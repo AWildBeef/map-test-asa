@@ -111,6 +111,30 @@ function drawDino(layer, cfg, dinoKey) {
   }
 }
 
+function setupDropdown(cfg, onChange) {
+  const sel = document.getElementById("dinoSelect");
+  if (!sel) return null;
+
+  const keys = Object.keys(cfg.dinos || {}).sort((a, b) => a.localeCompare(b));
+
+  sel.innerHTML = "";
+  for (const k of keys) {
+    const opt = document.createElement("option");
+    opt.value = k;
+    opt.textContent = k;
+    sel.appendChild(opt);
+  }
+
+  sel.addEventListener("change", () => onChange(sel.value));
+
+  if (keys.length) {
+    sel.value = keys[0];
+    onChange(keys[0]);
+  }
+
+  return sel;
+}
+
 let mapObj = null;
 let currentCfg = null;
 
