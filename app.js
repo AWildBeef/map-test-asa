@@ -1,23 +1,19 @@
-// If an entry has points AND boxes, and ALL boxes are smaller than this area,
-// render points instead of boxes.
-const BOX_TO_POINT_AREA_THRESHOLD = 18_000; // tweak (e.g. 10k–50k)
+const BOX_TO_POINT_AREA_THRESHOLD = 18_000;
+const BOX_TO_POINT_MIN_DIM = 40;
 
-// Optional: also trigger if boxes are tiny in width/height
-const BOX_TO_POINT_MIN_DIM = 40; // pixels; tweak or set to 0 to disable
+function isTinyBox(box) {
+  const area = (box.w || 0) * (box.h || 0);
+  if (area > 0 && area <= BOX_TO_POINT_AREA_THRESHOLD) return true;
 
-function shouldPreferPoints(entry) {
-  const hasPts = (entry.points && entry.points.length > 0);
-  const hasBoxes = (entry.boxes && entry.boxes.length > 0);
-  if (!hasPts || !hasBoxes) return false;
+  if (
+    BOX_TO_POINT_MIN_DIM > 0 &&
+    ((box.w || 0) <= BOX_TO_POINT_MIN_DIM ||
+     (box.h || 0) <= BOX_TO_POINT_MIN_DIM)
+  ) {
+    return true;
+  }
 
-  return entry.boxes.every(b => {
-    const area = (b.w || 0) * (b.h || 0);
-    const tinyArea = area > 0 && area <= BOX_TO_POINT_AREA_THRESHOLD;
-    const tinyDim = (BOX_TO_POINT_MIN_DIM > 0) &&
-      ((b.w || 0) <= BOX_TO_POINT_MIN_DIM || (b.h || 0) <= BOX_TO_POINT_MIN_DIM);
-
-    return tinyArea || tinyDim;
-  });
+  return false;
 }
 
 async function loadJSON(path) {
@@ -50,11 +46,20 @@ function drawDino(layer, cfg, dinoKey) {
   if (!dino) return;
 
   for (const entry of (dino.entries || [])) {
-    const preferPoints = shouldPreferPoints(entry);
+    const hasPoints = (entry.points && entry.points.length > 0);
 
-    if (!preferPoints) {
-      // Draw boxes
-      for (const box of (entry.boxes || [])) {
+    // Boxes (with tiny-box → point fallback if points exist)
+    for (const box of (entry.boxes || [])) {
+      if (hasPoints && isTinyBox(box)) {
+        const cx = box.x + box.w / 2;
+        const cy = box.y + box.h / 2;
+
+        L.circleMarker([cy, cx], {
+          radius: 3,
+          weight: 1,
+          fillOpacity: 0.9
+        }).addTo(layer);
+      } else {
         const y1 = box.y;
         const x1 = box.x;
         const y2 = box.y + box.h;
@@ -67,20 +72,16 @@ function drawDino(layer, cfg, dinoKey) {
       }
     }
 
-    // Draw points if either:
-    // - we prefer points (boxes too small), OR
-    // - the entry only has points
-    if (preferPoints || !(entry.boxes && entry.boxes.length)) {
-      for (const pt of (entry.points || [])) {
-        L.circleMarker([pt.y, pt.x], {
-          radius: 3,
-          weight: 1,
-          fillOpacity: 0.9
-        }).addTo(layer);
-      }
+    // Real server-side points
+    for (const pt of (entry.points || [])) {
+      L.circleMarker([pt.y, pt.x], {
+        radius: 3,
+        weight: 1,
+        fillOpacity: 0.9
+      }).addTo(layer);
     }
   }
-} // ✅ <-- you were missing this closing brace
+}
 
 function setupDropdown(cfg, onChange) {
   const sel = document.getElementById("dinoSelect");
