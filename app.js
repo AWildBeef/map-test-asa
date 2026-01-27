@@ -40,6 +40,16 @@ function drawDino(layer, cfg, dinoKey) {
         fillOpacity: 0.25
       }).addTo(layer);
     }
+    for (const pt of (entry.points || [])) {
+      const cy = pt.y;
+      const cx = pt.x;
+
+      L.circleMarker([cy, cx], {
+        radius: 3,
+        weight: 1,
+        fillOpacity: 0.9
+      }).addTo(layer);
+    }
   }
 }
 
