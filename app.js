@@ -1,6 +1,18 @@
 const BOX_TO_POINT_AREA_THRESHOLD = 18_000;
 const BOX_TO_POINT_MIN_DIM = 40;
 
+const MAPS = [
+  { id: "The Island", file: "data/TheIsland.json" },
+  { id: "The Center", file: "data/TheCenter.json" },
+  { id: "Scorched Earth", file: "data/ScorchedEarth.json" },
+  { id: "Valguero", file: "data/Valguero.json" },
+  { id: "Ragnarok", file: "data/Ragnarok.json" },
+  { id: "Lost Colony", file: "data/LostColony.json" },
+  { id: "Extinction", file: "data/Extinction.json" },
+  { id: "Aberration", file: "data/Aberration.json" },
+  { id: "Astraeos", file: "data/Astraeos.json" }
+];
+
 function isTinyBox(box) {
   const area = (box.w || 0) * (box.h || 0);
   if (area > 0 && area <= BOX_TO_POINT_AREA_THRESHOLD) return true;
@@ -39,6 +51,15 @@ function initMap(cfg) {
   return { map, layer };
 }
 
+function rarityToColor(r) {
+  const s = String(r || "").toLowerCase();
+  if (s.includes("very rare")) return "red";
+  if (s.includes("rare")) return "orange";
+  if (s.includes("uncommon")) return "yellow";
+  if (s.includes("common")) return "lime";
+  return "white";
+}
+
 function drawDino(layer, cfg, dinoKey) {
   layer.clearLayers();
 
@@ -47,6 +68,7 @@ function drawDino(layer, cfg, dinoKey) {
 
   for (const entry of (dino.entries || [])) {
     const hasPoints = (entry.points && entry.points.length > 0);
+    const color = rarityToColor(entry.rarity);
 
     // Boxes (with tiny-box → point fallback if points exist)
     for (const box of (entry.boxes || [])) {
@@ -55,6 +77,8 @@ function drawDino(layer, cfg, dinoKey) {
         const cy = box.y + box.h / 2;
 
         L.circleMarker([cy, cx], {
+          color,
+          fillColor: color,
           radius: 3,
           weight: 1,
           fillOpacity: 0.9
@@ -66,8 +90,10 @@ function drawDino(layer, cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
+          color,
           weight: 1,
-          fillOpacity: 0.25
+          fillColor: color,
+          fillOpacity: 0.20
         }).addTo(layer);
       }
     }
@@ -75,6 +101,8 @@ function drawDino(layer, cfg, dinoKey) {
     // Real server-side points
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
+        color,
+        fillColor: color,
         radius: 3,
         weight: 1,
         fillOpacity: 0.9
@@ -83,33 +111,40 @@ function drawDino(layer, cfg, dinoKey) {
   }
 }
 
-function setupDropdown(cfg, onChange) {
-  const sel = document.getElementById("dinoSelect");
-  if (!sel) return null;
+let mapObj = null;
+let currentCfg = null;
 
-  const keys = Object.keys(cfg.dinos || {}).sort((a, b) => a.localeCompare(b));
+async function loadMap(file) {
+  currentCfg = await loadJSON(file);
+
+  if (!mapObj) {
+    mapObj = initMap(currentCfg);
+  } else {
+    mapObj.map.remove();
+    mapObj = initMap(currentCfg);
+  }
+
+  setupDropdown(currentCfg, (dinoKey) => drawDino(mapObj.layer, currentCfg, dinoKey));
+}
+
+function setupMapDropdown() {
+  const sel = document.getElementById("mapSelect");
+  if (!sel) return;
 
   sel.innerHTML = "";
-  for (const k of keys) {
+  for (const m of MAPS) {
     const opt = document.createElement("option");
-    opt.value = k;
-    opt.textContent = k;
+    opt.value = m.file;
+    opt.textContent = m.id;
     sel.appendChild(opt);
   }
 
-  sel.addEventListener("change", () => onChange(sel.value));
+  sel.addEventListener("change", () => loadMap(sel.value));
 
-  if (keys.length) {
-    sel.value = keys[0];
-    onChange(keys[0]);
+  if (MAPS.length) {
+    sel.value = MAPS[0].file;
+    loadMap(MAPS[0].file);
   }
-
-  return sel;
 }
 
-(async function init() {
-  const cfg = await loadJSON("data/TheIsland.json");
-  const { layer } = initMap(cfg);
-
-  setupDropdown(cfg, (dinoKey) => drawDino(layer, cfg, dinoKey));
-})();
+setupMapDropdown();
