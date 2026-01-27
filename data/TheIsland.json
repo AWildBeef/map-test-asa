@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "map": "The Island",
+  "image": "maps/theisland.webp",
+  "imageSize": { "width": 8192, "height": 8192 },
+  "coordSystem": "pixel",
+  "dinos": {
+    "Test Dino": {
+      "bpPath": "/Game/Test/TestDino.TestDino_C",
+      "displayName": "Test Dino",
+      "entries": [
+        {
+          "entryClass": "TestEntry_C",
+          "rarity": "Test",
+          "boxes": [
+            { "x": 1000, "y": 1000, "w": 600, "h": 400, "normWeight": 1 },
+            { "x": 3000, "y": 2500, "w": 900, "h": 600, "normWeight": 1 }
+          ]
+        }
+      ]
+    }
+  }
+}
