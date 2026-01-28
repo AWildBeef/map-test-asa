@@ -97,7 +97,7 @@ function drawDino(layer, cfg, dinoKey) {
         const cy = box.y + box.h / 2;
 
         L.circleMarker([cy, cx], {
-          color: strokeColor,
+          color: '#000000',
           weight: isCave ? 2 : 1,
           opacity: 1,
           fillColor: color,
