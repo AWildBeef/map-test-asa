@@ -111,7 +111,7 @@ function drawDino(layer, cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color: strokeColor,
+          color: '#000000',
           weight: isCave ? 2 : 1,
           opacity: 1,
           dashArray: untame ? "6 4" : null,
@@ -124,7 +124,7 @@ function drawDino(layer, cfg, dinoKey) {
     // Real server-side points
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
-        color: strokeColor,
+        color: '#000000',
         weight: isCave ? 2 : 1,
         opacity: 1,
         fillColor: color,
