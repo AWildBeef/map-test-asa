@@ -1,5 +1,7 @@
 const BOX_TO_POINT_AREA_THRESHOLD = 18_000;
 const BOX_TO_POINT_MIN_DIM = 40;
+const isCave = entry.bIsCaveManager === true;
+const untame = entry.bForceUntameable === true;
 
 const MAPS = [
   { id: "The Island", file: "data/TheIsland.json" },
@@ -90,10 +92,11 @@ function drawDino(layer, cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color,
-          weight: 1,
+          color: isCave ? "black" : color,
+          weight: isCave ? 2 : 1,
+          dashArray: untame ? "6 4" : null,
           fillColor: color,
-          fillOpacity: 0.20
+          fillOpacity: untame ? 0.10 : (isCave ? 0.15 : 0.20)
         }).addTo(layer);
       }
     }
