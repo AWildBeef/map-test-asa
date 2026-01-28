@@ -374,7 +374,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -1192,7 +1197,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -1576,7 +1587,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         }
       ]
     },
@@ -1946,7 +1961,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -2415,7 +2435,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -3290,7 +3314,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -3388,7 +3413,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -4206,7 +4235,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -5024,7 +5059,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -5499,7 +5540,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -6374,7 +6419,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -6472,7 +6518,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -6618,7 +6668,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -7430,7 +7482,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -7493,7 +7551,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -7562,7 +7625,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterEasy_C",
@@ -7646,7 +7714,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
@@ -7891,7 +7960,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -8709,7 +8779,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -9093,7 +9169,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         }
       ]
     },
@@ -9911,7 +9991,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -10281,7 +10367,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -10750,7 +10841,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -11625,7 +11720,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -12443,7 +12539,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -12506,7 +12608,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -12757,7 +12864,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -13232,7 +13340,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -14107,7 +14219,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -14491,7 +14604,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -14589,7 +14706,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -14658,7 +14779,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterEasy_C",
@@ -14742,7 +14868,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
@@ -14987,7 +15114,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -15056,7 +15184,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
@@ -15301,7 +15434,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -15671,7 +15805,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -16049,7 +16188,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -16518,7 +16661,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -17393,7 +17540,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -17491,7 +17639,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -18372,7 +18524,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -18476,7 +18629,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -19294,7 +19451,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -19357,7 +19520,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -20175,7 +20343,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -20238,7 +20412,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
@@ -20483,7 +20662,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -21364,7 +21544,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
@@ -21609,7 +21790,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -21979,7 +22161,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -22357,7 +22544,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         }
       ]
     },
@@ -23175,7 +23366,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterEasy_C",
@@ -23259,7 +23456,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -23335,7 +23533,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 4000.0,
+          "TheIncreaseNPCInterval": 3000.0,
+          "TheIncreaseNPCIntervalMax": 5000.0
         }
       ]
     },
@@ -23810,7 +24012,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -24685,7 +24891,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -25495,7 +25702,10 @@
               "y": 1374.31,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25,
+          "TheIncreaseNPCInterval": 10000.0,
+          "TheIncreaseNPCIntervalMax": 16000.0
         }
       ]
     },
@@ -25865,7 +26075,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -26243,7 +26458,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -26712,7 +26931,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -27587,7 +27810,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -27971,7 +28195,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -28069,7 +28297,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -28453,7 +28685,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -29265,7 +29501,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -29328,7 +29570,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
@@ -29573,7 +29820,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         }
       ]
     },
@@ -29719,7 +29967,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -30531,7 +30781,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -33218,7 +33474,16 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "TheIncreaseNPCInterval": 0.01
         },
         {
           "entryClass": "SE_DinoSpawnEntries_ChupaCabraSurface_C",
@@ -33813,7 +34078,18 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_358'",
+            "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16561"
+          },
+          "MinDesiredNumberOfNPC": 6,
+          "bNPCWildIgnoreWild": true,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "bForceUntameable": true,
+          "TheIncreaseNPCInterval": 0.01
         }
       ]
     },
@@ -33917,7 +34193,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -34518,7 +34798,18 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_495'",
+            "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16702"
+          },
+          "MinDesiredNumberOfNPC": 6,
+          "bNPCWildIgnoreWild": true,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "bForceUntameable": true,
+          "TheIncreaseNPCInterval": 0.01
         }
       ]
     },
@@ -35357,7 +35648,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_669'",
+            "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16893"
+          },
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -36238,7 +36534,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_RockDrake_C",
@@ -36637,7 +36934,16 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_318'",
+            "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16517"
+          },
+          "MinDesiredNumberOfNPC": 2,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 10000.0,
+          "TheIncreaseNPCIntervalMax": 16000.0,
+          "SP_MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -37007,7 +37313,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -37385,7 +37696,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "SP_MinDesiredNumberOfNPC": 8,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 90.0
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -37854,7 +38169,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -38729,7 +39048,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 28
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -38827,7 +39147,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "AB_DinoSpawnEntries_OctoBat_C",
@@ -39422,7 +39746,18 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_1031'",
+            "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.15788"
+          },
+          "MinDesiredNumberOfNPC": 3,
+          "bNPCWildIgnoreWild": true,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "bForceUntameable": true,
+          "TheIncreaseNPCInterval": 0.01
         }
       ]
     }

@@ -24,7 +24,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -129,7 +130,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -556,7 +559,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -1417,7 +1422,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
@@ -1431,7 +1438,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -1445,7 +1453,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -1465,7 +1474,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
@@ -1808,7 +1818,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -2591,7 +2602,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -2642,7 +2654,17 @@
               "y": 1723.21,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 15,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "TheNPCFullIncreaseMaximumIterations": 20,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "TheIncreaseNPCInterval": 0.01
         }
       ]
     },
@@ -2662,7 +2684,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -2767,7 +2790,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -4076,7 +4101,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
@@ -4321,7 +4348,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
@@ -4517,7 +4546,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -4537,7 +4568,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
@@ -7301,7 +7333,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -7679,7 +7712,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -7798,7 +7832,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -8225,7 +8261,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -8245,7 +8283,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -8623,7 +8662,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
@@ -8966,7 +9006,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -9771,7 +9812,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -10513,7 +10556,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -10618,7 +10663,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -11927,7 +11974,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -11941,7 +11990,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -14711,7 +14761,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -15089,7 +15140,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -15411,7 +15463,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         }
       ]
     },
@@ -15431,7 +15486,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -15536,7 +15592,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_SnowDragon_C",
@@ -15716,7 +15774,10 @@
               "y": 1902.69,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -15841,7 +15902,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -16092,7 +16155,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -16330,7 +16395,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -17113,7 +17180,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -17133,7 +17201,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -17147,7 +17216,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Sauropod_C",
@@ -17210,7 +17281,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -17224,7 +17297,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -17244,7 +17319,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_2_C",
@@ -17258,7 +17335,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -17278,7 +17357,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
@@ -20042,7 +20122,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -20420,7 +20501,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -21225,7 +21307,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -21967,7 +22051,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -22072,7 +22158,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -23381,7 +23469,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
@@ -23626,7 +23716,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -23646,7 +23738,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -23820,7 +23914,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
@@ -23869,7 +23964,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -24575,7 +24671,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Glacier_LC_C",
@@ -24589,7 +24687,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -24714,7 +24813,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -24728,7 +24829,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -24966,7 +25069,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -24980,7 +25085,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -25000,7 +25107,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_2_C",
@@ -25014,7 +25123,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Lake_1_LC_C",
@@ -25028,7 +25139,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Water_LC_C",
@@ -25147,7 +25260,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Water_River_LC_C",
@@ -25490,7 +25605,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
@@ -25679,7 +25796,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -25804,7 +25923,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -26665,7 +26786,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -26679,7 +26802,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -26699,7 +26823,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
@@ -27399,7 +27524,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -28141,7 +28268,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -28155,7 +28284,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -28175,7 +28306,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
@@ -28875,7 +29007,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -29302,7 +29436,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -29316,7 +29452,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -30183,7 +30321,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -30421,7 +30561,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -30546,7 +30688,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
@@ -30560,7 +30704,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -30580,7 +30725,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -30958,7 +31104,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -31819,7 +31966,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -31952,7 +32101,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -31966,7 +32117,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -32001,7 +32154,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -32126,7 +32281,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -32146,7 +32303,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -32524,7 +32682,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -32643,7 +32802,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -32748,7 +32909,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         }
       ]
     },
@@ -32768,7 +32931,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_2_C",
@@ -32782,7 +32947,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -32907,7 +33074,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -34222,7 +34391,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
@@ -34418,7 +34589,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -34438,7 +34611,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
@@ -37202,7 +37376,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
@@ -37902,7 +38077,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -38007,7 +38184,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
@@ -38203,7 +38382,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -38217,7 +38398,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -38237,7 +38420,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -39098,7 +39283,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -39231,7 +39418,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -39245,7 +39434,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -39280,7 +39471,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -39294,7 +39487,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -39308,7 +39502,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -39328,7 +39524,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -40133,7 +40330,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -40875,7 +41074,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -40889,7 +41090,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -41211,7 +41414,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -42520,7 +42726,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -42534,7 +42742,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -42569,7 +42779,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -42583,7 +42795,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -45353,7 +45567,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -45472,7 +45687,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -45605,7 +45822,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
@@ -45619,7 +45838,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -45660,7 +45880,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2
         }
       ]
     },
@@ -45743,7 +45965,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -45763,7 +45987,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -46190,7 +46416,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -47051,7 +47279,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -47289,7 +47519,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -47303,7 +47535,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -47338,7 +47572,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -47352,7 +47588,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -47596,7 +47834,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -48101,7 +48341,9 @@
               "y": 1046.04,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3
         }
       ]
     },
@@ -48121,7 +48363,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -48226,7 +48469,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -48548,7 +48793,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -49857,7 +50105,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         }
       ]
     },
@@ -50640,7 +50890,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -51423,7 +51674,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -51807,7 +52059,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -51821,7 +52074,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -51926,7 +52181,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -51940,7 +52197,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -51975,7 +52234,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -51989,7 +52250,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -52114,7 +52377,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -52128,7 +52393,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -52163,7 +52430,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -52218,7 +52487,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 7
         },
         {
           "entryClass": "DinoSpawnEntries_Glacier_LC_C",
@@ -52232,7 +52503,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -52246,7 +52518,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -52379,7 +52653,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -52393,7 +52669,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -52428,7 +52706,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -52442,7 +52722,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -52637,7 +52919,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -52986,7 +53270,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -53413,7 +53698,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -53531,7 +53818,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -53649,7 +53938,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_CastleWater_LC_C",
@@ -53726,7 +54017,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -53746,7 +54039,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
@@ -54089,7 +54383,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Interior_C",
@@ -54257,7 +54552,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
@@ -54306,7 +54602,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -54411,7 +54708,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -54544,7 +54843,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -54564,7 +54865,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -54669,7 +54972,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
@@ -54914,7 +55219,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -55152,7 +55459,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
@@ -55348,7 +55657,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -55362,7 +55673,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -55382,7 +55695,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
@@ -56082,7 +56396,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -56187,7 +56503,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -57496,7 +57814,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         }
       ]
     },
@@ -60266,7 +60586,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -60644,7 +60965,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
@@ -60987,7 +61309,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
@@ -61001,7 +61324,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -61015,7 +61339,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -61035,7 +61360,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
@@ -61280,7 +61606,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -61518,7 +61846,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
@@ -61714,7 +62044,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -64484,7 +64816,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         }
       ]
     },
@@ -67254,7 +67587,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -67373,7 +67707,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -67387,7 +67723,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -67428,7 +67765,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -67448,7 +67786,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
@@ -67693,7 +68033,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -67707,7 +68049,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -67721,7 +68064,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -67776,7 +68121,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -67901,7 +68247,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -69210,7 +69558,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         }
       ]
     },
@@ -69594,7 +69944,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -69608,7 +69959,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -69930,7 +70283,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -70063,7 +70419,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -70077,7 +70435,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -70112,7 +70472,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -70126,7 +70488,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -70177,7 +70541,17 @@
               "y": 1723.21,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 15,
+          "NPCAIRangeMultiplier": 0.5,
+          "bNPCDontWander": true,
+          "TheNPCFullIncreaseMaximumIterations": 20,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "TheIncreaseNPCInterval": 0.01
         }
       ]
     },
@@ -72947,7 +73321,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -73752,7 +74127,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -74563,7 +74940,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -75305,7 +75684,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ossidon_C",
@@ -75333,7 +75714,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -75347,7 +75730,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -75361,7 +75746,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -75710,7 +76097,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Glacier_LC_C",
@@ -75724,7 +76112,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -75857,7 +76246,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -75871,7 +76262,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -75906,7 +76299,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
@@ -76095,7 +76490,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -76220,7 +76617,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -76234,7 +76633,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
@@ -76353,7 +76754,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -76675,7 +77078,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -76689,7 +77095,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -76724,7 +77132,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -76738,7 +77148,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -76758,7 +77170,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -77619,7 +78033,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -77857,7 +78273,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -77871,7 +78289,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -77906,7 +78326,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -77920,7 +78342,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -78059,7 +78483,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -78492,7 +78918,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -79353,7 +79781,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -80662,7 +81092,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         }
       ]
     },
@@ -81011,7 +81443,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -81025,7 +81458,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -81886,7 +82321,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -81900,7 +82337,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -81920,7 +82359,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
@@ -82039,7 +82480,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -82361,7 +82804,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -82494,7 +82940,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -82508,7 +82956,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -82543,7 +82993,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -82557,7 +83009,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -82612,7 +83066,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -82731,7 +83186,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -83080,7 +83537,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -83199,7 +83657,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -83213,7 +83673,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -83535,7 +83997,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -83549,7 +84014,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -83584,7 +84051,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -83598,7 +84067,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -83681,7 +84152,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -83932,7 +84405,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -83952,7 +84427,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -83987,7 +84464,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -84007,7 +84486,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -84385,7 +84865,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -84490,7 +84971,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -84917,7 +85400,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -86226,7 +86711,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         }
       ]
     },
@@ -86246,7 +86733,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
@@ -89010,7 +89498,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -89388,7 +89877,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
@@ -89731,7 +90221,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -90536,7 +91027,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -90641,7 +91134,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -91068,7 +91563,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -91082,7 +91579,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -91893,7 +92391,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -91998,7 +92498,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -92012,7 +92514,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -92032,7 +92535,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
@@ -92732,7 +93236,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -92851,7 +93357,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -92865,7 +93373,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
@@ -93292,7 +93802,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -93306,7 +93818,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -93414,7 +93928,15 @@
               "y": 1723.21,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "bAllowExtentTest": true,
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'LostColony_WP:PersistentLevel.NPCZoneVolume_UAID_60CF847B67A31FAC02_1301481668'",
+            "ObjectPath": "/Game/Maps/LostColony/LostColony_WP.16403"
+          },
+          "bNPCDontWander": true
         },
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_Reapers_C",
@@ -93456,7 +93978,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -94239,7 +94762,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -95022,7 +95546,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -95805,7 +96330,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -96588,7 +97114,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -97371,7 +97898,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -98154,7 +98682,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -98937,7 +99466,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -99720,7 +100250,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -100503,7 +101034,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -101286,7 +101818,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -102069,7 +102602,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -102852,7 +103386,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -103635,7 +104170,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -104418,7 +104954,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -105201,7 +105738,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -105984,7 +106522,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -106767,7 +107306,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -107550,7 +108090,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -108333,7 +108874,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -109116,7 +109658,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -109899,7 +110442,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 150
         }
       ]
     },
@@ -109919,7 +110463,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
@@ -110619,7 +111164,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -111361,7 +111908,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -111466,7 +112015,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_TREX_C",
@@ -111501,7 +112052,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2
         }
       ]
     },
@@ -112207,7 +112760,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -112312,7 +112867,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -113621,7 +114178,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -113859,7 +114418,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
@@ -114055,7 +114616,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -114069,7 +114632,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -114089,7 +114653,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntries_Lake_1_LC_C",
@@ -114103,7 +114669,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Water_LC_C",
@@ -114222,7 +114790,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Water_River_LC_C",
@@ -114565,7 +115135,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
@@ -114754,7 +115326,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -114774,7 +115348,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -115579,7 +116154,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -115684,7 +116261,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -116545,7 +117124,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
@@ -116741,7 +117322,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -117006,7 +117589,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6,
+          "TheIncreaseNPCInterval": 600.0,
+          "TheIncreaseNPCIntervalMax": 800.0
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -117111,7 +117698,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         }
       ]
     },
@@ -117229,7 +117818,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Water_LC_C",
@@ -117348,7 +117939,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -117473,7 +118066,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -117578,7 +118173,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -117711,7 +118308,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -118095,7 +118694,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -118900,7 +119500,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -118920,7 +119522,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
@@ -119039,7 +119642,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -119900,7 +120505,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -119914,7 +120521,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -120088,7 +120697,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -120262,7 +120872,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
@@ -120311,7 +120922,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -120485,7 +121097,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
@@ -120534,7 +121147,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -121849,7 +122463,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -121863,7 +122479,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -124633,7 +125250,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -124955,7 +125573,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         }
       ]
     },
@@ -125080,7 +125701,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -125094,7 +125717,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -125227,7 +125852,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -125241,7 +125868,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -125255,7 +125883,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -128025,7 +128655,8 @@
               "y": 264.18,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
@@ -128368,7 +128999,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -128487,7 +129119,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -128501,7 +129135,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -129362,7 +129998,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -129376,7 +130014,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -129390,7 +130029,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -129410,7 +130051,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -129788,7 +130430,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
@@ -130488,7 +131131,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -131230,7 +131875,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
@@ -131349,7 +131996,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
@@ -131594,7 +132243,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -131719,7 +132370,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -131844,7 +132497,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -131858,7 +132513,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
@@ -132180,7 +132837,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -132194,7 +132854,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -132229,7 +132891,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -132243,7 +132907,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -132257,7 +132922,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -132277,7 +132944,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
@@ -132655,7 +133323,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
@@ -132704,7 +133373,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
@@ -132823,7 +133493,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
@@ -132837,7 +133509,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
@@ -132956,7 +133630,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -133061,7 +133737,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
@@ -133922,7 +134600,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
@@ -134055,7 +134735,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -134069,7 +134751,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -134104,7 +134788,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -134118,7 +134804,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -134929,7 +135617,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -135671,7 +136361,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -135691,7 +136383,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
@@ -135810,7 +136503,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -135915,7 +136610,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -137224,7 +137921,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
@@ -137238,7 +137937,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
@@ -137273,7 +137974,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
@@ -137287,7 +137990,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
@@ -137301,7 +138005,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -138007,7 +138713,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -138749,7 +139457,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -138854,7 +139564,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
@@ -139099,7 +139811,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
@@ -139337,7 +140051,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -139721,7 +140437,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
@@ -140526,7 +141243,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
@@ -141268,7 +141987,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
@@ -141373,7 +142094,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
@@ -142682,7 +143405,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         }
       ]
     }

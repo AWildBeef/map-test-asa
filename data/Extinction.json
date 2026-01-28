@@ -31,7 +31,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -535,7 +537,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertCave_C",
@@ -745,7 +750,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -793,7 +803,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -807,7 +823,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -828,7 +850,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_C",
@@ -870,7 +898,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -1094,7 +1124,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -1604,7 +1635,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -1653,7 +1687,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -1709,7 +1745,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -1744,7 +1782,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -1765,7 +1804,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -1828,7 +1868,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -2437,7 +2481,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -2948,7 +2996,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -3039,7 +3091,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -3396,7 +3449,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -3620,7 +3674,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -3767,7 +3822,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -3844,7 +3901,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -4152,7 +4211,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -4229,7 +4290,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -4340,7 +4403,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_C",
@@ -4515,7 +4581,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -4550,7 +4619,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -4585,7 +4657,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -4606,7 +4679,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -5404,7 +5478,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -5684,7 +5762,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -6194,7 +6276,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_C",
@@ -6369,7 +6454,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -6404,7 +6492,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Fliers_C",
@@ -6495,7 +6586,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "TheIncreaseNPCInterval": 7000.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -6550,7 +6644,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -6585,7 +6681,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -7194,7 +7293,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -7705,7 +7808,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -7796,7 +7903,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -8306,7 +8414,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -8411,7 +8522,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -8460,7 +8574,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -8516,7 +8632,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -8551,7 +8669,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -8599,7 +8718,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -8613,7 +8738,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -8634,7 +8765,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -8956,7 +9093,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -9236,7 +9377,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertCave_C",
@@ -9446,7 +9591,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -9886,7 +10036,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -9934,7 +10086,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -9948,7 +10106,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -9969,7 +10133,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_ParkWater2_C",
@@ -9990,7 +10160,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         }
       ]
     },
@@ -10023,7 +10196,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_ParkWater_C",
@@ -10037,7 +10213,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 2000.0
         }
       ]
     },
@@ -10085,7 +10264,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -10141,7 +10322,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Hard_C",
@@ -10169,7 +10352,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -10491,7 +10675,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -11289,7 +11477,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -11799,7 +11991,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -11904,7 +12099,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -11960,7 +12158,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -12394,7 +12594,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -12442,7 +12644,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -12456,7 +12664,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -12477,7 +12691,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_C",
@@ -12519,7 +12739,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -12624,7 +12846,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -12673,7 +12898,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -12708,7 +12935,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -12743,7 +12973,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -12764,7 +12995,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -12911,7 +13143,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -12974,7 +13207,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -13296,7 +13533,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -14094,7 +14335,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -14374,7 +14619,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -14731,7 +14980,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -15165,7 +15415,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -15227,7 +15479,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "TheIncreaseNPCInterval": 21600.0
         },
         {
           "entryClass": "DinoSpawnEntries_Beavers_EX_C",
@@ -15290,7 +15545,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -15338,7 +15595,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         }
       ]
     },
@@ -15386,7 +15645,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Hard_C",
@@ -15414,7 +15675,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -15512,7 +15774,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -15869,7 +16135,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -16093,7 +16360,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -16708,7 +16976,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -17219,7 +17491,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -17310,7 +17586,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -17744,7 +18021,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -17891,7 +18170,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -17968,7 +18249,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -18276,7 +18559,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         }
       ]
     },
@@ -18303,7 +18588,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_ParkWater_C",
@@ -18317,7 +18605,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_C",
@@ -18562,7 +18853,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 120,
+          "TheIncreaseNPCInterval": 21600.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Cave_C",
@@ -18674,7 +18969,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 22,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Desert_C",
@@ -18779,7 +19077,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Ice_C",
@@ -18870,7 +19172,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -19380,7 +19687,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -19485,7 +19795,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -19534,7 +19847,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -19590,7 +19905,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -20024,7 +20341,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -20128,7 +20447,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -20450,7 +20773,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -20792,7 +21119,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -21114,7 +21445,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -21912,7 +22247,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -21981,7 +22320,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_ForbiddenZone_C",
@@ -22317,7 +22660,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -22926,7 +23273,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -23437,7 +23788,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -23759,7 +24114,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -23800,7 +24159,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -23821,7 +24181,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -23884,7 +24245,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -24493,7 +24858,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -25004,7 +25373,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -25326,7 +25699,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_Fliers_C",
@@ -25487,7 +25864,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 17,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -26285,7 +26666,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -26565,7 +26950,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -26907,7 +27296,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Hard_C",
@@ -26935,7 +27328,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -27277,7 +27671,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -27375,7 +27773,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -27886,7 +28288,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -27920,7 +28326,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -28018,7 +28425,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -28340,7 +28751,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -28381,7 +28796,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -28402,7 +28818,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -28549,7 +28966,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -28612,7 +29030,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -29221,7 +29643,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -29732,7 +30158,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -30054,7 +30484,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_Fliers_C",
@@ -30215,7 +30649,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 17,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -30306,7 +30744,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -31104,7 +31543,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -31384,7 +31827,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -31425,7 +31872,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -31446,7 +31894,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -31509,7 +31958,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_ForbiddenZone_C",
@@ -31845,7 +32298,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Hard_C",
@@ -31873,7 +32330,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -31971,7 +32429,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -32769,7 +33231,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -33049,7 +33515,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -33083,7 +33553,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -33692,7 +34163,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -34034,7 +34509,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Hard_C",
@@ -34062,7 +34541,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -34160,7 +34640,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -34671,7 +35155,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -35469,7 +35957,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -35503,7 +35995,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -36112,7 +36605,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -36623,7 +37120,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -36657,7 +37158,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -36755,7 +37257,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -37077,7 +37583,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -37357,7 +37867,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -37398,7 +37912,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -37419,7 +37934,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -37482,7 +37998,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -37580,7 +38100,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -38189,7 +38713,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -38700,7 +39228,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -39022,7 +39554,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -39820,7 +40356,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -40100,7 +40640,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -40141,7 +40685,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -40162,7 +40707,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -40225,7 +40771,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -40834,7 +41384,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -41345,7 +41899,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -42143,7 +42701,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -42423,7 +42985,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -42576,7 +43142,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -42884,7 +43452,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -42961,7 +43531,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -43471,7 +44043,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -43576,7 +44151,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -43625,7 +44203,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -43681,7 +44261,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -43702,7 +44284,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -43813,7 +44396,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_D2_C",
@@ -43827,7 +44414,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2
         }
       ]
     },
@@ -43875,7 +44464,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -44099,7 +44690,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -44147,7 +44739,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -44161,7 +44759,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -44182,7 +44786,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_C",
@@ -44203,7 +44813,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -44707,7 +45319,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -44812,7 +45427,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -44861,7 +45479,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -44896,7 +45516,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -44952,7 +45575,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -45099,7 +45724,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -45897,7 +46523,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -46331,7 +46961,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -46358,7 +46990,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -47156,7 +47791,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -47513,7 +48152,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -47737,7 +48377,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -47764,7 +48405,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -48198,7 +48841,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -48225,7 +48870,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         }
       ]
     },
@@ -48273,7 +48921,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -48329,7 +48979,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -48763,7 +49415,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -48867,7 +49521,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -49378,7 +50036,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -49469,7 +50131,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -49616,7 +50279,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -49693,7 +50358,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -49965,7 +50632,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -50112,7 +50784,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -50203,7 +50876,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -50350,7 +51024,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -50427,7 +51103,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -50735,7 +51413,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -50812,7 +51492,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -51322,7 +52004,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -51427,7 +52112,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -51476,7 +52164,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -51532,7 +52222,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -52043,7 +52735,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -52841,7 +53537,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -53065,7 +53765,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -53499,7 +54200,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -53547,7 +54250,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -53596,7 +54301,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -53953,7 +54660,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -54177,7 +54885,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -54687,7 +55396,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -54967,7 +55679,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -55407,7 +56123,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -55917,7 +56635,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -56022,7 +56743,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -56071,7 +56795,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_C",
@@ -56246,7 +56972,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -56281,7 +57010,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Fliers_C",
@@ -56372,7 +57104,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "TheIncreaseNPCInterval": 7000.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -56428,7 +57163,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -56476,7 +57213,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -56532,7 +57271,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -56889,7 +57630,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -57113,7 +57855,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -57189,7 +57932,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 36
         }
       ]
     },
@@ -57237,7 +57983,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -57293,7 +58041,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -57446,7 +58196,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -57509,7 +58260,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -57607,7 +58362,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -58118,7 +58877,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -58440,7 +59203,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_Fliers_C",
@@ -58601,7 +59368,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 17,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -59399,7 +60170,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -59679,7 +60454,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -60108,7 +60887,10 @@
               "y": 907.68,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 3,
+          "TheIncreaseNPCInterval": 10000.0,
+          "TheIncreaseNPCIntervalMax": 16000.0
         }
       ]
     },
@@ -60205,7 +60987,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -60715,7 +61498,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -60764,7 +61550,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -61198,7 +61986,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -61309,7 +62099,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Ice_C",
@@ -61400,7 +62194,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -61511,7 +62310,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         }
       ]
     },
@@ -62021,7 +62823,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -62077,7 +62882,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -62587,7 +63394,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -63021,7 +63831,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -63055,7 +63867,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -63103,7 +63917,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -63117,7 +63937,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -63138,7 +63964,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_City_Trench_C",
@@ -63165,7 +63997,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_ParkWater_C",
@@ -63179,7 +64014,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Cave_C",
@@ -63291,7 +64129,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 22,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Desert_C",
@@ -63396,7 +64237,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -63451,7 +64296,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -63808,7 +64655,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -64032,7 +64880,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -64262,7 +65111,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -64772,7 +65622,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -64877,7 +65730,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -65311,7 +66167,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -65464,7 +66322,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -65541,7 +66401,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -65849,7 +66711,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -65926,7 +66790,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -66079,7 +66945,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         }
       ]
     },
@@ -66295,7 +67163,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -66817,7 +67690,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -66922,7 +67798,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -66971,7 +67850,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -67027,7 +67908,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -67118,7 +68001,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -67265,7 +68149,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -67342,7 +68228,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -67650,7 +68538,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -67727,7 +68617,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -67775,7 +68667,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -67789,7 +68687,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -67810,7 +68714,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_City_Trench_C",
@@ -67864,7 +68774,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_C",
@@ -67885,7 +68797,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -68389,7 +69303,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -68494,7 +69411,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -68550,7 +69470,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -68830,7 +69752,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -69187,7 +70113,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -69411,7 +70338,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -69845,7 +70773,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -70355,7 +71285,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -70502,7 +71435,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -70810,7 +71745,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -70887,7 +71824,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -71397,7 +72336,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -71831,7 +72773,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -71879,7 +72823,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -71893,7 +72843,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -71914,7 +72870,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_C",
@@ -71956,7 +72918,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -71991,7 +72955,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -72047,7 +73014,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -72200,7 +73169,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -72557,7 +73527,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -72781,7 +73752,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -73291,7 +74263,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -73396,7 +74371,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -73830,7 +74808,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -74046,7 +75026,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -74073,7 +75058,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_ParkWater_C",
@@ -74087,7 +75075,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_C",
@@ -74332,7 +75323,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 120,
+          "TheIncreaseNPCInterval": 21600.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -74842,7 +75837,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -74947,7 +75945,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -75003,7 +76004,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -75437,7 +76440,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -75485,7 +76490,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -75541,7 +76548,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -75688,7 +76697,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -75996,7 +77007,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -76073,7 +77086,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -76121,7 +77136,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -76170,7 +77187,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -76604,7 +77623,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -76652,7 +77673,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -76708,7 +77731,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -76735,7 +77760,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -77057,7 +78084,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -77105,7 +78136,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -77609,7 +78642,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -77658,7 +78694,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -77714,7 +78752,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -78148,7 +79188,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -78588,7 +79630,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -78636,7 +79680,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_C",
@@ -78657,7 +79703,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -79161,7 +80209,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -79217,7 +80268,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -79651,7 +80704,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -79678,7 +80733,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Cave_C",
@@ -79790,7 +80848,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 22,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Desert_C",
@@ -79895,7 +80956,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -80167,7 +81232,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -80530,7 +81600,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -80754,7 +81825,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -80802,7 +81874,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -81306,7 +82380,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -81411,7 +82488,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -81460,7 +82540,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_C",
@@ -81635,7 +82717,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -81670,7 +82755,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Fliers_C",
@@ -81761,7 +82849,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "TheIncreaseNPCInterval": 7000.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -81817,7 +82908,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -81964,7 +83057,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -82573,7 +83667,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -83084,7 +84182,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -83882,7 +84984,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -83993,7 +85099,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -84042,7 +85151,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -84077,7 +85188,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -84098,7 +85210,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -84245,7 +85358,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -85043,7 +86157,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -85323,7 +86441,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -85680,7 +86802,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -85904,7 +87027,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -85952,7 +87076,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -85966,7 +87096,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -85987,7 +87123,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesIceCave_C",
@@ -86253,7 +87395,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -86330,7 +87477,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -86638,7 +87787,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -86715,7 +87866,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -86735,7 +87888,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 2,
+          "TheIncreaseNPCInterval": 4800.0,
+          "TheIncreaseNPCIntervalMax": 7200.0
         }
       ]
     },
@@ -86783,7 +87939,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -86888,7 +88046,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -86937,7 +88098,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -86993,7 +88156,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -87028,7 +88193,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -87049,7 +88215,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -87196,7 +88363,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -87259,7 +88427,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -88057,7 +89229,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -88337,7 +89513,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -88771,7 +89951,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -88819,7 +90001,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -88833,7 +90021,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -88854,7 +90048,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_C",
@@ -88896,7 +90096,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -88945,7 +90147,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -89001,7 +90205,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Hard_C",
@@ -89029,7 +90235,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -89638,7 +90845,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -90149,7 +91360,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -90240,7 +91455,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -91038,7 +92254,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -91115,7 +92335,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -91478,7 +92700,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -91694,7 +92917,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -91749,7 +92977,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -92358,7 +93588,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -92869,7 +94103,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -93016,7 +94254,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -93093,7 +94333,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -93401,7 +94643,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -93478,7 +94722,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -93505,7 +94751,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_ParkWater_C",
@@ -93519,7 +94768,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_C",
@@ -93764,7 +95016,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 120,
+          "TheIncreaseNPCInterval": 21600.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Ice_C",
@@ -93855,7 +95111,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -93888,7 +95149,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_ParkWater_C",
@@ -93902,7 +95166,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Cave_C",
@@ -94014,7 +95281,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 22,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -94524,7 +95794,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -94629,7 +95902,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -94678,7 +95954,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_C",
@@ -94853,7 +96131,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -94888,7 +96169,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Fliers_C",
@@ -94979,7 +96263,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "TheIncreaseNPCInterval": 7000.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -95035,7 +96322,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -95056,7 +96345,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -95209,7 +96499,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -95286,7 +96578,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -95594,7 +96888,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -95671,7 +96967,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -95705,7 +97003,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -96027,7 +97326,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -96307,7 +97610,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -96531,7 +97838,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -97041,7 +98349,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -97146,7 +98457,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -97195,7 +98509,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Fliers_C",
@@ -97286,7 +98602,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "TheIncreaseNPCInterval": 7000.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -97342,7 +98661,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         }
       ]
     },
@@ -97390,7 +98711,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -97894,7 +99217,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -97943,7 +99269,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -97999,7 +99327,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -98034,7 +99364,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -98055,7 +99386,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -98202,7 +99534,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -98265,7 +99598,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -98874,7 +100211,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -99385,7 +100726,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -99707,7 +101052,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -99798,7 +101147,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -100596,7 +101946,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -100876,7 +102230,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -101100,7 +102458,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -101534,7 +102893,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -101897,7 +103258,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -102121,7 +103483,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -102631,7 +103994,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -102736,7 +104102,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_C",
@@ -102911,7 +104280,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -102946,7 +104318,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 7000.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Fliers_C",
@@ -103037,7 +104412,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "TheIncreaseNPCInterval": 7000.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -103135,7 +104513,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -103492,7 +104874,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -103716,7 +105099,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -104150,7 +105534,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -104198,7 +105584,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -104212,7 +105604,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -104233,7 +105631,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_C",
@@ -104275,7 +105679,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -104380,7 +105786,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         }
       ]
     },
@@ -104497,7 +105906,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -104511,7 +105926,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -104532,7 +105953,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Medium_C",
@@ -104630,7 +106057,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -105239,7 +106670,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -105750,7 +107185,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -106184,7 +107623,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -106547,7 +107988,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -106771,7 +108213,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -106875,7 +108318,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -107484,7 +108931,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -107995,7 +109446,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         }
       ]
     },
@@ -108022,7 +109477,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_1_C",
@@ -108057,7 +109514,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_City_Buffer_2_C",
@@ -108078,7 +109536,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -108400,7 +109859,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Sulfur_C",
@@ -108680,7 +110143,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertCave_C",
@@ -108890,7 +110357,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -108938,7 +110410,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -109442,7 +110916,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -109547,7 +111024,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -109603,7 +111083,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -109960,7 +111442,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -110184,7 +111667,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -110618,7 +112102,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -110666,7 +112152,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -111170,7 +112658,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -111275,7 +112766,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -111331,7 +112825,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -111688,7 +113184,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -111912,7 +113409,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -112346,7 +113844,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -112394,7 +113894,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -112898,7 +114400,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -113003,7 +114508,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -113052,7 +114560,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -113108,7 +114618,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -113255,7 +114767,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_NorthCraterForest_C",
@@ -113864,7 +115377,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_North_C",
@@ -114375,7 +115892,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -115173,7 +116694,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 13,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 0.0,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 0.0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -115607,7 +117132,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -115684,7 +117211,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -115781,7 +117310,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -116221,7 +117755,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -116584,7 +118120,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -116808,7 +118345,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -117038,7 +118576,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -117352,7 +118891,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -117429,7 +118970,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -117582,7 +119125,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -117659,7 +119204,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP2_C",
@@ -117967,7 +119514,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_TEMP_C",
@@ -118044,7 +119593,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -118316,7 +119867,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -118364,7 +119920,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_12_C",
@@ -118378,7 +119940,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesCaveTek_Hard_C",
@@ -118399,7 +119967,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 2.0,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
@@ -118490,7 +120064,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -118847,7 +120422,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -118994,7 +120570,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_Purlovia_C",
@@ -119071,7 +120649,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     }

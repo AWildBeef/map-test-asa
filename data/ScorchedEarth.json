@@ -38,7 +38,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -101,7 +105,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -122,7 +130,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
@@ -136,7 +145,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -199,7 +212,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -289,7 +306,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         }
       ]
     },
@@ -533,7 +557,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -820,7 +845,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -1667,7 +1693,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -2507,7 +2534,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -2541,7 +2569,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -2604,7 +2636,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -2625,7 +2661,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -2715,7 +2752,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -2981,7 +3025,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 125,
+          "TheIncreaseNPCInterval": 1.0
         }
       ]
     },
@@ -3834,7 +3881,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -4680,7 +4728,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -4924,7 +4973,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -4952,7 +5002,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -8417,7 +8471,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
@@ -8431,7 +8486,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -8494,7 +8553,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -8584,7 +8647,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -8850,7 +8920,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 125,
+          "TheIncreaseNPCInterval": 1.0
         }
       ]
     },
@@ -9094,7 +9167,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -9934,7 +10008,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -10178,7 +10253,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -11018,7 +11094,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -11066,7 +11143,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWater_C",
@@ -11248,7 +11326,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -11492,7 +11573,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -12339,7 +12421,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -12478,7 +12561,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 3
         }
       ]
     },
@@ -12498,7 +12582,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
@@ -12540,7 +12625,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWater_C",
@@ -12722,7 +12808,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -13575,7 +13664,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -13659,7 +13749,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -13903,7 +13994,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -14071,7 +14163,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -14918,7 +15011,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -14981,7 +15075,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -15002,7 +15100,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         }
       ]
     },
@@ -15246,7 +15345,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -15414,7 +15514,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -15701,7 +15802,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -16548,7 +16650,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -20019,7 +20122,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -20285,7 +20389,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 125,
+          "TheIncreaseNPCInterval": 1.0
         }
       ]
     },
@@ -20305,7 +20412,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -21158,7 +21266,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -21998,7 +22107,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -25469,7 +25579,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -25720,7 +25831,15 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'ScorchedEarth_WP:PersistentLevel.NPCZoneVolume_398'",
+            "ObjectPath": "/Game/Maps/ScorchedEarth/ScorchedEarth_WP.10850"
+          },
+          "MinDesiredNumberOfNPC": 1,
+          "TheIncreaseNPCInterval": 3600.0,
+          "bForceInEditor": true,
+          "NPCWanderRadiusMultiplier": 0.1
         }
       ]
     },
@@ -26573,7 +26692,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -26657,7 +26777,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -26828,7 +26949,11 @@
               "y": 818.4,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "TheIncreaseNPCInterval": 10000.0,
+          "TheIncreaseNPCIntervalMax": 16000.0
         }
       ]
     },
@@ -27072,7 +27197,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -27240,7 +27366,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -28080,7 +28207,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -28170,7 +28298,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -28463,7 +28592,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -29310,7 +29440,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -29394,7 +29525,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -29414,7 +29546,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
@@ -29456,7 +29589,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWater_C",
@@ -29638,7 +29772,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -30484,7 +30621,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -30735,7 +30873,15 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'ScorchedEarth_WP:PersistentLevel.NPCZoneVolume_398'",
+            "ObjectPath": "/Game/Maps/ScorchedEarth/ScorchedEarth_WP.10850"
+          },
+          "MinDesiredNumberOfNPC": 1,
+          "TheIncreaseNPCInterval": 3600.0,
+          "bForceInEditor": true,
+          "NPCWanderRadiusMultiplier": 0.1
         }
       ]
     },
@@ -30979,7 +31125,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -31826,7 +31973,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -32666,7 +32814,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -32750,7 +32899,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -33043,7 +33193,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -33890,7 +34041,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -33974,7 +34126,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -34008,7 +34161,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -37473,7 +37630,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -37536,7 +37694,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -37557,7 +37719,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
@@ -37571,7 +37734,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -37634,7 +37801,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -37724,7 +37895,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -37990,7 +38168,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 125,
+          "TheIncreaseNPCInterval": 1.0
         }
       ]
     },
@@ -38530,7 +38711,15 @@
               "y": 1355.4,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "TheSpawnPointMinimumFloorNormal": 1.0,
+          "MinDesiredNumberOfNPC": 3,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 9000.0,
+          "TheIncreaseNPCIntervalMax": 14400.0
         }
       ]
     },
@@ -38557,7 +38746,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.4,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 18000.0
         }
       ]
     },
@@ -39410,7 +39603,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -40263,7 +40457,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -40507,7 +40702,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -40675,7 +40871,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -40962,7 +41159,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -41809,7 +42007,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -41893,7 +42092,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -41983,7 +42183,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -42038,7 +42239,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 2,
+          "TheIncreaseNPCInterval": 14400.0
         }
       ]
     },
@@ -42282,7 +42485,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -42450,7 +42654,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -45915,7 +46120,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -46202,7 +46408,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -47049,7 +47256,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -47083,7 +47291,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -47146,7 +47358,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -47167,7 +47383,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
@@ -47181,7 +47398,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -47244,7 +47465,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -47334,7 +47559,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         }
       ]
     },
@@ -47424,7 +47656,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -48277,7 +48510,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -48361,7 +48595,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -48654,7 +48889,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -49507,7 +49743,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -49591,7 +49828,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -49611,7 +49849,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 3,
+          "TheIncreaseNPCInterval": 14400.0
         }
       ]
     },
@@ -49631,7 +49871,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
@@ -49673,7 +49914,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -49924,7 +50166,15 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'ScorchedEarth_WP:PersistentLevel.NPCZoneVolume_398'",
+            "ObjectPath": "/Game/Maps/ScorchedEarth/ScorchedEarth_WP.10850"
+          },
+          "MinDesiredNumberOfNPC": 1,
+          "TheIncreaseNPCInterval": 3600.0,
+          "bForceInEditor": true,
+          "NPCWanderRadiusMultiplier": 0.1
         }
       ]
     },
@@ -50217,7 +50467,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -51064,7 +51315,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -51148,7 +51400,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -51392,7 +51645,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -51420,7 +51674,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -51588,7 +51846,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -55053,7 +55312,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -55116,7 +55376,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -55956,7 +56220,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -55977,7 +56242,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -56067,7 +56333,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -56333,7 +56606,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 125,
+          "TheIncreaseNPCInterval": 1.0
         }
       ]
     },
@@ -56507,7 +56783,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -56779,7 +57056,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 125,
+          "TheIncreaseNPCInterval": 1.0
         }
       ]
     },
@@ -57072,7 +57352,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -57156,7 +57437,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -57218,7 +57500,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -57462,7 +57745,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -58309,7 +58593,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -59149,7 +59434,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -59183,7 +59469,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -59246,7 +59536,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -59267,7 +59561,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -59330,7 +59625,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -59420,7 +59719,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         }
       ]
     },
@@ -59664,7 +59970,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -59832,7 +60139,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -60679,7 +60987,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
@@ -60742,7 +61051,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -61582,7 +61895,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
@@ -61603,7 +61917,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 32
         }
       ]
     },
@@ -61847,7 +62162,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -62015,7 +62331,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -62302,7 +62619,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -63149,7 +63467,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -63233,7 +63552,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -64079,7 +64399,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -64323,7 +64644,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -64491,7 +64813,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -65338,7 +65661,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -65582,7 +65906,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -65750,7 +66075,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -66597,7 +66923,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -67437,7 +67764,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -67681,7 +68009,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -67925,7 +68254,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -67953,7 +68283,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 20,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -68121,7 +68455,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -71586,7 +71921,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
@@ -71600,7 +71936,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -71663,7 +72003,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 10,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -71753,7 +72097,14 @@
               "y": 802.0,
               "normWeight": 1
             }
-          ]
+          ],
+          "TheSpawnPointMinimumFloorNormal": 0.6,
+          "MinDesiredNumberOfNPC": 40,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true,
+          "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -72019,7 +72370,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 125,
+          "TheIncreaseNPCInterval": 1.0
         }
       ]
     },
@@ -72263,7 +72617,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -72431,7 +72786,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -75896,7 +76252,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -76743,7 +77100,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -76827,7 +77185,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -77071,7 +77430,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -77239,7 +77599,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -80704,7 +81065,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -81551,7 +81913,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -81635,7 +81998,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -81683,7 +82047,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "MaximumNumberNearbyCoreStructures": 50,
+          "TheIncreaseNPCInterval": 86400.0,
+          "TheIncreaseNPCIntervalMax": 172800.0
         }
       ]
     },
@@ -81927,7 +82297,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -82171,7 +82542,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -85636,7 +86008,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -86476,7 +86849,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -86720,7 +87094,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -86888,7 +87263,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -90353,7 +90729,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -90640,7 +91017,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -91487,7 +91865,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -92333,7 +92712,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     }

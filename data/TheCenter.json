@@ -836,7 +836,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -1053,7 +1054,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -1143,7 +1145,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -1346,7 +1352,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -1583,7 +1590,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -1820,7 +1832,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "UnderwaterCaveSpawn_C",
@@ -1911,7 +1928,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -2120,7 +2143,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -2176,7 +2200,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -2554,7 +2579,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -3184,7 +3210,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -3366,7 +3393,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -4644,7 +4672,11 @@
               "y": 1675.76,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Generic_C",
@@ -4665,7 +4697,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -4798,7 +4836,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "IceCave_Spawner_C",
@@ -4875,7 +4920,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -4916,7 +4968,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'TheCenter_WP:PersistentLevel.NPCZoneVolume_772'",
+            "ObjectPath": "/Game/Mods/TheCenter/TheCenter_WP.15066"
+          },
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -4936,7 +4993,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -6497,7 +6555,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -6622,7 +6683,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -6825,7 +6887,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -6881,7 +6944,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -7140,7 +7204,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Upper_Spawn_C",
@@ -7231,7 +7296,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -7609,7 +7675,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -8239,7 +8306,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -8421,7 +8489,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -9699,7 +9768,11 @@
               "y": 1675.76,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Generic_C",
@@ -9720,7 +9793,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -9853,7 +9932,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -10146,7 +10232,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -10972,7 +11062,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -11237,7 +11328,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -11272,7 +11365,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -11292,7 +11386,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -12853,7 +12948,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -12894,7 +12992,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -13775,7 +13874,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_C",
@@ -13859,7 +13962,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -14740,7 +14847,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -15027,7 +15138,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -15117,7 +15232,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -15404,7 +15523,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -15523,7 +15646,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -15726,7 +15850,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -16552,7 +16677,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -16608,7 +16734,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "LavaBeach_Spawn_C",
@@ -16923,7 +17050,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -17182,7 +17310,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Upper_Spawn_C",
@@ -17273,7 +17402,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -17903,7 +18033,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -18085,7 +18216,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -18245,7 +18377,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -18335,7 +18468,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -18425,7 +18562,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -18544,7 +18685,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -18747,7 +18889,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -19040,7 +19183,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -19096,7 +19243,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -19333,7 +19481,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -19347,7 +19500,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -20908,7 +21062,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -21110,7 +21267,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 6,
+          "bForceInEditor": true,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
@@ -21369,7 +21530,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "DinoSpawnEntries_OceanUnderworld_Generic_C",
@@ -21390,7 +21553,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 500,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -21404,7 +21572,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -22965,7 +23134,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         },
         {
           "entryClass": "DinoSpawnEntries_ShallowWater_Generic_C",
@@ -23006,7 +23178,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "GrasslandsUnderArea_WaterSpawn_C",
@@ -23020,7 +23193,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -23901,7 +24075,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -24188,7 +24366,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -25014,7 +25196,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -25076,7 +25259,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -25123,7 +25307,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -26004,7 +26189,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_C",
@@ -26088,7 +26277,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -26969,7 +27162,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -27256,7 +27453,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -27473,7 +27674,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -27514,7 +27716,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -27807,7 +28010,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -28010,7 +28217,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -28836,7 +29044,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -29053,7 +29262,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -29094,7 +29304,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -29184,7 +29395,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -29471,7 +29686,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -30297,7 +30516,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -31129,7 +31349,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "MiniCaveBearSpawner_C",
@@ -31164,7 +31385,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -31542,7 +31764,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -31604,7 +31827,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "IceCave_Spawner_C",
@@ -31681,7 +31905,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -31940,7 +32171,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Upper_Spawn_C",
@@ -32031,7 +32263,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -32661,7 +32894,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -32843,7 +33077,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -32884,7 +33119,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -33765,7 +34001,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -34052,7 +34292,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -34142,7 +34386,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -34345,7 +34593,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -35171,7 +35420,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -36449,7 +36699,11 @@
               "y": 1675.76,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Generic_C",
@@ -36470,7 +36724,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -36603,7 +36863,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -36840,7 +37107,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -37133,7 +37405,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -37959,7 +38235,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -38196,7 +38473,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -38286,7 +38568,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -38523,7 +38809,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         },
         {
           "entryClass": "UnderwaterCaveSpawn_C",
@@ -38614,7 +38905,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -38704,7 +39001,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -39530,7 +39831,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -40376,7 +40678,10 @@
               "y": 425.89,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "bTraceForSpawnPoints": false
         }
       ]
     },
@@ -40424,7 +40729,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -41256,7 +41562,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -41634,7 +41941,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -42264,7 +42572,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -42557,7 +42866,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -42822,7 +43135,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "DinoSpawnEntries_ShallowWater_Generic_C",
@@ -43037,7 +43352,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -43918,7 +44234,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -43945,7 +44265,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 500,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -43959,7 +44284,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -45520,7 +45846,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -45813,7 +46142,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -45882,7 +46215,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 25
         },
         {
           "entryClass": "IceCaveWater_Spawner_C",
@@ -45903,7 +46237,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.67,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -46085,7 +46426,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -46126,7 +46468,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -46335,7 +46678,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -46376,7 +46720,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -46396,7 +46741,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -47957,7 +48303,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -47984,7 +48333,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "TheIncreaseNPCInterval": 8000.0,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -48865,7 +49220,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -49152,7 +49511,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -49214,7 +49577,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -49592,7 +49956,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -50222,7 +50587,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -50404,7 +50770,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -50431,7 +50798,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 500,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -50445,7 +50817,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -52006,7 +52379,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -52233,7 +52609,11 @@
               "y": 162.06,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -53065,7 +53445,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -53121,7 +53502,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -53499,7 +53881,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -54129,7 +54512,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -54311,7 +54695,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -54331,7 +54716,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -55892,7 +56278,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -55994,7 +56383,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -56281,7 +56674,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -56498,7 +56895,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -57330,7 +57728,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -57386,7 +57785,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -57679,7 +58079,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -57769,7 +58173,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -58595,7 +59003,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -58748,7 +59157,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -59629,7 +60043,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -59916,7 +60334,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -59943,7 +60365,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -60076,7 +60504,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -60341,7 +60776,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -61222,7 +61659,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -61509,7 +61950,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -61599,7 +62044,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -61655,7 +62104,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -61745,7 +62195,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -62032,7 +62486,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -62235,7 +62693,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -62325,7 +62784,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -63157,7 +63620,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -63374,7 +63838,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -64255,7 +64720,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_C",
@@ -64339,7 +64808,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -64626,7 +65099,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -65507,7 +65984,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -66333,7 +66814,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -66367,7 +66849,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'TheCenter_WP:PersistentLevel.NPCZoneVolume_555'",
+            "ObjectPath": "/Game/Mods/TheCenter/TheCenter_WP.14825"
+          },
+          "MinDesiredNumberOfNPC": 65
         }
       ]
     },
@@ -66457,7 +66944,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -66744,7 +67235,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -66961,7 +67456,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -67226,7 +67722,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "DinoSpawnEntries_ShallowWater_Generic_C",
@@ -67267,7 +67765,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "IceCaveWater_Spawner_C",
@@ -67288,7 +67787,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.67,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "LavaWater_Spawn_C",
@@ -67330,7 +67836,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 6
         },
         {
           "entryClass": "UnderwaterCaveSpawn_C",
@@ -67421,7 +67928,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 3,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -67581,7 +68094,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -67790,7 +68304,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -68168,7 +68683,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -69049,7 +69565,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_C",
@@ -69133,7 +69653,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -69959,7 +70483,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -71237,7 +71762,11 @@
               "y": 1675.76,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Generic_C",
@@ -71258,7 +71787,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -71391,7 +71926,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -71510,7 +72052,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -71713,7 +72256,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "LavaBeach_Spawn_C",
@@ -72028,7 +72572,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -72287,7 +72832,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -72349,7 +72895,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -72670,7 +73217,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -72929,7 +73477,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Upper_Spawn_C",
@@ -73020,7 +73569,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         }
       ]
     },
@@ -73075,7 +73625,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 1
         }
       ]
     },
@@ -73165,7 +73717,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -73452,7 +74008,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -73571,7 +74131,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -73774,7 +74335,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "LavaBeach_Spawn_C",
@@ -74089,7 +74651,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -74348,7 +74911,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -74438,7 +75002,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -74557,7 +75125,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -74760,7 +75329,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "LavaBeach_Spawn_C",
@@ -75075,7 +75645,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -75334,7 +75905,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Upper_Spawn_C",
@@ -75425,7 +75997,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -75607,7 +76180,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -75732,7 +76306,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -75935,7 +76510,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -75991,7 +76567,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "IceCave_Spawner_C",
@@ -76068,7 +76645,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "Lava_Spawn_C",
@@ -76327,7 +76911,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "Lava_Upper_Spawn_C",
@@ -76418,7 +77003,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 10
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -77048,7 +77634,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -77230,7 +77817,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -77495,7 +78083,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "GrasslandsUnderArea_WaterSpawn_C",
@@ -77509,7 +78099,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -77556,7 +78147,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -77625,7 +78217,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 2
         }
       ]
     },
@@ -77890,7 +78483,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "LavaWater_Spawn_C",
@@ -77932,7 +78527,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -78022,7 +78618,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -78112,7 +78712,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -78399,7 +79003,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -78602,7 +79210,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -79483,7 +80092,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -79700,7 +80313,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -79993,7 +80607,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -80083,7 +80701,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -80909,7 +81531,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -81202,7 +81825,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -82048,7 +82675,9 @@
               "y": 425.89,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30
         }
       ]
     },
@@ -83326,7 +83955,11 @@
               "y": 1675.76,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Generic_C",
@@ -83347,7 +83980,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -83480,7 +84119,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -83697,7 +84343,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -83787,7 +84434,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -84074,7 +84725,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -84900,7 +85555,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -84990,7 +85646,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -85277,7 +85937,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -86103,7 +86767,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -86123,7 +86788,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 3,
+          "TheMinimumStructureDistanceFromSpawnPoint": 3000.0,
+          "MaximumNumberNearbyCoreStructures": 50,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 86400.0,
+          "TheIncreaseNPCIntervalMax": 172800.0
         }
       ]
     },
@@ -87004,7 +87676,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "bForceInEditor": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_C",
@@ -87088,7 +87764,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_C",
@@ -87375,7 +88055,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -87402,7 +88086,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 500,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -87416,7 +88105,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -88977,7 +89667,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -89270,7 +89963,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -90096,7 +90793,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -90214,7 +90912,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 1,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -90276,7 +90979,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -90654,7 +91358,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -91284,7 +91989,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowyMountain_Spawn_C",
@@ -91466,7 +92172,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -91528,7 +92235,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslandsUnderArea_Spawn_C",
@@ -91906,7 +92614,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -92536,7 +93245,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -92556,7 +93266,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
@@ -94117,7 +94828,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "bForceInEditor": true,
+          "SP_MinDesiredNumberOfNPC": 50
         }
       ]
     },
@@ -94200,7 +94914,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "NPCLerpToMaxRandomBaseLevel": 0.67,
+          "ManualSpawningNPCLerpToMaxRandomBaseLevel": 0.67
         }
       ]
     },
@@ -94262,7 +94983,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "SnowGrasslands_Spawn_C",
@@ -94892,7 +95614,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     }
