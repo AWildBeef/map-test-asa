@@ -38,14 +38,28 @@ function initMap(cfg) {
   const w = cfg.imageSize.width;
   const h = cfg.imageSize.height;
 
+  const bounds = [[0, 0], [h, w]];
+
   const map = L.map("map", {
     crs: L.CRS.Simple,
-    minZoom: -4
+
+    minZoom: -3,
+    maxZoom: 2,
+
+    zoomSnap: 0.25,
+    zoomDelta: 0.25,
+    wheelPxPerZoomLevel: 120
   });
 
-  const bounds = [[0, 0], [h, w]];
   L.imageOverlay(cfg.image, bounds).addTo(map);
-  map.fitBounds(bounds);
+
+  map.fitBounds(bounds, {
+    padding: [20, 20],
+    maxZoom: -1
+  });
+
+  map.setMaxBounds(bounds);
+  map.options.maxBoundsViscosity = 1.0;
 
   const layer = L.layerGroup().addTo(map);
   return { map, layer };
