@@ -97,12 +97,12 @@ function drawDino(layer, cfg, dinoKey) {
         const cy = box.y + box.h / 2;
 
         L.circleMarker([cy, cx], {
-          color: strokeColor,
-          weight: isCave ? 2 : 1,
-          opacity: untame ? 0.50 : (isCave ? 0.50 : 1),
+          color: color,
+          weight: isCave ? 1.3 : 1,
+          opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
           fillColor: color,
           radius: 2,
-          fillOpacity: untame ? 0.55 : 0.8
+          fillOpacity: untame ? 0.5 : 0.8
         }).addTo(layer);
       } else {
         const y1 = box.y;
@@ -111,12 +111,12 @@ function drawDino(layer, cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color: strokeColor,
-          weight: isCave ? 2 : 1,
-          opacity: untame ? 0.50 : (isCave ? 0.50 : 1),
-          dashArray: untame ? "6 4" : null,
+          color: color,
+          weight: isCave ? 3 : 1,
+          opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
+          dashArray: untame ? "3 3" : null,
           fillColor: color,
-          fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.70)
+          fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.80)
         }).addTo(layer);
       }
     }
@@ -124,9 +124,9 @@ function drawDino(layer, cfg, dinoKey) {
     // Real server-side points
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
-        color: strokeColor,
+        color: color,
         weight: isCave ? 2 : 1,
-        opacity: untame ? 0.50 : (isCave ? 0.50 : 1),
+        opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
         fillColor: color,
         radius: 2,
         fillOpacity: untame ? 0.55 : 0.8
