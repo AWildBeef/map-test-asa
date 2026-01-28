@@ -31,7 +31,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -58,7 +59,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -85,7 +87,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -121,7 +124,14 @@
               "y": 341.69,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -148,7 +158,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -175,7 +186,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -2288,7 +2300,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesSwampCave_Generic_C",
@@ -2507,7 +2520,14 @@
               "y": 599.98,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -2570,7 +2590,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -3199,7 +3221,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -3584,7 +3607,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -4585,7 +4609,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -4718,7 +4743,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -4858,7 +4884,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -5180,7 +5207,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -5207,7 +5235,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "DinoSpawnEntries_Eel_CaveWater_C",
@@ -5249,7 +5279,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 5,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -5290,7 +5326,15 @@
               "y": 1754.77,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 12,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntries_DarkWaterAngler_C",
@@ -5311,7 +5355,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 32
         }
       ]
     },
@@ -5807,7 +5853,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -6192,7 +6239,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -6283,7 +6331,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -7081,7 +7130,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -8082,7 +8132,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -8215,7 +8266,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -8355,7 +8407,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -8474,7 +8527,12 @@
               "y": 1338.28,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -8587,7 +8645,16 @@
               "y": 333.59,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 14,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntriesCave7-Fliers_Generic_C",
@@ -8617,7 +8684,12 @@
               "y": 1312.84,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesSwampCave_Generic_C",
@@ -8836,7 +8908,14 @@
               "y": 599.98,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntries_SpiderCave_Entrance_C",
@@ -8871,7 +8950,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_381'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15528"
+          },
+          "MinDesiredNumberOfNPC": 9
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -8927,7 +9012,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Val_DinoSpawnEntriesWyvernTrench_C",
@@ -9102,7 +9189,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -9178,7 +9269,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_1155'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15167"
+          },
+          "MinDesiredNumberOfNPC": 2,
+          "TheIncreaseNPCInterval": 6000.0,
+          "TheIncreaseNPCIntervalMax": 9000.0
         }
       ]
     },
@@ -9450,7 +9548,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -9562,7 +9661,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -9624,7 +9725,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -10009,7 +10111,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -10807,7 +10910,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -11731,7 +11835,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -11850,7 +11955,12 @@
               "y": 1338.28,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -11963,7 +12073,16 @@
               "y": 333.59,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 14,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntriesCave_JungleTemple_C",
@@ -11991,7 +12110,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesSwampCave_Generic_C",
@@ -12210,7 +12335,14 @@
               "y": 599.98,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -12266,7 +12398,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Val_DinoSpawnEntriesWyvernTrench_C",
@@ -12441,7 +12575,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -13133,7 +13271,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -15240,7 +15379,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -15449,7 +15589,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -15526,7 +15667,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -15553,7 +15696,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 4000.0,
+          "TheIncreaseNPCInterval": 3000.0,
+          "TheIncreaseNPCIntervalMax": 5000.0
         }
       ]
     },
@@ -15671,7 +15819,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -15754,7 +15904,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -16383,7 +16535,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -16606,7 +16759,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
@@ -17096,7 +17250,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_Valguero_C",
@@ -17719,7 +17874,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -17859,7 +18015,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -18181,7 +18338,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -18217,7 +18375,14 @@
               "y": 341.69,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -18440,7 +18605,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -19126,7 +19292,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -19755,7 +19922,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -20441,7 +20609,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -20497,7 +20666,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -20882,7 +21052,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -22989,7 +23160,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -23787,7 +23959,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -23835,7 +24008,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_1195'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15211"
+          },
+          "MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -24464,7 +24642,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Cats_C",
@@ -24478,7 +24657,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6
         }
       ]
     },
@@ -25107,7 +25288,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -25163,7 +25345,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -25548,7 +25731,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -26240,7 +26424,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -27038,7 +27223,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -27962,7 +28148,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -28101,7 +28288,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -28128,7 +28316,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "DinoSpawnEntries_DeepWater_Generic_C",
@@ -28394,7 +28584,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -28506,7 +28697,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -28666,7 +28859,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 20.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_DeepWater_Generic_C",
@@ -28932,7 +29128,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
@@ -29135,7 +29332,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_NormalLakeWater_C",
@@ -29184,7 +29382,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -29296,7 +29495,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_C",
@@ -29331,7 +29532,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 20.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_Generic_C",
@@ -29548,7 +29752,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ShallowWater_Generic_C",
@@ -29590,7 +29795,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_SmallLakeNoPiranha_C",
@@ -29716,7 +29922,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_1078'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15081"
+          },
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_SmallLakeWithPiranha_C",
@@ -29807,7 +30018,17 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_383'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15530"
+          },
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -29884,7 +30105,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         },
         {
           "entryClass": "Valguero_DinoSpawnEntries_Fish_JustFish_C",
@@ -29914,7 +30137,15 @@
               "y": 342.44,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -30137,7 +30368,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -30823,7 +31055,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -32930,7 +33163,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -33734,7 +33968,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -33950,7 +34185,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 4
         }
       ]
     },
@@ -33998,7 +34235,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -34075,7 +34313,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -34298,7 +34538,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         }
       ]
     },
@@ -34521,7 +34762,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesCave_JungleTemple_C",
@@ -34549,7 +34791,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -35235,7 +35483,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -35298,7 +35547,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -35381,7 +35632,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -36073,7 +36326,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -36458,7 +36712,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -38565,7 +38820,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -38628,7 +38884,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -38711,7 +38969,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -39340,7 +39600,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -40026,7 +40287,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -42133,7 +42395,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -42273,7 +42536,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -42595,7 +42859,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -44708,7 +44973,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -44795,7 +45061,15 @@
               "y": 1739.55,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 12,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -45593,7 +45867,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_IceDesert_C",
@@ -45754,7 +46029,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -46678,7 +46954,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowPlains_C",
@@ -47189,7 +47466,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -47244,7 +47522,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -47321,7 +47606,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -47544,7 +47831,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -48230,7 +48518,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -48859,7 +49148,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -49244,7 +49534,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -51351,7 +51642,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -51442,7 +51734,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -52443,7 +52736,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -52576,7 +52870,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -52716,7 +53011,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -52835,7 +53131,12 @@
               "y": 1338.28,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesCave7-Fliers_Generic_C",
@@ -52865,7 +53166,12 @@
               "y": 1312.84,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -52921,7 +53227,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Val_DinoSpawnEntriesWyvernTrench_C",
@@ -53096,7 +53404,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -53123,7 +53435,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 32
         }
       ]
     },
@@ -53815,7 +54129,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -55922,7 +56237,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -55949,7 +56265,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "DinoSpawnEntries_Eel_CaveWater_C",
@@ -55991,7 +56309,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 5,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -56620,7 +56944,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -57621,7 +57946,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -57754,7 +58080,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -57894,7 +58221,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -58216,7 +58544,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -58243,7 +58572,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 32
         },
         {
           "entryClass": "DinoSpawnEntries_Eel_CaveWater_C",
@@ -58285,7 +58616,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 5,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -58312,7 +58649,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "Valguero_DinoSpawnEntries_MiltonSpot_C",
@@ -58342,7 +58680,14 @@
               "y": 341.69,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -58418,7 +58763,10 @@
               "y": 1763.43,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCWanderRadiusMultiplier": 0.1
         }
       ]
     },
@@ -59047,7 +59395,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -61154,7 +61503,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -61476,7 +61826,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -62670,7 +63021,9 @@
               "y": 204.75,
               "normWeight": 1
             }
-          ]
+          ],
+          "MinDesiredNumberOfNPC": 15,
+          "bForceInEditor": true
         }
       ]
     },
@@ -62704,7 +63057,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 2,
+          "TheIncreaseNPCInterval": 86400.0
         }
       ]
     },
@@ -64817,7 +65172,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -65509,7 +65865,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -65536,7 +65893,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         },
         {
           "entryClass": "Valguero_DinoSpawnEntries_MiltonSpot_C",
@@ -65566,7 +65924,14 @@
               "y": 341.69,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -65593,7 +65958,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -65865,7 +66231,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -66074,7 +66441,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_ShallowWater_Generic_C",
@@ -66116,7 +66484,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -66507,7 +66876,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -66598,7 +66968,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -66765,7 +67136,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -66785,7 +67157,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_IceWorms'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.16248"
+          },
+          "MinDesiredNumberOfNPC": 2,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         }
       ]
     },
@@ -67008,7 +67387,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         }
       ]
     },
@@ -67280,7 +67660,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_NormalLakeWater_C",
@@ -67329,7 +67710,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -67441,7 +67823,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -68133,7 +68517,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -69140,7 +69525,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -69273,7 +69659,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -69413,7 +69800,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -69468,7 +69856,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 30,
+          "TheIncreaseNPCInterval": 500.0
         }
       ]
     },
@@ -69551,7 +69941,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -69578,7 +69970,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -69969,7 +70362,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -70060,7 +70454,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -70115,7 +70510,14 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -70192,7 +70594,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -70310,7 +70714,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -71317,7 +71723,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -71450,7 +71857,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -71590,7 +71998,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -71813,7 +72222,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -72499,7 +72909,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -73500,7 +73911,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -73633,7 +74045,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -73773,7 +74186,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -73870,7 +74284,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -74668,7 +75083,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_IceDesert_C",
@@ -74829,7 +75245,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowPlains_C",
@@ -75340,7 +75757,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -75612,7 +76030,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_NormalLakeWater_C",
@@ -75661,7 +76080,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -75773,7 +76193,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -75835,7 +76257,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Val_DinoSpawnEntriesWyvernTrench_C",
@@ -76010,7 +76434,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -76051,7 +76479,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 4,
+          "bNPCDontWander": true
         }
       ]
     },
@@ -78164,7 +78595,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -78962,7 +79394,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -79886,7 +80319,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -80158,7 +80592,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -80270,7 +80705,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -80899,7 +81336,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -81585,7 +82023,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesSwampCave_Generic_C",
@@ -81804,7 +82243,14 @@
               "y": 599.98,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -81867,7 +82313,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -81950,7 +82398,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2
         }
       ]
     },
@@ -84063,7 +84513,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -84861,7 +85312,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -85553,7 +86005,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -86182,7 +86635,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -88289,7 +88743,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -88323,7 +88778,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "NPCAIRangeMultiplier": 0.5
         }
       ]
     },
@@ -88546,7 +89004,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -89232,7 +89691,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -89273,7 +89733,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "TheIncreaseNPCInterval": 0.01
         }
       ]
     },
@@ -89309,7 +89775,12 @@
               "y": 1312.84,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesCave_JungleTemple_C",
@@ -89337,7 +89808,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_SpiderCave_Entrance_C",
@@ -89372,7 +89849,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_381'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15528"
+          },
+          "MinDesiredNumberOfNPC": 9
         }
       ]
     },
@@ -89581,7 +90064,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_C",
@@ -89616,7 +90100,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 20.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_Generic_C",
@@ -89833,7 +90320,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -90056,7 +90544,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -90742,7 +91231,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -91371,7 +91861,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -92169,7 +92660,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -93170,7 +93662,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -93303,7 +93796,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -93443,7 +93937,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -93765,7 +94260,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -94394,7 +94890,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -95080,7 +95577,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -95465,7 +95963,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -96094,7 +96593,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -98207,7 +98707,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -98270,7 +98771,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -98410,7 +98913,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -98633,7 +99137,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
@@ -99123,7 +99628,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_Valguero_C",
@@ -99746,7 +100252,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -100432,7 +100939,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -101433,7 +101941,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -101566,7 +102075,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -101706,7 +102216,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -101929,7 +102440,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -104036,7 +104548,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -104544,7 +105057,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_Valguero_C",
@@ -105167,7 +105681,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -105853,7 +106368,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -105916,7 +106432,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -105943,7 +106461,16 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
@@ -106146,7 +106673,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_ShallowWater_Generic_C",
@@ -106188,7 +106716,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_SmallLakeWithPiranha_C",
@@ -106279,7 +106808,17 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_383'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15530"
+          },
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -106356,7 +106895,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -106397,7 +106938,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 2,
+          "NPCAIRangeMultiplier": 0.5
         }
       ]
     },
@@ -106484,7 +107027,15 @@
               "y": 1739.55,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 12,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntries_PolarBear_C",
@@ -106505,7 +107056,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_570'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15736"
+          },
+          "MinDesiredNumberOfNPC": 4,
+          "TheNPCFullIncreaseMaximumIterations": 8000
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_IceDesert_C",
@@ -106666,7 +107223,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -107057,7 +107615,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -107148,7 +107707,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -108149,7 +108709,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -108282,7 +108843,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -108422,7 +108984,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -108645,7 +109208,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
@@ -109135,7 +109699,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_Valguero_C",
@@ -109758,7 +110323,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -111865,7 +112431,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -112187,7 +112754,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -112306,7 +112874,12 @@
               "y": 1338.28,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -112419,7 +112992,16 @@
               "y": 333.59,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 14,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntriesCave7-Fliers_Generic_C",
@@ -112449,7 +113031,12 @@
               "y": 1312.84,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesCave_JungleTemple_C",
@@ -112477,7 +113064,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bAllowExtentTest": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -112533,7 +113126,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -112918,7 +113512,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -113009,7 +113604,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -113065,7 +113661,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Val_DinoSpawnEntriesWyvernTrench_C",
@@ -113240,7 +113838,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -113327,7 +113929,15 @@
               "y": 1739.55,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 12,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -114125,7 +114735,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -115049,7 +115660,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -115111,7 +115723,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         }
       ]
     },
@@ -115152,7 +115766,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 5,
+          "TheIncreaseNPCInterval": 4800.0,
+          "TheIncreaseNPCIntervalMax": 7200.0
         }
       ]
     },
@@ -115781,7 +116398,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -116467,7 +117085,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -116523,7 +117142,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -116908,7 +117528,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_C",
@@ -117909,7 +118530,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Golem_C",
@@ -118042,7 +118664,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -118182,7 +118805,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -118216,7 +118840,20 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_UAID_60CF847B67A3978B02_1129491919'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.16595"
+          },
+          "MinDesiredNumberOfNPC": 2,
+          "SP_MinDesiredNumberOfNPC": 2,
+          "bNPCWildIgnoreWild": true,
+          "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
+          "MaximumNumberNearbyCoreStructures": 10000,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
+          "bForceUntameable": true,
+          "TheIncreaseNPCInterval": 0.01
         }
       ]
     },
@@ -118845,7 +119482,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
@@ -118901,7 +119539,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -119286,7 +119925,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_ChalkHills_Plains_C",
@@ -119426,7 +120066,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -119453,7 +120094,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 2
         }
       ]
     },
@@ -119515,7 +120157,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -119900,7 +120543,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -119991,7 +120635,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -120789,7 +121434,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -120830,7 +121476,15 @@
               "y": 1754.77,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 12,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
@@ -121033,7 +121687,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_C",
@@ -121068,7 +121723,10 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 9,
+          "TheMinimumStructureDistanceFromSpawnPoint": 20.0,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 20.0
         },
         {
           "entryClass": "DinoSpawnEntries_RedwoodWater_Generic_C",
@@ -121285,7 +121943,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_SmallLakeNoPiranha_C",
@@ -121411,7 +122070,12 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_1078'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15081"
+          },
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntries_SmallLakeWithPiranha_C",
@@ -121502,7 +122166,17 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Valguero_WP:PersistentLevel.NPCZoneVolume_383'",
+            "ObjectPath": "/Game/Mods/Valguero/Valguero_WP.15530"
+          },
+          "MinDesiredNumberOfNPC": 15,
+          "bAllowExtentTest": true,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true
         },
         {
           "entryClass": "Valguero_DinoSpawnEntries_Fish_JustFish_C",
@@ -121532,7 +122206,15 @@
               "y": 342.44,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 10,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -121559,7 +122241,16 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 20,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntries_ShallowWater_Generic_C",
@@ -121601,7 +122292,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -121678,7 +122370,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -121705,7 +122399,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 60
         }
       ]
     },
@@ -121741,7 +122436,14 @@
               "y": 341.69,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 4,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -121950,7 +122652,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     },
@@ -122446,7 +123149,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_Valguero_C",
@@ -123069,7 +123773,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         }
       ]
     },
@@ -123565,7 +124270,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_Valguero_C",
@@ -124188,7 +124894,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -124874,7 +125581,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesMountain_Generic_C",
@@ -125259,7 +125967,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesSavana_C",
@@ -125350,7 +126059,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         }
       ]
     },
@@ -125573,7 +126283,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -125636,7 +126347,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         }
       ]
     },
@@ -126328,7 +127041,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -126957,7 +127671,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -129064,7 +129779,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -129756,7 +130472,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         }
       ]
     },
@@ -129790,7 +130507,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 24
         }
       ]
     },
@@ -129909,7 +130627,12 @@
               "y": 1338.28,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "bNPCDontWander": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -130022,7 +130745,16 @@
               "y": 333.59,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 14,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0,
+          "bIsCaveManager": true
         },
         {
           "entryClass": "DinoSpawnEntriesSwampCave_Generic_C",
@@ -130241,7 +130973,14 @@
               "y": 599.98,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
@@ -130304,7 +131043,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 20,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -130360,7 +131101,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 5
         },
         {
           "entryClass": "Val_DinoSpawnEntriesWyvernTrench_C",
@@ -130535,7 +131278,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true
         }
       ]
     },
@@ -131164,7 +131911,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -131850,7 +132598,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -133957,7 +134706,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesSwampCave_Generic_C",
@@ -134176,7 +134926,14 @@
               "y": 599.98,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         }
       ]
     },
@@ -134805,7 +135562,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -135491,7 +136249,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -137598,7 +138357,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         },
         {
           "entryClass": "DinoSpawnEntriesSwampCave_Generic_C",
@@ -137817,7 +138577,14 @@
               "y": 599.98,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 30,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "NPCLevelMultiplier": 2.0
         }
       ]
     },
@@ -138040,7 +138807,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 18
         },
         {
           "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
@@ -138530,7 +139298,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntriesGrassland_Generic_Valguero_C",
@@ -139153,7 +139922,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntriesJungle_Generic_Valguero_C",
@@ -139839,7 +140609,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
@@ -140161,7 +140932,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 21
         }
       ]
     },
@@ -140433,7 +141205,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         },
         {
           "entryClass": "DinoSpawnEntries_NormalLakeWater_C",
@@ -140482,7 +141255,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Ocean_C",
@@ -140594,7 +141368,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -141286,7 +142062,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 23
         },
         {
           "entryClass": "DinoSpawnEntriesRedwoods_Generic_C",
@@ -143393,7 +144170,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 19
         }
       ]
     },
@@ -143434,7 +144212,11 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "NPCAIRangeMultiplier": 0.5,
+          "TheIncreaseNPCInterval": 9000.0
         }
       ]
     },
@@ -143475,7 +144257,13 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 1,
+          "TheMinimumStructureDistanceFromSpawnPoint": 3000.0,
+          "MaximumNumberNearbyCoreStructures": 50,
+          "TheMinimumTamedDinoDistanceFromSpawnPoint": 2000.0,
+          "TheIncreaseNPCInterval": 86400.0,
+          "TheIncreaseNPCIntervalMax": 172800.0
         }
       ]
     },
@@ -144279,7 +145067,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -145203,7 +145992,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowPlains_C",
@@ -145714,7 +146504,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -145811,7 +146602,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 15
         },
         {
           "entryClass": "DinoSpawnEntriesTundra_C",
@@ -146609,7 +147401,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_IceDesert_C",
@@ -146770,7 +147563,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowPlains_C",
@@ -147281,7 +148075,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 8
         }
       ]
     },
@@ -147399,7 +148194,9 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20
         }
       ]
     },
@@ -147486,7 +148283,15 @@
               "y": 1739.55,
               "normWeight": 1
             }
-          ]
+          ],
+          "bForceInEditor": true,
+          "bAllowExtentTest": false,
+          "MinDesiredNumberOfNPC": 12,
+          "NPCAIRangeMultiplier": 0.7,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "bIsCaveManager": true
         }
       ]
     },
@@ -148290,7 +149095,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 16
         },
         {
           "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -149214,7 +150020,8 @@
               "normWeight": 1
             }
           ],
-          "points": []
+          "points": [],
+          "MinDesiredNumberOfNPC": 12
         }
       ]
     }
