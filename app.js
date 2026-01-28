@@ -87,7 +87,7 @@ function drawDino(layer, cfg, dinoKey) {
     const color = rarityToColor(entry.rarity);
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
-    const strokeColor = isCave ? "#000000" : color;
+    const strokeColor = isCave ? "#ff00ff" : color;
 
 
     // Boxes (with tiny-box → point fallback if points exist)
