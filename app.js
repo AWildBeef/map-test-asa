@@ -1,7 +1,5 @@
 const BOX_TO_POINT_AREA_THRESHOLD = 18_000;
 const BOX_TO_POINT_MIN_DIM = 40;
-const isCave = entry.bIsCaveManager === true;
-const untame = entry.bForceUntameable === true;
 
 const MAPS = [
   { id: "The Island", file: "data/TheIsland.json" },
@@ -71,6 +69,9 @@ function drawDino(layer, cfg, dinoKey) {
   for (const entry of (dino.entries || [])) {
     const hasPoints = (entry.points && entry.points.length > 0);
     const color = rarityToColor(entry.rarity);
+    const isCave = entry.bIsCaveManager === true;
+    const untame = entry.bForceUntameable === true;
+
 
     // Boxes (with tiny-box → point fallback if points exist)
     for (const box of (entry.boxes || [])) {
