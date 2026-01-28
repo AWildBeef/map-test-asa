@@ -87,7 +87,7 @@ function drawDino(layer, cfg, dinoKey) {
     const color = rarityToColor(entry.rarity);
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
-    const strokeColor = isCave ? "#000000" : color;
+    const strokeColor = isCave ? "#242729" : color;
 
 
     // Boxes (with tiny-box → point fallback if points exist)
@@ -97,9 +97,9 @@ function drawDino(layer, cfg, dinoKey) {
         const cy = box.y + box.h / 2;
 
         L.circleMarker([cy, cx], {
-          color: '#242729',
+          color: strokeColor,
           weight: isCave ? 2 : 1,
-          opacity: 1,
+          opacity: untame ? 0.50 : (isCave ? 0.50 : 1),
           fillColor: color,
           radius: 2,
           fillOpacity: untame ? 0.55 : 0.8
@@ -111,9 +111,9 @@ function drawDino(layer, cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color: '#242729',
+          color: strokeColor,
           weight: isCave ? 2 : 1,
-          opacity: 1,
+          opacity: untame ? 0.50 : (isCave ? 0.50 : 1),
           dashArray: untame ? "6 4" : null,
           fillColor: color,
           fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.70)
@@ -124,9 +124,9 @@ function drawDino(layer, cfg, dinoKey) {
     // Real server-side points
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
-        color: '#242729',
+        color: strokeColor,
         weight: isCave ? 2 : 1,
-        opacity: 1,
+        opacity: untame ? 0.50 : (isCave ? 0.50 : 1),
         fillColor: color,
         radius: 2,
         fillOpacity: untame ? 0.55 : 0.8
