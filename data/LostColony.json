@@ -14,7 +14,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -25,11 +24,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.011403,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -132,11 +132,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00202,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 326.86,
@@ -561,11 +562,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.005,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -1424,11 +1426,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.008197,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1103.02,
@@ -1439,11 +1442,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.25,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -1454,7 +1458,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.001196,
+          "rarity": "rare"
         }
       ]
     },
@@ -1464,7 +1470,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -1475,11 +1480,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.002661,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 1346.23,
@@ -1819,7 +1825,31 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.093333,
+          "rarity": "uncommon"
+        }
+      ]
+    },
+    "Alpha Carno": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Carno/MegaCarno_Character_BP.MegaCarno_Character_BP_C",
+      "displayName": "Alpha Carno",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_Caldera_LC_C",
+          "boxes": [
+            {
+              "x": 1787.44,
+              "y": 1216.42,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000209,
+          "rarity": "very rare"
         }
       ]
     },
@@ -1829,7 +1859,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 314.47,
@@ -2603,7 +2632,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.016216,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -2613,7 +2644,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ChupaCabra_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1259.51,
@@ -2664,17 +2694,41 @@
           "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
-          "TheIncreaseNPCInterval": 0.01
+          "TheIncreaseNPCInterval": 0.01,
+          "weight": 0.1,
+          "rarity": "common"
         }
       ]
     },
-    "Ankylosaurus": {
-      "bpPath": "/Game/PrimalEarth/Dinos/Ankylo/Ankylo_Character_BP.Ankylo_Character_BP_C",
-      "displayName": "Ankylosaurus",
+    "Alpha Ossidon": {
+      "bpPath": "/Game/LostColony/Dinos/SnowMonster/MegaSnowMonster_Character_BP.MegaSnowMonster_Character_BP_C",
+      "displayName": "Alpha Ossidon",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_Valley_LC_C",
+          "boxes": [
+            {
+              "x": 199.49,
+              "y": 772.06,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.009901,
+          "rarity": "rare"
+        }
+      ]
+    },
+    "Alpha Raptor": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Raptor/MegaRaptor_Character_BP.MegaRaptor_Character_BP_C",
+      "displayName": "Alpha Raptor",
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -2685,11 +2739,190 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000415,
+          "rarity": "very rare"
+        },
+        {
+          "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
+          "boxes": [
+            {
+              "x": 8.62,
+              "y": 72.2,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 8.62,
+              "y": 1790.04,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 135.87,
+              "y": 326.7,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 72.24,
+              "y": 326.7,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 135.87,
+              "y": 263.08,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 72.24,
+              "y": 263.08,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 72.24,
+              "y": 199.45,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 72.24,
+              "y": 135.83,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 72.24,
+              "y": 72.2,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 263.11,
+              "y": 135.83,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 199.49,
+              "y": 135.83,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 326.74,
+              "y": 135.83,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 72.24,
+              "y": 1726.42,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 72.24,
+              "y": 1790.04,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 135.87,
+              "y": 1790.04,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1790.83,
+              "y": 71.83,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000912,
+          "rarity": "very rare"
+        },
+        {
+          "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
+          "boxes": [
+            {
+              "x": 8.62,
+              "y": 199.45,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000442,
+          "rarity": "very rare"
+        },
+        {
+          "entryClass": "DinoSpawnEntries_Valley_LC_C",
+          "boxes": [
+            {
+              "x": 199.49,
+              "y": 772.06,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00036,
+          "rarity": "very rare"
+        }
+      ]
+    },
+    "Alpha Rex": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Rex/MegaRex_Character_BP.MegaRex_Character_BP_C",
+      "displayName": "Alpha Rex",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_Caldera_LC_C",
+          "boxes": [
+            {
+              "x": 1787.44,
+              "y": 1216.42,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000233,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -2792,11 +3025,142 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000248,
+          "rarity": "very rare"
+        }
+      ]
+    },
+    "Ankylosaurus": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Ankylo/Ankylo_Character_BP.Ankylo_Character_BP_C",
+      "displayName": "Ankylosaurus",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_Caldera_LC_C",
+          "boxes": [
+            {
+              "x": 1787.44,
+              "y": 1216.42,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.003207,
+          "rarity": "rare"
+        },
+        {
+          "entryClass": "DinoSpawnEntries_Mountain_LC_C",
+          "boxes": [
+            {
+              "x": 581.23,
+              "y": 517.57,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 708.6,
+              "y": 262.7,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 772.1,
+              "y": 262.7,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 772.23,
+              "y": 326.32,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 835.85,
+              "y": 453.57,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 390.36,
+              "y": 962.68,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1217.72,
+              "y": 199.08,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1345.09,
+              "y": 8.58,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1345.22,
+              "y": 262.57,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1918.2,
+              "y": 326.32,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1981.83,
+              "y": 326.32,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1727.33,
+              "y": 517.07,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 1662.71,
+              "y": 771.69,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            },
+            {
+              "x": 517.86,
+              "y": 1662.79,
+              "w": 58.48,
+              "h": 58.48,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 4,
+          "bForceInEditor": true,
+          "weight": 0.003409,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -4103,11 +4467,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.005242,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -4350,11 +4715,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.007356,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -4548,7 +4914,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.088636,
+          "rarity": "uncommon"
         }
       ]
     },
@@ -4558,7 +4926,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -4569,11 +4936,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000722,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 621.69,
@@ -7334,11 +7702,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.059495,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -7713,11 +8082,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.007587,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -7834,11 +8204,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.003481,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 326.86,
@@ -8263,7 +8634,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00375,
+          "rarity": "rare"
         }
       ]
     },
@@ -8273,7 +8646,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -8284,11 +8656,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.011149,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -8663,11 +9036,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.002568,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1346.23,
@@ -9007,11 +9381,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.1,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -9814,11 +10189,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.0115,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 772.23,
@@ -10558,11 +10934,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.029833,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -10665,11 +11042,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.008889,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 772.35,
@@ -11976,11 +12354,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.017094,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -11991,7 +12370,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.010526,
+          "rarity": "rare"
         }
       ]
     },
@@ -12001,7 +12382,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 621.69,
@@ -14762,11 +15142,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.009064,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -15141,11 +15522,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.010505,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 517.71,
@@ -15466,7 +15848,9 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.019737,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -15476,7 +15860,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -15487,11 +15870,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.0,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -15594,11 +15978,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 6.1e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_SnowDragon_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1108.92,
@@ -15777,7 +16162,9 @@
           ],
           "bForceInEditor": true,
           "bAllowExtentTest": true,
-          "MinDesiredNumberOfNPC": 1
+          "MinDesiredNumberOfNPC": 1,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -15787,7 +16174,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -15904,7 +16290,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.012208,
+          "rarity": "rare"
         }
       ]
     },
@@ -15914,7 +16302,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -16157,11 +16544,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.011379,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -16397,7 +16785,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.006689,
+          "rarity": "rare"
         }
       ]
     },
@@ -16407,7 +16797,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 314.47,
@@ -17181,7 +17570,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.020878,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -17191,7 +17582,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -17202,11 +17592,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000475,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -17218,11 +17609,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000506,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Sauropod_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 96.75,
@@ -17283,11 +17675,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.5,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -17299,7 +17692,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000413,
+          "rarity": "very rare"
         }
       ]
     },
@@ -17309,7 +17704,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_1_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 84.77,
@@ -17321,11 +17715,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.08,
+          "rarity": "uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_2_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 45.27,
@@ -17337,7 +17732,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.08,
+          "rarity": "uncommon"
         }
       ]
     },
@@ -17347,7 +17744,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -17358,11 +17754,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000417,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 621.69,
@@ -20123,11 +20520,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.002125,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -20502,11 +20900,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.004669,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -21309,11 +21708,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00836,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 772.23,
@@ -22053,11 +22453,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000955,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -22160,11 +22561,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001293,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -23471,11 +23873,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.012821,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -23718,7 +24121,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.051724,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -23728,7 +24133,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Beavers_LC_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1235.98,
@@ -23740,7 +24144,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -23750,7 +24156,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Interior_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1076.23,
@@ -23915,11 +24320,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000585,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 941.27,
@@ -23965,7 +24371,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000441,
+          "rarity": "very rare"
         }
       ]
     },
@@ -23975,7 +24383,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -24673,11 +25080,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00495,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Glacier_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 199.49,
@@ -24688,7 +25096,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.013514,
+          "rarity": "rare"
         }
       ]
     },
@@ -24698,7 +25108,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -24815,11 +25224,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.00282,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -24831,11 +25241,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.002159,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -25071,11 +25482,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.010811,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -25087,7 +25499,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00176,
+          "rarity": "rare"
         }
       ]
     },
@@ -25097,7 +25511,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_1_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 84.77,
@@ -25109,11 +25522,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.1275,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_2_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 45.27,
@@ -25125,11 +25539,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.1275,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Lake_1_LC_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 88.1,
@@ -25141,11 +25556,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.271943,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 728.85,
@@ -25262,11 +25678,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.166826,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_River_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 343.79,
@@ -25607,11 +26024,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.05,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1775.19,
@@ -25798,7 +26216,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.042076,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -25808,7 +26228,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -25925,11 +26344,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.009649,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -26788,11 +27208,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.012295,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -26803,7 +27224,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.005933,
+          "rarity": "rare"
         }
       ]
     },
@@ -26813,7 +27236,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -26824,11 +27246,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.003041,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -27526,11 +27949,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00495,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.23,
@@ -28270,11 +28694,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.005967,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -28286,7 +28711,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.001584,
+          "rarity": "rare"
         }
       ]
     },
@@ -28296,7 +28723,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -28307,11 +28733,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.001378,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -29009,11 +29436,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.011139,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 326.86,
@@ -29438,11 +29866,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.007,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -29454,7 +29883,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.001436,
+          "rarity": "rare"
         }
       ]
     },
@@ -29464,7 +29895,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -30323,11 +30753,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.005656,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -30563,7 +30994,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.018649,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -30573,7 +31006,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Desmodus_LC_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1424.79,
@@ -30690,11 +31122,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 1.0,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1103.02,
@@ -30705,7 +31138,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.25,
+          "rarity": "very common"
         }
       ]
     },
@@ -30715,7 +31150,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -30726,11 +31160,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.005068,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -31105,11 +31540,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.008949,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 390.46,
@@ -31968,11 +32404,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.016393,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -32103,11 +32540,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.016892,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -32119,11 +32557,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.003772,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -32156,7 +32595,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.003984,
+          "rarity": "rare"
         }
       ]
     },
@@ -32166,7 +32607,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -32283,7 +32723,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.012531,
+          "rarity": "rare"
         }
       ]
     },
@@ -32293,7 +32735,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -32304,11 +32745,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.007602,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -32683,11 +33125,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.001745,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -32804,11 +33247,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.010867,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -32911,7 +33355,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.002417,
+          "rarity": "rare"
         }
       ]
     },
@@ -32921,7 +33367,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_1_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 84.77,
@@ -32933,11 +33378,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.08,
+          "rarity": "uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_2_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 45.27,
@@ -32949,7 +33395,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.08,
+          "rarity": "uncommon"
         }
       ]
     },
@@ -32959,7 +33407,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -33076,7 +33523,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.009375,
+          "rarity": "rare"
         }
       ]
     },
@@ -33086,7 +33535,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -34393,11 +34841,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.005556,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -34591,7 +35040,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.090909,
+          "rarity": "uncommon"
         }
       ]
     },
@@ -34601,7 +35052,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -34612,11 +35062,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.006842,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 621.69,
@@ -37377,11 +37828,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.006375,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -38079,11 +38531,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.011139,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -38186,11 +38639,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.007273,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 8.62,
@@ -38384,11 +38838,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.141414,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -38400,7 +38855,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.005941,
+          "rarity": "rare"
         }
       ]
     },
@@ -38410,7 +38867,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -38422,11 +38878,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.014195,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -39285,11 +39742,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.006011,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -39420,11 +39878,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.016667,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -39436,11 +39895,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.012401,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -39473,11 +39933,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.013095,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -39488,11 +39949,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.008947,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -39504,7 +39966,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.011572,
+          "rarity": "rare"
         }
       ]
     },
@@ -39514,7 +39978,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -39525,11 +39988,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.002851,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -40332,11 +40796,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00975,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 772.23,
@@ -41076,11 +41541,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.023866,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -41092,11 +41558,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.001215,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 517.71,
@@ -41417,11 +41884,12 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.026316,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -42728,11 +43196,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.008547,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -42744,11 +43213,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000531,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -42781,11 +43251,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00056,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -42797,7 +43268,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00099,
+          "rarity": "very rare"
         }
       ]
     },
@@ -42807,7 +43280,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 621.69,
@@ -45568,11 +46040,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.00664,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -45689,11 +46162,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.011278,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -45824,11 +46298,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.003604,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1103.02,
@@ -45839,7 +46314,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.25,
+          "rarity": "very common"
         }
       ]
     },
@@ -45849,7 +46326,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_ElderClaw_LC_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 389.16,
@@ -45882,7 +46358,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 2
+          "MinDesiredNumberOfNPC": 2,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -45892,7 +46370,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_CastleWater_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1586.22,
@@ -45967,7 +46444,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.033333,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -45977,7 +46456,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -45989,11 +46467,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.001442,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 326.86,
@@ -46418,11 +46897,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.008438,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 390.46,
@@ -47281,11 +47761,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.016393,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -47521,11 +48002,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.032432,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -47537,11 +48019,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.00189,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -47574,11 +48057,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.001996,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -47590,7 +48074,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.001176,
+          "rarity": "rare"
         }
       ]
     },
@@ -47600,7 +48086,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -47836,7 +48321,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.009009,
+          "rarity": "rare"
         }
       ]
     },
@@ -47846,7 +48333,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesBee_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 349.68,
@@ -48343,7 +48829,9 @@
             }
           ],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 3
+          "MinDesiredNumberOfNPC": 3,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -48353,7 +48841,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -48364,11 +48851,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 9.5e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -48471,11 +48959,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000101,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 517.71,
@@ -48796,11 +49285,12 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.019737,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -50107,7 +50597,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.006923,
+          "rarity": "rare"
         }
       ]
     },
@@ -50117,7 +50609,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 314.47,
@@ -50891,7 +51382,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.021622,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -50901,7 +51394,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -51675,7 +52167,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.012527,
+          "rarity": "rare"
         }
       ]
     },
@@ -51685,7 +52179,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -52060,11 +52553,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.00428,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -52076,11 +52570,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.033401,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -52183,11 +52678,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.003333,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -52199,11 +52695,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.002334,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -52236,11 +52733,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.002465,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -52252,7 +52750,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.001361,
+          "rarity": "rare"
         }
       ]
     },
@@ -52262,7 +52762,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -52379,11 +52878,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.004177,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -52395,11 +52895,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.007073,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -52432,7 +52933,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00747,
+          "rarity": "rare"
         }
       ]
     },
@@ -52442,7 +52945,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesPenguins_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1227.49,
@@ -52489,11 +52991,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 7
+          "MinDesiredNumberOfNPC": 7,
+          "weight": 0.16,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Glacier_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 199.49,
@@ -52504,11 +53007,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.086486,
+          "rarity": "uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -52520,11 +53024,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.014899,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -52655,11 +53160,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.018018,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -52671,11 +53177,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.013015,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -52708,11 +53215,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.013744,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -52724,7 +53232,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.012145,
+          "rarity": "rare"
         }
       ]
     },
@@ -52734,7 +53244,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1775.19,
@@ -52921,7 +53430,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.008135,
+          "rarity": "rare"
         }
       ]
     },
@@ -52931,7 +53442,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 1346.23,
@@ -53271,11 +53781,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.08,
+          "rarity": "uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 326.86,
@@ -53700,7 +54211,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.018333,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -53710,7 +54223,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_BloodWater_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1677.75,
@@ -53820,7 +54332,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.225,
+          "rarity": "common"
         }
       ]
     },
@@ -53830,7 +54344,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_BloodWater_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1677.75,
@@ -53940,11 +54453,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.114583,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_CastleWater_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1586.22,
@@ -54019,7 +54533,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.011458,
+          "rarity": "rare"
         }
       ]
     },
@@ -54029,7 +54545,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -54040,11 +54555,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.002851,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1346.23,
@@ -54384,11 +54900,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.1,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Interior_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1076.23,
@@ -54553,11 +55070,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.002193,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 941.27,
@@ -54603,11 +55121,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.001652,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -54710,11 +55229,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000606,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -54845,7 +55365,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.018018,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -54855,7 +55377,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -54867,11 +55388,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.020513,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 581.23,
@@ -54974,11 +55496,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.020471,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -55221,11 +55744,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.041188,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -55461,11 +55985,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.023243,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 8.62,
@@ -55659,11 +56184,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.30303,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 199.49,
@@ -55675,7 +56201,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.016722,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -55685,7 +56213,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -55696,11 +56223,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 9.5e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -56398,11 +56926,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00495,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -56505,11 +57034,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000101,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -57816,7 +58346,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001026,
+          "rarity": "rare"
         }
       ]
     },
@@ -57826,7 +58358,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 621.69,
@@ -60587,11 +61118,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.000133,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -60966,11 +61498,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.011672,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1346.23,
@@ -61310,11 +61843,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.07,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1103.02,
@@ -61325,11 +61859,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.25,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -61340,7 +61875,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.0,
+          "rarity": "very rare"
         }
       ]
     },
@@ -61350,7 +61887,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -61361,11 +61897,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.011403,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -61608,11 +62145,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.007172,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -61848,11 +62386,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.008432,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 8.62,
@@ -62046,7 +62585,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.136364,
+          "rarity": "common"
         }
       ]
     },
@@ -62056,7 +62597,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 621.69,
@@ -64817,7 +65357,9 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.001992,
+          "rarity": "rare"
         }
       ]
     },
@@ -64827,7 +65369,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 621.69,
@@ -67588,11 +68129,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.106242,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -67709,11 +68251,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.017753,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -67724,7 +68267,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.009569,
+          "rarity": "rare"
         }
       ]
     },
@@ -67734,7 +68279,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Tundra_MegaRaptor_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 124.86,
@@ -67766,7 +68310,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 1
+          "MinDesiredNumberOfNPC": 1,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -67776,7 +68322,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -67788,11 +68333,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000607,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -68035,11 +68581,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.009195,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -68050,11 +68597,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000718,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -68066,7 +68614,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000495,
+          "rarity": "very rare"
         }
       ]
     },
@@ -68076,7 +68626,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 941.27,
@@ -68122,7 +68671,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.010279,
+          "rarity": "rare"
         }
       ]
     },
@@ -68132,7 +68683,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -68249,11 +68799,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.008354,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -69560,7 +70111,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.010256,
+          "rarity": "rare"
         }
       ]
     },
@@ -69570,7 +70123,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -69945,11 +70497,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.011672,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -69961,11 +70514,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000992,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 517.71,
@@ -70286,11 +70840,12 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.010526,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -70421,11 +70976,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.005405,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -70437,11 +70993,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000866,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -70474,11 +71031,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000915,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -70490,7 +71048,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000809,
+          "rarity": "very rare"
         }
       ]
     },
@@ -70500,7 +71060,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ChupaCabra_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1259.51,
@@ -70551,7 +71110,9 @@
           "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
-          "TheIncreaseNPCInterval": 0.01
+          "TheIncreaseNPCInterval": 0.01,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -70561,7 +71122,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 621.69,
@@ -73322,11 +73882,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.015936,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -74129,7 +74690,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.012,
+          "rarity": "rare"
         }
       ]
     },
@@ -74139,7 +74702,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 453.98,
@@ -74942,11 +75504,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.23,
@@ -75686,11 +76249,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.002387,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ossidon_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 233.58,
@@ -75716,11 +76280,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 3
+          "MinDesiredNumberOfNPC": 3,
+          "weight": 0.25,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -75732,11 +76297,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.002653,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -75748,7 +76314,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00198,
+          "rarity": "rare"
         }
       ]
     },
@@ -75758,7 +76326,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1346.23,
@@ -76098,11 +76665,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.1,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Glacier_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 199.49,
@@ -76113,11 +76681,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.075243,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -76248,11 +76817,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.022523,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -76264,11 +76834,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.012308,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -76301,11 +76872,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.012997,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1775.19,
@@ -76492,7 +77064,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.006248,
+          "rarity": "rare"
         }
       ]
     },
@@ -76502,7 +77076,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -76619,11 +77192,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.001253,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -76635,11 +77209,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000506,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -76756,11 +77331,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.00625,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 517.71,
@@ -77081,11 +77657,12 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.006579,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -77097,11 +77674,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000354,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -77134,11 +77712,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000373,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -77150,7 +77729,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000413,
+          "rarity": "very rare"
         }
       ]
     },
@@ -77160,7 +77741,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -77172,11 +77752,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.001215,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -78035,11 +78616,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.003689,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -78275,11 +78857,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.019054,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -78291,11 +78874,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000637,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -78328,11 +78912,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000672,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -78344,7 +78929,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00099,
+          "rarity": "very rare"
         }
       ]
     },
@@ -78354,7 +78941,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -78485,7 +79071,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.018018,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -78495,7 +79083,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 326.86,
@@ -78920,11 +79507,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.019167,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -79783,11 +80371,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.009426,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -81094,7 +81683,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.010684,
+          "rarity": "rare"
         }
       ]
     },
@@ -81104,7 +81695,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1346.23,
@@ -81444,11 +82034,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.1,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -81460,11 +82051,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.002429,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -82323,11 +82915,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.006557,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -82339,7 +82932,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00198,
+          "rarity": "rare"
         }
       ]
     },
@@ -82349,7 +82944,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -82361,11 +82955,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.005693,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -82482,11 +83077,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.025,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 517.71,
@@ -82807,11 +83403,12 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.014803,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -82942,11 +83539,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.013514,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -82958,11 +83556,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.004973,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -82995,11 +83594,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.005252,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -83011,7 +83611,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.004641,
+          "rarity": "rare"
         }
       ]
     },
@@ -83021,7 +83623,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 941.27,
@@ -83067,11 +83668,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.00027,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -83188,7 +83790,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.004177,
+          "rarity": "rare"
         }
       ]
     },
@@ -83198,7 +83802,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "uncommon",
           "boxes": [
             {
               "x": 1346.23,
@@ -83538,11 +84141,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.09,
+          "rarity": "uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -83659,11 +84263,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.001963,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -83675,11 +84280,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.009109,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 517.71,
@@ -84000,11 +84606,12 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.006316,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -84016,11 +84623,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.005305,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -84053,11 +84661,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.005602,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -84069,7 +84678,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.007426,
+          "rarity": "rare"
         }
       ]
     },
@@ -84079,7 +84690,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_CastleWater_LC_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1586.22,
@@ -84154,7 +84764,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.25,
+          "rarity": "very common"
         }
       ]
     },
@@ -84164,7 +84776,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -84407,7 +85018,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.011954,
+          "rarity": "rare"
         }
       ]
     },
@@ -84417,7 +85030,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -84429,11 +85041,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.001061,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -84466,7 +85079,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.00112,
+          "rarity": "rare"
         }
       ]
     },
@@ -84476,7 +85091,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -84487,11 +85101,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.004276,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -84866,11 +85481,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.003283,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -84973,11 +85589,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001455,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 326.86,
@@ -85402,11 +86019,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.020313,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 772.35,
@@ -86713,7 +87331,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.017094,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -86723,7 +87343,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -86734,11 +87353,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.009027,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 621.69,
@@ -89499,11 +90119,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.0166,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -89878,11 +90499,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.003502,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1346.23,
@@ -90222,11 +90844,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.1,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 453.98,
@@ -91029,11 +91652,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.0225,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -91136,11 +91760,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001919,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 326.86,
@@ -91565,11 +92190,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.004063,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -91580,7 +92206,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.006818,
+          "rarity": "rare"
         }
       ]
     },
@@ -91590,7 +92218,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -92393,11 +93020,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.0135,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -92500,11 +93128,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000606,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -92515,7 +93144,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000144,
+          "rarity": "very rare"
         }
       ]
     },
@@ -92525,7 +93156,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -92536,11 +93166,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.001384,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 899.35,
@@ -93238,11 +93869,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.017822,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -93359,11 +93991,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000304,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -93375,11 +94008,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.002211,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 326.86,
@@ -93804,11 +94438,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.012,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -93820,7 +94455,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.001802,
+          "rarity": "rare"
         }
       ]
     },
@@ -93830,7 +94467,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_XenoQueens_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1276.08,
@@ -93936,11 +94572,12 @@
             "ObjectName": "NPCZoneVolume'LostColony_WP:PersistentLevel.NPCZoneVolume_UAID_60CF847B67A31FAC02_1301481668'",
             "ObjectPath": "/Game/Maps/LostColony/LostColony_WP.16403"
           },
-          "bNPCDontWander": true
+          "bNPCDontWander": true,
+          "weight": 0.0,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_Reapers_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1320.59,
@@ -93979,7 +94616,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -93989,7 +94628,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 314.47,
@@ -94763,7 +95401,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.132432,
+          "rarity": "common"
         }
       ]
     },
@@ -94773,7 +95413,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -95547,7 +96186,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -95557,7 +96198,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -96331,7 +96971,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -96341,7 +96983,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -97115,7 +97756,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.002703,
+          "rarity": "rare"
         }
       ]
     },
@@ -97125,7 +97768,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -97899,7 +98541,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.002703,
+          "rarity": "rare"
         }
       ]
     },
@@ -97909,7 +98553,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -98683,7 +99326,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -98693,7 +99338,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -99467,7 +100111,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -99477,7 +100123,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -100251,7 +100896,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -100261,7 +100908,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -101035,7 +101681,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -101045,7 +101693,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -101819,7 +102466,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -101829,7 +102478,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -102603,7 +103251,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.002703,
+          "rarity": "rare"
         }
       ]
     },
@@ -102613,7 +103263,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -103387,7 +104036,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -103397,7 +104048,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -104171,7 +104821,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001622,
+          "rarity": "rare"
         }
       ]
     },
@@ -104181,7 +104833,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -104955,7 +105606,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -104965,7 +105618,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -105739,7 +106391,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -105749,7 +106403,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -106523,7 +107176,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -106533,7 +107188,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -107307,7 +107961,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -107317,7 +107973,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -108091,7 +108746,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -108101,7 +108758,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -108875,7 +109531,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -108885,7 +109543,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 314.47,
@@ -109659,7 +110316,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.001081,
+          "rarity": "rare"
         }
       ]
     },
@@ -109669,7 +110328,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Zombie_Generic_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 314.47,
@@ -110443,7 +111101,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 150
+          "MinDesiredNumberOfNPC": 150,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -110453,7 +111113,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -110464,11 +111123,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.001164,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -111166,11 +111826,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.004827,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.23,
@@ -111910,11 +112571,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.011933,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -112017,11 +112679,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000619,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_TREX_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 124.86,
@@ -112054,7 +112717,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 2
+          "MinDesiredNumberOfNPC": 2,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -112064,7 +112729,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -112762,11 +113426,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.009356,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -112869,11 +113534,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.007576,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -114180,11 +114846,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.011538,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -114420,11 +115087,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.054054,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -114618,11 +115286,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.068182,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -114633,7 +115302,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.013457,
+          "rarity": "rare"
         }
       ]
     },
@@ -114643,7 +115314,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Water_Cold_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 18.93,
@@ -114655,11 +115325,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 20
+          "MinDesiredNumberOfNPC": 20,
+          "weight": 1.0,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Lake_1_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 88.1,
@@ -114671,11 +115342,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.104089,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 728.85,
@@ -114792,11 +115464,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.044685,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_River_LC_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 343.79,
@@ -115137,11 +115810,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.293333,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1775.19,
@@ -115328,7 +116002,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.246844,
+          "rarity": "common"
         }
       ]
     },
@@ -115338,7 +116014,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -115349,11 +116024,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.00095,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -116156,11 +116832,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00375,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -116263,11 +116940,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.00101,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -117126,11 +117804,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.004098,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -117324,7 +118003,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.061553,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -117334,7 +118015,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_AngelFox_ONLY_LC_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 998.44,
@@ -117593,11 +118273,12 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 6,
           "TheIncreaseNPCInterval": 600.0,
-          "TheIncreaseNPCIntervalMax": 800.0
+          "TheIncreaseNPCIntervalMax": 800.0,
+          "weight": 1.0,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -117700,7 +118381,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001061,
+          "rarity": "rare"
         }
       ]
     },
@@ -117710,7 +118393,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_BloodWater_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1677.75,
@@ -117820,11 +118502,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.003333,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Water_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 728.85,
@@ -117941,7 +118624,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.002336,
+          "rarity": "rare"
         }
       ]
     },
@@ -117951,7 +118636,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -118068,11 +118752,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.016833,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 581.23,
@@ -118175,11 +118860,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.018182,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -118310,7 +118996,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.072072,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -118320,7 +119008,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -118695,11 +119382,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.00028,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -119502,7 +120190,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.0075,
+          "rarity": "rare"
         }
       ]
     },
@@ -119512,7 +120202,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -119523,11 +120212,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000456,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -119644,11 +120334,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.01125,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -120507,11 +121198,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.006557,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -120523,7 +121215,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000594,
+          "rarity": "very rare"
         }
       ]
     },
@@ -120533,7 +121227,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Interior_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1076.23,
@@ -120698,7 +121391,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.190058,
+          "rarity": "common"
         }
       ]
     },
@@ -120708,7 +121403,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Interior_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1076.23,
@@ -120873,11 +121567,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.233918,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 941.27,
@@ -120923,7 +121618,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.132159,
+          "rarity": "common"
         }
       ]
     },
@@ -120933,7 +121630,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Interior_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1076.23,
@@ -121098,11 +121794,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.263158,
+          "rarity": "very common"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 941.27,
@@ -121148,7 +121845,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.440529,
+          "rarity": "very common"
         }
       ]
     },
@@ -121158,7 +121857,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -122465,11 +123163,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.004274,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -122480,7 +123179,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000179,
+          "rarity": "very rare"
         }
       ]
     },
@@ -122490,7 +123191,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 621.69,
@@ -125251,11 +125951,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.00996,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 517.71,
@@ -125576,7 +126277,9 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.019737,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -125586,7 +126289,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -125703,11 +126405,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.003523,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -125719,11 +126422,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.012146,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -125854,11 +126558,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.012613,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -125869,11 +126574,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.009569,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -125885,7 +126591,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.009901,
+          "rarity": "rare"
         }
       ]
     },
@@ -125895,7 +126603,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 621.69,
@@ -128656,11 +129363,12 @@
               "normWeight": 1
             }
           ],
-          "MinDesiredNumberOfNPC": 25
+          "MinDesiredNumberOfNPC": 25,
+          "weight": 0.070828,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_2_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1346.23,
@@ -129000,11 +129708,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.1,
+          "rarity": "common"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -129121,11 +129830,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.005848,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -129137,11 +129847,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.008097,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -130000,11 +130711,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.006831,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -130015,11 +130727,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.009569,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 199.49,
@@ -130031,7 +130744,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.006601,
+          "rarity": "rare"
         }
       ]
     },
@@ -130041,7 +130756,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -130052,11 +130766,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.010452,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1301.24,
@@ -130431,11 +131146,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.026262,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 899.35,
@@ -131133,11 +131849,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.016634,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 772.23,
@@ -131877,11 +132594,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.019391,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -131998,11 +132716,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.018333,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -132245,7 +132964,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.006897,
+          "rarity": "rare"
         }
       ]
     },
@@ -132255,7 +132976,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Water_LC_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 728.85,
@@ -132372,7 +133092,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 16
+          "MinDesiredNumberOfNPC": 16,
+          "weight": 0.031776,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -132382,7 +133104,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -132499,11 +133220,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.00031,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -132515,11 +133237,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000902,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 517.71,
@@ -132840,11 +133563,12 @@
           "points": [],
           "MinDesiredNumberOfNPC": 15,
           "bAllowExtentTest": true,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.002632,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -132856,11 +133580,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000525,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -132893,11 +133618,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000555,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -132908,11 +133634,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.001776,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -132924,7 +133651,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000735,
+          "rarity": "very rare"
         }
       ]
     },
@@ -132934,7 +133663,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -132945,11 +133673,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000475,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -133324,11 +134053,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000438,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_City_Perimeter_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 941.27,
@@ -133374,11 +134104,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000551,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_G_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -133495,11 +134226,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.003759,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -133511,11 +134243,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 0.000101,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -133632,11 +134365,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.003125,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -133739,11 +134473,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000101,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Forest_Open_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 390.46,
@@ -134602,11 +135337,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.002049,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_Bowl_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -134737,11 +135473,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.011261,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -134753,11 +135490,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.000442,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -134790,11 +135528,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 0.000467,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -134806,7 +135545,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 8.3e-05,
+          "rarity": "very rare"
         }
       ]
     },
@@ -134816,7 +135557,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 453.98,
@@ -135619,11 +136359,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.021667,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 772.23,
@@ -136363,7 +137104,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.020137,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -136373,7 +137116,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Caldera_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1787.44,
@@ -136384,11 +137126,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 12
+          "MinDesiredNumberOfNPC": 12,
+          "weight": 4.8e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 8.62,
@@ -136505,11 +137248,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.001125,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -136612,11 +137356,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 5.1e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -137923,11 +138668,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001197,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 8.62,
@@ -137939,11 +138685,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 4.4e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_ValleySnow_LC_Easy_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -137976,11 +138723,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 4.7e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_Canyon_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1153.84,
@@ -137991,11 +138739,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 6e-05,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Valley_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 199.49,
@@ -138007,7 +138756,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 10
+          "MinDesiredNumberOfNPC": 10,
+          "weight": 4.1e-05,
+          "rarity": "very rare"
         }
       ]
     },
@@ -138017,7 +138768,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_2_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 899.35,
@@ -138715,11 +139465,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.014851,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 772.23,
@@ -139459,11 +140210,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.023866,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 581.23,
@@ -139566,11 +140318,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.001263,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_1_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -139813,11 +140566,12 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 15
+          "MinDesiredNumberOfNPC": 15,
+          "weight": 0.042672,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_Tundra_2_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 8.62,
@@ -140053,7 +140807,9 @@
           ],
           "points": [],
           "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 6
+          "MinDesiredNumberOfNPC": 6,
+          "weight": 0.03902,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -140063,7 +140819,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_City_Caldera_1_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1301.24,
@@ -140438,11 +141193,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 4
+          "MinDesiredNumberOfNPC": 4,
+          "weight": 0.000233,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Forest_1_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 453.98,
@@ -141245,11 +142001,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.01,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Dark_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.23,
@@ -141989,11 +142746,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 15,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.002387,
+          "rarity": "rare"
         },
         {
           "entryClass": "DinoSpawnEntries_Mountain_LC_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 581.23,
@@ -142096,11 +142854,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 4,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.000323,
+          "rarity": "very rare"
         },
         {
           "entryClass": "DinoSpawnEntries_TW_Mountain_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 772.35,
@@ -143407,7 +144166,9 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "bForceInEditor": true
+          "bForceInEditor": true,
+          "weight": 0.008547,
+          "rarity": "rare"
         }
       ]
     }

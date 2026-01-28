@@ -14,7 +14,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1374.34,
@@ -379,7 +378,9 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.017496,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -389,7 +390,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1425.26,
@@ -1203,7 +1203,9 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.018243,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -1213,7 +1215,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -1591,7 +1592,9 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.009325,
+          "rarity": "rare"
         }
       ]
     },
@@ -1601,7 +1604,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1374.34,
@@ -1966,11 +1968,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.000622,
+          "rarity": "very rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 994.5,
@@ -2439,11 +2442,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.011734,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -3315,11 +3319,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.008233,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 504.26,
@@ -3417,7 +3422,9 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.006553,
+          "rarity": "rare"
         }
       ]
     },
@@ -3427,7 +3434,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -4241,7 +4247,9 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.000541,
+          "rarity": "very rare"
         }
       ]
     },
@@ -4251,7 +4259,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -5065,7 +5072,9 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.002703,
+          "rarity": "rare"
         }
       ]
     },
@@ -5075,7 +5084,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 994.5,
@@ -5544,11 +5552,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.010057,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -6420,11 +6429,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.007056,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 504.26,
@@ -6522,7 +6532,9 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.013592,
+          "rarity": "rare"
         }
       ]
     },
@@ -6532,7 +6544,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementWater_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1247.45,
@@ -6670,11 +6681,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.166667,
+          "rarity": "common"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -7488,11 +7500,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.006757,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 484.58,
@@ -7556,7 +7569,9 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.000713,
+          "rarity": "very rare"
         }
       ]
     },
@@ -7566,7 +7581,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 484.58,
@@ -7630,11 +7644,12 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.076763,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterEasy_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 572.87,
@@ -7715,11 +7730,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.153041,
+          "rarity": "common"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1006.83,
@@ -7961,7 +7977,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.140909,
+          "rarity": "common"
         }
       ]
     },
@@ -7971,7 +7989,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -8785,7 +8802,9 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.003649,
+          "rarity": "rare"
         }
       ]
     },
@@ -8795,7 +8814,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -9173,7 +9191,9 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.012822,
+          "rarity": "rare"
         }
       ]
     },
@@ -9183,7 +9203,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -9997,7 +10016,9 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.002432,
+          "rarity": "rare"
         }
       ]
     },
@@ -10007,7 +10028,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1374.34,
@@ -10372,11 +10392,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.001555,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 994.5,
@@ -10845,11 +10866,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.001916,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -11721,7 +11743,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.002352,
+          "rarity": "rare"
         }
       ]
     },
@@ -11731,7 +11755,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -12545,11 +12568,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.002162,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 484.58,
@@ -12613,7 +12637,9 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.000194,
+          "rarity": "very rare"
         }
       ]
     },
@@ -12623,7 +12649,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1006.83,
@@ -12865,7 +12890,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.005455,
+          "rarity": "rare"
         }
       ]
     },
@@ -12875,7 +12902,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 994.5,
@@ -13344,11 +13370,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.003352,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -14220,7 +14247,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.002352,
+          "rarity": "rare"
         }
       ]
     },
@@ -14230,7 +14259,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -14608,11 +14636,12 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.008108,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 504.26,
@@ -14710,7 +14739,9 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.00967,
+          "rarity": "rare"
         }
       ]
     },
@@ -14720,7 +14751,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 484.58,
@@ -14784,11 +14814,12 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.000883,
+          "rarity": "very rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterEasy_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 572.87,
@@ -14869,11 +14900,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.003519,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1006.83,
@@ -15115,7 +15147,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.00135,
+          "rarity": "rare"
         }
       ]
     },
@@ -15125,7 +15159,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 484.58,
@@ -15189,11 +15222,12 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.046429,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1006.83,
@@ -15435,7 +15469,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.047348,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -15445,7 +15481,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1374.34,
@@ -15810,11 +15845,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.013608,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -16192,11 +16228,12 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.002131,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 994.5,
@@ -16665,11 +16702,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.001149,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 881.63,
@@ -17541,11 +17579,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.000806,
+          "rarity": "very rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 504.26,
@@ -17643,7 +17682,9 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.006796,
+          "rarity": "rare"
         }
       ]
     },
@@ -17653,7 +17694,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 881.63,
@@ -18525,7 +18565,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.064684,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -18535,7 +18577,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 504.26,
@@ -18633,7 +18674,9 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.011214,
+          "rarity": "rare"
         }
       ]
     },
@@ -18643,7 +18686,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1425.26,
@@ -19457,11 +19499,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.031196,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 484.58,
@@ -19525,7 +19568,9 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.041838,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -19535,7 +19580,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -20349,11 +20393,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.001216,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 484.58,
@@ -20417,11 +20462,12 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.003962,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1006.83,
@@ -20663,7 +20709,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.004242,
+          "rarity": "rare"
         }
       ]
     },
@@ -20673,7 +20721,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -21545,11 +21592,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.002016,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1006.83,
@@ -21791,7 +21839,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.000297,
+          "rarity": "very rare"
         }
       ]
     },
@@ -21801,7 +21851,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1374.34,
@@ -22166,11 +22215,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.034992,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1029.57,
@@ -22548,7 +22598,9 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.016319,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -22558,7 +22610,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -23372,11 +23423,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.009459,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterEasy_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 572.87,
@@ -23457,7 +23509,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.221169,
+          "rarity": "common"
         }
       ]
     },
@@ -23467,7 +23521,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_Basilisks_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1311.2,
@@ -23537,7 +23590,9 @@
           "MinDesiredNumberOfNPC": 4,
           "TheMinimumPlayerDistanceFromSpawnPoint": 4000.0,
           "TheIncreaseNPCInterval": 3000.0,
-          "TheIncreaseNPCIntervalMax": 5000.0
+          "TheIncreaseNPCIntervalMax": 5000.0,
+          "weight": 0.0,
+          "rarity": "very rare"
         }
       ]
     },
@@ -23547,7 +23602,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 994.5,
@@ -24016,11 +24070,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.019157,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -24892,7 +24947,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.013441,
+          "rarity": "rare"
         }
       ]
     },
@@ -24902,7 +24959,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesBee_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 379.1,
@@ -25705,7 +25761,9 @@
           ],
           "MinDesiredNumberOfNPC": 25,
           "TheIncreaseNPCInterval": 10000.0,
-          "TheIncreaseNPCIntervalMax": 16000.0
+          "TheIncreaseNPCIntervalMax": 16000.0,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -25715,7 +25773,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1374.34,
@@ -26080,11 +26137,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.029938,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -26462,11 +26520,12 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.01421,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 994.5,
@@ -26935,11 +26994,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.015326,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -27811,7 +27871,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.010753,
+          "rarity": "rare"
         }
       ]
     },
@@ -27821,7 +27883,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -28199,11 +28260,12 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.01421,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 504.26,
@@ -28301,7 +28363,9 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.019029,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -28311,7 +28375,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -28689,11 +28752,12 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.004663,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -29507,11 +29571,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.002432,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 484.58,
@@ -29575,11 +29640,12 @@
           "MinDesiredNumberOfNPC": 6,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.000357,
+          "rarity": "very rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1006.83,
@@ -29821,7 +29887,9 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.0008,
+          "rarity": "very rare"
         }
       ]
     },
@@ -29831,7 +29899,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementWater_C",
-          "rarity": "common",
           "boxes": [
             {
               "x": 1247.45,
@@ -29969,11 +30036,12 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.126667,
+          "rarity": "common"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1425.26,
@@ -30787,7 +30855,9 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.003851,
+          "rarity": "rare"
         }
       ]
     },
@@ -30797,7 +30867,6 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesChupa_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1381.88,
@@ -33483,11 +33552,12 @@
           "TheMinimumStructureDistanceFromSpawnPoint": 0.0,
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
-          "TheIncreaseNPCInterval": 0.01
+          "TheIncreaseNPCInterval": 0.01,
+          "weight": 1.0,
+          "rarity": "very common"
         },
         {
           "entryClass": "SE_DinoSpawnEntries_ChupaCabraSurface_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1330.62,
@@ -34089,7 +34159,9 @@
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
-          "TheIncreaseNPCInterval": 0.01
+          "TheIncreaseNPCInterval": 0.01,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -34099,7 +34171,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 504.26,
@@ -34197,17 +34268,18 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.023301,
+          "rarity": "very uncommon"
         }
       ]
     },
     "Reaper King": {
-      "bpPath": "/Game/Aberration/Dinos/Nameless/Xenomorph_Character_BP_Male_Surface.Xenomorph_Character_BP_Male_Surface_C",
+      "bpPath": "/Game/Aberration/Dinos/Nameless/MegaXenomorph_Character_BP_Male_Surface.MegaXenomorph_Character_BP_Male_Surface_C",
       "displayName": "Reaper King",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_Xenos_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 1330.62,
@@ -34809,7 +34881,9 @@
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
-          "TheIncreaseNPCInterval": 0.01
+          "TheIncreaseNPCInterval": 0.01,
+          "weight": 0.0,
+          "rarity": "very rare"
         }
       ]
     },
@@ -34819,7 +34893,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_XenoQueens_C",
-          "rarity": "very rare",
           "boxes": [
             {
               "x": 656.78,
@@ -35653,7 +35726,9 @@
             "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_669'",
             "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16893"
           },
-          "MinDesiredNumberOfNPC": 1
+          "MinDesiredNumberOfNPC": 1,
+          "weight": 0.0,
+          "rarity": "very rare"
         }
       ]
     },
@@ -35663,7 +35738,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -36535,11 +36609,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.002026,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_RockDrake_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 612.16,
@@ -36943,7 +37018,9 @@
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 10000.0,
           "TheIncreaseNPCIntervalMax": 16000.0,
-          "SP_MinDesiredNumberOfNPC": 6
+          "SP_MinDesiredNumberOfNPC": 6,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -36953,7 +37030,6 @@
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 1374.34,
@@ -37318,11 +37394,12 @@
           "MinDesiredNumberOfNPC": 3,
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.062208,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 1029.57,
@@ -37700,11 +37777,12 @@
           "MinDesiredNumberOfNPC": 8,
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
-          "TheIncreaseNPCInterval": 90.0
+          "TheIncreaseNPCInterval": 90.0,
+          "weight": 0.002487,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
-          "rarity": "very uncommon",
           "boxes": [
             {
               "x": 994.5,
@@ -38173,11 +38251,12 @@
           "MinDesiredNumberOfNPC": 10,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.015086,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 881.63,
@@ -39049,11 +39128,12 @@
             }
           ],
           "points": [],
-          "MinDesiredNumberOfNPC": 28
+          "MinDesiredNumberOfNPC": 28,
+          "weight": 0.010585,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
-          "rarity": "rare",
           "boxes": [
             {
               "x": 504.26,
@@ -39151,11 +39231,12 @@
           "MinDesiredNumberOfNPC": 8,
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true
+          "bNPCWildIgnoreWild": true,
+          "weight": 0.001456,
+          "rarity": "rare"
         },
         {
           "entryClass": "AB_DinoSpawnEntries_OctoBat_C",
-          "rarity": "very common",
           "boxes": [
             {
               "x": 1330.62,
@@ -39757,7 +39838,9 @@
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
-          "TheIncreaseNPCInterval": 0.01
+          "TheIncreaseNPCInterval": 0.01,
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     }
