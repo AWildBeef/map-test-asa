@@ -101,7 +101,7 @@ function drawDino(layer, cfg, dinoKey) {
           weight: isCave ? 1.3 : 1,
           opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
           fillColor: color,
-          radius: 2,
+          radius: 4,
           fillOpacity: untame ? 0.5 : 0.8
         }).addTo(layer);
       } else {
@@ -128,7 +128,7 @@ function drawDino(layer, cfg, dinoKey) {
         weight: isCave ? 2 : 1,
         opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
         fillColor: color,
-        radius: 2,
+        radius: 4,
         fillOpacity: untame ? 0.55 : 0.8
       }).addTo(layer);
     }
