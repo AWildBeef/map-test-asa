@@ -53,11 +53,13 @@ function initMap(cfg) {
 
 function rarityToColor(r) {
   const s = String(r || "").toLowerCase();
-  if (s.includes("very rare")) return "red";
-  if (s.includes("rare")) return "orange";
-  if (s.includes("uncommon")) return "yellow";
-  if (s.includes("common")) return "lime";
-  return "white";
+  if (s.includes("very rare")) return "#FF0000";
+  if (s.includes("rare")) return "#FF6600";
+  if (s.includes("very uncommon")) return "#FFCC00";
+  if (s.includes("uncommon")) return "#FFFF00";
+  if (s.includes("common")) return "#B2FF00";
+  if (s.includes("very common")) return "#00FF00";
+  return "black";
 }
 
 function drawDino(layer, cfg, dinoKey) {
