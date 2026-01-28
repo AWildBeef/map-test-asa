@@ -71,6 +71,7 @@ function drawDino(layer, cfg, dinoKey) {
     const color = rarityToColor(entry.rarity);
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
+    const strokeColor = isCave ? "#000" : color;
 
 
     // Boxes (with tiny-box → point fallback if points exist)
@@ -82,9 +83,9 @@ function drawDino(layer, cfg, dinoKey) {
         L.circleMarker([cy, cx], {
           color,
           fillColor: color,
-          radius: 3,
+          radius: 2,
           weight: 1,
-          fillOpacity: 0.9
+          fillOpacity: 0.8
         }).addTo(layer);
       } else {
         const y1 = box.y;
@@ -93,11 +94,11 @@ function drawDino(layer, cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color: isCave ? "black" : color,
+          color: strokeColor,
           weight: isCave ? 2 : 1,
           dashArray: untame ? "6 4" : null,
           fillColor: color,
-          fillOpacity: untame ? 0.10 : (isCave ? 0.15 : 0.20)
+          fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.70)
         }).addTo(layer);
       }
     }
@@ -107,9 +108,9 @@ function drawDino(layer, cfg, dinoKey) {
       L.circleMarker([pt.y, pt.x], {
         color,
         fillColor: color,
-        radius: 3,
+        radius: 2,
         weight: 1,
-        fillOpacity: 0.9
+        fillOpacity: 0.8
       }).addTo(layer);
     }
   }
