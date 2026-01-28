@@ -111,7 +111,7 @@ function drawDino(layer, cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color: '#000000',
+          color: '#FFFFFF',
           weight: isCave ? 2 : 1,
           opacity: 1,
           dashArray: untame ? "6 4" : null,
