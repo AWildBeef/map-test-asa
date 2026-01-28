@@ -73,7 +73,7 @@ function rarityToColor(r) {
   if (s.includes("uncommon")) return "#FFFF00";
   if (s.includes("common")) return "#B2FF00";
   if (s.includes("very common")) return "#00FF00";
-  return "black";
+  return "#000000";
 }
 
 function drawDino(layer, cfg, dinoKey) {
