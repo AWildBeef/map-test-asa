@@ -16,8 +16,8 @@ const MAPS = [
     id: "Astraeos",
     file: "data/Astraeos.json",
     backgrounds: [
-      { id: "hand", label: "Hand-drawn", url: "maps/astraeos.png" },
-      { id: "sat",  label: "Satellite",  url: "maps/astraeos_sat.png" }
+      { id: "hand", label: "Hand-drawn", url: "maps/astraeos_ingame.png" },
+      { id: "sat",  label: "Satellite",  url: "maps/astraeos.png" }
     ],
     defaultBg: "sat"
   }
