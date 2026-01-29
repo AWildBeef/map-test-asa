@@ -1,67 +1,94 @@
+/* ======================================================
+   THEME COLORS
+   Change these to reskin the entire site
+====================================================== */
 :root {
-  --bg: #121417;
-  --panel: #1a1d21;
+  --bg: #121417;                 /* page background */
+  --panel: #1a1d21;              /* top bar background */
   --panel-border: #2a2f35;
+
   --text: #e6e6e6;
   --muted: #b8c0cc;
+
   --control-bg: #242a30;
   --control-border: #3a414a;
   --focus: #7aa2ff;
 }
 
-* { box-sizing: border-box; }
+/* ======================================================
+   BASE PAGE LAYOUT
+====================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* This makes the map auto-fill remaining space */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Top bar */
+/* ======================================================
+   TOP BAR
+====================================================== */
+
 #topbar {
-  padding: 14px 18px 12px;
   background: var(--panel);
   border-bottom: 1px solid var(--panel-border);
 
+  padding: 14px 18px 12px;
+
   display: flex;
+  flex-direction: column;   /* title on top, controls below */
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* Title */
-#topbar strong {
-  font-size: 18px;
-  font-weight: 650;
+/* Title text */
+#topbar .title {
+  font-size: 22px;
+  font-weight: 700;
   letter-spacing: 0.4px;
-  margin-right: 10px;
   color: #f2f2f2;
 }
 
-/* Background label */
-#bgSelectWrap {
-  color: var(--muted);
-  font-size: 12px;
-  display: inline-flex;
+/* Container holding dropdowns */
+#topbar .controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 6px;
 }
 
-/* Dropdowns */
-#topbar select {
-  padding: 7px 10px;
-  min-width: 190px;
-  font-size: 14px;
+/* ======================================================
+   DROPDOWNS
+====================================================== */
 
+#topbar select {
+  min-width: 220px;
+  padding: 9px 12px;
+
+  font-size: 15px;
   border-radius: 8px;
-  align-items: center;
+
   border: 1px solid var(--control-border);
   background: var(--control-bg);
-  color: #fff;
+  color: #ffffff;
 
   outline: none;
+  cursor: pointer;
 }
 
 #topbar select:hover {
@@ -73,8 +100,21 @@ body {
   box-shadow: 0 0 0 3px rgba(122, 162, 255, 0.18);
 }
 
-/* Map fills remaining space */
+/* Background selector label */
+#bgSelectWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ======================================================
+   MAP AREA
+====================================================== */
+
 #map {
+  flex: 1;             /* THIS is the magic line */
   width: 100vw;
-  height: calc(100vh - 64px); /* adjust if your topbar gets taller */
 }
