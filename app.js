@@ -89,9 +89,7 @@ function setupBackgroundDropdown(mapMeta, cfg) {
 
   mapObj.overlay.setUrl(sel.value);
 
-  sel.addEventListener("change", () => {
-    mapObj.overlay.setUrl(sel.value);
-  });
+  sel.onchange = () => mapObj.overlay.setUrl(sel.value);
 }
 
 async function loadMapByMeta(mapMeta) {
@@ -168,12 +166,13 @@ function drawDino(layer, cfg, dinoKey) {
 
 
     // Boxes (with tiny-box → point fallback if points exist)
+    // Boxes
     for (const box of (entry.boxes || [])) {
       if (hasPoints && isTinyBox(box)) {
         const cx = box.x + box.w / 2;
         const cy = box.y + box.h / 2;
 
-        L.circleMarker([cy, cx], {
+        const marker = L.circleMarker([cy, cx], {
           color: color,
           weight: isCave ? 1.3 : 1,
           opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
@@ -181,13 +180,15 @@ function drawDino(layer, cfg, dinoKey) {
           radius: 4,
           fillOpacity: untame ? 0.5 : 0.8
         }).addTo(layer);
+
+        if (isCave) marker.bringToFront();
       } else {
         const y1 = box.y;
         const x1 = box.x;
         const y2 = box.y + box.h;
         const x2 = box.x + box.w;
 
-        L.rectangle([[y1, x1], [y2, x2]], {
+        const rect = L.rectangle([[y1, x1], [y2, x2]], {
           color: color,
           weight: isCave ? 3 : 1,
           opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
@@ -195,26 +196,24 @@ function drawDino(layer, cfg, dinoKey) {
           fillColor: color,
           fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.80)
         }).addTo(layer);
-        if (isCave) {
-          rect.bringToFront();
-        }
+
+        if (isCave) rect.bringToFront();
       }
     }
 
-    // Real server-side points
-    for (const pt of (entry.points || [])) {
-      L.circleMarker([pt.y, pt.x], {
-        color: color,
-        weight: isCave ? 2 : 1,
-        opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
-        fillColor: color,
-        radius: 4,
-        fillOpacity: untame ? 0.55 : 0.8
-      }).addTo(layer);
-      if (isCave) {
-        rect.bringToFront();
-      }
-    }
+// Points
+for (const pt of (entry.points || [])) {
+  const marker = L.circleMarker([pt.y, pt.x], {
+    color: color,
+    weight: isCave ? 2 : 1,
+    opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
+    fillColor: color,
+    radius: 4,
+    fillOpacity: untame ? 0.55 : 0.8
+  }).addTo(layer);
+
+  if (isCave) marker.bringToFront();
+}
   }
 }
 
