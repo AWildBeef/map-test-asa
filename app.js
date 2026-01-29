@@ -82,7 +82,7 @@ function setupBackgroundDropdown(mapMeta, cfg) {
   for (const bg of bgs) {
     const opt = document.createElement("option");
     opt.value = bg.url;
-    opt.textContent = bg.label;
+    opt.textContent = `Map style: ${bg.label}`;
     sel.appendChild(opt);
   }
 
