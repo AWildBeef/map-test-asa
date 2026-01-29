@@ -1,68 +1,79 @@
+:root {
+  --bg: #121417;
+  --panel: #1a1d21;
+  --panel-border: #2a2f35;
+  --text: #e6e6e6;
+  --muted: #b8c0cc;
+  --control-bg: #242a30;
+  --control-border: #3a414a;
+  --focus: #7aa2ff;
+}
+
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  background: #121417;
-  color: #e6e6e6;
+  background: var(--bg);
+  color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Top UI panel */
-#ui {
-  padding: 16px 24px 10px;
-  background: #1a1d21;
-  border-bottom: 1px solid #2a2f35;
-}
+/* Top bar */
+#topbar {
+  padding: 14px 18px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--panel-border);
 
-/* Title */
-#ui h1 {
-  margin: 0 0 10px;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: #f2f2f2;
-}
-
-/* Controls row */
-.controls {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-/* Label + dropdown */
-.controls label {
-  display: flex;
-  flex-direction: column;
-  font-size: 12px;
-  opacity: 0.85;
+/* Title */
+#topbar strong {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: 0.4px;
+  margin-right: 10px;
+  color: #f2f2f2;
 }
 
-/* Dropdown styling */
-.controls select {
-  margin-top: 4px;
-  padding: 6px 10px;
-  min-width: 180px;
+/* Background label */
+#bgSelectWrap {
+  color: var(--muted);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 
+/* Dropdowns */
+#topbar select {
+  padding: 7px 10px;
+  min-width: 190px;
   font-size: 14px;
-  border-radius: 6px;
 
-  background: #242a30;
+  border-radius: 8px;
+  border: 1px solid var(--control-border);
+  background: var(--control-bg);
   color: #fff;
 
-  border: 1px solid #333;
   outline: none;
 }
 
-.controls select:hover {
-  border-color: #555;
+#topbar select:hover {
+  border-color: #596273;
 }
 
-.controls select:focus {
-  border-color: #7aa2ff;
+#topbar select:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(122, 162, 255, 0.18);
 }
 
-/* Map takes remaining space */
+/* Map fills remaining space */
 #map {
-  width: 100%;
-  height: calc(100vh - 100px);
+  width: 100vw;
+  height: calc(100vh - 64px); /* adjust if your topbar gets taller */
 }
