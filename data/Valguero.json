@@ -22035,8 +22035,41 @@
           "TheMinimumPlayerDistanceFromSpawnPoint": 4000.0,
           "TheIncreaseNPCInterval": 3000.0,
           "TheIncreaseNPCIntervalMax": 5000.0,
-          "weight": 0.0,
-          "rarity": "very rare"
+          "weight": 0.982318,
+          "rarity": "very common"
+        }
+      ]
+    },
+    "Alpha Basilisk": {
+      "bpPath": "/Game/Aberration/Dinos/Basilisk/MegaBasilisk_Character_BP.MegaBasilisk_Character_BP_C",
+      "displayName": "Alpha Basilisk",
+      "entries": [
+        {
+          "entryClass": "AB_DinoSpawnEntries_Basilisks_C",
+          "boxes": [
+            {
+              "x": 1481.62,
+              "y": 1348.64,
+              "w": 248.66,
+              "h": 152.22,
+              "normWeight": 1
+            },
+            {
+              "x": 1314.27,
+              "y": 1142.12,
+              "w": 152.22,
+              "h": 248.66,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 8,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 4000.0,
+          "TheIncreaseNPCInterval": 3000.0,
+          "TheIncreaseNPCIntervalMax": 5000.0,
+          "weight": 0.017682,
+          "rarity": "very uncommon"
         }
       ]
     },
@@ -40655,8 +40688,8 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
-          "weight": 0.0,
-          "rarity": "very rare"
+          "weight": 0.045802,
+          "rarity": "very uncommon"
         },
         {
           "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
@@ -76471,8 +76504,37 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 60,
-          "weight": 0.001679,
+          "weight": 0.001659,
           "rarity": "rare"
+        }
+      ]
+    },
+    "Alpha Karkinos": {
+      "bpPath": "/Game/Aberration/Dinos/Crab/MegaCrab_Character_BP.MegaCrab_Character_BP_C",
+      "displayName": "Alpha Karkinos",
+      "entries": [
+        {
+          "entryClass": "Val_DinoSpawnEntries_DrakeTrench_C",
+          "boxes": [
+            {
+              "x": 1152.83,
+              "y": 1169.38,
+              "w": 90.37,
+              "h": 94.74,
+              "normWeight": 1
+            },
+            {
+              "x": 1152.83,
+              "y": 1051.98,
+              "w": 90.37,
+              "h": 94.74,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 60,
+          "weight": 2.1e-05,
+          "rarity": "very rare"
         }
       ]
     },
@@ -77105,8 +77167,129 @@
         }
       ]
     },
-    "Leedsichthys": {
+    "Alpha Leedsichthys": {
       "bpPath": "/Game/PrimalEarth/Dinos/Leedsichthys/Alpha_Leedsichthys_Character_BP.Alpha_Leedsichthys_Character_BP_C",
+      "displayName": "Alpha Leedsichthys",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_Ocean_C",
+          "boxes": [
+            {
+              "x": 469.32,
+              "y": 1180.63,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 469.32,
+              "y": 1079.41,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 352.99,
+              "y": 1139.33,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 239.24,
+              "y": 1294.37,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 340.66,
+              "y": 1294.37,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 560.84,
+              "y": 937.27,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 745.38,
+              "y": 1038.85,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 745.38,
+              "y": 1140.03,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 983.27,
+              "y": 944.6,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 933.42,
+              "y": 976.7,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1218.89,
+              "y": 847.05,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1279.42,
+              "y": 801.16,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1392.47,
+              "y": 743.83,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1471.22,
+              "y": 699.46,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 310.38,
+              "y": 1232.49,
+              "w": 136.4,
+              "h": 68.58,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "weight": 0.000162,
+          "rarity": "very rare"
+        }
+      ]
+    },
+    "Leedsichthys": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Leedsichthys/Leedsichthys_Character_BP.Leedsichthys_Character_BP_C",
       "displayName": "Leedsichthys",
       "entries": [
         {
@@ -77221,7 +77404,7 @@
           "points": [],
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 20,
-          "weight": 0.00146,
+          "weight": 0.001298,
           "rarity": "rare"
         }
       ]
@@ -86851,8 +87034,397 @@
         }
       ]
     },
-    "Megalodon": {
+    "Alpha Megalodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Megalodon/MEgaMegalodon_Character_BP.MegaMegalodon_Character_BP_C",
+      "displayName": "Alpha Megalodon",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_DeepWater_Generic_C",
+          "boxes": [
+            {
+              "x": 1069.57,
+              "y": 1075.65,
+              "w": 42.4,
+              "h": 43.68,
+              "normWeight": 1
+            },
+            {
+              "x": 967.01,
+              "y": 976.58,
+              "w": 45.38,
+              "h": 44.56,
+              "normWeight": 1
+            },
+            {
+              "x": 1069.28,
+              "y": 1021.57,
+              "w": 42.53,
+              "h": 47.97,
+              "normWeight": 1
+            },
+            {
+              "x": 986.17,
+              "y": 826.08,
+              "w": 44.99,
+              "h": 44.51,
+              "normWeight": 1
+            },
+            {
+              "x": 986.1,
+              "y": 773.53,
+              "w": 45.09,
+              "h": 47.04,
+              "normWeight": 1
+            },
+            {
+              "x": 1036.27,
+              "y": 819.49,
+              "w": 44.91,
+              "h": 51.34,
+              "normWeight": 1
+            },
+            {
+              "x": 1036.68,
+              "y": 761.92,
+              "w": 44.7,
+              "h": 52.73,
+              "normWeight": 1
+            },
+            {
+              "x": 1087.11,
+              "y": 792.3,
+              "w": 43.87,
+              "h": 52.04,
+              "normWeight": 1
+            },
+            {
+              "x": 1086.96,
+              "y": 735.98,
+              "w": 44.29,
+              "h": 51.55,
+              "normWeight": 1
+            },
+            {
+              "x": 1187.24,
+              "y": 739.36,
+              "w": 43.21,
+              "h": 37.65,
+              "normWeight": 1
+            },
+            {
+              "x": 1137.43,
+              "y": 736.46,
+              "w": 43.26,
+              "h": 63.76,
+              "normWeight": 1
+            },
+            {
+              "x": 1286.8,
+              "y": 753.64,
+              "w": 45.45,
+              "h": 64.52,
+              "normWeight": 1
+            },
+            {
+              "x": 936.74,
+              "y": 926.43,
+              "w": 50.58,
+              "h": 44.93,
+              "normWeight": 1
+            },
+            {
+              "x": 936.36,
+              "y": 876.06,
+              "w": 44.1,
+              "h": 45.05,
+              "normWeight": 1
+            },
+            {
+              "x": 936.36,
+              "y": 797.22,
+              "w": 44.12,
+              "h": 73.43,
+              "normWeight": 1
+            },
+            {
+              "x": 862.59,
+              "y": 876.07,
+              "w": 68.11,
+              "h": 45.05,
+              "normWeight": 1
+            },
+            {
+              "x": 885.58,
+              "y": 813.0,
+              "w": 45.35,
+              "h": 57.45,
+              "normWeight": 1
+            },
+            {
+              "x": 810.42,
+              "y": 954.21,
+              "w": 70.09,
+              "h": 49.31,
+              "normWeight": 1
+            },
+            {
+              "x": 785.44,
+              "y": 1019.44,
+              "w": 44.36,
+              "h": 65.96,
+              "normWeight": 1
+            },
+            {
+              "x": 835.28,
+              "y": 818.7,
+              "w": 45.67,
+              "h": 51.76,
+              "normWeight": 1
+            },
+            {
+              "x": 734.73,
+              "y": 1025.78,
+              "w": 45.66,
+              "h": 57.27,
+              "normWeight": 1
+            },
+            {
+              "x": 684.97,
+              "y": 1037.66,
+              "w": 44.91,
+              "h": 45.37,
+              "normWeight": 1
+            },
+            {
+              "x": 609.78,
+              "y": 1038.55,
+              "w": 70.62,
+              "h": 44.36,
+              "normWeight": 1
+            },
+            {
+              "x": 719.14,
+              "y": 1088.01,
+              "w": 44.45,
+              "h": 45.0,
+              "normWeight": 1
+            },
+            {
+              "x": 669.47,
+              "y": 1088.28,
+              "w": 44.72,
+              "h": 44.55,
+              "normWeight": 1
+            },
+            {
+              "x": 618.8,
+              "y": 1087.43,
+              "w": 45.35,
+              "h": 45.63,
+              "normWeight": 1
+            },
+            {
+              "x": 1069.45,
+              "y": 1126.06,
+              "w": 42.66,
+              "h": 43.57,
+              "normWeight": 1
+            },
+            {
+              "x": 1018.06,
+              "y": 998.86,
+              "w": 44.03,
+              "h": 53.49,
+              "normWeight": 1
+            },
+            {
+              "x": 1237.13,
+              "y": 739.33,
+              "w": 44.2,
+              "h": 42.41,
+              "normWeight": 1
+            },
+            {
+              "x": 1336.8,
+              "y": 773.91,
+              "w": 44.96,
+              "h": 43.98,
+              "normWeight": 1
+            },
+            {
+              "x": 885.77,
+              "y": 926.58,
+              "w": 45.06,
+              "h": 44.5,
+              "normWeight": 1
+            },
+            {
+              "x": 835.36,
+              "y": 1009.29,
+              "w": 44.94,
+              "h": 53.8,
+              "normWeight": 1
+            },
+            {
+              "x": 751.15,
+              "y": 823.72,
+              "w": 78.56,
+              "h": 46.91,
+              "normWeight": 1
+            },
+            {
+              "x": 669.54,
+              "y": 962.55,
+              "w": 59.25,
+              "h": 70.37,
+              "normWeight": 1
+            },
+            {
+              "x": 719.07,
+              "y": 1137.27,
+              "w": 44.71,
+              "h": 45.97,
+              "normWeight": 1
+            },
+            {
+              "x": 669.23,
+              "y": 1137.61,
+              "w": 44.72,
+              "h": 45.44,
+              "normWeight": 1
+            },
+            {
+              "x": 618.47,
+              "y": 1137.79,
+              "w": 45.79,
+              "h": 45.4,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 8,
+          "weight": 0.000187,
+          "rarity": "very rare"
+        },
+        {
+          "entryClass": "DinoSpawnEntries_Ocean_C",
+          "boxes": [
+            {
+              "x": 469.32,
+              "y": 1180.63,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 469.32,
+              "y": 1079.41,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 352.99,
+              "y": 1139.33,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 239.24,
+              "y": 1294.37,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 340.66,
+              "y": 1294.37,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 560.84,
+              "y": 937.27,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 745.38,
+              "y": 1038.85,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 745.38,
+              "y": 1140.03,
+              "w": 84.64,
+              "h": 84.63,
+              "normWeight": 1
+            },
+            {
+              "x": 983.27,
+              "y": 944.6,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 933.42,
+              "y": 976.7,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1218.89,
+              "y": 847.05,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1279.42,
+              "y": 801.16,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1392.47,
+              "y": 743.83,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 1471.22,
+              "y": 699.46,
+              "w": 28.19,
+              "h": 28.19,
+              "normWeight": 1
+            },
+            {
+              "x": 310.38,
+              "y": 1232.49,
+              "w": 136.4,
+              "h": 68.58,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 20,
+          "weight": 0.000474,
+          "rarity": "very rare"
+        }
+      ]
+    },
+    "Megalodon": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Megalodon/Megalodon_Character_BP.Megalodon_Character_BP_C",
       "displayName": "Megalodon",
       "entries": [
         {
@@ -87120,7 +87692,7 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
-          "weight": 0.006982,
+          "weight": 0.006795,
           "rarity": "rare"
         },
         {
@@ -87235,7 +87807,7 @@
           "points": [],
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 20,
-          "weight": 0.017699,
+          "weight": 0.017225,
           "rarity": "very uncommon"
         }
       ]
@@ -95320,8 +95892,46 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 2,
           "NPCAIRangeMultiplier": 0.5,
-          "weight": 1.0,
+          "weight": 0.833333,
           "rarity": "very common"
+        }
+      ]
+    },
+    "Alpha Mosasaurus": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Mosasaurus/Mosa_Character_BP_Mega.Mosa_Character_BP_Mega_C",
+      "displayName": "Alpha Mosasaurus",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_DarkWater_Mosa_C",
+          "boxes": [
+            {
+              "x": 488.15,
+              "y": 1189.24,
+              "w": 50.2,
+              "h": 50.2,
+              "normWeight": 1
+            },
+            {
+              "x": 573.36,
+              "y": 982.58,
+              "w": 50.2,
+              "h": 50.2,
+              "normWeight": 1
+            },
+            {
+              "x": 803.28,
+              "y": 1028.82,
+              "w": 50.2,
+              "h": 50.2,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "NPCAIRangeMultiplier": 0.5,
+          "weight": 0.166667,
+          "rarity": "common"
         }
       ]
     },
@@ -125471,8 +126081,8 @@
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
           "TheIncreaseNPCInterval": 0.01,
-          "weight": 0.0,
-          "rarity": "very rare"
+          "weight": 1.0,
+          "rarity": "very common"
         }
       ]
     },
@@ -150854,8 +151464,54 @@
         }
       ]
     },
-    "Tusoteuthis": {
+    "Alpha Tusoteuthis": {
       "bpPath": "/Game/PrimalEarth/Dinos/Tusoteuthis/Mega_Tusoteuthis_Character_BP.Mega_Tusoteuthis_Character_BP_C",
+      "displayName": "Alpha Tusoteuthis",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntries_DarkWater_Tuso_C",
+          "boxes": [
+            {
+              "x": 518.0,
+              "y": 1111.15,
+              "w": 50.2,
+              "h": 50.2,
+              "normWeight": 1
+            },
+            {
+              "x": 333.81,
+              "y": 1232.67,
+              "w": 50.2,
+              "h": 50.2,
+              "normWeight": 1
+            },
+            {
+              "x": 770.04,
+              "y": 1118.26,
+              "w": 50.2,
+              "h": 50.2,
+              "normWeight": 1
+            },
+            {
+              "x": 563.63,
+              "y": 879.25,
+              "w": 50.2,
+              "h": 50.2,
+              "normWeight": 1
+            }
+          ],
+          "points": [],
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "NPCAIRangeMultiplier": 0.5,
+          "TheIncreaseNPCInterval": 9000.0,
+          "weight": 0.166667,
+          "rarity": "common"
+        }
+      ]
+    },
+    "Tusoteuthis": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Tusoteuthis/Tusoteuthis_Character_BP.Tusoteuthis_Character_BP_C",
       "displayName": "Tusoteuthis",
       "entries": [
         {
@@ -150895,7 +151551,7 @@
           "MinDesiredNumberOfNPC": 2,
           "NPCAIRangeMultiplier": 0.5,
           "TheIncreaseNPCInterval": 9000.0,
-          "weight": 1.0,
+          "weight": 0.833333,
           "rarity": "very common"
         }
       ]
