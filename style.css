@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  background: #121417;
+  color: #e6e6e6;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Top UI panel */
+#ui {
+  padding: 16px 24px 10px;
+  background: #1a1d21;
+  border-bottom: 1px solid #2a2f35;
+}
+
+/* Title */
+#ui h1 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #f2f2f2;
+}
+
+/* Controls row */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Label + dropdown */
+.controls label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* Dropdown styling */
+.controls select {
+  margin-top: 4px;
+  padding: 6px 10px;
+  min-width: 180px;
+
+  font-size: 14px;
+  border-radius: 6px;
+
+  background: #242a30;
+  color: #fff;
+
+  border: 1px solid #333;
+  outline: none;
+}
+
+.controls select:hover {
+  border-color: #555;
+}
+
+.controls select:focus {
+  border-color: #7aa2ff;
+}
+
+/* Map takes remaining space */
+#map {
+  width: 100%;
+  height: calc(100vh - 100px);
+}
