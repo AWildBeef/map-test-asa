@@ -10,23 +10,21 @@ const MAPS = [
   { id: "Lost Colony", file: "data/LostColony.json" },
   { id: "Extinction", file: "data/Extinction.json" },
   { id: "Aberration", file: "data/Aberration.json" },
-  { id: "Astraeos", file: "data/Astraeos.json" }
+
+  // Single Astraeos entry (with backgrounds)
+  {
+    id: "Astraeos",
+    file: "data/Astraeos.json",
+    backgrounds: [
+      { id: "hand", label: "Hand-drawn", url: "maps/astraeos.png" },
+      { id: "sat",  label: "Satellite",  url: "maps/astraeos_sat.png" }
+    ],
+    defaultBg: "sat"
+  }
 ];
 
-function isTinyBox(box) {
-  const area = (box.w || 0) * (box.h || 0);
-  if (area > 0 && area <= BOX_TO_POINT_AREA_THRESHOLD) return true;
-
-  if (
-    BOX_TO_POINT_MIN_DIM > 0 &&
-    ((box.w || 0) <= BOX_TO_POINT_MIN_DIM ||
-     (box.h || 0) <= BOX_TO_POINT_MIN_DIM)
-  ) {
-    return true;
-  }
-
-  return false;
-}
+let mapObj = null;
+let currentCfg = null;
 
 async function loadJSON(path) {
   const res = await fetch(path);
@@ -42,27 +40,106 @@ function initMap(cfg) {
 
   const map = L.map("map", {
     crs: L.CRS.Simple,
-
     minZoom: -3,
     maxZoom: 2,
-
     zoomSnap: 0.25,
     zoomDelta: 0.25,
     wheelPxPerZoomLevel: 120
   });
 
-  L.imageOverlay(cfg.image, bounds).addTo(map);
+  const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
-  map.fitBounds(bounds, {
-    padding: [20, 20],
-    maxZoom: -1
-  });
-
+  map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
   const layer = L.layerGroup().addTo(map);
-  return { map, layer };
+  return { map, layer, overlay, bounds };
+}
+
+function setupBackgroundDropdown(mapMeta, cfg) {
+  const wrap = document.getElementById("bgSelectWrap");
+  const sel = document.getElementById("bgSelect");
+  if (!wrap || !sel || !mapObj) return;
+
+  const bgs = mapMeta?.backgrounds;
+
+  // Hide for maps without alt backgrounds
+  if (!bgs || !bgs.length) {
+    wrap.style.display = "none";
+    sel.innerHTML = "";
+    // ensure base image is used
+    mapObj.overlay.setUrl(cfg.image);
+    return;
+  }
+
+  // Show + populate
+  wrap.style.display = "";
+  sel.innerHTML = "";
+
+  for (const bg of bgs) {
+    const opt = document.createElement("option");
+    opt.value = bg.url;
+    opt.textContent = bg.label;
+    sel.appendChild(opt);
+  }
+
+  const defaultBg = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
+  sel.value = defaultBg.url;
+
+  mapObj.overlay.setUrl(sel.value);
+
+  sel.addEventListener("change", () => {
+    mapObj.overlay.setUrl(sel.value);
+  });
+}
+
+async function loadMapByMeta(mapMeta) {
+  currentCfg = await loadJSON(mapMeta.file);
+
+  if (mapObj) mapObj.map.remove();
+  mapObj = initMap(currentCfg);
+
+  setupBackgroundDropdown(mapMeta, currentCfg);
+  setupDropdown(currentCfg, (dinoKey) => drawDino(mapObj.layer, currentCfg, dinoKey));
+}
+
+function setupMapDropdown() {
+  const sel = document.getElementById("mapSelect");
+  if (!sel) return;
+
+  sel.innerHTML = "";
+  for (const m of MAPS) {
+    const opt = document.createElement("option");
+    opt.value = m.id;
+    opt.textContent = m.id;
+    sel.appendChild(opt);
+  }
+
+  const pickById = (id) => MAPS.find(m => m.id === id) || MAPS[0];
+
+  sel.addEventListener("change", () => loadMapByMeta(pickById(sel.value)));
+
+  sel.value = MAPS[0].id;
+  loadMapByMeta(MAPS[0]);
+}
+
+setupMapDropdown();
+
+
+function isTinyBox(box) {
+  const area = (box.w || 0) * (box.h || 0);
+  if (area > 0 && area <= BOX_TO_POINT_AREA_THRESHOLD) return true;
+
+  if (
+    BOX_TO_POINT_MIN_DIM > 0 &&
+    ((box.w || 0) <= BOX_TO_POINT_MIN_DIM ||
+     (box.h || 0) <= BOX_TO_POINT_MIN_DIM)
+  ) {
+    return true;
+  }
+
+  return false;
 }
 
 function rarityToColor(r) {
@@ -118,6 +195,9 @@ function drawDino(layer, cfg, dinoKey) {
           fillColor: color,
           fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.80)
         }).addTo(layer);
+        if (isCave) {
+          rect.bringToFront();
+        }
       }
     }
 
@@ -131,6 +211,9 @@ function drawDino(layer, cfg, dinoKey) {
         radius: 4,
         fillOpacity: untame ? 0.55 : 0.8
       }).addTo(layer);
+      if (isCave) {
+        rect.bringToFront();
+      }
     }
   }
 }
@@ -158,41 +241,3 @@ function setupDropdown(cfg, onChange) {
 
   return sel;
 }
-
-let mapObj = null;
-let currentCfg = null;
-
-async function loadMap(file) {
-  currentCfg = await loadJSON(file);
-
-  if (!mapObj) {
-    mapObj = initMap(currentCfg);
-  } else {
-    mapObj.map.remove();
-    mapObj = initMap(currentCfg);
-  }
-
-  setupDropdown(currentCfg, (dinoKey) => drawDino(mapObj.layer, currentCfg, dinoKey));
-}
-
-function setupMapDropdown() {
-  const sel = document.getElementById("mapSelect");
-  if (!sel) return;
-
-  sel.innerHTML = "";
-  for (const m of MAPS) {
-    const opt = document.createElement("option");
-    opt.value = m.file;
-    opt.textContent = m.id;
-    sel.appendChild(opt);
-  }
-
-  sel.addEventListener("change", () => loadMap(sel.value));
-
-  if (MAPS.length) {
-    sel.value = MAPS[0].file;
-    loadMap(MAPS[0].file);
-  }
-}
-
-setupMapDropdown();
