@@ -35,7 +35,6 @@ async function loadJSON(path) {
 function initMap(cfg) {
   const w = cfg.imageSize.width;
   const h = cfg.imageSize.height;
-
   const bounds = [[0, 0], [h, w]];
 
   const map = L.map("map", {
@@ -53,8 +52,11 @@ function initMap(cfg) {
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
+  // 👇 two groups: normal first, caves second (top)
   const layer = L.layerGroup().addTo(map);
-  return { map, layer, overlay, bounds };
+  const caveLayer = L.layerGroup().addTo(map);
+
+  return { map, layer, caveLayer, overlay, bounds };
 }
 
 function setupBackgroundDropdown(mapMeta, cfg) {
@@ -152,7 +154,9 @@ function rarityToColor(r) {
 }
 
 function drawDino(layer, cfg, dinoKey) {
-  layer.clearLayers();
+  mapObj.layer.clearLayers();
+  mapObj.caveLayer.clearLayers();
+
 
   const dino = cfg.dinos?.[dinoKey];
   if (!dino) return;
@@ -163,6 +167,7 @@ function drawDino(layer, cfg, dinoKey) {
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
     const strokeColor = isCave ? "#242729" : color;
+    const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
 
     // Boxes (with tiny-box → point fallback if points exist)
@@ -179,9 +184,8 @@ function drawDino(layer, cfg, dinoKey) {
           fillColor: color,
           radius: 4,
           fillOpacity: untame ? 0.5 : 0.8
-        }).addTo(layer);
+        }).addTo(targetLayer);
 
-        if (isCave) marker.bringToFront();
       } else {
         const y1 = box.y;
         const x1 = box.x;
@@ -195,9 +199,8 @@ function drawDino(layer, cfg, dinoKey) {
           dashArray: untame ? "3 3" : null,
           fillColor: color,
           fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.80)
-        }).addTo(layer);
+        }).addTo(targetLayer);
 
-        if (isCave) rect.bringToFront();
       }
     }
 
@@ -210,9 +213,8 @@ for (const pt of (entry.points || [])) {
     fillColor: color,
     radius: 4,
     fillOpacity: untame ? 0.55 : 0.8
-  }).addTo(layer);
+  }).addTo(targetLayer);
 
-  if (isCave) marker.bringToFront();
 }
   }
 }
