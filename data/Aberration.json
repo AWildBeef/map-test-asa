@@ -1372,7 +1372,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.008787,
+          "weight": 0.009122,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -4850,7 +4850,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.00026,
+          "weight": 0.00027,
           "rarity": "very rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -5792,7 +5792,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.001302,
+          "weight": 0.001351,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -8567,7 +8567,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.003254,
+          "weight": 0.003378,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -10055,7 +10055,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.001757,
+          "weight": 0.001824,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -11441,7 +11441,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.001172,
+          "weight": 0.001216,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -14357,7 +14357,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.001041,
+          "weight": 0.001081,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -22278,7 +22278,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.015025,
+          "weight": 0.015598,
           "rarity": "very uncommon",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -23299,7 +23299,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.000586,
+          "weight": 0.000608,
           "rarity": "very rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -26762,7 +26762,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.004556,
+          "weight": 0.00473,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -33924,7 +33924,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.001157,
+          "weight": 0.001201,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -35666,7 +35666,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 1.4e-05,
+          "weight": 1.5e-05,
           "rarity": "very rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -37134,7 +37134,7 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
-          "weight": 0.001855,
+          "weight": 0.001926,
           "rarity": "rare",
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
@@ -40215,7 +40215,7 @@
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "TheIncreaseNPCInterval": 0.01,
-          "weight": 0.289791,
+          "weight": 0.5,
           "rarity": "very common",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
@@ -43396,9 +43396,9 @@
           },
           "MinDesiredNumberOfNPC": 1,
           "weight": 1.0,
-          "rarity": "very uncommon",
+          "rarity": "very rare",
           "bestSharedMin": 1.0,
-          "minRarityDownshift": 3
+          "minRarityDownshift": 5
         }
       ]
     },
