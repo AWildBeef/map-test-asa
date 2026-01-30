@@ -1,9 +1,9 @@
 // ---------- RARITY TUNING (edit these whenever) ----------
 const RARITY_THRESHOLDS = [
-  [0.25,  "very common"],
-  [0.10,  "common"],
-  [0.08,  "uncommon"],
-  [0.015, "very uncommon"],
+  [0.20,  "very common"],
+  [0.09,  "common"],
+  [0.05,  "uncommon"],
+  [0.01, "very uncommon"],
   [0.001, "rare"],
   [-1,    "very rare"],
 ];
@@ -12,8 +12,8 @@ const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rar
 
 const MIN_GLOBAL_DOWNSHIFT = [
   [2,  6],
-  [4,  2],
-  [10, 1],
+  [5,  2],
+  [14, 1],
 ];
 // --------------------------------------------------------
 
