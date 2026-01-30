@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "map": "Scorched Earth",
-  "image": "maps/scorchedearth.webp",
+  "image": "maps/scorchedearth.png",
   "imageSize": {
     "width": 2048,
     "height": 2048
@@ -19517,6 +19517,87 @@
           "weight": 0.004306,
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
+        }
+      ]
+    },
+    "Dreadmare": {
+      "bpPath": "/Game/ASA/Dinos/DarkPegasus/DarkPegasus_Character_BP.DarkPegasus_Character_BP_C",
+      "displayName": "Dreadmare",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntriesDreadmare_C",
+          "boxes": [
+            {
+              "x": 213.44,
+              "y": 576.07,
+              "w": 267.57,
+              "h": 863.95,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 395.06,
+              "y": 781.29,
+              "w": 332.97,
+              "h": 649.62,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 430.59,
+              "y": 598.67,
+              "w": 311.84,
+              "h": 307.4,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1164.01,
+              "y": 257.74,
+              "w": 232.35,
+              "h": 236.02,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1480.95,
+              "y": 741.06,
+              "w": 288.25,
+              "h": 330.57,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1098.67,
+              "y": 1303.0,
+              "w": 159.13,
+              "h": 309.51,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1276.79,
+              "y": 1234.16,
+              "w": 280.95,
+              "h": 153.79,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 914.77,
+              "y": 429.64,
+              "w": 128.46,
+              "h": 186.13,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 6,
+          "TheIncreaseNPCInterval": 3600.0,
+          "weight": 1.0,
+          "bestSharedMin": 0.75,
+          "minRarityDownshift": 6
         }
       ]
     },
