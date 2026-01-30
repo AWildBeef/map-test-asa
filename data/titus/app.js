@@ -1,3 +1,59 @@
+// ---------- RARITY TUNING (edit these whenever) ----------
+const RARITY_THRESHOLDS = [
+  [0.25,  "very common"],
+  [0.10,  "common"],
+  [0.08,  "uncommon"],
+  [0.015, "very uncommon"],
+  [0.001, "rare"],
+  [-1,    "very rare"],
+];
+
+const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rare", "very rare"];
+
+const MIN_GLOBAL_DOWNSHIFT = [
+  [2,  6],
+  [4,  2],
+  [10, 1],
+];
+// --------------------------------------------------------
+
+function rarityFromWeight(w) {
+  const eff = Number(w || 0);
+  for (const [thr, name] of RARITY_THRESHOLDS) {
+    if (eff >= thr) return name;
+  }
+  return "very rare";
+}
+
+function downshiftStepsForMin(bestSharedMin) {
+  const m = Number(bestSharedMin || 0);
+  if (m <= 0) return 0;
+  for (const [thr, steps] of MIN_GLOBAL_DOWNSHIFT) {
+    if (m <= thr) return steps;
+  }
+  return 0;
+}
+
+function downgradeRarity(label, steps) {
+  if (!steps) return label;
+  const i = Math.max(0, RARITY_ORDER.indexOf(label));
+  const j = Math.min(RARITY_ORDER.length - 1, i + steps);
+  return RARITY_ORDER[j];
+}
+
+function applyRarityToConfig(cfg) {
+  const dinos = cfg?.dinos || {};
+  for (const d of Object.values(dinos)) {
+    for (const entry of (d.entries || [])) {
+      const base = rarityFromWeight(entry.weight);
+      const steps = downshiftStepsForMin(entry.bestSharedMin);
+      entry.rarity = downgradeRarity(base, steps);
+    }
+  }
+}
+
+
+
 const BOX_TO_POINT_AREA_THRESHOLD = 18_000;
 const BOX_TO_POINT_MIN_DIM = 40;
 
@@ -16,8 +72,8 @@ const MAPS = [
     id: "Astraeos",
     file: "data/Astraeos.json",
     backgrounds: [
-      { id: "hand", label: "In Game", url: "maps/astraeos_ingame.webp" },
-      { id: "sat",  label: "Satellite",  url: "maps/astraeos.webp" }
+      { id: "hand", label: "In Game", url: "maps/astraeos_ingame.png" },
+      { id: "sat",  label: "Satellite",  url: "maps/astraeos.png" }
     ],
     defaultBg: "sat"
   }
@@ -96,6 +152,9 @@ function setupBackgroundDropdown(mapMeta, cfg) {
 
 async function loadMapByMeta(mapMeta) {
   currentCfg = await loadJSON(mapMeta.file);
+
+  // Compute rarity client-side (no re-export needed for tweaks)
+  applyRarityToConfig(currentCfg);
 
   if (mapObj) mapObj.map.remove();
   mapObj = initMap(currentCfg);
