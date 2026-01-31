@@ -198,10 +198,16 @@ function setupSourceDropdown() {
 
   sel.addEventListener("change", async () => {
     activeSourceId = sel.value;
+    updateModUIVisibility();
     const mapSel = document.getElementById("mapSelect");
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
   });
+}
+function updateModUIVisibility() {
+  const wrap = document.getElementById("modColorWrap");
+  if (!wrap) return;
+  wrap.style.display = (activeSourceId === "official") ? "none" : "";
 }
 
 async function loadModSource(sourceId) {
@@ -287,6 +293,27 @@ function isTinyBox(box) {
   return false;
 }
 
+let modDrawColor = "#ff0000";
+
+function setupModColorPicker() {
+  const wrap = document.getElementById("modColorWrap");
+  const inp = document.getElementById("modColor");
+  if (!wrap || !inp) return;
+
+  inp.value = modDrawColor;
+
+  inp.addEventListener("input", () => {
+    modDrawColor = inp.value;
+
+    // redraw current dino immediately
+    const dinoSel = document.getElementById("dinoSelect");
+    if (currentCfg && dinoSel && dinoSel.value) {
+      drawDino(currentCfg, dinoSel.value);
+    }
+  });
+}
+
+
 function rarityToColor(r) {
   const s = String(r || "").toLowerCase();
   if (s.includes("very rare")) return "#FF0000";
@@ -309,7 +336,9 @@ function drawDino(cfg, dinoKey) {
 
   for (const entry of (dino.entries || [])) {
     const hasPoints = (entry.points && entry.points.length > 0);
-    const color = rarityToColor(entry.rarity);
+    const color = (activeSourceId === "official")
+      ? rarityToColor(entry.rarity)
+      : modDrawColor;
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
 
@@ -402,6 +431,11 @@ function setupDropdown(cfg, onChange) {
 function boot() {
   setupSourceDropdown();
   setupMapDropdown();
+  setupModColorPicker();
+  updateModUIVisibility();
+
+  loadMapByMeta(MAPS[0]);
+}
 
   // initial load
   const mapMeta = MAPS[0];
