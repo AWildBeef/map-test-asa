@@ -199,6 +199,35 @@ function setupModColorPicker() {
   });
 }
 
+let modDrawOpacity = 0.8;
+
+function setupModOpacity() {
+  const inp = document.getElementById("modOpacity");
+  if (!inp) return;
+
+  inp.value = modDrawOpacity;
+
+  inp.addEventListener("input", () => {
+    modDrawOpacity = Number(inp.value);
+
+    const dinoSel = document.getElementById("dinoSelect");
+    if (currentCfg && dinoSel?.value) {
+      drawDino(currentCfg, dinoSel.value);
+    }
+  });
+}
+
+let modGlowEnabled = true;
+
+document.getElementById("modShadow")?.addEventListener("change", e => {
+  modGlowEnabled = e.target.checked;
+
+  const dinoSel = document.getElementById("dinoSelect");
+  if (currentCfg && dinoSel?.value) {
+    drawDino(currentCfg, dinoSel.value);
+  }
+});
+
 function updateModUIVisibility() {
   const wrap = document.getElementById("modColorWrap");
   if (!wrap) return;
@@ -338,6 +367,11 @@ function drawDino(cfg, dinoKey) {
     const color = (activeSourceId === "official")
       ? rarityToColor(entry.rarity)
       : modDrawColor;
+    const weight = isCave ? 3 : 1;
+
+    const glowWeight = modGlowEnabled
+      ? weight + 2
+      : weight;
 
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
@@ -351,7 +385,7 @@ function drawDino(cfg, dinoKey) {
 
         L.circleMarker([cy, cx], {
           color,
-          weight: isCave ? 1.3 : 1,
+          weight: glowWeight,
           opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
           fillColor: color,
           radius: 4,
@@ -366,7 +400,7 @@ function drawDino(cfg, dinoKey) {
 
         L.rectangle([[y1, x1], [y2, x2]], {
           color,
-          weight: isCave ? 3 : 1,
+          weight: glowWeight,
           opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
           dashArray: untame ? "3 3" : null,
           fillColor: color,
@@ -378,7 +412,7 @@ function drawDino(cfg, dinoKey) {
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
         color,
-        weight: isCave ? 2 : 1,
+        weight: glowWeight,
         opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
         fillColor: color,
         radius: 4,
@@ -428,6 +462,7 @@ function boot() {
   setupSourceDropdown();
   setupMapDropdown();
   setupModColorPicker();
+  setupModOpacity();
   updateModUIVisibility();
 
   // single initial load (ONLY ONCE)
