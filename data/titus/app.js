@@ -218,32 +218,26 @@ function setupModOpacity() {
 }
 
 let modGlowEnabled = true;
-
-document.getElementById("modShadow")?.addEventListener("change", e => {
-  modGlowEnabled = e.target.checked;
-
-  const dinoSel = document.getElementById("dinoSelect");
-  if (currentCfg && dinoSel?.value) {
-    drawDino(currentCfg, dinoSel.value);
-  }
-});
-
 let highlightCaves = true;
-
-document.getElementById("highlightCaves")?.addEventListener("change", e => {
-  highlightCaves = e.target.checked;
-  const dinoSel = document.getElementById("dinoSelect");
-  if (currentCfg && dinoSel?.value) {
-    drawDino(currentCfg, dinoSel.value);
-  }
-});
-
-
 
 function updateModUIVisibility() {
   const wrap = document.getElementById("modColorWrap");
   if (!wrap) return;
   wrap.style.display = (activeSourceId === "official") ? "none" : "";
+}
+
+function setupModToggles() {
+  document.getElementById("modShadow")?.addEventListener("change", e => {
+    modGlowEnabled = e.target.checked;
+    const dinoSel = document.getElementById("dinoSelect");
+    if (currentCfg && dinoSel?.value) drawDino(currentCfg, dinoSel.value);
+  });
+
+  document.getElementById("highlightCaves")?.addEventListener("change", e => {
+    highlightCaves = e.target.checked;
+    const dinoSel = document.getElementById("dinoSelect");
+    if (currentCfg && dinoSel?.value) drawDino(currentCfg, dinoSel.value);
+  });
 }
 
 // ============================================================
@@ -376,34 +370,46 @@ function drawDino(cfg, dinoKey) {
   for (const entry of (dino.entries || [])) {
     const hasPoints = (entry.points && entry.points.length > 0);
 
-    const color = (activeSourceId === "official")
-      ? rarityToColor(entry.rarity)
-      : modDrawColor;
-    const weight = isCave ? 3 : 1;
-
-    const glowWeight = modGlowEnabled
-      ? weight + 2
-      : weight;
-    const weight = isCave && highlightCaves ? 4 : 1;
-    const opacity = isCave && highlightCaves ? 1.0 : modDrawOpacity;
-
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
+    const color = (activeSourceId === "official")
+      ? rarityToColor(entry.rarity)
+      : modDrawColor;
+
+    // base line weight
+    const baseWeight = isCave ? 3 : 1;
+
+    // cave emphasis override (optional)
+    const finalWeight = (isCave && highlightCaves) ? 4 : baseWeight;
+
+    // glow hack = slightly thicker stroke
+    const glowWeight = modGlowEnabled ? (finalWeight + 2) : finalWeight;
+
+    // final opacity for mod vs official
+    // (official uses normal behavior; mod uses slider)
+    const finalOpacity = (activeSourceId === "official")
+      ? (untame ? 0.80 : 1.0)
+      : ((isCave && highlightCaves) ? 1.0 : modDrawOpacity);
+
+    const finalFillOpacity = (activeSourceId === "official")
+      ? (untame ? 0.50 : (isCave ? 0.50 : 0.80))
+      : finalOpacity;
+
+    // Boxes
     for (const box of (entry.boxes || [])) {
-      // if your mod exporter now matches official format, this is fine
       if (hasPoints && isTinyBox(box)) {
         const cx = box.x + box.w / 2;
         const cy = box.y + box.h / 2;
 
         L.circleMarker([cy, cx], {
-          color,
+          color: color,
           weight: glowWeight,
-          opacity: modDrawOpacity,
+          opacity: finalOpacity,
           fillColor: color,
           radius: 4,
-          fillOpacity: modDrawOpacity
+          fillOpacity: finalFillOpacity
         }).addTo(targetLayer);
 
       } else {
@@ -413,24 +419,25 @@ function drawDino(cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color,
+          color: color,
           weight: glowWeight,
-          opacity: modDrawOpacity,
+          opacity: finalOpacity,
           dashArray: untame ? "3 3" : null,
           fillColor: color,
-          fillOpacity: modDrawOpacity
+          fillOpacity: finalFillOpacity
         }).addTo(targetLayer);
       }
     }
 
+    // Points
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
-        color,
+        color: color,
         weight: glowWeight,
-        opacity: modDrawOpacity,
+        opacity: finalOpacity,
         fillColor: color,
         radius: 4,
-        fillOpacity: modDrawOpacity
+        fillOpacity: finalFillOpacity
       }).addTo(targetLayer);
     }
   }
@@ -477,6 +484,7 @@ function boot() {
   setupMapDropdown();
   setupModColorPicker();
   setupModOpacity();
+  setupModToggles();
   updateModUIVisibility();
 
   // single initial load (ONLY ONCE)
