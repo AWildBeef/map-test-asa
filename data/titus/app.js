@@ -228,6 +228,18 @@ document.getElementById("modShadow")?.addEventListener("change", e => {
   }
 });
 
+let highlightCaves = true;
+
+document.getElementById("highlightCaves")?.addEventListener("change", e => {
+  highlightCaves = e.target.checked;
+  const dinoSel = document.getElementById("dinoSelect");
+  if (currentCfg && dinoSel?.value) {
+    drawDino(currentCfg, dinoSel.value);
+  }
+});
+
+
+
 function updateModUIVisibility() {
   const wrap = document.getElementById("modColorWrap");
   if (!wrap) return;
@@ -372,6 +384,8 @@ function drawDino(cfg, dinoKey) {
     const glowWeight = modGlowEnabled
       ? weight + 2
       : weight;
+    const weight = isCave && highlightCaves ? 4 : 1;
+    const opacity = isCave && highlightCaves ? 1.0 : modDrawOpacity;
 
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
@@ -386,10 +400,10 @@ function drawDino(cfg, dinoKey) {
         L.circleMarker([cy, cx], {
           color,
           weight: glowWeight,
-          opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
+          opacity: modDrawOpacity,
           fillColor: color,
           radius: 4,
-          fillOpacity: untame ? 0.5 : 0.8
+          fillOpacity: modDrawOpacity
         }).addTo(targetLayer);
 
       } else {
@@ -401,10 +415,10 @@ function drawDino(cfg, dinoKey) {
         L.rectangle([[y1, x1], [y2, x2]], {
           color,
           weight: glowWeight,
-          opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
+          opacity: modDrawOpacity,
           dashArray: untame ? "3 3" : null,
           fillColor: color,
-          fillOpacity: untame ? 0.50 : (isCave ? 0.50 : 0.80)
+          fillOpacity: modDrawOpacity
         }).addTo(targetLayer);
       }
     }
@@ -413,10 +427,10 @@ function drawDino(cfg, dinoKey) {
       L.circleMarker([pt.y, pt.x], {
         color,
         weight: glowWeight,
-        opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
+        opacity: modDrawOpacity,
         fillColor: color,
         radius: 4,
-        fillOpacity: untame ? 0.55 : 0.8
+        fillOpacity: modDrawOpacity
       }).addTo(targetLayer);
     }
   }
