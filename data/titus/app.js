@@ -54,6 +54,7 @@ function applyRarityToConfig(cfg) {
   }
 }
 
+
 // ============================================================
 // DRAWING TUNING
 // ============================================================
@@ -82,6 +83,8 @@ const MAPS = [
     defaultBg: "sat"
   }
 ];
+
+let currentMapId = "";
 
 // ============================================================
 // SOURCES (Official + Mods)
@@ -444,8 +447,10 @@ function renderInfoPanelForDino(cfg, dinoKey) {
 }
 
 function renderEntryRow(entry, dinoKey, idx) {
-  const key = `${activeSourceId}::${MAP_NAME_HERE}::${dinoKey}::${idx}`;
-  const visible = entryVisibility[key] ?? true;
+  function isEntryVisible(dinoKey, entryIndex) {
+  const key = `${activeSourceId}::${currentMapId}::${dinoKey}::${entryIndex}`;
+  return entryVisibility[key] ?? true;
+}
 
   const entryClass = entry.entryClass || entry.entry || `Entry ${idx+1}`;
   const groupWeight = entry.groupWeight ?? entry.group_weight ?? entry.weight ?? 0;
@@ -559,6 +564,7 @@ function setupMapDropdown() {
 // MAIN LOAD
 // ============================================================
 async function loadMapByMeta(mapMeta) {
+	currentMapId = mapMeta.id;
   const vanillaCfg = await loadJSON(mapMeta.file);
 
   let effectiveCfg = vanillaCfg;
