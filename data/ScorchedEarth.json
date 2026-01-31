@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "map": "Scorched Earth",
-  "image": "maps/scorchedearth.png",
+  "image": "maps/scorchedearth.webp",
   "imageSize": {
     "width": 2048,
     "height": 2048
@@ -46,7 +46,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.002135,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -124,7 +123,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.002603,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -151,7 +149,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.003203,
-          "rarity": "rare",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -173,7 +170,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.005354,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -251,7 +247,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.004375,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -367,7 +362,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.003203,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         }
@@ -663,7 +657,6 @@
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
           "weight": 0.007968,
-          "rarity": "very rare",
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -944,7 +937,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.001081,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -1275,7 +1267,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.002866,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -2246,7 +2237,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.00123,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -3209,7 +3199,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.00473,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -3253,7 +3242,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.010714,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -3331,7 +3319,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.013058,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -3358,7 +3345,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.016071,
-          "rarity": "very uncommon",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -3474,7 +3460,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.016071,
-          "rarity": "very uncommon",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -3783,7 +3768,6 @@
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
           "weight": 0.028302,
-          "rarity": "very rare",
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -4760,7 +4744,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000469,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -5729,7 +5712,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.011548,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -6010,7 +5992,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.003294,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -6048,7 +6029,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.007812,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -10011,7 +9991,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.005583,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -10033,7 +10012,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.022388,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -10111,7 +10089,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.018293,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -10227,7 +10204,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.011719,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -10536,7 +10512,6 @@
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
           "weight": 0.025157,
-          "rarity": "very rare",
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -10817,7 +10792,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.004529,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -11780,7 +11754,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.002759,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -12061,7 +12034,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.000588,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -13024,7 +12996,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.003018,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -13081,7 +13052,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 12,
           "weight": 0.171642,
-          "rarity": "common",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -13294,7 +13264,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.315789,
-          "rarity": "very common",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -13575,7 +13544,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 5.1e-05,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -14546,7 +14514,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.00019,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -14707,7 +14674,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 3,
           "weight": 0.637255,
-          "rarity": "common",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -14868,7 +14834,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 3,
           "weight": 0.012745,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -14893,7 +14858,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.0008,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -14944,7 +14908,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 12,
           "weight": 0.001631,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -15157,7 +15120,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.006316,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -16134,7 +16096,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000102,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -16233,7 +16194,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 1.5e-05,
-          "rarity": "very rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -16514,7 +16474,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.006306,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -16709,7 +16668,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.008251,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -17680,7 +17638,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.004614,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -17758,7 +17715,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.010882,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -17785,7 +17741,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.013393,
-          "rarity": "rare",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         }
@@ -18066,7 +18021,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.000618,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -18261,7 +18215,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.010467,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -18592,7 +18545,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.008188,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -19563,9 +19515,89 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.004306,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
+        }
+      ]
+    },
+    "Dreadmare": {
+      "bpPath": "/Game/ASA/Dinos/DarkPegasus/DarkPegasus_Character_BP.DarkPegasus_Character_BP_C",
+      "displayName": "Dreadmare",
+      "entries": [
+        {
+          "entryClass": "DinoSpawnEntriesDreadmare_C",
+          "boxes": [
+            {
+              "x": 213.44,
+              "y": 576.07,
+              "w": 267.57,
+              "h": 863.95,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 395.06,
+              "y": 781.29,
+              "w": 332.97,
+              "h": 649.62,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 430.59,
+              "y": 598.67,
+              "w": 311.84,
+              "h": 307.4,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1164.01,
+              "y": 257.74,
+              "w": 232.35,
+              "h": 236.02,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1480.95,
+              "y": 741.06,
+              "w": 288.25,
+              "h": 330.57,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1098.67,
+              "y": 1303.0,
+              "w": 159.13,
+              "h": 309.51,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 1276.79,
+              "y": 1234.16,
+              "w": 280.95,
+              "h": 153.79,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            },
+            {
+              "x": 914.77,
+              "y": 429.64,
+              "w": 128.46,
+              "h": 186.13,
+              "normWeight": 1.0,
+              "manager": "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455"
+            }
+          ],
+          "points": [],
+          "MinDesiredNumberOfNPC": 6,
+          "TheIncreaseNPCInterval": 3600.0,
+          "weight": 1.0,
+          "bestSharedMin": 0.75,
+          "minRarityDownshift": 6
         }
       ]
     },
@@ -23532,7 +23564,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.000838,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -23841,7 +23872,6 @@
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
           "weight": 0.016352,
-          "rarity": "very rare",
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -23866,7 +23896,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.2448,
-          "rarity": "uncommon",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -24843,7 +24872,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000789,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -25806,7 +25834,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.001011,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -29775,7 +29802,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.001309,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -30071,7 +30097,6 @@
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
           "weight": 0.052586,
-          "rarity": "very rare",
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -31048,7 +31073,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.002307,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -31147,7 +31171,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.012327,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -31356,7 +31379,6 @@
           "TheIncreaseNPCInterval": 10000.0,
           "TheIncreaseNPCIntervalMax": 16000.0,
           "weight": 1.0,
-          "rarity": "very rare",
           "bestSharedMin": 2.0,
           "minRarityDownshift": 6
         }
@@ -31637,7 +31659,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.001765,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -31832,7 +31853,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.001224,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -32795,7 +32815,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.001655,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -32900,7 +32919,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000137,
-          "rarity": "very rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -33237,7 +33255,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.024013,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -34208,7 +34225,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.015931,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -34307,7 +34323,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.022256,
-          "rarity": "very uncommon",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -34332,7 +34347,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.000798,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -34383,7 +34397,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 12,
           "weight": 0.000571,
-          "rarity": "very rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -34596,7 +34609,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.00063,
-          "rarity": "very rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -35565,7 +35577,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.000883,
-          "rarity": "very rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -35861,7 +35872,6 @@
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
           "weight": 0.055216,
-          "rarity": "very rare",
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -36142,7 +36152,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.000659,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -37113,7 +37122,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.001602,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -38076,7 +38084,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.002464,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         },
@@ -38175,7 +38182,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.001142,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -38512,7 +38518,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.008188,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -39483,7 +39488,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.001845,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -39582,7 +39586,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.011094,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -39626,7 +39629,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.007143,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -43589,7 +43591,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.001527,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -43667,7 +43668,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.008705,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -43694,7 +43694,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.010714,
-          "rarity": "rare",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -43716,7 +43715,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.026866,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -43794,7 +43792,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.021951,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -43910,7 +43907,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.010714,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -44219,7 +44215,6 @@
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
           "weight": 0.037736,
-          "rarity": "very rare",
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -44874,7 +44869,6 @@
           "TheIncreaseNPCInterval": 9000.0,
           "TheIncreaseNPCIntervalMax": 14400.0,
           "weight": 1.0,
-          "rarity": "uncommon",
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         }
@@ -44910,7 +44904,6 @@
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 18000.0,
           "weight": 1.0,
-          "rarity": "very rare",
           "bestSharedMin": 2.0,
           "minRarityDownshift": 6
         }
@@ -45887,7 +45880,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000115,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -46864,7 +46856,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.001362,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -47145,7 +47136,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.000376,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -47340,7 +47330,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.002771,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -47671,7 +47660,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.008188,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -48642,7 +48630,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.005536,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -48741,7 +48728,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.008218,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -48846,7 +48832,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.002517,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -48912,7 +48897,6 @@
           "MinDesiredNumberOfNPC": 2,
           "TheIncreaseNPCInterval": 14400.0,
           "weight": 1.0,
-          "rarity": "very rare",
           "bestSharedMin": 0.333,
           "minRarityDownshift": 6
         }
@@ -49193,7 +49177,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.047059,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -49388,7 +49371,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.070368,
-          "rarity": "very uncommon",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -53351,7 +53333,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.078534,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -53682,7 +53663,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.057574,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -54653,7 +54633,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.043253,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -54697,7 +54676,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.008929,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -54775,7 +54753,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.010882,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -54802,7 +54779,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.013393,
-          "rarity": "rare",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -54824,7 +54800,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.029851,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -54902,7 +54877,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.02439,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -55018,7 +54992,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.013393,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         }
@@ -55123,7 +55096,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.00137,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -56100,7 +56072,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000577,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -56199,7 +56170,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.008218,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -56536,7 +56506,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.004299,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -57513,7 +57482,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000653,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -57612,7 +57580,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.001531,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -57638,7 +57605,6 @@
           "MinDesiredNumberOfNPC": 3,
           "TheIncreaseNPCInterval": 14400.0,
           "weight": 1.0,
-          "rarity": "uncommon",
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         }
@@ -57663,7 +57629,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.16,
-          "rarity": "uncommon",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -57714,7 +57679,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 12,
           "weight": 0.114428,
-          "rarity": "common",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         }
@@ -58010,7 +57974,6 @@
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
           "weight": 0.055216,
-          "rarity": "very rare",
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -58347,7 +58310,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000613,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -59318,7 +59280,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.000716,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -59417,7 +59378,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.004657,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -59698,7 +59658,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.006275,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -59736,7 +59695,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.005952,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -59931,7 +59889,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.011728,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -63894,7 +63851,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.010471,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -63972,7 +63928,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.007254,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -64935,7 +64890,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.009854,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         },
@@ -64962,7 +64916,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.008929,
-          "rarity": "rare",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -65078,7 +65031,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.008929,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -65387,7 +65339,6 @@
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
           "weight": 0.010484,
-          "rarity": "very rare",
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -65588,7 +65539,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.001006,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         }
@@ -65903,7 +65853,6 @@
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
           "weight": 0.00805,
-          "rarity": "very rare",
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -66240,7 +66189,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.002687,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -66339,7 +66287,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.003116,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -66412,7 +66359,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 1.0,
-          "rarity": "very rare",
           "bestSharedMin": 1.0,
           "minRarityDownshift": 6
         }
@@ -66693,7 +66639,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.000424,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -67664,7 +67609,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 7.7e-05,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -68627,7 +68571,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.009854,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -68671,7 +68614,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.002232,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -68749,7 +68691,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.00272,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -68776,7 +68717,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.003348,
-          "rarity": "rare",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -68854,7 +68794,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.004573,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -68970,7 +68909,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.003348,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         }
@@ -69251,7 +69189,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.006588,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -69446,7 +69383,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.008081,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -70417,7 +70353,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.002768,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -70495,7 +70430,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.009521,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -71458,7 +71392,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.025867,
-          "rarity": "very uncommon",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         },
@@ -71485,7 +71418,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 32,
           "weight": 0.011719,
-          "rarity": "rare",
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         }
@@ -71766,7 +71698,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 2.4e-05,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -71961,7 +71892,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 3.5e-05,
-          "rarity": "very rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -72292,7 +72222,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 5.1e-05,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -73263,7 +73192,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 3.8e-05,
-          "rarity": "very rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -73362,7 +73290,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 2.7e-05,
-          "rarity": "very rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -74331,7 +74258,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.000801,
-          "rarity": "very rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -74612,7 +74538,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.001235,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -74807,7 +74732,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.012314,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -75778,7 +75702,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.004037,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -76059,7 +75982,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.006471,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -76254,7 +76176,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.002903,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -77225,7 +77146,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.00123,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -78188,7 +78108,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.010839,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -78469,7 +78388,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.014118,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -78750,7 +78668,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.002471,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -78788,7 +78705,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.007812,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -78983,7 +78899,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.006157,
-          "rarity": "rare",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -82946,7 +82861,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.006545,
-          "rarity": "rare",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -82968,7 +82882,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.029384,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -83046,7 +82959,6 @@
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
           "weight": 0.024009,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -83162,7 +83074,6 @@
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
           "weight": 0.011719,
-          "rarity": "rare",
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -83471,7 +83382,6 @@
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
           "weight": 0.028302,
-          "rarity": "very rare",
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -83752,7 +83662,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.041176,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -83947,7 +83856,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.092358,
-          "rarity": "uncommon",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -87910,7 +87818,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.091623,
-          "rarity": "uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -88881,7 +88788,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.103806,
-          "rarity": "common",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -88980,7 +88886,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.071905,
-          "rarity": "very uncommon",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -89261,7 +89166,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.023529,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -89456,7 +89360,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.052776,
-          "rarity": "very uncommon",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -93419,7 +93322,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.052356,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -94390,7 +94292,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.074971,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -94489,7 +94390,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.041088,
-          "rarity": "very uncommon",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -94551,7 +94451,6 @@
           "TheIncreaseNPCInterval": 86400.0,
           "TheIncreaseNPCIntervalMax": 172800.0,
           "weight": 1.0,
-          "rarity": "very rare",
           "bestSharedMin": 0.6,
           "minRarityDownshift": 6
         }
@@ -94832,7 +94731,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.000515,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -95113,7 +95011,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.007059,
-          "rarity": "very rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -99076,7 +98973,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.016198,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -100039,7 +99935,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.007883,
-          "rarity": "rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -100320,7 +100215,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 10,
           "weight": 0.035294,
-          "rarity": "rare",
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -100515,7 +100409,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 1,
           "weight": 0.070368,
-          "rarity": "very uncommon",
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -104478,7 +104371,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "weight": 0.078534,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -104809,7 +104701,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.057574,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -105780,7 +105671,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 20,
           "weight": 0.043253,
-          "rarity": "very uncommon",
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -106749,7 +106639,6 @@
           "points": [],
           "MinDesiredNumberOfNPC": 24,
           "weight": 0.000138,
-          "rarity": "very rare",
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
