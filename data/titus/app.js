@@ -221,7 +221,7 @@ let modGlowEnabled = true;
 let highlightCaves = true;
 
 function updateModUIVisibility() {
-  const wrap = document.getElementById("modColorWrap");
+  const wrap = document.getElementById("modControlsWrap");
   if (!wrap) return;
   wrap.style.display = (activeSourceId === "official") ? "none" : "";
 }
