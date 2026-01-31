@@ -447,16 +447,13 @@ function renderInfoPanelForDino(cfg, dinoKey) {
 }
 
 function renderEntryRow(entry, dinoKey, idx) {
-  function isEntryVisible(dinoKey, entryIndex) {
-  const key = `${activeSourceId}::${currentMapId}::${dinoKey}::${entryIndex}`;
-  return entryVisibility[key] ?? true;
-}
+  const key = `${activeSourceId}::${currentMapId}::${dinoKey}::${idx}`;
+  const visible = entryVisibility[key] ?? true;
 
-  const entryClass = entry.entryClass || entry.entry || `Entry ${idx+1}`;
+  const entryClass = entry.entryClass || entry.entry || `Entry ${idx + 1}`;
   const groupWeight = entry.groupWeight ?? entry.group_weight ?? entry.weight ?? 0;
-  const spawnLimit = entry.spawnLimit ?? entry.spawn_limit ?? 0;
+  const spawnLimit  = entry.spawnLimit  ?? entry.spawn_limit  ?? 0;
 
-  // If you later compute % chance, put it here
   const pct = (entry.percentChance != null) ? `${entry.percentChance.toFixed(2)}%` : "";
 
   return `
