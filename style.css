@@ -1,10 +1,6 @@
-/* ======================================================
-   THEME COLORS
-   Change these to reskin the entire site
-====================================================== */
 :root {
-  --bg: #121417;                 /* page background */
-  --panel: #1a1d21;              /* top bar background */
+  --bg: #121417;
+  --panel: #1a1d21;
   --panel-border: #2a2f35;
 
   --text: #e6e6e6;
@@ -15,47 +11,32 @@
   --focus: #7aa2ff;
 }
 
-/* ======================================================
-   BASE PAGE LAYOUT
-====================================================== */
+* { box-sizing: border-box; }
 
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-
-  /* This makes the map auto-fill remaining space */
   display: flex;
   flex-direction: column;
 }
 
-/* ======================================================
-   TOP BAR
-====================================================== */
+/* ================= TOP BAR ================= */
 
 #topbar {
   background: var(--panel);
   border-bottom: 1px solid var(--panel-border);
-
   padding: 14px 18px 12px;
 
   display: flex;
-  flex-direction: column;   /* title on top, controls below */
+  flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-/* Title text */
 #topbar .title {
   font-size: 22px;
   font-weight: 700;
@@ -63,29 +44,31 @@ body {
   color: #f2f2f2;
 }
 
-/* Container holding dropdowns */
 #topbar .controls {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: min(1100px, 100%);
 }
 
-/* ======================================================
-   DROPDOWNS
-====================================================== */
+#topbar .controls > select {
+  flex: 1 1 220px;
+}
 
 #topbar select {
-  min-width: 220px;
-  padding: 9px 12px;
+  min-width: 200px;
+  max-width: 320px;
+  width: 100%;
 
+  padding: 9px 12px;
   font-size: 15px;
   border-radius: 8px;
 
   border: 1px solid var(--control-border);
   background: var(--control-bg);
-  color: #ffffff;
+  color: #fff;
 
   outline: none;
   cursor: pointer;
@@ -100,12 +83,11 @@ body {
   box-shadow: 0 0 0 3px rgba(122, 162, 255, 0.18);
 }
 
-/* Background selector label */
+/* Background selector wrapper */
 #bgSelectWrap {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-
   font-size: 12px;
   color: var(--muted);
 }
@@ -114,11 +96,88 @@ body {
   min-width: 180px;
   opacity: 0.9;
 }
-/* ======================================================
-   MAP AREA
-====================================================== */
+
+/* ================= LEAFLET PANEL ================= */
+
+.leaflet-top.leaflet-right .leaflet-control {
+  margin-top: 12px;
+  margin-right: 12px;
+}
+
+.mod-style-panel.leaflet-bar {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  border: 1px solid var(--panel-border);
+}
+
+.mod-style-panel {
+  background: rgba(26, 29, 33, 0.92);
+  color: var(--text);
+  padding: 12px;
+  border-radius: 12px;
+  min-width: 230px;
+  max-width: 280px;
+  backdrop-filter: blur(6px);
+}
+
+.mod-style-panel .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.mod-style-panel button {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mod-style-panel.collapsed {
+  padding: 6px 10px;
+}
+
+.mod-style-panel.collapsed .panel-header {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.mod-style-panel button:hover {
+  border-color: #596273;
+}
+
+.mod-style-panel .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 10px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.mod-style-panel input[type="range"] {
+  width: 100%;
+}
+
+.mod-style-panel input[type="color"] {
+  width: 42px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--control-border);
+  background: var(--control-bg);
+  border-radius: 8px;
+}
+
+/* ================= MAP AREA ================= */
 
 #map {
-  flex: 1;             /* THIS is the magic line */
+  flex: 1;
   width: 100vw;
 }
