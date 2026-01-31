@@ -72,13 +72,12 @@ const MAPS = [
   { id: "Lost Colony", file: "data/LostColony.json" },
   { id: "Extinction", file: "data/Extinction.json" },
   { id: "Aberration", file: "data/Aberration.json" },
-
   {
     id: "Astraeos",
     file: "data/Astraeos.json",
     backgrounds: [
-      { id: "hand", label: "In Game",    url: "maps/astraeos_ingame.webp" },
-      { id: "sat",  label: "Satellite",  url: "maps/astraeos.webp" }
+      { id: "hand", label: "In Game",   url: "maps/astraeos_ingame.webp" },
+      { id: "sat",  label: "Satellite", url: "maps/astraeos.webp" }
     ],
     defaultBg: "sat"
   }
@@ -90,7 +89,6 @@ const MAPS = [
 const SOURCES = [
   { id: "official", name: "Official" },
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/runicwyverns.json" },
-  // later: { id: "someMod", name: "Some Mod", file: "data/mods/somemod.json" }
 ];
 
 let activeSourceId = "official";
@@ -138,7 +136,6 @@ function initMap(cfg) {
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
-  // normal first, caves second -> caves render on top
   const layer = L.layerGroup().addTo(map);
   const caveLayer = L.layerGroup().addTo(map);
 
@@ -168,7 +165,7 @@ function setupBackgroundDropdown(mapMeta, cfg) {
   for (const bg of bgs) {
     const opt = document.createElement("option");
     opt.value = bg.url;
-    opt.textContent = bg.label; // (no awkward "Background:" label)
+    opt.textContent = bg.label;
     sel.appendChild(opt);
   }
 
@@ -180,7 +177,36 @@ function setupBackgroundDropdown(mapMeta, cfg) {
 }
 
 // ============================================================
-// SOURCE DROPDOWN (Official / Mods)
+// MOD COLOR PICKER
+// ============================================================
+let modDrawColor = "#ff0000";
+
+function setupModColorPicker() {
+  const wrap = document.getElementById("modColorWrap");
+  const inp = document.getElementById("modColor");
+  if (!wrap || !inp) return;
+
+  inp.value = modDrawColor;
+
+  inp.addEventListener("input", () => {
+    modDrawColor = inp.value;
+
+    // redraw current dino immediately
+    const dinoSel = document.getElementById("dinoSelect");
+    if (currentCfg && dinoSel && dinoSel.value) {
+      drawDino(currentCfg, dinoSel.value);
+    }
+  });
+}
+
+function updateModUIVisibility() {
+  const wrap = document.getElementById("modColorWrap");
+  if (!wrap) return;
+  wrap.style.display = (activeSourceId === "official") ? "none" : "";
+}
+
+// ============================================================
+// SOURCE DROPDOWN
 // ============================================================
 function setupSourceDropdown() {
   const sel = document.getElementById("sourceSelect");
@@ -199,15 +225,11 @@ function setupSourceDropdown() {
   sel.addEventListener("change", async () => {
     activeSourceId = sel.value;
     updateModUIVisibility();
+
     const mapSel = document.getElementById("mapSelect");
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
   });
-}
-function updateModUIVisibility() {
-  const wrap = document.getElementById("modColorWrap");
-  if (!wrap) return;
-  wrap.style.display = (activeSourceId === "official") ? "none" : "";
 }
 
 async function loadModSource(sourceId) {
@@ -244,10 +266,9 @@ function setupMapDropdown() {
 }
 
 // ============================================================
-// MAIN LOAD: build an "effectiveCfg" based on source+map
+// MAIN LOAD
 // ============================================================
 async function loadMapByMeta(mapMeta) {
-  // Always load the vanilla cfg (image, imageSize, etc.)
   const vanillaCfg = await loadJSON(mapMeta.file);
 
   let effectiveCfg = vanillaCfg;
@@ -262,7 +283,7 @@ async function loadMapByMeta(mapMeta) {
     };
   }
 
-  // Apply rarity client-side (for either source)
+  // Apply rarity client-side (mod entries may not have weight yet; that's fine)
   applyRarityToConfig(effectiveCfg);
 
   currentCfg = effectiveCfg;
@@ -286,33 +307,10 @@ function isTinyBox(box) {
     BOX_TO_POINT_MIN_DIM > 0 &&
     ((box.w || 0) <= BOX_TO_POINT_MIN_DIM ||
      (box.h || 0) <= BOX_TO_POINT_MIN_DIM)
-  ) {
-    return true;
-  }
+  ) return true;
 
   return false;
 }
-
-let modDrawColor = "#ff0000";
-
-function setupModColorPicker() {
-  const wrap = document.getElementById("modColorWrap");
-  const inp = document.getElementById("modColor");
-  if (!wrap || !inp) return;
-
-  inp.value = modDrawColor;
-
-  inp.addEventListener("input", () => {
-    modDrawColor = inp.value;
-
-    // redraw current dino immediately
-    const dinoSel = document.getElementById("dinoSelect");
-    if (currentCfg && dinoSel && dinoSel.value) {
-      drawDino(currentCfg, dinoSel.value);
-    }
-  });
-}
-
 
 function rarityToColor(r) {
   const s = String(r || "").toLowerCase();
@@ -336,23 +334,23 @@ function drawDino(cfg, dinoKey) {
 
   for (const entry of (dino.entries || [])) {
     const hasPoints = (entry.points && entry.points.length > 0);
+
     const color = (activeSourceId === "official")
       ? rarityToColor(entry.rarity)
       : modDrawColor;
+
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
-
-    // caves draw into caveLayer (which was added after layer)
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
-    // Boxes
     for (const box of (entry.boxes || [])) {
+      // if your mod exporter now matches official format, this is fine
       if (hasPoints && isTinyBox(box)) {
         const cx = box.x + box.w / 2;
         const cy = box.y + box.h / 2;
 
         L.circleMarker([cy, cx], {
-          color: color,
+          color,
           weight: isCave ? 1.3 : 1,
           opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
           fillColor: color,
@@ -367,7 +365,7 @@ function drawDino(cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color: color,
+          color,
           weight: isCave ? 3 : 1,
           opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
           dashArray: untame ? "3 3" : null,
@@ -377,10 +375,9 @@ function drawDino(cfg, dinoKey) {
       }
     }
 
-    // Points
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
-        color: color,
+        color,
         weight: isCave ? 2 : 1,
         opacity: untame ? 0.80 : (isCave ? 0.80 : 1),
         fillColor: color,
@@ -399,7 +396,6 @@ function setupDropdown(cfg, onChange) {
   if (!sel) return null;
 
   const keys = Object.keys(cfg.dinos || {}).sort((a, b) => a.localeCompare(b));
-
   sel.innerHTML = "";
 
   if (!keys.length) {
@@ -434,12 +430,11 @@ function boot() {
   setupModColorPicker();
   updateModUIVisibility();
 
-  loadMapByMeta(MAPS[0]);
-}
-
-  // initial load
-  const mapMeta = MAPS[0];
-  loadMapByMeta(mapMeta);
+  // single initial load (ONLY ONCE)
+  loadMapByMeta(MAPS[0]).catch(err => {
+    console.error(err);
+    alert(err.message || String(err));
+  });
 }
 
 boot();
