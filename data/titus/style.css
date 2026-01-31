@@ -131,6 +131,54 @@ body {
   min-width: 180px;
   opacity: 0.9;
 }
+
+.mod-style-panel {
+  background: rgba(20, 20, 20, 0.85);
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 220px;
+  max-width: 260px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.mod-style-panel .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.mod-style-panel button {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.mod-style-panel .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.mod-style-panel .col {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.mod-style-panel .between {
+  width: 100%;
+}
+
+.mod-style-panel input[type="range"] {
+  width: 100%;
+}
+
 /* ======================================================
    MAP AREA
 ====================================================== */
