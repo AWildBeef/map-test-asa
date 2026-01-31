@@ -101,6 +101,20 @@ let mapObj = null;
 let currentCfg = null;
 
 // ============================================================
+// MOD STYLE STATE (used by floating panel + drawing)
+// ============================================================
+let modDrawColor = "#ff0000";
+let modDrawOpacity = 0.8;
+let modGlowEnabled = true;
+
+function redrawSelected() {
+  const dinoSel = document.getElementById("dinoSelect");
+  if (currentCfg && dinoSel?.value) {
+    drawDino(currentCfg, dinoSel.value);
+  }
+}
+
+// ============================================================
 // HELPERS
 // ============================================================
 async function loadJSON(path) {
@@ -142,6 +156,7 @@ function initMap(cfg) {
   return { map, layer, caveLayer, overlay, bounds };
 }
 
+
 // ============================================================
 // BACKGROUND DROPDOWN (if you still use it)
 // ============================================================
@@ -176,130 +191,305 @@ function setupBackgroundDropdown(mapMeta, cfg) {
   sel.onchange = () => mapObj.overlay.setUrl(sel.value);
 }
 
-// ============================================================
-// MOD STYLE PANEL (Leaflet floating)
-// ============================================================
-let modPanelControl = null;
+function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 } }) {
+  const mapEl = document.getElementById("mapWrap");
+  if (!mapEl) return null;
 
-// single source of truth for mod styling:
-let modDrawColor = "#ff0000";
-let modDrawOpacity = 0.8;
-let modGlowEnabled = true;
+  // If it already exists, return it
+  let panel = document.getElementById(id);
+  if (panel) return panel;
 
-function setModPanelVisible(isVisible) {
-  const el = document.querySelector(".mod-style-panel");
+  panel = document.createElement("div");
+  panel.id = id;
+  panel.className = "floating-panel";
+
+  panel.innerHTML = `
+    <div class="fp-header" data-drag-handle>
+      <div class="fp-title">${title}</div>
+      <div class="fp-actions">
+        <button class="fp-btn" data-action="min" title="Collapse">▾</button>
+        <button class="fp-btn" data-action="hide" title="Hide">✕</button>
+      </div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  mapEl.appendChild(panel);
+
+  // Initial position (top-right)
+  panel.style.top = `${defaultPos.top}px`;
+  panel.style.right = `${defaultPos.right}px`;
+
+  // Prevent map dragging/zoom while interacting
+  panel.addEventListener("pointerdown", (e) => e.stopPropagation());
+  panel.addEventListener("wheel", (e) => e.stopPropagation(), { passive: false });
+
+  // Hook buttons
+  const body = panel.querySelector(".fp-body");
+  panel.querySelector('[data-action="min"]').onclick = () => {
+    const closed = body.style.display === "none";
+    body.style.display = closed ? "" : "none";
+    panel.classList.toggle("collapsed", !closed);
+  };
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  };
+
+  makePanelDraggable(panel);
+
+  return panel;
+}
+
+function showPanel(id) {
+  const el = document.getElementById(id);
   if (!el) return;
-  el.style.display = isVisible ? "" : "none";
+  el.style.display = "";
+  el.dataset.hidden = "0";
 }
 
-function redrawSelected() {
-  const dinoSel = document.getElementById("dinoSelect");
-  if (currentCfg && dinoSel && dinoSel.value) {
-    drawDino(currentCfg, dinoSel.value);
-  }
-}
+function makePanelDraggable(panel) {
+  const handle = panel.querySelector("[data-drag-handle]");
+  if (!handle) return;
 
-function syncModPanelUIValues() {
-  const colorInp = document.getElementById("modColor");
-  const opInp = document.getElementById("modOpacity");
-  const opLab = document.getElementById("modOpacityLabel");
-  const glowChk = document.getElementById("modGlow");
+  let dragging = false;
+  let startX = 0, startY = 0;
+  let startLeft = 0, startTop = 0;
 
-  if (colorInp) colorInp.value = modDrawColor;
-  if (opInp) opInp.value = String(modDrawOpacity);
-  if (opLab) opLab.textContent = Number(modDrawOpacity).toFixed(2);
-  if (glowChk) glowChk.checked = !!modGlowEnabled;
-}
+  const mapEl = document.getElementById("mapWrap") || document.getElementById("map");
 
-function wireModPanelInputs() {
-  const colorInp = document.getElementById("modColor");
-  const opInp = document.getElementById("modOpacity");
-  const opLab = document.getElementById("modOpacityLabel");
-  const glowChk = document.getElementById("modGlow");
-
-  if (colorInp) {
-    colorInp.oninput = () => {
-      modDrawColor = colorInp.value;
-      redrawSelected();
-    };
-  }
-
-  if (opInp) {
-    opInp.oninput = () => {
-      modDrawOpacity = Number(opInp.value);
-      if (opLab) opLab.textContent = modDrawOpacity.toFixed(2);
-      redrawSelected();
-    };
-  }
-
-  if (glowChk) {
-    glowChk.onchange = () => {
-      modGlowEnabled = glowChk.checked;
-      redrawSelected();
-    };
-  }
-}
-
-function ensureModStylePanel(map) {
-  if (modPanelControl) return; // already created for this map instance
-
-  const Control = L.Control.extend({
-    options: { position: "topright" },
-
-    onAdd: function () {
-      const div = L.DomUtil.create("div", "mod-style-panel leaflet-bar");
-      div.innerHTML = `
-        <div class="panel-header">
-          <span>Mod Style</span>
-          <button id="modPanelToggle" type="button">▾</button>
-        </div>
-
-        <div id="modPanelBody">
-          <label class="row">
-            <span>Color</span>
-            <input id="modColor" type="color" value="#ff0000">
-          </label>
-
-          <label class="row col">
-            <div class="row between">
-              <span>Opacity</span>
-              <span id="modOpacityLabel">0.80</span>
-            </div>
-            <input id="modOpacity" type="range" min="0.1" max="1" step="0.05" value="0.8">
-          </label>
-
-          <label class="row">
-            <input type="checkbox" id="modGlow" checked>
-            <span>Glow</span>
-          </label>
-        </div>
-      `;
-
-      L.DomEvent.disableClickPropagation(div);
-      L.DomEvent.disableScrollPropagation(div);
-      return div;
+  const ensureLeftTop = () => {
+    // If we're still positioned by right/top, convert once
+    if (panel.style.right && panel.style.right !== "auto") {
+      const rect = panel.getBoundingClientRect();
+      const mapRect = mapEl.getBoundingClientRect();
+      panel.style.left = `${rect.left - mapRect.left}px`;
+      panel.style.top  = `${rect.top  - mapRect.top}px`;
+      panel.style.right = "auto";
     }
+  };
+
+  const onMove = (e) => {
+    if (!dragging) return;
+
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    const newLeft = startLeft + dx;
+    const newTop  = startTop + dy;
+
+    const map = mapEl.getBoundingClientRect();
+    const p = panel.getBoundingClientRect();
+
+    const maxLeft = map.width - p.width;
+    const maxTop  = map.height - 40;
+
+    panel.style.left = `${Math.max(0, Math.min(newLeft, maxLeft))}px`;
+    panel.style.top  = `${Math.max(0, Math.min(newTop, maxTop))}px`;
+  };
+
+  const onUp = () => {
+    dragging = false;
+    document.removeEventListener("pointermove", onMove);
+    document.removeEventListener("pointerup", onUp);
+  };
+
+  handle.addEventListener("pointerdown", (e) => {
+    ensureLeftTop();
+
+    dragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+
+    startLeft = parseFloat(panel.style.left || "0");
+    startTop  = parseFloat(panel.style.top  || "0");
+
+    document.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerup", onUp);
+  });
+}
+//===============DinoInfoPanel===============
+
+
+let infoPanel = null;
+let stylePanel = null;
+
+// per-dino entry visibility toggles
+let entryVisibility = {}; // key: `${dinoKey}::${entryIndex}` => boolean
+
+function ensurePanels() {
+  if (!stylePanel) {
+    stylePanel = createFloatingPanel({ id: "modStylePanel", title: "Mod Style", defaultPos: { right: 12, top: 12 } });
+    renderModStylePanelBody();
+  }
+
+  if (!infoPanel) {
+    infoPanel  = createFloatingPanel({ id: "dinoInfoPanel", title: "Dino Info", defaultPos: { right: 12, top: 250 } });
+    renderInfoPanelBodyEmpty();
+  }
+
+  setModStylePanelVisible(activeSourceId !== "official");
+}
+
+function setModStylePanelVisible(show) {
+  const el = document.getElementById("modStylePanel");
+  if (!el) return;
+  el.style.display = show ? "" : "none";
+}
+
+function renderModStylePanelBody() {
+  const panel = document.getElementById("modStylePanel");
+  if (!panel) return;
+  const body = panel.querySelector(".fp-body");
+
+  body.innerHTML = `
+    <label class="fp-row">
+      <span>Color</span>
+      <input id="modColor2" type="color" value="${modDrawColor}">
+    </label>
+
+    <label class="fp-row fp-col">
+      <div class="fp-row fp-between">
+        <span>Opacity</span>
+        <span id="modOpacityLabel2">${modDrawOpacity.toFixed(2)}</span>
+      </div>
+      <input id="modOpacity2" type="range" min="0.1" max="1" step="0.05" value="${modDrawOpacity}">
+    </label>
+
+    <label class="fp-row">
+      <input id="modGlow2" type="checkbox" ${modGlowEnabled ? "checked" : ""}>
+      <span>Glow</span>
+    </label>
+  `;
+
+  const c = document.getElementById("modColor2");
+  const o = document.getElementById("modOpacity2");
+  const ol = document.getElementById("modOpacityLabel2");
+  const g = document.getElementById("modGlow2");
+
+  if (c) c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
+  if (o) o.oninput = () => { modDrawOpacity = Number(o.value); if (ol) ol.textContent = modDrawOpacity.toFixed(2); redrawSelected(); };
+  if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    // fallback
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
+}
+
+function renderInfoPanelForDino(cfg, dinoKey) {
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+  const body = panel.querySelector(".fp-body");
+
+  const d = cfg?.dinos?.[dinoKey];
+  if (!d) {
+    renderInfoPanelBodyEmpty();
+    return;
+  }
+
+  const displayName = d.displayName || dinoKey;
+  const bp = d.bpPath || "";
+  const nameTag = d.nametag || d.nameTag || ""; // if you add it later
+
+  const entries = d.entries || [];
+
+  body.innerHTML = `
+    <div class="info-section">
+      <div class="info-title">${escapeHtml(displayName)}</div>
+
+      <div class="info-row">
+        <span class="info-label">Blueprint</span>
+        <button class="info-copy" data-copy="${escapeAttr(bp)}">Copy</button>
+      </div>
+      <div class="info-mono">${escapeHtml(bp || "(none)")}</div>
+
+      <div class="info-row">
+        <span class="info-label">Nametag</span>
+        <button class="info-copy" data-copy="${escapeAttr(nameTag)}">Copy</button>
+      </div>
+      <div class="info-mono">${escapeHtml(nameTag || "(none)")}</div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-subtitle">Spawn entries (${entries.length})</div>
+      <div class="entries">
+        ${entries.map((e, i) => renderEntryRow(e, dinoKey, i)).join("")}
+      </div>
+    </div>
+  `;
+
+  // hook copy buttons
+  body.querySelectorAll(".info-copy").forEach(btn => {
+    btn.onclick = () => copyText(btn.dataset.copy || "");
   });
 
-  modPanelControl = new Control();
-  modPanelControl.addTo(map);
-
-  // collapse toggle
-  const btn = document.getElementById("modPanelToggle");
-  const body = document.getElementById("modPanelBody");
-  if (btn && body) {
-    btn.onclick = () => {
-      const closed = body.style.display === "none";
-      body.style.display = closed ? "" : "none";
-      btn.textContent = closed ? "▾" : "▸";
-      div.classList.toggle("collapsed", !closed);
+  // hook entry toggles
+  body.querySelectorAll('input[data-entry-toggle="1"]').forEach(chk => {
+    chk.onchange = () => {
+      const key = chk.dataset.key;
+      entryVisibility[key] = chk.checked;
+      redrawSelected();
     };
-  }
-
-  wireModPanelInputs();
-  syncModPanelUIValues();
-  setModPanelVisible(activeSourceId !== "official");
+  });
 }
+
+function renderEntryRow(entry, dinoKey, idx) {
+  const key = `${activeSourceId}::${MAP_NAME_HERE}::${dinoKey}::${idx}`;
+  const visible = entryVisibility[key] ?? true;
+
+  const entryClass = entry.entryClass || entry.entry || `Entry ${idx+1}`;
+  const groupWeight = entry.groupWeight ?? entry.group_weight ?? entry.weight ?? 0;
+  const spawnLimit = entry.spawnLimit ?? entry.spawn_limit ?? 0;
+
+  // If you later compute % chance, put it here
+  const pct = (entry.percentChance != null) ? `${entry.percentChance.toFixed(2)}%` : "";
+
+  return `
+    <label class="entry-row">
+      <input type="checkbox" data-entry-toggle="1" data-key="${escapeAttr(key)}" ${visible ? "checked" : ""}>
+      <div class="entry-main">
+        <div class="entry-name">${escapeHtml(entryClass)}</div>
+        <div class="entry-meta">
+          w=${fmt(groupWeight)} ${pct ? `• ${pct}` : ""} • limit=${fmt(spawnLimit)}
+        </div>
+      </div>
+    </label>
+  `;
+}
+
+function renderInfoPanelBodyEmpty() {
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+  panel.querySelector(".fp-body").innerHTML = `<div style="color:var(--muted)">Select a dino to see details.</div>`;
+}
+
+function fmt(n) {
+  const x = Number(n || 0);
+  return (Math.round(x * 10000) / 10000).toString();
+}
+
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+function escapeAttr(s) { return escapeHtml(s).replace(/"/g, "&quot;"); }
+
+function isEntryVisible(dinoKey, entryIndex) {
+  const key = `${dinoKey}::${entryIndex}`;
+  return entryVisibility[key] ?? true;
+}
+
 
 // ============================================================
 // SOURCE DROPDOWN (top bar)
@@ -321,10 +511,11 @@ function setupSourceDropdown() {
   sel.addEventListener("change", async () => {
     activeSourceId = sel.value;
 
-    // show/hide panel immediately (if it exists)
-    setModPanelVisible(activeSourceId !== "official");
-    syncModPanelUIValues();
+    // Show/hide mod style panel immediately
+    setModStylePanelVisible(activeSourceId !== "official");
+    renderModStylePanelBody(); // keeps UI synced to current values
 
+    // Reload map data for this source
     const mapSel = document.getElementById("mapSelect");
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
@@ -385,16 +576,21 @@ async function loadMapByMeta(mapMeta) {
   applyRarityToConfig(effectiveCfg);
   currentCfg = effectiveCfg;
 
+  // Recreate Leaflet map
   if (mapObj) mapObj.map.remove();
   mapObj = initMap(currentCfg);
 
-  // new map instance => new control instance
-  modPanelControl = null;
-  ensureModStylePanel(mapObj.map);
+  // Panels need the map container to exist (and ideally map to be present)
+  ensurePanels();
+  setModStylePanelVisible(activeSourceId !== "official");
+  renderModStylePanelBody(); // re-render so sliders match stored values
 
   setupBackgroundDropdown(mapMeta, currentCfg);
 
-  setupDropdown(currentCfg, (dinoKey) => drawDino(currentCfg, dinoKey));
+  setupDropdown(currentCfg, (dinoKey) => {
+    drawDino(currentCfg, dinoKey);
+    renderInfoPanelForDino(currentCfg, dinoKey);
+  });
 }
 
 // ============================================================
@@ -434,8 +630,12 @@ function drawDino(cfg, dinoKey) {
   if (!dino) return;
 
   const isOfficial = (activeSourceId === "official");
+  const entries = dino.entries || [];
 
-  for (const entry of (dino.entries || [])) {
+  for (let i = 0; i < entries.length; i++) {
+    if (!isEntryVisible(dinoKey, i)) continue;
+    const entry = entries[i];
+
     const hasPoints = (entry.points && entry.points.length > 0);
 
     const isCave = entry.bIsCaveManager === true;
@@ -471,6 +671,7 @@ function drawDino(cfg, dinoKey) {
           radius: 4,
           fillOpacity
         }).addTo(targetLayer);
+
       } else {
         const y1 = box.y;
         const x1 = box.x;
@@ -517,6 +718,7 @@ function setupDropdown(cfg, onChange) {
     opt.value = "";
     opt.textContent = "(No dinos for this selection)";
     sel.appendChild(opt);
+	renderInfoPanelBodyEmpty();
     return sel;
   }
 
@@ -541,6 +743,11 @@ function setupDropdown(cfg, onChange) {
 function boot() {
   setupSourceDropdown();
   setupMapDropdown();
+
+  document.getElementById("showPanelsBtn")?.addEventListener("click", () => {
+    showPanel("modStylePanel");
+    showPanel("dinoInfoPanel");
+  });
 
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
