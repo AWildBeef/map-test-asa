@@ -193,7 +193,7 @@ body {
 .floating-panel {
   position: absolute;
   z-index: 9999;
-  width: 320px;
+  width: 100px;
   max-width: min(360px, calc(100vw - 24px));
 
   background: rgba(26, 29, 33, 0.92);
@@ -212,7 +212,7 @@ body {
   align-items: center;
   justify-content: space-between;
 
-  padding: 10px 10px;
+  padding: 6px 6px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 
   cursor: grab;
@@ -226,7 +226,7 @@ body {
 
 .floating-panel .fp-title {
   font-weight: 700;
-  font-size: 13px;
+  font-size: 11px;
   letter-spacing: 0.2px;
 }
 
@@ -236,8 +236,8 @@ body {
 }
 
 .floating-panel .fp-btn {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   border-radius: 8px;
   background: var(--control-bg);
   border: 1px solid var(--control-border);
@@ -252,7 +252,7 @@ body {
 /* Body */
 .floating-panel .fp-body {
   padding: 10px;
-  max-height: 45vh;         /* keeps it from going offscreen */
+  max-height: 25vh;         /* keeps it from going offscreen */
   overflow: auto;           /* scroll inside panel */
 }
 
@@ -396,15 +396,15 @@ body {
     flex-wrap: wrap;
     ustify-content: center;
     width: 100%;
-    gap: 6px;
+    gap: 4px;
     padding-top: 1px;
   }
 
   /* Shrink selects */
   #topbar select {
-    padding: 6px 8px;
-    font-size: 13px;
-    border-radius: 6px;
+    padding: 4px 4px;
+    font-size: 10px;
+    border-radius: 4px;
   }
   
   #topbar .controls > select {
@@ -413,12 +413,12 @@ body {
 
   /* Optional: reduce topbar padding on mobile */
   #topbar {
-    padding: 10px 12px 10px;
+    padding: 8px 10px 8px;
   }
 
   /* Optional: slightly smaller title */
   #topbar .title {
-    font-size: 18px;
+    font-size: 15px;
   }
 }
 
