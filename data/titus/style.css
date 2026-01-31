@@ -193,7 +193,7 @@ body {
 .floating-panel {
   position: absolute;
   z-index: 9999;
-  width: 100px;
+  width: 200px;
   max-width: min(360px, calc(100vw - 24px));
 
   background: rgba(26, 29, 33, 0.92);
@@ -212,7 +212,7 @@ body {
   align-items: center;
   justify-content: space-between;
 
-  padding: 6px 6px;
+  padding: 3px 3px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 
   cursor: grab;
@@ -225,20 +225,20 @@ body {
 }
 
 .floating-panel .fp-title {
-  font-weight: 700;
-  font-size: 11px;
+  font-weight: 600;
+  font-size: 10px;
   letter-spacing: 0.2px;
 }
 
 .floating-panel .fp-actions {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 .floating-panel .fp-btn {
-  width: 20px;
-  height: 20px;
-  border-radius: 8px;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
   background: var(--control-bg);
   border: 1px solid var(--control-border);
   color: var(--text);
@@ -251,7 +251,7 @@ body {
 
 /* Body */
 .floating-panel .fp-body {
-  padding: 10px;
+  padding: 5px;
   max-height: 25vh;         /* keeps it from going offscreen */
   overflow: auto;           /* scroll inside panel */
 }
@@ -318,15 +318,15 @@ body {
 
 /* Blueprint / nametag field: scroll horizontally but keep panel narrow */
 .info-mono {
-  margin-top: 6px;
-  padding: 8px 10px;
-  border-radius: 10px;
+  margin-top: 3px;
+  padding: 4px 6px;
+  border-radius: 6px;
   background: rgba(0,0,0,0.25);
   border: 1px solid rgba(255,255,255,0.10);
 
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 12px;
-  line-height: 1.25;
+  font-size: 10px;
+  line-height: 1;
 
   white-space: nowrap;
   overflow-x: auto;
@@ -337,9 +337,9 @@ body {
 .entry-row {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  padding: 8px 6px;
-  border-radius: 10px;
+  gap: 8px;
+  padding: 5px 4px;
+  border-radius: 6px;
 }
 
 .entry-row:hover {
@@ -349,13 +349,13 @@ body {
 .entry-main { flex: 1; min-width: 0; }
 
 .entry-name {
-  font-size: 12px;
-  font-weight: 650;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .entry-meta {
-  margin-top: 3px;
-  font-size: 11px;
+  margin-top: 2px;
+  font-size: 10px;
   color: var(--muted);
 }
 
@@ -364,14 +364,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 6px;
   width: 100%;
 }
 
 .controls-toggle {
   display: none;
-  padding: 8px 10px;
-  border-radius: 10px;
+  padding: 6px 8px;
+  border-radius: 8px;
   background: var(--control-bg);
   border: 1px solid var(--control-border);
   color: var(--text);
@@ -413,12 +413,12 @@ body {
 
   /* Optional: reduce topbar padding on mobile */
   #topbar {
-    padding: 8px 10px 8px;
+    padding: 6px 8px 6px;
   }
 
   /* Optional: slightly smaller title */
   #topbar .title {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
