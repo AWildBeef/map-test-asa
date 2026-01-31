@@ -746,6 +746,9 @@ function setupDropdown(cfg, onChange) {
 function boot() {
   setupSourceDropdown();
   setupMapDropdown();
+  document.getElementById("controlsToggle")?.addEventListener("click", () => {
+  document.getElementById("topbar")?.classList.toggle("show-controls");
+  });
 
   document.getElementById("showPanelsBtn")?.addEventListener("click", () => {
     showPanel("modStylePanel");
