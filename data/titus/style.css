@@ -359,6 +359,7 @@ body {
   color: var(--muted);
 }
 
+/* --- Title row / filters button --- */
 .title-row {
   display: flex;
   align-items: center;
@@ -376,23 +377,46 @@ body {
   color: var(--text);
 }
 
+/* --- Mobile behavior --- */
 @media (max-width: 640px) {
-  .controls-toggle { display: inline-flex; }
-  #topbar .controls { display: none; }             /* hidden by default */
-  #topbar.show-controls .controls { display: flex; } /* show when toggled */
 
+  .controls-toggle { display: inline-flex; }
+
+  /* Hide controls by default */
+  #topbar .controls { display: none; }
+
+  /* When toggled, show */
+  #topbar.show-controls .controls { 
+    display: flex; 
+  }
+
+  /* Stack vertically when shown */
   #topbar .controls {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
+    gap: 6px;
+    padding-top: 8px;
   }
 
-  #topbar select { max-width: none; }
+  /* Shrink selects */
+  #topbar select {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+
+  /* Optional: reduce topbar padding on mobile */
+  #topbar {
+    padding: 10px 12px 10px;
+  }
+
+  /* Optional: slightly smaller title */
+  #topbar .title {
+    font-size: 18px;
+  }
 }
-
-/* ================= MAP AREA ================= */
-
-#mapWrap { position: relative; flex: 1; }
-#map { position: absolute; inset: 0; }
-.floating-panel { position: absolute; z-index: 9999; }
 
