@@ -327,7 +327,7 @@ function ensurePanels() {
   }
 
   if (!infoPanel) {
-    infoPanel  = createFloatingPanel({ id: "dinoInfoPanel", title: "Dino Info", defaultPos: { right: 180, top: 2 } });
+    infoPanel  = createFloatingPanel({ id: "dinoInfoPanel", title: "Dino Info", defaultPos: { right: 200, top: 12 } });
     renderInfoPanelBodyEmpty();
   }
 
