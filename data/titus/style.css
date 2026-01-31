@@ -139,6 +139,15 @@ body {
   cursor: pointer;
 }
 
+.mod-style-panel.collapsed {
+  padding: 6px 10px;
+}
+
+.mod-style-panel.collapsed .panel-header {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
 .mod-style-panel button:hover {
   border-color: #596273;
 }
