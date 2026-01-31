@@ -177,7 +177,7 @@ body {
 
 /* ================= MAP AREA ================= */
 
-#map {
-  flex: 1;
-  width: 100vw;
-}
+#mapWrap { position: relative; flex: 1; }
+#map { position: absolute; inset: 0; }
+.floating-panel { position: absolute; z-index: 9999; }
+
