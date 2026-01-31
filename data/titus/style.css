@@ -392,22 +392,24 @@ body {
 
   /* Stack vertically when shown */
   #topbar .controls {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    ustify-content: center;
     width: 100%;
     gap: 6px;
-    padding-top: 8px;
+    padding-top: 1px;
   }
 
   /* Shrink selects */
   #topbar select {
-    min-width: 0;
-    max-width: none;
-    width: 100%;
     padding: 6px 8px;
     font-size: 13px;
     border-radius: 6px;
   }
+  
+  #topbar .controls > select {
+  flex: 1 1 140px;   /* try 120px / 140px / 160px */
+  min-width: 120px;
 
   /* Optional: reduce topbar padding on mobile */
   #topbar {
