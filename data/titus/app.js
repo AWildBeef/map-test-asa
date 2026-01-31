@@ -292,6 +292,7 @@ function ensureModStylePanel(map) {
       const closed = body.style.display === "none";
       body.style.display = closed ? "" : "none";
       btn.textContent = closed ? "▾" : "▸";
+      div.classList.toggle("collapsed", !closed);
     };
   }
 
