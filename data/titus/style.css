@@ -175,6 +175,190 @@ body {
   border-radius: 8px;
 }
 
+/* ================= FLOATING PANELS ================= */
+
+#mapWrap {
+  position: relative;
+  flex: 1;
+  width: 100vw;
+  min-height: 0; /* lets children scroll correctly */
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+}
+
+/* Panel container */
+.floating-panel {
+  position: absolute;
+  z-index: 9999;
+  width: 320px;
+  max-width: min(360px, calc(100vw - 24px));
+
+  background: rgba(26, 29, 33, 0.92);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+
+  overflow: hidden; /* keeps header/body clean */
+}
+
+/* Header (drag handle) */
+.floating-panel .fp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  cursor: grab;
+  user-select: none;
+  touch-action: none; /* important on mobile */
+}
+
+.floating-panel.dragging .fp-header {
+  cursor: grabbing;
+}
+
+.floating-panel .fp-title {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+
+.floating-panel .fp-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.floating-panel .fp-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.floating-panel .fp-btn:hover {
+  border-color: #596273;
+}
+
+/* Body */
+.floating-panel .fp-body {
+  padding: 10px;
+  max-height: 45vh;         /* keeps it from going offscreen */
+  overflow: auto;           /* scroll inside panel */
+}
+
+/* Collapsed state (header-only) */
+.floating-panel.collapsed .fp-body {
+  display: none;
+}
+.floating-panel.collapsed .fp-header {
+  border-bottom: none;
+}
+
+/* Mod panel rows */
+.fp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 10px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.fp-col { flex-direction: column; align-items: stretch; }
+.fp-between { width: 100%; }
+
+/* Info panel styling */
+.info-title {
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.info-section {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.info-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.info-copy {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.info-copy:hover { border-color: #596273; }
+
+/* Blueprint / nametag field: scroll horizontally but keep panel narrow */
+.info-mono {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.10);
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.25;
+
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Entry rows */
+.entry-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 6px;
+  border-radius: 10px;
+}
+
+.entry-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.entry-main { flex: 1; min-width: 0; }
+
+.entry-name {
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.entry-meta {
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
 /* ================= MAP AREA ================= */
 
 #mapWrap { position: relative; flex: 1; }
