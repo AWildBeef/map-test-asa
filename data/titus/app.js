@@ -38,7 +38,7 @@ function downshiftStepsForMin(bestSharedMin) {
 function downgradeRarity(label, steps) {
   if (!steps) return label;
   let i = RARITY_ORDER.indexOf(label);
-  if (i < 0) i = RARITY_ORDER.length - 1; // unknown => treat as rarest
+  if (i < 0) i = RARITY_ORDER.length - 1;
   const j = Math.min(RARITY_ORDER.length - 1, i + steps);
   return RARITY_ORDER[j];
 }
@@ -92,7 +92,7 @@ const SOURCES = [
 ];
 
 let activeSourceId = "official";
-let loadedMods = {}; // cache: sourceId -> parsed json
+let loadedMods = {}; // cache
 
 // ============================================================
 // STATE
@@ -143,7 +143,7 @@ function initMap(cfg) {
 }
 
 // ============================================================
-// BACKGROUND DROPDOWN
+// BACKGROUND DROPDOWN (if you still use it)
 // ============================================================
 function setupBackgroundDropdown(mapMeta, cfg) {
   const wrap = document.getElementById("bgSelectWrap");
@@ -177,71 +177,131 @@ function setupBackgroundDropdown(mapMeta, cfg) {
 }
 
 // ============================================================
-// MOD COLOR PICKER
+// MOD STYLE PANEL (Leaflet floating)
 // ============================================================
+let modPanelControl = null;
+
+// single source of truth for mod styling:
 let modDrawColor = "#ff0000";
-
-function setupModColorPicker() {
-  const wrap = document.getElementById("modColorWrap");
-  const inp = document.getElementById("modColor");
-  if (!wrap || !inp) return;
-
-  inp.value = modDrawColor;
-
-  inp.addEventListener("input", () => {
-    modDrawColor = inp.value;
-
-    // redraw current dino immediately
-    const dinoSel = document.getElementById("dinoSelect");
-    if (currentCfg && dinoSel && dinoSel.value) {
-      drawDino(currentCfg, dinoSel.value);
-    }
-  });
-}
-
 let modDrawOpacity = 0.8;
+let modGlowEnabled = true;
 
-function setupModOpacity() {
-  const inp = document.getElementById("modOpacity");
-  if (!inp) return;
+function setModPanelVisible(isVisible) {
+  const el = document.querySelector(".mod-style-panel");
+  if (!el) return;
+  el.style.display = isVisible ? "" : "none";
+}
 
-  inp.value = modDrawOpacity;
+function redrawSelected() {
+  const dinoSel = document.getElementById("dinoSelect");
+  if (currentCfg && dinoSel && dinoSel.value) {
+    drawDino(currentCfg, dinoSel.value);
+  }
+}
 
-  inp.addEventListener("input", () => {
-    modDrawOpacity = Number(inp.value);
+function syncModPanelUIValues() {
+  const colorInp = document.getElementById("modColor");
+  const opInp = document.getElementById("modOpacity");
+  const opLab = document.getElementById("modOpacityLabel");
+  const glowChk = document.getElementById("modGlow");
 
-    const dinoSel = document.getElementById("dinoSelect");
-    if (currentCfg && dinoSel?.value) {
-      drawDino(currentCfg, dinoSel.value);
+  if (colorInp) colorInp.value = modDrawColor;
+  if (opInp) opInp.value = String(modDrawOpacity);
+  if (opLab) opLab.textContent = Number(modDrawOpacity).toFixed(2);
+  if (glowChk) glowChk.checked = !!modGlowEnabled;
+}
+
+function wireModPanelInputs() {
+  const colorInp = document.getElementById("modColor");
+  const opInp = document.getElementById("modOpacity");
+  const opLab = document.getElementById("modOpacityLabel");
+  const glowChk = document.getElementById("modGlow");
+
+  if (colorInp) {
+    colorInp.oninput = () => {
+      modDrawColor = colorInp.value;
+      redrawSelected();
+    };
+  }
+
+  if (opInp) {
+    opInp.oninput = () => {
+      modDrawOpacity = Number(opInp.value);
+      if (opLab) opLab.textContent = modDrawOpacity.toFixed(2);
+      redrawSelected();
+    };
+  }
+
+  if (glowChk) {
+    glowChk.onchange = () => {
+      modGlowEnabled = glowChk.checked;
+      redrawSelected();
+    };
+  }
+}
+
+function ensureModStylePanel(map) {
+  if (modPanelControl) return; // already created for this map instance
+
+  const Control = L.Control.extend({
+    options: { position: "topright" },
+
+    onAdd: function () {
+      const div = L.DomUtil.create("div", "mod-style-panel leaflet-bar");
+      div.innerHTML = `
+        <div class="panel-header">
+          <span>Mod Style</span>
+          <button id="modPanelToggle" type="button">▾</button>
+        </div>
+
+        <div id="modPanelBody">
+          <label class="row">
+            <span>Color</span>
+            <input id="modColor" type="color" value="#ff0000">
+          </label>
+
+          <label class="row col">
+            <div class="row between">
+              <span>Opacity</span>
+              <span id="modOpacityLabel">0.80</span>
+            </div>
+            <input id="modOpacity" type="range" min="0.1" max="1" step="0.05" value="0.8">
+          </label>
+
+          <label class="row">
+            <input type="checkbox" id="modGlow" checked>
+            <span>Glow</span>
+          </label>
+        </div>
+      `;
+
+      L.DomEvent.disableClickPropagation(div);
+      L.DomEvent.disableScrollPropagation(div);
+      return div;
     }
   });
-}
 
-let modGlowEnabled = true;
-let highlightCaves = true;
+  modPanelControl = new Control();
+  modPanelControl.addTo(map);
 
-function updateModUIVisibility() {
-  const wrap = document.getElementById("modControlsWrap");
-  if (!wrap) return;
-  wrap.style.display = (activeSourceId === "official") ? "none" : "";
-}
+  // collapse toggle
+  const btn = document.getElementById("modPanelToggle");
+  const body = document.getElementById("modPanelBody");
+  if (btn && body) {
+    btn.onclick = () => {
+      const closed = body.style.display === "none";
+      body.style.display = closed ? "" : "none";
+      btn.textContent = closed ? "▾" : "▸";
+    };
+  }
 
-function setupModToggles() {
-  document.getElementById("modShadow")?.addEventListener("change", e => {
-    modGlowEnabled = e.target.checked;
-    const dinoSel = document.getElementById("dinoSelect");
-    if (currentCfg && dinoSel?.value) drawDino(currentCfg, dinoSel.value);
-  });
-
-  document.getElementById("highlightCaves")?.addEventListener("change", e => {
-    highlightCaves = e.target.checked;
-    const dinoSel = document.getElementById("dinoSelect");
-    if (currentCfg && dinoSel?.value) drawDino(currentCfg, dinoSel.value);
-  });
+  wireModPanelInputs();
+  syncModPanelUIValues();
+  setModPanelVisible(activeSourceId !== "official");
 }
 
 // ============================================================
-// SOURCE DROPDOWN
+// SOURCE DROPDOWN (top bar)
 // ============================================================
 function setupSourceDropdown() {
   const sel = document.getElementById("sourceSelect");
@@ -259,7 +319,10 @@ function setupSourceDropdown() {
 
   sel.addEventListener("change", async () => {
     activeSourceId = sel.value;
-    updateModUIVisibility();
+
+    // show/hide panel immediately (if it exists)
+    setModPanelVisible(activeSourceId !== "official");
+    syncModPanelUIValues();
 
     const mapSel = document.getElementById("mapSelect");
     const mapMeta = pickById(MAPS, mapSel?.value);
@@ -278,7 +341,7 @@ async function loadModSource(sourceId) {
 }
 
 // ============================================================
-// MAP DROPDOWN
+// MAP DROPDOWN (top bar)
 // ============================================================
 function setupMapDropdown() {
   const sel = document.getElementById("mapSelect");
@@ -318,13 +381,15 @@ async function loadMapByMeta(mapMeta) {
     };
   }
 
-  // Apply rarity client-side (mod entries may not have weight yet; that's fine)
   applyRarityToConfig(effectiveCfg);
-
   currentCfg = effectiveCfg;
 
   if (mapObj) mapObj.map.remove();
   mapObj = initMap(currentCfg);
+
+  // new map instance => new control instance
+  modPanelControl = null;
+  ensureModStylePanel(mapObj.map);
 
   setupBackgroundDropdown(mapMeta, currentCfg);
 
@@ -367,6 +432,8 @@ function drawDino(cfg, dinoKey) {
   const dino = cfg.dinos?.[dinoKey];
   if (!dino) return;
 
+  const isOfficial = (activeSourceId === "official");
+
   for (const entry of (dino.entries || [])) {
     const hasPoints = (entry.points && entry.points.length > 0);
 
@@ -374,28 +441,20 @@ function drawDino(cfg, dinoKey) {
     const untame = entry.bForceUntameable === true;
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
-    const color = (activeSourceId === "official")
-      ? rarityToColor(entry.rarity)
-      : modDrawColor;
+    const color = isOfficial ? rarityToColor(entry.rarity) : modDrawColor;
 
-    // base line weight
+    // line thickness
     const baseWeight = isCave ? 3 : 1;
+    const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
 
-    // cave emphasis override (optional)
-    const finalWeight = (isCave && highlightCaves) ? 4 : baseWeight;
-
-    // glow hack = slightly thicker stroke
-    const glowWeight = modGlowEnabled ? (finalWeight + 2) : finalWeight;
-
-    // final opacity for mod vs official
-    // (official uses normal behavior; mod uses slider)
-    const finalOpacity = (activeSourceId === "official")
+    // opacities
+    const opacity = isOfficial
       ? (untame ? 0.80 : 1.0)
-      : ((isCave && highlightCaves) ? 1.0 : modDrawOpacity);
+      : modDrawOpacity;
 
-    const finalFillOpacity = (activeSourceId === "official")
+    const fillOpacity = isOfficial
       ? (untame ? 0.50 : (isCave ? 0.50 : 0.80))
-      : finalOpacity;
+      : opacity;
 
     // Boxes
     for (const box of (entry.boxes || [])) {
@@ -404,14 +463,13 @@ function drawDino(cfg, dinoKey) {
         const cy = box.y + box.h / 2;
 
         L.circleMarker([cy, cx], {
-          color: color,
-          weight: glowWeight,
-          opacity: finalOpacity,
+          color,
+          weight,
+          opacity,
           fillColor: color,
           radius: 4,
-          fillOpacity: finalFillOpacity
+          fillOpacity
         }).addTo(targetLayer);
-
       } else {
         const y1 = box.y;
         const x1 = box.x;
@@ -419,12 +477,12 @@ function drawDino(cfg, dinoKey) {
         const x2 = box.x + box.w;
 
         L.rectangle([[y1, x1], [y2, x2]], {
-          color: color,
-          weight: glowWeight,
-          opacity: finalOpacity,
-          dashArray: untame ? "3 3" : null,
+          color,
+          weight,
+          opacity,
+          dashArray: (isOfficial && untame) ? "3 3" : null,
           fillColor: color,
-          fillOpacity: finalFillOpacity
+          fillOpacity
         }).addTo(targetLayer);
       }
     }
@@ -432,12 +490,12 @@ function drawDino(cfg, dinoKey) {
     // Points
     for (const pt of (entry.points || [])) {
       L.circleMarker([pt.y, pt.x], {
-        color: color,
-        weight: glowWeight,
-        opacity: finalOpacity,
+        color,
+        weight,
+        opacity,
         fillColor: color,
         radius: 4,
-        fillOpacity: finalFillOpacity
+        fillOpacity
       }).addTo(targetLayer);
     }
   }
@@ -482,12 +540,7 @@ function setupDropdown(cfg, onChange) {
 function boot() {
   setupSourceDropdown();
   setupMapDropdown();
-  setupModColorPicker();
-  setupModOpacity();
-  setupModToggles();
-  updateModUIVisibility();
 
-  // single initial load (ONLY ONCE)
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
     alert(err.message || String(err));
