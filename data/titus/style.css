@@ -359,6 +359,50 @@ body {
   color: var(--muted);
 }
 
+/* Make topbar stay visible */
+#topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5000;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  #topbar {
+    padding: 10px 12px 8px;
+    gap: 6px;
+  }
+
+  #topbar .title {
+    font-size: 16px;
+    line-height: 1.1;
+  }
+
+  /* Keep controls in ONE row and allow sideways scroll */
+  #topbar .controls {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px; /* makes the scroll feel nicer */
+    gap: 10px;
+  }
+
+  /* Give each control a sane width so they don’t shrink to nothing */
+  #topbar select,
+  #bgSelectWrap select {
+    flex: 0 0 220px;
+    max-width: 220px;
+  }
+
+  /* Optional: hide scrollbar but keep it scrollable */
+  #topbar .controls::-webkit-scrollbar {
+    height: 6px;
+  }
+}
+
 /* ================= MAP AREA ================= */
 
 #mapWrap { position: relative; flex: 1; }
