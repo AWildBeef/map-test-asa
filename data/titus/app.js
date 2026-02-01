@@ -221,7 +221,7 @@ function addPanelsControl(map) {
       L.DomEvent.on(btn, "click", (e) => {
         L.DomEvent.preventDefault(e);
         showPanel("dinoInfoPanel");
-        showPanel("modStylePanel");
+        if (activeSourceId !== "official") showPanel("modStylePanel");
       });
 
       return container;
