@@ -10,7 +10,7 @@ p/* ============================================================
   --text: #e6e6e6;          /* 📝 Main text color */
   --muted: #b8c0cc;         /* 🫧 "less important" text (labels, small info) */
 
-  --control-bg: #242a30;    /* 🎛️ Dropdown/button background */
+  --control-bg: #ff0000;    /* 🎛️ Dropdown/button background */
   --control-border: #3a414a;/* 🎛️ Border around dropdowns/buttons */
   --focus: #7aa2ff;         /* ✨ Highlight color when you click a dropdown */
 }
@@ -252,7 +252,7 @@ body {
   align-items: center;
   justify-content: space-between;
 
-  padding: 5px 5px; /* 📏 Header padding (smaller = tighter) */
+  padding: 6px 6px; /* 📏 Header padding (smaller = tighter) */
   border-bottom: 1px solid rgba(255,255,255,0.08);
 
   cursor: grab;      /* ✋ Shows grab cursor on desktop */
@@ -266,8 +266,8 @@ body {
 
 /* Panel title text */
 .floating-panel .fp-title {
-  font-weight: 500; /* 💪 1000 - Very bold */
-  font-size: 14px;   /* 🔠 Small */
+  font-weight: 300; /* 💪 1000 - Very bold */
+  font-size: 11px;   /* 🔠 Small */
   letter-spacing: 0.2px;
 }
 
@@ -294,7 +294,7 @@ body {
 
 /* The scrollable body of the panel */
 .floating-panel .fp-body {
-  padding: 5px;       /* 🧻 Padding inside */
+  padding: 7px;       /* 🧻 Padding inside */
   max-height: 50vh;   /* 📏 Limit height so it doesn’t run off screen */
   overflow: auto;     /* ✅ Adds scrollbars when content is too big */
 }
