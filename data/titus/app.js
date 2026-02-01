@@ -131,6 +131,39 @@ function pickById(list, id) {
   return list.find(x => x.id === id) || list[0];
 }
 
+function buildEntryMetaLine(entry) {
+  // 1) Prefer exporter-provided strings (official + mod)
+  const disp = entry?.display;
+  if (disp && (disp.weightText || disp.limitText || disp.chanceText)) {
+    return [disp.weightText, disp.limitText, disp.chanceText]
+      .filter(Boolean)
+      .join(" • ");
+  }
+
+  // 2) Fallback (older JSON / safety)
+  const gw  = entry.groupWeight ?? entry.group_weight ?? 0;
+  const lim = entry.spawnLimit  ?? entry.spawn_limit  ?? 0;
+
+  // spawn chances might be list or string depending on old files
+  const chances = entry.spawnChances ?? entry.spawn_chances;
+  let chanceText = "";
+
+  if (Array.isArray(chances) && chances.length) {
+    chanceText = `Spawn chances: ${chances.map(n => `${Number(n):g}%`).join(", ")}`;
+  } else if (typeof chances === "string" && chances.trim()) {
+    chanceText = `Spawn chances: ${chances.map(n => `${fmt(n)}%`).join(", ")}`;
+  }
+
+  const parts = [
+    `Weight: ${fmt(gw)}`,
+    `Max spawn: ${fmt(Number(lim) * 100)}%`,
+    chanceText
+  ].filter(Boolean);
+
+  return parts.join(" • ");
+}
+
+
 // ============================================================
 // LEAFLET MAP INIT
 // ============================================================
@@ -460,19 +493,14 @@ function renderEntryRow(entry, dinoKey, idx) {
   const visible = entryVisibility[key] ?? true;
 
   const entryClass = entry.entryClass || entry.entry || `Entry ${idx + 1}`;
-  const groupWeight = entry.groupWeight ?? entry.group_weight ?? entry.weight ?? 0;
-  const spawnLimit  = entry.spawnLimit  ?? entry.spawn_limit  ?? 0;
-
-  const pct = (entry.percentChance != null) ? `${entry.percentChance.toFixed(2)}%` : "";
+  const metaLine = buildEntryMetaLine(entry);
 
   return `
     <label class="entry-row">
       <input type="checkbox" data-entry-toggle="1" data-key="${escapeAttr(key)}" ${visible ? "checked" : ""}>
       <div class="entry-main">
         <div class="entry-name">${escapeHtml(entryClass)}</div>
-        <div class="entry-meta">
-          w=${fmt(groupWeight)} ${pct ? `• ${pct}` : ""} • limit=${fmt(spawnLimit)}
-        </div>
+        <div class="entry-meta">${escapeHtml(metaLine)}</div>
       </div>
     </label>
   `;
@@ -497,7 +525,7 @@ function escapeHtml(s) {
 function escapeAttr(s) { return escapeHtml(s).replace(/"/g, "&quot;"); }
 
 function isEntryVisible(dinoKey, entryIndex) {
-  const key = `${dinoKey}::${entryIndex}`;
+  const key = `${activeSourceId}::${currentMapId}::${dinoKey}::${entryIndex}`;
   return entryVisibility[key] ?? true;
 }
 
