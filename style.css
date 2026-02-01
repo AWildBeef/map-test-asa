@@ -250,6 +250,15 @@ body {
   overflow: hidden; /* ✅ Keeps header/body edges neat */
 }
 
+/* per-panel overrides */
+#dinoInfoPanel{
+  width: 195px;
+}
+
+#modStylePanel{
+  width: 180px;
+}
+
 /* The draggable header (grab handle) */
 .floating-panel .fp-header {
   display: flex;
