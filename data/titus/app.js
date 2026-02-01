@@ -131,40 +131,44 @@ function pickById(list, id) {
   return list.find(x => x.id === id) || list[0];
 }
 
-function buildEntryMetaLine(entry) {
-  // 1) Prefer exporter-provided strings (official + mod)
+function buildEntryMetaLines(entry) {
+  const lines = [];
+
+  // Prefer exporter-provided display text
   const disp = entry?.display;
-  if (disp && (disp.weightText || disp.limitText || disp.chanceText)) {
-    return [disp.weightText, disp.limitText, disp.chanceText]
-      .filter(Boolean)
-      .join(" • ");
+  if (disp) {
+    if (disp.weightText) lines.push(disp.weightText);
+    if (disp.limitText)  lines.push(disp.limitText);
+    if (disp.chanceText) lines.push(disp.chanceText);
+    return lines;
   }
 
-  // 2) Fallback (older JSON / safety)
-  const gw  = entry.groupWeight ?? entry.group_weight ?? 0;
-  const lim = entry.spawnLimit  ?? entry.spawn_limit  ?? 0;
+  // ---------- fallback (older JSON) ----------
+  const gw  = entry.groupWeight ?? entry.group_weight;
+  const lim = entry.spawnLimit  ?? entry.spawn_limit;
+
+  if (gw != null) {
+    lines.push(`Weight: ${fmt(gw)}`);
+  }
+
+  if (lim != null) {
+    lines.push(`Max spawn: ${fmt(Number(lim) * 100)}%`);
+  }
 
   const chances = entry.spawnChances ?? entry.spawn_chances;
-  let chanceText = "";
 
   if (Array.isArray(chances) && chances.length) {
-    // numbers like [100, 67, 33]
-    chanceText = `Spawn chances: ${chances.map(n => `${fmt(n)}%`).join(", ")}`;
+    lines.push(
+      `Spawn chances: ${chances.map(n => `${fmt(n)}%`).join(", ")}`
+    );
   } else if (typeof chances === "string" && chances.trim()) {
-    // string like "100" or "100, 67, 33"
     const parts = chances.split(",").map(s => s.trim()).filter(Boolean);
-    chanceText = parts.length
-      ? `Spawn chances: ${parts.map(p => `${p}%`).join(", ")}`
-      : "";
+    if (parts.length) {
+      lines.push(`Spawn chances: ${parts.map(p => `${p}%`).join(", ")}`);
+    }
   }
 
-  const parts = [
-    `Weight: ${fmt(gw)}`,
-    `Max spawn: ${fmt(Number(lim) * 100)}%`,
-    chanceText
-  ].filter(Boolean);
-
-  return parts.join(" • ");
+  return lines;
 }
 
 function getEntryBoxes(entry) {
@@ -516,17 +520,27 @@ function renderEntryRow(entry, dinoKey, idx) {
   const visible = entryVisibility[key] ?? true;
 
   const entryClass = entry.entryClass || entry.entry || `Entry ${idx + 1}`;
-  const metaLine = buildEntryMetaLine(entry);
+  const metaLines = buildEntryMetaLines(entry);
 
   return `
-    <label class="entry-row">
-      <input type="checkbox" data-entry-toggle="1" data-key="${escapeAttr(key)}" ${visible ? "checked" : ""}>
-      <div class="entry-main">
-        <div class="entry-name">${escapeHtml(entryClass)}</div>
-        <div class="entry-meta">${escapeHtml(metaLine)}</div>
+  <label class="entry-row">
+    <input
+      type="checkbox"
+      data-entry-toggle="1"
+      data-key="${escapeAttr(key)}"
+      ${visible ? "checked" : ""}
+    >
+    <div class="entry-main">
+      <div class="entry-name">${escapeHtml(entryClass)}</div>
+
+      <div class="entry-meta">
+        ${metaLines.map(line =>
+          `<div class="entry-meta-line">${escapeHtml(line)}</div>`
+        ).join("")}
       </div>
-    </label>
-  `;
+    </div>
+  </label>
+`;
 }
 
 function renderInfoPanelBodyEmpty() {
