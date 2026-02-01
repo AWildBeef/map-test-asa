@@ -391,12 +391,12 @@ let entryVisibility = {}; // key: `${dinoKey}::${entryIndex}` => boolean
 
 function ensurePanels() {
   if (!stylePanel) {
-    stylePanel = createFloatingPanel({ id: "modStylePanel", title: "Mod Style", defaultPos: { right: 7, top: 7 }, collapsedByDefault: true });
+    stylePanel = createFloatingPanel({ id: "modStylePanel", title: "Mod Style", defaultPos: { right: 2, top: 2 }, collapsedByDefault: true });
     renderModStylePanelBody();
   }
 
   if (!infoPanel) {
-    infoPanel  = createFloatingPanel({ id: "dinoInfoPanel", title: "Dino Info", defaultPos: { right: 220, top: 7 }, collapsedByDefault: true });
+    infoPanel  = createFloatingPanel({ id: "dinoInfoPanel", title: "Dino Info", defaultPos: { right: 218, top: 2 }, collapsedByDefault: true });
     renderInfoPanelBodyEmpty();
   }
 
