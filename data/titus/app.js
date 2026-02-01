@@ -145,7 +145,7 @@ function initMap(cfg) {
     maxZoom: 2,
     zoomSnap: 0.25,
     zoomDelta: 0.25,
-    wheelPxPerZoomLevel: 120
+    wheelPxPerZoomLevel: 120,
     
     zoomControl: false
   });
