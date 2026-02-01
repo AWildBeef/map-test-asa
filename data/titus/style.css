@@ -399,6 +399,12 @@ body {
 .entry-name { font-size: 10px; font-weight: 600; }
 .entry-meta { margin-top: 2px; font-size: 10px; color: var(--muted); }
 
+.entry-meta-line {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
 /* ============================================================
    🧃 Title row + Filters button (mobile)
    ============================================================ */
