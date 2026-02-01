@@ -376,6 +376,15 @@ body {
   overflow-y: hidden;
 }
 
+.info-subtitle {
+  font-size: 9px;        /* ← change this number */
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase; /* optional */
+}
+
 /* Entry checkbox rows */
 .entry-row {
   display: flex;
