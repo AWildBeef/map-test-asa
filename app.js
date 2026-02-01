@@ -322,6 +322,9 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
   `;
 
   mapEl.appendChild(panel);
+  // After you create the panel (inside createFloatingPanel), add:
+panel.addEventListener("mousedown", (e) => e.stopPropagation());
+panel.addEventListener("touchstart", (e) => e.stopPropagation(), { passive: false });
   
   if (collapsedByDefault) {
     panel.classList.add("collapsed");
