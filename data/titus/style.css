@@ -42,17 +42,19 @@ body {
 #topbar {
   background: var(--panel);                  /* 📦 Topbar background */
   border-bottom: 1px solid var(--panel-border); /* 🧷 Divider line under topbar */
-  padding: 14px 18px 12px;                   /* 🧻 Space inside topbar */
+  padding: 12px 16px 10px;                   /* 🧻 Space inside topbar */
 
   display: flex;                             /* 📦 Flexible layout container */
   flex-direction: column;                    /* ⬇️ Title row then controls row */
   align-items: center;                       /* 🎯 Center everything horizontally */
-  gap: 10px;                                 /* 🫧 Space between title and controls */
+  gap: 7px;                                 /* 🫧 Space between title and controls */
 }
 
 #topbar .title {
   font-size: 18px;        /* 🔠 Title size */
   font-weight: 700;       /* 💪 Boldness */
+  font-stretch: condensed;
+  text-transform: full-width;
   letter-spacing: 0.4px;  /* 🧾 Slight spacing between letters */
   color: #f2f2f2;         /* 🧊 Title color (slightly brighter than --text) */
 }
@@ -95,7 +97,7 @@ body {
   max-width: 320px;     /* 🚧 Largest allowed size on desktop */
   width: 100%;          /* 📏 Fill available flex width */
 
-  padding: 10px 15px;    /* 🧻 Inside spacing (makes dropdown “taller”) */
+  padding: 10px 20px;    /* 🧻 Inside spacing (makes dropdown “taller”) */
   font-size: 15px;      /* 🔠 Text size inside dropdown */
   border-radius: 8px;   /* 🍩 Rounded corners */
 
