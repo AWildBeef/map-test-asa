@@ -51,7 +51,7 @@ body {
 }
 
 #topbar .title {
-  font-size: 22px;        /* 🔠 Title size */
+  font-size: 18px;        /* 🔠 Title size */
   font-weight: 700;       /* 💪 Boldness */
   letter-spacing: 0.4px;  /* 🧾 Slight spacing between letters */
   color: #f2f2f2;         /* 🧊 Title color (slightly brighter than --text) */
@@ -95,7 +95,7 @@ body {
   max-width: 320px;     /* 🚧 Largest allowed size on desktop */
   width: 100%;          /* 📏 Fill available flex width */
 
-  padding: 9px 12px;    /* 🧻 Inside spacing (makes dropdown “taller”) */
+  padding: 10px 15px;    /* 🧻 Inside spacing (makes dropdown “taller”) */
   font-size: 15px;      /* 🔠 Text size inside dropdown */
   border-radius: 8px;   /* 🍩 Rounded corners */
 
@@ -233,7 +233,7 @@ body {
 .floating-panel {
   position: absolute;  /* 📍 Position relative to #mapWrap */
   z-index: 9999;       /* 🥇 Always on top of map */
-  width: 200px;        /* 📏 Default panel width */
+  width: 170px;        /* 📏 Default panel width */
   max-width: min(360px, calc(100vw - 24px)); /* 📱 Never overflow screen */
 
   background: rgba(26, 29, 33, 0.92); /* 🪟 Glassy dark background */
