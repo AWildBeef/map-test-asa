@@ -146,8 +146,10 @@ function initMap(cfg) {
     zoomSnap: 0.25,
     zoomDelta: 0.25,
     wheelPxPerZoomLevel: 120
+    
+    zoomControl: false
   });
-
+  L.control.zoom({ position: "bottomright" }).addTo(map);
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
   map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
