@@ -107,9 +107,9 @@ let currentCfg = null;
 // ============================================================
 // MOD STYLE STATE (used by floating panel + drawing)
 // ============================================================
-let modDrawColor = "#ff0000";
+let modDrawColor = "#00ff00";
 let modDrawOpacity = 0.8;
-let modGlowEnabled = true;
+let modGlowEnabled = false;
 
 function redrawSelected() {
   const dinoSel = document.getElementById("dinoSelect");
