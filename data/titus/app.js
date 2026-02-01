@@ -167,6 +167,25 @@ function buildEntryMetaLine(entry) {
   return parts.join(" • ");
 }
 
+function getEntryBoxes(entry) {
+  // New format: managers -> boxes
+  const mgrs = entry?.managers;
+  if (mgrs && typeof mgrs === "object") {
+    return Object.values(mgrs).flatMap(m => Array.isArray(m?.boxes) ? m.boxes : []);
+  }
+
+  // Old fallback
+  return Array.isArray(entry?.boxes) ? entry.boxes : [];
+}
+
+function getEntryPoints(entry) {
+  const mgrs = entry?.managers;
+  if (mgrs && typeof mgrs === "object") {
+    return Object.values(mgrs).flatMap(m => Array.isArray(m?.points) ? m.points : []);
+  }
+
+  return Array.isArray(entry?.points) ? entry.points : [];
+}
 
 // ============================================================
 // LEAFLET MAP INIT
@@ -676,11 +695,32 @@ function drawDino(cfg, dinoKey) {
   const isOfficial = (activeSourceId === "official");
   const entries = dino.entries || [];
 
+  // --- helpers: pull geometry from new "managers" structure, fallback to old fields ---
+  function getEntryBoxes(entry) {
+    const mgrs = entry?.managers;
+    if (mgrs && typeof mgrs === "object") {
+      return Object.values(mgrs).flatMap(m => Array.isArray(m?.boxes) ? m.boxes : []);
+    }
+    return Array.isArray(entry?.boxes) ? entry.boxes : [];
+  }
+
+  function getEntryPoints(entry) {
+    const mgrs = entry?.managers;
+    if (mgrs && typeof mgrs === "object") {
+      return Object.values(mgrs).flatMap(m => Array.isArray(m?.points) ? m.points : []);
+    }
+    return Array.isArray(entry?.points) ? entry.points : [];
+  }
+
   for (let i = 0; i < entries.length; i++) {
     if (!isEntryVisible(dinoKey, i)) continue;
+
     const entry = entries[i];
 
-    const hasPoints = (entry.points && entry.points.length > 0);
+    // NEW: collect geometry from managers
+    const boxes = getEntryBoxes(entry);
+    const points = getEntryPoints(entry);
+    const hasPoints = points.length > 0;
 
     const isCave = entry.bIsCaveManager === true;
     const untame = entry.bForceUntameable === true;
@@ -702,7 +742,7 @@ function drawDino(cfg, dinoKey) {
       : opacity;
 
     // Boxes
-    for (const box of (entry.boxes || [])) {
+    for (const box of boxes) {
       if (hasPoints && isTinyBox(box)) {
         const cx = box.x + box.w / 2;
         const cy = box.y + box.h / 2;
@@ -734,7 +774,7 @@ function drawDino(cfg, dinoKey) {
     }
 
     // Points
-    for (const pt of (entry.points || [])) {
+    for (const pt of points) {
       L.circleMarker([pt.y, pt.x], {
         color,
         weight,
