@@ -233,7 +233,7 @@ body {
 .floating-panel {
   position: absolute;  /* 📍 Position relative to #mapWrap */
   z-index: 9999;       /* 🥇 Always on top of map */
-  width: 170px;        /* 📏 Default panel width */
+  width: 180px;        /* 📏 Default panel width */
   max-width: min(360px, calc(100vw - 24px)); /* 📱 Never overflow screen */
 
   background: rgba(26, 29, 33, 0.92); /* 🪟 Glassy dark background */
