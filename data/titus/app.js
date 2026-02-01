@@ -92,6 +92,7 @@ let currentMapId = "";
 const SOURCES = [
   { id: "official", name: "Official" },
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/runicwyverns.json" },
+  { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
 ];
 
 let activeSourceId = "official";
