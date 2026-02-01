@@ -98,7 +98,7 @@ body {
   width: 100%;          /* 📏 Fill available flex width */
 
   padding: 10px 20px;    /* 🧻 Inside spacing (makes dropdown “taller”) */
-  font-size: 20px;      /* 🔠 Text size inside dropdown */
+  font-size: 15px;      /* 🔠 Text size inside dropdown */
   border-radius: 8px;   /* 🍩 Rounded corners */
 
   border: 1px solid var(--control-border);  /* 🧷 Border */
@@ -467,8 +467,8 @@ body {
     max-width: none;
     width: 100%;
 
-    padding: 4px 4px;   /* 📏 Smaller height */
-    font-size: 10px;    /* 🔠 Smaller text */
+    padding: 5px 5px;   /* 📏 Smaller height */
+    font-size: 12px;    /* 🔠 Smaller text */
     border-radius: 4px;
   }
 
@@ -480,11 +480,11 @@ body {
 
   /* Make the whole topbar shorter on mobile */
   #topbar {
-    padding: 6px 8px 6px;
+    padding: 6px 6px 6px;
   }
 
   /* Make the title smaller too */
   #topbar .title {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
