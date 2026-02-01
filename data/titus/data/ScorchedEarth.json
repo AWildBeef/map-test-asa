@@ -11,6 +11,7 @@
     "Achatina": {
       "bpPath": "/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C",
       "displayName": "Achatina",
+      "nameTag": "Achatina",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -45,7 +46,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.683333,
+          "spawnLimit": 0.075,
           "weight": 0.002135,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.683333"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -122,7 +131,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.683333,
+          "spawnLimit": 0.075,
           "weight": 0.002603,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.683333"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -148,7 +165,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.683333,
+          "spawnLimit": 0.075,
           "weight": 0.003203,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.683333"
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -169,7 +194,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.683333,
+          "spawnLimit": 0.075,
           "weight": 0.005354,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.683333"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -246,7 +279,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.683333,
+          "spawnLimit": 0.075,
           "weight": 0.004375,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.683333"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -361,7 +402,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.683333,
+          "spawnLimit": 0.075,
           "weight": 0.003203,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.683333"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         }
@@ -370,6 +419,7 @@
     "Alpha Fire Wyvern": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Wyvern/MegaWyvern_Character_BP_Fire.MegaWyvern_Character_BP_Fire_C",
       "displayName": "Alpha Fire Wyvern",
+      "nameTag": "Wyvern",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
@@ -656,7 +706,15 @@
           "TheIncreaseNPCInterval": 3600.0,
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
+          "groupWeight": 0.015714,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.007968,
+          "display": {
+            "weightText": "Weight: 0.015714",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -665,6 +723,7 @@
     "Ankylosaurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Ankylo/Ankylo_Character_BP.Ankylo_Character_BP_C",
       "displayName": "Ankylosaurus",
+      "nameTag": "Anky",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -936,7 +995,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.035,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.075,
           "weight": 0.001081,
+          "display": {
+            "weightText": "Weight: 0.035",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -1266,7 +1333,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.05,
           "weight": 0.002866,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -2236,7 +2311,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.05,
           "weight": 0.00123,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -3198,7 +3281,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.00473,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -3207,6 +3298,7 @@
     "Araneo": {
       "bpPath": "/Game/PrimalEarth/Dinos/Spider-Small/SpiderS_Character_BP.SpiderS_Character_BP_C",
       "displayName": "Araneo",
+      "nameTag": "Spider",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -3241,7 +3333,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.15,
           "weight": 0.010714,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -3318,7 +3418,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.15,
           "weight": 0.013058,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -3344,7 +3452,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.15,
           "weight": 0.016071,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -3459,7 +3575,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.15,
           "weight": 0.016071,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -3767,7 +3891,15 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.15,
           "weight": 0.028302,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": ""
+          },
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -3776,6 +3908,7 @@
     "Archaeopteryx": {
       "bpPath": "/Game/PrimalEarth/Dinos/Archaeopteryx/Archa_Character_BP.Archa_Character_BP_C",
       "displayName": "Archaeopteryx",
+      "nameTag": "Archa",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -4743,7 +4876,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.0125,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.065,
           "weight": 0.000469,
+          "display": {
+            "weightText": "Weight: 0.0125",
+            "limitText": "Max spawn: 6.5%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -4752,6 +4893,7 @@
     "Argentavis": {
       "bpPath": "/Game/PrimalEarth/Dinos/Argentavis/Argent_Character_BP.Argent_Character_BP_C",
       "displayName": "Argentavis",
+      "nameTag": "Argent",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -5711,7 +5853,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.125,
+          "spawnMultiplier": 0.625,
+          "spawnLimit": 0.15,
           "weight": 0.011548,
+          "display": {
+            "weightText": "Weight: 0.125",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.625"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -5720,6 +5870,7 @@
     "Arthropluera": {
       "bpPath": "/Game/PrimalEarth/Dinos/Arthropluera/Arthro_Character_BP.Arthro_Character_BP_C",
       "displayName": "Arthropluera",
+      "nameTag": "Arthro",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -5991,7 +6142,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.2,
           "weight": 0.003294,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -6028,7 +6187,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.007812,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -9990,7 +10157,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.6665,
+          "spawnLimit": 0.2,
           "weight": 0.005583,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.6665"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -10011,7 +10186,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.022388,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -10088,7 +10271,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.018293,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -10203,7 +10394,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.011719,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -10511,7 +10710,15 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.2,
           "weight": 0.025157,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 20%",
+            "multText": ""
+          },
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -10520,6 +10727,7 @@
     "Carnotaurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Carno/Carno_Character_BP.Carno_Character_BP_C",
       "displayName": "Carnotaurus",
+      "nameTag": "Carno",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -10791,7 +10999,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.055,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.2,
           "weight": 0.004529,
+          "display": {
+            "weightText": "Weight: 0.055",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -11753,7 +11969,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.014,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.2,
           "weight": 0.002759,
+          "display": {
+            "weightText": "Weight: 0.014",
+            "limitText": "Max spawn: 20%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -11762,6 +11986,7 @@
     "Ceratosaurus": {
       "bpPath": "/Game/ASA/Dinos/Ceratosaurus/Dinos/Ceratosaurus_Character_BP_ASA.Ceratosaurus_Character_BP_ASA_C",
       "displayName": "Ceratosaurus",
+      "nameTag": "CeratosaurusAA",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -12033,7 +12258,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.025,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.000588,
+          "display": {
+            "weightText": "Weight: 0.025",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -12995,7 +13228,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.06125,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.003018,
+          "display": {
+            "weightText": "Weight: 0.06125",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -13004,6 +13245,7 @@
     "Coelacanth": {
       "bpPath": "/Game/PrimalEarth/Dinos/Coelacanth/Coel_Character_BP.Coel_Character_BP_C",
       "displayName": "Coelacanth",
+      "nameTag": "Coel",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
@@ -13051,7 +13293,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.833333,
+          "spawnLimit": 0.6,
           "weight": 0.171642,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 60%",
+            "multText": "Multiplier: 0.833333"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -13263,7 +13513,15 @@
           "MinDesiredNumberOfNPC": 24,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.833333,
+          "spawnLimit": 1.0,
           "weight": 0.315789,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.833333"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -13272,6 +13530,7 @@
     "Daeodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Daeodon/Daeodon_Character_BP.Daeodon_Character_BP_C",
       "displayName": "Daeodon",
+      "nameTag": "Daeodon",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -13543,7 +13802,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.028,
+          "spawnMultiplier": 0.3875,
+          "spawnLimit": 0.01,
           "weight": 5.1e-05,
+          "display": {
+            "weightText": "Weight: 0.028",
+            "limitText": "Max spawn: 1%",
+            "multText": "Multiplier: 0.3875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -14513,7 +14780,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.03,
+          "spawnMultiplier": 0.825,
+          "spawnLimit": 0.01,
           "weight": 0.00019,
+          "display": {
+            "weightText": "Weight: 0.03",
+            "limitText": "Max spawn: 1%",
+            "multText": "Multiplier: 0.825"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -14522,6 +14797,7 @@
     "Deathworm": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Deathworm/Deathworm_Character_BP.Deathworm_Character_BP_C",
       "displayName": "Deathworm",
+      "nameTag": "Deathworm",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesSandworm_C",
@@ -14673,7 +14949,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 3,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.637255,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -14682,6 +14966,7 @@
     "Alpha Deathworm": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Deathworm/MegaDeathworm_Character_BP.MegaDeathworm_Character_BP_C",
       "displayName": "Alpha Deathworm",
+      "nameTag": "Deathworm",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesSandworm_C",
@@ -14833,7 +15118,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 3,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.012745,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -14842,6 +15135,7 @@
     "Deinosuchus": {
       "bpPath": "/Game/ASA/Dinos/Deinosuchus/DeinosuchusASA_Character_BP.DeinosuchusASA_Character_BP_C",
       "displayName": "Deinosuchus",
+      "nameTag": "DeinosuchusAA",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
@@ -14857,7 +15151,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.025,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 0.0008,
+          "display": {
+            "weightText": "Weight: 0.025",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -14907,7 +15209,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
+          "groupWeight": 0.0475,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.015,
           "weight": 0.001631,
+          "display": {
+            "weightText": "Weight: 0.0475",
+            "limitText": "Max spawn: 1.5%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -15119,7 +15429,15 @@
           "MinDesiredNumberOfNPC": 24,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.05,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.006316,
+          "display": {
+            "weightText": "Weight: 0.05",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -15128,6 +15446,7 @@
     "Deinotherium": {
       "bpPath": "/Game/ASA/Dinos/Deinotherium/Dinos/DeinotheriumASA_Character_BP.DeinotheriumASA_Character_BP_C",
       "displayName": "Deinotherium",
+      "nameTag": "DeinotheriumASA",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -16095,7 +16414,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.005,
+          "spawnMultiplier": 0.53,
+          "spawnLimit": 0.05,
           "weight": 0.000102,
+          "display": {
+            "weightText": "Weight: 0.005",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.53"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -16193,7 +16520,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.001,
+          "spawnMultiplier": 0.53,
+          "spawnLimit": 0.05,
           "weight": 1.5e-05,
+          "display": {
+            "weightText": "Weight: 0.001",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.53"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -16202,6 +16537,7 @@
     "Direwolf": {
       "bpPath": "/Game/PrimalEarth/Dinos/Direwolf/Direwolf_Character_BP.Direwolf_Character_BP_C",
       "displayName": "Direwolf",
+      "nameTag": "Direwolf",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -16473,7 +16809,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.067,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.2,
           "weight": 0.006306,
+          "display": {
+            "weightText": "Weight: 0.067",
+            "limitText": "Max spawn: 20%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -16667,7 +17011,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.067,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.175,
           "weight": 0.008251,
+          "display": {
+            "weightText": "Weight: 0.067",
+            "limitText": "Max spawn: 17.5%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -17637,7 +17989,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.004614,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -17714,7 +18074,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.010882,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -17740,7 +18108,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.013393,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         }
@@ -17749,6 +18125,7 @@
     "Doedicurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Doedicurus/Doed_Character_BP.Doed_Character_BP_C",
       "displayName": "Doedicurus",
+      "nameTag": "Doed",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -18020,7 +18397,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.03,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.05,
           "weight": 0.000618,
+          "display": {
+            "weightText": "Weight: 0.03",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -18214,7 +18599,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.17,
           "weight": 0.010467,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 17%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -18544,7 +18937,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.008188,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -19514,7 +19915,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.004306,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -19523,6 +19932,7 @@
     "Dreadmare": {
       "bpPath": "/Game/ASA/Dinos/DarkPegasus/DarkPegasus_Character_BP.DarkPegasus_Character_BP_C",
       "displayName": "Dreadmare",
+      "nameTag": "DarkPegasus",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesDreadmare_C",
@@ -19595,7 +20005,15 @@
           "points": [],
           "MinDesiredNumberOfNPC": 6,
           "TheIncreaseNPCInterval": 3600.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 0.75,
           "minRarityDownshift": 6
         }
@@ -19604,6 +20022,7 @@
     "Dung Beetle": {
       "bpPath": "/Game/PrimalEarth/Dinos/DungBeetle/DungBeetle_Character_BP.DungBeetle_Character_BP_C",
       "displayName": "Dung Beetle",
+      "nameTag": "Beetle",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -23563,7 +23982,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.05,
           "weight": 0.000838,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -23871,7 +24298,15 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
+          "groupWeight": 0.065,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.2,
           "weight": 0.016352,
+          "display": {
+            "weightText": "Weight: 0.065",
+            "limitText": "Max spawn: 20%",
+            "multText": ""
+          },
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -23880,6 +24315,7 @@
     "Electrophorus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Eel/Eel_Character_BP.Eel_Character_BP_C",
       "displayName": "Electrophorus",
+      "nameTag": "Eel",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
@@ -23895,7 +24331,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.85,
+          "spawnLimit": 0.6,
           "weight": 0.2448,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 60%",
+            "multText": "Multiplier: 0.85"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -23904,6 +24348,7 @@
     "Equus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Equus/Equus_Character_BP.Equus_Character_BP_C",
       "displayName": "Equus",
+      "nameTag": "Equus",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -24871,7 +25316,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.024,
+          "spawnMultiplier": 0.7125,
+          "spawnLimit": 0.06,
           "weight": 0.000789,
+          "display": {
+            "weightText": "Weight: 0.024",
+            "limitText": "Max spawn: 6%",
+            "multText": "Multiplier: 0.7125"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -25833,7 +26286,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.024,
+          "spawnMultiplier": 0.7125,
+          "spawnLimit": 0.06,
           "weight": 0.001011,
+          "display": {
+            "weightText": "Weight: 0.024",
+            "limitText": "Max spawn: 6%",
+            "multText": "Multiplier: 0.7125"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -25842,6 +26303,7 @@
     "Fasolasuchus": {
       "bpPath": "/Game/ASA/Dinos/Fasolasuchus/Fasola_Character_BP.Fasola_Character_BP_C",
       "displayName": "Fasolasuchus",
+      "nameTag": "Fasola",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -29801,7 +30263,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.05,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.001309,
+          "display": {
+            "weightText": "Weight: 0.05",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -29810,6 +30280,7 @@
     "Fire Wyvern": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Wyvern/Wyvern_Character_BP_Fire.Wyvern_Character_BP_Fire_C",
       "displayName": "Fire Wyvern",
+      "nameTag": "Wyvern",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
@@ -30096,7 +30567,15 @@
           "TheIncreaseNPCInterval": 3600.0,
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
+          "groupWeight": 0.314286,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.33,
           "weight": 0.052586,
+          "display": {
+            "weightText": "Weight: 0.314286",
+            "limitText": "Max spawn: 33%",
+            "multText": ""
+          },
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -30105,6 +30584,7 @@
     "Gallimimus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Gallimimus/Galli_Character_BP.Galli_Character_BP_C",
       "displayName": "Gallimimus",
+      "nameTag": "Galli",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -31072,7 +31552,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.002307,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -31170,7 +31658,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.15,
           "weight": 0.012327,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -31179,6 +31675,7 @@
     "Giant Queen Bee": {
       "bpPath": "/Game/PrimalEarth/Dinos/Bee/Bee_Queen_Character_BP.Bee_Queen_Character_BP_C",
       "displayName": "Giant Queen Bee",
+      "nameTag": "",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesBee_C",
@@ -31378,7 +31875,15 @@
           "MinDesiredNumberOfNPC": 2,
           "TheIncreaseNPCInterval": 10000.0,
           "TheIncreaseNPCIntervalMax": 16000.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 2.0,
           "minRarityDownshift": 6
         }
@@ -31387,6 +31892,7 @@
     "Hyaenodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Hyaenodon/Hyaenodon_Character_BP.Hyaenodon_Character_BP_C",
       "displayName": "Hyaenodon",
+      "nameTag": "Hyaenodon",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -31658,7 +32164,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.05,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.1,
           "weight": 0.001765,
+          "display": {
+            "weightText": "Weight: 0.05",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -31852,7 +32366,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.029,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.08,
           "weight": 0.001224,
+          "display": {
+            "weightText": "Weight: 0.029",
+            "limitText": "Max spawn: 8%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -32814,7 +33336,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.032,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.07,
           "weight": 0.001655,
+          "display": {
+            "weightText": "Weight: 0.032",
+            "limitText": "Max spawn: 7%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -32823,6 +33353,7 @@
     "Iguanodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Iguanodon/Iguanodon_Character_BP.Iguanodon_Character_BP_C",
       "displayName": "Iguanodon",
+      "nameTag": "Iguanodon",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -32918,7 +33449,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.025,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 0.000137,
+          "display": {
+            "weightText": "Weight: 0.025",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -32927,6 +33466,7 @@
     "Jerboa": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Jerboa/Jerboa_Character_BP.Jerboa_Character_BP_C",
       "displayName": "Jerboa",
+      "nameTag": "Jerboa",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -33254,7 +33794,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.165,
+          "spawnMultiplier": 0.8125,
+          "spawnLimit": 0.175,
           "weight": 0.024013,
+          "display": {
+            "weightText": "Weight: 0.165",
+            "limitText": "Max spawn: 17.5%",
+            "multText": "Multiplier: 0.8125"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -34224,7 +34772,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.17,
+          "spawnMultiplier": 0.8125,
+          "spawnLimit": 0.15,
           "weight": 0.015931,
+          "display": {
+            "weightText": "Weight: 0.17",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.8125"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -34322,7 +34878,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.25,
+          "spawnMultiplier": 0.8125,
+          "spawnLimit": 0.2,
           "weight": 0.022256,
+          "display": {
+            "weightText": "Weight: 0.25",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.8125"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -34331,6 +34895,7 @@
     "Kaprosuchus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Kaprosuchus/Kaprosuchus_Character_BP.Kaprosuchus_Character_BP_C",
       "displayName": "Kaprosuchus",
+      "nameTag": "Kaprosuchus",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
@@ -34346,7 +34911,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.0375,
+          "spawnMultiplier": 0.665,
+          "spawnLimit": 0.01,
           "weight": 0.000798,
+          "display": {
+            "weightText": "Weight: 0.0375",
+            "limitText": "Max spawn: 1%",
+            "multText": "Multiplier: 0.665"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -34396,7 +34969,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
+          "groupWeight": 0.0375,
+          "spawnMultiplier": 0.665,
+          "spawnLimit": 0.01,
           "weight": 0.000571,
+          "display": {
+            "weightText": "Weight: 0.0375",
+            "limitText": "Max spawn: 1%",
+            "multText": "Multiplier: 0.665"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -34608,7 +35189,15 @@
           "MinDesiredNumberOfNPC": 24,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.0375,
+          "spawnMultiplier": 0.665,
+          "spawnLimit": 0.01,
           "weight": 0.00063,
+          "display": {
+            "weightText": "Weight: 0.0375",
+            "limitText": "Max spawn: 1%",
+            "multText": "Multiplier: 0.665"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -34617,6 +35206,7 @@
     "Kentrosaurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Kentrosaurus/Kentro_Character_BP.Kentro_Character_BP_C",
       "displayName": "Kentrosaurus",
+      "nameTag": "Kentro",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -35576,7 +36166,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.025,
+          "spawnMultiplier": 0.716667,
+          "spawnLimit": 0.05,
           "weight": 0.000883,
+          "display": {
+            "weightText": "Weight: 0.025",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.716667"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -35585,6 +36183,7 @@
     "Lightning Wyvern": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Wyvern/Wyvern_Character_BP_Lightning.Wyvern_Character_BP_Lightning_C",
       "displayName": "Lightning Wyvern",
+      "nameTag": "Wyvern",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
@@ -35871,7 +36470,15 @@
           "TheIncreaseNPCInterval": 3600.0,
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
+          "groupWeight": 0.33,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.33,
           "weight": 0.055216,
+          "display": {
+            "weightText": "Weight: 0.33",
+            "limitText": "Max spawn: 33%",
+            "multText": ""
+          },
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -35880,6 +36487,7 @@
     "Lymantria": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Moth/Moth_Character_BP.Moth_Character_BP_C",
       "displayName": "Lymantria",
+      "nameTag": "Moth",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -36151,7 +36759,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.035,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.05,
           "weight": 0.000659,
+          "display": {
+            "weightText": "Weight: 0.035",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -37121,7 +37737,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.05,
+          "spawnMultiplier": 0.8335,
+          "spawnLimit": 0.05,
           "weight": 0.001602,
+          "display": {
+            "weightText": "Weight: 0.05",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8335"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -38083,7 +38707,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.8335,
+          "spawnLimit": 0.05,
           "weight": 0.002464,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8335"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         },
@@ -38181,7 +38813,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.05,
+          "spawnMultiplier": 0.8335,
+          "spawnLimit": 0.05,
           "weight": 0.001142,
+          "display": {
+            "weightText": "Weight: 0.05",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8335"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -38190,6 +38830,7 @@
     "Lystrosaurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Lystrosaurus/Lystro_Character_BP.Lystro_Character_BP_C",
       "displayName": "Lystrosaurus",
+      "nameTag": "Lystro",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -38517,7 +39158,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.008188,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -39487,7 +40136,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.05,
           "weight": 0.001845,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -39585,7 +40242,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.9,
+          "spawnLimit": 0.15,
           "weight": 0.011094,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.9"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -39594,6 +40259,7 @@
     "Mantis": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Mantis/Mantis_Character_BP.Mantis_Character_BP_C",
       "displayName": "Mantis",
+      "nameTag": "Mantis",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -39628,7 +40294,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.007143,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -43590,7 +44264,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.035,
+          "spawnMultiplier": 0.833333,
+          "spawnLimit": 0.1,
           "weight": 0.001527,
+          "display": {
+            "weightText": "Weight: 0.035",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.833333"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -43667,7 +44349,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.008705,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -43693,7 +44383,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.010714,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -43714,7 +44412,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.15,
           "weight": 0.026866,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -43791,7 +44497,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.15,
           "weight": 0.021951,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -43906,7 +44620,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.010714,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -44214,7 +44936,15 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.2,
           "weight": 0.037736,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 20%",
+            "multText": ""
+          },
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -44223,6 +44953,7 @@
     "Megalania": {
       "bpPath": "/Game/PrimalEarth/Dinos/Megalania/Megalania_Character_BP.Megalania_Character_BP_C",
       "displayName": "Megalania",
+      "nameTag": "Megalania",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesMegalania_C",
@@ -44868,7 +45599,15 @@
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 9000.0,
           "TheIncreaseNPCIntervalMax": 14400.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         }
@@ -44877,6 +45616,7 @@
     "Megalosaurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Megalosaurus/Megalosaurus_Character_BP.Megalosaurus_Character_BP_C",
       "displayName": "Megalosaurus",
+      "nameTag": "Megalosaurus",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesCaveMegalo_C",
@@ -44903,7 +45643,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 18000.0,
+          "groupWeight": 0.25,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 0.25",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 2.0,
           "minRarityDownshift": 6
         }
@@ -44912,6 +45660,7 @@
     "Megatherium": {
       "bpPath": "/Game/PrimalEarth/Dinos/Megatherium/Megatherium_Character_BP.Megatherium_Character_BP_C",
       "displayName": "Megatherium",
+      "nameTag": "Megatherium",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -45879,7 +46628,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.01,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.02,
           "weight": 0.000115,
+          "display": {
+            "weightText": "Weight: 0.01",
+            "limitText": "Max spawn: 2%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -45888,6 +46645,7 @@
     "Microraptor": {
       "bpPath": "/Game/PrimalEarth/Dinos/Microraptor/Microraptor_Character_BP.Microraptor_Character_BP_C",
       "displayName": "Microraptor",
+      "nameTag": "Microraptor",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -46855,7 +47613,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.036,
+          "spawnMultiplier": 0.82,
+          "spawnLimit": 0.06,
           "weight": 0.001362,
+          "display": {
+            "weightText": "Weight: 0.036",
+            "limitText": "Max spawn: 6%",
+            "multText": "Multiplier: 0.82"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -46864,6 +47630,7 @@
     "Morellatops": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Camelsaurus/camelsaurus_Character_BP.camelsaurus_Character_BP_C",
       "displayName": "Morellatops",
+      "nameTag": "Camelsaurus",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -47135,7 +47902,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.02,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.05,
           "weight": 0.000376,
+          "display": {
+            "weightText": "Weight: 0.02",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -47329,7 +48104,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.075,
           "weight": 0.002771,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -47659,7 +48442,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.008188,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -48629,7 +49420,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.005536,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -48727,7 +49526,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.125,
           "weight": 0.008218,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 12.5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -48736,6 +49543,7 @@
     "Moschops": {
       "bpPath": "/Game/PrimalEarth/Dinos/Moschops/Moschops_Character_BP.Moschops_Character_BP_C",
       "displayName": "Moschops",
+      "nameTag": "Moschops",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -48831,7 +49639,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.075,
           "weight": 0.002517,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -48840,6 +49656,7 @@
     "Oasisaur": {
       "bpPath": "/Game/Packs/Frontier/Dinos/Oasisaur/Oasisaur_Character_BP.Oasisaur_Character_BP_C",
       "displayName": "Oasisaur",
+      "nameTag": "Oasisaur",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesOasisaur_C",
@@ -48896,7 +49713,15 @@
           "points": [],
           "MinDesiredNumberOfNPC": 2,
           "TheIncreaseNPCInterval": 14400.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 0.333,
           "minRarityDownshift": 6
         }
@@ -48905,6 +49730,7 @@
     "Oil Jug Bug": {
       "bpPath": "/Game/ScorchedEarth/Dinos/JugBug/Jugbug_Oil_Character_BP.Jugbug_Oil_Character_BP_C",
       "displayName": "Oil Jug Bug",
+      "nameTag": "Jugbug",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -49176,7 +50002,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.047059,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -49370,7 +50204,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.070368,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -53332,7 +54174,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.078534,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -53662,7 +54512,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.075,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 1.0,
           "weight": 0.057574,
+          "display": {
+            "weightText": "Weight: 0.075",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -54632,7 +55490,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.075,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 1.0,
           "weight": 0.043253,
+          "display": {
+            "weightText": "Weight: 0.075",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -54641,6 +55507,7 @@
     "Onyc": {
       "bpPath": "/Game/PrimalEarth/Dinos/Bat/Bat_Character_BP.Bat_Character_BP_C",
       "displayName": "Onyc",
+      "nameTag": "Bat",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -54675,7 +55542,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.008929,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -54752,7 +55627,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.010882,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -54778,7 +55661,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.013393,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -54799,7 +55690,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.2,
           "weight": 0.029851,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -54876,7 +55775,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.2,
           "weight": 0.02439,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -54991,7 +55898,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.013393,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         }
@@ -55000,6 +55915,7 @@
     "Ovis": {
       "bpPath": "/Game/PrimalEarth/Dinos/Sheep/Sheep_Character_BP.Sheep_Character_BP_C",
       "displayName": "Ovis",
+      "nameTag": "Sheep",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
@@ -55095,7 +56011,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.025,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.00137,
+          "display": {
+            "weightText": "Weight: 0.025",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -55104,6 +56028,7 @@
     "Paraceratherium": {
       "bpPath": "/Game/PrimalEarth/Dinos/Paraceratherium/Paracer_Character_BP.Paracer_Character_BP_C",
       "displayName": "Paraceratherium",
+      "nameTag": "Paracer",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -56071,7 +56996,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.03,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.000577,
+          "display": {
+            "weightText": "Weight: 0.03",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -56169,7 +57102,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.008218,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -56178,6 +57119,7 @@
     "Parasaur": {
       "bpPath": "/Game/PrimalEarth/Dinos/Para/Para_Character_BP.Para_Character_BP_C",
       "displayName": "Parasaur",
+      "nameTag": "Para",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -56505,7 +57447,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.075,
           "weight": 0.004299,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -56514,6 +57464,7 @@
     "Pegomastax": {
       "bpPath": "/Game/PrimalEarth/Dinos/Pegomastax/Pegomastax_Character_BP.Pegomastax_Character_BP_C",
       "displayName": "Pegomastax",
+      "nameTag": "Pegomastax",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -57481,7 +58432,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.028,
+          "spawnMultiplier": 0.866667,
+          "spawnLimit": 0.035,
           "weight": 0.000653,
+          "display": {
+            "weightText": "Weight: 0.028",
+            "limitText": "Max spawn: 3.5%",
+            "multText": "Multiplier: 0.866667"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -57579,7 +58538,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.043,
+          "spawnMultiplier": 0.866667,
+          "spawnLimit": 0.075,
           "weight": 0.001531,
+          "display": {
+            "weightText": "Weight: 0.043",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.866667"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -57588,6 +58555,7 @@
     "Phoenix": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Phoenix/Phoenix_Character_BP.Phoenix_Character_BP_C",
       "displayName": "Phoenix",
+      "nameTag": "Phoenix",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesPhoenix_C",
@@ -57604,7 +58572,15 @@
           "points": [],
           "MinDesiredNumberOfNPC": 3,
           "TheIncreaseNPCInterval": 14400.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         }
@@ -57613,6 +58589,7 @@
     "Piranha": {
       "bpPath": "/Game/PrimalEarth/Dinos/Piranha/Piranha_Character_BP.Piranha_Character_BP_C",
       "displayName": "Piranha",
+      "nameTag": "Piranha",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
@@ -57628,7 +58605,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.833333,
+          "spawnLimit": 0.6,
           "weight": 0.16,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 60%",
+            "multText": "Multiplier: 0.833333"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -57678,7 +58663,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 12,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.833333,
+          "spawnLimit": 0.6,
           "weight": 0.114428,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 60%",
+            "multText": "Multiplier: 0.833333"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         }
@@ -57687,6 +58680,7 @@
     "Poison Wyvern": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Wyvern/Wyvern_Character_BP_Poison.Wyvern_Character_BP_Poison_C",
       "displayName": "Poison Wyvern",
+      "nameTag": "Wyvern",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
@@ -57973,7 +58967,15 @@
           "TheIncreaseNPCInterval": 3600.0,
           "bForceInEditor": true,
           "NPCWanderRadiusMultiplier": 0.1,
+          "groupWeight": 0.33,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.33,
           "weight": 0.055216,
+          "display": {
+            "weightText": "Weight: 0.33",
+            "limitText": "Max spawn: 33%",
+            "multText": ""
+          },
           "bestSharedMin": 3.75,
           "minRarityDownshift": 2
         }
@@ -57982,6 +58984,7 @@
     "Procoptodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Procoptodon/Procoptodon_Character_BP.Procoptodon_Character_BP_C",
       "displayName": "Procoptodon",
+      "nameTag": "Kangaroo",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -58309,7 +59312,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.03,
+          "spawnMultiplier": 0.665,
+          "spawnLimit": 0.03,
           "weight": 0.000613,
+          "display": {
+            "weightText": "Weight: 0.03",
+            "limitText": "Max spawn: 3%",
+            "multText": "Multiplier: 0.665"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -59279,7 +60290,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 0.665,
+          "spawnLimit": 0.035,
           "weight": 0.000716,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 3.5%",
+            "multText": "Multiplier: 0.665"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -59377,7 +60396,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.085,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.004657,
+          "display": {
+            "weightText": "Weight: 0.085",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -59386,6 +60413,7 @@
     "Pulmonoscorpius": {
       "bpPath": "/Game/PrimalEarth/Dinos/Scorpion/Scorpion_Character_BP.Scorpion_Character_BP_C",
       "displayName": "Pulmonoscorpius",
+      "nameTag": "Scorpion",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -59657,7 +60685,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.2,
           "weight": 0.006275,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -59694,7 +60730,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.1,
           "weight": 0.005952,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -59888,7 +60932,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.25,
           "weight": 0.011728,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 25%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -63850,7 +64902,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.2,
           "weight": 0.010471,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -63927,7 +64987,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.1,
           "weight": 0.007254,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -64889,7 +65957,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.009854,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         },
@@ -64915,7 +65991,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.1,
           "weight": 0.008929,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -65030,7 +66114,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.1,
           "weight": 0.008929,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -65338,7 +66430,15 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.8335,
+          "spawnLimit": 0.1,
           "weight": 0.010484,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8335"
+          },
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -65347,6 +66447,7 @@
     "Purlovia": {
       "bpPath": "/Game/PrimalEarth/Dinos/Purlovia/Purlovia_Character_BP.Purlovia_Character_BP_C",
       "displayName": "Purlovia",
+      "nameTag": "Purlovia",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -65538,7 +66639,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.022,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.065,
           "weight": 0.001006,
+          "display": {
+            "weightText": "Weight: 0.022",
+            "limitText": "Max spawn: 6.5%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         }
@@ -65547,6 +66656,7 @@
     "Pyromane": {
       "bpPath": "/Game/ASA/Dinos/FireLion/FireLion_Character_BP.FireLion_Character_BP_C",
       "displayName": "Pyromane",
+      "nameTag": "FireLion",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
@@ -65852,7 +66962,15 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.08,
           "weight": 0.00805,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 8%",
+            "multText": ""
+          },
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -65861,6 +66979,7 @@
     "Raptor": {
       "bpPath": "/Game/PrimalEarth/Dinos/Raptor/Raptor_Character_BP.Raptor_Character_BP_C",
       "displayName": "Raptor",
+      "nameTag": "Raptor",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -66188,7 +67307,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.05,
           "weight": 0.002687,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -66286,7 +67413,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.065,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.003116,
+          "display": {
+            "weightText": "Weight: 0.065",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -66295,6 +67430,7 @@
     "Rex": {
       "bpPath": "/Game/PrimalEarth/Dinos/Rex/Rex_Character_BP.Rex_Character_BP_C",
       "displayName": "Rex",
+      "nameTag": "Rex",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntries_RexSolo_C",
@@ -66358,7 +67494,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 1.0,
           "minRarityDownshift": 6
         }
@@ -66367,6 +67511,7 @@
     "Rock Elemental": {
       "bpPath": "/Game/ScorchedEarth/Dinos/RockGolem/RockGolem_Character_BP.RockGolem_Character_BP_C",
       "displayName": "Rock Elemental",
+      "nameTag": "RockElemental",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -66638,7 +67783,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.03,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.03,
           "weight": 0.000424,
+          "display": {
+            "weightText": "Weight: 0.03",
+            "limitText": "Max spawn: 3%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -67608,7 +68761,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.01,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 7.7e-05,
+          "display": {
+            "weightText": "Weight: 0.01",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -68570,7 +69731,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.009854,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -68579,6 +69748,7 @@
     "Rubble Golem": {
       "bpPath": "/Game/ScorchedEarth/Dinos/RockGolem/RubbleGolem_Character_BP.RubbleGolem_Character_BP_C",
       "displayName": "Rubble Golem",
+      "nameTag": "RockElemental",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -68613,7 +69783,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.002232,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -68690,7 +69868,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.00272,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -68716,7 +69902,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.003348,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         },
@@ -68793,7 +69987,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.004573,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -68908,7 +70110,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.003348,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         }
@@ -68917,6 +70127,7 @@
     "Sabertooth": {
       "bpPath": "/Game/PrimalEarth/Dinos/Saber/Saber_Character_BP.Saber_Character_BP_C",
       "displayName": "Sabertooth",
+      "nameTag": "Sabertooth",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -69188,7 +70399,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.2,
           "weight": 0.006588,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -69382,7 +70601,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.075,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.175,
           "weight": 0.008081,
+          "display": {
+            "weightText": "Weight: 0.075",
+            "limitText": "Max spawn: 17.5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -70352,7 +71579,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.075,
           "weight": 0.002768,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -70429,7 +71664,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.009521,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -71391,7 +72634,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.2,
           "weight": 0.025867,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         },
@@ -71417,7 +72668,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 32,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.011719,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 32.0,
           "minRarityDownshift": 0
         }
@@ -71426,6 +72685,7 @@
     "Summer Drakeling": {
       "bpPath": "/Game/ASA/Dinos/ShoulderDragon/ShoulderDragon_Character_BP_Summer.ShoulderDragon_Character_BP_Summer_C",
       "displayName": "Summer Drakeling",
+      "nameTag": "ShoulderDragon",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -71697,7 +72957,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.005,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 2.4e-05,
+          "display": {
+            "weightText": "Weight: 0.005",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -71891,7 +73159,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.005,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 3.5e-05,
+          "display": {
+            "weightText": "Weight: 0.005",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -72221,7 +73497,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.005,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 5.1e-05,
+          "display": {
+            "weightText": "Weight: 0.005",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -73191,7 +74475,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.005,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 3.8e-05,
+          "display": {
+            "weightText": "Weight: 0.005",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -73289,7 +74581,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.005,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 2.7e-05,
+          "display": {
+            "weightText": "Weight: 0.005",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -73298,6 +74598,7 @@
     "Tapejara": {
       "bpPath": "/Game/PrimalEarth/Dinos/Tapejara/Tapejara_Character_BP.Tapejara_Character_BP_C",
       "displayName": "Tapejara",
+      "nameTag": "Tapejara",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -74257,7 +75558,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.0125,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.065,
           "weight": 0.000801,
+          "display": {
+            "weightText": "Weight: 0.0125",
+            "limitText": "Max spawn: 6.5%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -74266,6 +75575,7 @@
     "Terror Bird": {
       "bpPath": "/Game/PrimalEarth/Dinos/TerrorBird/TerrorBird_Character_BP.TerrorBird_Character_BP_C",
       "displayName": "Terror Bird",
+      "nameTag": "TerrorBird",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -74537,7 +75847,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.075,
           "weight": 0.001235,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 7.5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -74731,7 +76049,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.2,
           "weight": 0.012314,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -75701,7 +77027,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.1,
           "weight": 0.004037,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -75710,6 +77044,7 @@
     "Thorny Dragon": {
       "bpPath": "/Game/ScorchedEarth/Dinos/SpineyLizard/SpineyLizard_Character_BP.SpineyLizard_Character_BP_C",
       "displayName": "Thorny Dragon",
+      "nameTag": "SpineyLizard",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -75981,7 +77316,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.6875,
+          "spawnLimit": 0.2,
           "weight": 0.006471,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.6875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -76175,7 +77518,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.6875,
+          "spawnLimit": 0.1,
           "weight": 0.002903,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.6875"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -77145,7 +78496,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.05,
           "weight": 0.00123,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -78107,7 +79466,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.6875,
+          "spawnLimit": 0.2,
           "weight": 0.010839,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.6875"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -78116,6 +79483,7 @@
     "Thylacoleo": {
       "bpPath": "/Game/PrimalEarth/Dinos/Thylacoleo/Thylacoleo_Character_BP.Thylacoleo_Character_BP_C",
       "displayName": "Thylacoleo",
+      "nameTag": "Thylacoleo",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -78387,7 +79755,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.03,
           "weight": 0.014118,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 3%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -78396,6 +79772,7 @@
     "Titanoboa": {
       "bpPath": "/Game/PrimalEarth/Dinos/BoaFrill/BoaFrill_Character_BP.BoaFrill_Character_BP_C",
       "displayName": "Titanoboa",
+      "nameTag": "TitanBoa",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -78667,7 +80044,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.002471,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -78704,7 +80089,15 @@
           "MinDesiredNumberOfNPC": 20,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.007812,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -78898,7 +80291,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.006157,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -82860,7 +84261,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.625,
+          "spawnLimit": 0.2,
           "weight": 0.006545,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.625"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -82881,7 +84290,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.15,
           "weight": 0.029384,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -82958,7 +84375,15 @@
           "MinDesiredNumberOfNPC": 10,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.15,
           "weight": 0.024009,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -83073,7 +84498,15 @@
           "bForceUntameable": true,
           "bIsCaveManager": true,
           "bAllowSpawnPointOverridesNonDedicatedLevelUnloadedFreezing": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.011719,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -83381,7 +84814,15 @@
           "bForceInEditor": true,
           "MinDesiredNumberOfNPC": 125,
           "TheIncreaseNPCInterval": 1.0,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.15,
           "weight": 0.028302,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": ""
+          },
           "bestSharedMin": 3.378,
           "minRarityDownshift": 2
         }
@@ -83390,6 +84831,7 @@
     "Titanomyrma Drone": {
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/Ant_Character_BP.Ant_Character_BP_C",
       "displayName": "Titanomyrma Drone",
+      "nameTag": "Ant",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -83661,7 +85103,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 1.0,
           "weight": 0.041176,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -83855,7 +85305,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 1.0,
           "weight": 0.092358,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -87817,7 +89275,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.2,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 1.0,
           "weight": 0.091623,
+          "display": {
+            "weightText": "Weight: 0.2",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -88787,7 +90253,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.9,
+          "spawnLimit": 1.0,
           "weight": 0.103806,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.9"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -88885,7 +90359,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 1.0,
           "weight": 0.071905,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -88894,6 +90376,7 @@
     "Titanomyrma Soldier": {
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/FlyingAnt_Character_BP.FlyingAnt_Character_BP_C",
       "displayName": "Titanomyrma Soldier",
+      "nameTag": "Ant",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -89165,7 +90648,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.5,
+          "spawnLimit": 1.0,
           "weight": 0.023529,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.5"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -89359,7 +90850,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.5,
+          "spawnLimit": 1.0,
           "weight": 0.052776,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.5"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -93321,7 +94820,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.2,
+          "spawnMultiplier": 0.5,
+          "spawnLimit": 1.0,
           "weight": 0.052356,
+          "display": {
+            "weightText": "Weight: 0.2",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.5"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -94291,7 +95798,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.65,
+          "spawnLimit": 1.0,
           "weight": 0.074971,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.65"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -94389,7 +95904,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.5,
+          "spawnLimit": 1.0,
           "weight": 0.041088,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.5"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -94398,6 +95921,7 @@
     "Titanosaur": {
       "bpPath": "/Game/PrimalEarth/Dinos/Titanosaur/Titanosaur_Character_BP.Titanosaur_Character_BP_C",
       "displayName": "Titanosaur",
+      "nameTag": "Titan",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesTitano_C",
@@ -94450,7 +95974,15 @@
           "MaximumNumberNearbyCoreStructures": 50,
           "TheIncreaseNPCInterval": 86400.0,
           "TheIncreaseNPCIntervalMax": 172800.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 0.6,
           "minRarityDownshift": 6
         }
@@ -94459,6 +95991,7 @@
     "Troodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Troodon/Troodon_Character_BP.Troodon_Character_BP_C",
       "displayName": "Troodon",
+      "nameTag": "Troodon",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -94730,7 +96263,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.025,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.05,
           "weight": 0.000515,
+          "display": {
+            "weightText": "Weight: 0.025",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         }
@@ -94739,6 +96280,7 @@
     "Vulture": {
       "bpPath": "/Game/ScorchedEarth/Dinos/Vulture/Vulture_Character_BP.Vulture_Character_BP_C",
       "displayName": "Vulture",
+      "nameTag": "Vulture",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -95010,7 +96552,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.2,
           "weight": 0.007059,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -98972,7 +100522,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 0.6875,
+          "spawnLimit": 0.3,
           "weight": 0.016198,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 30%",
+            "multText": "Multiplier: 0.6875"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -99934,7 +101492,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.8,
+          "spawnLimit": 0.1,
           "weight": 0.007883,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.8"
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }
@@ -99943,6 +101509,7 @@
     "Water Jug Bug": {
       "bpPath": "/Game/ScorchedEarth/Dinos/JugBug/Jugbug_Water_Character_BP.Jugbug_Water_Character_BP_C",
       "displayName": "Water Jug Bug",
+      "nameTag": "Jugbug",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -100214,7 +101781,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 10,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 1.0,
           "weight": 0.035294,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -100408,7 +101983,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.070368,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -104370,7 +105953,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 8,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.078534,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -104700,7 +106291,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.075,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 1.0,
           "weight": 0.057574,
+          "display": {
+            "weightText": "Weight: 0.075",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -105670,7 +107269,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 20,
+          "groupWeight": 0.075,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 1.0,
           "weight": 0.043253,
+          "display": {
+            "weightText": "Weight: 0.075",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         }
@@ -105679,6 +107286,7 @@
     "Yutyrannus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Yutyrannus/Yutyrannus_Character_BP.Yutyrannus_Character_BP_C",
       "displayName": "Yutyrannus",
+      "nameTag": "Yutyrannus",
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -106638,7 +108246,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 24,
+          "groupWeight": 0.014,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 0.000138,
+          "display": {
+            "weightText": "Weight: 0.014",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 24.0,
           "minRarityDownshift": 0
         }

@@ -11,6 +11,7 @@
     "Aberrant Achatina": {
       "bpPath": "/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP_Aberrant.Achatina_Character_BP_Aberrant_C",
       "displayName": "Aberrant Achatina",
+      "nameTag": "Achatina",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
@@ -430,7 +431,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.075,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.15,
           "weight": 0.017496,
+          "display": {
+            "weightText": "Weight: 0.075",
+            "limitText": "Max spawn: 15%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         }
@@ -439,6 +448,7 @@
     "Aberrant Anglerfish": {
       "bpPath": "/Game/PrimalEarth/Dinos/Anglerfish/Angler_Character_BP_Aberrant.Angler_Character_BP_Aberrant_C",
       "displayName": "Aberrant Anglerfish",
+      "nameTag": "Angler",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -1371,7 +1381,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.9,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.1,
           "weight": 0.009122,
+          "display": {
+            "weightText": "Weight: 0.9",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         }
@@ -1380,6 +1398,7 @@
     "Aberrant Araneo": {
       "bpPath": "/Game/PrimalEarth/Dinos/Spider-Small/SpiderS_Character_BP_Aberrant.SpiderS_Character_BP_Aberrant_C",
       "displayName": "Aberrant Araneo",
+      "nameTag": "Spider",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -1814,7 +1833,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.1,
           "weight": 0.009325,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -1823,6 +1850,7 @@
     "Aberrant Arthropluera": {
       "bpPath": "/Game/PrimalEarth/Dinos/Arthropluera/Arthro_Character_BP_Aberrant.Arthro_Character_BP_Aberrant_C",
       "displayName": "Aberrant Arthropluera",
+      "nameTag": "Arthro",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
@@ -2242,7 +2270,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.008,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.000622,
+          "display": {
+            "weightText": "Weight: 0.008",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         },
@@ -2783,7 +2819,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.011734,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -3785,7 +3829,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.008233,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         },
@@ -3902,7 +3954,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.05,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.09,
           "weight": 0.006049,
+          "display": {
+            "weightText": "Weight: 0.05",
+            "limitText": "Max spawn: 9%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -3911,6 +3971,7 @@
     "Aberrant Baryonyx": {
       "bpPath": "/Game/PrimalEarth/Dinos/Baryonyx/Baryonyx_Character_BP_Aberrant.Baryonyx_Character_BP_Aberrant_C",
       "displayName": "Aberrant Baryonyx",
+      "nameTag": "Baryonyx",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -4843,7 +4904,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.00027,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         }
@@ -4852,6 +4921,7 @@
     "Aberrant Beelzebufo": {
       "bpPath": "/Game/PrimalEarth/Dinos/Toad/Toad_Character_BP_Aberrant.Toad_Character_BP_Aberrant_C",
       "displayName": "Aberrant Beelzebufo",
+      "nameTag": "Toad",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -5784,7 +5854,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.2,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.001351,
+          "display": {
+            "weightText": "Weight: 0.2",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         }
@@ -5793,6 +5871,7 @@
     "Aberrant Carnotaurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Carno/Carno_Character_BP_Aberrant.Carno_Character_BP_Aberrant_C",
       "displayName": "Aberrant Carnotaurus",
+      "nameTag": "Carno",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -6331,7 +6410,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.1,
           "weight": 0.010057,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -7333,7 +7420,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.1,
           "weight": 0.007056,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         },
@@ -7450,7 +7545,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.012547,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -7459,6 +7562,7 @@
     "Aberrant Cnidaria": {
       "bpPath": "/Game/PrimalEarth/Dinos/Cnidaria/Cnidaria_Character_BP_Aberrant.Cnidaria_Character_BP_Aberrant_C",
       "displayName": "Aberrant Cnidaria",
+      "nameTag": "Cnidaria",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementWater_C",
@@ -7619,7 +7723,15 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.5,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.2,
           "weight": 0.166667,
+          "display": {
+            "weightText": "Weight: 0.5",
+            "limitText": "Max spawn: 20%",
+            "multText": ""
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -8554,7 +8666,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.5,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.003378,
+          "display": {
+            "weightText": "Weight: 0.5",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         },
@@ -8632,7 +8752,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 0.000535,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         }
@@ -8641,6 +8769,7 @@
     "Aberrant Coelacanth": {
       "bpPath": "/Game/PrimalEarth/Dinos/Coelacanth/Coel_Character_BP_Aberrant.Coel_Character_BP_Aberrant_C",
       "displayName": "Aberrant Coelacanth",
+      "nameTag": "Coel",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -8716,7 +8845,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.25,
+          "spawnMultiplier": 0.775,
+          "spawnLimit": 0.5,
           "weight": 0.057572,
+          "display": {
+            "weightText": "Weight: 0.25",
+            "limitText": "Max spawn: 50%",
+            "multText": "Multiplier: 0.775"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -8814,7 +8951,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.25,
+          "spawnMultiplier": 0.775,
+          "spawnLimit": 0.5,
           "weight": 0.132172,
+          "display": {
+            "weightText": "Weight: 0.25",
+            "limitText": "Max spawn: 50%",
+            "multText": "Multiplier: 0.775"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -9096,7 +9241,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.3,
+          "spawnMultiplier": 0.775,
+          "spawnLimit": 0.5,
           "weight": 0.12516,
+          "display": {
+            "weightText": "Weight: 0.3",
+            "limitText": "Max spawn: 50%",
+            "multText": "Multiplier: 0.775"
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -9105,6 +9258,7 @@
     "Aberrant Dimetrodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Dimetrodon/Dimetro_Character_BP_Aberrant.Dimetro_Character_BP_Aberrant_C",
       "displayName": "Aberrant Dimetrodon",
+      "nameTag": "Dimetro",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -10037,7 +10191,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.15,
           "weight": 0.001824,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 15%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         }
@@ -10046,6 +10208,7 @@
     "Aberrant Dimorphodon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Dimorphodon/Dimorph_Character_BP_Aberrant.Dimorph_Character_BP_Aberrant_C",
       "displayName": "Aberrant Dimorphodon",
+      "nameTag": "Dimorph",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -10480,7 +10643,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.055,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.15,
           "weight": 0.012822,
+          "display": {
+            "weightText": "Weight: 0.055",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -10489,6 +10660,7 @@
     "Aberrant Diplocaulus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Diplocaulus/Diplocaulus_Character_BP_Aberrant.Diplocaulus_Character_BP_Aberrant_C",
       "displayName": "Aberrant Diplocaulus",
+      "nameTag": "Diplocaulus",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -11421,7 +11593,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.001216,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         }
@@ -11430,6 +11610,7 @@
     "Aberrant Dung Beetle": {
       "bpPath": "/Game/PrimalEarth/Dinos/DungBeetle/DungBeetle_Character_BP_Aberrant.DungBeetle_Character_BP_Aberrant_C",
       "displayName": "Aberrant Dung Beetle",
+      "nameTag": "Beetle",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
@@ -11849,7 +12030,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.001555,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         },
@@ -12390,7 +12579,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.025,
           "weight": 0.001916,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 2.5%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -13392,7 +13589,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.04,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.05,
           "weight": 0.002352,
+          "display": {
+            "weightText": "Weight: 0.04",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         }
@@ -13401,6 +13606,7 @@
     "Aberrant Electrophorus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Eel/Eel_Character_BP_Aberrant.Eel_Character_BP_Aberrant_C",
       "displayName": "Aberrant Electrophorus",
+      "nameTag": "Eel",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -14333,7 +14539,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.8,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.01,
           "weight": 0.001081,
+          "display": {
+            "weightText": "Weight: 0.8",
+            "limitText": "Max spawn: 1%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         },
@@ -14411,7 +14625,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.049,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.005,
           "weight": 0.000146,
+          "display": {
+            "weightText": "Weight: 0.049",
+            "limitText": "Max spawn: 0.5%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         }
@@ -14420,6 +14642,7 @@
     "Aberrant Manta": {
       "bpPath": "/Game/PrimalEarth/Dinos/Manta/Manta_Character_BP_Aberrant.Manta_Character_BP_Aberrant_C",
       "displayName": "Aberrant Manta",
+      "nameTag": "Manta",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWater_C",
@@ -14699,7 +14922,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.004845,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -14708,6 +14939,7 @@
     "Aberrant Megalosaurus": {
       "bpPath": "/Game/PrimalEarth/Dinos/Megalosaurus/Megalosaurus_Character_BP_Aberrant.Megalosaurus_Character_BP_Aberrant_C",
       "displayName": "Aberrant Megalosaurus",
+      "nameTag": "Megalosaurus",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -15246,7 +15478,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.025,
           "weight": 0.003352,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 2.5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -16248,7 +16488,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.025,
           "weight": 0.002352,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 2.5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         }
@@ -16257,6 +16505,7 @@
     "Aberrant Meganeura": {
       "bpPath": "/Game/PrimalEarth/Dinos/Dragonfly/Dragonfly_Character_BP_Aberrant.Dragonfly_Character_BP_Aberrant_C",
       "displayName": "Aberrant Meganeura",
+      "nameTag": "Dragonfly",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -16691,7 +16940,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.11,
+          "spawnMultiplier": 0.415,
+          "spawnLimit": 0.1,
           "weight": 0.008108,
+          "display": {
+            "weightText": "Weight: 0.11",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.415"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -16808,7 +17065,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.06,
+          "spawnMultiplier": 0.83,
+          "spawnLimit": 0.1,
           "weight": 0.008926,
+          "display": {
+            "weightText": "Weight: 0.06",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.83"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -16817,6 +17082,7 @@
     "Aberrant Otter": {
       "bpPath": "/Game/PrimalEarth/Dinos/Otter/Otter_Character_BP_Aberrant.Otter_Character_BP_Aberrant_C",
       "displayName": "Aberrant Otter",
+      "nameTag": "Otter",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -16892,7 +17158,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.033,
+          "spawnMultiplier": 0.675,
+          "spawnLimit": 0.05,
           "weight": 0.000662,
+          "display": {
+            "weightText": "Weight: 0.033",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.675"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -16990,7 +17264,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.033,
+          "spawnMultiplier": 0.675,
+          "spawnLimit": 0.1,
           "weight": 0.003039,
+          "display": {
+            "weightText": "Weight: 0.033",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.675"
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         },
@@ -17272,7 +17554,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.033,
+          "spawnMultiplier": 0.675,
+          "spawnLimit": 0.05,
           "weight": 0.001199,
+          "display": {
+            "weightText": "Weight: 0.033",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.675"
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -17281,6 +17571,7 @@
     "Aberrant Piranha": {
       "bpPath": "/Game/PrimalEarth/Dinos/Piranha/Piranha_Character_BP_Aberrant.Piranha_Character_BP_Aberrant_C",
       "displayName": "Aberrant Piranha",
+      "nameTag": "Piranha",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchFertileWaterCave3_C",
@@ -17356,7 +17647,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.25,
+          "spawnMultiplier": 0.78125,
+          "spawnLimit": 0.3,
           "weight": 0.034822,
+          "display": {
+            "weightText": "Weight: 0.25",
+            "limitText": "Max spawn: 30%",
+            "multText": "Multiplier: 0.78125"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -17638,7 +17937,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.25,
+          "spawnMultiplier": 0.78125,
+          "spawnLimit": 0.2,
           "weight": 0.042057,
+          "display": {
+            "weightText": "Weight: 0.25",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.78125"
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -17647,6 +17954,7 @@
     "Aberrant Pulmonoscorpius": {
       "bpPath": "/Game/PrimalEarth/Dinos/Scorpion/Scorpion_Character_BP_Aberrant.Scorpion_Character_BP_Aberrant_C",
       "displayName": "Aberrant Pulmonoscorpius",
+      "nameTag": "Scorpion",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
@@ -18066,7 +18374,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.05,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.2,
           "weight": 0.013608,
+          "display": {
+            "weightText": "Weight: 0.05",
+            "limitText": "Max spawn: 20%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         },
@@ -18503,7 +18819,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.012,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.002131,
+          "display": {
+            "weightText": "Weight: 0.012",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -19044,7 +19368,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.012,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.001149,
+          "display": {
+            "weightText": "Weight: 0.012",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -20046,7 +20378,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.012,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.000806,
+          "display": {
+            "weightText": "Weight: 0.012",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         },
@@ -20163,7 +20503,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.05,
           "weight": 0.006273,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -20172,6 +20520,7 @@
     "Aberrant Purlovia": {
       "bpPath": "/Game/PrimalEarth/Dinos/Purlovia/Purlovia_Character_BP_Aberrant.Purlovia_Character_BP_Aberrant_C",
       "displayName": "Aberrant Purlovia",
+      "nameTag": "Purlovia",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -21171,7 +21520,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.055,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 1.0,
           "weight": 0.064684,
+          "display": {
+            "weightText": "Weight: 0.055",
+            "limitText": "Max spawn: 100%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         }
@@ -21180,6 +21537,7 @@
     "Aberrant Raptor": {
       "bpPath": "/Game/PrimalEarth/Dinos/Raptor/Raptor_Character_BP_Aberrant.Raptor_Character_BP_Aberrant_C",
       "displayName": "Aberrant Raptor",
+      "nameTag": "Raptor",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -21294,7 +21652,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.11,
           "weight": 0.010351,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 11%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -21303,6 +21669,7 @@
     "Aberrant Sabertooth Salmon": {
       "bpPath": "/Game/PrimalEarth/Dinos/Salmon/Salmon_Character_Aberrant.Salmon_Character_Aberrant_C",
       "displayName": "Aberrant Sabertooth Salmon",
+      "nameTag": "Salmon",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -22235,7 +22602,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.45,
+          "spawnMultiplier": 0.95,
+          "spawnLimit": 0.27,
           "weight": 0.015598,
+          "display": {
+            "weightText": "Weight: 0.45",
+            "limitText": "Max spawn: 27%",
+            "multText": "Multiplier: 0.95"
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         },
@@ -22313,7 +22688,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.4,
+          "spawnMultiplier": 0.88,
+          "spawnLimit": 0.15,
           "weight": 0.031379,
+          "display": {
+            "weightText": "Weight: 0.4",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.88"
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         }
@@ -22322,6 +22705,7 @@
     "Aberrant Sarco": {
       "bpPath": "/Game/PrimalEarth/Dinos/Sarco/Sarco_Character_BP_Aberrant.Sarco_Character_BP_Aberrant_C",
       "displayName": "Aberrant Sarco",
+      "nameTag": "Sarco",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -23254,7 +23638,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.000608,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         },
@@ -23332,7 +23724,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.002971,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -23614,7 +24014,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.05,
           "weight": 0.003768,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 5%",
+            "multText": ""
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -23623,6 +24031,7 @@
     "Aberrant Spino": {
       "bpPath": "/Game/PrimalEarth/Dinos/Spino/Spino_Character_BP_Aberrant.Spino_Character_BP_Aberrant_C",
       "displayName": "Aberrant Spino",
+      "nameTag": "Spino",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -24622,7 +25031,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.015,
           "weight": 0.002016,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 1.5%",
+            "multText": ""
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         },
@@ -24904,7 +25321,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.049,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.005,
           "weight": 0.000264,
+          "display": {
+            "weightText": "Weight: 0.049",
+            "limitText": "Max spawn: 0.5%",
+            "multText": ""
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -24913,6 +25338,7 @@
     "Aberrant Titanoboa": {
       "bpPath": "/Game/PrimalEarth/Dinos/BoaFrill/BoaFrill_Character_BP_Aberrant.BoaFrill_Character_BP_Aberrant_C",
       "displayName": "Aberrant Titanoboa",
+      "nameTag": "Titanboa",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
@@ -25332,7 +25758,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.15,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.15,
           "weight": 0.034992,
+          "display": {
+            "weightText": "Weight: 0.15",
+            "limitText": "Max spawn: 15%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         },
@@ -25769,7 +26203,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.15,
           "weight": 0.016319,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -25778,6 +26220,7 @@
     "Aberrant Trilobite": {
       "bpPath": "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character_Aberrant.Trilobite_Character_Aberrant_C",
       "displayName": "Aberrant Trilobite",
+      "nameTag": "Trilobite",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_TwitchBioWater_C",
@@ -26710,7 +27153,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.35,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.00473,
+          "display": {
+            "weightText": "Weight: 0.35",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         },
@@ -26808,7 +27259,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.35,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.4,
           "weight": 0.19101,
+          "display": {
+            "weightText": "Weight: 0.35",
+            "limitText": "Max spawn: 40%",
+            "multText": ""
+          },
           "bestSharedMin": 40.0,
           "minRarityDownshift": 0
         }
@@ -26817,6 +27276,7 @@
     "Basilisk": {
       "bpPath": "/Game/Aberration/Dinos/Basilisk/Basilisk_Character_BP.Basilisk_Character_BP_C",
       "displayName": "Basilisk",
+      "nameTag": "Basilisk",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_Basilisks_C",
@@ -26899,7 +27359,15 @@
           "TheMinimumPlayerDistanceFromSpawnPoint": 4000.0,
           "TheIncreaseNPCInterval": 3000.0,
           "TheIncreaseNPCIntervalMax": 5000.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.0,
           "weight": 0.764025,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 0%",
+            "multText": ""
+          },
           "bestSharedMin": 6.0,
           "minRarityDownshift": 1
         }
@@ -26908,6 +27376,7 @@
     "Alpha Basilisk": {
       "bpPath": "/Game/Aberration/Dinos/Basilisk/MegaBasilisk_Character_BP.MegaBasilisk_Character_BP_C",
       "displayName": "Alpha Basilisk",
+      "nameTag": "Elite Basilisk",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_Basilisks_C",
@@ -26990,7 +27459,15 @@
           "TheMinimumPlayerDistanceFromSpawnPoint": 4000.0,
           "TheIncreaseNPCInterval": 3000.0,
           "TheIncreaseNPCIntervalMax": 5000.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.0,
           "weight": 0.013752,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 0%",
+            "multText": ""
+          },
           "bestSharedMin": 6.0,
           "minRarityDownshift": 1
         }
@@ -26999,6 +27476,7 @@
     "Featherlight": {
       "bpPath": "/Game/Aberration/Dinos/LanternBird/LanternBird_Character_BP.LanternBird_Character_BP_C",
       "displayName": "Featherlight",
+      "nameTag": "Lantern Bird",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementCave_C",
@@ -27537,7 +28015,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.019157,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -28539,7 +29025,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.013441,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         }
@@ -28548,6 +29042,7 @@
     "Giant Queen Bee": {
       "bpPath": "/Game/PrimalEarth/Dinos/Bee/Bee_Queen_Character_BP.Bee_Queen_Character_BP_C",
       "displayName": "Giant Queen Bee",
+      "nameTag": "",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesBee_C",
@@ -29512,7 +30007,15 @@
           "MinDesiredNumberOfNPC": 25,
           "TheIncreaseNPCInterval": 10000.0,
           "TheIncreaseNPCIntervalMax": 16000.0,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.95443,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 25.0,
           "minRarityDownshift": 0
         }
@@ -29521,6 +30024,7 @@
     "Glowbug": {
       "bpPath": "/Game/Aberration/Dinos/Lightbug/Lightbug_Character_BaseBP.Lightbug_Character_BaseBP_C",
       "displayName": "Glowbug",
+      "nameTag": "Lightbug",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
@@ -29940,7 +30444,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.22,
+          "spawnMultiplier": 0.583333,
+          "spawnLimit": 0.15,
           "weight": 0.029938,
+          "display": {
+            "weightText": "Weight: 0.22",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.583333"
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         },
@@ -30377,7 +30889,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.01421,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -30918,7 +31438,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.015326,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -31920,7 +32448,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.666667,
+          "spawnLimit": 0.15,
           "weight": 0.010753,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.666667"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         }
@@ -31929,6 +32465,7 @@
     "Glowtail": {
       "bpPath": "/Game/Aberration/Dinos/LanternLizard/LanternLizard_Character_BP.LanternLizard_Character_BP_C",
       "displayName": "Glowtail",
+      "nameTag": "Lantern Lizard",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -32363,7 +32900,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.01421,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -32480,7 +33025,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.08,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.14,
           "weight": 0.017565,
+          "display": {
+            "weightText": "Weight: 0.08",
+            "limitText": "Max spawn: 14%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -32489,6 +33042,7 @@
     "Karkinos": {
       "bpPath": "/Game/Aberration/Dinos/Crab/Crab_Character_BP.Crab_Character_BP_C",
       "displayName": "Karkinos",
+      "nameTag": "CaveCrab",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -32923,7 +33477,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.05,
           "weight": 0.004605,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -33858,7 +34420,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 0.001201,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         },
@@ -33936,7 +34506,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.005,
           "weight": 0.000264,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 0.5%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -34218,7 +34796,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.033,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.02,
           "weight": 0.000702,
+          "display": {
+            "weightText": "Weight: 0.033",
+            "limitText": "Max spawn: 2%",
+            "multText": ""
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -34227,6 +34813,7 @@
     "Alpha Karkinos": {
       "bpPath": "/Game/Aberration/Dinos/Crab/MegaCrab_Character_BP.MegaCrab_Character_BP_C",
       "displayName": "Alpha Karkinos",
+      "nameTag": "Elite CaveCrab",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_DrakeTrench_C",
@@ -34661,7 +35248,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.05,
           "weight": 5.8e-05,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 5%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -35596,7 +36191,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.1,
           "weight": 1.5e-05,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 10%",
+            "multText": ""
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         },
@@ -35674,7 +36277,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.09,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.005,
           "weight": 3e-06,
+          "display": {
+            "weightText": "Weight: 0.09",
+            "limitText": "Max spawn: 0.5%",
+            "multText": ""
+          },
           "bestSharedMin": 12.0,
           "minRarityDownshift": 0
         },
@@ -35956,7 +36567,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.033,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.02,
           "weight": 9e-06,
+          "display": {
+            "weightText": "Weight: 0.033",
+            "limitText": "Max spawn: 2%",
+            "multText": ""
+          },
           "bestSharedMin": 35.0,
           "minRarityDownshift": 0
         }
@@ -35965,6 +36584,7 @@
     "Lamprey": {
       "bpPath": "/Game/Aberration/Dinos/Lamprey/Lamprey_Character.Lamprey_Character_C",
       "displayName": "Lamprey",
+      "nameTag": "Lamprey",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementWater_C",
@@ -36125,7 +36745,15 @@
           "points": [],
           "MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.95,
+          "spawnLimit": 0.8,
           "weight": 0.126667,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 80%",
+            "multText": "Multiplier: 0.95"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -37060,7 +37688,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.95,
+          "spawnLimit": 0.15,
           "weight": 0.001926,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.95"
+          },
           "bestSharedMin": 18.0,
           "minRarityDownshift": 0
         }
@@ -37069,6 +37705,7 @@
     "Nameless": {
       "bpPath": "/Game/Aberration/Dinos/ChupaCabra/ChupaCabra_Character_BP.ChupaCabra_Character_BP_C",
       "displayName": "Nameless",
+      "nameTag": "Chupacabra",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesChupa_C",
@@ -40140,7 +40777,15 @@
           "MaximumNumberNearbyCoreStructures": 10000,
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "TheIncreaseNPCInterval": 0.01,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.5,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
         },
@@ -40832,7 +41477,15 @@
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
           "TheIncreaseNPCInterval": 0.01,
+          "groupWeight": 0.065,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 0.065",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 6.0,
           "minRarityDownshift": 1
         }
@@ -40841,6 +41494,7 @@
     "Ravager": {
       "bpPath": "/Game/Aberration/Dinos/CaveWolf/CaveWolf_Character_BP.CaveWolf_Character_BP_C",
       "displayName": "Ravager",
+      "nameTag": "CaveWolf",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_FertileCave_C",
@@ -40955,7 +41609,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.16,
           "weight": 0.021509,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 16%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         }
@@ -40964,6 +41626,7 @@
     "Alpha Surface Reaper King": {
       "bpPath": "/Game/Aberration/Dinos/Nameless/MegaXenomorph_Character_BP_Male_Surface.MegaXenomorph_Character_BP_Male_Surface_C",
       "displayName": "Alpha Surface Reaper King",
+      "nameTag": "Elite Xenomorph",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_Xenos_C",
@@ -41653,7 +42316,15 @@
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
           "TheIncreaseNPCInterval": 0.01,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.0,
           "weight": 0.003984,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 0%",
+            "multText": ""
+          },
           "bestSharedMin": 6.0,
           "minRarityDownshift": 1
         }
@@ -41662,6 +42333,7 @@
     "Reaper King": {
       "bpPath": "/Game/Aberration/Dinos/Nameless/Xenomorph_Character_BP_Male_Surface.Xenomorph_Character_BP_Male_Surface_C",
       "displayName": "Reaper King",
+      "nameTag": "",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_Xenos_C",
@@ -42351,7 +43023,15 @@
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
           "TheIncreaseNPCInterval": 0.01,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.0,
           "weight": 0.996016,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 0%",
+            "multText": ""
+          },
           "bestSharedMin": 6.0,
           "minRarityDownshift": 1
         }
@@ -42360,6 +43040,7 @@
     "Reaper Queen": {
       "bpPath": "/Game/Aberration/Dinos/Nameless/Xenomorph_Character_BP_Female.Xenomorph_Character_BP_Female_C",
       "displayName": "Reaper Queen",
+      "nameTag": "Xenomorph",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_XenoQueens_C",
@@ -43315,7 +43996,15 @@
             "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16893"
           },
           "MinDesiredNumberOfNPC": 1,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 0%",
+            "multText": ""
+          },
           "bestSharedMin": 1.0,
           "minRarityDownshift": 6
         }
@@ -43324,6 +44013,7 @@
     "Rock Drake": {
       "bpPath": "/Game/Aberration/Dinos/RockDrake/RockDrake_Character_BP.RockDrake_Character_BP_C",
       "displayName": "Rock Drake",
+      "nameTag": "RockDrake",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
@@ -44323,7 +45013,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.067,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.03,
           "weight": 0.002026,
+          "display": {
+            "weightText": "Weight: 0.067",
+            "limitText": "Max spawn: 3%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         },
@@ -44789,7 +45487,15 @@
           "TheIncreaseNPCInterval": 10000.0,
           "TheIncreaseNPCIntervalMax": 16000.0,
           "SP_MinDesiredNumberOfNPC": 6,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 0.964286,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 6.0,
           "minRarityDownshift": 1
         }
@@ -44798,6 +45504,7 @@
     "Seeker": {
       "bpPath": "/Game/Aberration/Dinos/Pteroteuthis/Pteroteuthis_Char_BP.Pteroteuthis_Char_BP_C",
       "displayName": "Seeker",
+      "nameTag": "Seeker",
       "entries": [
         {
           "entryClass": "AB_DinoSpawnEntries_BioLumCave_C",
@@ -45217,7 +45924,15 @@
           "NPCAIRangeMultiplier": 0.4,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.1,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.4,
           "weight": 0.062208,
+          "display": {
+            "weightText": "Weight: 0.1",
+            "limitText": "Max spawn: 40%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         },
@@ -45654,7 +46369,15 @@
           "SP_MinDesiredNumberOfNPC": 8,
           "bNPCWildIgnoreWild": true,
           "TheIncreaseNPCInterval": 90.0,
+          "groupWeight": 0.016,
+          "spawnMultiplier": 0.875,
+          "spawnLimit": 0.1,
           "weight": 0.002487,
+          "display": {
+            "weightText": "Weight: 0.016",
+            "limitText": "Max spawn: 10%",
+            "multText": "Multiplier: 0.875"
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -46195,7 +46918,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.15,
           "weight": 0.015086,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 10.0,
           "minRarityDownshift": 1
         },
@@ -47197,7 +47928,15 @@
           ],
           "points": [],
           "MinDesiredNumberOfNPC": 28,
+          "groupWeight": 0.07,
+          "spawnMultiplier": 0.75,
+          "spawnLimit": 0.15,
           "weight": 0.010585,
+          "display": {
+            "weightText": "Weight: 0.07",
+            "limitText": "Max spawn: 15%",
+            "multText": "Multiplier: 0.75"
+          },
           "bestSharedMin": 28.0,
           "minRarityDownshift": 0
         },
@@ -47314,7 +48053,15 @@
           "NPCAIRangeMultiplier": 0.5,
           "bNPCDontWander": true,
           "bNPCWildIgnoreWild": true,
+          "groupWeight": 0.005,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 0.15,
           "weight": 0.001344,
+          "display": {
+            "weightText": "Weight: 0.005",
+            "limitText": "Max spawn: 15%",
+            "multText": ""
+          },
           "bestSharedMin": 8.0,
           "minRarityDownshift": 1
         },
@@ -48006,7 +48753,15 @@
           "TheMinimumTamedDinoDistanceFromSpawnPoint": 1000.0,
           "bForceUntameable": true,
           "TheIncreaseNPCInterval": 0.01,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
           "weight": 1.0,
+          "display": {
+            "weightText": "Weight: 1",
+            "limitText": "Max spawn: 100%",
+            "multText": ""
+          },
           "bestSharedMin": 3.0,
           "minRarityDownshift": 2
         }
