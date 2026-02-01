@@ -400,9 +400,12 @@ body {
 .entry-meta { margin-top: 2px; font-size: 10px; color: var(--muted); }
 
 .entry-meta-line {
-  font-size: 12px;
+  font-size: 8px;
+  text-indent: 1mm;
+  font-stretch: semi-condensed;
+  font-weight: 400;
   color: var(--muted);
-  line-height: 1.25;
+  line-height: 1;
 }
 
 /* ============================================================
