@@ -20,71 +20,23 @@
 
 <body>
 
-  <!-- =========================================================
-       📌 TOPBAR (the stuff ABOVE the map)
-       This whole block is styled by:
-         #topbar
-         .title-row
-         .controls
-         #topbar select
-       ========================================================= -->
-  <div id="topbar">
+ <div id="topbar">
 
-    <!-- =======================================================
-         🧾 TITLE ROW (Title on left, Filters button on right)
-         Styled by:
-           .title-row
-           #topbar .title
-           .controls-toggle
-         ======================================================= -->
     <div class="title-row">
 
-      <!-- 🏷️ Big title text
-           Styled by:
-             #topbar .title
-           If you want the title smaller/bigger: change font-size there -->
-      <div class="title">ASA Spawn Maps (test)</div>
+      <div class="title">ASA Spawn Maps</div>
 
-      <!-- 📱 Filters button (ONLY visible on mobile)
-           What it does:
-             - On click, app.js toggles: #topbar.show-controls
-             - That class makes the dropdowns appear/disappear on mobile
-           Styled by:
-             .controls-toggle
-             @media (max-width: 640px) { .controls-toggle { display: inline-flex; } }
-      -->
       <button id="controlsToggle" class="controls-toggle">Filters</button>
     </div>
 
-    <!-- =======================================================
-         🎛️ CONTROLS ROW (the dropdowns)
-         This whole row is styled by:
-           #topbar .controls
-           #topbar .controls > select
-           #topbar select
-         Mobile behavior:
-           - hidden by default on small screens
-           - shown when #topbar has class "show-controls"
-         ======================================================= -->
     <div class="controls">
 
-      <!-- 🌍 Source dropdown (Official / Mods)
-           JS fills this list in setupSourceDropdown()
-           Styling comes from #topbar select and #topbar .controls > select -->
       <select id="sourceSelect"></select>
 
-      <!-- 🗺️ Map dropdown (The Island / Center / etc)
-           JS fills this list in setupMapDropdown() -->
       <select id="mapSelect"></select>
 
-      <!-- 🦖 Dino dropdown (list changes based on source+map)
-           JS fills this list in setupDropdown() -->
       <select id="dinoSelect"></select>
 
-      <!-- 🖼️ Background dropdown wrapper (only for maps that have multiple backgrounds)
-           JS shows/hides this by changing style.display
-           IMPORTANT: this wrapper is NOT a <select>, it’s a <div>,
-           so it won’t be affected by "#topbar .controls > select" flex rules unless we add CSS for it -->
       <div id="bgSelectWrap" style="display:none;">
         <select id="bgSelect"></select>
       </div>
@@ -92,11 +44,6 @@
     </div><!-- /.controls -->
   </div><!-- /#topbar -->
 
-  <!-- =========================================================
-       🗺️ MAP AREA (everything below the topbar)
-       #mapWrap is the "playpen" that floating panels live inside
-       #map is the Leaflet map itself
-       ========================================================= -->
   <div id="mapWrap">
     <div id="map"></div>
   </div>
