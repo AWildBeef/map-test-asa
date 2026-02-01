@@ -194,7 +194,7 @@ function setupBackgroundDropdown(mapMeta, cfg) {
   sel.onchange = () => mapObj.overlay.setUrl(sel.value);
 }
 
-function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 } }) {
+function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, collapsedByDefault = false }) {
   const mapEl = document.getElementById("mapWrap");
   if (!mapEl) return null;
 
@@ -218,6 +218,12 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 } })
   `;
 
   mapEl.appendChild(panel);
+  
+  if (collapsedByDefault) {
+    panel.classList.add("collapsed");
+    const body = panel.querySelector(".fp-body");
+    if (body) body.style.display = "none";
+  }
 
   // Initial position (top-right)
   panel.style.top = `${defaultPos.top}px`;
@@ -327,7 +333,7 @@ function ensurePanels() {
   }
 
   if (!infoPanel) {
-    infoPanel  = createFloatingPanel({ id: "dinoInfoPanel", title: "Dino Info", defaultPos: { right: 200, top: 12 } });
+    infoPanel  = createFloatingPanel({ id: "dinoInfoPanel", title: "Dino Info", defaultPos: { right: 185, top: 12 } });
     renderInfoPanelBodyEmpty();
   }
 
