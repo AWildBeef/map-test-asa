@@ -144,14 +144,18 @@ function buildEntryMetaLine(entry) {
   const gw  = entry.groupWeight ?? entry.group_weight ?? 0;
   const lim = entry.spawnLimit  ?? entry.spawn_limit  ?? 0;
 
-  // spawn chances might be list or string depending on old files
   const chances = entry.spawnChances ?? entry.spawn_chances;
   let chanceText = "";
 
   if (Array.isArray(chances) && chances.length) {
-    chanceText = `Spawn chances: ${chances.map(n => `${Number(n):g}%`).join(", ")}`;
-  } else if (typeof chances === "string" && chances.trim()) {
+    // numbers like [100, 67, 33]
     chanceText = `Spawn chances: ${chances.map(n => `${fmt(n)}%`).join(", ")}`;
+  } else if (typeof chances === "string" && chances.trim()) {
+    // string like "100" or "100, 67, 33"
+    const parts = chances.split(",").map(s => s.trim()).filter(Boolean);
+    chanceText = parts.length
+      ? `Spawn chances: ${parts.map(p => `${p}%`).join(", ")}`
+      : "";
   }
 
   const parts = [
