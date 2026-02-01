@@ -74,6 +74,21 @@ body {
                         📏 flex-basis:220px (starting width target) */
 }
 
+#topbar .controls > #bgSelectWrap {
+  flex: 1 1 220px;   /* same behavior as the selects */
+  min-width: 200px;  /* match your desktop minimum */
+}
+
+@media (max-width: 640px) {
+  #topbar .controls > #bgSelectWrap {
+    flex: 1 1 140px;
+    min-width: 120px;
+  }
+
+  /* Ensure the <select> inside fills the wrapper */
+  #bgSelectWrap select { width: 100%; }
+}
+
 /* The dropdowns themselves */
 #topbar select {
   min-width: 200px;     /* 🚧 Smallest allowed size on desktop */
