@@ -191,6 +191,47 @@ function getEntryPoints(entry) {
   return Array.isArray(entry?.points) ? entry.points : [];
 }
 
+function addPanelsControl(map) {
+  const PanelsControl = L.Control.extend({
+    options: { position: "bottomright" }, // same as zoom
+
+    onAdd() {
+      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+      container.style.background = "rgba(30,30,30,0.85)";
+      container.style.border = "1px solid rgba(255,255,255,0.15)";
+      container.style.borderRadius = "6px";
+      container.style.overflow = "hidden";
+
+      const btn = L.DomUtil.create("a", "", container);
+      btn.href = "#";
+      btn.title = "Show panels";
+      btn.innerHTML = "☰"; // or "ⓘ" or "▣"
+      btn.style.display = "block";
+      btn.style.width = "30px";
+      btn.style.height = "30px";
+      btn.style.lineHeight = "30px";
+      btn.style.textAlign = "center";
+      btn.style.color = "white";
+      btn.style.textDecoration = "none";
+
+      // stop map drag/scroll when clicking the button
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+
+      L.DomEvent.on(btn, "click", (e) => {
+        L.DomEvent.preventDefault(e);
+        showPanel("dinoInfoPanel");
+        showPanel("modStylePanel");
+      });
+
+      return container;
+    }
+  });
+
+  map.addControl(new PanelsControl());
+}
+
+
 // ============================================================
 // LEAFLET MAP INIT
 // ============================================================
@@ -656,6 +697,7 @@ async function loadMapByMeta(mapMeta) {
   // Recreate Leaflet map
   if (mapObj) mapObj.map.remove();
   mapObj = initMap(currentCfg);
+  addPanelsControl(mapObj.map);
 
   // Panels need the map container to exist (and ideally map to be present)
   ensurePanels();
