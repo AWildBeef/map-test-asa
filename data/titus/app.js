@@ -177,6 +177,36 @@ function redrawSelected() {
   }
 }
 
+function preloadImage(url) {
+  if (!url) return;
+
+  const img = new Image();
+  img.decoding = "async";
+  img.loading = "eager";           // hint: do it now
+  img.referrerPolicy = "no-referrer"; // safe default
+  img.src = url;
+}
+
+async function preloadMapAssets() {
+  // 1) Load each map's JSON (uses your cached loadJSON)
+  for (const m of MAPS) {
+    try {
+      const cfg = await loadJSON(m.file);
+
+      // Preload the main map image from the JSON
+      preloadImage(cfg.image);
+
+      // Preload any alternate backgrounds defined in MAPS
+      if (Array.isArray(m.backgrounds)) {
+        for (const bg of m.backgrounds) preloadImage(bg.url);
+      }
+    } catch (e) {
+      console.warn("Preload failed for", m.id, e);
+    }
+  }
+}
+
+
 // ============================================================
 // Meta lines (3 lines: weight / max / chances)
 // ============================================================
@@ -1004,7 +1034,7 @@ function renderInfoPanelForEntry(cfg, entryClass) {
 
       <div class="info-row">
         <span class="info-label">Entry class</span>
-        <button class="info-copy" data-copy="${escapeAttr(entryClass)}">Copy</button>
+        <button class="info-copy" data-copy="${escapeAttr(entryClass)}"aria-label="Copy"></button>
       </div>
       <div class="info-mono">${escapeHtml(entryClass)}</div>
     </div>
@@ -1045,7 +1075,7 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
     <div class="info-section" style="padding-bottom:8px;">
       <div class="info-row">
         <span class="info-label">${escapeHtml(displayName)}</span>
-        <button class="info-copy" data-copy="${escapeAttr(bp || nameTag || displayName)}">Copy</button>
+        <button class="info-copy" data-copy="${escapeAttr(bp || nameTag || displayName)}"aria-label="Copy"></button>
       </div>
       ${bp ? `<div class="info-mono">${escapeHtml(bp)}</div>` : ``}
       ${nameTag ? `<div class="info-mono" style="margin-top:4px;">${escapeHtml(nameTag)}</div>` : ``}
@@ -1078,13 +1108,13 @@ function renderInfoPanelForDino(cfg, dinoKey) {
 
       <div class="info-row">
         <span class="info-label">Blueprint</span>
-        <button class="info-copy" data-copy="${escapeAttr(bp)}">Copy</button>
+        <button class="info-copy" data-copy="${escapeAttr(bp)}"aria-label="Copy"></button>
       </div>
       <div class="info-mono">${escapeHtml(bp || "(none)")}</div>
 
       <div class="info-row">
         <span class="info-label">Nametag</span>
-        <button class="info-copy" data-copy="${escapeAttr(nameTag)}">Copy</button>
+        <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
       </div>
       <div class="info-mono">${escapeHtml(nameTag || "(none)")}</div>
     </div>
@@ -1142,24 +1172,18 @@ function boot() {
   setupSourceDropdown();
   setupMapDropdown();
 
-  // Filters button (mobile)
+  // kick off preloading (don’t await — it runs in background)
+  preloadMapAssets();
+
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
     document.getElementById("topbar")?.classList.toggle("show-controls");
   });
 
-  // Mode toggle button
   document.getElementById("modeToggle")?.addEventListener("click", () => {
     const next = (currentViewMode === "dino") ? "entry" : "dino";
     switchMode(next);
   });
 
-  // Optional: if you still have a showPanelsBtn in HTML somewhere
-  document.getElementById("showPanelsBtn")?.addEventListener("click", () => {
-    showPanel("dinoInfoPanel");
-    if (activeSourceId !== "official") showPanel("modStylePanel");
-  });
-
-  // Initial load
   syncModeBtn();
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
