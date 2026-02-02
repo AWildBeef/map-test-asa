@@ -1,7 +1,7 @@
 // ============================================================
 // RARITY TUNING (edit these whenever)
 // ============================================================
-const ASSET_VER = "dev-2026-02-02-D";
+const ASSET_VER = "dev-2026-02-02-F";
 
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
@@ -110,6 +110,10 @@ const SOURCES = [
   { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
   { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json" },
   { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json" },
+  { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json" },
+  { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json" },
+  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json" },
+  { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
 
 ];
 
