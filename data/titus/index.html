@@ -54,6 +54,13 @@
              @media (max-width: 640px) { .controls-toggle { display: inline-flex; } }
       -->
       <button id="controlsToggle" class="controls-toggle">Filters</button>
+      <select id="viewMode">
+        <option value="dino" selected>Dinos</option>
+        <option value="entry">Spawn Entries</option>
+      </select>
+      
+      <select id="entrySelect" style="display:none"></select>
+
     </div>
 
     <!-- =======================================================
@@ -88,13 +95,7 @@
       <div id="bgSelectWrap" style="display:none;">
         <select id="bgSelect"></select>
       </div>
-      <select id="viewMode">
-        <option value="dino" selected>Dinos</option>
-        <option value="entry">Spawn Entries</option>
-      </select>
       
-      <select id="entrySelect" style="display:none"></select>
-
     </div><!-- /.controls -->
   </div><!-- /#topbar -->
 
