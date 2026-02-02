@@ -50,6 +50,23 @@ body {
   gap: 7px;                                 /* 🫧 Space between title and controls */
 }
 
+.icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.75);
+  color:#fff;
+  cursor:pointer;
+}
+
+.icon-btn:hover{ background:rgba(45,45,45,.85); }
+.icon-btn:active{ transform:translateY(1px); }
+
+
 #topbar .title {
   font-size: 18px;        /* 🔠 Title size */
   font-weight: 700;       /* 💪 Boldness */
@@ -74,6 +91,26 @@ body {
   flex: 1 1 220px;   /* 📏 flex-grow:1 (can expand)
                         📏 flex-shrink:1 (can shrink)
                         📏 flex-basis:220px (starting width target) */
+}
+
+.mode-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.15);
+  background:rgba(30,30,30,0.85);
+  color:#fff;
+  font:inherit;
+  cursor:pointer;
+  user-select:none;
+}
+
+.mode-toggle.is-entry{
+  background:rgba(0,140,255,0.30);
+  border-color:rgba(0,140,255,0.55);
 }
 
 #topbar .controls > #bgSelectWrap {
@@ -235,8 +272,6 @@ body {
 .floating-panel {
   position: absolute;  /* 📍 Position relative to #mapWrap */
   z-index: 9999;       /* 🥇 Always on top of map */
-  resize: both;
-  overflow: auto;
   width: 180px;        /* 📏 Default panel width */
   max-width: min(360px, calc(100vw - 24px)); /* 📱 Never overflow screen */
 
@@ -248,15 +283,6 @@ body {
   backdrop-filter: blur(8px);               /* 🧊 Blur behind */
 
   overflow: hidden; /* ✅ Keeps header/body edges neat */
-}
-
-/* per-panel overrides */
-#dinoInfoPanel{
-  width: 195px;
-}
-
-#modStylePanel{
-  width: 180px;
 }
 
 /* The draggable header (grab handle) */
@@ -362,15 +388,31 @@ body {
 }
 
 /* Copy button */
-.info-copy {
-  padding: 4px 6px;
-  border-radius: 8px;
-  background: var(--control-bg);
-  border: 1px solid var(--control-border);
-  color: var(--text);
-  cursor: pointer;
+/* Make the copy button an icon button */
+.info-copy{
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.info-copy:hover { border-color: #596273; }
+
+/* The icon itself */
+.info-copy::before{
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+
+  /* "copy" icon (two squares) as a mask */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center / contain no-repeat;
+
+  opacity: 0.9;
+}
+
+.info-copy:hover::before{ opacity: 1; }
 
 /* Blueprint/nametag field (scroll sideways) */
 .info-mono {
@@ -433,7 +475,28 @@ body {
   width: 100%;
 }
 
-.controls-toggle {
+..title-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+} 
+
+.mode-btn{
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.75);
+  color:#fff;
+  border-radius:8px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.mode-btn[data-mode="dino"]::before{ content:"🦖 "; }
+.mode-btn[data-mode="entry"]::before{ content:"📦 "; }
+
+
+#controlsToggle {
   display: none;              /* 🚫 Hidden on desktop */
   padding: 6px 8px;           /* 📏 Button size */
   border-radius: 8px;
@@ -448,7 +511,7 @@ body {
    ============================================================ */
 @media (max-width: 640px) {
 
-  .controls-toggle { 
+  #controlsToggle { 
     display: inline-flex; /* ✅ Show the Filters button */
   }
 
