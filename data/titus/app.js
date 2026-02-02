@@ -2,10 +2,10 @@
 // RARITY TUNING (edit these whenever)
 // ============================================================
 const RARITY_THRESHOLDS = [
-  [0.01,   "very common"],
-  [0.004,   "common"],
-  [0.001,   "uncommon"],
-  [0.0004,  "very uncommon"],
+  [0.005,   "very common"],
+  [0.001,   "common"],
+  [0.0006,   "uncommon"],
+  [0.0002,  "very uncommon"],
   [0.00003, "rare"],
   [-1,     "very rare"],
 ];
