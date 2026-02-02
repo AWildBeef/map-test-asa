@@ -10,6 +10,18 @@ const RARITY_THRESHOLDS = [
   [-1,     "very rare"],
 ];
 
+// Extra downshift based on how "underspawned" a manager is vs bestSharedMin.
+// Tune thresholds however you like.
+function downshiftStepsForMinPct(pct) {
+  const p = Number(pct || 1);
+  if (p >= 0.75) return 0;
+  if (p >= 0.50) return 1;
+  if (p >= 0.33) return 2;
+  if (p >= 0.20) return 3;
+  return 4;
+}
+
+
 const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rare", "very rare"];
 
 const MIN_GLOBAL_DOWNSHIFT = [
@@ -48,8 +60,14 @@ function applyRarityToConfig(cfg) {
   for (const d of Object.values(dinos)) {
     for (const entry of (d.entries || [])) {
       const base = rarityFromWeight(entry.weight ?? 0);
-      const steps = downshiftStepsForMin(entry.bestSharedMin ?? 0);
-      entry.rarity = downgradeRarity(base, steps);
+
+      // Prefer exporter-provided global downshift
+      const globalSteps =
+        (entry.minRarityDownshift != null)
+          ? Number(entry.minRarityDownshift || 0)
+          : downshiftStepsForMin(entry.bestSharedMin ?? 0);
+
+      entry.rarity = downgradeRarity(base, globalSteps);
     }
   }
 }
@@ -246,18 +264,54 @@ function buildEntryMetaLines(entry) {
 function preprocessCfg(cfg) {
   const dinos = cfg?.dinos || {};
   for (const d of Object.values(dinos)) {
-    const entries = d.entries || [];
-    for (const e of entries) {
-      // Cache flattened geometry so draw loop doesn't re-flatten managers every time
-      e._boxes = getEntryBoxes(e);
-      e._points = getEntryPoints(e);
+    for (const e of (d.entries || [])) {
+      const mgrs = e?.managers && typeof e.managers === "object" ? e.managers : null;
 
-      // Convenience cache
-      e._hasPoints = (e._points && e._points.length > 0);
+      // entry-level flags cached once
+      const isCave = (e.bIsCaveManager === true);
+      const untame = (e.bForceUntameable === true);
 
-      // Optional: normalize some frequently checked flags once
-      e._isCave = (e.bIsCaveManager === true);
-      e._untame = (e.bForceUntameable === true);
+      if (mgrs) {
+        e._mgrDraw = Object.entries(mgrs).map(([mgrId, mgr]) => {
+          const pct =
+            (mgr?.minDesiredPct != null)
+              ? Number(mgr.minDesiredPct || 1)
+              : (() => {
+                  // fallback if pct isn't exported
+                  const best = Number(e.bestSharedMin || 0);
+                  const mmin = Number(mgr?.minDesired || 0);
+                  return (best > 0) ? (mmin / best) : 1;
+                })();
+
+          const extraSteps = downshiftStepsForMinPct(pct);
+
+          return {
+            mgrId,
+            pct,
+            rarity: downgradeRarity(e.rarity, extraSteps), // ✅ key line
+            boxes: Array.isArray(mgr?.boxes) ? mgr.boxes : [],
+            points: Array.isArray(mgr?.points) ? mgr.points : [],
+            hasPoints: Array.isArray(mgr?.points) && mgr.points.length > 0,
+            isCave,
+            untame,
+          };
+        });
+
+        // Optional: keep flattened caches too (handy for entry mode if you want)
+        e._boxes = e._mgrDraw.flatMap(m => m.boxes);
+        e._points = e._mgrDraw.flatMap(m => m.points);
+        e._hasPoints = e._points.length > 0;
+        e._isCave = isCave;
+        e._untame = untame;
+
+      } else {
+        // no managers -> old fallback
+        e._boxes = getEntryBoxes(e);
+        e._points = getEntryPoints(e);
+        e._hasPoints = e._points.length > 0;
+        e._isCave = isCave;
+        e._untame = untame;
+      }
     }
   }
 }
@@ -731,11 +785,55 @@ function drawDino(cfg, dinoKey) {
     if (!isEntryVisible(dinoKey, i)) continue;
 
     const entry = entries[i];
-    // drawDino(...) inside loop
+
+    // ✅ If managers exist, draw each manager with its own rarity
+    if (Array.isArray(entry._mgrDraw) && entry._mgrDraw.length) {
+      for (const m of entry._mgrDraw) {
+        const targetLayer = m.isCave ? mapObj.caveLayer : mapObj.layer;
+
+        const color = isOfficial ? rarityToColor(m.rarity) : modDrawColor;
+
+        const baseWeight = m.isCave ? 3 : 1;
+        const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
+
+        const opacity = isOfficial ? (m.untame ? 0.80 : 1.0) : modDrawOpacity;
+        const fillOpacity = isOfficial ? (m.untame ? 0.50 : (m.isCave ? 0.50 : 0.80)) : opacity;
+
+        const boxes = m.boxes || [];
+        const points = m.points || [];
+        const hasPoints = m.hasPoints || (points.length > 0);
+
+        for (const box of boxes) {
+          if (hasPoints && isTinyBox(box)) {
+            const cx = box.x + box.w / 2;
+            const cy = box.y + box.h / 2;
+            L.circleMarker([cy, cx], { color, weight, opacity, fillColor: color, radius: 4, fillOpacity })
+              .addTo(targetLayer);
+          } else {
+            const y1 = box.y, x1 = box.x, y2 = box.y + box.h, x2 = box.x + box.w;
+            L.rectangle([[y1, x1], [y2, x2]], {
+              color, weight, opacity,
+              dashArray: (isOfficial && m.untame) ? "3 3" : null,
+              fillColor: color,
+              fillOpacity
+            }).addTo(targetLayer);
+          }
+        }
+
+        for (const pt of points) {
+          L.circleMarker([pt.y, pt.x], { color, weight, opacity, fillColor: color, radius: 4, fillOpacity })
+            .addTo(targetLayer);
+        }
+      }
+
+      continue; // ✅ done with this entry
+    }
+
+    // ----- Fallback: no managers -----
     const boxes = entry._boxes ?? getEntryBoxes(entry);
     const points = entry._points ?? getEntryPoints(entry);
     const hasPoints = entry._hasPoints ?? (points.length > 0);
-    
+
     const isCave = entry._isCave ?? (entry.bIsCaveManager === true);
     const untame = entry._untame ?? (entry.bForceUntameable === true);
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
@@ -752,15 +850,10 @@ function drawDino(cfg, dinoKey) {
       if (hasPoints && isTinyBox(box)) {
         const cx = box.x + box.w / 2;
         const cy = box.y + box.h / 2;
-
-        L.circleMarker([cy, cx], {
-          color, weight, opacity,
-          fillColor: color, radius: 4, fillOpacity
-        }).addTo(targetLayer);
-
+        L.circleMarker([cy, cx], { color, weight, opacity, fillColor: color, radius: 4, fillOpacity })
+          .addTo(targetLayer);
       } else {
         const y1 = box.y, x1 = box.x, y2 = box.y + box.h, x2 = box.x + box.w;
-
         L.rectangle([[y1, x1], [y2, x2]], {
           color, weight, opacity,
           dashArray: (isOfficial && untame) ? "3 3" : null,
@@ -771,10 +864,8 @@ function drawDino(cfg, dinoKey) {
     }
 
     for (const pt of points) {
-      L.circleMarker([pt.y, pt.x], {
-        color, weight, opacity,
-        fillColor: color, radius: 4, fillOpacity
-      }).addTo(targetLayer);
+      L.circleMarker([pt.y, pt.x], { color, weight, opacity, fillColor: color, radius: 4, fillOpacity })
+        .addTo(targetLayer);
     }
   }
 }
