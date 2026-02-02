@@ -18,6 +18,9 @@ const MIN_GLOBAL_DOWNSHIFT = [
   [14, 1],
 ];
 
+let currentViewMode = "dino";
+let entryIndex = {};   // entryClass -> array of { dinoKey, entry, entryIndex }
+
 function rarityFromWeight(w) {
   const eff = Number(w || 0);
   for (const [thr, name] of RARITY_THRESHOLDS) {
@@ -229,6 +232,35 @@ function addPanelsControl(map) {
   });
 
   map.addControl(new PanelsControl());
+}
+
+function buildEntryIndex(cfg) {
+  const idx = {};
+  const dinos = cfg?.dinos || {};
+
+  for (const [dinoKey, d] of Object.entries(dinos)) {
+    const entries = d.entries || [];
+    for (let i = 0; i < entries.length; i++) {
+      const e = entries[i];
+      const entryClass = e.entryClass || e.entry;
+      if (!entryClass) continue;
+
+      (idx[entryClass] ||= []).push({ dinoKey, entry: e, entryIndex: i });
+    }
+  }
+  return idx;
+}
+
+function setViewMode(mode) {
+  currentViewMode = mode;
+
+  const dinoSel = document.getElementById("dinoSelect");
+  const entrySel = document.getElementById("entrySelect");
+
+  if (dinoSel) dinoSel.style.display = (mode === "dino") ? "" : "none";
+  if (entrySel) entrySel.style.display = (mode === "entry") ? "" : "none";
+
+  // Also: info panel contents should change per mode (later)
 }
 
 
@@ -672,6 +704,35 @@ function setupMapDropdown() {
   sel.value = MAPS[0].id;
 }
 
+function setupEntryDropdown(cfg, onChange) {
+  const sel = document.getElementById("entrySelect");
+  if (!sel) return null;
+
+  const keys = Object.keys(entryIndex || {}).sort((a, b) => a.localeCompare(b));
+  sel.innerHTML = "";
+
+  if (!keys.length) {
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = "(No spawn entries)";
+    sel.appendChild(opt);
+    return sel;
+  }
+
+  for (const k of keys) {
+    const opt = document.createElement("option");
+    opt.value = k;
+    opt.textContent = k;
+    sel.appendChild(opt);
+  }
+
+  sel.onchange = () => onChange(sel.value);
+
+  sel.value = keys[0];
+  onChange(keys[0]);
+  return sel;
+}
+
 // ============================================================
 // MAIN LOAD
 // ============================================================
@@ -693,6 +754,7 @@ async function loadMapByMeta(mapMeta) {
 
   applyRarityToConfig(effectiveCfg);
   currentCfg = effectiveCfg;
+  entryIndex = buildEntryIndex(currentCfg);
 
   // Recreate Leaflet map
   if (mapObj) mapObj.map.remove();
@@ -710,6 +772,12 @@ async function loadMapByMeta(mapMeta) {
     drawDino(currentCfg, dinoKey);
     renderInfoPanelForDino(currentCfg, dinoKey);
   });
+  // keep current mode working after reload
+  setViewMode(currentViewMode);
+
+  if (currentViewMode === "entry") {
+    setupEntryDropdown(currentCfg, (entryClass) => drawSpawnEntry(currentCfg, entryClass));
+  };
 }
 
 // ============================================================
@@ -738,6 +806,60 @@ function rarityToColor(r) {
   if (s.includes("very common")) return "#00FF00";
   return "#000000";
 }
+
+function drawSpawnEntry(cfg, entryClass) {
+  if (!mapObj) return;
+
+  mapObj.layer.clearLayers();
+  mapObj.caveLayer.clearLayers();
+
+  const rows = entryIndex?.[entryClass] || [];
+  if (!rows.length) return;
+
+  const isOfficial = (activeSourceId === "official");
+
+  // Pick one representative entry object for geometry:
+  // (In your official JSON, geometry lives per entry object.
+  // It *should* be the same across dinos for same entryClass.)
+  const sample = rows[0].entry;
+
+  // If you moved geometry into managers, flatten it here:
+  const boxes = getEntryBoxes(sample);
+  const points = getEntryPoints(sample);
+
+  // Optional: you can detect cave/untame flags from sample
+  const isCave = sample.bIsCaveManager === true;
+  const untame = sample.bForceUntameable === true;
+  const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
+
+  const color = isOfficial ? "#00FF00" : modDrawColor; // simple for now
+
+  const baseWeight = isCave ? 3 : 1;
+  const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
+
+  const opacity = isOfficial ? (untame ? 0.80 : 1.0) : modDrawOpacity;
+  const fillOpacity = isOfficial ? (untame ? 0.50 : (isCave ? 0.50 : 0.80)) : opacity;
+
+  for (const box of boxes) {
+    const y1 = box.y, x1 = box.x, y2 = box.y + box.h, x2 = box.x + box.w;
+    L.rectangle([[y1, x1], [y2, x2]], {
+      color, weight, opacity,
+      dashArray: (isOfficial && untame) ? "3 3" : null,
+      fillColor: color,
+      fillOpacity
+    }).addTo(targetLayer);
+  }
+
+  for (const pt of points) {
+    L.circleMarker([pt.y, pt.x], {
+      color, weight, opacity,
+      fillColor: color,
+      radius: 4,
+      fillOpacity
+    }).addTo(targetLayer);
+  }
+}
+
 
 function drawDino(cfg, dinoKey) {
   if (!mapObj) return;
@@ -883,15 +1005,37 @@ function setupDropdown(cfg, onChange) {
 function boot() {
   setupSourceDropdown();
   setupMapDropdown();
+
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
-  document.getElementById("topbar")?.classList.toggle("show-controls");
+    document.getElementById("topbar")?.classList.toggle("show-controls");
   });
 
   document.getElementById("showPanelsBtn")?.addEventListener("click", () => {
-    showPanel("modStylePanel");
     showPanel("dinoInfoPanel");
+    if (activeSourceId !== "official") showPanel("modStylePanel");
   });
 
+  // ✅ View mode dropdown handler
+  const modeSel = document.getElementById("viewMode");
+  modeSel?.addEventListener("change", () => {
+    setViewMode(modeSel.value);
+
+    if (modeSel.value === "dino") {
+      const sel = document.getElementById("dinoSelect");
+      if (sel?.value) {
+        drawDino(currentCfg, sel.value);
+        renderInfoPanelForDino(currentCfg, sel.value);
+      }
+    } else {
+      // entry mode
+      setupEntryDropdown(currentCfg, (entryClass) => {
+        drawSpawnEntry(currentCfg, entryClass);
+        // renderInfoPanelForEntry(...) later
+      });
+    }
+  });
+
+  // ✅ initial load
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
     alert(err.message || String(err));
