@@ -2,11 +2,11 @@
 // RARITY TUNING (edit these whenever)
 // ============================================================
 const RARITY_THRESHOLDS = [
-  [0.15,   "very common"],
-  [0.06,   "common"],
-  [0.03,   "uncommon"],
-  [0.008,  "very uncommon"],
-  [0.0007, "rare"],
+  [0.1,   "very common"],
+  [0.04,   "common"],
+  [0.01,   "uncommon"],
+  [0.004,  "very uncommon"],
+  [0.0003, "rare"],
   [-1,     "very rare"],
 ];
 
@@ -16,7 +16,7 @@ function downshiftStepsForMinPct(pct) {
   const p = Number(pct || 1);
   if (p >= 0.75) return 0;
   if (p >= 0.50) return 1;
-  if (p >= 0.33) return 2;
+  if (p >= 0.30) return 2;
   if (p >= 0.20) return 3;
   return 4;
 }
