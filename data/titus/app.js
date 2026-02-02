@@ -355,7 +355,7 @@ function addPanelsControl(map) {
       const btn = L.DomUtil.create("a", "", container);
       btn.href = "#";
       btn.title = "Show panels";
-      btn.innerHTML = "ⓘ";
+      btn.innerHTML = "┇";
       btn.style.display = "block";
       btn.style.width = "30px";
       btn.style.height = "30px";
