@@ -25,9 +25,7 @@ function downshiftStepsForMinPct(pct) {
 const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rare", "very rare"];
 
 const MIN_GLOBAL_DOWNSHIFT = [
-  [2,  6],
-  [5,  2],
-  [14, 1],
+  [3,  6],
 ];
 
 function rarityFromWeight(w) {
