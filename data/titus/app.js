@@ -2,11 +2,11 @@
 // RARITY TUNING (edit these whenever)
 // ============================================================
 const RARITY_THRESHOLDS = [
-  [0.005,   "very common"],
-  [0.001,   "common"],
-  [0.0006,   "uncommon"],
-  [0.0002,  "very uncommon"],
-  [0.00003, "rare"],
+  [0.01,   "very common"],
+  [0.002,   "common"],
+  [0.0007,   "uncommon"],
+  [0.0004,  "very uncommon"],
+  [0.00006, "rare"],
   [-1,     "very rare"],
 ];
 
@@ -706,9 +706,9 @@ function rarityToColor(r) {
   const s = String(r || "").toLowerCase();
   if (s.includes("very rare")) return "#FF0000";
   if (s.includes("rare")) return "#FF6600";
-  if (s.includes("very uncommon")) return "#FFCC00";
+  if (s.includes("very uncommon")) return "#FFAA00";
   if (s.includes("uncommon")) return "#FFFF00";
-  if (s.includes("common")) return "#B2FF00";
+  if (s.includes("common")) return "#CCFF00";
   if (s.includes("very common")) return "#00FF00";
   return "#000000";
 }
