@@ -1,7 +1,7 @@
 // ============================================================
 // RARITY TUNING (edit these whenever)
 // ============================================================
-const ASSET_VER = "dev-2026-02-02-B";
+const ASSET_VER = "dev-2026-02-02-C";
 
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
