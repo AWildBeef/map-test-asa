@@ -1002,44 +1002,75 @@ function setupDropdown(cfg, onChange) {
 // ============================================================
 // BOOT
 // ============================================================
+function updateModeToggleUI() {
+  const btn = document.getElementById("modeToggle");
+  if (!btn) return;
+
+  const isEntry = (currentViewMode === "entry");
+  btn.textContent = isEntry ? "Entries" : "Dinos";
+  btn.classList.toggle("is-entry", isEntry);
+}
+
+function switchMode(nextMode) {
+  // update state + show/hide the right dropdowns
+  setViewMode(nextMode);
+  updateModeToggleUI();
+
+  if (!currentCfg) return;
+
+  if (nextMode === "dino") {
+    const sel = document.getElementById("dinoSelect");
+    if (sel?.value) {
+      drawDino(currentCfg, sel.value);
+      renderInfoPanelForDino(currentCfg, sel.value);
+    } else {
+      // if dropdown is empty for some reason, rebuild it
+      setupDropdown(currentCfg, (dinoKey) => {
+        drawDino(currentCfg, dinoKey);
+        renderInfoPanelForDino(currentCfg, dinoKey);
+      });
+    }
+  } else {
+    // entry mode
+    setupEntryDropdown(currentCfg, (entryClass) => {
+      drawSpawnEntry(currentCfg, entryClass);
+      // renderInfoPanelForEntry(...) later
+    });
+  }
+}
+
 function boot() {
   setupSourceDropdown();
   setupMapDropdown();
 
+  // Filters button (mobile)
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
     document.getElementById("topbar")?.classList.toggle("show-controls");
   });
 
+  // Mode toggle button (next to Filters)
+  document.getElementById("modeToggle")?.addEventListener("click", () => {
+    const next = (currentViewMode === "dino") ? "entry" : "dino";
+    switchMode(next);
+  });
+
+  // Optional: if you still have a "show panels" button somewhere
   document.getElementById("showPanelsBtn")?.addEventListener("click", () => {
     showPanel("dinoInfoPanel");
     if (activeSourceId !== "official") showPanel("modStylePanel");
   });
 
-  // ✅ View mode dropdown handler
-  const modeSel = document.getElementById("viewMode");
-  modeSel?.addEventListener("change", () => {
-    setViewMode(modeSel.value);
-
-    if (modeSel.value === "dino") {
-      const sel = document.getElementById("dinoSelect");
-      if (sel?.value) {
-        drawDino(currentCfg, sel.value);
-        renderInfoPanelForDino(currentCfg, sel.value);
-      }
-    } else {
-      // entry mode
-      setupEntryDropdown(currentCfg, (entryClass) => {
-        drawSpawnEntry(currentCfg, entryClass);
-        // renderInfoPanelForEntry(...) later
-      });
-    }
-  });
-
-  // ✅ initial load
-  loadMapByMeta(MAPS[0]).catch(err => {
-    console.error(err);
-    alert(err.message || String(err));
-  });
+  // Initial load
+  loadMapByMeta(MAPS[0])
+    .then(() => {
+      // ensure UI matches the current mode after first load
+      updateModeToggleUI();
+      switchMode(currentViewMode); // draws + sets correct dropdown contents
+    })
+    .catch(err => {
+      console.error(err);
+      alert(err.message || String(err));
+    });
 }
 
 boot();
