@@ -1,7 +1,7 @@
 // ============================================================
 // RARITY TUNING (edit these whenever)
 // ============================================================
-const ASSET_VER = "dev-2026-02-02-C";
+const ASSET_VER = "dev-2026-02-02-D";
 
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
@@ -109,6 +109,8 @@ const SOURCES = [
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
   { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
   { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json" },
+  { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json" },
+
 ];
 
 // ============================================================
