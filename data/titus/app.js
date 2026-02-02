@@ -451,9 +451,10 @@ function setupMainSelect(cfg) {
       sel.appendChild(opt);
     }
 
+    // ---- ENTRY LIST ----
     sel.onchange = () => {
       drawSpawnEntry(cfg, sel.value);
-      // later: renderInfoPanelForEntry(cfg, sel.value)
+      renderInfoPanelForEntry(cfg, sel.value);
     };
 
     sel.value = keys[0];
@@ -461,9 +462,19 @@ function setupMainSelect(cfg) {
   }
 }
 
+function setInfoPanelTitle(text) {
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+  const t = panel.querySelector(".fp-title");
+  if (t) t.textContent = text;
+}
+
 function setViewMode(mode) {
   currentViewMode = mode;
   syncModeBtn();
+
+  setInfoPanelTitle(mode === "dino" ? "Dino Info" : "Spawn Entry Info");
+
   if (currentCfg) setupMainSelect(currentCfg);
 }
 
@@ -479,6 +490,7 @@ function switchMode(nextMode) {
     renderInfoPanelForDino(currentCfg, sel.value);
   } else {
     drawSpawnEntry(currentCfg, sel.value);
+    renderInfoPanelForEntry(currentCfg, sel.value);
   }
 }
 
@@ -637,8 +649,8 @@ function drawSpawnEntry(cfg, entryClass) {
 
   const isOfficial = (activeSourceId === "official");
 
-  const isCave = sample.bIsCaveManager === true;
-  const untame = sample.bForceUntameable === true;
+  const isCave = sample._isCave ?? (sample.bIsCaveManager === true);
+  const untame = sample._untame ?? (sample.bForceUntameable === true);
   const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
   // You can make this smarter later (multi-colored, etc). For now:
@@ -934,10 +946,10 @@ function renderModStylePanelBody() {
 
   if (c) c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
   if (o) o.oninput = () => {
-  modDrawOpacity = Number(o.value);
-  if (ol) ol.textContent = modDrawOpacity.toFixed(2);
-  requestRedraw();
-};
+    modDrawOpacity = Number(o.value);
+    if (ol) ol.textContent = modDrawOpacity.toFixed(2);
+    requestRedraw();
+  };
   if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
 }
 
@@ -960,6 +972,88 @@ function renderInfoPanelBodyEmpty() {
   panel.querySelector(".fp-body").innerHTML =
     `<div style="color:var(--muted)">Select a dino to see details.</div>`;
 }
+
+function renderInfoPanelForEntry(cfg, entryClass) {
+  const panel = document.getElementById("dinoInfoPanel"); // keep same panel
+  if (!panel) return;
+  const body = panel.querySelector(".fp-body");
+
+  const rows = entryIndex?.[entryClass] || [];
+  if (!rows.length) {
+    body.innerHTML = `<div style="color:var(--muted)">No data for this spawn entry.</div>`;
+    return;
+  }
+
+  // Group by dinoKey so if the same dino appears multiple times (rare), we can show multiple rows
+  const byDino = new Map();
+  for (const r of rows) {
+    if (!byDino.has(r.dinoKey)) byDino.set(r.dinoKey, []);
+    byDino.get(r.dinoKey).push(r);
+  }
+
+  // Optional: sort dinos by display name (or by total weight)
+  const dinoKeys = Array.from(byDino.keys()).sort((a, b) => {
+    const an = cfg?.dinos?.[a]?.displayName || a;
+    const bn = cfg?.dinos?.[b]?.displayName || b;
+    return an.localeCompare(bn);
+  });
+
+  body.innerHTML = `
+    <div class="info-section">
+      <div class="info-title">${escapeHtml(entryClass)}</div>
+
+      <div class="info-row">
+        <span class="info-label">Entry class</span>
+        <button class="info-copy" data-copy="${escapeAttr(entryClass)}">Copy</button>
+      </div>
+      <div class="info-mono">${escapeHtml(entryClass)}</div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-subtitle">Dinos (${dinoKeys.length})</div>
+      <div class="entries">
+        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(cfg, dinoKey, byDino.get(dinoKey))).join("")}
+      </div>
+    </div>
+  `;
+
+  // hook copy buttons
+  body.querySelectorAll(".info-copy").forEach(btn => {
+    btn.onclick = () => copyText(btn.dataset.copy || "");
+  });
+}
+
+function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
+  const d = cfg?.dinos?.[dinoKey];
+  const displayName = d?.displayName || dinoKey;
+  const bp = d?.bpPath || "";
+  const nameTag = d?.nameTag || d?.nametag || "";
+
+  // If the same dino has multiple entry objects for this entryClass, list them all
+  const entryLinesHtml = rowsForThisDino.map((r) => {
+    const e = r.entry;
+    const metaLines = buildEntryMetaLines(e);
+
+    return `
+      <div class="entry-meta" style="margin-top:4px;">
+        ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="info-section" style="padding-bottom:8px;">
+      <div class="info-row">
+        <span class="info-label">${escapeHtml(displayName)}</span>
+        <button class="info-copy" data-copy="${escapeAttr(bp || nameTag || displayName)}">Copy</button>
+      </div>
+      ${bp ? `<div class="info-mono">${escapeHtml(bp)}</div>` : ``}
+      ${nameTag ? `<div class="info-mono" style="margin-top:4px;">${escapeHtml(nameTag)}</div>` : ``}
+      ${entryLinesHtml}
+    </div>
+  `;
+}
+
 
 function renderInfoPanelForDino(cfg, dinoKey) {
   const panel = document.getElementById("dinoInfoPanel");
