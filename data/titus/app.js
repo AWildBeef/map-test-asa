@@ -125,13 +125,18 @@ let currentViewMode = "dino";
 let entryIndex = {};
 
 const jsonCache = {};
+const ASSET_VER = "dev-2026-02-02"; // bump when files change
 
 async function loadJSON(path) {
-  if (jsonCache[path]) return jsonCache[path];
-  const res = await fetch(path, { cache: "force-cache" });
+  const url = `${path}?v=${ASSET_VER}`;
+
+  if (jsonCache[url]) return jsonCache[url];
+
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
+
   const data = await res.json();
-  jsonCache[path] = data;
+  jsonCache[url] = data;
   return data;
 }
 // ============================================================
