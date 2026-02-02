@@ -1,6 +1,8 @@
 // ============================================================
 // RARITY TUNING (edit these whenever)
 // ============================================================
+const ASSET_VER = "dev-2026-02-02"; l
+
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
   [0.005,   "common"],
@@ -125,7 +127,6 @@ let currentViewMode = "dino";
 let entryIndex = {};
 
 const jsonCache = {};
-const ASSET_VER = "dev-2026-02-02"; // bump when files change
 
 async function loadJSON(path) {
   const url = `${path}?v=${ASSET_VER}`;
