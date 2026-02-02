@@ -108,6 +108,7 @@ const SOURCES = [
   { id: "official", name: "Official" },
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
   { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
+  { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json" },
 ];
 
 // ============================================================
