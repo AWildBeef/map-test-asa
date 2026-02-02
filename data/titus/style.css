@@ -50,6 +50,23 @@ body {
   gap: 7px;                                 /* 🫧 Space between title and controls */
 }
 
+.icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.75);
+  color:#fff;
+  cursor:pointer;
+}
+
+.icon-btn:hover{ background:rgba(45,45,45,.85); }
+.icon-btn:active{ transform:translateY(1px); }
+
+
 #topbar .title {
   font-size: 18px;        /* 🔠 Title size */
   font-weight: 700;       /* 💪 Boldness */
@@ -441,6 +458,26 @@ body {
   gap: 6px;
   width: 100%;
 }
+
+.title-actions{
+  margin-left:auto;      /* pushes actions to the far right */
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+.mode-btn{
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.75);
+  color:#fff;
+  border-radius:8px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.mode-btn[data-mode="dino"]::before{ content:"🦖 "; }
+.mode-btn[data-mode="entry"]::before{ content:"📦 "; }
+
 
 .controls-toggle {
   display: none;              /* 🚫 Hidden on desktop */
