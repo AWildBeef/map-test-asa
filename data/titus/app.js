@@ -254,13 +254,72 @@ function buildEntryIndex(cfg) {
 function setViewMode(mode) {
   currentViewMode = mode;
 
-  const dinoSel = document.getElementById("dinoSelect");
-  const entrySel = document.getElementById("entrySelect");
+  // (optional) change placeholder label somewhere if you want
+  // ex: dinoSelect title text
 
-  if (dinoSel) dinoSel.style.display = (mode === "dino") ? "" : "none";
-  if (entrySel) entrySel.style.display = (mode === "entry") ? "" : "none";
+  // repopulate the same dropdown slot with the right list + handler
+  if (currentCfg) setupMainSelect(currentCfg);
+}
 
-  // Also: info panel contents should change per mode (later)
+function setupMainSelect(cfg) {
+  const sel = document.getElementById("dinoSelect");
+  if (!sel) return;
+
+  sel.innerHTML = "";
+
+  if (currentViewMode === "dino") {
+    // ---- DINO LIST ----
+    const keys = Object.keys(cfg.dinos || {}).sort((a, b) => a.localeCompare(b));
+    if (!keys.length) {
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "(No dinos)";
+      sel.appendChild(opt);
+      renderInfoPanelBodyEmpty();
+      return;
+    }
+
+    for (const k of keys) {
+      const opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = k;
+      sel.appendChild(opt);
+    }
+
+    sel.onchange = () => {
+      drawDino(cfg, sel.value);
+      renderInfoPanelForDino(cfg, sel.value);
+    };
+
+    sel.value = keys[0];
+    sel.onchange();
+
+  } else {
+    // ---- ENTRY LIST ----
+    const keys = Object.keys(entryIndex || {}).sort((a, b) => a.localeCompare(b));
+    if (!keys.length) {
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "(No spawn entries)";
+      sel.appendChild(opt);
+      return;
+    }
+
+    for (const k of keys) {
+      const opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = k;
+      sel.appendChild(opt);
+    }
+
+    sel.onchange = () => {
+      drawSpawnEntry(cfg, sel.value);
+      // later: renderInfoPanelForEntry(cfg, sel.value);
+    };
+
+    sel.value = keys[0];
+    sel.onchange();
+  }
 }
 
 
@@ -737,11 +796,13 @@ function setupEntryDropdown(cfg, onChange) {
 // MAIN LOAD
 // ============================================================
 async function loadMapByMeta(mapMeta) {
-	currentMapId = mapMeta.id;
-  const vanillaCfg = await loadJSON(mapMeta.file);
+  currentMapId = mapMeta.id;
 
+  // 1) Load base map JSON
+  const vanillaCfg = await loadJSON(mapMeta.file);
   let effectiveCfg = vanillaCfg;
 
+  // 2) If mod source, swap dinos from mod map
   if (activeSourceId !== "official") {
     const modCfg = await loadModSource(activeSourceId);
     const modMap = modCfg?.maps?.[mapMeta.id];
@@ -752,32 +813,30 @@ async function loadMapByMeta(mapMeta) {
     };
   }
 
+  // 3) Post-process config
   applyRarityToConfig(effectiveCfg);
   currentCfg = effectiveCfg;
+
+  // Build entry index (needed for Entry mode)
   entryIndex = buildEntryIndex(currentCfg);
 
-  // Recreate Leaflet map
+  // 4) Recreate Leaflet map
   if (mapObj) mapObj.map.remove();
   mapObj = initMap(currentCfg);
   addPanelsControl(mapObj.map);
 
-  // Panels need the map container to exist (and ideally map to be present)
+  // 5) Panels + background
   ensurePanels();
   setModStylePanelVisible(activeSourceId !== "official");
-  renderModStylePanelBody(); // re-render so sliders match stored values
-
+  renderModStylePanelBody();
   setupBackgroundDropdown(mapMeta, currentCfg);
 
-  setupDropdown(currentCfg, (dinoKey) => {
-    drawDino(currentCfg, dinoKey);
-    renderInfoPanelForDino(currentCfg, dinoKey);
-  });
-  // keep current mode working after reload
-  setViewMode(currentViewMode);
+  // 6) Populate the ONE "slot" dropdown based on current mode
+  // Option A (cleanest): call your unified builder directly
+  setupMainSelect(currentCfg);
 
-  if (currentViewMode === "entry") {
-    setupEntryDropdown(currentCfg, (entryClass) => drawSpawnEntry(currentCfg, entryClass));
-  };
+  // Option B (also fine): if setViewMode() already calls setupMainSelect()
+  // setViewMode(currentViewMode);
 }
 
 // ============================================================
