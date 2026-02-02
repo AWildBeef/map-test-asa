@@ -108,6 +108,16 @@ let currentViewMode = "dino";
 // entryClass -> array of { dinoKey, entry, entryIndex }
 let entryIndex = {};
 
+const jsonCache = {};
+
+async function loadJSON(path) {
+  if (jsonCache[path]) return jsonCache[path];
+  const res = await fetch(path, { cache: "force-cache" });
+  if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
+  const data = await res.json();
+  jsonCache[path] = data;
+  return data;
+}
 // ============================================================
 // MOD STYLE STATE (used by floating panel + drawing)
 // ============================================================
@@ -121,11 +131,7 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
-async function loadJSON(path) {
-  const res = await fetch(path);
-  if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
-  return await res.json();
-}
+
 
 function pickById(list, id) {
   return list.find(x => x.id === id) || list[0];
@@ -207,6 +213,25 @@ function buildEntryMetaLines(entry) {
 // ============================================================
 // Geometry helpers (NEW managers format + fallback)
 // ============================================================
+function preprocessCfg(cfg) {
+  const dinos = cfg?.dinos || {};
+  for (const d of Object.values(dinos)) {
+    const entries = d.entries || [];
+    for (const e of entries) {
+      // Cache flattened geometry so draw loop doesn't re-flatten managers every time
+      e._boxes = getEntryBoxes(e);
+      e._points = getEntryPoints(e);
+
+      // Convenience cache
+      e._hasPoints = (e._points && e._points.length > 0);
+
+      // Optional: normalize some frequently checked flags once
+      e._isCave = (e.bIsCaveManager === true);
+      e._untame = (e.bForceUntameable === true);
+    }
+  }
+}
+
 function getEntryBoxes(entry) {
   const mgrs = entry?.managers;
   if (mgrs && typeof mgrs === "object") {
@@ -243,16 +268,40 @@ function initMap(cfg) {
 
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
+  // Create overlay ONCE
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
   map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
+  // Create layers ONCE
   const layer = L.layerGroup().addTo(map);
   const caveLayer = L.layerGroup().addTo(map);
 
   return { map, layer, caveLayer, overlay, bounds };
+}
+
+function updateMapForCfg(cfg) {
+  if (!mapObj) return;
+
+  const w = cfg.imageSize.width;
+  const h = cfg.imageSize.height;
+  const bounds = [[0, 0], [h, w]];
+
+  // Clear drawn shapes
+  mapObj.layer.clearLayers();
+  mapObj.caveLayer.clearLayers();
+
+  // Swap background image + its bounds
+  mapObj.overlay.setUrl(cfg.image);
+  mapObj.overlay.setBounds(bounds);
+
+  // Update map constraints + view
+  mapObj.map.setMaxBounds(bounds);
+  mapObj.map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
+
+  mapObj.bounds = bounds;
 }
 
 // ============================================================
@@ -499,36 +548,47 @@ function setupMapDropdown() {
 async function loadMapByMeta(mapMeta) {
   currentMapId = mapMeta.id;
 
+  // 1) Load base map JSON (cached if you kept the cached loadJSON)
   const vanillaCfg = await loadJSON(mapMeta.file);
   let effectiveCfg = vanillaCfg;
 
+  // 2) If mod source, swap dinos from mod map
   if (activeSourceId !== "official") {
     const modCfg = await loadModSource(activeSourceId);
     const modMap = modCfg?.maps?.[mapMeta.id];
-    effectiveCfg = {
-      ...vanillaCfg,
-      dinos: modMap?.dinos || {}
-    };
+    effectiveCfg = { ...vanillaCfg, dinos: modMap?.dinos || {} };
   }
 
+  // 3) Post-process config
   applyRarityToConfig(effectiveCfg);
   currentCfg = effectiveCfg;
+
+  // Cache flattened geometry + flags once
+  preprocessCfg(currentCfg);
+
+  // Build entry index (needed for Entry mode)
   entryIndex = buildEntryIndex(currentCfg);
 
-  if (mapObj) mapObj.map.remove();
-  mapObj = initMap(currentCfg);
-  addPanelsControl(mapObj.map);
+  // 4) Create map ONCE; otherwise update it
+  if (!mapObj) {
+    mapObj = initMap(currentCfg);
+    addPanelsControl(mapObj.map);     // add once
+  } else {
+    updateMapForCfg(currentCfg);      // fast path
+  }
 
+  // 5) Panels + background dropdown
   ensurePanels();
   setModStylePanelVisible(activeSourceId !== "official");
   renderModStylePanelBody();
 
+  // If Astraeos has alternate bgs, keep your dropdown behavior:
   setupBackgroundDropdown(mapMeta, currentCfg);
 
-  // One dropdown slot based on mode
+  // 6) Populate the ONE dropdown slot based on mode (dino/entry)
   setupMainSelect(currentCfg);
 
-  // keep button label correct
+  // 7) Keep mode button label correct
   syncModeBtn();
 }
 
@@ -570,9 +630,10 @@ function drawSpawnEntry(cfg, entryClass) {
 
   const sample = rows[0].entry;
 
-  const boxes = getEntryBoxes(sample);
-  const points = getEntryPoints(sample);
-  const hasPoints = points.length > 0;
+  // drawSpawnEntry(...)
+  const boxes = sample._boxes ?? getEntryBoxes(sample);
+  const points = sample._points ?? getEntryPoints(sample);
+  const hasPoints = sample._hasPoints ?? (points.length > 0);
 
   const isOfficial = (activeSourceId === "official");
 
@@ -628,12 +689,13 @@ function drawDino(cfg, dinoKey) {
     if (!isEntryVisible(dinoKey, i)) continue;
 
     const entry = entries[i];
-    const boxes = getEntryBoxes(entry);
-    const points = getEntryPoints(entry);
-    const hasPoints = points.length > 0;
-
-    const isCave = entry.bIsCaveManager === true;
-    const untame = entry.bForceUntameable === true;
+    // drawDino(...) inside loop
+    const boxes = entry._boxes ?? getEntryBoxes(entry);
+    const points = entry._points ?? getEntryPoints(entry);
+    const hasPoints = entry._hasPoints ?? (points.length > 0);
+    
+    const isCave = entry._isCave ?? (entry.bIsCaveManager === true);
+    const untame = entry._untame ?? (entry.bForceUntameable === true);
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
     const color = isOfficial ? rarityToColor(entry.rarity) : modDrawColor;
@@ -799,6 +861,17 @@ function makePanelDraggable(panel) {
   });
 }
 
+let redrawQueued = false;
+function requestRedraw() {
+  if (redrawQueued) return;
+  redrawQueued = true;
+  requestAnimationFrame(() => {
+    redrawQueued = false;
+    redrawSelected();
+  });
+}
+
+
 function ensurePanels() {
   if (!stylePanel) {
     stylePanel = createFloatingPanel({
@@ -860,7 +933,11 @@ function renderModStylePanelBody() {
   const g = document.getElementById("modGlow2");
 
   if (c) c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
-  if (o) o.oninput = () => { modDrawOpacity = Number(o.value); if (ol) ol.textContent = modDrawOpacity.toFixed(2); redrawSelected(); };
+  if (o) o.oninput = () => {
+  modDrawOpacity = Number(o.value);
+  if (ol) ol.textContent = modDrawOpacity.toFixed(2);
+  requestRedraw();
+};
   if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
 }
 
