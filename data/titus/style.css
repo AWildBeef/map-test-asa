@@ -76,6 +76,26 @@ body {
                         📏 flex-basis:220px (starting width target) */
 }
 
+.mode-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.15);
+  background:rgba(30,30,30,0.85);
+  color:#fff;
+  font:inherit;
+  cursor:pointer;
+  user-select:none;
+}
+
+.mode-toggle.is-entry{
+  background:rgba(0,140,255,0.30);
+  border-color:rgba(0,140,255,0.55);
+}
+
 #topbar .controls > #bgSelectWrap {
   flex: 1 1 220px;   /* same behavior as the selects */
   min-width: 200px;  /* match your desktop minimum */
