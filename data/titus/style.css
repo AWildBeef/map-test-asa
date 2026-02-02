@@ -388,15 +388,31 @@ body {
 }
 
 /* Copy button */
-.info-copy {
-  padding: 4px 6px;
-  border-radius: 8px;
-  background: var(--control-bg);
-  border: 1px solid var(--control-border);
-  color: var(--text);
-  cursor: pointer;
+/* Make the copy button an icon button */
+.info-copy{
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.info-copy:hover { border-color: #596273; }
+
+/* The icon itself */
+.info-copy::before{
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+
+  /* "copy" icon (two squares) as a mask */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center / contain no-repeat;
+
+  opacity: 0.9;
+}
+
+.info-copy:hover::before{ opacity: 1; }
 
 /* Blueprint/nametag field (scroll sideways) */
 .info-mono {
