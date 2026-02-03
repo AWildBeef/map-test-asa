@@ -55,18 +55,20 @@ body {
 /* obelisks */
 
 
-/* default for anything unknown */
+/* Default POI color fallback */
 .poi-icon { color: #ff00ff; }
 
-/* specific types (match the normalized class names in JS) */
+/* per-type */
 .poi-icon.poi-obeliskblue  { color: #00a5ff; }
 .poi-icon.poi-obeliskgreen { color: #14e800; }
 .poi-icon.poi-obeliskred   { color: #f70102; }
 .poi-icon.poi-tekcave      { color: #b84cff; }
 
-.poi-icon svg {
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.9))
-          drop-shadow(0 0 6px rgba(0,0,0,0.35));
+.poi-icon svg{
+  filter:
+    drop-shadow(0 0 2px rgba(0,0,0,0.9))
+    drop-shadow(0 0 6px rgba(0,0,0,0.35))
+    drop-shadow(0 0 5px currentColor); /* tek glow follows color */
 }
 
 /* ============================================================
