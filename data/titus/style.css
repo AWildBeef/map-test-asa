@@ -15,7 +15,7 @@
 
   /* Panel sizing knobs (easy to tune) */
   --panel-w: 420px;
-  --panel-w-mobile: 190px;
+  --panel-w-mobile: 210px;
   --panel-radius: 12px;
 
   --panel-header-pad: 3px;
@@ -440,6 +440,34 @@ body{
     font-weight:600;
     font-size:11px;
     letter-spacing:.2px;
+  }
+  
+  .entry-name{   /* The actual spawn entry name */
+    font-size:11px; 
+    font-weight:500; 
+  }
+  
+  .entry-meta-line{
+    font-size:8px;
+    font-weight:400;
+    line-height:1.08;
+  }
+  
+  .info-mono{   /* The scrollable BP and Nametag Fields */
+    font-size:10px;
+    color:var(--muted);
+    line-height:1.176;
+    font-weight:500;
+  }
+  
+  .info-subtitle{    /* "Spawn Entries (#) */
+    font-size:10px;
+    font-weight:500;
+  }
+  
+  .info-row{ /* "Blueprint" & "Nametag" */
+    font-size:10px;
+    font-weight:500;
   }
 
   /* Filters toggle visible */
