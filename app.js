@@ -148,6 +148,61 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+function makeTributeIcon() {
+  return L.divIcon({
+    className: "", // don't use default leaflet styles
+    html: `
+      <div style="
+        width:14px;height:14px;border-radius:50%;
+        background: rgba(0,255,255,0.85);
+        border: 2px solid rgba(255,255,255,0.95);
+        box-shadow: 0 0 10px rgba(0,255,255,0.9), 0 0 3px rgba(0,0,0,0.8);
+      "></div>
+    `,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7],
+  });
+}
+
+function drawTributeTerminals(cfg) {
+  if (!mapObj?.poiLayer) return;
+
+  mapObj.poiLayer.clearLayers();
+
+  const pts = cfg?.pois?.tributeTerminals;
+  if (!Array.isArray(pts) || !pts.length) return;
+
+  const icon = makeTributeIcon();
+
+  for (const p of pts) {
+    const x = Number(p.x);
+    const y = Number(p.y);
+    if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+
+    const id = p.id || "Tribute Terminal";
+
+    // Note Leaflet CRS.Simple expects [lat=y, lng=x]
+    const marker = L.marker([y, x], { icon, keyboard: false });
+
+    // Optional: tooltip on hover
+    marker.bindTooltip(id, { direction: "top", offset: [0, -8], opacity: 0.9 });
+
+    // Optional: click popup with world coords
+    if (p.world) {
+      const w = p.world;
+      marker.bindPopup(`
+        <div style="font-family:system-ui; font-size:12px;">
+          <b>${escapeHtml(id)}</b><br>
+          pixel: (${fmt(x)}, ${fmt(y)})<br>
+          world: (${fmt(w.X)}, ${fmt(w.Y)}, ${fmt(w.Z)})
+        </div>
+      `);
+    }
+
+    marker.addTo(mapObj.poiLayer);
+  }
+}
+
 
 function pickById(list, id) {
   return list.find(x => x.id === id) || list[0];
@@ -681,6 +736,9 @@ async function loadMapByMeta(mapMeta) {
 
   // 6) Populate the ONE dropdown slot based on mode (dino/entry)
   setupMainSelect(currentCfg);
+  
+  // ... after setupMainSelect(currentCfg);
+  drawTributeTerminals(currentCfg);
 
   // 7) Keep mode button label correct
   syncModeBtn();
