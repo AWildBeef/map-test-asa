@@ -14,11 +14,11 @@
   --focus:#7aa2ff;
 
   /* Panel sizing knobs (easy to tune) */
-  --panel-w: 360px;
+  --panel-w: 400px;
   --panel-w-mobile: 190px;
   --panel-radius: 12px;
 
-  --panel-header-pad: 6px;
+  --panel-header-pad: 3px;
   --panel-body-pad: 7px;
 
   --topbar-pad-y: 12px;
@@ -234,7 +234,7 @@ body{
 
 .floating-panel.dragging .fp-header{ cursor:grabbing; }
 
-.floating-panel .fp-title{
+.floating-panel .fp-title{  /* The header "Dino Info" */
   font-weight:600;
   font-size:13px;
   letter-spacing:.3px;
@@ -284,8 +284,8 @@ body{
    6) INSIDE PANELS — Dino Info styling
    ============================================================ */
 .info-title{    /* Dino Name */
-  font-weight:700;
-  font-size:18px;
+  font-weight:600;
+  font-size:20px;
   margin-bottom:8px;
   color:var(--muted);
 }
@@ -317,8 +317,9 @@ body{
   gap:10px;
   margin-top:8px;
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
+  text-transform:uppercase;
 }
 
 /* Copy button */
