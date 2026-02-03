@@ -164,17 +164,59 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // POIs (Tribute Terminals / Obelisks)
 // ============================================================
-const OBELISK_ICON = L.divIcon({
-  className: "poi-icon",
-  html: `
-    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2 4.5 20.5h15L12 2z" fill="white" opacity="0.95"/>
-      <path d="M12 5.2 7.2 18.8h9.6L12 5.2z" fill="#00d1ff" opacity="0.85"/>
-    </svg>
-  `,
-  iconSize: [22, 22],
-  iconAnchor: [11, 20],
-});
+
+
+function cssEscape(s) {
+  // safe-ish for classnames
+  return String(s || "").replace(/[^a-z0-9_-]/gi, "_");
+}
+
+function makeObeliskIcon(type) {
+  const t = cssEscape(type || "unknown");
+
+  return L.divIcon({
+    className: `poi-icon poi-${t}`,
+    html: `
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2 4.5 20.5h15L12 2z" fill="white" opacity="0.95"/>
+        <path class="poi-fill" d="M12 5.2 7.2 18.8h9.6L12 5.2z" opacity="0.85"/>
+      </svg>
+    `,
+    iconSize: [22, 22],
+    iconAnchor: [11, 20],
+  });
+}
+
+function makeTerminalIcon(type) {
+  const t = cssEscape(type || "unknown");
+
+  return L.divIcon({
+    className: `poi-icon poi-${t}`,
+    html: `
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="5" y="5" width="14" height="14" rx="2.5" fill="white" opacity="0.95"/>
+        <rect class="poi-fill" x="7" y="7" width="10" height="10" rx="1.8" opacity="0.85"/>
+      </svg>
+    `,
+    iconSize: [22, 22],
+    iconAnchor: [11, 20],
+  });
+}
+
+// Optional cache so we don't recreate icons every redraw
+const poiIconCache = new Map();
+function iconForPoiType(type) {
+  const t = type || "unknown";
+  const key = t;
+
+  if (poiIconCache.has(key)) return poiIconCache.get(key);
+
+  // Example: triangle for obelisks, square-ish for terminals
+  const icon = t.startsWith("obelisk_") ? makeObeliskIcon(t) : makeTerminalIcon(t);
+  poiIconCache.set(key, icon);
+  return icon;
+}
+
 
 function drawPois(cfg) {
   if (!mapObj?.poiLayer) return;
@@ -187,11 +229,16 @@ function drawPois(cfg) {
     const y = Number(p.y);
     if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
 
-    const title = p.id || "Tribute Terminal";
+    const type = p.type || "unknown";
+    const title = p.label || p.id || "POI";
 
-    L.marker([y, x], { icon: OBELISK_ICON, title })
+    L.marker([y, x], {
+      icon: iconForPoiType(type),
+      title,
+      interactive: true
+    })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(title, { direction: "top", opacity: 0.9 });
+      .bindTooltip(title, { direction: "top", opacity: 0.95 });
   }
 }
 
