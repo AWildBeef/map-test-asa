@@ -16,18 +16,15 @@ const RARITY_THRESHOLDS = [
 // Tune thresholds however you like.
 function downshiftStepsForMinPct(pct) {
   const p = Number(pct || 1);
-  if (p >= 0.75) return 0;
   if (p >= 0.50) return 1;
-  if (p >= 0.30) return 2;
-  if (p >= 0.20) return 3;
-  return 4;
+  return 0;
 }
 
 
 const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rare", "very rare"];
 
 const MIN_GLOBAL_DOWNSHIFT = [
-  [3,  6],
+  [2,  6],
 ];
 
 function rarityFromWeight(w) {
