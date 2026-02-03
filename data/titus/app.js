@@ -16,8 +16,8 @@ const RARITY_THRESHOLDS = [
 // Tune thresholds however you like.
 function downshiftStepsForMinPct(pct) {
   const p = Number(pct || 1);
-  if (p >= 0.50) return 1;
-  return 0;
+  if (p >= 0.51) return 0;
+  return 1;
 }
 
 
