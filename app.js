@@ -1,12 +1,14 @@
 // ============================================================
 // RARITY TUNING (edit these whenever)
 // ============================================================
+const ASSET_VER = "dev-2026-02-02-G";
+
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
-  [0.005,   "common"],
-  [0.001,   "uncommon"],
-  [0.0004,  "very uncommon"],
-  [0.00006, "rare"],
+  [0.009,   "common"],
+  [0.005,   "uncommon"],
+  [0.0009,  "very uncommon"],
+  [0.0001, "rare"],
   [-1,     "very rare"],
 ];
 
@@ -14,18 +16,15 @@ const RARITY_THRESHOLDS = [
 // Tune thresholds however you like.
 function downshiftStepsForMinPct(pct) {
   const p = Number(pct || 1);
-  if (p >= 0.75) return 0;
-  if (p >= 0.50) return 1;
-  if (p >= 0.30) return 2;
-  if (p >= 0.20) return 3;
-  return 4;
+  if (p >= 0.51) return 0;
+  return 1;
 }
 
 
 const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rare", "very rare"];
 
 const MIN_GLOBAL_DOWNSHIFT = [
-  [3,  6],
+  [2,  6],
 ];
 
 function rarityFromWeight(w) {
@@ -70,6 +69,14 @@ function applyRarityToConfig(cfg) {
   }
 }
 
+function normalizePoiType(type) {
+  const raw = String(type || "").toLowerCase();
+  if (raw.includes("obelisk") && raw.includes("blue")) return "obelisk_blue";
+  if (raw.includes("obelisk") && raw.includes("green")) return "obelisk_green";
+  if (raw.includes("obelisk") && raw.includes("red")) return "obelisk_red";
+  if (raw.includes("tekcave")) return "tekcave";
+  return raw;
+}
 // ============================================================
 // DRAWING TUNING
 // ============================================================
@@ -106,6 +113,13 @@ const SOURCES = [
   { id: "official", name: "Official" },
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
   { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
+  { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json" },
+  { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json" },
+  { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json" },
+  { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json" },
+  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json" },
+  { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
+
 ];
 
 // ============================================================
@@ -127,11 +141,15 @@ let entryIndex = {};
 const jsonCache = {};
 
 async function loadJSON(path) {
-  if (jsonCache[path]) return jsonCache[path];
-  const res = await fetch(path, { cache: "force-cache" });
+  const url = `${path}?v=${ASSET_VER}`;
+
+  if (jsonCache[url]) return jsonCache[url];
+
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
+
   const data = await res.json();
-  jsonCache[path] = data;
+  jsonCache[url] = data;
   return data;
 }
 // ============================================================
@@ -147,9 +165,109 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+// ============================================================
+// POIs
+// ============================================================
+function cssEscape(s) {
+  return String(s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]/g, "_");
+}
 
+// Decide which icon shape to use (triangle for obelisks, square for terminals)
+function poiShapeForType(type) {
+  const t = String(type || "").toLowerCase();
+  if (t.startsWith("obelisk")) return "obelisk";
+  return "terminal";
+}
 
+function makeObeliskIcon(type) {
+  const t = cssEscape(type || "unknown");
 
+  return L.divIcon({
+    className: `poi-icon poi-${t}`,
+    html: `
+      <svg width="22" height="22" viewBox="0 0 24 24">
+        <!-- white border -->
+        <circle cx="12" cy="12" r="7.7" fill="white" opacity="0.95"/>
+
+        <!-- colored fill -->
+        <circle cx="12" cy="12" r="7.5"
+                fill="currentColor"
+                class="poi-fill"
+                stroke="Black"
+                stroke-width="1.2"
+                opacity="0.9"/>
+      </svg>
+    `,
+    iconSize: [22, 22],
+    iconAnchor: [11, 11], // IMPORTANT: center it now
+  });
+}
+
+function makeTerminalIcon(type) {
+  const cls = cssEscape(type);
+  return L.divIcon({
+    className: `poi-icon poi-${cls}`,
+    html: `
+      <svg width="26" height="34" viewBox="-10 -12 20 26">
+        
+        <!-- white frame -->
+        <path d="M -3 0 L 0 -8 L 3 0 L 0 5 Z"
+              fill="white"
+              opacity="0.95"/>
+
+        <!-- inner core -->
+        <path class="poi-fill"
+              d="M -2 0 L 0 -6 L 2 0 L 0 3.5 Z"
+              fill="currentColor"
+              opacity="0.9"/>
+
+      </svg>
+    `,
+    iconSize: [22, 22],
+    iconAnchor: [11, 20],
+  });
+}
+
+const poiIconCache = new Map();
+
+function iconForPoiType(type) {
+  const key = String(type || "");
+  if (poiIconCache.has(key)) return poiIconCache.get(key);
+
+  const shape = poiShapeForType(key);
+  const icon = (shape === "obelisk") ? makeObeliskIcon(key) : makeTerminalIcon(key);
+
+  poiIconCache.set(key, icon);
+  return icon;
+}
+
+function drawPois(cfg) {
+  if (!mapObj?.poiLayer) return;
+
+  mapObj.poiLayer.clearLayers();
+
+  // your current JSON location:
+  const pts = cfg?.pois?.tributeTerminals || [];
+
+  for (const p of pts) {
+    const x = Number(p.x);
+    const y = Number(p.y);
+    if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+
+    const type  = p.type || "unknown";
+    const title = p.label || p.id || "POI";
+
+    L.marker([y, x], {
+      icon: iconForPoiType(type),
+      title,
+      interactive: true
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(title, { direction: "top", opacity: 0.95 });
+  }
+}
 
 function pickById(list, id) {
   return list.find(x => x.id === id) || list[0];
@@ -363,9 +481,11 @@ function initMap(cfg) {
   const layer = L.layerGroup().addTo(map);
   const caveLayer = L.layerGroup().addTo(map);
 
-  return { map, layer, caveLayer, overlay, bounds };
-}
+  // NEW: POIs always-on-top layer
+  const poiLayer = L.layerGroup().addTo(map);
 
+  return { map, layer, caveLayer, poiLayer, overlay, bounds };
+}
 function updateMapForCfg(cfg) {
   if (!mapObj) return;
 
@@ -376,7 +496,7 @@ function updateMapForCfg(cfg) {
   // Clear drawn shapes
   mapObj.layer.clearLayers();
   mapObj.caveLayer.clearLayers();
-
+  mapObj.poiLayer?.clearLayers();
   // Swap background image + its bounds
   mapObj.overlay.setUrl(cfg.image);
   mapObj.overlay.setBounds(bounds);
@@ -672,6 +792,8 @@ async function loadMapByMeta(mapMeta) {
   } else {
     updateMapForCfg(currentCfg);      // fast path
   }
+  
+  drawPois(currentCfg);
 
   // 5) Panels + background dropdown
   ensurePanels();
@@ -683,9 +805,6 @@ async function loadMapByMeta(mapMeta) {
 
   // 6) Populate the ONE dropdown slot based on mode (dino/entry)
   setupMainSelect(currentCfg);
-  
-  // ... after setupMainSelect(currentCfg);
-  drawTributeTerminals(currentCfg);
 
   // 7) Keep mode button label correct
   syncModeBtn();
@@ -709,12 +828,16 @@ function isTinyBox(box) {
 
 function rarityToColor(r) {
   const s = String(r || "").toLowerCase();
-  if (s.includes("very rare")) return "#FF0000";
-  if (s.includes("rare")) return "#FF6600";
-  if (s.includes("very uncommon")) return "#FFAA00";
-  if (s.includes("uncommon")) return "#FFFF00";
-  if (s.includes("common")) return "#CCFF00";
-  if (s.includes("very common")) return "#00FF00";
+
+  if (s.includes("very rare"))      return "#FF0000";
+  if (s.includes("rare"))           return "#FF6600";
+
+  if (s.includes("very uncommon"))  return "#FFAA00";
+  if (s.includes("uncommon"))       return "#FFFF00";
+
+  if (s.includes("very common"))    return "#00FF00"; // ✅ moved above "common"
+  if (s.includes("common"))         return "#CCFF00";
+
   return "#000000";
 }
 
@@ -1023,7 +1146,7 @@ function ensurePanels() {
     infoPanel = createFloatingPanel({
       id: "dinoInfoPanel",
       title: "Dino Info",
-      defaultPos: { right: 218, top: 2 },
+      defaultPos: { left: 2, top: 2 },
       collapsedByDefault: true
     });
     renderInfoPanelBodyEmpty();
