@@ -169249,5 +169249,48 @@
         }
       ]
     }
+  },
+  "pois": {
+    "tributeTerminals": [
+      {
+        "id": "TributeTerminal_1",
+        "type": "obeliskRed",
+        "label": "Red Obelisk",
+        "x": 799.35,
+        "y": 584.57,
+        "world": {
+          "X": -86321.97,
+          "Y": 168998.73,
+          "Z": -16242.276
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_2",
+        "type": "obeliskGreen",
+        "label": "Green Obelisk",
+        "x": 1531.35,
+        "y": 1023.38,
+        "world": {
+          "X": 195113.11,
+          "Y": 286.48163,
+          "Z": -12425.294
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_3",
+        "type": "obeliskBlue",
+        "label": "Blue Obelisk",
+        "x": 689.67,
+        "y": 1703.86,
+        "world": {
+          "X": -128492.02,
+          "Y": -261338.06,
+          "Z": -15340.092
+        },
+        "rot": null
+      }
+    ]
   }
 }
