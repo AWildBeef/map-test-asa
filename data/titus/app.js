@@ -374,8 +374,10 @@ function initMap(cfg) {
   const layer = L.layerGroup().addTo(map);
   const caveLayer = L.layerGroup().addTo(map);
 
-  return { map, layer, caveLayer, overlay, bounds };
-}
+  // NEW: POIs always-on-top layer
+  const poiLayer = L.layerGroup().addTo(map);
+
+  return { map, layer, caveLayer, poiLayer, overlay, bounds };
 
 function updateMapForCfg(cfg) {
   if (!mapObj) return;
@@ -387,7 +389,7 @@ function updateMapForCfg(cfg) {
   // Clear drawn shapes
   mapObj.layer.clearLayers();
   mapObj.caveLayer.clearLayers();
-
+  mapObj.poiLayer?.clearLayers();
   // Swap background image + its bounds
   mapObj.overlay.setUrl(cfg.image);
   mapObj.overlay.setBounds(bounds);
