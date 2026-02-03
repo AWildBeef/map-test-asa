@@ -235,7 +235,6 @@ body{
 .floating-panel.dragging .fp-header{ cursor:grabbing; }
 
 .floating-panel .fp-title{
-  color:#ff00ff;
   font-weight:800;
   font-size:13px;
   letter-spacing:.3px;
@@ -266,10 +265,6 @@ body{
 .floating-panel.collapsed .fp-body{ display:none; }
 .floating-panel.collapsed .fp-header{ border-bottom:none; }
 
-/* Panel positions (desktop defaults) */
-#dinoInfoPanel{ top:2px; right:500px; }
-#modStylePanel{ top:2px; right:2px; }
-
 /* ============================================================
    5) INSIDE PANELS — Mod Style controls
    ============================================================ */
@@ -290,15 +285,16 @@ body{
    ============================================================ */
 .info-title{
   font-weight:800;
-  font-size:10px;
+  font-size:14px;
   margin-bottom:8px;
+  color:#ff00ff;
 }
 
 .info-subtitle{
-  font-size:9px;
+  font-size:11px;
   font-weight:700;
-  color:var(--muted);
-  margin-bottom:4px;
+  color:#00ff00;
+  margin-bottom:6px;
   letter-spacing:.2px;
   text-transform:uppercase;
 }
@@ -320,8 +316,8 @@ body{
   justify-content:space-between;
   gap:10px;
   margin-top:8px;
-  color:var(--muted);
-  font-size:10px;
+  color:#ff0000;
+  font-size:12px;
 }
 
 /* Copy button */
@@ -332,6 +328,7 @@ body{
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  background:var(--panel);
 }
 
 /* Icon */
@@ -356,7 +353,8 @@ body{
   border:1px solid rgba(255,255,255,.10);
 
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:10px;
+  font-size:12px;
+  color:#ff9900;
   line-height:1.176;
 
   white-space:nowrap;
@@ -367,24 +365,24 @@ body{
 .entry-row{
   display:flex;
   align-items:flex-start;
-  gap:8px;
-  padding:5px 4px;
+  gap:10px;
+  padding:6px 5px;
   border-radius:6px;
 }
 .entry-row:hover{ background:rgba(255,255,255,.04); }
 
 .entry-main{ flex:1; min-width:0; }
-.entry-name{ font-size:10px; font-weight:600; }
-.entry-meta{ margin-top:2px; font-size:10px; color:var(--muted); }
+.entry-name{ font-size:13px; font-weight:800; }
+.entry-meta{ margin-top:2px; font-size:12px; color:#0099ff; }
 
 .entry-meta-line{
-  font-size:7px;
+  font-size:10px;
   text-indent:1mm;
   font-stretch:semi-condensed;
-  font-weight:400;
+  font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
-  line-height:1.05;
+  line-height:1.25;
 }
 
 /* ============================================================
