@@ -235,9 +235,10 @@ body{
 .floating-panel.dragging .fp-header{ cursor:grabbing; }
 
 .floating-panel .fp-title{
-  font-weight:600;
-  font-size:11px;
-  letter-spacing:.2px;
+  color:#ff00ff;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:.3px;
 }
 
 .floating-panel .fp-actions{
@@ -420,6 +421,13 @@ body{
   .floating-panel{
     width: var(--panel-w-mobile);
     font-size:11px;
+  }
+  
+  .floating-panel .fp-title{
+    color:#ffff00;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.2px;
   }
 
   /* Filters toggle visible */
