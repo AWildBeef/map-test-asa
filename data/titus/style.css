@@ -1,97 +1,175 @@
 /* ============================================================
-   🎨 COLOR THEME VARIABLES (our paint buckets)
-   These are used everywhere via var(--name)
+   0) THEME TOKENS (colors + sizing knobs)
    ============================================================ */
-:root {
-  --bg: #121417;            /* 🧱 Page background color (behind everything) */
-  --panel: #1a1d21;         /* 📦 Panels/topbar background color */
-  --panel-border: #2a2f35;  /* 🧷 Border line color around panels */
+:root{
+  --bg:#121417;
+  --panel:#1a1d21;
+  --panel-border:#2a2f35;
 
-  --text: #e6e6e6;          /* 📝 Main text color */
-  --muted: #b8c0cc;         /* 🫧 "less important" text (labels, small info) */
+  --text:#e6e6e6;
+  --muted:#b8c0cc;
 
-  --control-bg: #242a30;    /* 🎛️ Dropdown/button background */
-  --control-border: #3a414a;/* 🎛️ Border around dropdowns/buttons */
-  --focus: #7aa2ff;         /* ✨ Highlight color when you click a dropdown */
+  --control-bg:#242a30;
+  --control-border:#3a414a;
+  --focus:#7aa2ff;
+
+  /* Panel sizing knobs (easy to tune) */
+  --panel-w: 180px;
+  --panel-w-mobile: 200px;
+  --panel-radius: 12px;
+
+  --panel-header-pad: 6px;
+  --panel-body-pad: 7px;
+
+  --topbar-pad-y: 12px;
+  --topbar-pad-x: 16px;
 }
-
-#dinoInfoPanel { top: 2px; right: 500px; }
-#modStylePanel { top: 2px; right: 2px; }
-
-@media (max-width: 640px) {
-  #dinoInfoPanel { top: 2px; right: 218px; }
-  #modStylePanel { top: 2px; right: 2px; }
-}
-
 
 /* ============================================================
-   🧩 GLOBAL DEFAULTS
+   1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
-* { 
-  box-sizing: border-box;   /* 📏 Makes width/height include padding/border.
-                               Prevents "why is this bigger than I set it?!" */
+*{ box-sizing:border-box; }
+
+html, body{ height:100%; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  display:flex;
+  flex-direction:column;
 }
 
-html, body { 
-  height: 100%;             /* 🧍 Lets the map take full height of screen */
+#buildInfo{
+  position:fixed;
+  bottom:4px;
+  left:6px;
+  font-size:10px;
+  opacity:.4;
+  pointer-events:none;
 }
-
-body {
-  margin: 0;                /* 🚫 Remove default browser margin */
-  background: var(--bg);    /* 🎨 Use our background color */
-  color: var(--text);       /* 📝 Default text color */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; /* 🧠 Nice readable font */
-  display: flex;            /* 📦 Flex layout so topbar sits on top and map fills rest */
-  flex-direction: column;   /* ⬇️ Stack children vertically */
-}
-
-#buildInfo {
-  position: fixed;
-  bottom: 4px;
-  left: 6px;
-  font-size: 10px;
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-/* base */
-
-/* default */
-.poi-icon .poi-fill {
-  fill: currentColor;
-}
-
-/* obelisks */
-
-/* default for anything unknown */
-.poi-icon { color: #ff00ff; }
-
-/* specific types (match the normalized class names in JS) */
-.poi-icon.poi-obeliskblue  { color: #00a5ff; }
-.poi-icon.poi-obeliskgreen { color: #14e800; }
-.poi-icon.poi-obeliskred   { color: #f70102; }
-.poi-icon.poi-tekcave      { color: #b84cff; }
-
-.poi-icon svg {
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.9))
-          drop-shadow(0 0 6px rgba(0,0,0,0.35))
-          drop-shadow(0 0 4px currentColor);
-}
-          
-
 
 /* ============================================================
-   🧠 TOP BAR (title + dropdowns)
+   2) LAYOUT CONTAINERS (map + wrapper)
    ============================================================ */
-#topbar {
-  background: var(--panel);                  /* 📦 Topbar background */
-  border-bottom: 1px solid var(--panel-border); /* 🧷 Divider line under topbar */
-  padding: 12px 16px 10px;                   /* 🧻 Space inside topbar */
+#mapWrap{
+  position:relative;
+  flex:1;
+  width:100vw;
+  min-height:0; /* important for scroll */
+}
 
-  display: flex;                             /* 📦 Flexible layout container */
-  flex-direction: column;                    /* ⬇️ Title row then controls row */
-  align-items: center;                       /* 🎯 Center everything horizontally */
-  gap: 7px;                                 /* 🫧 Space between title and controls */
+#map{
+  position:absolute;
+  inset:0;
+}
+
+/* ============================================================
+   3) TOP BAR (title + controls)
+   ============================================================ */
+#topbar{
+  background:var(--panel);
+  border-bottom:1px solid var(--panel-border);
+  padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+}
+
+.title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  width:100%;
+}
+
+.title-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+#topbar .title{
+  font-size:18px;
+  font-weight:700;
+  font-stretch:condensed;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:#f2f2f2;
+}
+
+#topbar .controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  width:min(1100px, 100%);
+}
+
+#topbar .controls > select{
+  flex: 1 1 220px;
+}
+
+#topbar select{
+  min-width:200px;
+  max-width:320px;
+  width:100%;
+
+  padding:10px 20px;
+  font-size:15px;
+  border-radius:8px;
+
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  outline:none;
+  cursor:pointer;
+}
+
+#topbar select:hover{ border-color:#596273; }
+
+#topbar select:focus{
+  border-color:var(--focus);
+  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+}
+
+/* bg dropdown wrapper */
+#bgSelectWrap{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:var(--muted);
+}
+#bgSelectWrap select{
+  min-width:180px;
+  opacity:.9;
+}
+
+.mode-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(30,30,30,.85);
+  color:#fff;
+  font:inherit;
+  cursor:pointer;
+  user-select:none;
+}
+.mode-toggle.is-entry{
+  background:rgba(0,140,255,.30);
+  border-color:rgba(0,140,255,.55);
 }
 
 .icon-btn{
@@ -106,516 +184,288 @@ body {
   color:#fff;
   cursor:pointer;
 }
-
 .icon-btn:hover{ background:rgba(45,45,45,.85); }
 .icon-btn:active{ transform:translateY(1px); }
 
-
-#topbar .title {
-  font-size: 18px;        /* 🔠 Title size */
-  font-weight: 700;       /* 💪 Boldness */
-  font-stretch: condensed;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;  /* 🧾 Slight spacing between letters */
-  color: #f2f2f2;         /* 🧊 Title color (slightly brighter than --text) */
+/* Filters button (only visible on mobile) */
+#controlsToggle{
+  display:none;
+  padding:6px 8px;
+  border-radius:8px;
+  background:var(--control-bg);
+  border:1px solid var(--control-border);
+  color:var(--text);
 }
 
-/* This is the row that holds the dropdowns */
-#topbar .controls {
-  display: flex;                   /* 📦 Put dropdowns in a flex row */
-  gap: 12px;                       /* 🫧 Space between dropdowns */
-  flex-wrap: wrap;                 /* 🧺 Let dropdowns wrap to new line if needed */
-  justify-content: center;         /* 🎯 Center the group */
-  align-items: center;             /* 🎯 Align dropdowns vertically */
-  width: min(1100px, 100%);        /* 📏 Don’t get wider than 1100px on desktop */
+/* ============================================================
+   4) FLOATING PANELS (new draggable system)
+   ============================================================ */
+.floating-panel{
+  position:absolute;
+  z-index:9999;
+
+  width: var(--panel-w);
+  max-width: min(360px, calc(100vw - 24px));
+
+  background:rgba(26,29,33,.92);
+  color:var(--text);
+  border:1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  box-shadow:0 10px 28px rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+  overflow:hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* This controls how wide each dropdown *wants* to be */
-#topbar .controls > select {
-  flex: 1 1 220px;   /* 📏 flex-grow:1 (can expand)
-                        📏 flex-shrink:1 (can shrink)
-                        📏 flex-basis:220px (starting width target) */
-}
-
-.mode-toggle{
-  display:inline-flex;
+.floating-panel .fp-header{
+  display:flex;
   align-items:center;
-  justify-content:center;
-  gap:6px;
-  padding:8px 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.15);
-  background:rgba(30,30,30,0.85);
-  color:#fff;
-  font:inherit;
-  cursor:pointer;
+  justify-content:space-between;
+
+  padding: var(--panel-header-pad);
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  cursor:grab;
   user-select:none;
+  touch-action:none;
 }
 
-.mode-toggle.is-entry{
-  background:rgba(0,140,255,0.30);
-  border-color:rgba(0,140,255,0.55);
+.floating-panel.dragging .fp-header{ cursor:grabbing; }
+
+.floating-panel .fp-title{
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.2px;
 }
 
-#topbar .controls > #bgSelectWrap {
-  flex: 1 1 220px;   /* same behavior as the selects */
-  min-width: 200px;  /* match your desktop minimum */
+.floating-panel .fp-actions{
+  display:flex;
+  gap:6px;
 }
 
-@media (max-width: 640px) {
-  #topbar .controls > #bgSelectWrap {
-    flex: 1 1 140px;
-    min-width: 120px;
-  }
+.floating-panel .fp-btn{
+  width:20px;
+  height:20px;
+  border-radius:5px;
+  background:var(--control-bg);
+  border:1px solid var(--control-border);
+  color:var(--text);
+  cursor:pointer;
+}
+.floating-panel .fp-btn:hover{ border-color:#596273; }
 
-  /* Ensure the <select> inside fills the wrapper */
-  #bgSelectWrap select { width: 100%; }
+.floating-panel .fp-body{
+  padding: var(--panel-body-pad);
+  max-height:50vh;
+  overflow:auto;
 }
 
-/* The dropdowns themselves */
-#topbar select {
-  min-width: 200px;     /* 🚧 Smallest allowed size on desktop */
-  max-width: 320px;     /* 🚧 Largest allowed size on desktop */
-  width: 100%;          /* 📏 Fill available flex width */
+.floating-panel.collapsed .fp-body{ display:none; }
+.floating-panel.collapsed .fp-header{ border-bottom:none; }
 
-  padding: 10px 20px;    /* 🧻 Inside spacing (makes dropdown “taller”) */
-  font-size: 15px;      /* 🔠 Text size inside dropdown */
-  border-radius: 8px;   /* 🍩 Rounded corners */
-
-  border: 1px solid var(--control-border);  /* 🧷 Border */
-  background: var(--control-bg);            /* 🎛️ Background */
-  color: #fff;                              /* 📝 Dropdown text color */
-
-  outline: none;     /* 🚫 Remove default outline */
-  cursor: pointer;   /* 🖱️ Cursor shows it’s clickable */
-}
-
-#topbar select:hover {
-  border-color: #596273;   /* 👀 Border highlight on hover */
-}
-
-#topbar select:focus {
-  border-color: var(--focus);   /* ✨ Border highlight when selected */
-  box-shadow: 0 0 0 3px rgba(122, 162, 255, 0.18); /* 🌈 Soft glow ring */
-}
-
-/* Background selector wrapper (the extra dropdown for Astraeos backgrounds) */
-#bgSelectWrap {
-  display: inline-flex;   /* 📦 Keeps this wrapper in-line and flexy */
-  align-items: center;    /* 🎯 Align stuff vertically */
-  gap: 6px;               /* 🫧 Space between things inside wrapper */
-  font-size: 12px;        /* 🔠 Smaller label text */
-  color: var(--muted);    /* 🫧 Muted label color */
-}
-
-#bgSelectWrap select {
-  min-width: 180px;       /* 🚧 Keep background dropdown from being too tiny */
-  opacity: 0.9;           /* 👻 Slightly transparent */
-}
+/* Panel positions (desktop defaults) */
+#dinoInfoPanel{ top:2px; right:500px; }
+#modStylePanel{ top:2px; right:2px; }
 
 /* ============================================================
-   🗺️ LEAFLET PANEL (your older "leaflet control" styling)
-   This mostly affects Leaflet default controls if you use them.
+   5) INSIDE PANELS — Mod Style controls
    ============================================================ */
-.leaflet-top.leaflet-right .leaflet-control {
-  margin-top: 12px;    /* 📍 Push down from top */
-  margin-right: 12px;  /* 📍 Push left from right edge */
+.fp-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:10px 0;
+  color:var(--muted);
+  font-size:12px;
 }
-
-/* This applies to your "old" mod style panel if it used leaflet-bar classes */
-.mod-style-panel.leaflet-bar {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.35); /* 🌫️ Shadow so it floats */
-  border: 1px solid var(--panel-border);   /* 🧷 Border */
-}
-
-.mod-style-panel {
-  background: rgba(26, 29, 33, 0.92); /* 🪟 Semi-transparent panel background */
-  color: var(--text);                 /* 📝 Text color */
-  padding: 12px;                      /* 🧻 Inside spacing */
-  border-radius: 12px;               /* 🍩 Rounded corners */
-  min-width: 230px;                  /* 📏 Minimum panel width */
-  max-width: 280px;                  /* 📏 Maximum panel width */
-  backdrop-filter: blur(6px);        /* 🧊 Blur the map behind it (glass look) */
-}
-
-/* Header row in the old mod panel */
-.mod-style-panel .panel-header {
-  display: flex;                      /* 📦 Put title and buttons on one row */
-  align-items: center;                /* 🎯 Center vertically */
-  justify-content: space-between;     /* ↔️ Spread left/right */
-  font-weight: 700;                   /* 💪 Bold header text */
-  margin-bottom: 10px;                /* 🫧 Space under header */
-  padding-bottom: 2px;                /* 🧻 Small padding */
-  border-bottom: 1px solid rgba(255,255,255,0.08); /* 🧷 Subtle divider */
-}
-
-/* Buttons inside the old mod style panel */
-.mod-style-panel button {
-  width: 28px; height: 28px;          /* 📐 Button size */
-  border-radius: 8px;                 /* 🍩 Rounded button */
-  background: var(--control-bg);      /* 🎛️ Background */
-  border: 1px solid var(--control-border); /* 🧷 Border */
-  color: var(--text);                 /* 📝 Text/icon color */
-  cursor: pointer;                    /* 🖱️ Pointer cursor */
-}
-
-.mod-style-panel.collapsed {
-  padding: 6px 10px; /* 📏 Make it smaller when collapsed */
-}
-
-.mod-style-panel.collapsed .panel-header {
-  margin-bottom: 0;    /* 🚫 No bottom space when collapsed */
-  border-bottom: none; /* 🚫 No divider line when collapsed */
-}
-
-.mod-style-panel button:hover {
-  border-color: #596273; /* 👀 Hover border */
-}
-
-.mod-style-panel .row {
-  display: flex;                       /* 📦 Layout for each setting row */
-  align-items: center;                 /* 🎯 Vertical alignment */
-  justify-content: space-between;      /* ↔️ Spread label and control */
-  gap: 12px;                           /* 🫧 Space between label/control */
-  margin: 10px 0;                      /* 🧻 Space above/below row */
-  color: var(--muted);                 /* 🫧 Muted labels */
-  font-size: 12px;                     /* 🔠 Small labels */
-}
-
-.mod-style-panel input[type="range"] {
-  width: 100%; /* 📏 Slider spans full width of its container */
-}
-
-.mod-style-panel input[type="color"] {
-  width: 42px; height: 30px;           /* 🎨 Color picker size */
-  padding: 0;
-  border: 1px solid var(--control-border);
-  background: var(--control-bg);
-  border-radius: 8px;
-}
+.fp-col{ flex-direction:column; align-items:stretch; }
+.fp-between{ width:100%; }
 
 /* ============================================================
-   🧊 FLOATING PANELS SYSTEM (your new draggable panels)
+   6) INSIDE PANELS — Dino Info styling
    ============================================================ */
-
-/* This wrapper MUST be relative so the floating panels can be absolute inside it */
-#mapWrap {
-  position: relative;   /* 🧷 Makes children absolute-position relative to this */
-  flex: 1;              /* 📏 Takes all remaining space under the topbar */
-  width: 100vw;         /* 📏 Full viewport width */
-  min-height: 0;        /* ✅ Important for internal scrolling to behave */
+.info-title{
+  font-weight:800;
+  font-size:10px;
+  margin-bottom:8px;
 }
 
-/* Leaflet map fills the wrapper */
-#map {
-  position: absolute;   /* 📍 Fill mapWrap */
-  inset: 0;             /* 📍 top/right/bottom/left all 0 */
+.info-subtitle{
+  font-size:9px;
+  font-weight:700;
+  color:var(--muted);
+  margin-bottom:4px;
+  letter-spacing:.2px;
+  text-transform:uppercase;
 }
 
-/* The floating panel "box" */
-.floating-panel {
-  position: absolute;  /* 📍 Position relative to #mapWrap */
-  z-index: 9999;       /* 🥇 Always on top of map */
-  width: 180px;        /* 📏 Default panel width */
-  max-width: min(360px, calc(100vw - 24px)); /* 📱 Never overflow screen */
-
-  background: rgba(26, 29, 33, 0.92); /* 🪟 Glassy dark background */
-  color: var(--text);
-  border: 1px solid var(--panel-border);
-  border-radius: 12px;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.45); /* 🌫️ Shadow makes it float */
-  backdrop-filter: blur(8px);               /* 🧊 Blur behind */
-
-  overflow: hidden; /* ✅ Keeps header/body edges neat */
+.info-section{
+  margin-bottom:10px;
+  padding-bottom:6px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.info-section:last-child{
+  border-bottom:none;
+  padding-bottom:0;
+  margin-bottom:0;
 }
 
-/* The draggable header (grab handle) */
-.floating-panel .fp-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 6px 6px; /* 📏 Header padding (smaller = tighter) */
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-
-  cursor: grab;      /* ✋ Shows grab cursor on desktop */
-  user-select: none; /* 🚫 Prevent text selection while dragging */
-  touch-action: none;/* ✅ Prevents browser panning while dragging on mobile */
-}
-
-.floating-panel.dragging .fp-header {
-  cursor: grabbing; /* ✊ Changes cursor while dragging */
-}
-
-/* Panel title text */
-.floating-panel .fp-title {
-  font-weight: 300; /* 💪 1000 - Very bold */
-  font-size: 11px;   /* 🔠 Small */
-  letter-spacing: 0.2px;
-}
-
-/* Buttons container in header */
-.floating-panel .fp-actions {
-  display: flex;
-  gap: 6px; /* 🫧 Space between minimize & close */
-}
-
-/* Header buttons */
-.floating-panel .fp-btn {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  background: var(--control-bg);
-  border: 1px solid var(--control-border);
-  color: var(--text);
-  cursor: pointer;
-}
-
-.floating-panel .fp-btn:hover {
-  border-color: #596273;
-}
-
-/* The scrollable body of the panel */
-.floating-panel .fp-body {
-  padding: 7px;       /* 🧻 Padding inside */
-  max-height: 50vh;   /* 📏 Limit height so it doesn’t run off screen */
-  overflow: auto;     /* ✅ Adds scrollbars when content is too big */
-}
-
-/* Collapsed: hide body, keep header */
-.floating-panel.collapsed .fp-body { display: none; }
-.floating-panel.collapsed .fp-header { border-bottom: none; }
-
-/* ============================================================
-   🎛️ INSIDE PANELS: Mod Style controls
-   ============================================================ */
-.fp-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 10px 0;     /* 🧻 Vertical spacing between rows */
-  color: var(--muted);
-  font-size: 12px;
-}
-.fp-col { flex-direction: column; align-items: stretch; } /* 🧱 Stack row vertically */
-.fp-between { width: 100%; } /* 📏 Forces row to fill body width */
-
-/* ============================================================
-   🦖 Dino Info Panel content styling
-   ============================================================ */
-.info-title {
-  font-weight: 800;
-  font-size: 10px;
-  margin-bottom: 8px;
-}
-
-.info-section {
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.info-section:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-.info-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 10px;
+.info-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:10px;
 }
 
 /* Copy button */
-/* Make the copy button an icon button */
 .info-copy{
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* The icon itself */
-.info-copy::before{
-  content: "";
-  width: 16px;
-  height: 16px;
-  background: currentColor;
-
-  /* "copy" icon (two squares) as a mask */
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center / contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center / contain no-repeat;
-
-  opacity: 0.9;
-}
-
-.info-copy:hover::before{ opacity: 1; }
-
-/* Blueprint/nametag field (scroll sideways) */
-.info-mono {
-  margin-top: 2px;
-  padding: 4px 6px;
-  border-radius: 6px;
-  background: rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.10);
-
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 10px;
-  line-height: 1.176;
-
-  white-space: nowrap;  /* 🚫 Don’t wrap */
-  overflow-x: auto;     /* ✅ Scroll sideways */
-  overflow-y: hidden;
-}
-
-.info-subtitle {
-  font-size: 9px;        /* ← change this number */
-  font-weight: 700;
-  color: var(--muted);
-  margin-bottom: 4px;
-  letter-spacing: 0.2px;
-  text-transform: uppercase; /* optional */
-}
-
-/* Entry checkbox rows */
-.entry-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 5px 4px;
-  border-radius: 6px;
-}
-.entry-row:hover { background: rgba(255,255,255,0.04); }
-
-.entry-main { flex: 1; min-width: 0; } /* ✅ Allows text to shrink properly */
-.entry-name { font-size: 10px; font-weight: 600; }
-.entry-meta { margin-top: 2px; font-size: 10px; color: var(--muted); }
-
-.entry-meta-line {
-  font-size: 7px;
-  text-indent: 1mm;
-  font-stretch: semi-condensed;
-  font-weight: 400;
-  text-wrap: nowrap;
-  color: var(--muted);
-  line-height: 1.05;
-}
-
-/* ============================================================
-   🧃 Title row + Filters button (mobile)
-   ============================================================ */
-.title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* ↔️ Title left, button right */
-  gap: 6px;
-  width: 100%;
-}
-
-..title-actions{
-  margin-left:auto;
-  display:flex;
+  width:28px;
+  height:28px;
+  padding:0;
+  display:inline-flex;
   align-items:center;
-  gap:8px;
-} 
-
-.mode-btn{
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(30,30,30,.75);
-  color:#fff;
-  border-radius:8px;
-  padding:8px 10px;
-  cursor:pointer;
-  font-weight:600;
+  justify-content:center;
 }
 
-.mode-btn[data-mode="dino"]::before{ content:"🦖 "; }
-.mode-btn[data-mode="entry"]::before{ content:"📦 "; }
+/* Icon */
+.info-copy::before{
+  content:"";
+  width:16px;
+  height:16px;
+  background:currentColor;
 
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
 
-#controlsToggle {
-  display: none;              /* 🚫 Hidden on desktop */
-  padding: 6px 8px;           /* 📏 Button size */
-  border-radius: 8px;
-  background: var(--control-bg);
-  border: 1px solid var(--control-border);
-  color: var(--text);
+  opacity:.9;
+}
+.info-copy:hover::before{ opacity:1; }
+
+.info-mono{
+  margin-top:2px;
+  padding:4px 6px;
+  border-radius:6px;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.10);
+
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:10px;
+  line-height:1.176;
+
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+
+.entry-row{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  padding:5px 4px;
+  border-radius:6px;
+}
+.entry-row:hover{ background:rgba(255,255,255,.04); }
+
+.entry-main{ flex:1; min-width:0; }
+.entry-name{ font-size:10px; font-weight:600; }
+.entry-meta{ margin-top:2px; font-size:10px; color:var(--muted); }
+
+.entry-meta-line{
+  font-size:7px;
+  text-indent:1mm;
+  font-stretch:semi-condensed;
+  font-weight:400;
+  white-space:nowrap; /* use white-space, not text-wrap */
+  color:var(--muted);
+  line-height:1.05;
 }
 
 /* ============================================================
-   📱 Mobile rules
-   Everything inside here ONLY happens when screen ≤ 640px
+   7) POI ICONS (Leaflet divIcon SVGs)
    ============================================================ */
-@media (max-width: 640px) {
-  
-    .floating-panel {
-    width: 200px;
-    font-size: 11px;
-  }
+.poi-icon .poi-fill{ fill: currentColor; }
 
-  .floating-panel .fp-body { padding: 7px; }
+/* fallback */
+.poi-icon{ color:#ff00ff; }
 
-  .info-title { font-size: 10px; }
-  .entry-name { font-size: 10px; }
-  .entry-meta-line { font-size: 7px; }
-  .info-mono { font-size: 10px; }
+/* your types (lowercased by cssEscape/normalization) */
+.poi-icon.poi-obeliskblue  { color:#00a5ff; }
+.poi-icon.poi-obeliskgreen { color:#14e800; }
+.poi-icon.poi-obeliskred   { color:#f70102; }
+.poi-icon.poi-tekcave      { color:#b84cff; }
+
+.poi-icon svg{
+  filter:
+    drop-shadow(0 0 2px rgba(0,0,0,.9))
+    drop-shadow(0 0 6px rgba(0,0,0,.35))
+    drop-shadow(0 0 4px currentColor);
 }
 
-  #controlsToggle { 
-    display: inline-flex; /* ✅ Show the Filters button */
+/* ============================================================
+   8) MOBILE OVERRIDES (<= 640px)
+   ============================================================ */
+@media (max-width: 640px){
+
+  /* Panel positions on mobile */
+  #dinoInfoPanel{ top:2px; right:218px; }
+  #modStylePanel{ top:2px; right:2px; }
+
+  /* Slightly larger panel for fat-fingers */
+  .floating-panel{
+    width: var(--panel-w-mobile);
+    font-size:11px;
   }
 
-  /* Hide dropdown row by default */
-  #topbar .controls { 
-    display: none; 
+  /* Filters toggle visible */
+  #controlsToggle{ display:inline-flex; }
+
+  /* Hide dropdown row unless toggled */
+  #topbar .controls{ display:none; }
+  #topbar.show-controls .controls{ display:flex; }
+
+  /* Controls layout */
+  #topbar .controls{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    width:100%;
+    gap:4px;
+    padding-top:1px;
   }
 
-  /* When topbar has class "show-controls", show them */
-  #topbar.show-controls .controls { 
-    display: flex; 
+  /* Dropdowns smaller */
+  #topbar select{
+    min-width:0;
+    max-width:none;
+    width:100%;
+    padding:5px 5px;
+    font-size:12px;
+    border-radius:4px;
   }
 
-  /* When shown, lay them out in small rows */
-  #topbar .controls {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center; /* ✅ (you had a typo here before) */
-    width: 100%;
-    gap: 4px;
-    padding-top: 1px;
+  #topbar .controls > select{
+    flex: 1 1 140px;
+    min-width:120px;
   }
 
-  /* Make dropdowns small on mobile */
-  #topbar select {
-    min-width: 0;
-    max-width: none;
-    width: 100%;
-
-    padding: 5px 5px;   /* 📏 Smaller height */
-    font-size: 12px;    /* 🔠 Smaller text */
-    border-radius: 4px;
+  #topbar{
+    padding:6px 6px 6px;
   }
 
-  /* Controls how wide each dropdown is allowed to be on mobile */
-  #topbar .controls > select {
-    flex: 1 1 140px; /* 🎛️ This is the BIGGEST “layout knob” for mobile */
-    min-width: 120px;
+  #topbar .title{
+    font-size:12px;
   }
 
-  /* Make the whole topbar shorter on mobile */
-  #topbar {
-    padding: 6px 6px 6px;
+  /* bgSelectWrap sizing */
+  #topbar .controls > #bgSelectWrap{
+    flex: 1 1 140px;
+    min-width:120px;
   }
-
-  /* Make the title smaller too */
-  #topbar .title {
-    font-size: 12px;
-  }
+  #bgSelectWrap select{ width:100%; }
 }
