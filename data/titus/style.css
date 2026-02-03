@@ -55,9 +55,9 @@ body {
 /* obelisks */
 
 
-.poi-icon.poi-obelisk_blue  .poi-fill { fill: #00a5ff; }
-.poi-icon.poi-obelisk_green .poi-fill { fill: #14e800; }
-.poi-icon.poi-obelisk_red   .poi-fill { fill: #f70102; }
+.poi-icon.poi-obelisk-blue  .poi-fill { fill: #00a5ff; }
+.poi-icon.poi-obelisk-green .poi-fill { fill: #14e800; }
+.poi-icon.poi-obelisk-red   .poi-fill { fill: #f70102; }
 
 .poi-icon svg {
   filter: drop-shadow(0 0 2px rgba(0,0,0,0.9))
