@@ -55,14 +55,14 @@ body {
 /* obelisks */
 
 
-/* default */
+/* default for anything unknown */
 .poi-icon { color: #ff00ff; }
 
-/* per-type */
-.poi-icon.poi-obelisk_blue  { color: #00a5ff; }
-.poi-icon.poi-obelisk_green { color: #14e800; }
-.poi-icon.poi-obelisk_red   { color: #f70102; }
-.poi-icon.poi-tekcave       { color: #b84cff; }
+/* specific types (match the normalized class names in JS) */
+.poi-icon.poi-obeliskblue  { color: #00a5ff; }
+.poi-icon.poi-obeliskgreen { color: #14e800; }
+.poi-icon.poi-obeliskred   { color: #f70102; }
+.poi-icon.poi-tekcave      { color: #b84cff; }
 
 .poi-icon svg {
   filter: drop-shadow(0 0 2px rgba(0,0,0,0.9))
