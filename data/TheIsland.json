@@ -173772,5 +173772,73 @@
         }
       ]
     }
+  },
+  "pois": {
+    "tributeTerminals": [
+      {
+        "id": "TributeTerminal_Blue_11",
+        "type": "obeliskBlue",
+        "label": "Blue Obelisk",
+        "x": 441.26,
+        "y": 1609.55,
+        "world": {
+          "X": -195138.08,
+          "Y": -196079.92,
+          "Z": 33843.363
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": 24.999952,
+          "Roll": -0.0
+        }
+      },
+      {
+        "id": "TributeTerminal_Green_12",
+        "type": "obeliskGreen",
+        "label": "Green Obelisk",
+        "x": 1556.91,
+        "y": 809.74,
+        "world": {
+          "X": 178452.42,
+          "Y": 71749.46,
+          "Z": -10071.467
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": 116.59936,
+          "Roll": -0.0
+        }
+      },
+      {
+        "id": "TributeTerminal_Red_12",
+        "type": "obeliskRed",
+        "label": "Red Obelisk",
+        "x": 245.85,
+        "y": 310.24,
+        "world": {
+          "X": -260575.23,
+          "Y": 239011.33,
+          "Z": -11209.397
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": -10.40036,
+          "Roll": -0.0
+        }
+      },
+      {
+        "id": "TributeTerminal_TekCave",
+        "type": "tekCave",
+        "label": "Tek Cave Terminal",
+        "x": 764.18,
+        "y": 1186.81,
+        "world": {
+          "X": -87004.34,
+          "Y": -54520.676,
+          "Z": 33454.82
+        },
+        "rot": null
+      }
+    ]
   }
 }
