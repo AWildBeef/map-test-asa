@@ -168,15 +168,6 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
-
-// ============================================================
-// POIs (Tribute Terminals / Obelisks)
-// ============================================================
-
-// ============================================================
-// POIs (Tribute Terminals / Obelisks)
-// ============================================================
-
 // ============================================================
 // POIs
 // ============================================================
@@ -194,24 +185,17 @@ function poiShapeForType(type) {
 }
 
 function makeObeliskIcon(type) {
-  const t = cssEscape(type || "unknown");
-
+  const cls = cssEscape(type);
   return L.divIcon({
-    className: `poi-icon poi-${t}`,
+    className: `poi-icon poi-${cls}`,
     html: `
-      <svg width="22" height="22" viewBox="0 0 24 24">
-        <!-- white border -->
-        <circle cx="12" cy="12" r="9.5" fill="white" opacity="0.95"/>
-
-        <!-- colored fill -->
-        <circle cx="12" cy="12" r="7.5"
-                fill="currentColor"
-                class="poi-fill"
-                opacity="0.9"/>
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2 4.5 20.5h15L12 2z" fill="white" opacity="0.95"/>
+        <path class="poi-fill" d="M12 5.2 7.2 18.8h9.6L12 5.2z" fill="currentColor" opacity="0.85"/>
       </svg>
     `,
     iconSize: [22, 22],
-    iconAnchor: [11, 11], // IMPORTANT: center it now
+    iconAnchor: [11, 20],
   });
 }
 
@@ -230,66 +214,17 @@ function makeTerminalIcon(type) {
   });
 }
 
-function makeTekCaveIcon(type) {
-  const t = cssEscape(type || "tekCave");
-
-  return L.divIcon({
-    className: `poi-icon poi-${t}`,
-    html: `
-      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-        <!-- Outer frame (tek-ish hex) -->
-        <path
-          d="M12 2.6 20.4 7.4v9.2L12 21.4 3.6 16.6V7.4L12 2.6Z"
-          fill="none"
-          stroke="white"
-          stroke-width="1.6"
-          opacity="0.95"
-          stroke-linejoin="round"
-        />
-
-        <!-- Inner glow plate -->
-        <path
-          d="M12 5.2 18 8.6v6.8L12 18.8 6 15.4V8.6L12 5.2Z"
-          fill="currentColor"
-          opacity="0.22"
-        />
-
-        <!-- Tek glyph (stylized T / circuit) -->
-        <path
-          d="M8 8.3h8v2H13v6.4h-2V10.3H8v-2Z"
-          fill="currentColor"
-          opacity="0.95"
-        />
-
-        <!-- Small “circuit notches” for extra tek flavor -->
-        <path
-          d="M6.6 12h2.1M15.3 12h2.1M12 6.9v1.8M12 15.3v1.8"
-          stroke="currentColor"
-          stroke-width="1.2"
-          stroke-linecap="round"
-          opacity="0.85"
-        />
-      </svg>
-    `,
-    iconSize: [22, 22],
-    iconAnchor: [11, 11], // centered
-  });
-}
-
-
 const poiIconCache = new Map();
 
 function iconForPoiType(type) {
-  const raw = String(type || "");
-  const norm = normalizePoiType(raw); // returns "tekCave", "obeliskBlue", etc.
-  const key = cssEscape(norm);
+  const key = String(type || "");
+  if (poiIconCache.has(key)) return poiIconCache.get(key);
 
-  if (norm === "tekCave") return makeTekCaveIcon(norm);
+  const shape = poiShapeForType(key);
+  const icon = (shape === "obelisk") ? makeObeliskIcon(key) : makeTerminalIcon(key);
 
-  const isObelisk =
-    norm === "obeliskBlue" || norm === "obeliskGreen" || norm === "obeliskRed";
-
-  return isObelisk ? makeObeliskIcon(norm) : makeTerminalIcon(norm);
+  poiIconCache.set(key, icon);
+  return icon;
 }
 
 function drawPois(cfg) {
@@ -317,7 +252,6 @@ function drawPois(cfg) {
       .bindTooltip(title, { direction: "top", opacity: 0.95 });
   }
 }
-
 
 function pickById(list, id) {
   return list.find(x => x.id === id) || list[0];
