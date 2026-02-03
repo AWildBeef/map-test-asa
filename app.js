@@ -148,58 +148,92 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
-function makeTributeIcon() {
+function cssEscape(s) {
+  return String(s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]/g, "_");
+}
+
+// Decide which icon shape to use (triangle for obelisks, square for terminals)
+function poiShapeForType(type) {
+  const t = String(type || "").toLowerCase();
+  if (t.startsWith("obelisk")) return "obelisk";
+  return "terminal";
+}
+
+function makeObeliskIcon(type) {
+  const t = cssEscape(type || "unknown");
+
   return L.divIcon({
-    className: "", // don't use default leaflet styles
+    className: `poi-icon poi-${t}`,
     html: `
-      <div style="
-        width:14px;height:14px;border-radius:50%;
-        background: rgba(0,255,255,0.85);
-        border: 2px solid rgba(255,255,255,0.95);
-        box-shadow: 0 0 10px rgba(0,255,255,0.9), 0 0 3px rgba(0,0,0,0.8);
-      "></div>
+      <svg width="22" height="22" viewBox="0 0 24 24">
+        <!-- white border -->
+        <circle cx="12" cy="12" r="9.5" fill="white" opacity="0.95"/>
+
+        <!-- colored fill -->
+        <circle cx="12" cy="12" r="7.5"
+                fill="currentColor"
+                class="poi-fill"
+                opacity="0.9"/>
+      </svg>
     `,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
+    iconSize: [22, 22],
+    iconAnchor: [11, 11], // IMPORTANT: center it now
   });
 }
 
-function drawTributeTerminals(cfg) {
+function makeTerminalIcon(type) {
+  const cls = cssEscape(type);
+  return L.divIcon({
+    className: `poi-icon poi-${cls}`,
+    html: `
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="5" y="5" width="14" height="14" rx="2.5" fill="white" opacity="0.95"/>
+        <rect class="poi-fill" x="7" y="7" width="10" height="10" rx="1.8" fill="currentColor" opacity="0.85"/>
+      </svg>
+    `,
+    iconSize: [22, 22],
+    iconAnchor: [11, 20],
+  });
+}
+
+const poiIconCache = new Map();
+
+function iconForPoiType(type) {
+  const key = String(type || "");
+  if (poiIconCache.has(key)) return poiIconCache.get(key);
+
+  const shape = poiShapeForType(key);
+  const icon = (shape === "obelisk") ? makeObeliskIcon(key) : makeTerminalIcon(key);
+
+  poiIconCache.set(key, icon);
+  return icon;
+}
+
+function drawPois(cfg) {
   if (!mapObj?.poiLayer) return;
 
   mapObj.poiLayer.clearLayers();
 
-  const pts = cfg?.pois?.tributeTerminals;
-  if (!Array.isArray(pts) || !pts.length) return;
-
-  const icon = makeTributeIcon();
+  // your current JSON location:
+  const pts = cfg?.pois?.tributeTerminals || [];
 
   for (const p of pts) {
     const x = Number(p.x);
     const y = Number(p.y);
     if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
 
-    const id = p.id || "Tribute Terminal";
+    const type  = p.type || "unknown";
+    const title = p.label || p.id || "POI";
 
-    // Note Leaflet CRS.Simple expects [lat=y, lng=x]
-    const marker = L.marker([y, x], { icon, keyboard: false });
-
-    // Optional: tooltip on hover
-    marker.bindTooltip(id, { direction: "top", offset: [0, -8], opacity: 0.9 });
-
-    // Optional: click popup with world coords
-    if (p.world) {
-      const w = p.world;
-      marker.bindPopup(`
-        <div style="font-family:system-ui; font-size:12px;">
-          <b>${escapeHtml(id)}</b><br>
-          pixel: (${fmt(x)}, ${fmt(y)})<br>
-          world: (${fmt(w.X)}, ${fmt(w.Y)}, ${fmt(w.Z)})
-        </div>
-      `);
-    }
-
-    marker.addTo(mapObj.poiLayer);
+    L.marker([y, x], {
+      icon: iconForPoiType(type),
+      title,
+      interactive: true
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(title, { direction: "top", opacity: 0.95 });
   }
 }
 
