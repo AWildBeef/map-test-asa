@@ -6,8 +6,8 @@ const ASSET_VER = "dev-2026-02-02-G";
 const RARITY_THRESHOLDS = [
   [0.05,   "very common"],
   [0.01,   "common"],
-  [0.002,   "uncommon"],
-  [0.0004,  "very uncommon"],
+  [0.004,   "uncommon"],
+  [0.0006,  "very uncommon"],
   [0.00006, "rare"],
   [-1,     "very rare"],
 ];
