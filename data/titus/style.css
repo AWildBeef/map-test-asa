@@ -15,6 +15,15 @@
   --focus: #7aa2ff;         /* ✨ Highlight color when you click a dropdown */
 }
 
+#dinoInfoPanel { top: 2px; right: 500px; }
+#modStylePanel { top: 2px; right: 2px; }
+
+@media (max-width: 640px) {
+  #dinoInfoPanel { top: 2px; right: 218px; }
+  #modStylePanel { top: 2px; right: 2px; }
+}
+
+
 /* ============================================================
    🧩 GLOBAL DEFAULTS
    ============================================================ */
@@ -545,6 +554,19 @@ body {
    Everything inside here ONLY happens when screen ≤ 640px
    ============================================================ */
 @media (max-width: 640px) {
+  
+    .floating-panel {
+    width: 200px;
+    font-size: 11px;
+  }
+
+  .floating-panel .fp-body { padding: 7px; }
+
+  .info-title { font-size: 10px; }
+  .entry-name { font-size: 10px; }
+  .entry-meta-line { font-size: 7px; }
+  .info-mono { font-size: 10px; }
+}
 
   #controlsToggle { 
     display: inline-flex; /* ✅ Show the Filters button */
