@@ -46,17 +46,23 @@ body {
 }
 
 /* base */
-.poi-icon { background: transparent !important; border: none !important; }
-.poi-icon .poi-fill { fill: #00d1ff; } /* default */
+./* default */
+.poi-icon .poi-fill { fill: #00d1ff; }
 
-/* types (match your exporter strings exactly) */
-.poi-obelisk_blue  .poi-fill { fill: #00a5ff; }
-.poi-obelisk_green .poi-fill { fill: #14e800; }
-.poi-obelisk_red   .poi-fill { fill: #f70102; }
+/* obelisks: match "obelisk_blue" and "obelisk-blue" */
+.poi-obelisk_blue  .poi-fill,
+.poi-obelisk-blue  .poi-fill { fill: #00a5ff; }
 
-.poi-tekcave .poi-fill { fill: #b84cff; }           /* example */
-.poi-tribute_terminal .poi-fill { fill: #00d1ff; }  /* example */
+.poi-obelisk_green .poi-fill,
+.poi-obelisk-green .poi-fill { fill: #14e800; }
 
+.poi-obelisk_red   .poi-fill,
+.poi-obelisk-red   .poi-fill { fill: #f70102; }
+
+/* terminals (examples) */
+.poi-tekcave .poi-fill { fill: #b84cff; }
+.poi-tribute_terminal .poi-fill,
+.poi-tribute-terminal .poi-fill { fill: #00d1ff; }
 /* optional readability */
 .poi-icon svg {
   filter: drop-shadow(0 0 2px rgba(0,0,0,0.9))
