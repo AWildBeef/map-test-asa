@@ -378,7 +378,7 @@ function initMap(cfg) {
   const poiLayer = L.layerGroup().addTo(map);
 
   return { map, layer, caveLayer, poiLayer, overlay, bounds };
-
+}
 function updateMapForCfg(cfg) {
   if (!mapObj) return;
 
