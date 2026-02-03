@@ -161,6 +161,40 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+// ============================================================
+// POIs (Tribute Terminals / Obelisks)
+// ============================================================
+const OBELISK_ICON = L.divIcon({
+  className: "poi-icon",
+  html: `
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2 4.5 20.5h15L12 2z" fill="white" opacity="0.95"/>
+      <path d="M12 5.2 7.2 18.8h9.6L12 5.2z" fill="#00d1ff" opacity="0.85"/>
+    </svg>
+  `,
+  iconSize: [22, 22],
+  iconAnchor: [11, 20],
+});
+
+function drawPois(cfg) {
+  if (!mapObj?.poiLayer) return;
+
+  mapObj.poiLayer.clearLayers();
+
+  const pts = cfg?.pois?.tributeTerminals || [];
+  for (const p of pts) {
+    const x = Number(p.x);
+    const y = Number(p.y);
+    if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+
+    const title = p.id || "Tribute Terminal";
+
+    L.marker([y, x], { icon: OBELISK_ICON, title })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(title, { direction: "top", opacity: 0.9 });
+  }
+}
+
 
 function pickById(list, id) {
   return list.find(x => x.id === id) || list[0];
@@ -685,6 +719,8 @@ async function loadMapByMeta(mapMeta) {
   } else {
     updateMapForCfg(currentCfg);      // fast path
   }
+  
+  drawPois(currentCfg);
 
   // 5) Panels + background dropdown
   ensurePanels();
