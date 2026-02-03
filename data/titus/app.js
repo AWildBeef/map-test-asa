@@ -72,6 +72,14 @@ function applyRarityToConfig(cfg) {
   }
 }
 
+function normalizePoiType(type) {
+  const raw = String(type || "").toLowerCase();
+  if (raw.includes("obelisk") && raw.includes("blue")) return "obelisk_blue";
+  if (raw.includes("obelisk") && raw.includes("green")) return "obelisk_green";
+  if (raw.includes("obelisk") && raw.includes("red")) return "obelisk_red";
+  if (raw.includes("tekcave")) return "tekcave";
+  return raw;
+}
 // ============================================================
 // DRAWING TUNING
 // ============================================================
@@ -166,11 +174,8 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 
 
-function cssEscape(s) {
-  return String(s || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9_-]/g, "_");
-}
+const t = cssEscape(normalizePoiType(type));
+className: `poi-icon poi-${t}`
 
 function makeObeliskIcon(type) {
   const t = cssEscape(type || "unknown");
