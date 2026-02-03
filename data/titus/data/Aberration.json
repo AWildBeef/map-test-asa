@@ -76989,5 +76989,61 @@
         }
       ]
     }
+  },
+  "pois": {
+    "tributeTerminals": [
+      {
+        "id": "TributeTerminal_Blue_6",
+        "type": "obeliskBlue",
+        "label": "Blue Obelisk",
+        "x": 329.82,
+        "y": 1659.47,
+        "world": {
+          "X": -271163.2,
+          "Y": -248230.67,
+          "Z": 66772.875
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_Purple_C_1",
+        "type": "tekCave",
+        "label": "Rockwell Terminal",
+        "x": 753.02,
+        "y": 1173.11,
+        "world": {
+          "X": -105852.445,
+          "Y": -58246.19,
+          "Z": -103001.42
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_Red_6",
+        "type": "obeliskRed",
+        "label": "Red Obelisk",
+        "x": 417.35,
+        "y": 391.42,
+        "world": {
+          "X": -236973.22,
+          "Y": 247101.4,
+          "Z": 53462.562
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_Green_6",
+        "type": "obeliskGreen",
+        "label": "Green Obelisk",
+        "x": 1593.28,
+        "y": 1585.81,
+        "world": {
+          "X": 222375.3,
+          "Y": -219457.81,
+          "Z": 57330.586
+        },
+        "rot": null
+      }
+    ]
   }
 }
