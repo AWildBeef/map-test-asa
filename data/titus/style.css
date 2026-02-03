@@ -235,7 +235,7 @@ body{
 .floating-panel.dragging .fp-header{ cursor:grabbing; }
 
 .floating-panel .fp-title{
-  font-weight:800;
+  font-weight:600;
   font-size:13px;
   letter-spacing:.3px;
 }
@@ -283,17 +283,17 @@ body{
 /* ============================================================
    6) INSIDE PANELS — Dino Info styling
    ============================================================ */
-.info-title{
-  font-weight:800;
-  font-size:14px;
+.info-title{    /* Dino Name */
+  font-weight:700;
+  font-size:18px;
   margin-bottom:8px;
-  color:#ff00ff;
+  color:var(--muted);
 }
 
-.info-subtitle{
+.info-subtitle{    /* "Spawn Entries (#) */
   font-size:11px;
   font-weight:700;
-  color:#00ff00;
+  color:var(--muted);
   margin-bottom:6px;
   letter-spacing:.2px;
   text-transform:uppercase;
@@ -310,14 +310,15 @@ body{
   margin-bottom:0;
 }
 
-.info-row{
+.info-row{ /* "Blueprint" & "Nametag" */
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
   margin-top:8px;
-  color:#ff0000;
+  color:var(--muted);
   font-size:12px;
+  font-weight:700;
 }
 
 /* Copy button */
@@ -328,7 +329,7 @@ body{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  background:var(--panel);
+  background:#ff0000;
 }
 
 /* Icon */
@@ -336,7 +337,7 @@ body{
   content:"";
   width:16px;
   height:16px;
-  background:currentColor;
+  background:var(--muted);
 
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -345,7 +346,7 @@ body{
 }
 .info-copy:hover::before{ opacity:1; }
 
-.info-mono{
+.info-mono{   /* The scrollable BP and Nametag Fields */
   margin-top:2px;
   padding:4px 6px;
   border-radius:6px;
@@ -356,6 +357,7 @@ body{
   font-size:12px;
   color:#ff9900;
   line-height:1.176;
+  font-weight:700;
 
   white-space:nowrap;
   overflow-x:auto;
@@ -369,15 +371,26 @@ body{
   padding:6px 5px;
   border-radius:6px;
 }
-.entry-row:hover{ background:rgba(255,255,255,.04); }
+.entry-row:hover{ 
+  background:rgba(255,255,255,.04); 
+}
 
-.entry-main{ flex:1; min-width:0; }
-.entry-name{ font-size:13px; font-weight:800; }
-.entry-meta{ margin-top:2px; font-size:12px; color:#0099ff; }
+.entry-main{ 
+  flex:1; min-width:0; 
+}
+.entry-name{ 
+  font-size:14px; 
+  font-weight:800; 
+  color:#00ff00;
+}
+.entry-meta{ 
+  margin-top:2px; 
+  font-size:12px; 
+  color:#0000ff; }
 
 .entry-meta-line{
-  font-size:10px;
-  text-indent:1mm;
+  font-size:11px;
+  text-indent:2mm;
   font-stretch:semi-condensed;
   font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
