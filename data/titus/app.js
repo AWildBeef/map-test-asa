@@ -216,18 +216,10 @@ function iconForPoiType(type) {
     raw.includes("green") ||
     raw.includes("red");
 
-  const key = raw;
-
-  if (poiIconCache.has(key)) return poiIconCache.get(key);
-
-  const icon = isObelisk
+  return isObelisk
     ? makeObeliskIcon(raw)
     : makeTerminalIcon(raw);
-
-  poiIconCache.set(key, icon);
-  return icon;
 }
-
 
 function drawPois(cfg) {
   if (!mapObj?.poiLayer) return;
