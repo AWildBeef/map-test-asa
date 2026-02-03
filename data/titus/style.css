@@ -15,7 +15,7 @@
 
   /* Panel sizing knobs (easy to tune) */
   --panel-w: 255px;
-  --panel-w-mobile: 180px;
+  --panel-w-mobile: 190px;
   --panel-radius: 12px;
 
   --panel-header-pad: 6px;
@@ -413,7 +413,7 @@ body{
 @media (max-width: 640px){
 
   /* Panel positions on mobile */
-  #dinoInfoPanel{ top:2px; right:218px; }
+  #dinoInfoPanel{ top:2px; right:208px; }
   #modStylePanel{ top:2px; right:2px; }
 
   /* Slightly larger panel for fat-fingers */
