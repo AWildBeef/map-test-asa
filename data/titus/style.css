@@ -235,8 +235,8 @@ body{
 .floating-panel.dragging .fp-header{ cursor:grabbing; }
 
 .floating-panel .fp-title{  /* The header "Dino Info" */
-  font-weight:600;
-  font-size:13px;
+  font-weight:500;
+  font-size:14px;
   letter-spacing:.3px;
 }
 
@@ -285,14 +285,14 @@ body{
    ============================================================ */
 .info-title{    /* Dino Name */
   font-weight:600;
-  font-size:20px;
+  font-size:22px;
   margin-bottom:8px;
   color:var(--muted);
 }
 
 .info-subtitle{    /* "Spawn Entries (#) */
   font-size:11px;
-  font-weight:700;
+  font-weight:650;
   color:var(--muted);
   margin-bottom:6px;
   letter-spacing:.2px;
@@ -318,7 +318,7 @@ body{
   margin-top:8px;
   color:var(--muted);
   font-size:11px;
-  font-weight:700;
+  font-weight:650;
   text-transform:uppercase;
 }
 
@@ -330,7 +330,7 @@ body{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  background:var(--text);
+  background:var(--panel);
 }
 
 /* Icon */
@@ -338,7 +338,7 @@ body{
   content:"";
   width:16px;
   height:16px;
-  background:var(--muted);
+  background:var(--text);
 
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -381,7 +381,7 @@ body{
 }
 .entry-name{   /* The actual spawn entry name */
   font-size:14px; 
-  font-weight:800; 
+  font-weight:650; 
   color:var(--muted);
 }
 .entry-meta{ 
@@ -393,7 +393,7 @@ body{
   font-size:11px;
   text-indent:2mm;
   font-stretch:semi-condensed;
-  font-weight:600;
+  font-weight:500;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
   line-height:1.25;
