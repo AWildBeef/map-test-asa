@@ -31653,6 +31653,643 @@
         }
       }
     },
+    "Lost Colony": {
+      "dinos": {
+        "Runic Flame Wyvern": {
+          "bpPath": "/RunicWyverns/DinoEntries/RunicFlameWyvern/Runic_Wyvern_Character_BP_Flame-V2.Runic_Wyvern_Character_BP_Flame-V2_C",
+          "displayName": "Runic Flame Wyvern",
+          "nameTag": "RW_Flame",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Mountain_LC_C",
+              "groupWeight": 0.06,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.02,
+              "spawnChances": [],
+              "weight": 0.0,
+              "display": {
+                "weightText": "Weight: 0.06",
+                "limitText": "Max spawn: 2%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 581.23,
+                  "y": 517.57,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB588002_2043328393",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB588002_2043330395",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 708.6,
+                  "y": 262.7,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB588002_2099082432",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB588002_2099085434",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 772.1,
+                  "y": 262.7,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB598002_1172103635",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB598002_1172125637",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 772.23,
+                  "y": 326.32,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB598002_1320414662",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB598002_1320417664",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 835.85,
+                  "y": 453.57,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB598002_1373342704",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB598002_1373345706",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 390.36,
+                  "y": 962.68,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5A8002_1517725021",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5A8002_1517728023",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1217.72,
+                  "y": 199.08,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_2047438903",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_2047441905",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1345.09,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_2062288921",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_2062292923",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1345.22,
+                  "y": 262.57,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_2091429945",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_2091432947",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1918.2,
+                  "y": 326.32,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB608002_1600989620",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB608002_1600992622",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1981.83,
+                  "y": 326.32,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB608002_1600994623",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB608002_1600997625",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1727.33,
+                  "y": 517.07,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB608002_1634110641",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB608002_1634113643",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1662.71,
+                  "y": 771.69,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB618002_1260274015",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB618002_1260298017",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 517.86,
+                  "y": 1662.79,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB618002_1923390207",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB618002_1923393209",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "points": []
+            }
+          ]
+        },
+        "Runic Glacial Wyvern": {
+          "bpPath": "/RunicWyverns/DinoEntries/RunicGlacialWyvern/Runic_Wyvern_Character_BP_Glacial-V2.Runic_Wyvern_Character_BP_Glacial-V2_C",
+          "displayName": "Runic Glacial Wyvern",
+          "nameTag": "RW_Glacial",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Glacier_LC_C",
+              "groupWeight": 0.032,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.07,
+              "spawnChances": [],
+              "weight": 0.0,
+              "display": {
+                "weightText": "Weight: 0.032",
+                "limitText": "Max spawn: 7%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 199.49,
+                  "y": 1281.05,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB548002_1705525443",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB548002_1705528445",
+                  "min_desired_npc": 4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "points": []
+            }
+          ]
+        },
+        "Runic Lantern Halo Wyvern": {
+          "bpPath": "/RunicWyverns/DinoEntries/RunicHaloWyvern/RW_Charater_BP_HaloWyvern_Lantern.RW_Charater_BP_HaloWyvern_Lantern_C",
+          "displayName": "Runic Lantern Halo Wyvern",
+          "nameTag": "RW_HaloLantern",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
+              "groupWeight": 0.02,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.03,
+              "spawnChances": [],
+              "weight": 0.0,
+              "display": {
+                "weightText": "Weight: 0.02",
+                "limitText": "Max spawn: 3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 8.62,
+                  "y": 199.45,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB488002_1530681670",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB488002_1530700672",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "points": []
+            }
+          ]
+        },
+        "Runic Quartz Wyvern": {
+          "bpPath": "/RunicWyverns/DinoEntries/RunicCrystalWyv/RunicQuartzWyv/RW_Character_BP_Quartz.RW_Character_BP_Quartz_C",
+          "displayName": "Runic Quartz Wyvern",
+          "nameTag": "RW_Quartz",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Valley_LC_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.05,
+              "spawnChances": [],
+              "weight": 0.0,
+              "display": {
+                "weightText": "Weight: 0.05",
+                "limitText": "Max spawn: 5%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 199.49,
+                  "y": 772.06,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB498002_1097383942",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB498002_1097405944",
+                  "min_desired_npc": 10,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "points": []
+            }
+          ]
+        },
+        "Runic Spark Wyvern": {
+          "bpPath": "/RunicWyverns/DinoEntries/RunicSparkWyvern/Runic_Wyvern_Character_BP_Spark-V2.Runic_Wyvern_Character_BP_Spark-V2_C",
+          "displayName": "Runic Spark Wyvern",
+          "nameTag": "RW_Spark",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Tundra_Ridge_C",
+              "groupWeight": 0.08,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.25,
+              "spawnChances": [],
+              "weight": 0.0,
+              "display": {
+                "weightText": "Weight: 0.08",
+                "limitText": "Max spawn: 25%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 8.62,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB458002_2134323726",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB458002_2134303725",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 8.62,
+                  "y": 390.32,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB488002_1540754679",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB488002_1540756681",
+                  "min_desired_npc": 10,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 8.62,
+                  "y": 835.69,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB488002_1590886700",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB488002_1590907702",
+                  "min_desired_npc": 10,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 199.49,
+                  "y": 835.69,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB4A8002_1593175277",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB4A8002_1593198279",
+                  "min_desired_npc": 10,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 135.87,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB4D8002_1700258951",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB4D8002_1700231949",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.98,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB4D8002_1719891966",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB4D8002_1719870964",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 644.86,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB4D8002_1719903976",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB4D8002_1719905978",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 326.74,
+                  "y": 199.45,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB4D8002_1921621988",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB4D8002_1921624990",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 263.11,
+                  "y": 453.95,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB4D8002_2067713011",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB4D8002_2067711009",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 263.11,
+                  "y": 1217.43,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB548002_1714740449",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB548002_1714743451",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 326.74,
+                  "y": 453.95,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB548002_2007434461",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB548002_2007456463",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 326.74,
+                  "y": 1917.29,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB568002_1483591852",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB568002_1483616854",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 517.61,
+                  "y": 199.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB578002_1547117153",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB578002_1547093151",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 644.85,
+                  "y": 199.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB578002_1547121156",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB578002_1547118154",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 263.11,
+                  "y": 390.32,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB588002_1860731345",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB588002_1860753347",
+                  "min_desired_npc": 10,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 326.86,
+                  "y": 390.32,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB588002_1905119351",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB588002_1905143353",
+                  "min_desired_npc": 10,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 326.86,
+                  "y": 326.7,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB588002_1905144354",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB588002_1905147356",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 390.49,
+                  "y": 326.7,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB588002_1936287360",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB588002_1936290362",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 454.11,
+                  "y": 326.7,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB588002_1998313366",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB588002_1998316368",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 899.35,
+                  "y": 326.32,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB598002_1334608674",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB598002_1334611676",
+                  "min_desired_npc": 15,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 962.97,
+                  "y": 389.95,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB598002_1334612677",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB598002_1334615679",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 899.35,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_1572576852",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_1572599854",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 962.97,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_1576612855",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_1576635857",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 962.97,
+                  "y": 72.2,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_1588844858",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_1588866860",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1026.6,
+                  "y": 72.2,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_1982953876",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_1982977878",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1026.6,
+                  "y": 8.58,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB5D8002_1996044882",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB5D8002_1996066884",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1918.08,
+                  "y": 262.7,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB608002_1383869584",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB608002_1383892586",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "points": []
+            }
+          ]
+        },
+        "Runic Venom Wyvern": {
+          "bpPath": "/RunicWyverns/DinoEntries/RunicVenomWyvern/Runic_Wyvern_Character_BP_Venom-V2.Runic_Wyvern_Character_BP_Venom-V2_C",
+          "displayName": "Runic Venom Wyvern",
+          "nameTag": "RW_Venom",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Hotsprings_LC_C",
+              "groupWeight": 0.04,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.025,
+              "spawnChances": [],
+              "weight": 0.0,
+              "display": {
+                "weightText": "Weight: 0.04",
+                "limitText": "Max spawn: 2.5%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 8.62,
+                  "y": 199.45,
+                  "w": 58.48,
+                  "h": 58.48,
+                  "manager": "NPCZoneManager_UAID_C87F54C5CAFB488002_1530681670",
+                  "spawn_volume": "NPCZoneSpawnVolume_UAID_C87F54C5CAFB488002_1530700672",
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "points": []
+            }
+          ]
+        }
+      }
+    },
     "Astraeos": {
       "dinos": {
         "Runic Flame Wyvern": {
