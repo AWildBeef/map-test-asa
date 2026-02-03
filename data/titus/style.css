@@ -390,10 +390,10 @@ body{
   color:#0000ff; }
 
 .entry-meta-line{
-  font-size:11px;
+  font-size:12px;
   text-indent:2mm;
   font-stretch:semi-condensed;
-  font-weight:500;
+  font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
   line-height:1.25;
