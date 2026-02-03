@@ -180,7 +180,7 @@ function makeObeliskIcon(type) {
     html: `
       <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 2 4.5 20.5h15L12 2z" fill="white" opacity="0.95"/>
-        <path class="poi-fill" d="M12 5.2 7.2 18.8h9.6L12 5.2z" opacity="0.85"/>
+        <path class="poi-fill" d="M12 5.2 7.2 18.8h9.6L12 5.2z" fill="currentColor" opacity="0.85"/>
       </svg>
     `,
     iconSize: [22, 22],
@@ -196,7 +196,7 @@ function makeTerminalIcon(type) {
     html: `
       <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
         <rect x="5" y="5" width="14" height="14" rx="2.5" fill="white" opacity="0.95"/>
-        <rect class="poi-fill" x="7" y="7" width="10" height="10" rx="1.8" opacity="0.85"/>
+        <rect class="poi-fill" x="7" y="7" width="10" height="10" rx="1.8" fill="currentColor" opacity="0.85"/>
       </svg>
     `,
     iconSize: [22, 22],
