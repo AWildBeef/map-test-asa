@@ -172,7 +172,11 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // POIs (Tribute Terminals / Obelisks)
 // ============================================================
-
+function essEscape(s) {
+  return String(s || "")
+  .toLowerCase ()
+  .replace(/[^a-z0-9_-]/g, "_");
+}
 
 const t = cssEscape(normalizePoiType(type));
 className: `poi-icon poi-${t}`
