@@ -241215,5 +241215,65 @@
         }
       ]
     }
+  },
+  "pois": {
+    "tributeTerminals": [
+      {
+        "id": "TributeTerminal_Desert_12",
+        "type": "titanDesert",
+        "label": "Desert Titan Terminal",
+        "x": 1983.97,
+        "y": -103.2,
+        "world": {
+          "X": 321458.4,
+          "Y": 377459.28,
+          "Z": -60354.96
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_Forest_C_0",
+        "type": "titanForest",
+        "label": "Forest Titan Terminal",
+        "x": 1036.68,
+        "y": 1838.54,
+        "world": {
+          "X": 4246.8315,
+          "Y": -272759.75,
+          "Z": -146041.25
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_FZ_C_1",
+        "type": "tekCave",
+        "label": "King Titan Terminal",
+        "x": 1005.36,
+        "y": 2134.64,
+        "world": {
+          "X": -6242.4155,
+          "Y": -371913.97,
+          "Z": 36809.02
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": 25.400045,
+          "Roll": -0.0
+        }
+      },
+      {
+        "id": "TributeTerminal_Snow_C_1",
+        "type": "titanIce",
+        "label": "Ice Titan Terminal",
+        "x": 1880.59,
+        "y": 2057.84,
+        "world": {
+          "X": 286839.1,
+          "Y": -346195.78,
+          "Z": -40757.38
+        },
+        "rot": null
+      }
+    ]
   }
 }

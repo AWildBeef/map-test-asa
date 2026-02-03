@@ -466787,5 +466787,39 @@
         }
       ]
     }
+  },
+  "pois": {
+    "tributeTerminals": [
+      {
+        "id": "TributeTerminal_Blue_C_UAID_60CF847B67A3BB6802_1198583263",
+        "type": "obeliskBlue",
+        "label": "Blue Obelisk",
+        "x": 1875.72,
+        "y": 1872.36,
+        "world": {
+          "X": 665405.4,
+          "Y": -662777.7,
+          "Z": 14059.876
+        },
+        "rot": null
+      },
+      {
+        "id": "TributeTerminal_Green_C_UAID_F02F74C9A86AB30D02_1511851727",
+        "type": "obeliskGreen",
+        "label": "Green Obelisk",
+        "x": 325.35,
+        "y": 1330.31,
+        "world": {
+          "X": -545822.44,
+          "Y": -239305.58,
+          "Z": 30695.914
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": -90.0,
+          "Roll": 0.0
+        }
+      }
+    ]
   }
 }
