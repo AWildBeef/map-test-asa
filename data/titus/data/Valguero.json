@@ -288320,5 +288320,60 @@
         }
       ]
     }
+  },
+  "pois": {
+    "tributeTerminals": [
+      {
+        "id": "TributeTerminal_Blue_11",
+        "type": "obeliskBlue",
+        "label": "Blue Obelisk",
+        "x": 354.2,
+        "y": 1856.27,
+        "world": {
+          "X": -266874.78,
+          "Y": -331607.12,
+          "Z": 627.3628
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": 24.999952,
+          "Roll": -0.0
+        }
+      },
+      {
+        "id": "TributeTerminal_Green_12",
+        "type": "obeliskGreen",
+        "label": "Green Obelisk",
+        "x": 1560.23,
+        "y": 1047.29,
+        "world": {
+          "X": 213654.42,
+          "Y": -9281.539,
+          "Z": -12788.467
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": 116.59936,
+          "Roll": -0.0
+        }
+      },
+      {
+        "id": "TributeTerminal_Red_12",
+        "type": "obeliskRed",
+        "label": "Red Obelisk",
+        "x": 351.35,
+        "y": 487.98,
+        "world": {
+          "X": -268007.25,
+          "Y": 213572.33,
+          "Z": -147.39746
+        },
+        "rot": {
+          "Pitch": 0.0,
+          "Yaw": -10.40036,
+          "Roll": -0.0
+        }
+      }
+    ]
   }
 }
