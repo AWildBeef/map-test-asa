@@ -206,14 +206,24 @@ function makeTerminalIcon(type) {
 
 // Optional cache so we don't recreate icons every redraw
 const poiIconCache = new Map();
+
 function iconForPoiType(type) {
-  const t = type || "unknown";
-  const key = t;
+  const raw = String(type || "").toLowerCase();
+
+  const isObelisk =
+    raw.includes("obelisk") ||
+    raw.includes("blue") ||
+    raw.includes("green") ||
+    raw.includes("red");
+
+  const key = raw;
 
   if (poiIconCache.has(key)) return poiIconCache.get(key);
 
-  // Example: triangle for obelisks, square-ish for terminals
-  const icon = t.startsWith("obelisk_") ? makeObeliskIcon(t) : makeTerminalIcon(t);
+  const icon = isObelisk
+    ? makeObeliskIcon(raw)
+    : makeTerminalIcon(raw);
+
   poiIconCache.set(key, icon);
   return icon;
 }
