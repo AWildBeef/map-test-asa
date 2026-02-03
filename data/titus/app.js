@@ -198,6 +198,8 @@ function makeObeliskIcon(type) {
         <circle cx="12" cy="12" r="7.5"
                 fill="currentColor"
                 class="poi-fill"
+                stroke="Black"
+                stroke-width="1.2"
                 opacity="0.9"/>
       </svg>
     `,
@@ -212,8 +214,38 @@ function makeTerminalIcon(type) {
     className: `poi-icon poi-${cls}`,
     html: `
       <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="5" y="5" width="14" height="14" rx="2.5" fill="white" opacity="0.95"/>
-        <rect class="poi-fill" x="7" y="7" width="10" height="10" rx="1.8" fill="currentColor" opacity="0.85"/>
+        <!-- Outer frame (tek-ish hex) -->
+        <path
+          d="M12 2.6 20.4 7.4v9.2L12 21.4 3.6 16.6V7.4L12 2.6Z"
+          fill="none"
+          stroke="white"
+          stroke-width="1.6"
+          opacity="0.95"
+          stroke-linejoin="round"
+        />
+
+        <!-- Inner glow plate -->
+        <path
+          d="M12 5.2 18 8.6v6.8L12 18.8 6 15.4V8.6L12 5.2Z"
+          fill="currentColor"
+          opacity="0.22"
+        />
+
+        <!-- Tek glyph (stylized T / circuit) -->
+        <path
+          d="M8 8.3h8v2H13v6.4h-2V10.3H8v-2Z"
+          fill="currentColor"
+          opacity="0.95"
+        />
+
+        <!-- Small “circuit notches” for extra tek flavor -->
+        <path
+          d="M6.6 12h2.1M15.3 12h2.1M12 6.9v1.8M12 15.3v1.8"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+          opacity="0.85"
+        />
       </svg>
     `,
     iconSize: [22, 22],
