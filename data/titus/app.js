@@ -194,17 +194,24 @@ function poiShapeForType(type) {
 }
 
 function makeObeliskIcon(type) {
-  const cls = cssEscape(type);
+  const t = cssEscape(type || "unknown");
+
   return L.divIcon({
-    className: `poi-icon poi-${cls}`,
+    className: `poi-icon poi-${t}`,
     html: `
-      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 2 4.5 20.5h15L12 2z" fill="white" opacity="0.95"/>
-        <path class="poi-fill" d="M12 5.2 7.2 18.8h9.6L12 5.2z" fill="currentColor" opacity="0.85"/>
+      <svg width="22" height="22" viewBox="0 0 24 24">
+        <!-- white border -->
+        <circle cx="12" cy="12" r="9.5" fill="white" opacity="0.95"/>
+
+        <!-- colored fill -->
+        <circle cx="12" cy="12" r="7.5"
+                fill="currentColor"
+                class="poi-fill"
+                opacity="0.9"/>
       </svg>
     `,
     iconSize: [22, 22],
-    iconAnchor: [11, 20],
+    iconAnchor: [11, 11], // IMPORTANT: center it now
   });
 }
 
