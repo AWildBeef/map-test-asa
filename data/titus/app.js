@@ -189,7 +189,7 @@ function makeObeliskIcon(type) {
     html: `
       <svg width="22" height="22" viewBox="0 0 24 24">
         <!-- white border -->
-        <circle cx="12" cy="12" r="9.5" fill="white" opacity="0.95"/>
+        <circle cx="12" cy="12" r="7.7" fill="white" opacity="0.95"/>
 
         <!-- colored fill -->
         <circle cx="12" cy="12" r="7.5"
