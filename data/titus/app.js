@@ -172,17 +172,28 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // POIs (Tribute Terminals / Obelisks)
 // ============================================================
-function essEscape(s) {
+
+// ============================================================
+// POIs (Tribute Terminals / Obelisks)
+// ============================================================
+
+function cssEscape(s) {
   return String(s || "")
-  .toLowerCase ()
-  .replace(/[^a-z0-9_-]/g, "_");
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]/g, "_");
 }
 
-const t = cssEscape(normalizePoiType(type));
-className: `poi-icon poi-${t}`
+function normalizePoiType(type) {
+  const raw = String(type || "").toLowerCase();
+  if (raw.includes("obelisk") && raw.includes("blue"))  return "obelisk_blue";
+  if (raw.includes("obelisk") && raw.includes("green")) return "obelisk_green";
+  if (raw.includes("obelisk") && raw.includes("red"))   return "obelisk_red";
+  if (raw.includes("tekcave")) return "tekcave";
+  return raw;
+}
 
 function makeObeliskIcon(type) {
-  const t = cssEscape(type || "unknown");
+  const t = cssEscape(normalizePoiType(type));
 
   return L.divIcon({
     className: `poi-icon poi-${t}`,
@@ -198,7 +209,7 @@ function makeObeliskIcon(type) {
 }
 
 function makeTerminalIcon(type) {
-  const t = cssEscape(type || "unknown");
+  const t = cssEscape(normalizePoiType(type));
 
   return L.divIcon({
     className: `poi-icon poi-${t}`,
@@ -213,21 +224,21 @@ function makeTerminalIcon(type) {
   });
 }
 
-// Optional cache so we don't recreate icons every redraw
-const poiIconCache = new Map();
-
 function iconForPoiType(type) {
   const raw = String(type || "").toLowerCase();
-
   const isObelisk =
     raw.includes("obelisk") ||
-    raw.includes("blue") ||
-    raw.includes("green") ||
-    raw.includes("red");
+    raw.includes("obeliskblue") ||
+    raw.includes("obeliskgreen") ||
+    raw.includes("obeliskred") ||
+    raw.includes("blue obelisk") ||
+    raw.includes("green obelisk") ||
+    raw.includes("red obelisk") ||
+    raw === "obelisk_blue" ||
+    raw === "obelisk_green" ||
+    raw === "obelisk_red";
 
-  return isObelisk
-    ? makeObeliskIcon(raw)
-    : makeTerminalIcon(raw);
+  return isObelisk ? makeObeliskIcon(type) : makeTerminalIcon(type);
 }
 
 function drawPois(cfg) {
