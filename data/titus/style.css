@@ -424,11 +424,6 @@ body{
    8) MOBILE OVERRIDES (<= 640px)
    ============================================================ */
 @media (max-width: 640px){
-
-  /* Panel positions on mobile */
-  #dinoInfoPanel{ top:2px; right:208px; }
-  #modStylePanel{ top:2px; right:2px; }
-
   /* Slightly larger panel for fat-fingers */
   .floating-panel{
     width: var(--panel-w-mobile);
@@ -436,7 +431,7 @@ body{
   }
   
   .floating-panel .fp-title{
-    color:#ffff00;
+    color:var(--muted);
     font-weight:600;
     font-size:11px;
     letter-spacing:.2px;
