@@ -167,8 +167,9 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 
 
 function cssEscape(s) {
-  // safe-ish for classnames
-  return String(s || "").replace(/[^a-z0-9_-]/gi, "_");
+  return String(s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]/g, "_");
 }
 
 function makeObeliskIcon(type) {
