@@ -177,26 +177,26 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // POIs (Tribute Terminals / Obelisks)
 // ============================================================
 
+// ============================================================
+// POIs
+// ============================================================
 function cssEscape(s) {
   return String(s || "")
     .toLowerCase()
     .replace(/[^a-z0-9_-]/g, "_");
 }
 
-function normalizePoiType(type) {
-  const raw = String(type || "").toLowerCase();
-  if (raw.includes("obelisk") && raw.includes("blue"))  return "obelisk_blue";
-  if (raw.includes("obelisk") && raw.includes("green")) return "obelisk_green";
-  if (raw.includes("obelisk") && raw.includes("red"))   return "obelisk_red";
-  if (raw.includes("tekcave")) return "tekcave";
-  return raw;
+// Decide which icon shape to use (triangle for obelisks, square for terminals)
+function poiShapeForType(type) {
+  const t = String(type || "").toLowerCase();
+  if (t.startsWith("obelisk")) return "obelisk";
+  return "terminal";
 }
 
 function makeObeliskIcon(type) {
-  const t = cssEscape(normalizePoiType(type));
-
+  const cls = cssEscape(type);
   return L.divIcon({
-    className: `poi-icon poi-${t}`,
+    className: `poi-icon poi-${cls}`,
     html: `
       <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 2 4.5 20.5h15L12 2z" fill="white" opacity="0.95"/>
@@ -209,10 +209,9 @@ function makeObeliskIcon(type) {
 }
 
 function makeTerminalIcon(type) {
-  const t = cssEscape(normalizePoiType(type));
-
+  const cls = cssEscape(type);
   return L.divIcon({
-    className: `poi-icon poi-${t}`,
+    className: `poi-icon poi-${cls}`,
     html: `
       <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
         <rect x="5" y="5" width="14" height="14" rx="2.5" fill="white" opacity="0.95"/>
@@ -224,21 +223,17 @@ function makeTerminalIcon(type) {
   });
 }
 
-function iconForPoiType(type) {
-  const raw = String(type || "").toLowerCase();
-  const isObelisk =
-    raw.includes("obelisk") ||
-    raw.includes("obeliskblue") ||
-    raw.includes("obeliskgreen") ||
-    raw.includes("obeliskred") ||
-    raw.includes("blue obelisk") ||
-    raw.includes("green obelisk") ||
-    raw.includes("red obelisk") ||
-    raw === "obelisk_blue" ||
-    raw === "obelisk_green" ||
-    raw === "obelisk_red";
+const poiIconCache = new Map();
 
-  return isObelisk ? makeObeliskIcon(type) : makeTerminalIcon(type);
+function iconForPoiType(type) {
+  const key = String(type || "");
+  if (poiIconCache.has(key)) return poiIconCache.get(key);
+
+  const shape = poiShapeForType(key);
+  const icon = (shape === "obelisk") ? makeObeliskIcon(key) : makeTerminalIcon(key);
+
+  poiIconCache.set(key, icon);
+  return icon;
 }
 
 function drawPois(cfg) {
@@ -246,13 +241,15 @@ function drawPois(cfg) {
 
   mapObj.poiLayer.clearLayers();
 
+  // your current JSON location:
   const pts = cfg?.pois?.tributeTerminals || [];
+
   for (const p of pts) {
     const x = Number(p.x);
     const y = Number(p.y);
     if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
 
-    const type = p.type || "unknown";
+    const type  = p.type || "unknown";
     const title = p.label || p.id || "POI";
 
     L.marker([y, x], {
