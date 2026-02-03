@@ -32,10 +32,8 @@
 
 html, body{ height:100%; }
 
-#mapWrap,
-#map,
-.leaflet-container {
-  background: var(--bg) !important;
+#mapWrap .leaflet-container {
+  background: var(--bg);
 }
 
 body{
