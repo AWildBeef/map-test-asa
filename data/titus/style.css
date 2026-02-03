@@ -47,18 +47,10 @@ body {
 
 /* base */
 ./* default */
-.poi-icon .poi-fill { fill: #00d1ff; }
-
-/* obelisks: match "obelisk_blue" and "obelisk-blue" */
-.poi-obelisk_blue  .poi-fill,
-.poi-obelisk-blue  .poi-fill { fill: #00a5ff; }
-
-.poi-obelisk_green .poi-fill,
-.poi-obelisk-green .poi-fill { fill: #14e800; }
-
-.poi-obelisk_red   .poi-fill,
-.poi-obelisk-red   .poi-fill { fill: #f70102; }
-
+.poi-icon svg .poi-fill { fill: currentColor; }
+.poi-obelisk_blue  { color: #00a5ff; }
+.poi-obelisk_green { color: #14e800; }
+.poi-obelisk_red   { color: #f70102; }
 /* terminals (examples) */
 .poi-tekcave .poi-fill { fill: #b84cff; }
 
