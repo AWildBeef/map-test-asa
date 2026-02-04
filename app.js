@@ -126,6 +126,7 @@ const SOURCES = [
   { id: "Xyphias'CreaturesDickinsonia", name: "Xyphias' Creatures: Dickinsonia", file: "data/mods/Xyphias'CreaturesDickinsonia.json" },
   { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json" },
   { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
+  { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json" },
 ];
 
 // ============================================================
