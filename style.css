@@ -16,6 +16,8 @@
   /* Panel sizing knobs (easy to tune) */
   --panel-w: 420px;
   --panel-w-mobile: 210px;
+  --dinoPanel-w-mobile: 210px;
+  --modPanel-w-mobile: 150px;
   --panel-radius: 12px;
 
   --panel-header-pad: 3px;
@@ -432,6 +434,15 @@ body{
   .floating-panel{
     width: var(--panel-w-mobile);
     font-size:11px;
+  }
+  /* 🦖 Dino Info panel: wider */
+  #dinoInfoPanel {
+    width: var(--dinoPanel-w-mobile);
+  }
+
+  /* 🎛️ Mod Style panel: keep smaller (optional, since default already 200px) */
+  #modStylePanel {
+    width: var(--modPanel-w-mobile);
   }
   
   .floating-panel .fp-title{
