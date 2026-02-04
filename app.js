@@ -118,7 +118,6 @@ const SOURCES = [
   { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json" },
   { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json" },
   { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json" },
-  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json" },
   { id: "Xyphias'CreaturesHatzegopteryx", name: "Xyphias' Creatures: Hatzegopteryx", file: "data/mods/Xyphias'CreaturesHatzegopteryx.json" },
   { id: "Xyphias'CreaturesMeiolania", name: "Xyphias' Creatures: Meiolania", file: "data/mods/Xyphias'CreaturesMeiolania.json" },
   { id: "Xyphias'CreaturesMischoptera", name: "Xyphias' Creatures: Mischoptera", file: "data/mods/Xyphias'CreaturesMischoptera.json" },
