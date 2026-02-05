@@ -377,7 +377,7 @@ function buildEntryMetaLines(entry) {
     lines.push(`Spawn chances: ${chances.map(n => `${fmt(n)}%`).join(", ")}`);
   } else if (typeof chances === "string" && chances.trim()) {
     const parts = chances.split(",").map(s => s.trim()).filter(Boolean);
-    if (parts.length) lines.push(`Spawn chances: ${parts.map(p => `${p}%`).join(", ")}`);
+    if (parts.length) lines.push(`Spawn Chances: ${parts.map(p => `${p}%`).join(", ")}`);
   }
 
   return lines;
