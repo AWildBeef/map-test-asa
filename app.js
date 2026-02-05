@@ -127,8 +127,8 @@ const SOURCES = [
   { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json" },
   { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
   { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json" },
-  { id: "WildARK", name: "Isle of Myths: Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
-  { id: "ASAAquaria", name: "Isle of Myths: Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
+  { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
+  { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
 ];
 
 // ============================================================
