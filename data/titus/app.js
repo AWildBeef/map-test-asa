@@ -369,8 +369,8 @@ function buildEntryMetaLines(entry) {
   const gw  = entry.groupWeight ?? entry.group_weight;
   const lim = entry.spawnLimit  ?? entry.spawn_limit;
 
-  if (gw != null) lines.push(`Weight: ${fmt(gw)}`);
-  if (lim != null) lines.push(`Max spawn: ${fmt(Number(lim) * 100)}%`);
+  if (gw != null) lines.push(`Entry Weight: ${fmt(gw)}`);
+  if (lim != null) lines.push(`Max % To Spawn: ${fmt(Number(lim) * 100)}%`);
 
   const chances = entry.spawnChances ?? entry.spawn_chances;
   if (Array.isArray(chances) && chances.length) {
