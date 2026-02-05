@@ -1159,7 +1159,7 @@ function ensurePanels() {
     infoPanel = createFloatingPanel({
       id: "dinoInfoPanel",
       title: "Dino Info",
-      defaultPos: { left: 5, top: 2 },
+      defaultPos: { left: 2, top: 2 },
       collapsedByDefault: true
     });
     renderInfoPanelBodyEmpty();
