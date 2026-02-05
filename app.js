@@ -1041,9 +1041,15 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
     if (body) body.style.display = "none";
   }
 
-  panel.style.top = `${defaultPos.top}px`;
-  panel.style.right = `${defaultPos.right}px`;
+  panel.style.top = `${defaultPos.top ?? 12}px`;
 
+  if (defaultPos.left != null) {
+    panel.style.left = `${defaultPos.left}px`;
+    panel.style.right = "auto";
+  } else {
+    panel.style.right = `${defaultPos.right ?? 12}px`;
+    panel.style.left = "auto";
+  }
   // prevent map interactions while interacting with panel
   panel.addEventListener("pointerdown", (e) => e.stopPropagation());
   panel.addEventListener("wheel", (e) => e.stopPropagation(), { passive: false });
@@ -1155,7 +1161,7 @@ function ensurePanels() {
     infoPanel = createFloatingPanel({
       id: "dinoInfoPanel",
       title: "Dino Info",
-      defaultPos: { left: 10, top: 2 },
+      defaultPos: { left: 2, top: 2 },
       collapsedByDefault: true
     });
     renderInfoPanelBodyEmpty();
