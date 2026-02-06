@@ -12730,7 +12730,21 @@
         },
         {
           "entryClass": "DinoSpawnEntriesCave7-Fliers_C",
-          "managers": {},
+          "managers": {
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1803.88,
+                  "y": 1805.52,
+                  "w": 50.79,
+                  "h": 48.13
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            }
+          },
           "groupWeight": 0.42,
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.2,
@@ -12741,7 +12755,7 @@
             "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
-          "bestSharedMin": 0.0,
+          "bestSharedMin": 15.0,
           "minRarityDownshift": 0
         },
         {
@@ -67552,7 +67566,21 @@
         },
         {
           "entryClass": "DinoSpawnEntriesCave7-Fliers_C",
-          "managers": {},
+          "managers": {
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1803.88,
+                  "y": 1805.52,
+                  "w": 50.79,
+                  "h": 48.13
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            }
+          },
           "groupWeight": 0.125,
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.2,
@@ -67563,7 +67591,7 @@
             "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 0.0,
+          "bestSharedMin": 15.0,
           "minRarityDownshift": 0
         },
         {
@@ -115889,7 +115917,21 @@
         },
         {
           "entryClass": "DinoSpawnEntriesCave7-Fliers_C",
-          "managers": {},
+          "managers": {
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1803.88,
+                  "y": 1805.52,
+                  "w": 50.79,
+                  "h": 48.13
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            }
+          },
           "groupWeight": 0.33,
           "spawnMultiplier": 2.5,
           "spawnLimit": 0.6,
@@ -115900,7 +115942,7 @@
             "limitText": "Max % To Allow: 60%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%, 25%"
           },
-          "bestSharedMin": 0.0,
+          "bestSharedMin": 15.0,
           "minRarityDownshift": 0
         },
         {
@@ -135592,7 +135634,21 @@
         },
         {
           "entryClass": "DinoSpawnEntriesCave7-Fliers_C",
-          "managers": {},
+          "managers": {
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1803.88,
+                  "y": 1805.52,
+                  "w": 50.79,
+                  "h": 48.13
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            }
+          },
           "groupWeight": 0.25,
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.2,
@@ -135603,7 +135659,7 @@
             "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 0.0,
+          "bestSharedMin": 15.0,
           "minRarityDownshift": 0
         },
         {
