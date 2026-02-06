@@ -9955,6 +9955,25 @@
               "points": [],
               "minDesiredPct": 1.0
             },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1351.07,
+                  "y": 1500.57,
+                  "w": 85.4,
+                  "h": 40.76
+                },
+                {
+                  "x": 1390.39,
+                  "y": 1541.94,
+                  "w": 65.54,
+                  "h": 76.8
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.75
+            },
             "IntSPawns": {
               "minDesired": 5.0,
               "boxes": [],
@@ -19220,7 +19239,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.8
+              "minDesiredPct": 0.533333
             },
             "NPCZoneManagerBlueprint_Cave_C_1": {
               "minDesired": 5.0,
@@ -19233,7 +19252,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_12": {
               "minDesired": 5.0,
@@ -19246,7 +19265,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_3": {
               "minDesired": 5.0,
@@ -19259,7 +19278,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_4": {
               "minDesired": 5.0,
@@ -19272,7 +19291,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_5": {
               "minDesired": 10.0,
@@ -19285,7 +19304,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.666667
             },
             "NPCZoneManagerBlueprint_Cave_C_8": {
               "minDesired": 5.0,
@@ -19298,7 +19317,26 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.3,
+                  "y": 1645.98,
+                  "w": 5.94,
+                  "h": 6.35
+                },
+                {
+                  "x": 569.55,
+                  "y": 1636.56,
+                  "w": 6.35,
+                  "h": 6.35
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 8,
@@ -19309,14 +19347,14 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.8,
           "spawnChances": "100, 67, 33",
-          "weight": 0.366933,
+          "weight": 0.323002,
           "display": {
             "weightText": "Entry Weight: 0.42",
             "limitText": "Max % To Allow: 80%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
-          "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -19332,7 +19370,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.4
             },
             "NPCZoneManagerBlueprint_Cave_C_2": {
               "minDesired": 5.0,
@@ -19345,7 +19383,20 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.833333
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.09,
+                  "y": 1647.0,
+                  "w": 8.81,
+                  "h": 8.4
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 6,
@@ -19356,14 +19407,14 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.6,
           "spawnChances": "100, 67, 33",
-          "weight": 0.462,
+          "weight": 0.2912,
           "display": {
             "weightText": "Entry Weight: 0.42",
             "limitText": "Max % To Allow: 60%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
-          "bestSharedMin": 6.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -19393,6 +19444,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.28
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1601.95,
+                  "y": 1061.07,
+                  "w": 2.25,
+                  "h": 5.32
+                },
+                {
+                  "x": 558.9,
+                  "y": 1615.67,
+                  "w": 9.22,
+                  "h": 7.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 25,
@@ -19403,7 +19473,7 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.2,
           "spawnChances": "100, 67, 33",
-          "weight": 0.073897,
+          "weight": 0.071588,
           "display": {
             "weightText": "Entry Weight: 0.42",
             "limitText": "Max % To Allow: 20%",
@@ -20410,6 +20480,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1360.08,
+                  "y": 1499.96,
+                  "w": 40.35,
+                  "h": 31.54
+                },
+                {
+                  "x": 1364.58,
+                  "y": 1621.2,
+                  "w": 28.06,
+                  "h": 39.12
+                },
+                {
+                  "x": 1376.05,
+                  "y": 1591.3,
+                  "w": 40.76,
+                  "h": 39.32
+                },
+                {
+                  "x": 1393.05,
+                  "y": 1512.24,
+                  "w": 40.55,
+                  "h": 31.54
+                },
+                {
+                  "x": 1401.04,
+                  "y": 1565.29,
+                  "w": 39.12,
+                  "h": 40.76
+                },
+                {
+                  "x": 1420.49,
+                  "y": 1520.23,
+                  "w": 38.3,
+                  "h": 40.96
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -20417,7 +20530,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.15,
           "spawnChances": "100",
-          "weight": 0.025606,
+          "weight": 0.02369,
           "display": {
             "weightText": "Entry Weight: 0.15",
             "limitText": "Max % To Allow: 15%",
@@ -25184,7 +25297,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.8
+              "minDesiredPct": 0.533333
             },
             "NPCZoneManagerBlueprint_Cave_C_1": {
               "minDesired": 5.0,
@@ -25197,7 +25310,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_12": {
               "minDesired": 5.0,
@@ -25210,7 +25323,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_3": {
               "minDesired": 5.0,
@@ -25223,7 +25336,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_4": {
               "minDesired": 5.0,
@@ -25236,7 +25349,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_5": {
               "minDesired": 10.0,
@@ -25249,7 +25362,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.666667
             },
             "NPCZoneManagerBlueprint_Cave_C_8": {
               "minDesired": 5.0,
@@ -25262,7 +25375,26 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.3,
+                  "y": 1645.98,
+                  "w": 5.94,
+                  "h": 6.35
+                },
+                {
+                  "x": 569.55,
+                  "y": 1636.56,
+                  "w": 6.35,
+                  "h": 6.35
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 8,
@@ -25273,14 +25405,14 @@
           "spawnMultiplier": 1.75,
           "spawnLimit": 0.3,
           "spawnChances": "100, 75",
-          "weight": 0.037267,
+          "weight": 0.032805,
           "display": {
             "weightText": "Entry Weight: 0.13",
             "limitText": "Max % To Allow: 30%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
-          "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -25296,7 +25428,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.4
             },
             "NPCZoneManagerBlueprint_Cave_C_2": {
               "minDesired": 5.0,
@@ -25309,7 +25441,20 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.833333
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.09,
+                  "y": 1647.0,
+                  "w": 8.81,
+                  "h": 8.4
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 6,
@@ -25320,14 +25465,14 @@
           "spawnMultiplier": 1.75,
           "spawnLimit": 0.25,
           "spawnChances": "100, 75",
-          "weight": 0.052135,
+          "weight": 0.032861,
           "display": {
             "weightText": "Entry Weight: 0.13",
             "limitText": "Max % To Allow: 25%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
-          "bestSharedMin": 6.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -25357,6 +25502,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.28
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1601.95,
+                  "y": 1061.07,
+                  "w": 2.25,
+                  "h": 5.32
+                },
+                {
+                  "x": 558.9,
+                  "y": 1615.67,
+                  "w": 9.22,
+                  "h": 7.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 25,
@@ -25367,7 +25531,7 @@
           "spawnMultiplier": 1.75,
           "spawnLimit": 0.175,
           "spawnChances": "100, 75",
-          "weight": 0.017512,
+          "weight": 0.016965,
           "display": {
             "weightText": "Entry Weight: 0.13",
             "limitText": "Max % To Allow: 17.5%",
@@ -28076,6 +28240,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1360.08,
+                  "y": 1499.96,
+                  "w": 40.35,
+                  "h": 31.54
+                },
+                {
+                  "x": 1364.58,
+                  "y": 1621.2,
+                  "w": 28.06,
+                  "h": 39.12
+                },
+                {
+                  "x": 1376.05,
+                  "y": 1591.3,
+                  "w": 40.76,
+                  "h": 39.32
+                },
+                {
+                  "x": 1393.05,
+                  "y": 1512.24,
+                  "w": 40.55,
+                  "h": 31.54
+                },
+                {
+                  "x": 1401.04,
+                  "y": 1565.29,
+                  "w": 39.12,
+                  "h": 40.76
+                },
+                {
+                  "x": 1420.49,
+                  "y": 1520.23,
+                  "w": 38.3,
+                  "h": 40.96
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -28083,7 +28290,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.2,
           "spawnChances": "100",
-          "weight": 0.022761,
+          "weight": 0.021058,
           "display": {
             "weightText": "Entry Weight: 0.1",
             "limitText": "Max % To Allow: 20%",
@@ -41579,6 +41786,37 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 864.26,
+                  "y": 1535.59,
+                  "w": 21.09,
+                  "h": 22.53
+                },
+                {
+                  "x": 909.11,
+                  "y": 1541.53,
+                  "w": 20.48,
+                  "h": 22.12
+                },
+                {
+                  "x": 1566.52,
+                  "y": 1213.03,
+                  "w": 59.6,
+                  "h": 68.61
+                },
+                {
+                  "x": 1750.63,
+                  "y": 1763.33,
+                  "w": 20.48,
+                  "h": 22.32
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -48038,6 +48276,43 @@
               ],
               "points": [],
               "minDesiredPct": 0.75
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 385.84,
+                  "y": 1462.68,
+                  "w": 22.32,
+                  "h": 18.23
+                },
+                {
+                  "x": 401.61,
+                  "y": 1472.1,
+                  "w": 22.32,
+                  "h": 18.43
+                },
+                {
+                  "x": 408.17,
+                  "y": 1507.12,
+                  "w": 27.24,
+                  "h": 31.74
+                },
+                {
+                  "x": 598.84,
+                  "y": 1677.52,
+                  "w": 30.52,
+                  "h": 30.52
+                },
+                {
+                  "x": 840.09,
+                  "y": 1455.1,
+                  "w": 27.03,
+                  "h": 26.83
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.75
             }
           },
           "MinDesiredNumberOfNPC": 20,
@@ -48051,7 +48326,7 @@
           "spawnMultiplier": 3.0,
           "spawnLimit": 1.0,
           "spawnChances": "100, 80, 60, 40, 20",
-          "weight": 2.04,
+          "weight": 2.145,
           "display": {
             "weightText": "Entry Weight: 1",
             "limitText": "Max % To Allow: 100%",
@@ -50293,6 +50568,97 @@
               ],
               "points": [],
               "minDesiredPct": 0.6
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1492.58,
+                  "y": 1377.08,
+                  "w": 32.56,
+                  "h": 34.0
+                },
+                {
+                  "x": 439.09,
+                  "y": 1631.85,
+                  "w": 45.47,
+                  "h": 49.56
+                },
+                {
+                  "x": 471.65,
+                  "y": 1623.45,
+                  "w": 30.92,
+                  "h": 29.7
+                },
+                {
+                  "x": 485.99,
+                  "y": 1605.22,
+                  "w": 30.92,
+                  "h": 29.7
+                },
+                {
+                  "x": 494.59,
+                  "y": 1583.92,
+                  "w": 30.92,
+                  "h": 29.9
+                },
+                {
+                  "x": 530.02,
+                  "y": 1473.33,
+                  "w": 43.01,
+                  "h": 35.02
+                },
+                {
+                  "x": 563.2,
+                  "y": 1662.16,
+                  "w": 19.66,
+                  "h": 19.66
+                },
+                {
+                  "x": 582.04,
+                  "y": 1565.49,
+                  "w": 32.77,
+                  "h": 20.89
+                },
+                {
+                  "x": 857.91,
+                  "y": 1527.6,
+                  "w": 31.74,
+                  "h": 36.45
+                },
+                {
+                  "x": 899.69,
+                  "y": 1526.58,
+                  "w": 34.41,
+                  "h": 43.21
+                },
+                {
+                  "x": 930.41,
+                  "y": 1504.67,
+                  "w": 42.6,
+                  "h": 37.07
+                },
+                {
+                  "x": 1319.32,
+                  "y": 1075.4,
+                  "w": 77.41,
+                  "h": 87.65
+                },
+                {
+                  "x": 1376.46,
+                  "y": 1189.48,
+                  "w": 39.94,
+                  "h": 38.3
+                },
+                {
+                  "x": 1594.98,
+                  "y": 1246.0,
+                  "w": 20.89,
+                  "h": 22.94
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "bForceInEditor": true,
@@ -50309,7 +50675,7 @@
           "spawnMultiplier": 3.1,
           "spawnLimit": 1.0,
           "spawnChances": "100, 100, 70, 40",
-          "weight": 1.211233,
+          "weight": 1.400488,
           "display": {
             "weightText": "Entry Weight: 0.5",
             "limitText": "Max % To Allow: 100%",
@@ -68666,7 +69032,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.666667
             },
             "NPCZoneManager_452": {
               "minDesired": 10.0,
@@ -68679,6 +69045,55 @@
                 }
               ],
               "points": [],
+              "minDesiredPct": 0.666667
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 687.92,
+                  "y": 1377.08,
+                  "w": 9.01,
+                  "h": 9.63
+                },
+                {
+                  "x": 707.79,
+                  "y": 1368.68,
+                  "w": 11.06,
+                  "h": 9.83
+                },
+                {
+                  "x": 708.4,
+                  "y": 1388.13,
+                  "w": 9.63,
+                  "h": 5.73
+                },
+                {
+                  "x": 737.28,
+                  "y": 1365.81,
+                  "w": 9.63,
+                  "h": 5.94
+                },
+                {
+                  "x": 739.12,
+                  "y": 1329.77,
+                  "w": 9.63,
+                  "h": 9.42
+                },
+                {
+                  "x": 674.2,
+                  "y": 1378.1,
+                  "w": 23.96,
+                  "h": 24.99
+                },
+                {
+                  "x": 694.07,
+                  "y": 1392.84,
+                  "w": 40.96,
+                  "h": 42.39
+                }
+              ],
+              "points": [],
               "minDesiredPct": 1.0
             }
           },
@@ -68688,14 +69103,14 @@
           "spawnMultiplier": 1.5,
           "spawnLimit": 1.0,
           "spawnChances": "100, 50",
-          "weight": 1.5,
+          "weight": 1.388889,
           "display": {
             "weightText": "Entry Weight: 0.2",
             "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 50%"
           },
-          "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Ragnarok_SnowPlains_C",
@@ -77895,7 +78310,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.8
+              "minDesiredPct": 0.533333
             },
             "NPCZoneManagerBlueprint_Cave_C_1": {
               "minDesired": 5.0,
@@ -77908,7 +78323,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_12": {
               "minDesired": 5.0,
@@ -77921,7 +78336,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_3": {
               "minDesired": 5.0,
@@ -77934,7 +78349,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_4": {
               "minDesired": 5.0,
@@ -77947,7 +78362,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_5": {
               "minDesired": 10.0,
@@ -77960,7 +78375,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.666667
             },
             "NPCZoneManagerBlueprint_Cave_C_8": {
               "minDesired": 5.0,
@@ -77973,7 +78388,26 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.3,
+                  "y": 1645.98,
+                  "w": 5.94,
+                  "h": 6.35
+                },
+                {
+                  "x": 569.55,
+                  "y": 1636.56,
+                  "w": 6.35,
+                  "h": 6.35
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 8,
@@ -77984,14 +78418,14 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.2,
           "spawnChances": "100",
-          "weight": 0.013651,
+          "weight": 0.012016,
           "display": {
             "weightText": "Entry Weight: 0.125",
             "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -78021,6 +78455,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.28
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1601.95,
+                  "y": 1061.07,
+                  "w": 2.25,
+                  "h": 5.32
+                },
+                {
+                  "x": 558.9,
+                  "y": 1615.67,
+                  "w": 9.22,
+                  "h": 7.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 25,
@@ -78031,7 +78484,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.2,
           "spawnChances": "100",
-          "weight": 0.010997,
+          "weight": 0.010653,
           "display": {
             "weightText": "Entry Weight: 0.125",
             "limitText": "Max % To Allow: 20%",
@@ -79803,6 +80256,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1360.08,
+                  "y": 1499.96,
+                  "w": 40.35,
+                  "h": 31.54
+                },
+                {
+                  "x": 1364.58,
+                  "y": 1621.2,
+                  "w": 28.06,
+                  "h": 39.12
+                },
+                {
+                  "x": 1376.05,
+                  "y": 1591.3,
+                  "w": 40.76,
+                  "h": 39.32
+                },
+                {
+                  "x": 1393.05,
+                  "y": 1512.24,
+                  "w": 40.55,
+                  "h": 31.54
+                },
+                {
+                  "x": 1401.04,
+                  "y": 1565.29,
+                  "w": 39.12,
+                  "h": 40.76
+                },
+                {
+                  "x": 1420.49,
+                  "y": 1520.23,
+                  "w": 38.3,
+                  "h": 40.96
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -79810,7 +80306,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.2,
           "spawnChances": "100",
-          "weight": 0.014795,
+          "weight": 0.013687,
           "display": {
             "weightText": "Entry Weight: 0.065",
             "limitText": "Max % To Allow: 20%",
@@ -84840,6 +85336,115 @@
           },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
+        },
+        {
+          "entryClass": "DinoSpawnEntries_Lobster_C",
+          "managers": {
+            "NPCZoneManagerBlueprint_Land_C_49": {
+              "minDesired": 5.0,
+              "boxes": [
+                {
+                  "x": 678.37,
+                  "y": 1592.82,
+                  "w": 9.58,
+                  "h": 3.68
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManagerBlueprint_Ocean_50": {
+              "minDesired": 5.0,
+              "boxes": [
+                {
+                  "x": 1818.38,
+                  "y": 1814.56,
+                  "w": 9.58,
+                  "h": 3.68
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManagerBlueprint_Ocean_51": {
+              "minDesired": 5.0,
+              "boxes": [
+                {
+                  "x": 1886.56,
+                  "y": 1342.71,
+                  "w": 18.17,
+                  "h": 27.18
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManagerBlueprint_Ocean_52": {
+              "minDesired": 5.0,
+              "boxes": [
+                {
+                  "x": 87.28,
+                  "y": 1049.16,
+                  "w": 9.58,
+                  "h": 3.68
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManagerBlueprint_Ocean_53": {
+              "minDesired": 5.0,
+              "boxes": [
+                {
+                  "x": 46.07,
+                  "y": 1075.09,
+                  "w": 9.58,
+                  "h": 5.01
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManagerBlueprint_Ocean_54": {
+              "minDesired": 5.0,
+              "boxes": [
+                {
+                  "x": 111.96,
+                  "y": 1046.86,
+                  "w": 9.58,
+                  "h": 5.01
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManagerBlueprint_Ocean_55": {
+              "minDesired": 5.0,
+              "boxes": [
+                {
+                  "x": 118.09,
+                  "y": 1011.52,
+                  "w": 9.58,
+                  "h": 5.01
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            }
+          },
+          "MinDesiredNumberOfNPC": 5,
+          "groupWeight": 1.0,
+          "spawnMultiplier": 1.5,
+          "spawnLimit": 1.0,
+          "spawnChances": "50, 100",
+          "weight": 1.5,
+          "display": {
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
+            "chanceText": "Spawn Chances: 50%, 100%"
+          },
+          "bestSharedMin": 5.0,
+          "minRarityDownshift": 1
         }
       ]
     },
@@ -86560,6 +87165,25 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1351.07,
+                  "y": 1500.57,
+                  "w": 85.4,
+                  "h": 40.76
+                },
+                {
+                  "x": 1390.39,
+                  "y": 1541.94,
+                  "w": 65.54,
+                  "h": 76.8
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.75
             },
             "IntSPawns": {
               "minDesired": 5.0,
@@ -95100,6 +95724,172 @@
         }
       ]
     },
+    "Ice Wyvern": {
+      "bpPath": "/Game/ASA/Dinos/IceWyvern/Wyvern_Character_BP_Ice.Wyvern_Character_BP_Ice_C",
+      "displayName": "Ice Wyvern",
+      "nameTag": "Wyvern",
+      "entries": [
+        {
+          "entryClass": "Ragnarok_DinoSpawnEntriesIceWyvern_C",
+          "managers": {
+            "NPCZoneManager316": {
+              "minDesired": 2.0,
+              "boxes": [
+                {
+                  "x": 1249.18,
+                  "y": 1309.35,
+                  "w": 43.51,
+                  "h": 20.0
+                },
+                {
+                  "x": 1392.34,
+                  "y": 1367.94,
+                  "w": 43.51,
+                  "h": 20.0
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManager_198": {
+              "minDesired": 1.0,
+              "boxes": [
+                {
+                  "x": 1159.3,
+                  "y": 1089.78,
+                  "w": 31.67,
+                  "h": 54.19
+                },
+                {
+                  "x": 1106.62,
+                  "y": 1162.78,
+                  "w": 60.08,
+                  "h": 26.13
+                },
+                {
+                  "x": 1060.53,
+                  "y": 1107.18,
+                  "w": 60.08,
+                  "h": 26.13
+                },
+                {
+                  "x": 1038.29,
+                  "y": 1033.11,
+                  "w": 53.22,
+                  "h": 42.94
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.5
+            }
+          },
+          "MinDesiredNumberOfNPC": 4,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 11000.0,
+          "NPCWanderRadiusMultiplier": 0.1,
+          "groupWeight": 0.33,
+          "spawnMultiplier": 1.0,
+          "spawnLimit": 1.0,
+          "spawnChances": "100",
+          "weight": 0.666667,
+          "display": {
+            "weightText": "Entry Weight: 0.33",
+            "limitText": "Max % To Allow: 100%",
+            "chanceText": "Spawn Chances: 100%"
+          },
+          "bestSharedMin": 2.0,
+          "minRarityDownshift": 6
+        },
+        {
+          "entryClass": "Ragnarok_DinoSpawnEntries_Ice_Wyvern_2_C",
+          "managers": {
+            "NPCZoneManager_UAID_7C10C95E7D400C7302_1251430065": {
+              "minDesired": 2.0,
+              "boxes": [
+                {
+                  "x": 1147.48,
+                  "y": 1051.73,
+                  "w": 0.31,
+                  "h": 0.31
+                }
+              ],
+              "points": [
+                {
+                  "x": 1155.87,
+                  "y": 1062.95
+                },
+                {
+                  "x": 1144.83,
+                  "y": 1044.94
+                }
+              ],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManager_UAID_7C10C95E7D401D7302_1864705067": {
+              "minDesired": 2.0,
+              "boxes": [
+                {
+                  "x": 770.88,
+                  "y": 1352.38,
+                  "w": 0.31,
+                  "h": 0.31
+                }
+              ],
+              "points": [
+                {
+                  "x": 774.99,
+                  "y": 1357.83
+                },
+                {
+                  "x": 766.57,
+                  "y": 1349.03
+                }
+              ],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManager_UAID_7C10C95E7D40FD7202_1520007411": {
+              "minDesired": 2.0,
+              "boxes": [
+                {
+                  "x": 668.0,
+                  "y": 1046.74,
+                  "w": 0.31,
+                  "h": 0.31
+                }
+              ],
+              "points": [
+                {
+                  "x": 650.15,
+                  "y": 1097.74
+                },
+                {
+                  "x": 662.43,
+                  "y": 1040.79
+                }
+              ],
+              "minDesiredPct": 1.0
+            }
+          },
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "TheIncreaseNPCInterval": 600.0,
+          "TheIncreaseNPCIntervalMax": 800.0,
+          "groupWeight": 0.33,
+          "spawnMultiplier": 2.0,
+          "spawnLimit": 1.0,
+          "spawnChances": "100, 100",
+          "weight": 2.0,
+          "display": {
+            "weightText": "Entry Weight: 0.33",
+            "limitText": "Max % To Allow: 100%",
+            "chanceText": "Spawn Chances: 100%, 100%"
+          },
+          "bestSharedMin": 2.0,
+          "minRarityDownshift": 6
+        }
+      ]
+    },
     "Iceworm Male": {
       "bpPath": "/Game/ASA/Dinos/Iceworm/Iceworm_Character_Minion_BP_smaller.Iceworm_Character_Minion_BP_smaller_C",
       "displayName": "Iceworm Male",
@@ -95132,7 +95922,7 @@
                   "y": 1332.32
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_16": {
               "minDesired": 1.0,
@@ -95158,6 +95948,79 @@
                   "y": 1341.21
                 }
               ],
+              "minDesiredPct": 0.066667
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 751.62,
+                  "y": 1363.76,
+                  "w": 9.63,
+                  "h": 9.63
+                },
+                {
+                  "x": 756.12,
+                  "y": 1341.85,
+                  "w": 8.6,
+                  "h": 10.24
+                },
+                {
+                  "x": 764.11,
+                  "y": 1307.03,
+                  "w": 9.01,
+                  "h": 9.01
+                },
+                {
+                  "x": 770.66,
+                  "y": 1296.18,
+                  "w": 8.19,
+                  "h": 9.42
+                },
+                {
+                  "x": 772.71,
+                  "y": 1309.7,
+                  "w": 8.81,
+                  "h": 8.4
+                },
+                {
+                  "x": 773.12,
+                  "y": 1289.42,
+                  "w": 7.99,
+                  "h": 8.81
+                },
+                {
+                  "x": 773.53,
+                  "y": 1292.9,
+                  "w": 8.19,
+                  "h": 9.42
+                },
+                {
+                  "x": 774.14,
+                  "y": 1351.27,
+                  "w": 9.83,
+                  "h": 9.01
+                },
+                {
+                  "x": 780.29,
+                  "y": 1302.94,
+                  "w": 8.81,
+                  "h": 9.22
+                },
+                {
+                  "x": 783.97,
+                  "y": 1333.04,
+                  "w": 10.04,
+                  "h": 9.22
+                },
+                {
+                  "x": 786.84,
+                  "y": 1292.7,
+                  "w": 7.17,
+                  "h": 9.22
+                }
+              ],
+              "points": [],
               "minDesiredPct": 1.0
             },
             "NPCZoneManagerBlueprint_Cave_38": {
@@ -95189,7 +96052,7 @@
                   "y": 1302.83
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_39": {
               "minDesired": 1.0,
@@ -95212,7 +96075,7 @@
                   "y": 1313.38
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_41": {
               "minDesired": 1.0,
@@ -95235,7 +96098,7 @@
                   "y": 1303.49
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_9": {
               "minDesired": 1.0,
@@ -95262,7 +96125,7 @@
                   "y": 1334.54
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_17": {
               "minDesired": 1.0,
@@ -95281,7 +96144,7 @@
                   "y": 1359.99
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_18": {
               "minDesired": 1.0,
@@ -95304,7 +96167,7 @@
                   "y": 1363.78
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_19": {
               "minDesired": 1.0,
@@ -95327,7 +96190,7 @@
                   "y": 1340.76
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_20": {
               "minDesired": 1.0,
@@ -95350,7 +96213,7 @@
                   "y": 1321.01
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_21": {
               "minDesired": 1.0,
@@ -95381,7 +96244,7 @@
                   "y": 1295.87
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_22": {
               "minDesired": 1.0,
@@ -95400,7 +96263,7 @@
                   "y": 1296.12
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             },
             "NPCZoneManagerBlueprint_Cave_C_23": {
               "minDesired": 1.0,
@@ -95427,7 +96290,7 @@
                   "y": 1304.68
                 }
               ],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.066667
             }
           },
           "bForceInEditor": true,
@@ -95442,14 +96305,14 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 1.0,
           "spawnChances": "100",
-          "weight": 1.0,
+          "weight": 0.5,
           "display": {
             "weightText": "Entry Weight: 1",
             "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 1.0,
-          "minRarityDownshift": 6
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -99130,6 +99993,19 @@
                 }
               ],
               "points": [],
+              "minDesiredPct": 0.666667
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 577.95,
+                  "y": 1655.6,
+                  "w": 58.98,
+                  "h": 65.13
+                }
+              ],
+              "points": [],
               "minDesiredPct": 1.0
             }
           },
@@ -99138,14 +100014,14 @@
           "spawnMultiplier": 3.25,
           "spawnLimit": 1.0,
           "spawnChances": "100, 100, 75, 50",
-          "weight": 3.25,
+          "weight": 2.708333,
           "display": {
             "weightText": "Entry Weight: 0.25",
             "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 100%, 75%, 50%"
           },
-          "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Ragnarok_MonkeyIsland_C",
@@ -103434,6 +104310,25 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1351.07,
+                  "y": 1500.57,
+                  "w": 85.4,
+                  "h": 40.76
+                },
+                {
+                  "x": 1390.39,
+                  "y": 1541.94,
+                  "w": 65.54,
+                  "h": 76.8
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.75
             },
             "IntSPawns": {
               "minDesired": 5.0,
@@ -112286,6 +113181,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1360.08,
+                  "y": 1499.96,
+                  "w": 40.35,
+                  "h": 31.54
+                },
+                {
+                  "x": 1364.58,
+                  "y": 1621.2,
+                  "w": 28.06,
+                  "h": 39.12
+                },
+                {
+                  "x": 1376.05,
+                  "y": 1591.3,
+                  "w": 40.76,
+                  "h": 39.32
+                },
+                {
+                  "x": 1393.05,
+                  "y": 1512.24,
+                  "w": 40.55,
+                  "h": 31.54
+                },
+                {
+                  "x": 1401.04,
+                  "y": 1565.29,
+                  "w": 39.12,
+                  "h": 40.76
+                },
+                {
+                  "x": 1420.49,
+                  "y": 1520.23,
+                  "w": 38.3,
+                  "h": 40.96
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -112293,7 +113231,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.2,
           "spawnChances": "100",
-          "weight": 0.034142,
+          "weight": 0.031586,
           "display": {
             "weightText": "Entry Weight: 0.15",
             "limitText": "Max % To Allow: 20%",
@@ -133991,6 +134929,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.28
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1601.95,
+                  "y": 1061.07,
+                  "w": 2.25,
+                  "h": 5.32
+                },
+                {
+                  "x": 558.9,
+                  "y": 1615.67,
+                  "w": 9.22,
+                  "h": 7.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 25,
@@ -134001,7 +134958,7 @@
           "spawnMultiplier": 1.75,
           "spawnLimit": 0.4,
           "spawnChances": "100, 75",
-          "weight": 0.101608,
+          "weight": 0.098433,
           "display": {
             "weightText": "Entry Weight: 0.33",
             "limitText": "Max % To Allow: 40%",
@@ -134523,6 +135480,97 @@
               ],
               "points": [],
               "minDesiredPct": 0.6
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1492.58,
+                  "y": 1377.08,
+                  "w": 32.56,
+                  "h": 34.0
+                },
+                {
+                  "x": 439.09,
+                  "y": 1631.85,
+                  "w": 45.47,
+                  "h": 49.56
+                },
+                {
+                  "x": 471.65,
+                  "y": 1623.45,
+                  "w": 30.92,
+                  "h": 29.7
+                },
+                {
+                  "x": 485.99,
+                  "y": 1605.22,
+                  "w": 30.92,
+                  "h": 29.7
+                },
+                {
+                  "x": 494.59,
+                  "y": 1583.92,
+                  "w": 30.92,
+                  "h": 29.9
+                },
+                {
+                  "x": 530.02,
+                  "y": 1473.33,
+                  "w": 43.01,
+                  "h": 35.02
+                },
+                {
+                  "x": 563.2,
+                  "y": 1662.16,
+                  "w": 19.66,
+                  "h": 19.66
+                },
+                {
+                  "x": 582.04,
+                  "y": 1565.49,
+                  "w": 32.77,
+                  "h": 20.89
+                },
+                {
+                  "x": 857.91,
+                  "y": 1527.6,
+                  "w": 31.74,
+                  "h": 36.45
+                },
+                {
+                  "x": 899.69,
+                  "y": 1526.58,
+                  "w": 34.41,
+                  "h": 43.21
+                },
+                {
+                  "x": 930.41,
+                  "y": 1504.67,
+                  "w": 42.6,
+                  "h": 37.07
+                },
+                {
+                  "x": 1319.32,
+                  "y": 1075.4,
+                  "w": 77.41,
+                  "h": 87.65
+                },
+                {
+                  "x": 1376.46,
+                  "y": 1189.48,
+                  "w": 39.94,
+                  "h": 38.3
+                },
+                {
+                  "x": 1594.98,
+                  "y": 1246.0,
+                  "w": 20.89,
+                  "h": 22.94
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "bForceInEditor": true,
@@ -134539,7 +135587,7 @@
           "spawnMultiplier": 1.35,
           "spawnLimit": 0.05,
           "spawnChances": "100, 35",
-          "weight": 0.003956,
+          "weight": 0.004574,
           "display": {
             "weightText": "Entry Weight: 0.075",
             "limitText": "Max % To Allow: 5%",
@@ -150150,6 +151198,25 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 503.4,
+                  "y": 1655.81,
+                  "w": 176.95,
+                  "h": 149.91
+                },
+                {
+                  "x": 253.54,
+                  "y": 618.09,
+                  "w": 219.75,
+                  "h": 300.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.5
             }
           },
           "HardLimitWildDinosToVolume": {
@@ -150161,7 +151228,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 1.0,
           "spawnChances": "100",
-          "weight": 0.818182,
+          "weight": 0.769231,
           "display": {
             "weightText": "Entry Weight: 1",
             "limitText": "Max % To Allow: 100%",
@@ -153225,6 +154292,47 @@
       "nameTag": "Wyvern",
       "entries": [
         {
+          "entryClass": "Ragnarok_DinoSpawnEntries_SwampWyvern_C",
+          "managers": {
+            "NPCZoneManager_UAID_7C10C95E7D407A7202_1223759387": {
+              "minDesired": 2.0,
+              "boxes": [
+                {
+                  "x": 394.28,
+                  "y": 1165.02,
+                  "w": 0.31,
+                  "h": 0.31
+                }
+              ],
+              "points": [
+                {
+                  "x": 393.32,
+                  "y": 1165.15
+                }
+              ],
+              "minDesiredPct": 1.0
+            }
+          },
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 2,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "TheMinimumPlayerDistanceFromSpawnPoint": 11000.0,
+          "NPCWanderRadiusMultiplier": 0.1,
+          "groupWeight": 0.33,
+          "spawnMultiplier": 2.0,
+          "spawnLimit": 1.0,
+          "spawnChances": "100, 100",
+          "weight": 2.0,
+          "display": {
+            "weightText": "Entry Weight: 0.33",
+            "limitText": "Max % To Allow: 100%",
+            "chanceText": "Spawn Chances: 100%, 100%"
+          },
+          "bestSharedMin": 2.0,
+          "minRarityDownshift": 6
+        },
+        {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
           "managers": {
             "NPCZoneManagerBlueprint_Cave_22": {
@@ -153355,6 +154463,25 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1351.07,
+                  "y": 1500.57,
+                  "w": 85.4,
+                  "h": 40.76
+                },
+                {
+                  "x": 1390.39,
+                  "y": 1541.94,
+                  "w": 65.54,
+                  "h": 76.8
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.75
             },
             "IntSPawns": {
               "minDesired": 5.0,
@@ -160028,7 +161155,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.8
+              "minDesiredPct": 0.533333
             },
             "NPCZoneManagerBlueprint_Cave_C_1": {
               "minDesired": 5.0,
@@ -160041,7 +161168,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_12": {
               "minDesired": 5.0,
@@ -160054,7 +161181,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_3": {
               "minDesired": 5.0,
@@ -160067,7 +161194,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_4": {
               "minDesired": 5.0,
@@ -160080,7 +161207,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_5": {
               "minDesired": 10.0,
@@ -160093,7 +161220,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.666667
             },
             "NPCZoneManagerBlueprint_Cave_C_8": {
               "minDesired": 5.0,
@@ -160106,7 +161233,26 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.3,
+                  "y": 1645.98,
+                  "w": 5.94,
+                  "h": 6.35
+                },
+                {
+                  "x": 569.55,
+                  "y": 1636.56,
+                  "w": 6.35,
+                  "h": 6.35
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 8,
@@ -160117,14 +161263,14 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.25,
           "spawnChances": "100",
-          "weight": 0.034127,
+          "weight": 0.030041,
           "display": {
             "weightText": "Entry Weight: 0.25",
             "limitText": "Max % To Allow: 25%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -160140,7 +161286,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.4
             },
             "NPCZoneManagerBlueprint_Cave_C_2": {
               "minDesired": 5.0,
@@ -160153,7 +161299,20 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.833333
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.09,
+                  "y": 1647.0,
+                  "w": 8.81,
+                  "h": 8.4
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 6,
@@ -160164,14 +161323,14 @@
           "spawnMultiplier": 1.5,
           "spawnLimit": 0.45,
           "spawnChances": "100, 50",
-          "weight": 0.154688,
+          "weight": 0.0975,
           "display": {
             "weightText": "Entry Weight: 0.25",
             "limitText": "Max % To Allow: 45%",
             "chanceText": "Spawn Chances: 100%, 50%"
           },
-          "bestSharedMin": 6.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -160201,6 +161360,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.28
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1601.95,
+                  "y": 1061.07,
+                  "w": 2.25,
+                  "h": 5.32
+                },
+                {
+                  "x": 558.9,
+                  "y": 1615.67,
+                  "w": 9.22,
+                  "h": 7.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 25,
@@ -160211,7 +161389,7 @@
           "spawnMultiplier": 1.5,
           "spawnLimit": 0.2,
           "spawnChances": "100, 50",
-          "weight": 0.03299,
+          "weight": 0.031959,
           "display": {
             "weightText": "Entry Weight: 0.25",
             "limitText": "Max % To Allow: 20%",
@@ -164429,6 +165607,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1360.08,
+                  "y": 1499.96,
+                  "w": 40.35,
+                  "h": 31.54
+                },
+                {
+                  "x": 1364.58,
+                  "y": 1621.2,
+                  "w": 28.06,
+                  "h": 39.12
+                },
+                {
+                  "x": 1376.05,
+                  "y": 1591.3,
+                  "w": 40.76,
+                  "h": 39.32
+                },
+                {
+                  "x": 1393.05,
+                  "y": 1512.24,
+                  "w": 40.55,
+                  "h": 31.54
+                },
+                {
+                  "x": 1401.04,
+                  "y": 1565.29,
+                  "w": 39.12,
+                  "h": 40.76
+                },
+                {
+                  "x": 1420.49,
+                  "y": 1520.23,
+                  "w": 38.3,
+                  "h": 40.96
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -164436,7 +165657,7 @@
           "spawnMultiplier": 1.667,
           "spawnLimit": 0.1,
           "spawnChances": "100, 67",
-          "weight": 0.018972,
+          "weight": 0.017551,
           "display": {
             "weightText": "Entry Weight: 0.1",
             "limitText": "Max % To Allow: 10%",
@@ -165502,6 +166723,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1360.08,
+                  "y": 1499.96,
+                  "w": 40.35,
+                  "h": 31.54
+                },
+                {
+                  "x": 1364.58,
+                  "y": 1621.2,
+                  "w": 28.06,
+                  "h": 39.12
+                },
+                {
+                  "x": 1376.05,
+                  "y": 1591.3,
+                  "w": 40.76,
+                  "h": 39.32
+                },
+                {
+                  "x": 1393.05,
+                  "y": 1512.24,
+                  "w": 40.55,
+                  "h": 31.54
+                },
+                {
+                  "x": 1401.04,
+                  "y": 1565.29,
+                  "w": 39.12,
+                  "h": 40.76
+                },
+                {
+                  "x": 1420.49,
+                  "y": 1520.23,
+                  "w": 38.3,
+                  "h": 40.96
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -165509,7 +166773,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.08,
           "spawnChances": "100",
-          "weight": 0.007284,
+          "weight": 0.006738,
           "display": {
             "weightText": "Entry Weight: 0.08",
             "limitText": "Max % To Allow: 8%",
@@ -176024,6 +177288,97 @@
               ],
               "points": [],
               "minDesiredPct": 0.6
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1492.58,
+                  "y": 1377.08,
+                  "w": 32.56,
+                  "h": 34.0
+                },
+                {
+                  "x": 439.09,
+                  "y": 1631.85,
+                  "w": 45.47,
+                  "h": 49.56
+                },
+                {
+                  "x": 471.65,
+                  "y": 1623.45,
+                  "w": 30.92,
+                  "h": 29.7
+                },
+                {
+                  "x": 485.99,
+                  "y": 1605.22,
+                  "w": 30.92,
+                  "h": 29.7
+                },
+                {
+                  "x": 494.59,
+                  "y": 1583.92,
+                  "w": 30.92,
+                  "h": 29.9
+                },
+                {
+                  "x": 530.02,
+                  "y": 1473.33,
+                  "w": 43.01,
+                  "h": 35.02
+                },
+                {
+                  "x": 563.2,
+                  "y": 1662.16,
+                  "w": 19.66,
+                  "h": 19.66
+                },
+                {
+                  "x": 582.04,
+                  "y": 1565.49,
+                  "w": 32.77,
+                  "h": 20.89
+                },
+                {
+                  "x": 857.91,
+                  "y": 1527.6,
+                  "w": 31.74,
+                  "h": 36.45
+                },
+                {
+                  "x": 899.69,
+                  "y": 1526.58,
+                  "w": 34.41,
+                  "h": 43.21
+                },
+                {
+                  "x": 930.41,
+                  "y": 1504.67,
+                  "w": 42.6,
+                  "h": 37.07
+                },
+                {
+                  "x": 1319.32,
+                  "y": 1075.4,
+                  "w": 77.41,
+                  "h": 87.65
+                },
+                {
+                  "x": 1376.46,
+                  "y": 1189.48,
+                  "w": 39.94,
+                  "h": 38.3
+                },
+                {
+                  "x": 1594.98,
+                  "y": 1246.0,
+                  "w": 20.89,
+                  "h": 22.94
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "bForceInEditor": true,
@@ -176040,7 +177395,7 @@
           "spawnMultiplier": 4.4,
           "spawnLimit": 1.0,
           "spawnChances": "100, 100, 100, 75, 65",
-          "weight": 1.375336,
+          "weight": 1.590232,
           "display": {
             "weightText": "Entry Weight: 0.4",
             "limitText": "Max % To Allow: 100%",
@@ -191792,7 +193147,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.8
+              "minDesiredPct": 0.533333
             },
             "NPCZoneManagerBlueprint_Cave_C_1": {
               "minDesired": 5.0,
@@ -191805,7 +193160,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_12": {
               "minDesired": 5.0,
@@ -191818,7 +193173,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_3": {
               "minDesired": 5.0,
@@ -191831,7 +193186,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_4": {
               "minDesired": 5.0,
@@ -191844,7 +193199,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
             },
             "NPCZoneManagerBlueprint_Cave_C_5": {
               "minDesired": 10.0,
@@ -191857,7 +193212,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.666667
             },
             "NPCZoneManagerBlueprint_Cave_C_8": {
               "minDesired": 5.0,
@@ -191870,7 +193225,26 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.5
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.3,
+                  "y": 1645.98,
+                  "w": 5.94,
+                  "h": 6.35
+                },
+                {
+                  "x": 569.55,
+                  "y": 1636.56,
+                  "w": 6.35,
+                  "h": 6.35
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 8,
@@ -191881,14 +193255,14 @@
           "spawnMultiplier": 2.5,
           "spawnLimit": 0.3,
           "spawnChances": "100, 75, 50, 25",
-          "weight": 0.081905,
+          "weight": 0.072099,
           "display": {
             "weightText": "Entry Weight: 0.2",
             "limitText": "Max % To Allow: 30%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%, 25%"
           },
-          "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave2_Generic_C",
@@ -191904,7 +193278,7 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 1.0
+              "minDesiredPct": 0.4
             },
             "NPCZoneManagerBlueprint_Cave_C_2": {
               "minDesired": 5.0,
@@ -191917,7 +193291,20 @@
                 }
               ],
               "points": [],
-              "minDesiredPct": 0.833333
+              "minDesiredPct": 0.333333
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 567.09,
+                  "y": 1647.0,
+                  "w": 8.81,
+                  "h": 8.4
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
             }
           },
           "MinDesiredNumberOfNPC": 6,
@@ -191928,14 +193315,14 @@
           "spawnMultiplier": 2.5,
           "spawnLimit": 0.25,
           "spawnChances": "100, 75, 50, 25",
-          "weight": 0.114583,
+          "weight": 0.072222,
           "display": {
             "weightText": "Entry Weight: 0.2",
             "limitText": "Max % To Allow: 25%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%, 25%"
           },
-          "bestSharedMin": 6.0,
-          "minRarityDownshift": 1
+          "bestSharedMin": 15.0,
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesCave5_Tough_Generic_C",
@@ -191965,6 +193352,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.28
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1601.95,
+                  "y": 1061.07,
+                  "w": 2.25,
+                  "h": 5.32
+                },
+                {
+                  "x": 558.9,
+                  "y": 1615.67,
+                  "w": 9.22,
+                  "h": 7.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 25,
@@ -191975,7 +193381,7 @@
           "spawnMultiplier": 1.75,
           "spawnLimit": 0.175,
           "spawnChances": "100, 75",
-          "weight": 0.026942,
+          "weight": 0.0261,
           "display": {
             "weightText": "Entry Weight: 0.2",
             "limitText": "Max % To Allow: 17.5%",
@@ -195489,6 +196895,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1360.08,
+                  "y": 1499.96,
+                  "w": 40.35,
+                  "h": 31.54
+                },
+                {
+                  "x": 1364.58,
+                  "y": 1621.2,
+                  "w": 28.06,
+                  "h": 39.12
+                },
+                {
+                  "x": 1376.05,
+                  "y": 1591.3,
+                  "w": 40.76,
+                  "h": 39.32
+                },
+                {
+                  "x": 1393.05,
+                  "y": 1512.24,
+                  "w": 40.55,
+                  "h": 31.54
+                },
+                {
+                  "x": 1401.04,
+                  "y": 1565.29,
+                  "w": 39.12,
+                  "h": 40.76
+                },
+                {
+                  "x": 1420.49,
+                  "y": 1520.23,
+                  "w": 38.3,
+                  "h": 40.96
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.6
             }
           },
           "MinDesiredNumberOfNPC": 15,
@@ -195496,7 +196945,7 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.15,
           "spawnChances": "100",
-          "weight": 0.025606,
+          "weight": 0.02369,
           "display": {
             "weightText": "Entry Weight: 0.15",
             "limitText": "Max % To Allow: 15%",
