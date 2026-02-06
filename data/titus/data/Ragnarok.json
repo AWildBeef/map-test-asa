@@ -92238,19 +92238,120 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Ragnarok_Griffin_C",
-          "managers": {},
+          "managers": {
+            "NPCZoneManager_191": {
+              "minDesired": 2.0,
+              "boxes": [
+                {
+                  "x": 702.26,
+                  "y": 1093.02,
+                  "w": 71.68,
+                  "h": 88.27
+                },
+                {
+                  "x": 726.22,
+                  "y": 973.41,
+                  "w": 51.81,
+                  "h": 63.9
+                },
+                {
+                  "x": 771.89,
+                  "y": 1106.33,
+                  "w": 58.37,
+                  "h": 72.09
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManager_19": {
+              "minDesired": 1.0,
+              "boxes": [
+                {
+                  "x": 820.02,
+                  "y": 1381.79,
+                  "w": 33.18,
+                  "h": 40.96
+                },
+                {
+                  "x": 842.75,
+                  "y": 1338.37,
+                  "w": 45.67,
+                  "h": 56.32
+                },
+                {
+                  "x": 885.56,
+                  "y": 1421.52,
+                  "w": 36.66,
+                  "h": 45.47
+                },
+                {
+                  "x": 898.05,
+                  "y": 1464.32,
+                  "w": 32.97,
+                  "h": 40.76
+                },
+                {
+                  "x": 963.17,
+                  "y": 1572.25,
+                  "w": 45.88,
+                  "h": 56.32
+                },
+                {
+                  "x": 964.61,
+                  "y": 1518.39,
+                  "w": 9.22,
+                  "h": 11.47
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.5
+            },
+            "NPCZoneManager_21": {
+              "minDesired": 1.333333,
+              "boxes": [
+                {
+                  "x": 538.21,
+                  "y": 1223.68,
+                  "w": 74.34,
+                  "h": 80.28
+                },
+                {
+                  "x": 726.22,
+                  "y": 973.41,
+                  "w": 51.81,
+                  "h": 63.9
+                },
+                {
+                  "x": 771.89,
+                  "y": 1106.33,
+                  "w": 58.37,
+                  "h": 72.09
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.666667
+            }
+          },
+          "HardLimitWildDinosToVolume": {
+            "ObjectName": "NPCZoneVolume'Ragnarok_WP:PersistentLevel.NPCZoneVolume_596'",
+            "ObjectPath": "/Game/Mods/Ragnarok/Ragnarok_WP.14753"
+          },
+          "bNeverSpawnInWater": true,
+          "MinDesiredNumberOfNPC": 6,
+          "NPCWanderRadiusMultiplier": 1.0,
           "groupWeight": 0.33,
           "spawnMultiplier": 1.1,
           "spawnLimit": 1.0,
           "spawnChances": "100, 10",
-          "weight": 1.1,
+          "weight": 0.733333,
           "display": {
             "weightText": "Entry Weight: 0.33",
             "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 10%"
           },
-          "bestSharedMin": 0.0,
-          "minRarityDownshift": 0
+          "bestSharedMin": 2.0,
+          "minRarityDownshift": 6
         }
       ]
     },
@@ -100307,7 +100408,33 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesPenguins_C",
-          "managers": {},
+          "managers": {
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 702.05,
+                  "y": 1370.93,
+                  "w": 32.77,
+                  "h": 35.64
+                },
+                {
+                  "x": 639.39,
+                  "y": 1433.19,
+                  "w": 35.23,
+                  "h": 36.25
+                },
+                {
+                  "x": 665.4,
+                  "y": 1389.77,
+                  "w": 40.96,
+                  "h": 42.39
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            }
+          },
           "groupWeight": 0.2,
           "spawnMultiplier": 4.0,
           "spawnLimit": 1.0,
@@ -100318,7 +100445,7 @@
             "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 60%, 40%"
           },
-          "bestSharedMin": 0.0,
+          "bestSharedMin": 15.0,
           "minRarityDownshift": 0
         }
       ]
@@ -153414,7 +153541,27 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntries_Ragnarok_PolarBear_C",
-          "managers": {},
+          "managers": {
+            "wiki": {
+              "minDesired": 15.0,
+              "boxes": [
+                {
+                  "x": 1103.67,
+                  "y": 1165.31,
+                  "w": 197.43,
+                  "h": 177.97
+                },
+                {
+                  "x": 1266.89,
+                  "y": 1302.12,
+                  "w": 198.86,
+                  "h": 137.83
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            }
+          },
           "groupWeight": 0.25,
           "spawnMultiplier": 1.0,
           "spawnLimit": 1.0,
@@ -153425,7 +153572,7 @@
             "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 0.0,
+          "bestSharedMin": 15.0,
           "minRarityDownshift": 0
         }
       ]
