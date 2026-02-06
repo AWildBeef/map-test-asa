@@ -81,7 +81,7 @@ function normalizePoiType(type) {
 // DRAWING TUNING
 // ============================================================
 const BOX_TO_POINT_AREA_THRESHOLD = 18_000;
-const BOX_TO_POINT_MIN_DIM = 40;
+const BOX_TO_POINT_MIN_DIM = 100;
 
 // ============================================================
 // MAPS
