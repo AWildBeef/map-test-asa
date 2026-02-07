@@ -54,6 +54,12 @@
 #bgSelectWrap #bgSelectFancy{
   width:100%;
 }
+
+/* Hide right-side badge for source + map dropdowns */
+#sourceSelectFancy .dd-badges,
+#mapSelectFancy .dd-badges{
+  display:none;
+}
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
