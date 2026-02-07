@@ -177,7 +177,7 @@ body{
 
   padding:6px 8px;         /* same as #topbar select */
   font-size:12px;            /* same as #topbar select */
-  font-weight:500px;
+  font-weight:400px;
   border-radius:4px;         /* same as #topbar select */
 
   border:1px solid var(--control-border);
@@ -370,8 +370,8 @@ body{
 }
 
 .dd-label{
-  font-size:14px;
-  font-weight:500;
+  font-size:13px;
+  font-weight:400;
   color:var(--muted);
   white-space:nowrap;
   overflow:hidden;
@@ -412,7 +412,7 @@ body{
 /* sticky search */
 .dd-search{
   width:100%;
-  padding:10px 12px;
+  padding:6px 8px;
   border:0;
   outline:none;
   font-size:16px;
@@ -461,8 +461,8 @@ body{
 }
 
 .dd-item-name{
-  font-size:13px;
-  font-weight:500;
+  font-size:12px;
+  font-weight:400;
   color:var(--muted);
   white-space:nowrap;
   overflow:hidden;
