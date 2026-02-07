@@ -470,6 +470,11 @@ body{
     font-weight:400;
   }
   
+  .entry-meta-chances{
+    font-size:7.5px;
+    font-weight:333;
+  }
+  
   .info-mono{   /* The scrollable BP and Nametag Fields */
     font-size:10px;
     color:var(--muted);
