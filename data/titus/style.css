@@ -16,9 +16,9 @@
   /* Panel sizing knobs (easy to tune) */
   --panel-w: 420px;
   --panel-w-mobile: 210px;
-  --dinoPanel-w-mobile: 210px;
+  --dinoPanel-w-mobile: 225px;
   --modPanel-w-mobile: 150px;
-  --panel-radius: 12px;
+  --panel-radius: 10px;
 
   --panel-header-pad: 3px;
   --panel-body-pad: 7px;
@@ -513,8 +513,8 @@ body{
     min-width:0;
     max-width:none;
     width:100%;
-    padding:5px 5px;
-    font-size:12px;
+    padding:7px 7px;
+    font-size:13px;
     border-radius:4px;
   }
 
