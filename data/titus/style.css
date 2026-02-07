@@ -204,6 +204,197 @@ body{
 }
 
 /* ============================================================
+   Fancy dropdown (search + rich rows)
+   ============================================================ */
+.dd{
+  position:relative;
+  width:100%;
+  max-width:320px; /* matches your topbar select feel */
+  font-family:inherit;
+}
+
+.dd-btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  cursor:pointer;
+  user-select:none;
+}
+
+.dd-btn:focus{
+  outline:none;
+  border-color:var(--focus);
+  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+}
+
+.dd-btn-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.dd-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  flex:0 0 auto;
+  background:#777;
+  box-shadow:0 0 0 2px rgba(0,0,0,.25);
+}
+
+.dd-label{
+  font-size:14px;
+  font-weight:650;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-sub{
+  font-size:11px;
+  color:rgba(255,255,255,.55);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-caret{
+  opacity:.85;
+  flex:0 0 auto;
+}
+
+.dd.open .dd-panel{ display:block; }
+
+.dd-panel{
+  display:none;
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(100% + 6px);
+  z-index:99999;
+
+  background:rgba(26,29,33,.97);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  box-shadow:0 14px 34px rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  overflow:hidden;
+}
+
+/* sticky search */
+.dd-search{
+  width:100%;
+  padding:10px 12px;
+  border:0;
+  outline:none;
+  font-size:13px;
+
+  background:rgba(0,0,0,.30);
+  color:var(--text);
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+/* results list */
+.dd-list{
+  max-height:min(55vh, 420px);
+  overflow:auto;
+}
+
+.dd-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  padding:10px 12px;
+  cursor:pointer;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.dd-item:last-child{ border-bottom:none; }
+
+.dd-item:hover{ background:rgba(255,255,255,.05); }
+
+.dd-item-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.dd-item-main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.dd-item-name{
+  font-size:13px;
+  font-weight:650;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-item-meta{
+  font-size:11px;
+  color:rgba(255,255,255,.55);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-badges{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+}
+
+.dd-pill{
+  font-size:10px;
+  padding:3px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  color:rgba(255,255,255,.72);
+}
+
+.dd-star{
+  width:26px;
+  height:26px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.18);
+  color:#fff;
+  opacity:.85;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.dd-star:hover{ opacity:1; }
+
+
+
+
+/* ============================================================
    4) FLOATING PANELS (new draggable system)
    ============================================================ */
 .floating-panel{
@@ -478,6 +669,14 @@ body{
   .info-row{ /* "Blueprint" & "Nametag" */
     font-size:10px;
     font-weight:500;
+  }
+  .dd-label{ font-size:12px;
+  }
+  .dd-item-name{ font-size:12px;
+  }
+  .dd-item-meta{ font-size:10px;
+  }
+  .dd-search{ font-size:12px;
   }
 
   /* Filters toggle visible */
