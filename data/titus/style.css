@@ -68,6 +68,8 @@
   display: none !important;
 }
 
+#sourceSelectFancy .dd-item-name { font-size: 10px; }
+
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
@@ -844,6 +846,8 @@ body{
   }
   .dd-search{ font-size:16px;
   }
+  
+  #sourceSelectFancy .dd-item-name { font-size: 10px; }
 
   /* Filters toggle visible */
   #controlsToggle{ display:inline-flex; }
