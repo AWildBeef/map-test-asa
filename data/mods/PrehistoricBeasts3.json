@@ -17,12 +17,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.12,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 12%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 12%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -973,14 +975,16 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_C",
               "groupWeight": 0.08,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 50%"
               },
               "boxes": [
                 {
@@ -1821,14 +1825,18 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_C",
               "groupWeight": 0.45,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 2.1,
               "spawnLimit": 0.13,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                80.0,
+                30.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.45",
-                "limitText": "Max spawn: 13%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.45",
+                "limitText": "Max % To Allow: 13%",
+                "chanceText": "Spawn Chances: 100%, 80%, 30%"
               },
               "boxes": [
                 {
@@ -2781,12 +2789,14 @@
               "groupWeight": 1.0,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.08,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 1",
-                "limitText": "Max spawn: 8%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 8%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -5092,12 +5102,14 @@
               "groupWeight": 0.2,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.2",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.2",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -7401,14 +7413,17 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -8242,14 +8257,17 @@
             {
               "entryClass": "DinoSpawnEntries_InlandWater_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.2,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 20%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 20%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -8837,14 +8855,17 @@
             {
               "entryClass": "DinoSpawnEntriesMonsterIsland_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -8897,14 +8918,17 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -9745,14 +9769,17 @@
             {
               "entryClass": "DinoSpawnEntriesDamiensAtoll_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -9794,14 +9821,17 @@
             {
               "entryClass": "DinoSpawnEntriesGrassland_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.25,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 25%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -10116,12 +10146,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -12418,14 +12450,16 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_C",
               "groupWeight": 0.3,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.8,
               "spawnLimit": 0.08,
-              "spawnChances": [],
+              "spawnChances": [
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.3",
-                "limitText": "Max spawn: 8%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.3",
+                "limitText": "Max % To Allow: 8%",
+                "chanceText": "Spawn Chances: 80%"
               },
               "boxes": [
                 {
@@ -13376,14 +13410,18 @@
             {
               "entryClass": "DinoSpawnEntriesDamiensAtoll_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.75,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                25.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
               },
               "boxes": [
                 {
@@ -13438,12 +13476,14 @@
               "groupWeight": 0.25,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.25",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.25",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -13470,14 +13510,17 @@
             {
               "entryClass": "SE_DinoSpawnEntriesEZMode_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -13939,12 +13982,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.25,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 25%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -16397,12 +16442,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.12,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 12%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 12%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -16429,14 +16476,16 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
               "groupWeight": 0.08,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 50%"
               },
               "boxes": [
                 {
@@ -16529,14 +16578,18 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
               "groupWeight": 0.45,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 2.1,
               "spawnLimit": 0.21,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                80.0,
+                30.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.45",
-                "limitText": "Max spawn: 21%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.45",
+                "limitText": "Max % To Allow: 21%",
+                "chanceText": "Spawn Chances: 100%, 80%, 30%"
               },
               "boxes": [
                 {
@@ -18987,14 +19040,18 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_C",
               "groupWeight": 0.45,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 2.1,
               "spawnLimit": 0.13,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                80.0,
+                30.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.45",
-                "limitText": "Max spawn: 13%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.45",
+                "limitText": "Max % To Allow: 13%",
+                "chanceText": "Spawn Chances: 100%, 80%, 30%"
               },
               "boxes": [
                 {
@@ -19021,14 +19078,17 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -19114,14 +19174,17 @@
             {
               "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.22,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 22%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 22%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -19533,14 +19596,17 @@
             {
               "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -19725,14 +19791,17 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -19825,14 +19894,17 @@
             {
               "entryClass": "DinoSpawnEntriesGrassland_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.3,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 30%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 30%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -19969,14 +20041,16 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
               "groupWeight": 0.3,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.8,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.3",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.3",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 80%"
               },
               "boxes": [
                 {
@@ -22427,14 +22501,16 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_C",
               "groupWeight": 0.3,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.8,
               "spawnLimit": 0.08,
-              "spawnChances": [],
+              "spawnChances": [
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.3",
-                "limitText": "Max spawn: 8%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.3",
+                "limitText": "Max % To Allow: 8%",
+                "chanceText": "Spawn Chances: 80%"
               },
               "boxes": [
                 {
@@ -22465,14 +22541,16 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
               "groupWeight": 0.08,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 50%"
               },
               "boxes": [
                 {
@@ -22635,14 +22713,16 @@
             {
               "entryClass": "Ragnarok_DinoSpawnEntriesIceWyvern_C",
               "groupWeight": 0.08,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 50%"
               },
               "boxes": [
                 {
@@ -22726,12 +22806,14 @@
               "groupWeight": 1.0,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.2,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 1",
-                "limitText": "Max spawn: 20%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 20%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -22903,12 +22985,14 @@
               "groupWeight": 0.2,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.2",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.2",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -23078,14 +23162,17 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -23248,14 +23335,17 @@
             {
               "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.22,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 22%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 22%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -23392,14 +23482,17 @@
             {
               "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -23463,14 +23556,17 @@
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -23640,14 +23736,17 @@
             {
               "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.2,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 20%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 20%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -23975,14 +24074,17 @@
             {
               "entryClass": "DinoSpawnEntriesGrassland_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.3,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 30%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 30%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -24572,12 +24674,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -24747,14 +24851,18 @@
             {
               "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.75,
               "spawnLimit": 0.2,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                25.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 20%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 20%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
               },
               "boxes": [
                 {
@@ -25095,12 +25203,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.12,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 12%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 12%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -25281,14 +25391,16 @@
             {
               "entryClass": "DinoSpawnEntries_Valguero_SnowPlains_C",
               "groupWeight": 0.08,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 50%"
               },
               "boxes": [
                 {
@@ -26096,14 +26208,18 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_C",
               "groupWeight": 0.45,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 2.1,
               "spawnLimit": 0.13,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                80.0,
+                30.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.45",
-                "limitText": "Max spawn: 13%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.45",
+                "limitText": "Max % To Allow: 13%",
+                "chanceText": "Spawn Chances: 100%, 80%, 30%"
               },
               "boxes": [
                 {
@@ -26286,12 +26402,14 @@
               "groupWeight": 1.0,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.2,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 1",
-                "limitText": "Max spawn: 20%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 20%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -26716,12 +26834,14 @@
               "groupWeight": 0.2,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.2",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.2",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -27144,14 +27264,17 @@
             {
               "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.22,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 22%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 22%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -27461,6 +27584,17 @@
                   "min_desired_npc": 12,
                   "bIsCaveManager": null,
                   "bForceUntameable": null
+                },
+                {
+                  "x": 1070.08,
+                  "y": 482.3,
+                  "w": 116.12,
+                  "h": 120.22,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
                 }
               ],
               "points": []
@@ -27475,14 +27609,17 @@
             {
               "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -27568,14 +27705,17 @@
             {
               "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.07,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 7%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -29032,14 +29172,17 @@
             {
               "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.2,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 20%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 20%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -29807,14 +29950,17 @@
             {
               "entryClass": "DinoSpawnEntries_ChalkHills_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -31394,12 +31540,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31815,14 +31963,16 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_C",
               "groupWeight": 0.3,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.8,
               "spawnLimit": 0.08,
-              "spawnChances": [],
+              "spawnChances": [
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.3",
-                "limitText": "Max spawn: 8%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.3",
+                "limitText": "Max % To Allow: 8%",
+                "chanceText": "Spawn Chances: 80%"
               },
               "boxes": [
                 {
@@ -32003,14 +32153,18 @@
             {
               "entryClass": "DinoSpawnEntriesDamiensAtoll_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.75,
               "spawnLimit": 0.2,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                25.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 20%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 20%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
               },
               "boxes": [
                 {
@@ -32778,14 +32932,18 @@
             {
               "entryClass": "DinoSpawnEntries_ChalkHills_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.75,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                25.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
               },
               "boxes": [
                 {
@@ -34367,14 +34525,17 @@
             {
               "entryClass": "AB_DinoSpawnEntries_ElementalChamber_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.055,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 5.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 5.5%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -35754,14 +35915,19 @@
             {
               "entryClass": "AB_DinoSpawnEntries_TwitchFertileLandEasy_C",
               "groupWeight": 0.2,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 3.0,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.2",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.2",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%, 50%, 100%, 50%"
               },
               "boxes": [
                 {
@@ -36052,14 +36218,18 @@
             {
               "entryClass": "AB_DinoSpawnEntries_TwitchFertileLand_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.75,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                25.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
               },
               "boxes": [
                 {
@@ -36849,14 +37019,16 @@
             {
               "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
               "groupWeight": 0.08,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 50%"
               },
               "boxes": [
                 {
@@ -37092,14 +37264,17 @@
             {
               "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -37335,14 +37510,17 @@
             {
               "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -37578,14 +37756,17 @@
             {
               "entryClass": "DinoSpawnEntries_CityObelisk_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -37660,14 +37841,17 @@
             {
               "entryClass": "DinoSpawnEntriesGrassland_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.25,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 25%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -37738,14 +37922,18 @@
             {
               "entryClass": "Ext_DinoSpawnEntries_Forest_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.75,
               "spawnLimit": 0.09,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                25.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 9%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 9%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
               },
               "boxes": [
                 {
@@ -38432,14 +38620,17 @@
             {
               "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -38800,14 +38991,17 @@
             {
               "entryClass": "DinoSpawnEntries_Water_Shallow_LC_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -39109,14 +39303,16 @@
             {
               "entryClass": "DinoSpawnEntries_Mountain_LC_C",
               "groupWeight": 0.08,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.5,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 50%"
               },
               "boxes": [
                 {
@@ -39286,14 +39482,17 @@
             {
               "entryClass": "DinoSpawnEntries_Glacier_LC_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -39313,14 +39512,17 @@
             {
               "entryClass": "DinoSpawnEntries_ValleySnow_LC_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -39351,14 +39553,19 @@
             {
               "entryClass": "AB_DinoSpawnEntries_TwitchFertileLandEasy_C",
               "groupWeight": 0.2,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 3.0,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.2",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.2",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%, 50%, 100%, 50%"
               },
               "boxes": [
                 {
@@ -39407,14 +39614,18 @@
             {
               "entryClass": "AB_DinoSpawnEntries_TwitchFertileLand_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.75,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0,
+                25.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
               },
               "boxes": [
                 {
@@ -39465,12 +39676,14 @@
               "groupWeight": 0.85,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.25,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.85",
-                "limitText": "Max spawn: 25%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.85",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -49243,14 +49456,18 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
               "groupWeight": 0.45,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 2.1,
               "spawnLimit": 0.21,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                80.0,
+                30.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.45",
-                "limitText": "Max spawn: 21%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.45",
+                "limitText": "Max % To Allow: 21%",
+                "chanceText": "Spawn Chances: 100%, 80%, 30%"
               },
               "boxes": [
                 {
@@ -59023,14 +59240,17 @@
             {
               "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.22,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 22%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 22%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -59497,14 +59717,17 @@
             {
               "entryClass": "DinoSpawnEntriesMonsterIsland_Generic_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
@@ -59619,14 +59842,16 @@
             {
               "entryClass": "DinoSpawnEntries_Ocean_Generic_C",
               "groupWeight": 0.3,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.8,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.3",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.3",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 80%"
               },
               "boxes": [
                 {
@@ -69399,14 +69624,17 @@
             {
               "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
               "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.5,
               "spawnLimit": 0.15,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                50.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 15%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 15%",
+                "chanceText": "Spawn Chances: 100%, 50%"
               },
               "boxes": [
                 {
