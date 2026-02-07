@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "mod": {
     "id": "931549",
-    "name": "Xyphias'Creatures: Dickinsonia"
+    "name": "Xyphias' Creatures: Dickinsonia"
   },
   "maps": {
     "The Island": {
@@ -17,12 +17,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -165,12 +167,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -183,6 +187,28 @@
                   "min_desired_npc": 60,
                   "bIsCaveManager": true,
                   "bForceUntameable": true
+                },
+                {
+                  "x": 1777.87,
+                  "y": 1110.22,
+                  "w": 96.87,
+                  "h": 49.15,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 140,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1783.19,
+                  "y": 1087.69,
+                  "w": 59.39,
+                  "h": 61.85,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 30,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
                 }
               ],
               "points": []
@@ -192,12 +218,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -323,154 +351,6 @@
                 }
               ],
               "points": []
-            },
-            {
-              "entryClass": "DinoSpawnEntries_DarkWater_C",
-              "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
-              "spawnLimit": 1.0,
-              "spawnChances": [],
-              "weight": 0.0,
-              "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
-              },
-              "boxes": [
-                {
-                  "x": 538.58,
-                  "y": 0.26,
-                  "w": 748.55,
-                  "h": 93.75,
-                  "manager": "NPCZoneManagerBlueprint_Water_190",
-                  "spawn_volume": "NPCZoneSpawnVolume_285",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1379.4,
-                  "y": 0.26,
-                  "w": 732.45,
-                  "h": 93.75,
-                  "manager": "NPCZoneManagerBlueprint_Water_208",
-                  "spawn_volume": "NPCZoneSpawnVolume_290",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": -0.62,
-                  "y": 82.92,
-                  "w": 93.75,
-                  "h": 696.04,
-                  "manager": "NPCZoneManagerBlueprint_Water_342",
-                  "spawn_volume": "NPCZoneSpawnVolume_298",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": -0.63,
-                  "y": 845.53,
-                  "w": 93.75,
-                  "h": 595.65,
-                  "manager": "NPCZoneManagerBlueprint_Water_343",
-                  "spawn_volume": "NPCZoneSpawnVolume_299",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": -0.62,
-                  "y": 1502.99,
-                  "w": 93.75,
-                  "h": 602.03,
-                  "manager": "NPCZoneManagerBlueprint_Water_344",
-                  "spawn_volume": "NPCZoneSpawnVolume_300",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1953.97,
-                  "y": 82.92,
-                  "w": 93.75,
-                  "h": 696.04,
-                  "manager": "NPCZoneManagerBlueprint_Water_345",
-                  "spawn_volume": "NPCZoneSpawnVolume_301",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1953.97,
-                  "y": 845.53,
-                  "w": 93.75,
-                  "h": 595.65,
-                  "manager": "NPCZoneManagerBlueprint_Water_346",
-                  "spawn_volume": "NPCZoneSpawnVolume_302",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1953.97,
-                  "y": 1502.99,
-                  "w": 93.75,
-                  "h": 602.03,
-                  "manager": "NPCZoneManagerBlueprint_Water_347",
-                  "spawn_volume": "NPCZoneSpawnVolume_303",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 33.8,
-                  "y": 1946.21,
-                  "w": 440.36,
-                  "h": 93.75,
-                  "manager": "NPCZoneManagerBlueprint_Water_348",
-                  "spawn_volume": "NPCZoneSpawnVolume_311",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 538.58,
-                  "y": 1946.21,
-                  "w": 748.55,
-                  "h": 93.75,
-                  "manager": "NPCZoneManagerBlueprint_Water_349",
-                  "spawn_volume": "NPCZoneSpawnVolume_312",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1379.4,
-                  "y": 1946.21,
-                  "w": 732.45,
-                  "h": 93.75,
-                  "manager": "NPCZoneManagerBlueprint_Water_350",
-                  "spawn_volume": "NPCZoneSpawnVolume_313",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": -71.12,
-                  "y": 0.26,
-                  "w": 530.5,
-                  "h": 93.75,
-                  "manager": "NPCZoneManagerBlueprint_Water_351",
-                  "spawn_volume": "NPCZoneSpawnVolume_284",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                }
-              ],
-              "points": []
             }
           ]
         }
@@ -488,12 +368,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -856,12 +738,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1015,12 +899,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1339,12 +1225,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -2576,12 +2464,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -3895,110 +3785,6 @@
                 }
               ],
               "points": []
-            },
-            {
-              "entryClass": "DinoSpawnEntries_DarkWater_C",
-              "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
-              "spawnLimit": 1.0,
-              "spawnChances": [],
-              "weight": 0.0,
-              "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
-              },
-              "boxes": [
-                {
-                  "x": 236.74,
-                  "y": 51.03,
-                  "w": 242.12,
-                  "h": 154.03,
-                  "manager": "Deep_Ocean_21",
-                  "spawn_volume": "NPCZoneSpawnVolume_835",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1856.81,
-                  "y": 1246.64,
-                  "w": 152.4,
-                  "h": 216.48,
-                  "manager": "Deep_Ocean_26",
-                  "spawn_volume": "NPCZoneSpawnVolume_618",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 235.24,
-                  "y": 1760.58,
-                  "w": 216.48,
-                  "h": 114.24,
-                  "manager": "NPCZoneManagerBlueprint_Land_C_28",
-                  "spawn_volume": "NPCZoneSpawnVolume_832",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 574.55,
-                  "y": 1760.58,
-                  "w": 216.48,
-                  "h": 114.24,
-                  "manager": "NPCZoneManagerBlueprint_Land_C_30",
-                  "spawn_volume": "NPCZoneSpawnVolume_552",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1249.75,
-                  "y": 1818.78,
-                  "w": 216.48,
-                  "h": 114.24,
-                  "manager": "NPCZoneManagerBlueprint_Land_C_47",
-                  "spawn_volume": "NPCZoneSpawnVolume_615",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1587.51,
-                  "y": 1772.91,
-                  "w": 216.48,
-                  "h": 152.39,
-                  "manager": "NPCZoneManagerBlueprint_Land_C_48",
-                  "spawn_volume": "NPCZoneSpawnVolume_617",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 613.93,
-                  "y": 51.03,
-                  "w": 242.12,
-                  "h": 154.03,
-                  "manager": "NPCZoneManagerBlueprint_Land_C_60",
-                  "spawn_volume": "NPCZoneSpawnVolume_320",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 993.91,
-                  "y": 51.03,
-                  "w": 242.12,
-                  "h": 154.03,
-                  "manager": "NPCZoneManagerBlueprint_Land_C_61",
-                  "spawn_volume": "NPCZoneSpawnVolume_407",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                }
-              ],
-              "points": []
             }
           ]
         }
@@ -4016,12 +3802,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -4054,12 +3842,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -4108,66 +3898,6 @@
                 }
               ],
               "points": []
-            },
-            {
-              "entryClass": "DinoSpawnEntries_DarkWater_C",
-              "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
-              "spawnLimit": 1.0,
-              "spawnChances": [],
-              "weight": 0.0,
-              "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
-              },
-              "boxes": [
-                {
-                  "x": 316.88,
-                  "y": 1275.13,
-                  "w": 50.2,
-                  "h": 50.2,
-                  "manager": "NPCZoneManager_UAID_60CF847B67A38B9A02_1078080597",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_60CF847B67A38B9A02_1099182598",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 414.0,
-                  "y": 1133.09,
-                  "w": 50.2,
-                  "h": 50.2,
-                  "manager": "NPCZoneManager_UAID_60CF847B67A38B9A02_1230471602",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_60CF847B67A38B9A02_1230464601",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 661.39,
-                  "y": 1260.11,
-                  "w": 50.2,
-                  "h": 50.2,
-                  "manager": "NPCZoneManager_UAID_60CF847B67A38B9A02_1233618605",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_60CF847B67A38B9A02_1233611604",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 602.04,
-                  "y": 971.39,
-                  "w": 50.2,
-                  "h": 50.2,
-                  "manager": "NPCZoneManager_UAID_60CF847B67A38B9A02_1243406608",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_60CF847B67A38B9A02_1243399607",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                }
-              ],
-              "points": []
             }
           ]
         }
@@ -4185,12 +3915,14 @@
               "groupWeight": 0.0005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.0005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.0005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -4401,6 +4133,94 @@
                   "min_desired_npc": 8,
                   "bIsCaveManager": null,
                   "bForceUntameable": null
+                },
+                {
+                  "x": 654.34,
+                  "y": 370.28,
+                  "w": 110.59,
+                  "h": 94.82,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 727.65,
+                  "y": 334.44,
+                  "w": 110.8,
+                  "h": 95.03,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 780.49,
+                  "y": 634.06,
+                  "w": 99.53,
+                  "h": 83.76,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 837.43,
+                  "y": 732.98,
+                  "w": 73.11,
+                  "h": 98.71,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 846.03,
+                  "y": 687.72,
+                  "w": 95.03,
+                  "h": 60.21,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 936.35,
+                  "y": 652.29,
+                  "w": 95.03,
+                  "h": 60.42,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1168.79,
+                  "y": 658.64,
+                  "w": 85.61,
+                  "h": 102.2,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1192.55,
+                  "y": 594.33,
+                  "w": 85.4,
+                  "h": 102.2,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
                 }
               ],
               "points": []
@@ -4410,12 +4230,14 @@
               "groupWeight": 0.0005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.0005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.0005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -5691,12 +5513,14 @@
               "groupWeight": 0.0005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.0005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.0005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -6081,12 +5905,14 @@
               "groupWeight": 0.0005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.0005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.0005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -6196,12 +6022,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -6377,12 +6205,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -6547,12 +6377,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -6686,6 +6518,61 @@
                   "min_desired_npc": 46,
                   "bIsCaveManager": null,
                   "bForceUntameable": null
+                },
+                {
+                  "x": 1741.62,
+                  "y": 1960.76,
+                  "w": 80.28,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 8,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1813.3,
+                  "y": 1937.0,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 25,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1465.34,
+                  "y": 1603.38,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1498.73,
+                  "y": 1551.97,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1570.41,
+                  "y": 1551.97,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
                 }
               ],
               "points": []
@@ -6695,12 +6582,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -6722,12 +6611,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -6760,12 +6651,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -7161,12 +7054,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -7364,12 +7259,14 @@
               "groupWeight": 0.0005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.0005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.0005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -7453,12 +7350,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -7579,12 +7478,14 @@
               "groupWeight": 0.005,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.005",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -7817,132 +7718,6 @@
                   "min_desired_npc": 20,
                   "bIsCaveManager": true,
                   "bForceUntameable": true
-                }
-              ],
-              "points": []
-            },
-            {
-              "entryClass": "DinoSpawnEntries_DarkWater_C",
-              "groupWeight": 0.1,
-              "spawnMultiplier": 1.0,
-              "spawnLimit": 1.0,
-              "spawnChances": [],
-              "weight": 0.0,
-              "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
-              },
-              "boxes": [
-                {
-                  "x": 1339.37,
-                  "y": 1377.45,
-                  "w": 53.48,
-                  "h": 40.67,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A33E6802_1444851666",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_60CF847B67A33E6802_1444863668",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1254.46,
-                  "y": 1276.46,
-                  "w": 50.8,
-                  "h": 54.79,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A33E6802_1464235669",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_60CF847B67A33E6802_1464245671",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 1105.8,
-                  "y": 1648.66,
-                  "w": 32.64,
-                  "h": 49.88,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A092F02_2059131739",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A092F02_2059152741",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 866.39,
-                  "y": 1984.21,
-                  "w": 35.86,
-                  "h": 24.6,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A092F02_2080386744",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A092F02_2080374742",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 43.86,
-                  "y": 473.15,
-                  "w": 320.85,
-                  "h": 40.18,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A301102_2055540052",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A301102_2055557054",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 255.92,
-                  "y": 618.14,
-                  "w": 89.56,
-                  "h": 144.62,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A311102_1078405234",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A311102_1078414236",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 8.27,
-                  "y": 653.96,
-                  "w": 40.18,
-                  "h": 584.22,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A311102_1159472237",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A311102_1159481239",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 452.01,
-                  "y": 407.05,
-                  "w": 80.84,
-                  "h": 216.13,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A311102_1224325240",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A311102_1224335242",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 578.05,
-                  "y": 993.31,
-                  "w": 50.32,
-                  "h": 108.81,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A311102_1248937243",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A311102_1248947245",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
-                },
-                {
-                  "x": 869.99,
-                  "y": 857.15,
-                  "w": 70.99,
-                  "h": 156.86,
-                  "manager": "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A893102_1381660650",
-                  "spawn_volume": "NPCZoneSpawnVolume_UAID_F02F74C9A86A893102_1381675652",
-                  "min_desired_npc": 2,
-                  "bIsCaveManager": null,
-                  "bForceUntameable": null
                 }
               ],
               "points": []
