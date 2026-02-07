@@ -402,11 +402,12 @@ body{
   font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
-  line-height:1.25;
+  line-height:1.33;
 }
 
 .entry-meta-chances{
-  margin-left:3mm;
+  margin-left:1mm;
+  line-height:1.1;
 }
 
 /* ============================================================
