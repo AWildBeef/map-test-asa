@@ -146,6 +146,19 @@ body{
   box-shadow:0 0 0 3px rgba(122,162,255,.18);
 }
 
+/* treat the fancy host like a dropdown control */
+#topbar .controls > #dinoSelectFancy{
+  flex: 2 1 440px;   /* bigger than source/map; tune numbers */
+  min-width:220px;
+}
+
+/* if you want it to match the old “two combined” feel, bump min */
+@media (min-width: 641px){
+  #topbar .controls > #dinoSelectFancy{
+    min-width:460px;
+  }
+}
+
 /* bg dropdown wrapper */
 #bgSelectWrap{
   display:inline-flex;
