@@ -176,7 +176,8 @@ body{
   width: 100%;
 
   padding:6px 8px;         /* same as #topbar select */
-  font-size:13px;            /* same as #topbar select */
+  font-size:12px;            /* same as #topbar select */
+  font-weight:500px;
   border-radius:4px;         /* same as #topbar select */
 
   border:1px solid var(--control-border);
