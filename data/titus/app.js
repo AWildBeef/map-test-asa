@@ -175,6 +175,56 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+
+function normSearch(s){
+  return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
+}
+
+function dinoSummaryForFancy(cfg, dinoKey){
+  const d = cfg?.dinos?.[dinoKey];
+  if (!d) return { entryCount: 0, rarity: "", label: dinoKey };
+
+  const entryCount = (d.entries || []).length;
+
+  // If you have per-entry rarity, pick the "best" (most common) or just first non-empty
+  let rarity = "";
+  for (const e of (d.entries || [])){
+    if (e?.rarity){ rarity = e.rarity; break; }
+  }
+
+  return { entryCount, rarity, label: (d.displayName || dinoKey) };
+}
+
+function rarityDotColor(rarity){
+  // reuse your existing rarityToColor
+  return rarity ? rarityToColor(rarity) : "#777";
+}
+
+function normSearch(s){
+  return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
+}
+
+function dinoSummaryForFancy(cfg, dinoKey){
+  const d = cfg?.dinos?.[dinoKey];
+  if (!d) return { entryCount: 0, rarity: "", label: dinoKey };
+
+  const entryCount = (d.entries || []).length;
+
+  // If you have per-entry rarity, pick the "best" (most common) or just first non-empty
+  let rarity = "";
+  for (const e of (d.entries || [])){
+    if (e?.rarity){ rarity = e.rarity; break; }
+  }
+
+  return { entryCount, rarity, label: (d.displayName || dinoKey) };
+}
+
+function rarityDotColor(rarity){
+  // reuse your existing rarityToColor
+  return rarity ? rarityToColor(rarity) : "#777";
+}
+
+
 // ============================================================
 // POIs
 // ============================================================
@@ -631,6 +681,7 @@ function setupMainSelect(cfg) {
       opt.textContent = "(No dinos)";
       sel.appendChild(opt);
       renderInfoPanelBodyEmpty();
+      mountFancyDinoSelect(cfg);
       return;
     }
 
