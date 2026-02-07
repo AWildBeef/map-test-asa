@@ -220,8 +220,8 @@ function mountFancyDinoSelect(cfg){
   btnLeft.className = "dd-btn-left";
 
   const textWrap = document.createElement("div");
-  textWrap.style.minWidth = "0";
-
+    textWrap.className = "dd-btn-text";
+    textWrap.style.minWidth = "0";
   const label = document.createElement("div");
   label.className = "dd-label";
 
