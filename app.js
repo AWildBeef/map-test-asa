@@ -80,8 +80,8 @@ function normalizePoiType(type) {
 // ============================================================
 // DRAWING TUNING
 // ============================================================
-const BOX_TO_POINT_AREA_THRESHOLD = 18_000;
-const BOX_TO_POINT_MIN_DIM = 40;
+const BOX_TO_POINT_AREA_THRESHOLD = 1_000;
+const BOX_TO_POINT_MIN_DIM = 10;
 
 // ============================================================
 // MAPS
@@ -129,6 +129,7 @@ const SOURCES = [
   { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json" },
   { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
   { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
+  { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json" },
 ];
 
 // ============================================================
@@ -164,7 +165,7 @@ async function loadJSON(path) {
 // ============================================================
 // MOD STYLE STATE (used by floating panel + drawing)
 // ============================================================
-let modDrawColor = "#00ff00";
+let modDrawColor = "#00ff55";
 let modDrawOpacity = 0.8;
 let modGlowEnabled = false;
 
@@ -362,8 +363,8 @@ function buildEntryMetaLines(entry) {
   const disp = entry?.display;
   if (disp) {
     if (disp.weightText) lines.push(disp.weightText);
-    if (disp.limitText)  lines.push(disp.limitText);
     if (disp.chanceText) lines.push(disp.chanceText);
+    if (disp.limitText)  lines.push(disp.limitText);
     return lines;
   }
 
@@ -371,16 +372,17 @@ function buildEntryMetaLines(entry) {
   const gw  = entry.groupWeight ?? entry.group_weight;
   const lim = entry.spawnLimit  ?? entry.spawn_limit;
 
-  if (gw != null) lines.push(`Weight: ${fmt(gw)}`);
-  if (lim != null) lines.push(`Max spawn: ${fmt(Number(lim) * 100)}%`);
-
+  if (gw != null) lines.push(`Entry Weight: ${fmt(gw)}`);
+  
   const chances = entry.spawnChances ?? entry.spawn_chances;
   if (Array.isArray(chances) && chances.length) {
     lines.push(`Spawn chances: ${chances.map(n => `${fmt(n)}%`).join(", ")}`);
   } else if (typeof chances === "string" && chances.trim()) {
     const parts = chances.split(",").map(s => s.trim()).filter(Boolean);
-    if (parts.length) lines.push(`Spawn chances: ${parts.map(p => `${p}%`).join(", ")}`);
+    if (parts.length) lines.push(`Spawn Chances: ${parts.map(p => `${p}%`).join(", ")}`);
   }
+  
+  if (lim != null) lines.push(`Max % To Spawn: ${fmt(Number(lim) * 100)}%`);
 
   return lines;
 }
@@ -1151,7 +1153,7 @@ function ensurePanels() {
     stylePanel = createFloatingPanel({
       id: "modStylePanel",
       title: "Mod Style",
-      defaultPos: { right: 2, top: 2 },
+      defaultPos: { right: 5, top: 2 },
       collapsedByDefault: true
     });
     renderModStylePanelBody();
@@ -1298,7 +1300,13 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
 
     return `
       <div class="entry-meta" style="margin-top:4px;">
-        ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+        ${metaLines.map(line => {
+          const isChances = String(line).toLowerCase().startsWith("spawn chances");
+          const cls = isChances
+            ? "entry-meta-line entry-meta-chances"
+            : "entry-meta-line";
+          return `<div class="${cls}">${escapeHtml(line)}</div>`;
+        }).join("")}
       </div>
     `;
   }).join("");
@@ -1390,7 +1398,13 @@ function renderEntryRow(entry, dinoKey, idx) {
       <div class="entry-main">
         <div class="entry-name">${escapeHtml(entryClass)}</div>
         <div class="entry-meta">
-          ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+          ${metaLines.map(line => {
+            const isChances = String(line).toLowerCase().startsWith("spawn chances");
+            const cls = isChances
+              ? "entry-meta-line entry-meta-chances"
+              : "entry-meta-line";
+            return `<div class="${cls}">${escapeHtml(line)}</div>`;
+          }).join("")}
         </div>
       </div>
     </label>
