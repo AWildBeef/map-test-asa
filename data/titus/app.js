@@ -165,7 +165,7 @@ async function loadJSON(path) {
 // ============================================================
 // MOD STYLE STATE (used by floating panel + drawing)
 // ============================================================
-let modDrawColor = "#00ff00";
+let modDrawColor = "#00ffff";
 let modDrawOpacity = 0.8;
 let modGlowEnabled = false;
 
