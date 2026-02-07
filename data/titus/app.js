@@ -363,8 +363,8 @@ function buildEntryMetaLines(entry) {
   const disp = entry?.display;
   if (disp) {
     if (disp.weightText) lines.push(disp.weightText);
-    if (disp.limitText)  lines.push(disp.limitText);
     if (disp.chanceText) lines.push(disp.chanceText);
+    if (disp.limitText)  lines.push(disp.limitText);
     return lines;
   }
 
@@ -373,8 +373,7 @@ function buildEntryMetaLines(entry) {
   const lim = entry.spawnLimit  ?? entry.spawn_limit;
 
   if (gw != null) lines.push(`Entry Weight: ${fmt(gw)}`);
-  if (lim != null) lines.push(`Max % To Spawn: ${fmt(Number(lim) * 100)}%`);
-
+  
   const chances = entry.spawnChances ?? entry.spawn_chances;
   if (Array.isArray(chances) && chances.length) {
     lines.push(`Spawn chances: ${chances.map(n => `${fmt(n)}%`).join(", ")}`);
@@ -382,6 +381,8 @@ function buildEntryMetaLines(entry) {
     const parts = chances.split(",").map(s => s.trim()).filter(Boolean);
     if (parts.length) lines.push(`Spawn Chances: ${parts.map(p => `${p}%`).join(", ")}`);
   }
+  
+  if (lim != null) lines.push(`Max % To Spawn: ${fmt(Number(lim) * 100)}%`);
 
   return lines;
 }
