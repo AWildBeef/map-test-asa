@@ -41,6 +41,19 @@
   max-width:none;      /* override dd's max-width:320px if needed */
 }
 
+/* Fancy dropdown hosts should size like native selects */
+#topbar .controls > #sourceSelectFancy,
+#topbar .controls > #mapSelectFancy{
+  flex: 1 1 220px;
+  min-width:200px;
+  max-width:320px;
+  width:100%;
+}
+
+/* bgSelectFancy lives inside #bgSelectWrap so target it there */
+#bgSelectWrap #bgSelectFancy{
+  width:100%;
+}
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
