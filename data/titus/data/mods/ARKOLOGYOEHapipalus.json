@@ -17,12 +17,14 @@
               "groupWeight": 0.015,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.015,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.015",
-                "limitText": "Max spawn: 1.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.015",
+                "limitText": "Max % To Allow: 1.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -616,12 +618,14 @@
               "groupWeight": 0.025,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.025,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.025",
-                "limitText": "Max spawn: 2.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.025",
+                "limitText": "Max % To Allow: 2.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1028,12 +1032,14 @@
               "groupWeight": 0.015,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.015,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.015",
-                "limitText": "Max spawn: 1.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.015",
+                "limitText": "Max % To Allow: 1.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1110,12 +1116,14 @@
               "groupWeight": 0.025,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.025,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.025",
-                "limitText": "Max spawn: 2.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.025",
+                "limitText": "Max % To Allow: 2.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1247,12 +1255,14 @@
               "groupWeight": 0.035,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.035",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.035",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1362,12 +1372,14 @@
               "groupWeight": 0.025,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.025,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.025",
-                "limitText": "Max spawn: 2.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.025",
+                "limitText": "Max % To Allow: 2.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1677,6 +1689,17 @@
                   "min_desired_npc": 12,
                   "bIsCaveManager": null,
                   "bForceUntameable": null
+                },
+                {
+                  "x": 1070.08,
+                  "y": 482.3,
+                  "w": 116.12,
+                  "h": 120.22,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
                 }
               ],
               "points": []
@@ -1686,12 +1709,14 @@
               "groupWeight": 0.08,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1779,12 +1804,14 @@
               "groupWeight": 0.1,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.1",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -3071,14 +3098,72 @@
               "groupWeight": 0.045,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.045,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.045",
-                "limitText": "Max spawn: 4.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.045",
+                "limitText": "Max % To Allow: 4.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
-              "boxes": [],
+              "boxes": [
+                {
+                  "x": 1319.12,
+                  "y": 853.4,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1388.75,
+                  "y": 871.83,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1457.97,
+                  "y": 890.47,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1527.4,
+                  "y": 908.9,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1596.62,
+                  "y": 927.54,
+                  "w": 80.49,
+                  "h": 80.49,
+                  "manager": "wiki",
+                  "spawn_volume": null,
+                  "min_desired_npc": 12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
               "points": []
             }
           ]
@@ -3097,12 +3182,14 @@
               "groupWeight": 0.025,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.025,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.025",
-                "limitText": "Max spawn: 2.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.025",
+                "limitText": "Max % To Allow: 2.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
