@@ -344,6 +344,7 @@ function mountFancyDinoSelect(cfg){
     search.value = "";
     // show all items
     list.querySelectorAll(".dd-item").forEach(el => el.style.display = "");
+    list.scrollTop = 0;
     search.focus(); // note: iOS zoom fix is CSS: .dd-search{font-size:16px;}
   }
 
@@ -357,8 +358,14 @@ function mountFancyDinoSelect(cfg){
   });
 
   // Filter
+  let lastQ = "";
+
   search.addEventListener("input", () => {
     const q = normSearch(search.value);
+  
+    if (q !== lastQ) list.scrollTop = 0;  // ✅
+    lastQ = q;
+  
     list.querySelectorAll(".dd-item").forEach(el => {
       el.style.display = el.dataset.search.includes(q) ? "" : "none";
     });
