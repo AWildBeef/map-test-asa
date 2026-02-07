@@ -404,13 +404,13 @@ body{
   font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
-  line-height:1.25;
+  line-height:1.15;
 }
 
 .entry-meta-chances{
   margin-left:1mm;
-  line-height:1.5;
-  margin-top:-3px;
+  line-height:1.2;
+  margin-top:-2px;
   color:#00ff00
 }
 
