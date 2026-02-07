@@ -27,6 +27,20 @@
   --topbar-pad-x: 16px;
 }
 
+/* Treat fancy dino select like a full flex item (same as selects) */
+#topbar .controls > #dinoSelectFancy{
+  flex: 1 1 220px;     /* same as your selects */
+  min-width:200px;     /* match your selects */
+  max-width:320px;     /* match your selects */
+  width:100%;
+}
+
+/* Make the component fill its flex slot */
+#dinoSelectFancy .dd{
+  width:100%;
+  max-width:none;      /* override dd's max-width:320px if needed */
+}
+
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
