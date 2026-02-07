@@ -393,7 +393,9 @@ body{
 .entry-meta{ 
   margin-top:2px; 
   font-size:12px; 
-  color:#0000ff; }
+  color:#0000ff;
+  gap:4px;
+}
 
 .entry-meta-line{
   font-size:12px;
@@ -402,12 +404,13 @@ body{
   font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
-  line-height:2;
+  line-height:1.25;
 }
 
 .entry-meta-chances{
   margin-left:1mm;
-  line-height:2;
+  line-height:1.25;
+  margin-bottom:-2px;
 }
 
 /* ============================================================
