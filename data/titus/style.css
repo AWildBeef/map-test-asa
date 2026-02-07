@@ -403,7 +403,7 @@ body{
   font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
-  line-height:1.25;
+  line-height:1.3;
 }
 
 .entry-meta-chances{
@@ -470,7 +470,7 @@ body{
   }
   
   .entry-meta-chances{
-    font-weight:300;
+    font-weight:390;
   }
   
   .info-mono{   /* The scrollable BP and Nametag Fields */
