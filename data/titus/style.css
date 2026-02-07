@@ -255,6 +255,7 @@ body{
   align-items:center;
   gap:10px;
   min-width:0;
+  width:100%;
 }
 
 /* Closed state: put name + count on the same line */
@@ -263,6 +264,7 @@ body{
   align-items:baseline;
   gap:8px;
   min-width:0;
+  width:100%;
 }
 
 /* The name should ellipsis if needed */
@@ -276,6 +278,7 @@ body{
   flex:0 0 auto;
   white-space:nowrap;
   opacity:.75;
+  margin-left:auto;
 }
 
 .dd-btn-text .dd-sub{
