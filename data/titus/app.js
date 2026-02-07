@@ -182,17 +182,12 @@ function normSearch(s){
 
 function dinoSummaryForFancy(cfg, dinoKey){
   const d = cfg?.dinos?.[dinoKey];
-  if (!d) return { entryCount: 0, rarity: "", label: dinoKey };
+  if (!d) return { entryCount: 0, label: dinoKey };
 
-  const entryCount = (d.entries || []).length;
-
-  // If you have per-entry rarity, pick the "best" (most common) or just first non-empty
-  let rarity = "";
-  for (const e of (d.entries || [])){
-    if (e?.rarity){ rarity = e.rarity; break; }
-  }
-
-  return { entryCount, rarity, label: (d.displayName || dinoKey) };
+  return {
+    entryCount: (d.entries || []).length,
+    label: (d.displayName || dinoKey),
+  };
 }
 
 function rarityDotColor(rarity){
@@ -224,9 +219,6 @@ function mountFancyDinoSelect(cfg){
   const btnLeft = document.createElement("div");
   btnLeft.className = "dd-btn-left";
 
-  const dot = document.createElement("span");
-  dot.className = "dd-dot";
-
   const textWrap = document.createElement("div");
   textWrap.style.minWidth = "0";
 
@@ -239,7 +231,7 @@ function mountFancyDinoSelect(cfg){
   textWrap.appendChild(label);
   textWrap.appendChild(sub);
 
-  btnLeft.appendChild(dot);
+  // (removed rarity dot)
   btnLeft.appendChild(textWrap);
 
   const caret = document.createElement("div");
@@ -270,10 +262,10 @@ function mountFancyDinoSelect(cfg){
   function rebuildItems(){
     list.innerHTML = "";
 
-    const opts = Array.from(native.options).map(o => ({ value: o.value, text: o.textContent || "" }))
+    const opts = Array.from(native.options)
+      .map(o => ({ value: o.value, text: o.textContent || "" }))
       .filter(o => o.value);
 
-    // Items for Dino mode
     for (const o of opts){
       const row = document.createElement("div");
       row.className = "dd-item";
@@ -282,9 +274,6 @@ function mountFancyDinoSelect(cfg){
 
       const left = document.createElement("div");
       left.className = "dd-item-left";
-
-      const rd = document.createElement("span");
-      rd.className = "dd-dot";
 
       const main = document.createElement("div");
       main.className = "dd-item-main";
@@ -300,28 +289,30 @@ function mountFancyDinoSelect(cfg){
       badges.className = "dd-badges";
 
       if (currentViewMode === "dino"){
-        const sum = dinoSummaryForFancy(cfg, o.value);
-        rd.style.background = rarityDotColor(sum.rarity);
-        meta.textContent = sum.rarity ? sum.rarity : " ";
+        const sum = dinoSummaryForFancy(cfg, o.value); // uses your existing helper (entryCount)
+        meta.textContent = "Dino";
+
         const pill = document.createElement("span");
         pill.className = "dd-pill";
         pill.textContent = `${sum.entryCount} entries`;
         badges.appendChild(pill);
+
       } else {
-        // Entry mode: keep dot neutral; show count of dinos in that entry
-        rd.style.background = "#777";
+        // Entry mode
         const rows = entryIndex?.[o.value] || [];
+
         const pill = document.createElement("span");
         pill.className = "dd-pill";
         pill.textContent = `${rows.length} dinos`;
         badges.appendChild(pill);
+
         meta.textContent = "Spawn entry";
       }
 
       main.appendChild(name);
       main.appendChild(meta);
 
-      left.appendChild(rd);
+      // (removed row rarity dot)
       left.appendChild(main);
 
       row.appendChild(left);
@@ -344,10 +335,8 @@ function mountFancyDinoSelect(cfg){
 
     if (currentViewMode === "dino"){
       const sum = dinoSummaryForFancy(cfg, v);
-      dot.style.background = rarityDotColor(sum.rarity);
-      sub.textContent = `${sum.entryCount} entries${sum.rarity ? ` • ${sum.rarity}` : ""}`;
+      sub.textContent = `${sum.entryCount} entries`;
     } else {
-      dot.style.background = "#777";
       const rows = entryIndex?.[v] || [];
       sub.textContent = `${rows.length} dinos`;
     }
@@ -358,7 +347,7 @@ function mountFancyDinoSelect(cfg){
     search.value = "";
     // show all items
     list.querySelectorAll(".dd-item").forEach(el => el.style.display = "");
-    search.focus();
+    search.focus(); // note: iOS zoom fix is CSS: .dd-search{font-size:16px;}
   }
 
   function close(){
