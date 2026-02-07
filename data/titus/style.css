@@ -767,6 +767,28 @@ body{
     width: var(--modPanel-w-mobile);
   }
   
+  /* MOBILE: treat fancy dropdown hosts like selects (so they can sit side-by-side) */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy,
+  #topbar .controls > #bgSelectWrap,
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 140px;   /* same as your selects */
+    min-width:120px;
+    width:auto;        /* IMPORTANT: override any 100% width */
+  }
+  
+  /* Make the dino one span the full row (so source+map stay above it) */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    min-width:0;
+  }
+  
+  /* If any fancy host got forced to width:100% somewhere, squash it */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy{
+    max-width:none;
+  }
+  
   .floating-panel .fp-title{
     color:var(--muted);
     font-weight:600;
