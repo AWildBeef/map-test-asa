@@ -290,7 +290,7 @@ function mountFancyDinoSelect(cfg){
 
       if (currentViewMode === "dino"){
         const sum = dinoSummaryForFancy(cfg, o.value); // uses your existing helper (entryCount)
-        meta.textContent = "Dino";
+        
 
         const pill = document.createElement("span");
         pill.className = "dd-pill";
@@ -305,12 +305,9 @@ function mountFancyDinoSelect(cfg){
         pill.className = "dd-pill";
         pill.textContent = `${rows.length} dinos`;
         badges.appendChild(pill);
-
-        meta.textContent = "Spawn entry";
       }
 
       main.appendChild(name);
-      main.appendChild(meta);
 
       // (removed row rarity dot)
       left.appendChild(main);
