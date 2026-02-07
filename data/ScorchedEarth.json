@@ -66,8 +66,8 @@
           "spawnChances": "100, 70, 35",
           "weight": 0.006406,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 40.0,
@@ -179,6 +179,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -189,10 +208,10 @@
           "spawnMultiplier": 2.05,
           "spawnLimit": 0.075,
           "spawnChances": "100, 70, 35",
-          "weight": 0.007808,
+          "weight": 0.00663,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 20.0,
@@ -235,8 +254,8 @@
           "spawnChances": "100, 70, 35",
           "weight": 0.009609,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 32.0,
@@ -257,6 +276,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 1589.66,
+                  "y": 431.31,
+                  "w": 11.06,
+                  "h": 12.7
+                },
+                {
+                  "x": 1598.05,
+                  "y": 427.01,
+                  "w": 12.9,
+                  "h": 11.06
+                },
+                {
+                  "x": 1600.31,
+                  "y": 444.01,
+                  "w": 10.65,
+                  "h": 9.01
+                },
+                {
+                  "x": 1607.48,
+                  "y": 433.36,
+                  "w": 7.99,
+                  "h": 13.11
+                },
+                {
+                  "x": 1615.05,
+                  "y": 437.66,
+                  "w": 7.17,
+                  "h": 12.9
+                },
+                {
+                  "x": 1621.2,
+                  "y": 453.22,
+                  "w": 11.67,
+                  "h": 12.49
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.4
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -267,10 +329,10 @@
           "spawnMultiplier": 2.05,
           "spawnLimit": 0.075,
           "spawnChances": "100, 70, 35",
-          "weight": 0.016063,
+          "weight": 0.008032,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 10.0,
@@ -394,8 +456,8 @@
           "spawnChances": "100, 70, 35",
           "weight": 0.013125,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 10.0,
@@ -492,8 +554,8 @@
           "spawnChances": "100, 70, 35",
           "weight": 0.009609,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 40.0,
@@ -784,8 +846,8 @@
           "spawnChances": "100",
           "weight": 0.007968,
           "display": {
-            "weightText": "Weight: 0.015714",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.015714",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
@@ -1238,8 +1300,8 @@
           "spawnChances": "100, 75",
           "weight": 0.002162,
           "display": {
-            "weightText": "Weight: 0.035",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.035",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -1776,8 +1838,8 @@
           "spawnChances": "100, 60",
           "weight": 0.005732,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -3354,8 +3416,8 @@
           "spawnChances": "100, 60",
           "weight": 0.002461,
           "display": {
-            "weightText": "Weight: 0.04",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.04",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -4919,8 +4981,8 @@
           "spawnChances": "100, 60",
           "weight": 0.00946,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 24.0,
@@ -4986,8 +5048,8 @@
           "spawnChances": "100, 60",
           "weight": 0.021429,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 40.0,
@@ -5099,6 +5161,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -5109,10 +5190,10 @@
           "spawnMultiplier": 1.6,
           "spawnLimit": 0.15,
           "spawnChances": "100, 60",
-          "weight": 0.026116,
+          "weight": 0.022179,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -5155,8 +5236,8 @@
           "spawnChances": "100, 60",
           "weight": 0.032143,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 32.0,
@@ -5253,8 +5334,8 @@
           "spawnChances": "100, 60",
           "weight": 0.032143,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 40.0,
@@ -5502,8 +5583,8 @@
           "spawnChances": "100",
           "weight": 0.028302,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
@@ -7087,8 +7168,8 @@
           "spawnChances": "100, 50",
           "weight": 0.000937,
           "display": {
-            "weightText": "Weight: 0.0125",
-            "limitText": "Max spawn: 6.5%",
+            "weightText": "Entry Weight: 0.0125",
+            "limitText": "Max % To Allow: 6.5%",
             "chanceText": "Spawn Chances: 100%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -8659,8 +8740,8 @@
           "spawnChances": "100, 25",
           "weight": 0.023095,
           "display": {
-            "weightText": "Weight: 0.125",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.125",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 25%"
           },
           "bestSharedMin": 24.0,
@@ -9113,8 +9194,8 @@
           "spawnChances": "100, 75",
           "weight": 0.006588,
           "display": {
-            "weightText": "Weight: 0.04",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.04",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -9173,8 +9254,8 @@
           "spawnChances": "100, 75",
           "weight": 0.015625,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 40.0,
@@ -15613,8 +15694,8 @@
           "spawnChances": "100, 33",
           "weight": 0.011166,
           "display": {
-            "weightText": "Weight: 0.08",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.08",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 33%"
           },
           "bestSharedMin": 20.0,
@@ -15635,6 +15716,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 1589.66,
+                  "y": 431.31,
+                  "w": 11.06,
+                  "h": 12.7
+                },
+                {
+                  "x": 1598.05,
+                  "y": 427.01,
+                  "w": 12.9,
+                  "h": 11.06
+                },
+                {
+                  "x": 1600.31,
+                  "y": 444.01,
+                  "w": 10.65,
+                  "h": 9.01
+                },
+                {
+                  "x": 1607.48,
+                  "y": 433.36,
+                  "w": 7.99,
+                  "h": 13.11
+                },
+                {
+                  "x": 1615.05,
+                  "y": 437.66,
+                  "w": 7.17,
+                  "h": 12.9
+                },
+                {
+                  "x": 1621.2,
+                  "y": 453.22,
+                  "w": 11.67,
+                  "h": 12.49
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.4
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -15645,10 +15769,10 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.15,
           "spawnChances": "100, 67, 33",
-          "weight": 0.067164,
+          "weight": 0.033582,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
@@ -15772,8 +15896,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.054878,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
@@ -15870,8 +15994,8 @@
           "spawnChances": "100, 75",
           "weight": 0.023438,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 40.0,
@@ -16119,8 +16243,8 @@
           "spawnChances": "100",
           "weight": 0.025157,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
@@ -16573,8 +16697,8 @@
           "spawnChances": "100, 75",
           "weight": 0.009059,
           "display": {
-            "weightText": "Weight: 0.055",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.055",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -18138,8 +18262,8 @@
           "spawnChances": "100, 100, 100",
           "weight": 0.008277,
           "display": {
-            "weightText": "Weight: 0.014",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.014",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 100%, 100%"
           },
           "bestSharedMin": 24.0,
@@ -18592,8 +18716,8 @@
           "spawnChances": "100",
           "weight": 0.000588,
           "display": {
-            "weightText": "Weight: 0.025",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.025",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -20157,8 +20281,8 @@
           "spawnChances": "100",
           "weight": 0.003018,
           "display": {
-            "weightText": "Weight: 0.06125",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.06125",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -20247,8 +20371,8 @@
           "spawnChances": "100, 80, 70",
           "weight": 0.514925,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 60%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 60%",
             "chanceText": "Spawn Chances: 100%, 80%, 70%"
           },
           "bestSharedMin": 12.0,
@@ -20592,8 +20716,8 @@
           "spawnChances": "100, 80, 70",
           "weight": 0.947368,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 80%, 70%"
           },
           "bestSharedMin": 24.0,
@@ -21046,8 +21170,8 @@
           "spawnChances": "100, 55, 0, 0",
           "weight": 0.000204,
           "display": {
-            "weightText": "Weight: 0.028",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.028",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%, 55%, 0%, 0%"
           },
           "bestSharedMin": 10.0,
@@ -22624,8 +22748,8 @@
           "spawnChances": "100, 100, 70, 60",
           "weight": 0.000761,
           "display": {
-            "weightText": "Weight: 0.03",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.03",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%, 100%, 70%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -22883,8 +23007,8 @@
           "spawnChances": "100",
           "weight": 0.637255,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -23142,8 +23266,8 @@
           "spawnChances": "100",
           "weight": 0.012745,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -23180,8 +23304,8 @@
           "spawnChances": "100",
           "weight": 0.0008,
           "display": {
-            "weightText": "Weight: 0.025",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.025",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -23263,8 +23387,8 @@
           "spawnChances": "100",
           "weight": 0.001631,
           "display": {
-            "weightText": "Weight: 0.0475",
-            "limitText": "Max spawn: 1.5%",
+            "weightText": "Entry Weight: 0.0475",
+            "limitText": "Max % To Allow: 1.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 12.0,
@@ -23608,8 +23732,8 @@
           "spawnChances": "100",
           "weight": 0.006316,
           "display": {
-            "weightText": "Weight: 0.05",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.05",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -25193,8 +25317,8 @@
           "spawnChances": "100, 90, 50, 20, 5",
           "weight": 0.000509,
           "display": {
-            "weightText": "Weight: 0.005",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.005",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 90%, 50%, 20%, 5%"
           },
           "bestSharedMin": 20.0,
@@ -25354,8 +25478,8 @@
           "spawnChances": "100, 90, 50, 20, 5",
           "weight": 7.3e-05,
           "display": {
-            "weightText": "Weight: 0.001",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.001",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 90%, 50%, 20%, 5%"
           },
           "bestSharedMin": 24.0,
@@ -25808,8 +25932,8 @@
           "spawnChances": "100",
           "weight": 0.006306,
           "display": {
-            "weightText": "Weight: 0.067",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.067",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -26125,8 +26249,8 @@
           "spawnChances": "100",
           "weight": 0.008251,
           "display": {
-            "weightText": "Weight: 0.067",
-            "limitText": "Max spawn: 17.5%",
+            "weightText": "Entry Weight: 0.067",
+            "limitText": "Max % To Allow: 17.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 12.0,
@@ -27703,8 +27827,8 @@
           "spawnChances": "100",
           "weight": 0.004614,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -27816,6 +27940,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -27826,10 +27969,10 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.1,
           "spawnChances": "100, 100",
-          "weight": 0.021763,
+          "weight": 0.018482,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 100%"
           },
           "bestSharedMin": 20.0,
@@ -27872,8 +28015,8 @@
           "spawnChances": "100, 100",
           "weight": 0.026786,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 100%"
           },
           "bestSharedMin": 32.0,
@@ -28326,8 +28469,8 @@
           "spawnChances": "100, 75",
           "weight": 0.001235,
           "display": {
-            "weightText": "Weight: 0.03",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.03",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -28643,8 +28786,8 @@
           "spawnChances": "100, 75",
           "weight": 0.020934,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 17%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 17%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 12.0,
@@ -29181,8 +29324,8 @@
           "spawnChances": "100, 60",
           "weight": 0.016376,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -30759,8 +30902,8 @@
           "spawnChances": "100, 60",
           "weight": 0.008612,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -30840,8 +30983,8 @@
           "spawnChances": "100",
           "weight": 1.0,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 0.75,
@@ -37287,8 +37430,8 @@
           "spawnChances": "100, 60",
           "weight": 0.001675,
           "display": {
-            "weightText": "Weight: 0.04",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.04",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -37536,8 +37679,8 @@
           "spawnChances": "100",
           "weight": 0.016352,
           "display": {
-            "weightText": "Weight: 0.065",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.065",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
@@ -37574,8 +37717,8 @@
           "spawnChances": "100, 70",
           "weight": 0.4896,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 60%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 60%",
             "chanceText": "Spawn Chances: 100%, 70%"
           },
           "bestSharedMin": 10.0,
@@ -39159,8 +39302,8 @@
           "spawnChances": "100, 80, 60, 45",
           "weight": 0.003156,
           "display": {
-            "weightText": "Weight: 0.024",
-            "limitText": "Max spawn: 6%",
+            "weightText": "Entry Weight: 0.024",
+            "limitText": "Max % To Allow: 6%",
             "chanceText": "Spawn Chances: 100%, 80%, 60%, 45%"
           },
           "bestSharedMin": 20.0,
@@ -40724,8 +40867,8 @@
           "spawnChances": "100, 80, 60, 45",
           "weight": 0.004044,
           "display": {
-            "weightText": "Weight: 0.024",
-            "limitText": "Max spawn: 6%",
+            "weightText": "Entry Weight: 0.024",
+            "limitText": "Max % To Allow: 6%",
             "chanceText": "Spawn Chances: 100%, 80%, 60%, 45%"
           },
           "bestSharedMin": 24.0,
@@ -47171,8 +47314,8 @@
           "spawnChances": "100",
           "weight": 0.001309,
           "display": {
-            "weightText": "Weight: 0.05",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.05",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -47463,8 +47606,8 @@
           "spawnChances": "100",
           "weight": 0.052586,
           "display": {
-            "weightText": "Weight: 0.314286",
-            "limitText": "Max spawn: 33%",
+            "weightText": "Entry Weight: 0.314286",
+            "limitText": "Max % To Allow: 33%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
@@ -49048,8 +49191,8 @@
           "spawnChances": "100",
           "weight": 0.002307,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -49209,8 +49352,8 @@
           "spawnChances": "100",
           "weight": 0.012327,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -49371,8 +49514,8 @@
           "spawnChances": "100",
           "weight": 1.0,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 2.0,
@@ -49825,8 +49968,8 @@
           "spawnChances": "100, 90, 80, 70, 60, 50",
           "weight": 0.010588,
           "display": {
-            "weightText": "Weight: 0.05",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.05",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 90%, 80%, 70%, 60%, 50%"
           },
           "bestSharedMin": 10.0,
@@ -50142,8 +50285,8 @@
           "spawnChances": "100, 90, 80, 70, 60, 50",
           "weight": 0.007346,
           "display": {
-            "weightText": "Weight: 0.029",
-            "limitText": "Max spawn: 8%",
+            "weightText": "Entry Weight: 0.029",
+            "limitText": "Max % To Allow: 8%",
             "chanceText": "Spawn Chances: 100%, 90%, 80%, 70%, 60%, 50%"
           },
           "bestSharedMin": 12.0,
@@ -51707,8 +51850,8 @@
           "spawnChances": "100, 90, 80, 70, 60, 50",
           "weight": 0.009933,
           "display": {
-            "weightText": "Weight: 0.032",
-            "limitText": "Max spawn: 7%",
+            "weightText": "Entry Weight: 0.032",
+            "limitText": "Max % To Allow: 7%",
             "chanceText": "Spawn Chances: 100%, 90%, 80%, 70%, 60%, 50%"
           },
           "bestSharedMin": 24.0,
@@ -51875,8 +52018,8 @@
           "spawnChances": "100",
           "weight": 0.000137,
           "display": {
-            "weightText": "Weight: 0.025",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.025",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -52420,8 +52563,8 @@
           "spawnChances": "100, 100, 75, 50",
           "weight": 0.096052,
           "display": {
-            "weightText": "Weight: 0.165",
-            "limitText": "Max spawn: 17.5%",
+            "weightText": "Entry Weight: 0.165",
+            "limitText": "Max % To Allow: 17.5%",
             "chanceText": "Spawn Chances: 100%, 100%, 75%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -53998,8 +54141,8 @@
           "spawnChances": "100, 100, 75, 50",
           "weight": 0.063725,
           "display": {
-            "weightText": "Weight: 0.17",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.17",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 100%, 75%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -54159,8 +54302,8 @@
           "spawnChances": "100, 100, 75, 50",
           "weight": 0.089025,
           "display": {
-            "weightText": "Weight: 0.25",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.25",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 100%, 75%, 50%"
           },
           "bestSharedMin": 24.0,
@@ -54197,8 +54340,8 @@
           "spawnChances": "100, 33",
           "weight": 0.001596,
           "display": {
-            "weightText": "Weight: 0.0375",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.0375",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%, 33%"
           },
           "bestSharedMin": 10.0,
@@ -54280,8 +54423,8 @@
           "spawnChances": "100, 33",
           "weight": 0.001141,
           "display": {
-            "weightText": "Weight: 0.0375",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.0375",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%, 33%"
           },
           "bestSharedMin": 12.0,
@@ -54625,8 +54768,8 @@
           "spawnChances": "100, 33",
           "weight": 0.00126,
           "display": {
-            "weightText": "Weight: 0.0375",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.0375",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%, 33%"
           },
           "bestSharedMin": 24.0,
@@ -56197,8 +56340,8 @@
           "spawnChances": "100, 70, 45",
           "weight": 0.002648,
           "display": {
-            "weightText": "Weight: 0.025",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.025",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 70%, 45%"
           },
           "bestSharedMin": 24.0,
@@ -56489,8 +56632,8 @@
           "spawnChances": "100",
           "weight": 0.055216,
           "display": {
-            "weightText": "Weight: 0.33",
-            "limitText": "Max spawn: 33%",
+            "weightText": "Entry Weight: 0.33",
+            "limitText": "Max % To Allow: 33%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
@@ -56943,8 +57086,8 @@
           "spawnChances": "100, 60",
           "weight": 0.001318,
           "display": {
-            "weightText": "Weight: 0.035",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.035",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
@@ -58521,8 +58664,8 @@
           "spawnChances": "100, 67",
           "weight": 0.003205,
           "display": {
-            "weightText": "Weight: 0.05",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.05",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 67%"
           },
           "bestSharedMin": 20.0,
@@ -60086,8 +60229,8 @@
           "spawnChances": "100, 67",
           "weight": 0.004928,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 67%"
           },
           "bestSharedMin": 24.0,
@@ -60247,8 +60390,8 @@
           "spawnChances": "100, 67",
           "weight": 0.002283,
           "display": {
-            "weightText": "Weight: 0.05",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.05",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 67%"
           },
           "bestSharedMin": 24.0,
@@ -60792,8 +60935,8 @@
           "spawnChances": "100, 60",
           "weight": 0.016376,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -62370,8 +62513,8 @@
           "spawnChances": "100, 60",
           "weight": 0.003691,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -62531,8 +62674,8 @@
           "spawnChances": "100, 90, 80",
           "weight": 0.033282,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 90%, 80%"
           },
           "bestSharedMin": 24.0,
@@ -62598,8 +62741,8 @@
           "spawnChances": "100, 60",
           "weight": 0.014286,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 40.0,
@@ -69038,8 +69181,8 @@
           "spawnChances": "100, 100, 50",
           "weight": 0.004581,
           "display": {
-            "weightText": "Weight: 0.035",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.035",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 100%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -69151,6 +69294,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -69161,10 +69323,10 @@
           "spawnMultiplier": 1.6,
           "spawnLimit": 0.1,
           "spawnChances": "100, 60",
-          "weight": 0.017411,
+          "weight": 0.014786,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -69207,8 +69369,8 @@
           "spawnChances": "100, 60",
           "weight": 0.021429,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 32.0,
@@ -69229,6 +69391,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 1589.66,
+                  "y": 431.31,
+                  "w": 11.06,
+                  "h": 12.7
+                },
+                {
+                  "x": 1598.05,
+                  "y": 427.01,
+                  "w": 12.9,
+                  "h": 11.06
+                },
+                {
+                  "x": 1600.31,
+                  "y": 444.01,
+                  "w": 10.65,
+                  "h": 9.01
+                },
+                {
+                  "x": 1607.48,
+                  "y": 433.36,
+                  "w": 7.99,
+                  "h": 13.11
+                },
+                {
+                  "x": 1615.05,
+                  "y": 437.66,
+                  "w": 7.17,
+                  "h": 12.9
+                },
+                {
+                  "x": 1621.2,
+                  "y": 453.22,
+                  "w": 11.67,
+                  "h": 12.49
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.4
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -69239,10 +69444,10 @@
           "spawnMultiplier": 1.6,
           "spawnLimit": 0.15,
           "spawnChances": "100, 60",
-          "weight": 0.053731,
+          "weight": 0.026866,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
@@ -69366,8 +69571,8 @@
           "spawnChances": "100, 60",
           "weight": 0.043902,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
@@ -69464,8 +69669,8 @@
           "spawnChances": "100, 60",
           "weight": 0.021429,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 40.0,
@@ -69713,8 +69918,8 @@
           "spawnChances": "100",
           "weight": 0.037736,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
@@ -70191,8 +70396,8 @@
           "spawnChances": "100",
           "weight": 1.0,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.0,
@@ -70225,6 +70430,19 @@
                 }
               ],
               "points": [],
+              "minDesiredPct": 0.5
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 590.23,
+                  "y": 1404.11,
+                  "w": 7.58,
+                  "h": 12.08
+                }
+              ],
+              "points": [],
               "minDesiredPct": 1.0
             }
           },
@@ -70236,14 +70454,14 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 1.0,
           "spawnChances": "100",
-          "weight": 1.0,
+          "weight": 0.666667,
           "display": {
-            "weightText": "Weight: 0.25",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.25",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 2.0,
-          "minRarityDownshift": 6
+          "bestSharedMin": 4.0,
+          "minRarityDownshift": 2
         }
       ]
     },
@@ -71823,8 +72041,8 @@
           "spawnChances": "100, 50",
           "weight": 0.000231,
           "display": {
-            "weightText": "Weight: 0.01",
-            "limitText": "Max spawn: 2%",
+            "weightText": "Entry Weight: 0.01",
+            "limitText": "Max % To Allow: 2%",
             "chanceText": "Spawn Chances: 100%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -73408,8 +73626,8 @@
           "spawnChances": "100, 100, 100, 70, 40",
           "weight": 0.00681,
           "display": {
-            "weightText": "Weight: 0.036",
-            "limitText": "Max spawn: 6%",
+            "weightText": "Entry Weight: 0.036",
+            "limitText": "Max % To Allow: 6%",
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 70%, 40%"
           },
           "bestSharedMin": 20.0,
@@ -73862,8 +74080,8 @@
           "spawnChances": "100, 60",
           "weight": 0.000753,
           "display": {
-            "weightText": "Weight: 0.02",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.02",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
@@ -74179,8 +74397,8 @@
           "spawnChances": "100, 75",
           "weight": 0.005541,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 12.0,
@@ -74717,8 +74935,8 @@
           "spawnChances": "100, 60",
           "weight": 0.016376,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -76295,8 +76513,8 @@
           "spawnChances": "100, 60",
           "weight": 0.011073,
           "display": {
-            "weightText": "Weight: 0.09",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.09",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -76456,8 +76674,8 @@
           "spawnChances": "100, 60",
           "weight": 0.016435,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 12.5%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 12.5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 24.0,
@@ -76624,8 +76842,8 @@
           "spawnChances": "100, 75",
           "weight": 0.005033,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 24.0,
@@ -76693,8 +76911,8 @@
           "spawnChances": "100",
           "weight": 1.0,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 0.333,
@@ -77147,8 +77365,8 @@
           "spawnChances": "100",
           "weight": 0.047059,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -77464,8 +77682,8 @@
           "spawnChances": "100",
           "weight": 0.070368,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 12.0,
@@ -83904,8 +84122,8 @@
           "spawnChances": "100",
           "weight": 0.078534,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -84442,8 +84660,8 @@
           "spawnChances": "100, 75, 50",
           "weight": 0.172721,
           "display": {
-            "weightText": "Weight: 0.075",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.075",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -86020,8 +86238,8 @@
           "spawnChances": "100, 75, 50",
           "weight": 0.129758,
           "display": {
-            "weightText": "Weight: 0.075",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.075",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -86087,8 +86305,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.026786,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 40.0,
@@ -86200,6 +86418,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -86210,10 +86447,10 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.15,
           "spawnChances": "100, 67, 33",
-          "weight": 0.032645,
+          "weight": 0.027723,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 20.0,
@@ -86256,8 +86493,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.040179,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 32.0,
@@ -86278,6 +86515,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 1589.66,
+                  "y": 431.31,
+                  "w": 11.06,
+                  "h": 12.7
+                },
+                {
+                  "x": 1598.05,
+                  "y": 427.01,
+                  "w": 12.9,
+                  "h": 11.06
+                },
+                {
+                  "x": 1600.31,
+                  "y": 444.01,
+                  "w": 10.65,
+                  "h": 9.01
+                },
+                {
+                  "x": 1607.48,
+                  "y": 433.36,
+                  "w": 7.99,
+                  "h": 13.11
+                },
+                {
+                  "x": 1615.05,
+                  "y": 437.66,
+                  "w": 7.17,
+                  "h": 12.9
+                },
+                {
+                  "x": 1621.2,
+                  "y": 453.22,
+                  "w": 11.67,
+                  "h": 12.49
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.4
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -86288,10 +86568,10 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.2,
           "spawnChances": "100, 67, 33",
-          "weight": 0.089552,
+          "weight": 0.044776,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
@@ -86415,8 +86695,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.073171,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
@@ -86513,8 +86793,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.040179,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 40.0,
@@ -86681,8 +86961,8 @@
           "spawnChances": "100",
           "weight": 0.00137,
           "display": {
-            "weightText": "Weight: 0.025",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.025",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -88266,8 +88546,8 @@
           "spawnChances": "100",
           "weight": 0.000577,
           "display": {
-            "weightText": "Weight: 0.03",
-            "limitText": "Max spawn: 2.5%",
+            "weightText": "Entry Weight: 0.03",
+            "limitText": "Max % To Allow: 2.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -88427,8 +88707,8 @@
           "spawnChances": "100",
           "weight": 0.008218,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -88972,8 +89252,8 @@
           "spawnChances": "100, 60",
           "weight": 0.008598,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -90557,8 +90837,8 @@
           "spawnChances": "100, 85, 75",
           "weight": 0.001959,
           "display": {
-            "weightText": "Weight: 0.028",
-            "limitText": "Max spawn: 3.5%",
+            "weightText": "Entry Weight: 0.028",
+            "limitText": "Max % To Allow: 3.5%",
             "chanceText": "Spawn Chances: 100%, 85%, 75%"
           },
           "bestSharedMin": 20.0,
@@ -90718,8 +90998,8 @@
           "spawnChances": "100, 85, 75",
           "weight": 0.004594,
           "display": {
-            "weightText": "Weight: 0.043",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.043",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 85%, 75%"
           },
           "bestSharedMin": 24.0,
@@ -90757,8 +91037,8 @@
           "spawnChances": "100",
           "weight": 1.0,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.0,
@@ -90795,8 +91075,8 @@
           "spawnChances": "100, 100, 50",
           "weight": 0.48,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 60%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 60%",
             "chanceText": "Spawn Chances: 100%, 100%, 50%"
           },
           "bestSharedMin": 10.0,
@@ -90878,8 +91158,8 @@
           "spawnChances": "100, 100, 50",
           "weight": 0.343284,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 60%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 60%",
             "chanceText": "Spawn Chances: 100%, 100%, 50%"
           },
           "bestSharedMin": 12.0,
@@ -91170,8 +91450,8 @@
           "spawnChances": "100",
           "weight": 0.055216,
           "display": {
-            "weightText": "Weight: 0.33",
-            "limitText": "Max spawn: 33%",
+            "weightText": "Entry Weight: 0.33",
+            "limitText": "Max % To Allow: 33%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
@@ -91715,8 +91995,8 @@
           "spawnChances": "100, 33",
           "weight": 0.001225,
           "display": {
-            "weightText": "Weight: 0.03",
-            "limitText": "Max spawn: 3%",
+            "weightText": "Entry Weight: 0.03",
+            "limitText": "Max % To Allow: 3%",
             "chanceText": "Spawn Chances: 100%, 33%"
           },
           "bestSharedMin": 20.0,
@@ -93293,8 +93573,8 @@
           "spawnChances": "100, 33",
           "weight": 0.001432,
           "display": {
-            "weightText": "Weight: 0.04",
-            "limitText": "Max spawn: 3.5%",
+            "weightText": "Entry Weight: 0.04",
+            "limitText": "Max % To Allow: 3.5%",
             "chanceText": "Spawn Chances: 100%, 33%"
           },
           "bestSharedMin": 20.0,
@@ -93454,8 +93734,8 @@
           "spawnChances": "100",
           "weight": 0.004657,
           "display": {
-            "weightText": "Weight: 0.085",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.085",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -93908,8 +94188,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.018824,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
@@ -93968,8 +94248,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.017857,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 40.0,
@@ -94285,8 +94565,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.035184,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 25%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 25%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 12.0,
@@ -100725,8 +101005,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.031414,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 20.0,
@@ -100838,6 +101118,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -100848,10 +101147,10 @@
           "spawnMultiplier": 2.0,
           "spawnLimit": 0.1,
           "spawnChances": "100, 67, 33",
-          "weight": 0.021763,
+          "weight": 0.018482,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 20.0,
@@ -102415,8 +102714,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.029562,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 24.0,
@@ -102459,8 +102758,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.026786,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 32.0,
@@ -102557,8 +102856,8 @@
           "spawnChances": "100, 67, 33",
           "weight": 0.026786,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 40.0,
@@ -102806,8 +103105,8 @@
           "spawnChances": "100, 67",
           "weight": 0.020969,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 67%"
           },
           "bestSharedMin": 3.378,
@@ -103130,8 +103429,8 @@
           "spawnChances": "100",
           "weight": 0.001006,
           "display": {
-            "weightText": "Weight: 0.022",
-            "limitText": "Max spawn: 6.5%",
+            "weightText": "Entry Weight: 0.022",
+            "limitText": "Max % To Allow: 6.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 12.0,
@@ -103386,8 +103685,8 @@
           "spawnChances": "100",
           "weight": 0.00805,
           "display": {
-            "weightText": "Weight: 0.08",
-            "limitText": "Max spawn: 8%",
+            "weightText": "Entry Weight: 0.08",
+            "limitText": "Max % To Allow: 8%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
@@ -103931,8 +104230,8 @@
           "spawnChances": "100, 75",
           "weight": 0.005374,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 20.0,
@@ -104092,8 +104391,8 @@
           "spawnChances": "100, 75",
           "weight": 0.006232,
           "display": {
-            "weightText": "Weight: 0.065",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.065",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 24.0,
@@ -104208,8 +104507,8 @@
           "spawnChances": null,
           "weight": 1.0,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": ""
           },
           "bestSharedMin": 1.0,
@@ -104662,8 +104961,8 @@
           "spawnChances": "100",
           "weight": 0.000424,
           "display": {
-            "weightText": "Weight: 0.03",
-            "limitText": "Max spawn: 3%",
+            "weightText": "Entry Weight: 0.03",
+            "limitText": "Max % To Allow: 3%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -106240,8 +106539,8 @@
           "spawnChances": "100",
           "weight": 7.7e-05,
           "display": {
-            "weightText": "Weight: 0.01",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.01",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -107805,8 +108104,8 @@
           "spawnChances": "100",
           "weight": 0.009854,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -107872,8 +108171,8 @@
           "spawnChances": "100",
           "weight": 0.002232,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 2.5%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 2.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 40.0,
@@ -107985,6 +108284,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -107995,10 +108313,10 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.025,
           "spawnChances": "100",
-          "weight": 0.00272,
+          "weight": 0.00231,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 2.5%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 2.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -108041,8 +108359,8 @@
           "spawnChances": "100",
           "weight": 0.003348,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 2.5%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 2.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 32.0,
@@ -108166,8 +108484,8 @@
           "spawnChances": "100",
           "weight": 0.004573,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 2.5%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 2.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -108264,8 +108582,8 @@
           "spawnChances": "100",
           "weight": 0.003348,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 2.5%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 2.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 40.0,
@@ -108718,8 +109036,8 @@
           "spawnChances": "100, 75",
           "weight": 0.013176,
           "display": {
-            "weightText": "Weight: 0.08",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.08",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -109035,8 +109353,8 @@
           "spawnChances": "100, 75",
           "weight": 0.016163,
           "display": {
-            "weightText": "Weight: 0.075",
-            "limitText": "Max spawn: 17.5%",
+            "weightText": "Entry Weight: 0.075",
+            "limitText": "Max % To Allow: 17.5%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 12.0,
@@ -110613,8 +110931,8 @@
           "spawnChances": "100, 60",
           "weight": 0.005536,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -110726,6 +111044,25 @@
               ],
               "points": [],
               "minDesiredPct": 0.25
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                },
+                {
+                  "x": 584.91,
+                  "y": 1395.92,
+                  "w": 20.07,
+                  "h": 27.85
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.2
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -110736,10 +111073,10 @@
           "spawnMultiplier": 1.75,
           "spawnLimit": 0.1,
           "spawnChances": "100, 75",
-          "weight": 0.019043,
+          "weight": 0.016172,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 20.0,
@@ -112303,8 +112640,8 @@
           "spawnChances": "100, 75",
           "weight": 0.051734,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 24.0,
@@ -112347,8 +112684,8 @@
           "spawnChances": "100, 75",
           "weight": 0.023438,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 32.0,
@@ -112801,8 +113138,8 @@
           "spawnChances": "100",
           "weight": 2.4e-05,
           "display": {
-            "weightText": "Weight: 0.005",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.005",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -113118,8 +113455,8 @@
           "spawnChances": "100",
           "weight": 3.5e-05,
           "display": {
-            "weightText": "Weight: 0.005",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.005",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 12.0,
@@ -113656,8 +113993,8 @@
           "spawnChances": "100",
           "weight": 5.1e-05,
           "display": {
-            "weightText": "Weight: 0.005",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.005",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -115234,8 +115571,8 @@
           "spawnChances": "100",
           "weight": 3.8e-05,
           "display": {
-            "weightText": "Weight: 0.005",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.005",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -115395,8 +115732,8 @@
           "spawnChances": "100",
           "weight": 2.7e-05,
           "display": {
-            "weightText": "Weight: 0.005",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.005",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -116967,8 +117304,8 @@
           "spawnChances": "100",
           "weight": 0.000801,
           "display": {
-            "weightText": "Weight: 0.0125",
-            "limitText": "Max spawn: 6.5%",
+            "weightText": "Entry Weight: 0.0125",
+            "limitText": "Max % To Allow: 6.5%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
@@ -117421,8 +117758,8 @@
           "spawnChances": "100, 75",
           "weight": 0.002471,
           "display": {
-            "weightText": "Weight: 0.04",
-            "limitText": "Max spawn: 7.5%",
+            "weightText": "Entry Weight: 0.04",
+            "limitText": "Max % To Allow: 7.5%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -117738,8 +118075,8 @@
           "spawnChances": "100, 75",
           "weight": 0.024629,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 12.0,
@@ -119316,8 +119653,8 @@
           "spawnChances": "100, 75, 50",
           "weight": 0.012111,
           "display": {
-            "weightText": "Weight: 0.07",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.07",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -119770,8 +120107,8 @@
           "spawnChances": "100, 75, 67, 33",
           "weight": 0.025882,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
@@ -120087,8 +120424,8 @@
           "spawnChances": "100, 75, 67, 33",
           "weight": 0.011611,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%, 67%, 33%"
           },
           "bestSharedMin": 12.0,
@@ -121665,8 +122002,8 @@
           "spawnChances": "100, 60",
           "weight": 0.002461,
           "display": {
-            "weightText": "Weight: 0.04",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.04",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -123230,8 +123567,8 @@
           "spawnChances": "100, 75, 67, 33",
           "weight": 0.043358,
           "display": {
-            "weightText": "Weight: 0.08",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.08",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%, 67%, 33%"
           },
           "bestSharedMin": 24.0,
@@ -123684,8 +124021,8 @@
           "spawnChances": "100",
           "weight": 0.014118,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 3%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 3%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
@@ -124138,8 +124475,8 @@
           "spawnChances": "100, 75",
           "weight": 0.004941,
           "display": {
-            "weightText": "Weight: 0.06",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.06",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -124198,8 +124535,8 @@
           "spawnChances": "100, 75",
           "weight": 0.015625,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 40.0,
@@ -124515,8 +124852,8 @@
           "spawnChances": "100, 75",
           "weight": 0.012314,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 12.0,
@@ -130955,8 +131292,8 @@
           "spawnChances": "100, 25",
           "weight": 0.013089,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 25%"
           },
           "bestSharedMin": 20.0,
@@ -130977,6 +131314,49 @@
               ],
               "points": [],
               "minDesiredPct": 1.0
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 1589.66,
+                  "y": 431.31,
+                  "w": 11.06,
+                  "h": 12.7
+                },
+                {
+                  "x": 1598.05,
+                  "y": 427.01,
+                  "w": 12.9,
+                  "h": 11.06
+                },
+                {
+                  "x": 1600.31,
+                  "y": 444.01,
+                  "w": 10.65,
+                  "h": 9.01
+                },
+                {
+                  "x": 1607.48,
+                  "y": 433.36,
+                  "w": 7.99,
+                  "h": 13.11
+                },
+                {
+                  "x": 1615.05,
+                  "y": 437.66,
+                  "w": 7.17,
+                  "h": 12.9
+                },
+                {
+                  "x": 1621.2,
+                  "y": 453.22,
+                  "w": 11.67,
+                  "h": 12.49
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.4
             }
           },
           "TheSpawnPointMinimumFloorNormal": 0.6,
@@ -130987,10 +131367,10 @@
           "spawnMultiplier": 1.75,
           "spawnLimit": 0.15,
           "spawnChances": "100, 75",
-          "weight": 0.058769,
+          "weight": 0.029384,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -131114,8 +131494,8 @@
           "spawnChances": "100, 75",
           "weight": 0.048018,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -131212,8 +131592,8 @@
           "spawnChances": "100, 75",
           "weight": 0.023438,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 40.0,
@@ -131461,8 +131841,8 @@
           "spawnChances": "100",
           "weight": 0.028302,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 15%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 15%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
@@ -131915,8 +132295,8 @@
           "spawnChances": "100, 75",
           "weight": 0.082353,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
@@ -132232,8 +132612,8 @@
           "spawnChances": "100, 75",
           "weight": 0.184715,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 12.0,
@@ -138672,8 +139052,8 @@
           "spawnChances": "100, 75",
           "weight": 0.183246,
           "display": {
-            "weightText": "Weight: 0.2",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.2",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 20.0,
@@ -140250,8 +140630,8 @@
           "spawnChances": "100, 90, 80",
           "weight": 0.311419,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 90%, 80%"
           },
           "bestSharedMin": 20.0,
@@ -140411,8 +140791,8 @@
           "spawnChances": "100, 75",
           "weight": 0.143809,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 24.0,
@@ -140865,8 +141245,8 @@
           "spawnChances": "50",
           "weight": 0.023529,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 50%"
           },
           "bestSharedMin": 10.0,
@@ -141182,8 +141562,8 @@
           "spawnChances": "50",
           "weight": 0.052776,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 50%"
           },
           "bestSharedMin": 12.0,
@@ -147622,8 +148002,8 @@
           "spawnChances": "50",
           "weight": 0.052356,
           "display": {
-            "weightText": "Weight: 0.2",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.2",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 50%"
           },
           "bestSharedMin": 20.0,
@@ -149200,8 +149580,8 @@
           "spawnChances": "70, 60",
           "weight": 0.149942,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 70%, 60%"
           },
           "bestSharedMin": 20.0,
@@ -149361,8 +149741,8 @@
           "spawnChances": "50",
           "weight": 0.041088,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 50%"
           },
           "bestSharedMin": 24.0,
@@ -149413,6 +149793,37 @@
                 }
               ],
               "points": [],
+              "minDesiredPct": 0.15
+            },
+            "wiki": {
+              "minDesired": 4.0,
+              "boxes": [
+                {
+                  "x": 964.2,
+                  "y": 1281.43,
+                  "w": 140.9,
+                  "h": 170.39
+                },
+                {
+                  "x": 991.23,
+                  "y": 593.92,
+                  "w": 238.18,
+                  "h": 245.76
+                },
+                {
+                  "x": 992.05,
+                  "y": 1467.8,
+                  "w": 120.83,
+                  "h": 160.56
+                },
+                {
+                  "x": 1162.44,
+                  "y": 1174.32,
+                  "w": 197.22,
+                  "h": 252.52
+                }
+              ],
+              "points": [],
               "minDesiredPct": 1.0
             }
           },
@@ -149426,14 +149837,14 @@
           "spawnMultiplier": 1.0,
           "spawnLimit": 1.0,
           "spawnChances": "100",
-          "weight": 1.0,
+          "weight": 0.527778,
           "display": {
-            "weightText": "Weight: 1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
-          "bestSharedMin": 0.6,
-          "minRarityDownshift": 6
+          "bestSharedMin": 4.0,
+          "minRarityDownshift": 2
         }
       ]
     },
@@ -149882,8 +150293,8 @@
           "spawnChances": "100, 100, 100, 50",
           "weight": 0.002059,
           "display": {
-            "weightText": "Weight: 0.025",
-            "limitText": "Max spawn: 5%",
+            "weightText": "Entry Weight: 0.025",
+            "limitText": "Max % To Allow: 5%",
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 50%"
           },
           "bestSharedMin": 10.0,
@@ -150336,8 +150747,8 @@
           "spawnChances": "100, 75, 50",
           "weight": 0.021176,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 20%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 20%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%"
           },
           "bestSharedMin": 10.0,
@@ -156776,8 +157187,8 @@
           "spawnChances": "100, 100, 50, 25",
           "weight": 0.064791,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 30%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 30%",
             "chanceText": "Spawn Chances: 100%, 100%, 50%, 25%"
           },
           "bestSharedMin": 20.0,
@@ -158341,8 +158752,8 @@
           "spawnChances": "100, 60",
           "weight": 0.015766,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 10%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 10%",
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 24.0,
@@ -158795,8 +159206,8 @@
           "spawnChances": "75",
           "weight": 0.035294,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 75%"
           },
           "bestSharedMin": 10.0,
@@ -159112,8 +159523,8 @@
           "spawnChances": "100",
           "weight": 0.070368,
           "display": {
-            "weightText": "Weight: 0.1",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.1",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 12.0,
@@ -165552,8 +165963,8 @@
           "spawnChances": "100",
           "weight": 0.078534,
           "display": {
-            "weightText": "Weight: 0.15",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.15",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
@@ -166090,8 +166501,8 @@
           "spawnChances": "100, 75, 50",
           "weight": 0.172721,
           "display": {
-            "weightText": "Weight: 0.075",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.075",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -167668,8 +168079,8 @@
           "spawnChances": "100, 75, 50",
           "weight": 0.129758,
           "display": {
-            "weightText": "Weight: 0.075",
-            "limitText": "Max spawn: 100%",
+            "weightText": "Entry Weight: 0.075",
+            "limitText": "Max % To Allow: 100%",
             "chanceText": "Spawn Chances: 100%, 75%, 50%"
           },
           "bestSharedMin": 20.0,
@@ -169240,8 +169651,8 @@
           "spawnChances": "100",
           "weight": 0.000138,
           "display": {
-            "weightText": "Weight: 0.014",
-            "limitText": "Max spawn: 1%",
+            "weightText": "Entry Weight: 0.014",
+            "limitText": "Max % To Allow: 1%",
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 24.0,
