@@ -230,11 +230,11 @@ body{
 .dd-btn{
   width:100%;
   display:flex;
-  align-items:center;
+  align-items:left;
   justify-content:space-between;
-  gap:10px;
+  gap:5px;
 
-  padding:10px 12px;
+  padding:6px 8px;
   border-radius:8px;
   border:1px solid var(--control-border);
   background:var(--control-bg);
@@ -252,8 +252,9 @@ body{
 
 .dd-btn-left{
   display:flex;
-  align-items:center;
-  gap:10px;
+  align-items:left;
+  gap:5px;
+  justify-content:flex-start;
   min-width:0;
   width:100%;
 }
@@ -717,9 +718,9 @@ body{
     font-size:10px;
     font-weight:500;
   }
-  .dd-label{ font-size:12px;
+  .dd-label{ font-size:16px;
   }
-  .dd-item-name{ font-size:12px;
+  .dd-item-name{ font-size:16px;
   }
   .dd-item-meta{ font-size:10px;
   }
