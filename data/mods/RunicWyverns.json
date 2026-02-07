@@ -15,14 +15,17 @@
             {
               "entryClass": "DinoSpawnEntriesMountain_C",
               "groupWeight": 0.03,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.95,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                95.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%, 95%"
               },
               "boxes": [
                 {
@@ -590,12 +593,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -1438,12 +1443,14 @@
               "groupWeight": 0.02,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.02",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.02",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -2627,12 +2634,14 @@
               "groupWeight": 0.05,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -2938,14 +2947,17 @@
             {
               "entryClass": "DinoSpawnEntriesMountain_C",
               "groupWeight": 0.05,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.9,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                90.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%, 90%"
               },
               "boxes": [
                 {
@@ -3511,14 +3523,17 @@
             {
               "entryClass": "DinoSpawnEntriesGrassland_C",
               "groupWeight": 0.03,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.8,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 80%"
               },
               "boxes": [
                 {
@@ -3826,12 +3841,14 @@
               "groupWeight": 0.045,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.1,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.045",
-                "limitText": "Max spawn: 10%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.045",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -3893,12 +3910,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.035,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -4217,12 +4236,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -4603,12 +4624,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -5946,12 +5969,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -7282,12 +7307,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -8612,14 +8639,17 @@
             {
               "entryClass": "SE_DinoSpawnEntriesBadlands_C",
               "groupWeight": 0.06,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.7,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                70.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%, 70%"
               },
               "boxes": [
                 {
@@ -8998,14 +9028,17 @@
             {
               "entryClass": "SE_DinoSpawnEntriesBadlands_C",
               "groupWeight": 0.035,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.98,
               "spawnLimit": 0.08,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                98.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.035",
-                "limitText": "Max spawn: 8%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.035",
+                "limitText": "Max % To Allow: 8%",
+                "chanceText": "Spawn Chances: 100%, 98%"
               },
               "boxes": [
                 {
@@ -9384,14 +9417,16 @@
             {
               "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
               "groupWeight": 0.02,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.8,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.02",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.02",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 80%"
               },
               "boxes": [
                 {
@@ -10733,12 +10768,14 @@
               "groupWeight": 0.06,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -11057,12 +11094,14 @@
               "groupWeight": 0.038,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.07,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.038",
-                "limitText": "Max spawn: 7%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.038",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -11476,12 +11515,14 @@
               "groupWeight": 0.05,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -11613,12 +11654,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -11937,12 +11980,14 @@
               "groupWeight": 0.032,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.07,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.032",
-                "limitText": "Max spawn: 7%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.032",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -12030,12 +12075,14 @@
               "groupWeight": 0.09,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.09",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.09",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -13032,12 +13079,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -13169,12 +13218,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -13625,12 +13676,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -13954,14 +14007,17 @@
             {
               "entryClass": "DinoSpawnEntriesMountain_Generic_C",
               "groupWeight": 0.05,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.6,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                60.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 60%"
               },
               "boxes": [
                 {
@@ -14287,12 +14343,14 @@
               "groupWeight": 0.08,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.25,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 25%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -14422,14 +14480,17 @@
             {
               "entryClass": "DinoSpawnEntriesJungle_Generic_C",
               "groupWeight": 0.03,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.9,
               "spawnLimit": 0.035,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                90.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3.5%",
+                "chanceText": "Spawn Chances: 100%, 90%"
               },
               "boxes": [
                 {
@@ -14887,12 +14948,14 @@
               "groupWeight": 0.04,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.025,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.04",
-                "limitText": "Max spawn: 2.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.04",
+                "limitText": "Max % To Allow: 2.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -15354,12 +15417,14 @@
               "groupWeight": 0.06,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -16327,12 +16392,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -16603,12 +16670,14 @@
               "groupWeight": 0.05,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -17191,12 +17260,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -18164,12 +18235,14 @@
               "groupWeight": 0.032,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.07,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.032",
-                "limitText": "Max spawn: 7%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.032",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -18334,12 +18407,14 @@
               "groupWeight": 0.04,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.04",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.04",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -18625,12 +18700,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -19187,12 +19264,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -19775,12 +19854,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -20746,14 +20827,16 @@
             {
               "entryClass": "DinoSpawnEntries_Ragnarok_Griffin_C",
               "groupWeight": 0.02,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.9,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                90.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.02",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.02",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 90%"
               },
               "boxes": [],
               "points": []
@@ -20763,12 +20846,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -21318,12 +21403,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -21757,14 +21844,17 @@
             {
               "entryClass": "DinoSpawnEntriesMountain_Generic_C",
               "groupWeight": 0.05,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.6,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                60.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 60%"
               },
               "boxes": [
                 {
@@ -22730,14 +22820,17 @@
             {
               "entryClass": "SE_DinoSpawnEntriesBadlands_C",
               "groupWeight": 0.06,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.7,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                70.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%, 70%"
               },
               "boxes": [
                 {
@@ -23008,12 +23101,14 @@
               "groupWeight": 0.08,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.25,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 25%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -23594,14 +23689,17 @@
             {
               "entryClass": "SE_DinoSpawnEntriesBadlands_C",
               "groupWeight": 0.035,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.98,
               "spawnLimit": 0.08,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                98.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.035",
-                "limitText": "Max spawn: 8%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.035",
+                "limitText": "Max % To Allow: 8%",
+                "chanceText": "Spawn Chances: 100%, 98%"
               },
               "boxes": [
                 {
@@ -23872,12 +23970,14 @@
               "groupWeight": 0.04,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.04",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.04",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -24084,14 +24184,16 @@
             {
               "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
               "groupWeight": 0.02,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 0.8,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.02",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.02",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 80%"
               },
               "boxes": [
                 {
@@ -24652,12 +24754,14 @@
               "groupWeight": 0.06,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -25260,14 +25364,17 @@
             {
               "entryClass": "Val_FireWyvernEntries_C",
               "groupWeight": 0.02,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.95,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                95.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.02",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.02",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%, 95%"
               },
               "boxes": [
                 {
@@ -25396,12 +25503,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -26013,12 +26122,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -26623,12 +26734,14 @@
               "groupWeight": 0.02,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.02",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.02",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -27139,14 +27252,17 @@
             {
               "entryClass": "DinoSpawnEntriesMountain_Generic_C",
               "groupWeight": 0.05,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.6,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                60.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 60%"
               },
               "boxes": [
                 {
@@ -27758,12 +27874,14 @@
               "groupWeight": 0.045,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.06,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.045",
-                "limitText": "Max spawn: 6%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.045",
+                "limitText": "Max % To Allow: 6%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -28276,12 +28394,14 @@
               "groupWeight": 0.04,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.04",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.04",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -28798,12 +28918,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -28968,12 +29090,14 @@
               "groupWeight": 0.068,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.045,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.068",
-                "limitText": "Max spawn: 4.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.068",
+                "limitText": "Max % To Allow: 4.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -29209,14 +29333,17 @@
             {
               "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
               "groupWeight": 0.075,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.95,
               "spawnLimit": 0.16,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                95.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.075",
-                "limitText": "Max spawn: 16%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.075",
+                "limitText": "Max % To Allow: 16%",
+                "chanceText": "Spawn Chances: 100%, 95%"
               },
               "boxes": [
                 {
@@ -29366,12 +29493,14 @@
               "groupWeight": 0.06,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -30053,12 +30182,14 @@
               "groupWeight": 0.05,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -30503,14 +30634,17 @@
             {
               "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
               "groupWeight": 0.07,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.7,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                70.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.07",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.07",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 70%"
               },
               "boxes": [
                 {
@@ -30741,12 +30875,14 @@
               "groupWeight": 0.07,
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.07",
-                "limitText": "Max spawn: 100%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.07",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31186,12 +31322,14 @@
               "groupWeight": 0.05,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31264,12 +31402,14 @@
               "groupWeight": 0.085,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.065,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.085",
-                "limitText": "Max spawn: 6.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.085",
+                "limitText": "Max % To Allow: 6.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31421,14 +31561,17 @@
             {
               "entryClass": "DinoSpawnEntriesGrassland_C",
               "groupWeight": 0.03,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.8,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                80.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 80%"
               },
               "boxes": [
                 {
@@ -31499,14 +31642,17 @@
             {
               "entryClass": "DinoSpawnEntries_CityObelisk_C",
               "groupWeight": 0.07,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.98,
               "spawnLimit": 0.08,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                98.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.07",
-                "limitText": "Max spawn: 8%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.07",
+                "limitText": "Max % To Allow: 8%",
+                "chanceText": "Spawn Chances: 100%, 98%"
               },
               "boxes": [
                 {
@@ -31583,12 +31729,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.035,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31665,12 +31813,14 @@
               "groupWeight": 0.06,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31842,12 +31992,14 @@
               "groupWeight": 0.032,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.07,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.032",
-                "limitText": "Max spawn: 7%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.032",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31876,12 +32028,14 @@
               "groupWeight": 0.02,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.03,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.02",
-                "limitText": "Max spawn: 3%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.02",
+                "limitText": "Max % To Allow: 3%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -31908,14 +32062,17 @@
             {
               "entryClass": "DinoSpawnEntries_Valley_LC_C",
               "groupWeight": 0.05,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.6,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                60.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 60%"
               },
               "boxes": [
                 {
@@ -31944,12 +32101,14 @@
               "groupWeight": 0.08,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.25,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.08",
-                "limitText": "Max spawn: 25%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.08",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -32264,12 +32423,14 @@
               "groupWeight": 0.04,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.025,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.04",
-                "limitText": "Max spawn: 2.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.04",
+                "limitText": "Max % To Allow: 2.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -32302,12 +32463,14 @@
               "groupWeight": 0.06,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.06",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.06",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -33656,12 +33819,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -35010,12 +35175,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.02,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 2%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 2%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -37061,12 +37228,14 @@
               "groupWeight": 0.03,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.04,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 4%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
@@ -38413,14 +38582,17 @@
             {
               "entryClass": "DinoSpawnEntriesMountain_Generic_C",
               "groupWeight": 0.05,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.6,
               "spawnLimit": 0.05,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                60.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.05",
-                "limitText": "Max spawn: 5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 60%"
               },
               "boxes": [
                 {
@@ -39767,14 +39939,17 @@
             {
               "entryClass": "DinoSpawnEntriesJungle_Generic_C",
               "groupWeight": 0.03,
-              "spawnMultiplier": 1.0,
+              "spawnMultiplier": 1.9,
               "spawnLimit": 0.035,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0,
+                90.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.03",
-                "limitText": "Max spawn: 3.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.03",
+                "limitText": "Max % To Allow: 3.5%",
+                "chanceText": "Spawn Chances: 100%, 90%"
               },
               "boxes": [
                 {
@@ -41827,12 +42002,14 @@
               "groupWeight": 0.04,
               "spawnMultiplier": 1.0,
               "spawnLimit": 0.025,
-              "spawnChances": [],
+              "spawnChances": [
+                100.0
+              ],
               "weight": 0.0,
               "display": {
-                "weightText": "Weight: 0.04",
-                "limitText": "Max spawn: 2.5%",
-                "chanceText": ""
+                "weightText": "Entry Weight: 0.04",
+                "limitText": "Max % To Allow: 2.5%",
+                "chanceText": "Spawn Chances: 100%"
               },
               "boxes": [
                 {
