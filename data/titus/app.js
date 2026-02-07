@@ -195,6 +195,180 @@ function rarityDotColor(rarity){
   return rarity ? rarityToColor(rarity) : "#777";
 }
 
+function mountFancySelect({
+  nativeId,
+  hostId,
+  placeholder = "Search...",
+  getButtonSubText = null,   // (value, cfg) => string
+  getRowBadges = null,       // (value, cfg) => [ "pill text", ... ]
+  cfg = null
+}) {
+  const native = document.getElementById(nativeId);
+  const host = document.getElementById(hostId);
+  if (!native || !host) return;
+
+  // Hide native but keep it functional
+  native.style.position = "absolute";
+  native.style.left = "-9999px";
+  native.style.width = "1px";
+  native.style.height = "1px";
+  native.style.opacity = "0";
+
+  // Replace any previous fancy UI cleanly
+  host.innerHTML = "";
+
+  const wrap = document.createElement("div");
+  wrap.className = "dd";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "dd-btn";
+
+  const btnLeft = document.createElement("div");
+  btnLeft.className = "dd-btn-left";
+
+  const textWrap = document.createElement("div");
+  textWrap.className = "dd-btn-text";
+  textWrap.style.minWidth = "0";
+
+  const label = document.createElement("div");
+  label.className = "dd-label";
+
+  const sub = document.createElement("div");
+  sub.className = "dd-sub";
+
+  textWrap.appendChild(label);
+  textWrap.appendChild(sub);
+  btnLeft.appendChild(textWrap);
+
+  const caret = document.createElement("div");
+  caret.className = "dd-caret";
+  caret.textContent = "▾";
+
+  btn.appendChild(btnLeft);
+  btn.appendChild(caret);
+
+  const panel = document.createElement("div");
+  panel.className = "dd-panel";
+
+  const search = document.createElement("input");
+  search.className = "dd-search";
+  search.placeholder = placeholder;
+
+  const list = document.createElement("div");
+  list.className = "dd-list";
+
+  panel.appendChild(search);
+  panel.appendChild(list);
+
+  wrap.appendChild(btn);
+  wrap.appendChild(panel);
+  host.appendChild(wrap);
+
+  function rebuildItems() {
+    list.innerHTML = "";
+
+    const opts = Array.from(native.options)
+      .map(o => ({ value: o.value, text: o.textContent || "" }))
+      .filter(o => o.value);
+
+    for (const o of opts) {
+      const row = document.createElement("div");
+      row.className = "dd-item";
+      row.dataset.value = o.value;
+      row.dataset.search = normSearch(o.text);
+
+      const left = document.createElement("div");
+      left.className = "dd-item-left";
+
+      const main = document.createElement("div");
+      main.className = "dd-item-main";
+
+      const name = document.createElement("div");
+      name.className = "dd-item-name";
+      name.textContent = o.text;
+
+      main.appendChild(name);
+      left.appendChild(main);
+
+      const badges = document.createElement("div");
+      badges.className = "dd-badges";
+
+      if (typeof getRowBadges === "function") {
+        const pills = getRowBadges(o.value, cfg) || [];
+        for (const t of pills) {
+          const pill = document.createElement("span");
+          pill.className = "dd-pill";
+          pill.textContent = String(t);
+          badges.appendChild(pill);
+        }
+      }
+
+      row.appendChild(left);
+      row.appendChild(badges);
+
+      row.addEventListener("click", () => {
+        native.value = o.value;
+        native.dispatchEvent(new Event("change"));
+        close();
+      });
+
+      list.appendChild(row);
+    }
+  }
+
+  function syncButton() {
+    const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
+    label.textContent = txt;
+
+    if (typeof getButtonSubText === "function") {
+      sub.textContent = getButtonSubText(native.value, cfg) || "";
+    } else {
+      sub.textContent = "";
+    }
+  }
+
+  function open() {
+    wrap.classList.add("open");
+    search.value = "";
+    list.querySelectorAll(".dd-item").forEach(el => (el.style.display = ""));
+    list.scrollTop = 0;
+    search.focus();
+  }
+
+  function close() {
+    wrap.classList.remove("open");
+    btn.focus();
+  }
+
+  btn.addEventListener("click", () => {
+    wrap.classList.contains("open") ? close() : open();
+  });
+
+  // Filter + scroll reset
+  let lastQ = "";
+  search.addEventListener("input", () => {
+    const q = normSearch(search.value);
+    if (q !== lastQ) list.scrollTop = 0;
+    lastQ = q;
+
+    list.querySelectorAll(".dd-item").forEach(el => {
+      el.style.display = el.dataset.search.includes(q) ? "" : "none";
+    });
+  });
+
+  // Click outside closes (avoid stacking listeners: one per dropdown is fine,
+  // but we guard by checking wrap.contains)
+  document.addEventListener("pointerdown", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  native.addEventListener("change", syncButton);
+
+  rebuildItems();
+  syncButton();
+}
+
 function mountFancyDinoSelect(cfg){
   const native = document.getElementById("dinoSelect");
   const host  = document.getElementById("dinoSelectFancy");
@@ -760,6 +934,14 @@ function setupBackgroundDropdown(mapMeta, cfg) {
   mapObj.overlay.setUrl(sel.value);
 
   sel.onchange = () => mapObj.overlay.setUrl(sel.value);
+  
+  mountFancySelect({
+    nativeId: "bgSelect",
+    hostId: "bgSelectFancy",
+    placeholder: "Search backgrounds...",
+    getButtonSubText: () => "",
+    getRowBadges: () => [],
+  });
 }
 
 // ============================================================
@@ -945,6 +1127,13 @@ function setupSourceDropdown() {
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
   });
+  mountFancySelect({
+    nativeId: "sourceSelect",
+    hostId: "sourceSelectFancy",
+    placeholder: "Search sources...",
+    getButtonSubText: (v) => (v === "official" ? "Official" : "Mod"),
+    getRowBadges: (v) => [v === "official" ? "official" : "mod"],
+  });
 }
 
 async function loadModSource(sourceId) {
@@ -978,6 +1167,13 @@ function setupMapDropdown() {
   });
 
   sel.value = MAPS[0].id;
+  mountFancySelect({
+    nativeId: "mapSelect",
+    hostId: "mapSelectFancy",
+    placeholder: "Search maps...",
+    getButtonSubText: (v) => "",
+    getRowBadges: (v) => [], // or ["map"]
+  });
 }
 
 // ============================================================
