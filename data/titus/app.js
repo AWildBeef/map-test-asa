@@ -200,28 +200,194 @@ function rarityDotColor(rarity){
   return rarity ? rarityToColor(rarity) : "#777";
 }
 
-function normSearch(s){
-  return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
-}
+function mountFancyDinoSelect(cfg){
+  const native = document.getElementById("dinoSelect");
+  const host  = document.getElementById("dinoSelectFancy");
+  if (!native || !host) return;
 
-function dinoSummaryForFancy(cfg, dinoKey){
-  const d = cfg?.dinos?.[dinoKey];
-  if (!d) return { entryCount: 0, rarity: "", label: dinoKey };
+  // Hide native but keep it functional
+  native.style.position = "absolute";
+  native.style.left = "-9999px";
+  native.style.width = "1px";
+  native.style.height = "1px";
+  native.style.opacity = "0";
 
-  const entryCount = (d.entries || []).length;
+  host.innerHTML = "";
 
-  // If you have per-entry rarity, pick the "best" (most common) or just first non-empty
-  let rarity = "";
-  for (const e of (d.entries || [])){
-    if (e?.rarity){ rarity = e.rarity; break; }
+  const wrap = document.createElement("div");
+  wrap.className = "dd";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "dd-btn";
+
+  const btnLeft = document.createElement("div");
+  btnLeft.className = "dd-btn-left";
+
+  const dot = document.createElement("span");
+  dot.className = "dd-dot";
+
+  const textWrap = document.createElement("div");
+  textWrap.style.minWidth = "0";
+
+  const label = document.createElement("div");
+  label.className = "dd-label";
+
+  const sub = document.createElement("div");
+  sub.className = "dd-sub";
+
+  textWrap.appendChild(label);
+  textWrap.appendChild(sub);
+
+  btnLeft.appendChild(dot);
+  btnLeft.appendChild(textWrap);
+
+  const caret = document.createElement("div");
+  caret.className = "dd-caret";
+  caret.textContent = "▾";
+
+  btn.appendChild(btnLeft);
+  btn.appendChild(caret);
+
+  const panel = document.createElement("div");
+  panel.className = "dd-panel";
+
+  const search = document.createElement("input");
+  search.className = "dd-search";
+  search.placeholder = (currentViewMode === "dino") ? "Search dinos..." : "Search spawn entries...";
+
+  const list = document.createElement("div");
+  list.className = "dd-list";
+
+  panel.appendChild(search);
+  panel.appendChild(list);
+
+  wrap.appendChild(btn);
+  wrap.appendChild(panel);
+  host.appendChild(wrap);
+
+  // build items from native <option>s so your existing setupMainSelect() stays the source of truth
+  function rebuildItems(){
+    list.innerHTML = "";
+
+    const opts = Array.from(native.options).map(o => ({ value: o.value, text: o.textContent || "" }))
+      .filter(o => o.value);
+
+    // Items for Dino mode
+    for (const o of opts){
+      const row = document.createElement("div");
+      row.className = "dd-item";
+      row.dataset.value = o.value;
+      row.dataset.search = normSearch(o.text);
+
+      const left = document.createElement("div");
+      left.className = "dd-item-left";
+
+      const rd = document.createElement("span");
+      rd.className = "dd-dot";
+
+      const main = document.createElement("div");
+      main.className = "dd-item-main";
+
+      const name = document.createElement("div");
+      name.className = "dd-item-name";
+      name.textContent = o.text;
+
+      const meta = document.createElement("div");
+      meta.className = "dd-item-meta";
+
+      const badges = document.createElement("div");
+      badges.className = "dd-badges";
+
+      if (currentViewMode === "dino"){
+        const sum = dinoSummaryForFancy(cfg, o.value);
+        rd.style.background = rarityDotColor(sum.rarity);
+        meta.textContent = sum.rarity ? sum.rarity : " ";
+        const pill = document.createElement("span");
+        pill.className = "dd-pill";
+        pill.textContent = `${sum.entryCount} entries`;
+        badges.appendChild(pill);
+      } else {
+        // Entry mode: keep dot neutral; show count of dinos in that entry
+        rd.style.background = "#777";
+        const rows = entryIndex?.[o.value] || [];
+        const pill = document.createElement("span");
+        pill.className = "dd-pill";
+        pill.textContent = `${rows.length} dinos`;
+        badges.appendChild(pill);
+        meta.textContent = "Spawn entry";
+      }
+
+      main.appendChild(name);
+      main.appendChild(meta);
+
+      left.appendChild(rd);
+      left.appendChild(main);
+
+      row.appendChild(left);
+      row.appendChild(badges);
+
+      row.addEventListener("click", () => {
+        native.value = o.value;
+        native.dispatchEvent(new Event("change"));
+        close();
+      });
+
+      list.appendChild(row);
+    }
   }
 
-  return { entryCount, rarity, label: (d.displayName || dinoKey) };
-}
+  function syncButton(){
+    const v = native.value;
+    const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
+    label.textContent = txt;
 
-function rarityDotColor(rarity){
-  // reuse your existing rarityToColor
-  return rarity ? rarityToColor(rarity) : "#777";
+    if (currentViewMode === "dino"){
+      const sum = dinoSummaryForFancy(cfg, v);
+      dot.style.background = rarityDotColor(sum.rarity);
+      sub.textContent = `${sum.entryCount} entries${sum.rarity ? ` • ${sum.rarity}` : ""}`;
+    } else {
+      dot.style.background = "#777";
+      const rows = entryIndex?.[v] || [];
+      sub.textContent = `${rows.length} dinos`;
+    }
+  }
+
+  function open(){
+    wrap.classList.add("open");
+    search.value = "";
+    // show all items
+    list.querySelectorAll(".dd-item").forEach(el => el.style.display = "");
+    search.focus();
+  }
+
+  function close(){
+    wrap.classList.remove("open");
+    btn.focus();
+  }
+
+  btn.addEventListener("click", () => {
+    wrap.classList.contains("open") ? close() : open();
+  });
+
+  // Filter
+  search.addEventListener("input", () => {
+    const q = normSearch(search.value);
+    list.querySelectorAll(".dd-item").forEach(el => {
+      el.style.display = el.dataset.search.includes(q) ? "" : "none";
+    });
+  });
+
+  // Click outside to close
+  document.addEventListener("pointerdown", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  // Keep fancy button synced whenever native changes (your code changes it a lot)
+  native.addEventListener("change", syncButton);
+
+  rebuildItems();
+  syncButton();
 }
 
 
@@ -681,7 +847,6 @@ function setupMainSelect(cfg) {
       opt.textContent = "(No dinos)";
       sel.appendChild(opt);
       renderInfoPanelBodyEmpty();
-      mountFancyDinoSelect(cfg);
       return;
     }
 
@@ -726,6 +891,8 @@ function setupMainSelect(cfg) {
     sel.value = keys[0];
     sel.onchange();
   }
+  
+  mountFancyDinoSelect(cfg);
 }
 
 function setInfoPanelTitle(text) {
