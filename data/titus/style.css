@@ -56,10 +56,18 @@
 }
 
 /* Hide right-side badge for source + map dropdowns */
+/* Hide right-side badges for specific fancy dropdown hosts */
 #sourceSelectFancy .dd-badges,
 #mapSelectFancy .dd-badges{
-  display:none;
+  display: none !important;
 }
+
+/* Fallback: if the .dd is inserted after the native select */
+#sourceSelect + .dd .dd-badges,
+#mapSelect + .dd .dd-badges{
+  display: none !important;
+}
+
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
