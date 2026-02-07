@@ -129,6 +129,7 @@ const SOURCES = [
   { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json" },
   { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
   { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
+  { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json" },
 ];
 
 // ============================================================
