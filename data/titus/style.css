@@ -175,8 +175,8 @@ body{
 #dinoSelectFancy .dd-btn{
   width: 100%;
 
-  padding:10px 20px;         /* same as #topbar select */
-  font-size:15px;            /* same as #topbar select */
+  padding:6px 8px;         /* same as #topbar select */
+  font-size:14px;            /* same as #topbar select */
   border-radius:8px;         /* same as #topbar select */
 
   border:1px solid var(--control-border);
@@ -330,7 +330,7 @@ body{
 .dd-btn-text{
   display:flex;
   align-items:left;
-  gap:8px;
+  gap:5px;
   min-width:0;
   width:100%;
 }
@@ -370,7 +370,7 @@ body{
 
 .dd-label{
   font-size:14px;
-  font-weight:650;
+  font-weight:500;
   color:var(--muted);
   white-space:nowrap;
   overflow:hidden;
@@ -437,7 +437,7 @@ body{
   justify-content:space-between;
   gap:10px;
 
-  padding:10px 12px;
+  padding:6px 8px;
   cursor:pointer;
   border-bottom:1px solid rgba(255,255,255,.06);
 }
@@ -461,7 +461,7 @@ body{
 
 .dd-item-name{
   font-size:13px;
-  font-weight:650;
+  font-weight:500;
   color:var(--muted);
   white-space:nowrap;
   overflow:hidden;
