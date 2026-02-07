@@ -153,6 +153,73 @@ body{
   cursor:pointer;
 }
 
+/* ============================================================
+   Fancy dropdown should visually match #topbar select
+   ============================================================ */
+
+/* ensure the host behaves like a select in the flex row */
+#topbar .controls > #dinoSelectFancy{
+  flex: 2 1 440px;
+  min-width: 220px;
+  max-width: 660px;          /* optional: prevent it from going silly wide */
+  width: 100%;
+}
+
+/* the fancy wrapper should fill the host */
+#dinoSelectFancy .dd{
+  width: 100%;
+  max-width: none;
+}
+
+/* match the native select look */
+#dinoSelectFancy .dd-btn{
+  width: 100%;
+
+  padding:10px 20px;         /* same as #topbar select */
+  font-size:15px;            /* same as #topbar select */
+  border-radius:8px;         /* same as #topbar select */
+
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  cursor:pointer;
+}
+
+/* hover/focus match native */
+#dinoSelectFancy .dd-btn:hover{
+  border-color:#596273;
+}
+#dinoSelectFancy .dd-btn:focus{
+  outline:none;
+  border-color:var(--focus);
+  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+}
+
+/* left area should take space; name left, count right */
+#dinoSelectFancy .dd-btn-left{
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content:flex-start;
+}
+#dinoSelectFancy .dd-label{
+  text-align:left;
+}
+#dinoSelectFancy .dd-sub{
+  margin-left:auto;
+  white-space:nowrap;
+}
+
+/* optional: make caret feel like native arrow */
+#dinoSelectFancy .dd-caret{
+  opacity:.85;
+}
+
 #topbar select:hover{ border-color:#596273; }
 
 #topbar select:focus{
