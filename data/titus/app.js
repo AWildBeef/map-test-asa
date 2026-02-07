@@ -1300,7 +1300,13 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
 
     return `
       <div class="entry-meta" style="margin-top:4px;">
-        ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+        ${metaLines.map(line => {
+          const isChances = String(line).toLowerCase().startsWith("spawn chances");
+          const cls = isChances
+            ? "entry-meta-line entry-meta-chances"
+            : "entry-meta-line";
+          return `<div class="${cls}">${escapeHtml(line)}</div>`;
+        }).join("")}
       </div>
     `;
   }).join("");
@@ -1392,7 +1398,13 @@ function renderEntryRow(entry, dinoKey, idx) {
       <div class="entry-main">
         <div class="entry-name">${escapeHtml(entryClass)}</div>
         <div class="entry-meta">
-          ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+          ${metaLines.map(line => {
+            const isChances = String(line).toLowerCase().startsWith("spawn chances");
+            const cls = isChances
+              ? "entry-meta-line entry-meta-chances"
+              : "entry-meta-line";
+            return `<div class="${cls}">${escapeHtml(line)}</div>`;
+          }).join("")}
         </div>
       </div>
     </label>
