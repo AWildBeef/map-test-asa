@@ -257,6 +257,36 @@ body{
   min-width:0;
 }
 
+/* Closed state: put name + count on the same line */
+.dd-btn-text{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  min-width:0;
+}
+
+/* The name should ellipsis if needed */
+.dd-btn-text .dd-label{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+/* The count should stay visible and not wrap */
+.dd-btn-text .dd-sub{
+  flex:0 0 auto;
+  white-space:nowrap;
+  opacity:.75;
+}
+
+.dd-btn-text .dd-sub{
+  font-size:10px;
+  padding:3px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  color:rgba(255,255,255,.72);
+}
+
 .dd-dot{
   width:10px;
   height:10px;
