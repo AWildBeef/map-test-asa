@@ -262,7 +262,7 @@ body{
 /* Closed state: put name + count on the same line */
 .dd-btn-text{
   display:flex;
-  align-items:baseline;
+  align-items:left;
   gap:8px;
   min-width:0;
   width:100%;
@@ -272,6 +272,7 @@ body{
 .dd-btn-text .dd-label{
   flex:1 1 auto;
   min-width:0;
+  text-align:left;
 }
 
 /* The count should stay visible and not wrap */
