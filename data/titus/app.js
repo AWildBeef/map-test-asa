@@ -969,6 +969,8 @@ function setBgToggle(mapMeta, cfg){
 
   bgToggleControl = new BgControl();
   mapObj.map.addControl(bgToggleControl);
+  
+  btn.style.color = "white";
 }
 // ============================================================
 function addPanelsControl(map) {
