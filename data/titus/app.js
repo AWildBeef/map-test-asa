@@ -27,34 +27,28 @@ const MIN_GLOBAL_DOWNSHIFT = [
   [2,  6],
 ];
 
-function fitBoundsWithSafeAreas(map, bounds) {
+function fitOptionsForUI() {
+  const isMobile = window.innerWidth <= 640;
 
-  map.fitBounds(bounds, { padding:[10,10], maxZoom:-1 });
+  // measure real UI heights (safe if null)
+  const topbarH = document.getElementById("topbar")?.offsetHeight ?? 0;
 
-  requestAnimationFrame(() => {
+  // estimate bottom controls / toolbar area
+  // (you can also measure your custom toolbar div if you add one)
+  const bottomSafe = isMobile ? 70 : 40;
 
-    let offsetX = 0;
-    let offsetY = 0;
+  // X padding (left/right)
+  const padX = isMobile ? 6 : 20;
 
-    const topbar = document.getElementById("topbar");
-    const bgBtn  = document.querySelector(".leaflet-control.bg-toggle");
-    const zoom   = document.querySelector(".leaflet-control-zoom");
+  // Y padding: less on top, more on bottom
+  const padTop = isMobile ? 6 : 10;
+  const padBottom = isMobile ? Math.max(bottomSafe, 60) : 20;
 
-    if (topbar){
-      offsetY -= topbar.offsetHeight * 0.5;
-    }
-
-    if (bgBtn){
-      offsetY += bgBtn.offsetHeight * 0.7;
-    }
-
-    if (zoom){
-      offsetY += zoom.offsetHeight * 0.25;
-    }
-
-    map.panBy([offsetX, offsetY], { animate:false });
-
-  });
+  return {
+    maxZoom: -1,
+    paddingTopLeft:    [padX, padTop + Math.min(topbarH, 120) * 0.0], // keep 0.0 unless you want topbar to influence fit
+    paddingBottomRight:[padX, padBottom]
+  };
 }
 
 function rarityFromWeight(w) {
@@ -897,7 +891,7 @@ function initMap(cfg) {
   // Create overlay ONCE
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
-  map.fitBoundsWithSafeAreas(mapObj.map, mapObj.bounds);
+  map.fitBounds(bounds, fitOptionsForUI());
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
@@ -907,6 +901,11 @@ function initMap(cfg) {
 
   // NEW: POIs always-on-top layer
   const poiLayer = L.layerGroup().addTo(map);
+  
+  window.addEventListener("resize", () => {
+    if (!mapObj?.map || !mapObj?.bounds) return;
+    mapObj.map.fitBounds(mapObj.bounds, fitOptionsForUI());
+  });
 
   return { map, layer, caveLayer, poiLayer, overlay, bounds };
 }
@@ -927,7 +926,12 @@ function updateMapForCfg(cfg) {
 
   // Update map constraints + view
   mapObj.map.setMaxBounds(bounds);
-  mapObj.map.fitBoundsWithSafeAreas(mapObj.map, mapObj.bounds);
+  mapObj.map.fitBounds(bounds, fitOptionsForUI());
+  
+  window.addEventListener("resize", () => {
+    if (!mapObj?.map || !mapObj?.bounds) return;
+    mapObj.map.fitBounds(mapObj.bounds, fitOptionsForUI());
+  });
 
   mapObj.bounds = bounds;
 }
@@ -947,12 +951,10 @@ function setBgToggle(mapMeta, cfg){
 
   const bgs = mapMeta?.backgrounds;
   if (!bgs || !bgs.length || !mapObj?.map){
-    // no alternates: use default image from cfg
     mapObj?.overlay?.setUrl(cfg.image);
     return;
   }
 
-  // pick initial index (defaultBg if present)
   const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
   let i = Math.max(0, bgs.indexOf(def));
   mapObj.overlay.setUrl(bgs[i].url);
@@ -975,7 +977,16 @@ function setBgToggle(mapMeta, cfg){
         </svg>
       `;
 
-      // Stop Leaflet + page focus weirdness
+      // ✅ styles belong HERE (btn exists here)
+      btn.style.width = "34px";
+      btn.style.height = "34px";
+      btn.style.display = "flex";
+      btn.style.alignItems = "center";
+      btn.style.justifyContent = "center";
+      btn.style.lineHeight = "1";
+      btn.style.padding = "0";
+      btn.style.color = "white";
+
       L.DomEvent.disableClickPropagation(container);
       L.DomEvent.disableScrollPropagation(container);
 
@@ -987,7 +998,6 @@ function setBgToggle(mapMeta, cfg){
         mapObj.overlay.setUrl(bgs[i].url);
         btn.title = `Background: ${bgs[i].label || bgs[i].id || (i+1)} (tap to cycle)`;
 
-        // Prevent the “blue focus flash” on whatever was previously focused
         if (document.activeElement && typeof document.activeElement.blur === "function"){
           document.activeElement.blur();
         }
@@ -999,17 +1009,18 @@ function setBgToggle(mapMeta, cfg){
 
   bgToggleControl = new BgControl();
   mapObj.map.addControl(bgToggleControl);
-  
-  
-  btn.style.width = "34px";
-  btn.style.height = "34px";
-  btn.style.display = "flex";
-  btn.style.alignItems = "center";
-  btn.style.justifyContent = "center";
-  btn.style.lineHeight = "1";
-  btn.style.padding = "0";
-  btn.style.color = "white";
 }
+
+function refitMapForUI() {
+  if (!mapObj?.map || !mapObj?.bounds) return;
+
+  // if the topbar expands/collapses, map container size changes
+  mapObj.map.invalidateSize();
+
+  // re-fit with your asymmetric padding
+  mapObj.map.fitBounds(mapObj.bounds, fitOptionsForUI());
+}
+
 // ============================================================
 function addPanelsControl(map) {
   const PanelsControl = L.Control.extend({
@@ -1955,8 +1966,12 @@ function boot() {
 
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
     document.getElementById("topbar")?.classList.toggle("show-controls");
+  
+    // let the DOM apply the new layout, then refit
+    requestAnimationFrame(() => {
+      refitMapForUI();
+    });
   });
-
   document.getElementById("modeToggle")?.addEventListener("click", () => {
     const next = (currentViewMode === "dino") ? "entry" : "dino";
     switchMode(next);
