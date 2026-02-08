@@ -176,6 +176,74 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+let bgToggleControl = null;
+
+function setBgToggle(mapMeta, cfg){
+  // Remove existing control if any
+  if (bgToggleControl && mapObj?.map) {
+    mapObj.map.removeControl(bgToggleControl);
+    bgToggleControl = null;
+  }
+
+  const bgs = mapMeta?.backgrounds;
+  if (!bgs || !bgs.length || !mapObj?.map) {
+    // no alternates, use default image
+    mapObj?.overlay?.setUrl(cfg.image);
+    return;
+  }
+
+  // pick initial bg
+  let i = 0;
+  const defaultBg = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
+  i = Math.max(0, bgs.indexOf(defaultBg));
+
+  mapObj.overlay.setUrl(bgs[i].url);
+
+  // create Leaflet control
+  const BgControl = L.Control.extend({
+    options: { position: "topright" },
+    onAdd() {
+      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+      container.style.background = "rgba(30,30,30,0.85)";
+      container.style.border = "1px solid rgba(255,255,255,0.15)";
+      container.style.borderRadius = "8px";
+      container.style.overflow = "hidden";
+
+      const btn = L.DomUtil.create("a", "", container);
+      btn.href = "#";
+      btn.title = "Toggle background";
+      btn.style.display = "block";
+      btn.style.padding = "6px 10px";
+      btn.style.color = "white";
+      btn.style.textDecoration = "none";
+      btn.style.fontSize = "12px";
+      btn.style.whiteSpace = "nowrap";
+
+      const setLabel = () => {
+        btn.textContent = `BG: ${bgs[i].label || bgs[i].id || (i+1)}`;
+      };
+      setLabel();
+
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+
+      L.DomEvent.on(btn, "click", (e) => {
+        L.DomEvent.preventDefault(e);
+        i = (i + 1) % bgs.length;
+        mapObj.overlay.setUrl(bgs[i].url);
+        setLabel();
+      });
+
+      return container;
+    }
+  });
+
+  bgToggleControl = new BgControl();
+  mapObj.map.addControl(bgToggleControl);
+}
+
+
+
 function normSearch(s){
   return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
 }
@@ -1220,7 +1288,7 @@ async function loadMapByMeta(mapMeta) {
   renderModStylePanelBody();
 
   // If Astraeos has alternate bgs, keep your dropdown behavior:
-  setupBackgroundDropdown(mapMeta, currentCfg);
+  setBgToggle(mapMeta, currentCfg);
 
   // 6) Populate the ONE dropdown slot based on mode (dino/entry)
   setupMainSelect(currentCfg);
