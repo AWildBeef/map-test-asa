@@ -1035,12 +1035,6 @@ body{
     width:auto;
   }
 
-  /* ✅ When BG is visible, make Dino + BG share row 2 */
-  #topbar.show-bg-row .controls > #dinoSelectFancy,
-  #topbar.show-bg-row .controls > #bgSelectWrap{
-    flex: 1 1 calc(50% - 4px);
-  }
-
   /* Make sure the fancy button typography stays consistent on mobile too */
   #sourceSelectFancy .dd-btn,
   #mapSelectFancy .dd-btn,
@@ -1074,10 +1068,14 @@ body{
     width:auto;
   }
 
-  /* ✅ When BG is available: Dino + BG split the row */
-  #topbar.show-bg-row .controls > #dinoSelectFancy,
+  /* ✅ When BG is available: Dino ~2/3, BG ~1/3 */
+  #topbar.show-bg-row .controls > #dinoSelectFancy{
+    flex: 2 1 0;
+    min-width: 0;
+  }
   #topbar.show-bg-row .controls > #bgSelectWrap{
-    flex: 1 1 calc(50% - 4px);
+    flex: 1 1 0;
+    min-width: 0;
   }
 
   /* Make sure bg fancy fills its wrapper slot */
