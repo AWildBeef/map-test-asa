@@ -686,53 +686,38 @@ body{
   text-transform:uppercase;
 }
 
-/* Copy button */
-.info-copy{
-  width:28px;
-  height:28px;
-  padding:0;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--panel);
-}
-
-/* Icon */
-.info-copy::before{
-  content:"";
-  width:16px;
-  height:16px;
-  background:var(--text);
-
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-
-  opacity:.9;
-}
-
-/* --- Icon-only copy button (no square) --- */
+/* Icon-only copy button */
 .info-copy{
   width:18px;
   height:18px;
   padding:0;
   border:0;
-  background:transparent;   /* kill the square */
-  border-radius:0;          /* no pill/square */
+  background:transparent;
+  border-radius:0;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  opacity:.65;
+
+  /* THIS controls icon color */
+  color: rgba(255,255,255,.80);
 }
 
-.info-copy:hover{ opacity:1; }
-
-/* keep your masked icon, just size it a bit smaller for subtlety */
+/* The masked icon (tinted by currentColor) */
 .info-copy::before{
+  content:"";
+  display:block;
   width:14px;
   height:14px;
-  background:#ffffff;
-  opacity:1;                /* let the button control opacity instead */
+
+  background-color: currentColor;
+
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+.info-copy:hover{
+  color: rgba(255,255,255,1);
 }
 
 
