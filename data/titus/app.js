@@ -920,6 +920,7 @@ function setupBackgroundDropdown(mapMeta, cfg) {
   }
 
   wrap.style.display = "";
+  topbar?.classList.add("show-bg-row");        // ✅
   sel.innerHTML = "";
 
   for (const bg of bgs) {
