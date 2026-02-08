@@ -53,6 +53,7 @@
 /* bgSelectFancy lives inside #bgSelectWrap so target it there */
 #bgSelectWrap #bgSelectFancy{
   width:100%;
+  
 }
 
 /* Hide right-side badge for source + map dropdowns */
@@ -279,7 +280,7 @@ body{
 
 /* bg dropdown wrapper */
 #bgSelectWrap{
-  display:inline-flex;
+  display:none !important;
   align-items:center;
   gap:6px;
   font-size:12px;
@@ -575,7 +576,7 @@ body{
 
 /* bg wrapper should behave like a single “slot” */
 #bgSelectWrap{
-  display:flex;
+  display:none !important;
   align-items:center;
   gap:12px; /* match your controls gap feel */
 }
@@ -1081,6 +1082,7 @@ body{
   /* Make sure bg fancy fills its wrapper slot */
   #bgSelectWrap #bgSelectFancy{
     width:100%;
+    display:none !important;
   }
   #bgSelectWrap #bgSelectFancy .dd{
     width:100%;
