@@ -27,6 +27,11 @@ const MIN_GLOBAL_DOWNSHIFT = [
   [2,  6],
 ];
 
+function fitPadding() {
+  // tighter on phones, roomier on desktop
+  return (window.innerWidth <= 640) ? [6, 6] : [20, 20];
+}
+
 function rarityFromWeight(w) {
   const eff = Number(w || 0);
   for (const [thr, name] of RARITY_THRESHOLDS) {
@@ -867,7 +872,7 @@ function initMap(cfg) {
   // Create overlay ONCE
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
-  map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
+  map.fitBounds(bounds, { padding: fitPadding(), maxZoom: -1 });
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
@@ -897,7 +902,7 @@ function updateMapForCfg(cfg) {
 
   // Update map constraints + view
   mapObj.map.setMaxBounds(bounds);
-  mapObj.map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
+  mapObj.map.fitBounds(bounds, { padding: fitPadding(), maxZoom: -1 });
 
   mapObj.bounds = bounds;
 }
@@ -1936,6 +1941,11 @@ function boot() {
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
     alert(err.message || String(err));
+  });
+  
+  window.addEventListener("resize", () => {
+    if (!mapObj?.map || !mapObj?.bounds) return;
+    mapObj.map.fitBounds(mapObj.bounds, { padding: fitPadding(), maxZoom: -1 });
   });
 }
 
