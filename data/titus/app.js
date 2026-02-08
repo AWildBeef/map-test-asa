@@ -927,11 +927,6 @@ function updateMapForCfg(cfg) {
   // Update map constraints + view
   mapObj.map.setMaxBounds(bounds);
   mapObj.map.fitBounds(bounds, fitOptionsForUI());
-  
-  window.addEventListener("resize", () => {
-    if (!mapObj?.map || !mapObj?.bounds) return;
-    mapObj.map.fitBounds(mapObj.bounds, fitOptionsForUI());
-  });
 
   mapObj.bounds = bounds;
 }
@@ -1978,6 +1973,9 @@ function boot() {
   });
 
   syncModeBtn();
+  window.addEventListener("resize", () => {
+    refitMapForUI();
+  });
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
     alert(err.message || String(err));
