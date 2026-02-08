@@ -941,7 +941,7 @@ function setBgToggle(mapMeta, cfg){
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
           <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
                 fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linejoin="round" />
+                stroke-linejoin="round"/>
         </svg>
       `;
 
@@ -966,6 +966,15 @@ function setBgToggle(mapMeta, cfg){
       return container;
     }
   });
+  
+  btn.style.width = "34px";
+  btn.style.height = "34px";
+  btn.style.display = "flex";
+  btn.style.alignItems = "center";
+  btn.style.justifyContent = "center";
+  btn.style.lineHeight = "1";
+  btn.style.padding = "0";
+  btn.style.color = "white";
 
   bgToggleControl = new BgControl();
   mapObj.map.addControl(bgToggleControl);
