@@ -27,9 +27,34 @@ const MIN_GLOBAL_DOWNSHIFT = [
   [2,  6],
 ];
 
-function fitPadding() {
-  // tighter on phones, roomier on desktop
-  return (window.innerWidth <= 640) ? [6, 6] : [20, 20];
+function fitBoundsWithSafeAreas(map, bounds) {
+
+  map.fitBounds(bounds, { padding:[10,10], maxZoom:-1 });
+
+  requestAnimationFrame(() => {
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    const topbar = document.getElementById("topbar");
+    const bgBtn  = document.querySelector(".leaflet-control.bg-toggle");
+    const zoom   = document.querySelector(".leaflet-control-zoom");
+
+    if (topbar){
+      offsetY -= topbar.offsetHeight * 0.5;
+    }
+
+    if (bgBtn){
+      offsetY += bgBtn.offsetHeight * 0.7;
+    }
+
+    if (zoom){
+      offsetY += zoom.offsetHeight * 0.25;
+    }
+
+    map.panBy([offsetX, offsetY], { animate:false });
+
+  });
 }
 
 function rarityFromWeight(w) {
@@ -872,7 +897,7 @@ function initMap(cfg) {
   // Create overlay ONCE
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
-  map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
+  map.fitBoundsWithSafeAreas(mapObj.map, mapObj.bounds);
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
@@ -902,7 +927,7 @@ function updateMapForCfg(cfg) {
 
   // Update map constraints + view
   mapObj.map.setMaxBounds(bounds);
-  mapObj.map.fitBounds(bounds, { padding: [10, 20], maxZoom: -1 });
+  mapObj.map.fitBoundsWithSafeAreas(mapObj.map, mapObj.bounds);
 
   mapObj.bounds = bounds;
 }
