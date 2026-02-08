@@ -974,7 +974,9 @@ body{
   #controlsToggle{ display:inline-flex; }
 
   /* Hide dropdown row unless toggled */
-  #topbar .controls{ display:none; }
+  #topbar .controls{ 
+    display:none;
+   }
   #topbar.show-controls .controls{ display:flex; }
 
   /* Controls layout */
@@ -1002,6 +1004,8 @@ body{
 
   #topbar{
     padding:6px 6px 6px;
+    position: relative;
+    z-index: 2000;
   }
 
   #topbar .title{
