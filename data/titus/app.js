@@ -970,8 +970,6 @@ function setBgToggle(mapMeta, cfg){
   bgToggleControl = new BgControl();
   mapObj.map.addControl(bgToggleControl);
 }
-
- (Leaflet ☰)
 // ============================================================
 function addPanelsControl(map) {
   const PanelsControl = L.Control.extend({
