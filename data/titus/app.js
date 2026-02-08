@@ -201,7 +201,7 @@ function setBgToggle(mapMeta, cfg){
 
   // create Leaflet control
   const BgControl = L.Control.extend({
-    options: { position: "topright" },
+    options: { position: "bottomleft" },
     onAdd() {
       const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
       container.style.background = "rgba(30,30,30,0.85)";
@@ -219,20 +219,27 @@ function setBgToggle(mapMeta, cfg){
       btn.style.fontSize = "12px";
       btn.style.whiteSpace = "nowrap";
 
-      const setLabel = () => {
-        btn.textContent = `BG: ${bgs[i].label || bgs[i].id || (i+1)}`;
+      const setIcon = () => {
+        // simple “layers/map” icon
+        btn.innerHTML = `
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
+                  fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linejoin="round"/>
+          </svg>
+        `;
       };
-      setLabel();
-
-      L.DomEvent.disableClickPropagation(container);
-      L.DomEvent.disableScrollPropagation(container);
-
-      L.DomEvent.on(btn, "click", (e) => {
-        L.DomEvent.preventDefault(e);
-        i = (i + 1) % bgs.length;
-        mapObj.overlay.setUrl(bgs[i].url);
-        setLabel();
-      });
+      setIcon();
+      
+      btn.style.width = "34px";
+      btn.style.height = "34px";
+      btn.style.display = "flex";
+      btn.style.alignItems = "center";
+      btn.style.justifyContent = "center";
+      btn.style.lineHeight = "1";
+      btn.style.padding = "0";
+      btn.style.color = "white";
+      btn.title = `Background: ${bgs[i].label || bgs[i].id || (i+1)} (tap to cycle)`;
 
       return container;
     }
@@ -1483,6 +1490,40 @@ function drawDino(cfg, dinoKey) {
   }
 }
 
+let modFab = null;
+
+function ensureModStyleFab(){
+  if (modFab) return modFab;
+
+  const mapEl = document.getElementById("mapWrap");
+  if (!mapEl) return null;
+
+  const btn = document.createElement("button");
+  btn.id = "modStyleFab";
+  btn.type = "button";
+  btn.title = "Mod Style";
+
+  // paintbrush icon
+  btn.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
+            fill="currentColor" opacity=".9"/>
+      <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
+            fill="currentColor"/>
+    </svg>
+  `;
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPanel("modStylePanel");
+    btn.style.display = "none";
+  });
+
+  mapEl.appendChild(btn);
+  modFab = btn;
+  return btn;
+}
+
 // ============================================================
 // FLOATING PANELS (Dino Info + Mod Style)
 // ============================================================
@@ -1541,6 +1582,11 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
   panel.querySelector('[data-action="hide"]').onclick = () => {
     panel.style.display = "none";
     panel.dataset.hidden = "1";
+  
+    if (panel.id === "modStylePanel") {
+      const fab = ensureModStyleFab();
+      if (fab) fab.style.display = "";
+    }
   };
 
   makePanelDraggable(panel);
@@ -1652,6 +1698,10 @@ function setModStylePanelVisible(show) {
   const el = document.getElementById("modStylePanel");
   if (!el) return;
   el.style.display = show ? "" : "none";
+
+  // also manage the bubble
+  const fab = ensureModStyleFab();
+  if (fab) fab.style.display = (show && el.dataset.hidden === "1") ? "" : "none";
 }
 
 function renderModStylePanelBody() {
