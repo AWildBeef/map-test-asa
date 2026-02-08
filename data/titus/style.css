@@ -361,10 +361,17 @@ body{
   user-select:none;
 }
 
+/* remove the always-on focus ring */
 .dd-btn:focus{
-  outline:none;
-  border-color:var(--focus);
-  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--control-border) !important;
+}
+
+/* only show the ring for keyboard focus */
+.dd-btn:focus-visible{
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(122,162,255,.18);
 }
 
 /* iOS tap highlight (the blue flash) */
