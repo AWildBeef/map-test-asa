@@ -854,7 +854,6 @@ body{
   }
   
   .floating-panel .fp-title{
-    color:var(--muted);
     font-weight:600;
     font-size:11px;
     letter-spacing:.2px;
@@ -872,7 +871,6 @@ body{
 
   .info-mono{   /* The scrollable BP and Nametag Fields */
     font-size:10px;
-    color:var(--muted);
     line-height:1.176;
     font-weight:500;
   }
