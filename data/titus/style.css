@@ -654,7 +654,7 @@ body{
    ============================================================ */
 .floating-panel{
   position:absolute;
-  z-index:9999;
+  z-index:900;
 
   width: var(--panel-w);
   max-width: min(360px, calc(100vw - 24px));
