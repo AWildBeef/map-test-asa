@@ -970,6 +970,14 @@ function setBgToggle(mapMeta, cfg){
   bgToggleControl = new BgControl();
   mapObj.map.addControl(bgToggleControl);
   
+  
+  btn.style.width = "34px";
+  btn.style.height = "34px";
+  btn.style.display = "flex";
+  btn.style.alignItems = "center";
+  btn.style.justifyContent = "center";
+  btn.style.lineHeight = "1";
+  btn.style.padding = "0";
   btn.style.color = "white";
 }
 // ============================================================
