@@ -208,29 +208,14 @@ function setBgToggle(mapMeta, cfg){
       container.style.border = "1px solid rgba(255,255,255,0.15)";
       container.style.borderRadius = "8px";
       container.style.overflow = "hidden";
-
+    
       const btn = L.DomUtil.create("a", "", container);
       btn.href = "#";
-      btn.title = "Toggle background";
-      btn.style.display = "block";
-      btn.style.padding = "6px 10px";
-      btn.style.color = "white";
-      btn.style.textDecoration = "none";
-      btn.style.fontSize = "12px";
-      btn.style.whiteSpace = "nowrap";
-
-      const setIcon = () => {
-        // simple “layers/map” icon
-        btn.innerHTML = `
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-            <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
-                  fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linejoin="round"/>
-          </svg>
-        `;
-      };
-      setIcon();
-      
+    
+      // IMPORTANT: stop Leaflet/map + your document listeners from eating this click
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+    
       btn.style.width = "34px";
       btn.style.height = "34px";
       btn.style.display = "flex";
@@ -239,8 +224,31 @@ function setBgToggle(mapMeta, cfg){
       btn.style.lineHeight = "1";
       btn.style.padding = "0";
       btn.style.color = "white";
-      btn.title = `Background: ${bgs[i].label || bgs[i].id || (i+1)} (tap to cycle)`;
-
+      btn.style.textDecoration = "none";
+    
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
+                fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linejoin="round"/>
+        </svg>
+      `;
+    
+      const updateTitle = () => {
+        btn.title = `Background: ${bgs[i].label || bgs[i].id || (i + 1)} (tap to cycle)`;
+      };
+      updateTitle();
+    
+      // THE MISSING PART: click handler
+      L.DomEvent.on(btn, "click", (e) => {
+        L.DomEvent.preventDefault(e);
+        L.DomEvent.stopPropagation(e);
+    
+        i = (i + 1) % bgs.length;
+        mapObj.overlay.setUrl(bgs[i].url);
+        updateTitle();
+      });
+    
       return container;
     }
   });
@@ -1579,14 +1587,20 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
     body.style.display = closed ? "" : "none";
     panel.classList.toggle("collapsed", !closed);
   };
-  panel.querySelector('[data-action="hide"]').onclick = () => {
-    panel.style.display = "none";
-    panel.dataset.hidden = "1";
-  
+  panel.querySelector('[data-action="min"]').onclick = () => {
+    // For Mod Style panel, collapse into the FAB instead of a tiny header
     if (panel.id === "modStylePanel") {
+      panel.style.display = "none";
+      panel.dataset.hidden = "1";
       const fab = ensureModStyleFab();
       if (fab) fab.style.display = "";
+      return;
     }
+  
+    // Normal collapse for other panels
+    const closed = body.style.display === "none";
+    body.style.display = closed ? "" : "none";
+    panel.classList.toggle("collapsed", !closed);
   };
 
   makePanelDraggable(panel);
@@ -1697,11 +1711,39 @@ function ensurePanels() {
 function setModStylePanelVisible(show) {
   const el = document.getElementById("modStylePanel");
   if (!el) return;
-  el.style.display = show ? "" : "none";
 
-  // also manage the bubble
   const fab = ensureModStyleFab();
-  if (fab) fab.style.display = (show && el.dataset.hidden === "1") ? "" : "none";
+
+  if (!show) {
+    el.style.display = "none";
+    if (fab) fab.style.display = "none";
+    return;
+  }
+
+  // show=true:
+  if (el.dataset.hidden === "1") {
+    // user hid it -> keep hidden, show bubble
+    el.style.display = "none";
+    if (fab) fab.style.display = "";
+  } else {
+    // user wants it visible
+    el.style.display = "";
+    if (fab) fab.style.display = "none";
+  }
+}
+
+function showPanel(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.style.display = "";
+  el.dataset.hidden = "0";
+
+  // if we open mod panel, hide the bubble
+  if (id === "modStylePanel") {
+    const fab = ensureModStyleFab();
+    if (fab) fab.style.display = "none";
+  }
 }
 
 function renderModStylePanelBody() {
