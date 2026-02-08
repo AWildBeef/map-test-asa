@@ -85,7 +85,10 @@
    ============================================================ */
 *{ box-sizing:border-box; }
 
-html, body{ height:100%; }
+html, body{ 
+  height:100%;
+  margin: 0;
+}
 
 #mapWrap .leaflet-container {
   background: var(--bg);
@@ -98,6 +101,7 @@ body{
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   display:flex;
   flex-direction:column;
+  min-height: 100vh;
 }
 
 #buildInfo{
@@ -114,14 +118,18 @@ body{
    ============================================================ */
 #mapWrap{
   position:relative;
-  flex:1;
+  flex: 1 1 auto;
   width:100vw;
+  margin: 0;
+  padding: 0;
   min-height:0; /* important for scroll */
 }
 
 #map{
   position:absolute;
   inset:0;
+  height: 100%;
+  width: 100%;
 }
 
 /* ============================================================
@@ -136,6 +144,8 @@ body{
   flex-direction:column;
   align-items:center;
   gap:7px;
+  flex: 0 0 auto;
+  margin: 0;
 }
 
 .title-row{
