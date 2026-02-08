@@ -68,8 +68,18 @@
   display: none !important;
 }
 
-#sourceSelectFancy .dd-item-name { font-size: 10px; }
 
+/* Hide the “12 dinos / etc” line in the CLOSED button for source + map */
+#sourceSelectFancy .dd-sub,
+#mapSelectFancy .dd-sub{
+  display:none !important;
+}
+
+/* Optional: keep the label vertically centered when sub is hidden */
+#sourceSelectFancy .dd-btn-text,
+#mapSelectFancy .dd-btn-text{
+  justify-content:center;  /* only if dd-btn-text is a column flex */
+}
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
