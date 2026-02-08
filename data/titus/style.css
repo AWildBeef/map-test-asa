@@ -53,6 +53,7 @@
 /* bgSelectFancy lives inside #bgSelectWrap so target it there */
 #bgSelectWrap #bgSelectFancy{
   width:100%;
+  
 }
 
 /* Hide right-side badge for source + map dropdowns */
@@ -79,6 +80,16 @@
 #sourceSelectFancy .dd-btn-text,
 #mapSelectFancy .dd-btn-text{
   justify-content:center;  /* only if dd-btn-text is a column flex */
+}
+
+/* Hide the “pill” (dd-sub) in the CLOSED button for BG too */
+#bgSelectFancy .dd-sub{
+  display:none !important;
+}
+
+/* (optional) if you also want to hide badges in the OPEN list */
+#bgSelectFancy .dd-badges{
+  display:none !important;
 }
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
@@ -269,7 +280,7 @@ body{
 
 /* bg dropdown wrapper */
 #bgSelectWrap{
-  display:inline-flex;
+  display:none !important;
   align-items:center;
   gap:6px;
   font-size:12px;
@@ -548,7 +559,96 @@ body{
 .dd-star:hover{ opacity:1; }
 
 
+/* ============================================================
+   TOPBAR: Make ALL fancy dropdowns match the native selects
+   ============================================================ */
 
+/* All fancy hosts behave like native selects in the flex row */
+#topbar .controls > #sourceSelectFancy,
+#topbar .controls > #mapSelectFancy,
+#topbar .controls > #dinoSelectFancy,
+#topbar .controls > #bgSelectWrap{
+  flex: 1 1 220px;
+  min-width: 200px;
+  max-width: 320px;
+  width: 100%;
+}
+
+/* bg wrapper should behave like a single “slot” */
+#bgSelectWrap{
+  display:none !important;
+  align-items:center;
+  gap:12px; /* match your controls gap feel */
+}
+
+/* Make the fancy control fill its slot */
+#sourceSelectFancy .dd,
+#mapSelectFancy .dd,
+#dinoSelectFancy .dd,
+#bgSelectFancy .dd{
+  width:100%;
+  max-width:none;
+}
+
+/* The big fix: style ALL fancy buttons like #topbar select */
+#sourceSelectFancy .dd-btn,
+#mapSelectFancy .dd-btn,
+#dinoSelectFancy .dd-btn,
+#bgSelectFancy .dd-btn{
+  padding:6px 10px;            /* match #topbar select */
+  font-size:12px;               /* match #topbar select */
+  border-radius:6px;            /* match #topbar select */
+  min-height:41px;              /* helps equalize height across browsers */
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+/* Ensure label alignment is consistent */
+#sourceSelectFancy .dd-label,
+#mapSelectFancy .dd-label,
+#dinoSelectFancy .dd-label,
+#bgSelectFancy .dd-label{
+  font-size:15px;
+  font-weight:400;
+  color:#fff;
+}
+
+/* Make sure your “special dino” rules don’t re-shrink/reshape it */
+#dinoSelectFancy .dd-btn{
+  /* intentionally empty – this block exists to override any earlier dino-only dd-btn rules */
+}
+
+/* Mod Style floating bubble (shows when panel hidden) */
+#modStyleFab{
+  position:absolute;
+  z-index:10000;
+  right:10px;
+  top:52px;              /* tweak so it doesn't overlap BG */
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.85);
+  color:#fff;
+  display:none;          /* shown only when panel hidden */
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,.40);
+}
+#modStyleFab:hover{ background:rgba(45,45,45,.92); }
+#modStyleFab:active{ transform:translateY(1px); }
+
+#modStyleFab svg{
+  width:18px;
+  height:18px;
+}
 
 /* ============================================================
    4) FLOATING PANELS (new draggable system)
@@ -607,6 +707,17 @@ body{
   color:var(--text);
   cursor:pointer;
 }
+
+/* --- Center the ▾ / ✕ perfectly inside the header buttons --- */
+.floating-panel .fp-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  line-height:1;
+  font-size:14px;   /* tune if you want */
+}
+
 .floating-panel .fp-btn:hover{ border-color:#596273; }
 
 .floating-panel .fp-body{
@@ -675,29 +786,42 @@ body{
   text-transform:uppercase;
 }
 
-/* Copy button */
+/* Icon-only copy button */
 .info-copy{
-  width:28px;
-  height:28px;
+  width:18px;
+  height:18px;
   padding:0;
+  border:0;
+  background:transparent;
+  border-radius:0;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  background:var(--panel);
+  cursor:pointer;
+
+  /* THIS controls icon color */
+  color: rgba(255,255,255,.80);
 }
 
-/* Icon */
+/* The masked icon (tinted by currentColor) */
 .info-copy::before{
   content:"";
-  width:16px;
-  height:16px;
-  background:var(--text);
+  display:block;
+  width:14px;
+  height:14px;
+
+  background-color: currentColor;
 
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-
-  opacity:.9;
 }
+
+.info-copy:hover{
+  color: rgba(255,255,255,1);
+  filter: drop-shadow(0 0 2px rgba(255,255,255,.25));
+}
+
+
 .info-copy:hover::before{ opacity:1; }
 
 .info-mono{   /* The scrollable BP and Nametag Fields */
@@ -816,7 +940,6 @@ body{
   }
   
   .floating-panel .fp-title{
-    color:var(--muted);
     font-weight:600;
     font-size:11px;
     letter-spacing:.2px;
@@ -834,7 +957,6 @@ body{
 
   .info-mono{   /* The scrollable BP and Nametag Fields */
     font-size:10px;
-    color:var(--muted);
     line-height:1.176;
     font-weight:500;
   }
@@ -907,61 +1029,91 @@ body{
     flex: 1 1 140px;
     min-width:120px;
   }
+  /* Keep the controls row wrapping */
+  #topbar .controls{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:4px;
+  }
+
+  /* Row 1: source + map side-by-side */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy{
+    flex: 1 1 calc(50% - 4px);
+    min-width:120px;
+    max-width:none;
+    width:auto;
+  }
+
+  /* Row 2 default: dino spans full width */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    min-width:0;
+    max-width:none;
+    width:auto;
+  }
+
+  /* BG wrapper should sit in the flow like a normal slot */
+  #topbar .controls > #bgSelectWrap{
+    flex: 1 1 100%;  /* default: full row, but we’ll refine below */
+    min-width:0;
+    max-width:none;
+    width:auto;
+  }
+
+  /* Make sure the fancy button typography stays consistent on mobile too */
+  #sourceSelectFancy .dd-btn,
+  #mapSelectFancy .dd-btn,
+  #dinoSelectFancy .dd-btn,
+  #bgSelectFancy .dd-btn{
+    padding:7px 7px;
+    font-size:10px;
+    border-radius:4px;
+    min-height:34px;
+  }
+
+  /* Row 1: source + map */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy{
+    flex: 1 1 calc(50% - 4px);
+    max-width:none;
+    width:auto;
+  }
+
+  /* Default: Dino full width */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    max-width:none;
+    width:auto;
+  }
+
+  /* Default: BG full width (only matters when visible) */
+  #topbar .controls > #bgSelectWrap{
+    flex: 1 1 100%;
+    max-width:none;
+    width:auto;
+  }
+
+  /* ✅ When BG is available: Dino ~2/3, BG ~1/3 */
+  #topbar.show-bg-row .controls > #dinoSelectFancy{
+    flex: 2 1 0;
+    min-width: 0;
+  }
+  #topbar.show-bg-row .controls > #bgSelectWrap{
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* Make sure bg fancy fills its wrapper slot */
+  #bgSelectWrap #bgSelectFancy{
+    width:100%;
+    display:none !important;
+  }
+  #bgSelectWrap #bgSelectFancy .dd{
+    width:100%;
+    max-width:none;
+  }
+
   #bgSelectWrap select{ width:100%; }
-}
-
-
-/* ============================================================
-   Map controls: Background toggle + Mod Style FAB
-   ============================================================ */
-
-.leaflet-control.bg-toggle{
-  background: rgba(30,30,30,0.85);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.leaflet-control.bg-toggle .bg-toggle-btn{
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background: transparent;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.leaflet-control.bg-toggle .bg-toggle-btn:hover{
-  background: rgba(255,255,255,0.08);
-}
-
-#modStyleFab{
-  position:absolute;
-  z-index:10000;
-  right:10px;
-  top:52px; /* tweak if it overlaps other map controls */
-  width:40px;
-  height:40px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(30,30,30,.85);
-  color:#fff;
-  display:none; /* only visible when Mod Style panel is hidden */
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 10px 22px rgba(0,0,0,.40);
-}
-
-#modStyleFab:hover{ background:rgba(45,45,45,.92); }
-#modStyleFab:active{ transform:translateY(1px); }
-
-#modStyleFab svg{
-  width:18px;
-  height:18px;
 }
