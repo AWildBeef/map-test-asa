@@ -548,7 +548,96 @@ body{
 .dd-star:hover{ opacity:1; }
 
 
+/* ============================================================
+   TOPBAR: Make ALL fancy dropdowns match the native selects
+   ============================================================ */
 
+/* All fancy hosts behave like native selects in the flex row */
+#topbar .controls > #sourceSelectFancy,
+#topbar .controls > #mapSelectFancy,
+#topbar .controls > #dinoSelectFancy,
+#topbar .controls > #bgSelectWrap{
+  flex: 1 1 220px;
+  min-width: 200px;
+  max-width: 320px;
+  width: 100%;
+}
+
+/* bg wrapper should behave like a single “slot” */
+#bgSelectWrap{
+  display:none !important;
+  align-items:center;
+  gap:12px; /* match your controls gap feel */
+}
+
+/* Make the fancy control fill its slot */
+#sourceSelectFancy .dd,
+#mapSelectFancy .dd,
+#dinoSelectFancy .dd,
+#bgSelectFancy .dd{
+  width:100%;
+  max-width:none;
+}
+
+/* The big fix: style ALL fancy buttons like #topbar select */
+#sourceSelectFancy .dd-btn,
+#mapSelectFancy .dd-btn,
+#dinoSelectFancy .dd-btn,
+#bgSelectFancy .dd-btn{
+  padding:6px 10px;            /* match #topbar select */
+  font-size:12px;               /* match #topbar select */
+  border-radius:6px;            /* match #topbar select */
+  min-height:41px;              /* helps equalize height across browsers */
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+/* Ensure label alignment is consistent */
+#sourceSelectFancy .dd-label,
+#mapSelectFancy .dd-label,
+#dinoSelectFancy .dd-label,
+#bgSelectFancy .dd-label{
+  font-size:15px;
+  font-weight:400;
+  color:#fff;
+}
+
+/* Make sure your “special dino” rules don’t re-shrink/reshape it */
+#dinoSelectFancy .dd-btn{
+  /* intentionally empty – this block exists to override any earlier dino-only dd-btn rules */
+}
+
+/* Mod Style floating bubble (shows when panel hidden) */
+#modStyleFab{
+  position:absolute;
+  z-index:10000;
+  right:10px;
+  top:52px;              /* tweak so it doesn't overlap BG */
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.85);
+  color:#fff;
+  display:none;          /* shown only when panel hidden */
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,.40);
+}
+#modStyleFab:hover{ background:rgba(45,45,45,.92); }
+#modStyleFab:active{ transform:translateY(1px); }
+
+#modStyleFab svg{
+  width:18px;
+  height:18px;
+}
 
 /* ============================================================
    4) FLOATING PANELS (new draggable system)
