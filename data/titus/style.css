@@ -731,6 +731,7 @@ body{
 .info-copy::before{
   width:14px;
   height:14px;
+  background:var(--text);
   opacity:1;                /* let the button control opacity instead */
 }
 
