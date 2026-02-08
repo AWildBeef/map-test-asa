@@ -985,17 +985,6 @@ body{
     flex-wrap:wrap;
     justify-content:center;
     gap:4px;
-    display: none;            /* default collapsed */
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;                /* right below the title row */
-    margin: 0;
-    padding: 6px;
-    background: rgba(26,29,33,.96);
-    border-bottom: 1px solid rgba(255,255,255,.10);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 12px 26px rgba(0,0,0,.45);
   }
 
   /* Dropdowns smaller */
