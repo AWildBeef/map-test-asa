@@ -176,89 +176,6 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
-let bgToggleControl = null;
-
-function setBgToggle(mapMeta, cfg){
-  // Remove existing control if any
-  if (bgToggleControl && mapObj?.map) {
-    mapObj.map.removeControl(bgToggleControl);
-    bgToggleControl = null;
-  }
-
-  const bgs = mapMeta?.backgrounds;
-  if (!bgs || !bgs.length || !mapObj?.map) {
-    // no alternates, use default image
-    mapObj?.overlay?.setUrl(cfg.image);
-    return;
-  }
-
-  // pick initial bg
-  let i = 0;
-  const defaultBg = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
-  i = Math.max(0, bgs.indexOf(defaultBg));
-
-  mapObj.overlay.setUrl(bgs[i].url);
-
-  // create Leaflet control
-  const BgControl = L.Control.extend({
-    options: { position: "bottomleft" },
-    onAdd() {
-      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
-      container.style.background = "rgba(30,30,30,0.85)";
-      container.style.border = "1px solid rgba(255,255,255,0.15)";
-      container.style.borderRadius = "8px";
-      container.style.overflow = "hidden";
-    
-      const btn = L.DomUtil.create("a", "", container);
-      btn.href = "#";
-    
-      // IMPORTANT: stop Leaflet/map + your document listeners from eating this click
-      L.DomEvent.disableClickPropagation(container);
-      L.DomEvent.disableScrollPropagation(container);
-    
-      btn.style.width = "34px";
-      btn.style.height = "34px";
-      btn.style.display = "flex";
-      btn.style.alignItems = "center";
-      btn.style.justifyContent = "center";
-      btn.style.lineHeight = "1";
-      btn.style.padding = "0";
-      btn.style.color = "white";
-      btn.style.textDecoration = "none";
-    
-      btn.innerHTML = `
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
-                fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linejoin="round"/>
-        </svg>
-      `;
-    
-      const updateTitle = () => {
-        btn.title = `Background: ${bgs[i].label || bgs[i].id || (i + 1)} (tap to cycle)`;
-      };
-      updateTitle();
-    
-      // THE MISSING PART: click handler
-      L.DomEvent.on(btn, "click", (e) => {
-        L.DomEvent.preventDefault(e);
-        L.DomEvent.stopPropagation(e);
-    
-        i = (i + 1) % bgs.length;
-        mapObj.overlay.setUrl(bgs[i].url);
-        updateTitle();
-      });
-    
-      return container;
-    }
-  });
-
-  bgToggleControl = new BgControl();
-  mapObj.map.addControl(bgToggleControl);
-}
-
-
-
 function normSearch(s){
   return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
 }
@@ -986,50 +903,75 @@ function updateMapForCfg(cfg) {
 }
 
 // ============================================================
-// Background dropdown
+// Background toggle (Leaflet button) — replaces BG dropdown
 // ============================================================
-function setupBackgroundDropdown(mapMeta, cfg) {
-  const wrap = document.getElementById("bgSelectWrap");
-  const sel = document.getElementById("bgSelect");
-  if (!wrap || !sel || !mapObj) return;
+
+let bgToggleControl = null;
+
+function setBgToggle(mapMeta, cfg){
+  // remove existing
+  if (bgToggleControl && mapObj?.map){
+    mapObj.map.removeControl(bgToggleControl);
+    bgToggleControl = null;
+  }
 
   const bgs = mapMeta?.backgrounds;
-
-  if (!bgs || !bgs.length) {
-    wrap.style.display = "none";
-    sel.innerHTML = "";
-    mapObj.overlay.setUrl(cfg.image);
+  if (!bgs || !bgs.length || !mapObj?.map){
+    // no alternates: use default image from cfg
+    mapObj?.overlay?.setUrl(cfg.image);
     return;
   }
 
-  wrap.style.display = "";
-  topbar?.classList.add("show-bg-row");        // ✅
-  sel.innerHTML = "";
+  // pick initial index (defaultBg if present)
+  const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
+  let i = Math.max(0, bgs.indexOf(def));
+  mapObj.overlay.setUrl(bgs[i].url);
 
-  for (const bg of bgs) {
-    const opt = document.createElement("option");
-    opt.value = bg.url;
-    opt.textContent = bg.label;
-    sel.appendChild(opt);
-  }
+  const BgControl = L.Control.extend({
+    options: { position: "bottomleft" },
+    onAdd() {
+      const container = L.DomUtil.create("div", "leaflet-control leaflet-bar bg-toggle");
+      const btn = L.DomUtil.create("button", "bg-toggle-btn", container);
 
-  const defaultBg = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
-  sel.value = defaultBg.url;
-  mapObj.overlay.setUrl(sel.value);
+      btn.type = "button";
+      btn.title = `Background: ${bgs[i].label || bgs[i].id || (i+1)} (tap to cycle)`;
+      btn.setAttribute("aria-label", "Toggle background");
 
-  sel.onchange = () => mapObj.overlay.setUrl(sel.value);
-  
-  mountFancySelect({
-    nativeId: "bgSelect",
-    hostId: "bgSelectFancy",
-    placeholder: "Search backgrounds...",
-    getButtonSubText: () => "",
-    getRowBadges: () => [],
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
+                fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linejoin="round" />
+        </svg>
+      `;
+
+      // Stop Leaflet + page focus weirdness
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+
+      L.DomEvent.on(btn, "click", (e) => {
+        L.DomEvent.preventDefault(e);
+        L.DomEvent.stopPropagation(e);
+
+        i = (i + 1) % bgs.length;
+        mapObj.overlay.setUrl(bgs[i].url);
+        btn.title = `Background: ${bgs[i].label || bgs[i].id || (i+1)} (tap to cycle)`;
+
+        // Prevent the “blue focus flash” on whatever was previously focused
+        if (document.activeElement && typeof document.activeElement.blur === "function"){
+          document.activeElement.blur();
+        }
+      });
+
+      return container;
+    }
   });
+
+  bgToggleControl = new BgControl();
+  mapObj.map.addControl(bgToggleControl);
 }
 
-// ============================================================
-// Panels control button (Leaflet ☰)
+ (Leaflet ☰)
 // ============================================================
 function addPanelsControl(map) {
   const PanelsControl = L.Control.extend({
@@ -1510,8 +1452,8 @@ function ensureModStyleFab(){
   btn.id = "modStyleFab";
   btn.type = "button";
   btn.title = "Mod Style";
+  btn.setAttribute("aria-label", "Show Mod Style panel");
 
-  // paintbrush icon
   btn.innerHTML = `
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
@@ -1587,20 +1529,15 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
     body.style.display = closed ? "" : "none";
     panel.classList.toggle("collapsed", !closed);
   };
-  panel.querySelector('[data-action="min"]').onclick = () => {
-    // For Mod Style panel, collapse into the FAB instead of a tiny header
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+
+    // If it's the mod panel, show the floating “paintbrush” button
     if (panel.id === "modStylePanel") {
-      panel.style.display = "none";
-      panel.dataset.hidden = "1";
       const fab = ensureModStyleFab();
       if (fab) fab.style.display = "";
-      return;
     }
-  
-    // Normal collapse for other panels
-    const closed = body.style.display === "none";
-    body.style.display = closed ? "" : "none";
-    panel.classList.toggle("collapsed", !closed);
   };
 
   makePanelDraggable(panel);
@@ -1612,6 +1549,12 @@ function showPanel(id) {
   if (!el) return;
   el.style.display = "";
   el.dataset.hidden = "0";
+
+  // If this is the mod panel, hide the FAB
+  if (id === "modStylePanel") {
+    const fab = ensureModStyleFab();
+    if (fab) fab.style.display = "none";
+  }
 }
 
 function makePanelDraggable(panel) {
@@ -1712,38 +1655,21 @@ function setModStylePanelVisible(show) {
   const el = document.getElementById("modStylePanel");
   if (!el) return;
 
-  const fab = ensureModStyleFab();
-
+  // If we're switching away from a mod source, hide both the panel and the FAB.
   if (!show) {
     el.style.display = "none";
+    el.dataset.hidden = "0";
+    const fab = ensureModStyleFab();
     if (fab) fab.style.display = "none";
     return;
   }
 
-  // show=true:
-  if (el.dataset.hidden === "1") {
-    // user hid it -> keep hidden, show bubble
-    el.style.display = "none";
-    if (fab) fab.style.display = "";
-  } else {
-    // user wants it visible
-    el.style.display = "";
-    if (fab) fab.style.display = "none";
-  }
-}
+  // show=true: respect whether the user hid it (dataset.hidden)
+  const hidden = (el.dataset.hidden === "1");
+  el.style.display = hidden ? "none" : "";
 
-function showPanel(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-
-  el.style.display = "";
-  el.dataset.hidden = "0";
-
-  // if we open mod panel, hide the bubble
-  if (id === "modStylePanel") {
-    const fab = ensureModStyleFab();
-    if (fab) fab.style.display = "none";
-  }
+  const fab = ensureModStyleFab();
+  if (fab) fab.style.display = hidden ? "" : "none";
 }
 
 function renderModStylePanelBody() {
