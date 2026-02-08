@@ -367,6 +367,29 @@ body{
   box-shadow:0 0 0 3px rgba(122,162,255,.18);
 }
 
+/* iOS tap highlight (the blue flash) */
+.dd-btn,
+.dd-item,
+#topbar select,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent Safari's native focus glow from showing */
+.dd-btn:focus,
+#topbar select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Only show focus styling for real keyboard focus */
+.dd-btn:focus { outline:none; box-shadow:none; }
+
+.dd-btn:focus-visible{
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(122,162,255,.18);
+}
+
 .dd-btn-left{
   display:flex;
   align-items:left;
