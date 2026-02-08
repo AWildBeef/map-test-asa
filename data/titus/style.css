@@ -548,7 +548,70 @@ body{
 .dd-star:hover{ opacity:1; }
 
 
+/* ============================================================
+   TOPBAR: Make ALL fancy dropdowns match the native selects
+   ============================================================ */
 
+/* All fancy hosts behave like native selects in the flex row */
+#topbar .controls > #sourceSelectFancy,
+#topbar .controls > #mapSelectFancy,
+#topbar .controls > #dinoSelectFancy,
+#topbar .controls > #bgSelectWrap{
+  flex: 1 1 220px;
+  min-width: 200px;
+  max-width: 320px;
+  width: 100%;
+}
+
+/* bg wrapper should behave like a single “slot” */
+#bgSelectWrap{
+  display:flex;
+  align-items:center;
+  gap:12px; /* match your controls gap feel */
+}
+
+/* Make the fancy control fill its slot */
+#sourceSelectFancy .dd,
+#mapSelectFancy .dd,
+#dinoSelectFancy .dd,
+#bgSelectFancy .dd{
+  width:100%;
+  max-width:none;
+}
+
+/* The big fix: style ALL fancy buttons like #topbar select */
+#sourceSelectFancy .dd-btn,
+#mapSelectFancy .dd-btn,
+#dinoSelectFancy .dd-btn,
+#bgSelectFancy .dd-btn{
+  padding:6px 10px;            /* match #topbar select */
+  font-size:12px;               /* match #topbar select */
+  border-radius:6px;            /* match #topbar select */
+  min-height:41px;              /* helps equalize height across browsers */
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+/* Ensure label alignment is consistent */
+#sourceSelectFancy .dd-label,
+#mapSelectFancy .dd-label,
+#dinoSelectFancy .dd-label,
+#bgSelectFancy .dd-label{
+  font-size:15px;
+  font-weight:400;
+  color:#fff;
+}
+
+/* Make sure your “special dino” rules don’t re-shrink/reshape it */
+#dinoSelectFancy .dd-btn{
+  /* intentionally empty – this block exists to override any earlier dino-only dd-btn rules */
+}
 
 /* ============================================================
    4) FLOATING PANELS (new draggable system)
@@ -929,5 +992,55 @@ body{
     flex: 1 1 140px;
     min-width:120px;
   }
+  /* Keep the controls row wrapping */
+  #topbar .controls{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:4px;
+  }
+
+  /* Row 1: source + map side-by-side */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy{
+    flex: 1 1 calc(50% - 4px);
+    min-width:120px;
+    max-width:none;
+    width:auto;
+  }
+
+  /* Row 2 default: dino spans full width */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    min-width:0;
+    max-width:none;
+    width:auto;
+  }
+
+  /* BG wrapper should sit in the flow like a normal slot */
+  #topbar .controls > #bgSelectWrap{
+    flex: 1 1 100%;  /* default: full row, but we’ll refine below */
+    min-width:0;
+    max-width:none;
+    width:auto;
+  }
+
+  /* ✅ When BG is visible, make Dino + BG share row 2 */
+  #topbar.show-bg-row .controls > #dinoSelectFancy,
+  #topbar.show-bg-row .controls > #bgSelectWrap{
+    flex: 1 1 calc(50% - 4px);
+  }
+
+  /* Make sure the fancy button typography stays consistent on mobile too */
+  #sourceSelectFancy .dd-btn,
+  #mapSelectFancy .dd-btn,
+  #dinoSelectFancy .dd-btn,
+  #bgSelectFancy .dd-btn{
+    padding:7px 7px;
+    font-size:10px;
+    border-radius:4px;
+    min-height:34px;
+  }
+
   #bgSelectWrap select{ width:100%; }
 }
