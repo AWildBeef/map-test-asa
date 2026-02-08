@@ -607,6 +607,17 @@ body{
   color:var(--text);
   cursor:pointer;
 }
+
+/* --- Center the ▾ / ✕ perfectly inside the header buttons --- */
+.floating-panel .fp-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  line-height:1;
+  font-size:14px;   /* tune if you want */
+}
+
 .floating-panel .fp-btn:hover{ border-color:#596273; }
 
 .floating-panel .fp-body{
@@ -698,6 +709,32 @@ body{
 
   opacity:.9;
 }
+
+/* --- Icon-only copy button (no square) --- */
+.info-copy{
+  width:18px;
+  height:18px;
+  padding:0;
+  border:0;
+  background:transparent;   /* kill the square */
+  border-radius:0;          /* no pill/square */
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  opacity:.65;
+}
+
+.info-copy:hover{ opacity:1; }
+
+/* keep your masked icon, just size it a bit smaller for subtlety */
+.info-copy::before{
+  width:14px;
+  height:14px;
+  opacity:1;                /* let the button control opacity instead */
+}
+
+
 .info-copy:hover::before{ opacity:1; }
 
 .info-mono{   /* The scrollable BP and Nametag Fields */
