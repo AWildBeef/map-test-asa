@@ -1085,16 +1085,26 @@ function setupMainSelect(cfg) {
   const sel = document.getElementById("dinoSelect");
   if (!sel) return;
 
+  // reset everything
   sel.innerHTML = "";
+  sel.onchange = null;
+
+  const addPlaceholder = (text) => {
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = text;
+    sel.appendChild(opt);
+    sel.value = "";
+  };
 
   if (currentViewMode === "dino") {
     const keys = Object.keys(cfg.dinos || {}).sort((a, b) => a.localeCompare(b));
+
     if (!keys.length) {
-      const opt = document.createElement("option");
-      opt.value = "";
-      opt.textContent = "(No dinos)";
-      sel.appendChild(opt);
+      addPlaceholder("(No dinos)");
       renderInfoPanelBodyEmpty();
+      // ✅ IMPORTANT: still rebuild fancy UI
+      mountFancyDinoSelect(cfg);
       return;
     }
 
@@ -1115,11 +1125,11 @@ function setupMainSelect(cfg) {
 
   } else {
     const keys = Object.keys(entryIndex || {}).sort((a, b) => a.localeCompare(b));
+
     if (!keys.length) {
-      const opt = document.createElement("option");
-      opt.value = "";
-      opt.textContent = "(No spawn entries)";
-      sel.appendChild(opt);
+      addPlaceholder("(No spawn entries)");
+      // ✅ IMPORTANT: still rebuild fancy UI
+      mountFancyDinoSelect(cfg);
       return;
     }
 
@@ -1130,7 +1140,6 @@ function setupMainSelect(cfg) {
       sel.appendChild(opt);
     }
 
-    // ---- ENTRY LIST ----
     sel.onchange = () => {
       drawSpawnEntry(cfg, sel.value);
       renderInfoPanelForEntry(cfg, sel.value);
@@ -1139,7 +1148,8 @@ function setupMainSelect(cfg) {
     sel.value = keys[0];
     sel.onchange();
   }
-  
+
+  // ✅ Always rebuild fancy UI after native options change
   mountFancyDinoSelect(cfg);
 }
 
