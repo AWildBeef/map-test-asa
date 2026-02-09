@@ -1917,10 +1917,12 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
       
-      ${allBps.map(p => `
-        <div class="info-mono-row">
+      ${(allBps.length ? allBps : ["(none)"]).map(p => `
+        <div class="info-row">
           <div class="info-mono">${escapeHtml(p)}</div>
-          <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>
+          ${p !== "(none)"
+            ? `<button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>`
+            : ""}
         </div>
       `).join("")}
       <div class="info-row">
