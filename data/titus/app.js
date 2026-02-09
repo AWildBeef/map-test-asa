@@ -1919,6 +1919,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       
       ${allBps.length
         ? allBps.map(p => renderCopyLine("Blueprint", p)).join("")
+        : renderCopyLine("", "")
       }
       <div class="info-row">
         <span class="info-label">Nametag</span>
