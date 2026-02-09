@@ -154,6 +154,9 @@ const SOURCES = [
   { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
   { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
   { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json" },
+  { id: "IoMSuchomimus", name: "Isle of Myths: Suchomimus", file: "data/mods/IoMSuchomimus.json" },
+  { id: "BSSpearcrest", name: "Isle of Myths: Spearcrest", file: "data/mods/BSSpearcrest.json" },
+  { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json" },
 ];
 
 // ============================================================
