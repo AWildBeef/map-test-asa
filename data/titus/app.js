@@ -1912,11 +1912,12 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const allBps = [bp, ...extraBps].filter(Boolean);
 
   const entries = d.entries || [];
-
-  ${allBps.length
-    ? allBps.map(p => renderCopyLine("Blueprint", p)).join("")
-    : renderCopyLine("Blueprint", "")
-  }
+  
+  body.innerHTML = `
+    ${allBps.length
+      ? allBps.map(p => renderCopyLine("Blueprint", p)).join("")
+      : renderCopyLine("Blueprint", "")
+    }
       <div class="info-row">
         <span class="info-label">Nametag</span>
         <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
