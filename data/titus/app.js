@@ -1917,14 +1917,22 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
       
-      ${(allBps.length ? allBps : ["(none)"]).map(p => `
+      const blueprintBlock = `
         <div class="info-row">
-          <div class="info-mono">${escapeHtml(p)}</div>
-          ${p !== "(none)"
-            ? `<button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>`
-            : ""}
+          <span class="info-label">Blueprint</span>
         </div>
-      `).join("")}
+      
+        ${(bpList.length ? bpList : ["(none)"]).map(p => `
+          ${p !== "(none)"
+            ? `<div class="info-row">
+                 <span class="info-label"></span>
+                 <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>
+               </div>`
+            : ""
+          }
+          <div class="info-mono">${escapeHtml(p)}</div>
+        `).join("")}
+      `;
       <div class="info-row">
         <span class="info-label">Nametag</span>
         <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
