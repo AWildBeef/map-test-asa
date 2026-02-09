@@ -1917,6 +1917,16 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
       
+      
+      const seen = new Set();
+        const bpList = allBps.filter(p => {
+          const k = String(p).trim();
+          if (!k || seen.has(k)) return false;
+          seen.add(k);
+          return true;
+        });
+
+
       const blueprintBlock = `
         <div class="info-row">
           <span class="info-label">Blueprint</span>
