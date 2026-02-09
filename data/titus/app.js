@@ -1918,7 +1918,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       <div class="info-title">${escapeHtml(displayName)}</div>
       
       ${allBps.map(p => `
-        <div class="info-mono-row">
+        <div class="info-row">
           <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>
           <div class="info-mono">${escapeHtml(p)}</div>
         </div>
