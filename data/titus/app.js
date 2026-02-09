@@ -1914,10 +1914,9 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const entries = d.entries || [];
   
   body.innerHTML = `
-    ${allBps.length
-      ? allBps.map(p => renderCopyLine("Blueprint", p)).join("")
-      : renderCopyLine("Blueprint", "")
-    }
+    <div class="info-section">
+      <div class="info-title">${escapeHtml(displayName)}</div>
+      
       <div class="info-row">
         <span class="info-label">Nametag</span>
         <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
