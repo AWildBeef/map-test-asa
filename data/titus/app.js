@@ -1910,6 +1910,28 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const nameTag = d.nameTag || d.nametag || "";
   const extraBps = asArray(d.additionalBpPathsToDisplay);
   const allBps = [bp, ...extraBps].filter(Boolean);
+  
+  const blueprintBlock = `
+    <div class="info-row">
+      <span class="info-label">Blueprint</span>
+      ${allBps[0]
+        ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
+        : ""}
+    </div>
+  
+    ${(allBps.length
+        ? allBps
+        : ["(none)"]
+      ).map((p, i) => `
+        <div class="info-mono">
+          ${escapeHtml(p)}
+          ${i > 0
+            ? `<button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>`
+            : ""}
+        </div>
+      `).join("")
+    }
+  `;
 
   const entries = d.entries || [];
   
@@ -1917,10 +1939,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
       
-      ${allBps.length
-        ? allBps.map(p => renderCopyLine("Blueprint", p)).join("")
-        : renderCopyLine("", "")
-      }
+      ${blueprintBlock}
       <div class="info-row">
         <span class="info-label">Nametag</span>
         <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
