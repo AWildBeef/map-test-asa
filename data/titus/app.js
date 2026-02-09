@@ -1919,12 +1919,12 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       
       
       const seen = new Set();
-        const bpList = allBps.filter(p => {
-          const k = String(p).trim();
-          if (!k || seen.has(k)) return false;
-          seen.add(k);
-          return true;
-        });
+      const bpList = allBps.filter(p => {
+        const k = String(p).trim();
+        if (!k || seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      });
 
 
       const blueprintBlock = `
@@ -1943,6 +1943,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
           <div class="info-mono">${escapeHtml(p)}</div>
         `).join("")}
       `;
+      
       <div class="info-row">
         <span class="info-label">Nametag</span>
         <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
