@@ -203,6 +203,24 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+
+function asArray(x) {
+  if (!x) return [];
+  return Array.isArray(x) ? x : [x];
+}
+
+function renderCopyLine(label, value) {
+  const v = String(value || "");
+  return `
+    <div class="info-row">
+      <span class="info-label">${escapeHtml(label)}</span>
+      <button class="info-copy" data-copy="${escapeAttr(v)}" aria-label="Copy"></button>
+    </div>
+    <div class="info-mono">${escapeHtml(v || "(none)")}</div>
+  `;
+}
+
+
 function normSearch(s){
   return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
 }
@@ -1890,6 +1908,8 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const displayName = d.displayName || dinoKey;
   const bp = d.bpPath || "";
   const nameTag = d.nameTag || d.nametag || "";
+  const extraBps = asArray(d.additionalBpPathsToDisplay);
+  const allBps = [bp, ...extraBps].filter(Boolean);
 
   const entries = d.entries || [];
 
@@ -1897,12 +1917,10 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
 
-      <div class="info-row">
-        <span class="info-label">Blueprint</span>
-        <button class="info-copy" data-copy="${escapeAttr(bp)}"aria-label="Copy"></button>
-      </div>
-      <div class="info-mono">${escapeHtml(bp || "(none)")}</div>
-
+      ${allBps.length
+        ? allBps.map(p => renderCopyLine("Blueprint", p)).join("")
+        : renderCopyLine("Blueprint", "")
+      }
       <div class="info-row">
         <span class="info-label">Nametag</span>
         <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
