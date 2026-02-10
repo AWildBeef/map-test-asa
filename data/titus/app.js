@@ -1076,7 +1076,7 @@ function initMap(cfg) {
     zoomControl: false
   });
 
-  L.control.zoom({ position: "bottomright" }).addTo(map);
+  L.control.zoom({ position: "bottomleft" }).addTo(map);
 
   // after it’s added, tag it
   setTimeout(() => {
