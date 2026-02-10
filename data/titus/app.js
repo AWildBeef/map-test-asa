@@ -1850,7 +1850,7 @@ function renderModStylePanelBody() {
     <label class="fp-row">
       <input id="modUseRarity" type="checkbox"
         ${useRarityForMods ? "checked" : ""}
-        ${isSpawnMode ? "disabled" : ""}>
+        ${isSpawnMode ? "hidden" : ""}>
       <span>Use rarity colors</span>
     </label>
 
