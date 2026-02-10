@@ -1918,7 +1918,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       <span class="info-label">Blueprint</span>
       <button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>
     </div>
-    <div class="info-mono">${escapeHtml(p)}</div>
+    ${allBps[0]
   
     ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
         <div class="info-row">
