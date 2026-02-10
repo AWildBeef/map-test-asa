@@ -1916,8 +1916,9 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const blueprintBlock = `
     <div class="info-row">
       <span class="info-label">Blueprint</span>
+      <button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>
       ${allBps[0]
-        ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
+        ? ``
         : ""}
     </div>
   
