@@ -1918,7 +1918,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       <span class="info-label">Blueprint</span>
     </div>
   
-    ${(bpList.length ? bpList : ["(none)"]).map(p => `
+    ${(allBps.length ? allBps : ["(none)"]).map(p => `
       ${p !== "(none)"
         ? `<div class="info-row">
              <span class="info-label"></span>
