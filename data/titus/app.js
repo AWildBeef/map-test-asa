@@ -1925,7 +1925,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
         <div class="info-row">
           ${i > 0
             ? `
-            <span class="info-label">bitch</span>
+            <span class="info-label"></span>
             <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
             `
             : ""}
@@ -1933,7 +1933,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
         <div class="info-mono">
           ${escapeHtml(p)}
         </div>
-      `).join("")
+      `)
     }
   `;
   
