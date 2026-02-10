@@ -1924,11 +1924,6 @@ function renderInfoPanelForDino(cfg, dinoKey) {
         <div class="info-row">
           <span class="info-label">Blueprint</span>
           <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
-          ${i > 0
-            ? `
-              <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
-            `
-            : ""}
         </div>
         <div class="info-mono">${escapeHtml(p)}</div>
       `).join("")
