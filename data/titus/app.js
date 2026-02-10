@@ -1919,19 +1919,17 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       ${allBps[0]
         ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
         : ""}
-    </div
+    </div>
   
     ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
-      <div class="info-mono">
-        ${i > 0
-          ? `
-            <div class="info-row">
-              <span class="info-label">bitch</span>
-              <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
-            </div>
+        <div class="info-mono">
+          ${escapeHtml(p)}
+          ${i > 0
+            ? `
+            <span class="info-label">bitch</span>
+            <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
             `
             : ""}
-          ${escapeHtml(p)}
         </div>
       `).join("")
     }
