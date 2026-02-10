@@ -1922,14 +1922,14 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     </div
   
     ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
-        <div class="info-row">
-          ${i > 0
-            ? `
+      ${i > 0
+        ? `
+          <div class="info-row">
             <span class="info-label">bitch</span>
             <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
-            `
-            : ""}
-        </div>
+          </div>
+          `
+          : ""}
         <div class="info-mono">${escapeHtml(p)}</div>
       `).join("")
     }
