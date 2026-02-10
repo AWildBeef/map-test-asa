@@ -1049,18 +1049,24 @@ button {
   }
   
   /* Row 1: source + map */
-  #topbar .controls > #sourceSelectFancy{
-    flex: 1 1 calc(70% - 4px);
-    max-width:none;
-    width:auto;
-  }
-  
+  #topbar .controls > #sourceSelectFancy,
   #topbar .controls > #mapSelectFancy{
     flex: 1 1 calc(30% - 4px);
     max-width:none;
     width:auto;
   }
-
+  /* Row 1: source + map */
+  #topbar .controls > #sourceSelectFancy{ 
+    flex: 7 1 0%;
+    max-width:none;
+    width:auto;
+  }
+  
+  #topbar .controls > #mapSelectFancy{
+    flex: 3 1 0%;
+    max-width:none;
+    width:auto;
+  }
   /* Default: Dino full width */
   #topbar .controls > #dinoSelectFancy{
     flex: 1 1 100%;
