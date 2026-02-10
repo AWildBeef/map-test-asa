@@ -1369,19 +1369,18 @@ async function loadMapByMeta(mapMeta) {
   // 4) Create map ONCE; otherwise update it
   if (!mapObj) {
     mapObj = initMap(currentCfg);
-      if (!mapObj) {
-    mapObj = initMap(currentCfg);
-    ensureDockControl(mapObj.map);  // ✅ add once
+    ensureDockControl(mapObj.map);   // ✅ add once (THIS is what was missing)
   } else {
     updateMapForCfg(currentCfg);
   }
-
-  dockState.mapMeta = mapMeta;      // ✅ keep latest
+  
+  // keep latest for dock rendering
+  dockState.mapMeta = mapMeta;
   dockState.cfg = currentCfg;
-  renderDock();                      // ✅ rebuild buttons based on map+source
-  } else {
-    updateMapForCfg(currentCfg);      // fast path
-  }
+  
+  // rebuild dock buttons based on map + source
+  renderDock();
+  updateDockToggles();
   
   drawPois(currentCfg);
 
