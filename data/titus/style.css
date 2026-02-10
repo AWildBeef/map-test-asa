@@ -103,6 +103,8 @@
   flex-direction: row;
   align-items: flex-end;   /* keeps them sitting on the same baseline */
   gap: 8px;                /* spacing between dock / zoom / attribution */
+  padding:8px;
+  box-sizing:border-box;
 }
 
 /* Remove Leaflet's default margins that assume vertical stacking */
