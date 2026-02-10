@@ -762,6 +762,11 @@ button {
 .fp-col{ flex-direction:column; align-items:stretch; }
 .fp-between{ width:100%; }
 
+/* Hide panel title when expanded */
+#dinoInfoPanel:not(.collapsed) .fp-title{
+  display:none;
+}
+
 /* ============================================================
    6) INSIDE PANELS — Dino Info styling
    ============================================================ */
