@@ -629,7 +629,7 @@ button {
   border-radius:6px;            /* match #topbar select */
   min-height:41px;              /* helps equalize height across browsers */
   border:1px solid var(--control-border);
-  background:var(--control-bg);
+  background:var(--panel);
   color:#fff;
 
   display:flex;
