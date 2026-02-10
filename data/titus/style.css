@@ -480,11 +480,11 @@ button {
   top:calc(100% + 6px);
   z-index:99999;
 
-  background:rgba(26,29,33,.97);
+  background:rgba(26,29,33,.52);
   border:1px solid rgba(255,255,255,.12);
   border-radius:10px;
   box-shadow:0 14px 34px rgba(0,0,0,.55);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
   overflow:hidden;
 }
 
