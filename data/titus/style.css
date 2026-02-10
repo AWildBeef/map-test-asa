@@ -97,6 +97,19 @@
   background: rgba(255,255,255,0.08);
 }
 
+/* Put all controls in bottom-left in a horizontal row */
+.leaflet-bottom.leaflet-left {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;   /* keeps them sitting on the same baseline */
+  gap: 8px;                /* spacing between dock / zoom / attribution */
+}
+
+/* Remove Leaflet's default margins that assume vertical stacking */
+.leaflet-bottom.leaflet-left .leaflet-control {
+  margin: 0 !important;
+}
+
 /* Treat fancy dino select like a full flex item (same as selects) */
 #topbar .controls > #dinoSelectFancy{
   flex: 1 1 220px;     /* same as your selects */
