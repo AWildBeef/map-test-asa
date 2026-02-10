@@ -1256,10 +1256,12 @@ function setViewMode(mode) {
 
   setInfoPanelTitle(mode === "dino" ? "Dino Info" : "Spawn Entry Info");
 
-  if (currentCfg) setupMainSelect(currentCfg);
   if (currentViewMode === "entry") {
     useRarityForMods = false;
   }
+  renderModStylePanelBody();
+
+  if (currentCfg) setupMainSelect(currentCfg);
 }
 
 function switchMode(nextMode) {
@@ -1278,7 +1280,11 @@ function switchMode(nextMode) {
   }
   if (currentViewMode === "entry") {
     useRarityForMods = false;
-}
+  }
+    if (currentViewMode === "entry") {
+    useRarityForMods = false;
+  }
+  renderModStylePanelBody();
 }
 
 // ============================================================
@@ -1852,17 +1858,15 @@ function renderModStylePanelBody() {
   const body = panel.querySelector(".fp-body");
 
   const isSpawnMode = (currentViewMode === "entry");
+
+  // ✅ If we're in spawn mode, force off (no stale checked UI)
+  if (isSpawnMode) useRarityForMods = false;
+
   body.innerHTML = `
     <label class="fp-row" style="${isSpawnMode ? "display:none;" : ""}">
-      <input
-        id="modUseRarity"
-        type="checkbox"
-        ${useRarityForMods ? "checked" : ""}
-        ${isSpawnMode ? "disabled" : ""}
-      >
+      <input id="modUseRarity" type="checkbox" ${useRarityForMods ? "checked" : ""} ${isSpawnMode ? "disabled" : ""}>
       <span>Use rarity colors</span>
     </label>
-
 
     <label class="fp-row">
       <span>Color</span>
@@ -1882,32 +1886,35 @@ function renderModStylePanelBody() {
       <span>Glow</span>
     </label>
   `;
-    const r  = document.getElementById("modUseRarity");
-    const c  = document.getElementById("modColor2");
-    const o  = document.getElementById("modOpacity2");
-    const ol = document.getElementById("modOpacityLabel2");
-    const g  = document.getElementById("modGlow2");
-  
-    if (r) r.onchange = () => {
-      useRarityForMods = r.checked;
-      // if you also want the dock button visibility to change, call renderDock() here too
-      redrawSelected();
-      renderModStylePanelBody(); // ✅ so color picker enables/disables immediately
-    };
-  
-    if (c) {
-      c.disabled = useRarityForMods;
-      c.style.opacity = useRarityForMods ? "0.5" : "1";
-      c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
-    }
-    if (o) o.oninput = () => {
-      modDrawOpacity = Number(o.value);
-      if (ol) ol.textContent = modDrawOpacity.toFixed(2);
-      requestRedraw();
-    };
-    if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected();
-    };
+
+  const r  = document.getElementById("modUseRarity");
+  const c  = document.getElementById("modColor2");
+  const o  = document.getElementById("modOpacity2");
+  const ol = document.getElementById("modOpacityLabel2");
+  const g  = document.getElementById("modGlow2");
+
+  if (r) r.onchange = () => {
+    useRarityForMods = r.checked;
+    redrawSelected();
+    // optional: if you want color control to instantly disable/enable:
+    renderModStylePanelBody();
+  };
+
+  // ✅ disable mod color picker when rarity is being used
+  if (c) {
+    c.disabled = (useRarityForMods && !isSpawnMode);
+    c.style.opacity = c.disabled ? "0.5" : "1";
+    c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
   }
+
+  if (o) o.oninput = () => {
+    modDrawOpacity = Number(o.value);
+    if (ol) ol.textContent = modDrawOpacity.toFixed(2);
+    requestRedraw();
+  };
+
+  if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
+}
 
 async function copyText(text) {
   try {
