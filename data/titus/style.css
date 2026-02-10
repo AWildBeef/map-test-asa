@@ -27,6 +27,10 @@
   --topbar-pad-x: 16px;
 }
 
+.leaflet-control.panel-restore .panel-restore-btn:hover{
+  background: rgba(255,255,255,0.08);
+}
+
 /* Treat fancy dino select like a full flex item (same as selects) */
 #topbar .controls > #dinoSelectFancy{
   flex: 1 1 220px;     /* same as your selects */
