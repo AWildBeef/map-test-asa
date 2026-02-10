@@ -768,6 +768,7 @@ button {
 
 #dinoInfoPanel:not(.collapsed) .fp-header{
   border-bottom:none;
+  background:transparent;
 }
 
 /* tighten space above title when expanded */
