@@ -766,6 +766,9 @@ button {
   visibility:hidden;
 }
 
+#dinoInfoPanel:not(.collapsed) .fp-header{
+  border-bottom:none;
+}
 /* ============================================================
    6) INSIDE PANELS — Dino Info styling
    ============================================================ */
