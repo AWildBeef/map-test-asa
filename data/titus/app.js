@@ -1869,28 +1869,30 @@ function renderModStylePanelBody() {
       <span>Glow</span>
     </label>
   `;
-  const r = document.getElementById("modUseRarity");
-  if (r) r.onchange = () => {
-    useRarityForMods = r.checked;
-    redrawSelected();
-  };
-  if (c) {
-    c.disabled = useRarityForMods;
-    c.style.opacity = useRarityForMods ? "0.5" : "1";
-  }
-  const c = document.getElementById("modColor2");
-  const o = document.getElementById("modOpacity2");
-  const ol = document.getElementById("modOpacityLabel2");
-  const g = document.getElementById("modGlow2");
-
-  if (c) c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
-  if (o) o.oninput = () => {
-    modDrawOpacity = Number(o.value);
-    if (ol) ol.textContent = modDrawOpacity.toFixed(2);
-    requestRedraw();
-  };
-  if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
-}
+    const r  = document.getElementById("modUseRarity");
+    const c  = document.getElementById("modColor2");
+    const o  = document.getElementById("modOpacity2");
+    const ol = document.getElementById("modOpacityLabel2");
+    const g  = document.getElementById("modGlow2");
+  
+    if (r) r.onchange = () => {
+      useRarityForMods = r.checked;
+      // if you also want the dock button visibility to change, call renderDock() here too
+      redrawSelected();
+      renderModStylePanelBody(); // ✅ so color picker enables/disables immediately
+    };
+  
+    if (c) {
+      c.disabled = useRarityForMods;
+      c.style.opacity = useRarityForMods ? "0.5" : "1";
+      c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
+    }
+    if (o) o.oninput = () => {
+      modDrawOpacity = Number(o.value);
+      if (ol) ol.textContent = modDrawOpacity.toFixed(2);
+      requestRedraw();
+    };
+    if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
 
 async function copyText(text) {
   try {
