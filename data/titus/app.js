@@ -175,7 +175,10 @@ let currentViewMode = "dino";
 
 // entryClass -> array of { dinoKey, entry, entryIndex }
 let entryIndex = {};
-
+// ============================================================
+// SETTINGS
+// ============================================================
+let useRarityForMods = true; // default; set to false if you want “mod style” by default
 
 const jsonCache = {};
 
@@ -1519,7 +1522,11 @@ function drawDino(cfg, dinoKey) {
       for (const m of entry._mgrDraw) {
         const targetLayer = m.isCave ? mapObj.caveLayer : mapObj.layer;
 
-        const color = isOfficial ? rarityToColor(m.rarity) : modDrawColor;
+        const useRarity = isOfficial || useRarityForMods;
+
+        const color = useRarity
+          ? rarityToColor(m.rarity)
+          : modDrawColor;
 
         const baseWeight = m.isCave ? 3 : 1;
         const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
@@ -1566,7 +1573,8 @@ function drawDino(cfg, dinoKey) {
     const untame = entry._untame ?? (entry.bForceUntameable === true);
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
-    const color = isOfficial ? rarityToColor(entry.rarity) : modDrawColor;
+    const useRarity = isOfficial || useRarityForMods;
+    const color = useRarity ? rarityToColor(entry.rarity) : modDrawColor;
 
     const baseWeight = isCave ? 3 : 1;
     const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
@@ -1839,6 +1847,11 @@ function renderModStylePanelBody() {
 
   body.innerHTML = `
     <label class="fp-row">
+      <input id="modUseRarity" type="checkbox" ${useRarityForMods ? "checked" : ""}>
+      <span>Use rarity colors</span>
+    </label>
+
+    <label class="fp-row">
       <span>Color</span>
       <input id="modColor2" type="color" value="${modDrawColor}">
     </label>
@@ -1856,7 +1869,15 @@ function renderModStylePanelBody() {
       <span>Glow</span>
     </label>
   `;
-
+  const r = document.getElementById("modUseRarity");
+  if (r) r.onchange = () => {
+    useRarityForMods = r.checked;
+    redrawSelected();
+  };
+  if (c) {
+    c.disabled = useRarityForMods;
+    c.style.opacity = useRarityForMods ? "0.5" : "1";
+  }
   const c = document.getElementById("modColor2");
   const o = document.getElementById("modOpacity2");
   const ol = document.getElementById("modOpacityLabel2");
