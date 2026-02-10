@@ -1078,6 +1078,11 @@ function initMap(cfg) {
 
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
+  // after it’s added, tag it
+  setTimeout(() => {
+    document.querySelector(".leaflet-control-zoom")?.classList.add("zoom-horizontal");
+  }, 0);
+
   // Create overlay ONCE
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
