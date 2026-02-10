@@ -1906,6 +1906,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   }
 
   const displayName = d.displayName || dinoKey;
+  setInfoPanelTitle(displayName);
   const bp = d.bpPath || "";
   const nameTag = d.nameTag || d.nametag || "";
   const extraBps = asArray(d.additionalBpPathsToDisplay);
