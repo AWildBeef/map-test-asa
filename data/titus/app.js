@@ -1707,7 +1707,7 @@ function ensurePanels() {
     stylePanel = createFloatingPanel({
       id: "modStylePanel",
       title: "Mod Style",
-      defaultPos: { right: 5, top: 2 },
+      defaultPos: { right: 12, top: 2 },
       collapsedByDefault: true
     });
     renderModStylePanelBody();
@@ -1717,7 +1717,7 @@ function ensurePanels() {
     infoPanel = createFloatingPanel({
       id: "dinoInfoPanel",
       title: "Dino Info",
-      defaultPos: { left: 2, top: 2 },
+      defaultPos: { left: 12, top: 2 },
       collapsedByDefault: true
     });
     renderInfoPanelBodyEmpty();
