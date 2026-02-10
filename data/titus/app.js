@@ -1924,6 +1924,8 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
         <div class="info-mono">
           ${escapeHtml(p)}
+        </div>
+        <div class="info-row">
           ${i > 0
             ? `
             <span class="info-label">bitch</span>
