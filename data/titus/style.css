@@ -774,6 +774,10 @@ button {
 #dinoInfoPanel:not(.collapsed) .info-title{
   margin-top:2px;
 }
+
+#dinoInfoPanel .fp-body{
+  padding-top: 0px;
+}
 /* ============================================================
    6) INSIDE PANELS — Dino Info styling
    ============================================================ */
