@@ -1924,7 +1924,10 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       ${(allBps.length ? allBps : ["(none)"]).map(p => `
         <div class="info-mono-row">
           ${p !== "(none)"
-            ? `<button class="info-copy bp-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>`
+            ? `<div class="info-row">
+                 <span class="info-label"></span>
+                 <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>
+               </div>`
             : ""}
           <div class="info-mono">${escapeHtml(p)}</div>
         </div>
