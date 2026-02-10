@@ -769,6 +769,11 @@ button {
 #dinoInfoPanel:not(.collapsed) .fp-header{
   border-bottom:none;
 }
+
+/* tighten space above title when expanded */
+#dinoInfoPanel:not(.collapsed) .info-title{
+  margin-top:2px;
+}
 /* ============================================================
    6) INSIDE PANELS — Dino Info styling
    ============================================================ */
