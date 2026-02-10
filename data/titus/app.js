@@ -1914,12 +1914,6 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const entries = d.entries || [];
   
   const blueprintBlock = `
-    <div class="info-row">
-      <span class="info-label">Blueprint</span>
-      ${allBps[0]
-        ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
-        : ""}
-    </div>
     ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
         <div class="info-row">
           <span class="info-label">Blueprint</span>
