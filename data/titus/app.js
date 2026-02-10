@@ -1257,6 +1257,9 @@ function setViewMode(mode) {
   setInfoPanelTitle(mode === "dino" ? "Dino Info" : "Spawn Entry Info");
 
   if (currentCfg) setupMainSelect(currentCfg);
+  if (currentViewMode === "entry") {
+    useRarityForMods = false;
+  }
 }
 
 function switchMode(nextMode) {
@@ -1273,6 +1276,9 @@ function switchMode(nextMode) {
     drawSpawnEntry(currentCfg, sel.value);
     renderInfoPanelForEntry(currentCfg, sel.value);
   }
+  if (currentViewMode === "entry") {
+    useRarityForMods = false;
+}
 }
 
 // ============================================================
@@ -1847,10 +1853,13 @@ function renderModStylePanelBody() {
 
   const isSpawnMode = (currentViewMode === "entry");
   body.innerHTML = `
-    <label class="fp-row">
-      <input id="modUseRarity" type="checkbox"
+    <label class="fp-row" style="${isSpawnMode ? "display:none;" : ""}">
+      <input
+        id="modUseRarity"
+        type="checkbox"
         ${useRarityForMods ? "checked" : ""}
-        ${isSpawnMode ? "hidden" : ""}>
+        ${isSpawnMode ? "disabled" : ""}
+      >
       <span>Use rarity colors</span>
     </label>
 
