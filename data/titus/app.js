@@ -1892,7 +1892,9 @@ function renderModStylePanelBody() {
       if (ol) ol.textContent = modDrawOpacity.toFixed(2);
       requestRedraw();
     };
-    if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
+    if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected();
+    };
+  }
 
 async function copyText(text) {
   try {
