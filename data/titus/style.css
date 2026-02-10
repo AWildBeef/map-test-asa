@@ -786,7 +786,6 @@ button {
   font-weight:600;
   font-size:22px;
   margin-bottom:4px;
-  margin-top:0px;
   color:var(--muted);
 }
 
@@ -800,7 +799,6 @@ button {
 }
 
 .info-section{
-  margin-top:-10px;
   margin-bottom:10px;
   padding-bottom:6px;
   border-bottom:1px solid rgba(255,255,255,.08);
