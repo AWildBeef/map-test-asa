@@ -1969,13 +1969,6 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
     <div class="info-section" style="padding-bottom:8px;">
       <div class="info-row">
         <span class="info-label">${escapeHtml(displayName)}</span>
-        ${modId ? `
-          <div class="info-row">
-            <span class="info-label">Mod ID</span>
-            <button class="info-copy" data-copy="${escapeAttr(modId)}" aria-label="Copy"></button>
-          </div>
-          <div class="info-mono">${escapeHtml(modId)}</div>
-        ` : ``}
         <button class="info-copy" data-copy="${escapeAttr(bp || nameTag || displayName)}"aria-label="Copy"></button>
       </div>
       ${bp ? `<div class="info-mono">${escapeHtml(bp)}</div>` : ``}
@@ -2036,6 +2029,11 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   body.innerHTML = `
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
+      ${currentModMeta?.id ? `
+        <div class="info-submeta">
+          Mod: ${escapeHtml(currentModMeta.id)}
+        </div>
+      ` : ``}
       
       ${blueprintBlock}
       
