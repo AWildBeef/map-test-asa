@@ -27,8 +27,36 @@
   --topbar-pad-x: 16px;
 }
 
-.leaflet-control.panel-restore .panel-restore-btn:hover{
+.leaflet-control.map-dock{
+  background: rgba(30,30,30,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  display:flex;
+}
+
+.leaflet-control.map-dock .dock-btn{
+  width: 34px;
+  height: 34px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: rgba(30,30,30,.85);
+  color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.leaflet-control.map-dock .dock-btn:hover{
   background: rgba(255,255,255,0.08);
+}
+
+/* Toggle “ON” state */
+.leaflet-control.map-dock .dock-btn.is-on{
+  background: rgba(0,140,255,.25);
+  box-shadow: inset 0 0 0 1px rgba(0,140,255,.45);
 }
 
 /* Treat fancy dino select like a full flex item (same as selects) */
