@@ -1040,35 +1040,76 @@ function refitMapForUI() {
 // ============================================================
 function addPanelsControl(map) {
   const PanelsControl = L.Control.extend({
-    options: { position: "bottomright" },
+    options: { position: "bottomleft" }, // ✅ move near BG button
 
     onAdd() {
-      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+      const container = L.DomUtil.create("div", "leaflet-control leaflet-bar panel-restore");
+
+      // Style similar to your bg-toggle control
       container.style.background = "rgba(30,30,30,0.85)";
       container.style.border = "1px solid rgba(255,255,255,0.15)";
-      container.style.borderRadius = "6px";
+      container.style.borderRadius = "8px";
       container.style.overflow = "hidden";
+      container.style.display = "flex";
+      container.style.gap = "0";
+      
+      const mkBtn = ({ title, icon, onClick }) => {
+        const btn = L.DomUtil.create("button", "panel-restore-btn", container);
+        btn.type = "button";
+        btn.title = title;
+        btn.setAttribute("aria-label", title);
+        btn.innerHTML = icon;
 
-      const btn = L.DomUtil.create("a", "", container);
-      btn.href = "#";
-      btn.title = "Show panels";
-      btn.innerHTML = "┇";
-      btn.style.display = "block";
-      btn.style.width = "30px";
-      btn.style.height = "30px";
-      btn.style.lineHeight = "30px";
-      btn.style.textAlign = "center";
-      btn.style.color = "white";
-      btn.style.textDecoration = "none";
+        btn.style.width = "34px";
+        btn.style.height = "34px";
+        btn.style.display = "flex";
+        btn.style.alignItems = "center";
+        btn.style.justifyContent = "center";
+        btn.style.padding = "0";
+        btn.style.margin = "0";
+        btn.style.border = "0";
+        btn.style.background = "rgba(30,30,30,.85)";
+        btn.style.color = "white";
+        btn.style.cursor = "pointer";
+
+        L.DomEvent.on(btn, "click", (e) => {
+          L.DomEvent.preventDefault(e);
+          L.DomEvent.stopPropagation(e);
+          onClick?.();
+          if (document.activeElement?.blur) document.activeElement.blur();
+        });
+
+        return btn;
+      };
+
+      // 🦖 Dino Info restore
+      mkBtn({
+        title: "Show Dino Info",
+        icon: `
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        `,
+        onClick: () => showPanel("dinoInfoPanel")
+      });
+
+      // 🎛️ Mod Style restore (only useful when source is mod)
+      mkBtn({
+        title: "Show Mod Style",
+        icon: `
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
+                  fill="currentColor" opacity=".9"/>
+            <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
+                  fill="currentColor"/>
+          </svg>
+        `,
+        onClick: () => showPanel("modStylePanel")
+      });
 
       L.DomEvent.disableClickPropagation(container);
       L.DomEvent.disableScrollPropagation(container);
-
-      L.DomEvent.on(btn, "click", (e) => {
-        L.DomEvent.preventDefault(e);
-        showPanel("dinoInfoPanel");
-        if (activeSourceId !== "official") showPanel("modStylePanel");
-      });
 
       return container;
     }
@@ -1611,7 +1652,7 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
     // If it's the mod panel, show the floating “paintbrush” button
     if (panel.id === "modStylePanel") {
       const fab = ensureModStyleFab();
-      if (fab) fab.style.display = "";
+      if (fab) fab.style.display = "none";
     }
   };
 
