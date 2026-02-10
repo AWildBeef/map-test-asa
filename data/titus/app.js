@@ -1923,8 +1923,8 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   
     ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
         <div class="info-row">
-          <span class="info-label">Blueprint</span>
           ${i > 0
+            ? `<span class="info-label">Blueprint</span>`
             ? `<button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>`
             : ""}
         </div>
