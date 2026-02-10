@@ -1845,11 +1845,15 @@ function renderModStylePanelBody() {
   if (!panel) return;
   const body = panel.querySelector(".fp-body");
 
+  const isSpawnMode = (currentViewMode === "entry");
   body.innerHTML = `
     <label class="fp-row">
-      <input id="modUseRarity" type="checkbox" ${useRarityForMods ? "checked" : ""}>
+      <input id="modUseRarity" type="checkbox"
+        ${useRarityForMods ? "checked" : ""}
+        ${isSpawnMode ? "disabled" : ""}>
       <span>Use rarity colors</span>
     </label>
+
 
     <label class="fp-row">
       <span>Color</span>
