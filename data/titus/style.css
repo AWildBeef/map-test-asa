@@ -773,7 +773,7 @@ button {
 
 /* tighten space above title when expanded */
 #dinoInfoPanel:not(.collapsed) .info-title{
-  margin-top:2px;
+  margin-top:1px;
 }
 
 #dinoInfoPanel .fp-body{
@@ -788,7 +788,6 @@ button {
   margin-bottom:4px;
   margin-top:-3px;
   color:var(--muted);
-  padding-top:-5px;
 }
 
 .info-subtitle{    /* "Spawn Entries (#) */
