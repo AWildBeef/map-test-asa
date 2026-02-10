@@ -780,7 +780,8 @@ button {
 .info-title{    /* Dino Name */
   font-weight:600;
   font-size:22px;
-  margin-bottom:8px;
+  margin-bottom:4px;
+  margin-top:-3px;
   color:var(--muted);
 }
 
