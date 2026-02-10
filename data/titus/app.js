@@ -1256,10 +1256,10 @@ function setViewMode(mode) {
 
   setInfoPanelTitle(mode === "dino" ? "Dino Info" : "Spawn Entry Info");
 
-  if (currentViewMode === "entry") {
-    useRarityForMods = false;
-  }
+  useRarityForMods = (mode === "dino");
+  
   renderModStylePanelBody();
+  redrawSelected();
 
   if (currentCfg) setupMainSelect(currentCfg);
 }
@@ -1859,14 +1859,14 @@ function renderModStylePanelBody() {
 
   const isSpawnMode = (currentViewMode === "entry");
 
-  // ✅ If we're in spawn mode, force off (no stale checked UI)
-  if (isSpawnMode) useRarityForMods = false;
 
   body.innerHTML = `
-    <label class="fp-row" style="${isSpawnMode ? "display:none;" : ""}">
-      <input id="modUseRarity" type="checkbox" ${useRarityForMods ? "checked" : ""} ${isSpawnMode ? "disabled" : ""}>
-      <span>Use rarity colors</span>
-    </label>
+    ${!isSpawnMode ? `
+      <label class="fp-row">
+        <input id="modUseRarity" type="checkbox" checked disabled>
+        <span>Use rarity colors</span>
+      </label>
+    ` : ``}
 
     <label class="fp-row">
       <span>Color</span>
