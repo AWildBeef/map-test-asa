@@ -1914,12 +1914,20 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const entries = d.entries || [];
   
   const blueprintBlock = `
+    <div class="info-row">
+      <span class="info-label">Blueprint</span>
+      ${allBps[0]
+        ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
+        : ""}
+    </div>
+  
     ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
-        <div class="info-row">
-          <span class="info-label">Blueprint</span>
-          <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
+        <div class="info-mono">
+          ${i > 0
+            ? `<button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>`
+            : ""}
+          ${escapeHtml(p)}
         </div>
-        <div class="info-mono">${escapeHtml(p)}</div>
       `).join("")
     }
   `;
