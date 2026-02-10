@@ -59,6 +59,44 @@
   box-shadow: inset 0 0 0 1px rgba(0,140,255,.45);
 }
 
+/* Make Leaflet zoom control horizontal (side-by-side) */
+.leaflet-control-zoom.zoom-horizontal{
+  display:flex;
+  flex-direction:row;
+  gap:0;
+  overflow:hidden;            /* keeps the rounded box clean */
+  border-radius:8px;          /* match your dock */
+}
+
+/* Remove the “stacked” separator and use a vertical divider instead */
+.leaflet-control-zoom.zoom-horizontal a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  line-height:34px;
+  border-bottom:0 !important; /* kills the default horizontal divider */
+}
+
+/* Add a divider between + and - */
+.leaflet-control-zoom.zoom-horizontal a + a{
+  border-left:1px solid rgba(255,255,255,0.15);
+}
+
+/* Optional: match your dark glass look */
+.leaflet-control-zoom.zoom-horizontal{
+  background: rgba(30,30,30,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.leaflet-control-zoom.zoom-horizontal a{
+  background: transparent;
+  color:#fff;
+}
+.leaflet-control-zoom.zoom-horizontal a:hover{
+  background: rgba(255,255,255,0.08);
+}
+
 /* Treat fancy dino select like a full flex item (same as selects) */
 #topbar .controls > #dinoSelectFancy{
   flex: 1 1 220px;     /* same as your selects */
