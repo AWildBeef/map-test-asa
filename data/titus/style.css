@@ -1049,9 +1049,14 @@ button {
   }
   
   /* Row 1: source + map */
-  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #sourceSelectFancy{
+    flex: 1 1 calc(70% - 4px);
+    max-width:none;
+    width:auto;
+  }
+  
   #topbar .controls > #mapSelectFancy{
-    flex: 1 1 calc(50% - 4px);
+    flex: 1 1 calc(30% - 4px);
     max-width:none;
     width:auto;
   }
