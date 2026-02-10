@@ -1933,7 +1933,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
         <div class="info-mono">
           ${escapeHtml(p)}
         </div>
-      `)
+      `).join("")
     }
   `;
   
