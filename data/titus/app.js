@@ -165,6 +165,7 @@ const SOURCES = [
 let currentMapId = "";
 let activeSourceId = "official";
 let loadedMods = {}; // cache
+let currentModMeta = null; // { id, name } from mod file, or null for official
 
 let mapObj = null;
 let currentCfg = null;
@@ -174,6 +175,7 @@ let currentViewMode = "dino";
 
 // entryClass -> array of { dinoKey, entry, entryIndex }
 let entryIndex = {};
+
 
 const jsonCache = {};
 
@@ -1357,8 +1359,14 @@ async function loadMapByMeta(mapMeta) {
   // 2) If mod source, swap dinos from mod map
   if (activeSourceId !== "official") {
     const modCfg = await loadModSource(activeSourceId);
+  
+    // ✅ capture mod metadata for UI
+    currentModMeta = modCfg?.mod || null;
+  
     const modMap = modCfg?.maps?.[mapMeta.id];
     effectiveCfg = { ...vanillaCfg, dinos: modMap?.dinos || {} };
+  } else {
+    currentModMeta = null;
   }
 
   // 3) Post-process config
@@ -1961,6 +1969,13 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
     <div class="info-section" style="padding-bottom:8px;">
       <div class="info-row">
         <span class="info-label">${escapeHtml(displayName)}</span>
+        ${modId ? `
+          <div class="info-row">
+            <span class="info-label">Mod ID</span>
+            <button class="info-copy" data-copy="${escapeAttr(modId)}" aria-label="Copy"></button>
+          </div>
+          <div class="info-mono">${escapeHtml(modId)}</div>
+        ` : ``}
         <button class="info-copy" data-copy="${escapeAttr(bp || nameTag || displayName)}"aria-label="Copy"></button>
       </div>
       ${bp ? `<div class="info-mono">${escapeHtml(bp)}</div>` : ``}
@@ -1988,6 +2003,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const nameTag = d.nameTag || d.nametag || "";
   const extraBps = asArray(d.additionalBpPathsToDisplay);
   const allBps = [bp, ...extraBps].filter(Boolean);
+  const modId = currentModMeta?.id || "";
   
   const entries = d.entries || [];
   
