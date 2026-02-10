@@ -1913,25 +1913,33 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   
   const entries = d.entries || [];
   
+  const blueprintBlock = `
+    <div class="info-row">
+      <span class="info-label">Blueprint</span>
+      ${allBps[0]
+        ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
+        : ""}
+    </div>
+  
+    ${(allBps.length
+        ? allBps
+        : ["(none)"]
+      ).map((p, i) => `
+        <div class="info-mono">
+          ${escapeHtml(p)}
+          ${i > 0
+            ? `<button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>`
+            : ""}
+        </div>
+      `).join("")
+    }
+  `;
+  
   body.innerHTML = `
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
       
-      <div class="info-row">
-        <span class="info-label">Blueprint</span>
-      </div>
-      
-      ${(allBps.length ? allBps : ["(none)"]).map(p => `
-        <div class="info-mono-row">
-          ${p !== "(none)"
-            ? `<div class="info-row">
-                 <span class="info-label"></span>
-                 <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy"></button>
-               </div>`
-            : ""}
-          <div class="info-mono">${escapeHtml(p)}</div>
-        </div>
-      `).join("")}
+      ${blueprintBlock}
       
       <div class="info-row">
         <span class="info-label">Nametag</span>
