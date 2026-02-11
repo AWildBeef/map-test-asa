@@ -614,6 +614,34 @@ function mountFancyDinoSelect(cfg){
   syncButton();
 }
 
+function createIconButton(svgPath, viewBox = "0 0 24 24") {
+  const btn = document.createElement("button");
+  btn.className = "fp-btn";
+  btn.type = "button";
+
+  btn.innerHTML = `
+    <svg viewBox="${viewBox}" width="16" height="16" aria-hidden="true">
+      ${svgPath}
+    </svg>
+  `;
+
+  return btn;
+}
+const CLOSE_ICON = `
+  <path d="M6 6L18 18M18 6L6 18"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"/>
+`;
+
+const CHEVRON_DOWN_ICON = `
+  <path d="M6 9l6 6 6-6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+`;
 
 // ============================================================
 // POIs
@@ -1710,13 +1738,25 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
   panel.innerHTML = `
     <div class="fp-header" data-drag-handle>
       <div class="fp-title">${title}</div>
-      <div class="fp-actions">
-        <button class="fp-btn" data-action="min" title="Collapse">▾</button>
-        <button class="fp-btn" data-action="hide" title="Hide">✕</button>
-      </div>
+      <div class="fp-actions"></div>
     </div>
     <div class="fp-body"></div>
   `;
+  const actions = panel.querySelector(".fp-actions");
+
+  // make SVG icon buttons
+  const minBtn = createIconButton(CHEVRON_DOWN_ICON);
+  minBtn.dataset.action = "min";
+  minBtn.title = "Collapse";
+  minBtn.classList.add("fp-btn-chevron"); // optional (if you want rotation later)
+  
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  
+  // add them
+  actions.appendChild(minBtn);
+  actions.appendChild(hideBtn);
 
   mapEl.appendChild(panel);
 
