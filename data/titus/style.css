@@ -1216,6 +1216,36 @@ button {
     border-radius:4px;
     min-height:34px;
   }
+  /* Make rows align as one "block" (same left edge) */
+  #topbar{ align-items: stretch; }
+
+  #topbar .title-row,
+  #topbar .controls{
+    width: 100%;
+    max-width: 520px;   /* tune */
+    margin: 0 auto;
+  }
+
+  /* Title row uses same 60/40 as Source/Map */
+  .title-row{
+    display: grid;
+    grid-template-columns: 6fr 4fr; /* 60/40 */
+    gap: 4px;
+    align-items: center;
+  }
+
+  #topbar .title{
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .title-actions{
+    grid-column: 2;
+    display: flex;
+    justify-content: flex-start; /* left edge of the "map column" */
+    gap: 8px;
+  }
+
   
   #bgSelectWrap select{ width:100%; }
 }
