@@ -295,6 +295,21 @@ body{
   cursor:pointer;
 }
 
+/* Prevent iOS double-tap zoom on UI controls */
+#topbar,
+#topbar button,
+#topbar .dd-btn,
+#topbar .dd-item,
+#topbar select,
+.floating-panel,
+.floating-panel button,
+.leaflet-control.map-dock .dock-btn,
+#controlsToggle,
+.mode-toggle,
+.icon-btn {
+  touch-action: manipulation;
+}
+
 /* ============================================================
    Fancy dropdown should visually match #topbar select
    ============================================================ */
