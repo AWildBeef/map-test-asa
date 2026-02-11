@@ -1234,23 +1234,27 @@ button {
 
   /* Title row uses same 60/40 as Source/Map */
   .title-row{
-    display: grid;
-    grid-template-columns: 6fr 4fr; /* 60/40 */
-    gap: 4px;
-    align-items: center;
+    display:grid;
+    grid-template-columns: 1fr auto auto; /* title | mode | filter */
+    align-items:center;
+    column-gap:8px;
   }
 
+  /* keep your title nudge */
   #topbar .title{
-    grid-column: 1;
-    justify-self: start;
+    margin-left: 5px; /* your current good value */
   }
 
-  .title-actions{
-    grid-column: 2;
-    display: flex;
-    justify-content: flex-start; /* left edge of the "map column" */
-    gap: 8px;
+  /* move ONLY the mode button left */
+  #modeToggle{
+    margin-right: 12px; /* tweak */
   }
+
+  /* ensure filter stays pinned */
+  #controlsToggle{
+    margin-right: 0;
+  }
+
 
   
   #bgSelectWrap select{ width:100%; }
