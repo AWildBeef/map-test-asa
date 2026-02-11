@@ -744,7 +744,7 @@ function syncModeBtn() {
   const b = document.getElementById("modeToggle");
   if (!b) return;
   b.dataset.mode = currentViewMode;
-  b.textContent = (currentViewMode === "dino") ? "Dino mode" : "Spawn mode";
+  b.textContent = (currentViewMode === "dino") ? "Dino View" : "Spawn View";
 }
 
 function setPoisVisible(show){
