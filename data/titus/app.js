@@ -180,6 +180,8 @@ const lastSelection = {
   dino: {},   // { [sourceId]: dinoKey }
   entry: {},  // { [sourceId]: entryClass }
 };
+
+let showPois = true;  // default on
 // ============================================================
 // SETTINGS
 // ============================================================
@@ -695,6 +697,8 @@ function drawPois(cfg) {
   if (!mapObj?.poiLayer) return;
 
   mapObj.poiLayer.clearLayers();
+  
+  if (!showPois) return;
 
   // your current JSON location:
   const pts = cfg?.pois?.tributeTerminals || [];
@@ -741,6 +745,19 @@ function syncModeBtn() {
   if (!b) return;
   b.dataset.mode = currentViewMode;
   b.textContent = (currentViewMode === "dino") ? "Dino mode" : "Spawn mode";
+}
+
+function setPoisVisible(show){
+  showPois = !!show;
+
+  if (!mapObj?.map || !mapObj?.poiLayer) return;
+
+  const has = mapObj.map.hasLayer(mapObj.poiLayer);
+
+  if (showPois && !has) mapObj.poiLayer.addTo(mapObj.map);
+  if (!showPois && has) mapObj.map.removeLayer(mapObj.poiLayer);
+
+  updateDockToggles(); // keep dock button highlight in sync
 }
 
 function isEntryVisible(dinoKey, entryIndexNum) {
@@ -940,21 +957,36 @@ function renderDock(){
     onClick: () => togglePanel("dinoInfoPanel")
   });
 
-  // 3) Mod Style toggle — only on mods
+    // 3) Mod Style toggle — only on mods
   if (isMod) {
     mkBtn({
       title: "Toggle Mod Style",
-      icon: `
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
-                fill="currentColor" opacity=".9"/>
-          <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
-                fill="currentColor"/>
-        </svg>
-      `,
+      icon: `...`,
       togglePanelId: "modStylePanel",
       onClick: () => togglePanel("modStylePanel")
     });
+  }
+
+  // 4) POI toggle — only if this map has POIs (works for official + mods)
+  const hasPois = !!(dockState.cfg?.pois?.tributeTerminals?.length);
+  if (hasPois) {
+    const poiBtn = mkBtn({
+      title: showPois ? "Hide markers" : "Show markers",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"
+                fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="10" r="2.5" fill="currentColor"/>
+        </svg>
+      `,
+      onClick: (btn) => {
+        setPoisVisible(!showPois);
+        btn.title = showPois ? "Hide markers" : "Show markers";
+        btn.classList.toggle("is-on", showPois);
+      }
+    });
+
+    poiBtn.classList.toggle("is-on", showPois);
   }
 
   updateDockToggles();
@@ -1416,6 +1448,7 @@ async function loadMapByMeta(mapMeta) {
   renderDock();
   updateDockToggles();
   
+  setPoisVisible(showPois); // ✅ re-apply on map changes
   drawPois(currentCfg);
 
   // 5) Panels + background dropdown
