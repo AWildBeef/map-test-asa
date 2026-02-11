@@ -1237,7 +1237,7 @@ button {
     display:grid;
     grid-template-columns: 1fr auto auto; /* title | mode | filter */
     align-items:center;
-    column-gap:8px;
+    column-gap:10px;
   }
 
   /* keep your title nudge */
@@ -1247,11 +1247,12 @@ button {
 
   /* move ONLY the mode button left */
   #modeToggle{
-    margin-right: 12px; /* tweak */
+    margin-right: 14px; /* tweak */
   }
 
   /* ensure filter stays pinned */
   #controlsToggle{
+    align-items:right;
     margin-right: 0;
   }
 
