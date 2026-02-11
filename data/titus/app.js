@@ -1281,9 +1281,6 @@ function switchMode(nextMode) {
   if (currentViewMode === "entry") {
     useRarityForMods = false;
   }
-    if (currentViewMode === "entry") {
-    useRarityForMods = false;
-  }
   renderModStylePanelBody();
 }
 
@@ -1863,7 +1860,7 @@ function renderModStylePanelBody() {
   body.innerHTML = `
     ${!isSpawnMode ? `
       <label class="fp-row">
-        <input id="modUseRarity" type="checkbox" checked disabled>
+        <input id="modUseRarity" type="checkbox" ${useRarityForMods ? "checked" : ""}>
         <span>Use rarity colors</span>
       </label>
     ` : ``}
