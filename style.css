@@ -1,4 +1,4 @@
-/* =============================hi===============================
+/* ============================================================
    0) THEME TOKENS (colors + sizing knobs)
    ============================================================ */
 :root{
@@ -20,19 +20,168 @@
   --modPanel-w-mobile: 150px;
   --panel-radius: 4px;
 
-  --panel-header-pad: 3px;
+  --panel-header-pad: 5px;
   --panel-body-pad: 7px;
 
   --topbar-pad-y: 12px;
   --topbar-pad-x: 16px;
 }
 
+.leaflet-control.map-dock{
+  background: rgba(30,30,30,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  display:flex;
+}
+
+.leaflet-control.map-dock .dock-btn{
+  width: 34px;
+  height: 34px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: rgba(30,30,30,.85);
+  color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.leaflet-control.map-dock .dock-btn:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+/* Toggle “ON” state */
+.leaflet-control.map-dock .dock-btn.is-on{
+  background: rgba(0,140,255,.06);
+  box-shadow: inset 0 0 0 1px rgba(122,162,255,.18);
+}
+
+/* Make Leaflet zoom control horizontal (side-by-side) */
+.leaflet-control-zoom.zoom-horizontal{
+  display:flex;
+  flex-direction:row;
+  gap:0;
+  overflow:hidden;            /* keeps the rounded box clean */
+  border-radius:8px;          /* match your dock */
+}
+
+/* Remove the “stacked” separator and use a vertical divider instead */
+.leaflet-control-zoom.zoom-horizontal a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  line-height:34px;
+  border-bottom:0 !important; /* kills the default horizontal divider */
+}
+
+/* Add a divider between + and - */
+.leaflet-control-zoom.zoom-horizontal a + a{
+  border-left:1px solid rgba(255,255,255,0.15);
+}
+
+/* Optional: match your dark glass look */
+.leaflet-control-zoom.zoom-horizontal{
+  background: rgba(30,30,30,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.leaflet-control-zoom.zoom-horizontal a{
+  background: transparent;
+  color:#fff;
+}
+.leaflet-control-zoom.zoom-horizontal a:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+/* Put all controls in bottom-left in a horizontal row */
+.leaflet-bottom.leaflet-left {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;   /* keeps them sitting on the same baseline */
+  gap: 8px;                /* spacing between dock / zoom / attribution */
+  padding:8px;
+  box-sizing:border-box;
+}
+
+/* Remove Leaflet's default margins that assume vertical stacking */
+.leaflet-bottom.leaflet-left .leaflet-control {
+  margin: 0 !important;
+}
+
+.leaflet-control-attribution {
+  padding: 1px 1px;
+  line-height: 1.2;
+  font-size: 8px;
+  opacity: 0.40;
+  border-radius: 6px;
+}
+
+/* Treat fancy dino select like a full flex item (same as selects) */
+#topbar .controls > #dinoSelectFancy{
+  flex: 1 1 220px;     /* same as your selects */
+  min-width:200px;     /* match your selects */
+  max-width:320px;     /* match your selects */
+  width:100%;
+}
+
+/* Make the component fill its flex slot */
+#dinoSelectFancy .dd{
+  width:100%;
+  max-width:none;      /* override dd's max-width:320px if needed */
+}
+
+/* Fancy dropdown hosts should size like native selects */
+#topbar .controls > #sourceSelectFancy,
+#topbar .controls > #mapSelectFancy{
+  flex: 1 1 220px;
+  min-width:200px;
+  max-width:320px;
+  width:100%;
+}
+
+/* bgSelectFancy lives inside #bgSelectWrap so target it there */
+#bgSelectWrap #bgSelectFancy{
+  width:100%;
+}
+
+/* Hide right-side badge for source + map dropdowns */
+/* Hide right-side badges for specific fancy dropdown hosts */
+#sourceSelectFancy .dd-badges,
+#mapSelectFancy .dd-badges{
+  display: none !important;
+}
+
+/* Fallback: if the .dd is inserted after the native select */
+#sourceSelect + .dd .dd-badges,
+#mapSelect + .dd .dd-badges{
+  display: none !important;
+}
+
+
+/* Hide the “12 dinos / etc” line in the CLOSED button for source + map */
+#sourceSelectFancy .dd-sub,
+#mapSelectFancy .dd-sub{
+  display:none !important;
+}
+
+/* Optional: keep the label vertically centered when sub is hidden */
+#sourceSelectFancy .dd-btn-text,
+#mapSelectFancy .dd-btn-text{
+  justify-content:center;  /* only if dd-btn-text is a column flex */
+}
 /* ============================================================
    1) GLOBAL DEFAULTS / RESETS
    ============================================================ */
 *{ box-sizing:border-box; }
 
-html, body{ height:100%; }
+html, body{ 
+  height:100%;
+  margin: 0;
+}
 
 #mapWrap .leaflet-container {
   background: var(--bg);
@@ -45,12 +194,13 @@ body{
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   display:flex;
   flex-direction:column;
+  min-height: 100vh;
 }
 
 #buildInfo{
   position:fixed;
-  bottom:4px;
-  left:6px;
+  bottom:10px;
+  right:6px;
   font-size:10px;
   opacity:.4;
   pointer-events:none;
@@ -61,14 +211,18 @@ body{
    ============================================================ */
 #mapWrap{
   position:relative;
-  flex:1;
+  flex: 1 1 auto;
   width:100vw;
+  margin: 0;
+  padding: 0;
   min-height:0; /* important for scroll */
 }
 
 #map{
   position:absolute;
   inset:0;
+  height: 100%;
+  width: 100%;
 }
 
 /* ============================================================
@@ -83,6 +237,8 @@ body{
   flex-direction:column;
   align-items:center;
   gap:7px;
+  flex: 0 0 auto;
+  margin: 0;
 }
 
 .title-row{
@@ -139,24 +295,141 @@ body{
   cursor:pointer;
 }
 
+/* Prevent iOS double-tap zoom on UI controls */
+#topbar,
+#topbar button,
+#topbar .dd-btn,
+#topbar .dd-item,
+#topbar select,
+.floating-panel,
+.floating-panel button,
+.leaflet-control.map-dock .dock-btn,
+#controlsToggle,
+.mode-toggle,
+.icon-btn {
+  touch-action: manipulation;
+}
+
+/* ================================
+   DESKTOP — even dropdown layout
+   ================================ */
+
+@media (min-width: 641px){
+
+  #topbar .controls{
+    flex-wrap: nowrap;      /* prevents wrapping */
+    justify-content: center;
+  }
+
+  /* ALL dropdown hosts get equal width */
+  #topbar .controls > *{
+    flex: 1 1 0;
+    min-width: 0;   /* critical for flexbox */
+    max-width: none;
+  }
+  
+  .mode-toggle{
+    height:42px;
+    padding:0 16px;
+    font-size:15px;
+  }
+
+  .icon-btn{
+    width:42px;
+    height:42px;
+  }
+
+  .leaflet-control.map-dock .dock-btn{
+    width:40px;
+    height:40px;
+  }
+  
+  .leaflet-control-zoom.zoom-horizontal a{
+    width:40px;
+    height:40px;
+    line-height:40px;
+  }
+
+  .leaflet-control-zoom.zoom-horizontal{
+    border-radius:10px; /* optional slight upscale */
+  }
+
+
+}
+
+/* ============================================================
+   Fancy dropdown should visually match #topbar select
+   ============================================================ */
+
+/* ensure the host behaves like a select in the flex row */
+#topbar .controls > #dinoSelectFancy{
+  flex: 2 1 440px;
+  min-width: 220px;
+  max-width: 660px;          /* optional: prevent it from going silly wide */
+  width: 100%;
+}
+
+/* the fancy wrapper should fill the host */
+#dinoSelectFancy .dd{
+  width: 100%;
+  max-width: none;
+}
+
+/* match the native select look */
+#dinoSelectFancy .dd-btn{
+  width: 100%;
+
+  padding:6px 8px;         /* same as #topbar select */
+  font-size:12px;            /* same as #topbar select */
+  font-weight:400px;
+  border-radius:4px;         /* same as #topbar select */
+
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  cursor:pointer;
+}
+
+/* hover/focus match native */
+#dinoSelectFancy .dd-btn:hover{
+  border-color:#596273;
+}
+#dinoSelectFancy .dd-btn:focus{
+  outline:none;
+  border-color:var(--focus);
+  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+}
+
+/* left area should take space; name left, count right */
+#dinoSelectFancy .dd-btn-left{
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content:flex-start;
+}
+#dinoSelectFancy .dd-label{
+  text-align:left;
+}
+#dinoSelectFancy .dd-sub{
+  margin-left:auto;
+  white-space:nowrap;
+}
+
+/* optional: make caret feel like native arrow */
+#dinoSelectFancy .dd-caret{
+  opacity:.85;
+}
+
 #topbar select:hover{ border-color:#596273; }
 
 #topbar select:focus{
   border-color:var(--focus);
   box-shadow:0 0 0 3px rgba(122,162,255,.18);
-}
-
-/* treat the fancy host like a dropdown control */
-#topbar .controls > #dinoSelectFancy{
-  flex: 2 1 440px;   /* bigger than source/map; tune numbers */
-  min-width:220px;
-}
-
-/* if you want it to match the old “two combined” feel, bump min */
-@media (min-width: 641px){
-  #topbar .controls > #dinoSelectFancy{
-    min-width:460px;
-  }
 }
 
 /* bg dropdown wrapper */
@@ -217,11 +490,356 @@ body{
 }
 
 /* ============================================================
+   Fancy dropdown (search + rich rows)
+   ============================================================ */
+.dd{
+  position:relative;
+  width:100%;
+  max-width:320px; /* matches your topbar select feel */
+  font-family:inherit;
+}
+
+.dd-btn{
+  width:100%;
+  display:flex;
+  align-items:left;
+  justify-content:space-between;
+  gap:5px;
+
+  padding:6px 8px;
+  border-radius:8px;
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  cursor:pointer;
+  user-select:none;
+}
+
+/* remove the always-on focus ring */
+.dd-btn:focus{
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--control-border) !important;
+}
+
+/* only show the ring for keyboard focus */
+.dd-btn:focus-visible{
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(122,162,255,.18);
+}
+
+/* iOS tap highlight (the blue flash) */
+.dd-btn,
+.dd-item,
+#topbar select,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent Safari's native focus glow from showing */
+.dd-btn:focus,
+#topbar select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Only show focus styling for real keyboard focus */
+.dd-btn:focus { outline:none; box-shadow:none; }
+
+.dd-btn:focus-visible{
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(122,162,255,.18);
+}
+
+.dd-btn-left{
+  display:flex;
+  align-items:left;
+  gap:5px;
+  justify-content:flex-start;
+  min-width:0;
+  width:100%;
+}
+
+/* Closed state: put name + count on the same line */
+.dd-btn-text{
+  display:flex;
+  align-items:left;
+  gap:5px;
+  min-width:0;
+  width:100%;
+}
+
+/* The name should ellipsis if needed */
+.dd-btn-text .dd-label{
+  flex:1 1 auto;
+  min-width:0;
+  text-align:left;
+}
+
+/* The count should stay visible and not wrap */
+.dd-btn-text .dd-sub{
+  flex:0 0 auto;
+  white-space:nowrap;
+  opacity:.75;
+  margin-left:auto;
+}
+
+.dd-btn-text .dd-sub{
+  font-size:10px;
+  padding:3px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  color:rgba(255,255,255,.72);
+}
+
+.dd-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  flex:0 0 auto;
+  background:#777;
+  box-shadow:0 0 0 2px rgba(0,0,0,.25);
+}
+
+.dd-label{
+  font-size:13px;
+  font-weight:400;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-sub{
+  font-size:11px;
+  color:rgba(255,255,255,.55);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-caret{
+  opacity:.85;
+  flex:0 0 auto;
+}
+
+.dd.open .dd-panel{ display:block; }
+
+.dd-panel{
+  display:none;
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(100% + 6px);
+  z-index:99999;
+
+  background:rgba(26,29,33,.72);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  box-shadow:0 14px 34px rgba(0,0,0,.55);
+  backdrop-filter: blur(16px);
+  overflow:hidden;
+}
+
+/* sticky search */
+.dd-search{
+  width:100%;
+  padding:6px 8px;
+  border:0;
+  outline:none;
+  font-size:16px;
+
+  background:rgba(0,0,0,.30);
+  color:var(--text);
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+/* results list */
+.dd-list{
+  max-height:min(33vh, 250px);
+  overflow:auto;
+}
+
+.dd-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  padding:6px 8px;
+  cursor:pointer;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.dd-item:last-child{ border-bottom:none; }
+
+.dd-item:hover{ background:rgba(255,255,255,.05); }
+
+.dd-item-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.dd-item-main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.dd-item-name{
+  font-size:12px;
+  font-weight:400;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-item-meta{
+  font-size:11px;
+  color:rgba(255,255,255,.55);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-badges{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+}
+
+.dd-pill{
+  font-size:10px;
+  padding:3px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  color:rgba(255,255,255,.72);
+}
+
+.dd-star{
+  width:26px;
+  height:26px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.18);
+  color:#fff;
+  opacity:.85;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.dd-star:hover{ opacity:1; }
+
+
+/* ============================================================
+   TOPBAR: Make ALL fancy dropdowns match the native selects
+   ============================================================ */
+
+/* All fancy hosts behave like native selects in the flex row */
+#topbar .controls > #sourceSelectFancy,
+#topbar .controls > #mapSelectFancy,
+#topbar .controls > #dinoSelectFancy,
+#topbar .controls > #bgSelectWrap{
+  flex: 1 1 220px;
+  min-width: 200px;
+  max-width: 320px;
+  width: 100%;
+}
+
+/* bg wrapper should behave like a single “slot” */
+#bgSelectWrap{
+  display:none !important;
+  align-items:center;
+  gap:12px; /* match your controls gap feel */
+}
+
+/* Make the fancy control fill its slot */
+#sourceSelectFancy .dd,
+#mapSelectFancy .dd,
+#dinoSelectFancy .dd,
+#bgSelectFancy .dd{
+  width:100%;
+  max-width:none;
+}
+
+/* The big fix: style ALL fancy buttons like #topbar select */
+#sourceSelectFancy .dd-btn,
+#mapSelectFancy .dd-btn,
+#dinoSelectFancy .dd-btn,
+#bgSelectFancy .dd-btn{
+  padding:6px 10px;            /* match #topbar select */
+  font-size:12px;               /* match #topbar select */
+  border-radius:6px;            /* match #topbar select */
+  min-height:41px;              /* helps equalize height across browsers */
+  border:1px solid var(--control-border);
+  background:var(--panel);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+/* Ensure label alignment is consistent */
+#sourceSelectFancy .dd-label,
+#mapSelectFancy .dd-label,
+#dinoSelectFancy .dd-label,
+#bgSelectFancy .dd-label{
+  font-size:15px;
+  font-weight:400;
+  color:#fff;
+}
+
+/* Make sure your “special dino” rules don’t re-shrink/reshape it */
+#dinoSelectFancy .dd-btn{
+  /* intentionally empty – this block exists to override any earlier dino-only dd-btn rules */
+}
+
+/* Mod Style floating bubble (shows when panel hidden) */
+#modStyleFab{
+  position:absolute;
+  z-index:10000;
+  right:10px;
+  top:52px;              /* tweak so it doesn't overlap BG */
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.85);
+  color:#fff;
+  display:none;          /* shown only when panel hidden */
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,.40);
+}
+#modStyleFab:hover{ background:rgba(45,45,45,.92); }
+#modStyleFab:active{ transform:translateY(1px); }
+
+#modStyleFab svg{
+  width:18px;
+  height:18px;
+}
+
+/* ============================================================
    4) FLOATING PANELS (new draggable system)
    ============================================================ */
 .floating-panel{
   position:absolute;
-  z-index:9999;
+  z-index:900;
 
   width: var(--panel-w);
   max-width: min(360px, calc(100vw - 24px));
@@ -265,13 +883,23 @@ body{
 }
 
 .floating-panel .fp-btn{
-  width:20px;
-  height:20px;
-  border-radius:5px;
-  background:var(--control-bg);
-  border:1px solid var(--control-border);
-  color:var(--text);
-  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+
+.floating-panel .fp-btn svg{
+  display:block;
+  pointer-events:none;
+  transition: transform .15s ease;
+}
+
+.floating-panel.collapsed .fp-btn-chevron svg{
+  transform: rotate(-90deg);
+}
+
+
 }
 .floating-panel .fp-btn:hover{ border-color:#596273; }
 
@@ -299,14 +927,39 @@ body{
 .fp-col{ flex-direction:column; align-items:stretch; }
 .fp-between{ width:100%; }
 
+#dinoInfoPanel:not(.collapsed) .fp-title{
+  visibility:hidden;
+}
+
+#dinoInfoPanel:not(.collapsed) .fp-header{
+  border-bottom:none;
+  background:transparent;
+}
+
+/* tighten space above title when expanded */
+#dinoInfoPanel:not(.collapsed) .info-title{
+  margin-top:1px;
+}
+
+#dinoInfoPanel .fp-body{
+  padding-top: 0px;
+}
 /* ============================================================
    6) INSIDE PANELS — Dino Info styling
    ============================================================ */
 .info-title{    /* Dino Name */
   font-weight:600;
   font-size:22px;
-  margin-bottom:8px;
+  margin-top:0px;
+  margin-bottom:4px;
   color:var(--muted);
+}
+
+.info-submeta{
+  font-size: 12px;
+  opacity: .65;
+  margin-top: -2px;
+  margin-bottom: 6px;
 }
 
 .info-subtitle{    /* "Spawn Entries (#) */
@@ -319,6 +972,7 @@ body{
 }
 
 .info-section{
+  margin-top:0px;
   margin-bottom:10px;
   padding-bottom:6px;
   border-bottom:1px solid rgba(255,255,255,.08);
@@ -343,26 +997,35 @@ body{
 
 /* Copy button */
 .info-copy{
-  width:28px;
-  height:28px;
+  width:18px;
+  height:18px;
   padding:0;
+  border:0;
+  background:transparent;
+  border-radius:0;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  background:var(--panel);
+  cursor:pointer;
+  color: rgba(255,255,255,.80);
 }
 
 /* Icon */
 .info-copy::before{
   content:"";
-  width:16px;
-  height:16px;
-  background:var(--text);
+  display:block;
+  width:14px;
+  height:14px;
+
+  background-color: currentColor;
 
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
 
-  opacity:.9;
+  .info-copy:hover{
+    color: rgba(255,255,255,1);
+    filter: drop-shadow(0 0 2px rgba(255,255,255,.25));
+  }
 }
 .info-copy:hover::before{ opacity:1; }
 
@@ -459,6 +1122,28 @@ body{
     width: var(--modPanel-w-mobile);
   }
   
+  /* MOBILE: treat fancy dropdown hosts like selects (so they can sit side-by-side) */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy,
+  #topbar .controls > #bgSelectWrap,
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 140px;   /* same as your selects */
+    min-width:120px;
+    width:auto;        /* IMPORTANT: override any 100% width */
+  }
+  
+  /* Make the dino one span the full row (so source+map stay above it) */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    min-width:0;
+  }
+  
+  /* If any fancy host got forced to width:100% somewhere, squash it */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy{
+    max-width:none;
+  }
+  
   .floating-panel .fp-title{
     color:var(--muted);
     font-weight:600;
@@ -492,12 +1177,27 @@ body{
     font-size:10px;
     font-weight:500;
   }
+  .dd-label{ font-size:16px;
+  }
+  .dd-item-name{ font-size:16px;
+  }
+  .dd-item-meta{ font-size:10px;
+  }
+  .dd-search{ font-size:16px;
+  }
+  
+  #sourceSelectFancy .dd-item-name { font-size: 13px; }
+  #mapSelectFancy .dd-item-name    { font-size: 13px; }
+
+
 
   /* Filters toggle visible */
   #controlsToggle{ display:inline-flex; }
 
   /* Hide dropdown row unless toggled */
-  #topbar .controls{ display:none; }
+  #topbar .controls{ 
+    display:none;
+   }
   #topbar.show-controls .controls{ display:flex; }
 
   /* Controls layout */
@@ -505,9 +1205,7 @@ body{
     flex-direction:row;
     flex-wrap:wrap;
     justify-content:center;
-    width:100%;
     gap:4px;
-    padding-top:1px;
   }
 
   /* Dropdowns smaller */
@@ -527,16 +1225,152 @@ body{
 
   #topbar{
     padding:6px 6px 6px;
+    position: relative;
+    z-index: 2000;
   }
 
   #topbar .title{
     font-size:12px;
+    margin-left:5px
   }
+  
+  modeToggle{
+    margin-right: 12px; /* increase to move it left more */
+    color:#00ff00;
+  }
+  
+
 
   /* bgSelectWrap sizing */
   #topbar .controls > #bgSelectWrap{
     flex: 1 1 140px;
     min-width:120px;
   }
+  
+  /* Row 1: source + map */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy{
+    flex: 1 1 calc(30% - 4px);
+    max-width:none;
+    width:auto;
+  }
+  /* Row 1: source + map */
+  #topbar .controls > #sourceSelectFancy{ 
+    flex: 6 1 0%;
+    max-width:none;
+    width:auto;
+  }
+  
+  #topbar .controls > #mapSelectFancy{
+    flex: 4 1 0%;
+    max-width:none;
+    width:auto;
+  }
+  /* Default: Dino full width */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    max-width:none;
+    width:auto;
+  }
+  
+  #sourceSelectFancy .dd-btn,
+  #mapSelectFancy .dd-btn,
+  #dinoSelectFancy .dd-btn,
+    padding:7px 7px;
+    font-size:10px;
+    border-radius:4px;
+    min-height:34px;
+  }
+  /* Make rows align as one "block" (same left edge) */
+  #topbar{ align-items: stretch; }
+
+  #topbar .title-row,
+  #topbar .controls{
+    width: 100%;
+    max-width: 520px;   /* tune */
+    margin: 0 auto;
+  }
+
+  /* Title row uses same 60/40 as Source/Map */
+  .title-row{
+    display:grid;
+    grid-template-columns: 1fr auto auto; /* title | mode | filter */
+    align-items:center;
+    column-gap:2px;
+  }
+
+  /* keep your title nudge */
+  #topbar .title{
+    margin-left: 5px; /* your current good value */
+  }
+
+  /* move ONLY the mode button left */
+  #modeToggle{
+    margin-right: 16px; /* tweak */
+  }
+
+  /* ensure filter stays pinned */
+  #controlsToggle{
+    margin-right: 0;
+  }
+
+
+  
   #bgSelectWrap select{ width:100%; }
+}
+
+
+/* ============================================================
+   Map controls: Background toggle + Mod Style FAB
+   ============================================================ */
+
+.leaflet-control.bg-toggle{
+  background: rgba(30,30,30,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.leaflet-control.bg-toggle .bg-toggle-btn{
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: rgba(30,30,30,.85);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.leaflet-control.bg-toggle .bg-toggle-btn:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+#modStyleFab{
+  position:absolute;
+  z-index:10000;
+  right:10px;
+  top:52px; /* tweak if it overlaps other map controls */
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.85);
+  color:#fff;
+  display:none; /* only visible when Mod Style panel is hidden */
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,.40);
+}
+
+#modStyleFab:hover{ background:rgba(45,45,45,.92); }
+#modStyleFab:active{ transform:translateY(1px); }
+
+#modStyleFab svg{
+  width:18px;
+  height:18px;
 }

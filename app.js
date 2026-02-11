@@ -1,4 +1,4 @@
-// =================================================hi===========
+// ============================================================
 // RARITY TUNING (edit these whenever)
 // ============================================================
 const ASSET_VER = "dev-2026-02-02-G";
@@ -26,6 +26,30 @@ const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rar
 const MIN_GLOBAL_DOWNSHIFT = [
   [2,  6],
 ];
+
+function fitOptionsForUI() {
+  const isMobile = window.innerWidth <= 640;
+
+  // measure real UI heights (safe if null)
+  const topbarH = document.getElementById("topbar")?.offsetHeight ?? 0;
+
+  // estimate bottom controls / toolbar area
+  // (you can also measure your custom toolbar div if you add one)
+  const bottomSafe = isMobile ? 70 : 40;
+
+  // X padding (left/right)
+  const padX = isMobile ? 6 : 20;
+
+  // Y padding: less on top, more on bottom
+  const padTop = isMobile ? 6 : 10;
+  const padBottom = isMobile ? Math.max(bottomSafe, 60) : 20;
+
+  return {
+    maxZoom: -1,
+    paddingTopLeft:    [padX, padTop + Math.min(topbarH, 120) * 0.0], // keep 0.0 unless you want topbar to influence fit
+    paddingBottomRight:[padX, padBottom]
+  };
+}
 
 function rarityFromWeight(w) {
   const eff = Number(w || 0);
@@ -130,6 +154,9 @@ const SOURCES = [
   { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
   { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
   { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json" },
+  { id: "IoMSuchomimus", name: "Isle of Myths: Suchomimus", file: "data/mods/IoMSuchomimus.json" },
+  { id: "BSSpearcrest", name: "Isle of Myths: Spearcrest", file: "data/mods/BSSpearcrest.json" },
+  { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json" },
 ];
 
 // ============================================================
@@ -138,6 +165,7 @@ const SOURCES = [
 let currentMapId = "";
 let activeSourceId = "official";
 let loadedMods = {}; // cache
+let currentModMeta = null; // { id, name } from mod file, or null for official
 
 let mapObj = null;
 let currentCfg = null;
@@ -147,6 +175,17 @@ let currentViewMode = "dino";
 
 // entryClass -> array of { dinoKey, entry, entryIndex }
 let entryIndex = {};
+
+const lastSelection = {
+  dino: {},   // { [sourceId]: dinoKey }
+  entry: {},  // { [sourceId]: entryClass }
+};
+
+let showPois = true;  // default on
+// ============================================================
+// SETTINGS
+// ============================================================
+let useRarityForMods = true; // default; set to false if you want “mod style” by default
 
 const jsonCache = {};
 
@@ -175,6 +214,435 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+
+
+function asArray(x) {
+  if (!x) return [];
+  return Array.isArray(x) ? x : [x];
+}
+
+function renderCopyLine(label, value) {
+  const v = String(value || "");
+  return `
+    <div class="info-row">
+      <span class="info-label">${escapeHtml(label)}</span>
+      <button class="info-copy" data-copy="${escapeAttr(v)}" aria-label="Copy"></button>
+    </div>
+    <div class="info-mono">${escapeHtml(v || "(none)")}</div>
+  `;
+}
+
+
+function normSearch(s){
+  return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
+}
+
+function dinoSummaryForFancy(cfg, dinoKey){
+  const d = cfg?.dinos?.[dinoKey];
+  if (!d) return { entryCount: 0, label: dinoKey };
+
+  return {
+    entryCount: (d.entries || []).length,
+    label: (d.displayName || dinoKey),
+  };
+}
+
+function rarityDotColor(rarity){
+  // reuse your existing rarityToColor
+  return rarity ? rarityToColor(rarity) : "#777";
+}
+
+function mountFancySelect({
+  nativeId,
+  hostId,
+  placeholder = "Search...",
+  getButtonSubText = null,   // (value, cfg) => string
+  getRowBadges = null,       // (value, cfg) => [ "pill text", ... ]
+  cfg = null
+}) {
+  const native = document.getElementById(nativeId);
+  const host = document.getElementById(hostId);
+  if (!native || !host) return;
+
+  // Hide native but keep it functional
+  native.style.position = "absolute";
+  native.style.left = "-9999px";
+  native.style.width = "1px";
+  native.style.height = "1px";
+  native.style.opacity = "0";
+
+  // Replace any previous fancy UI cleanly
+  host.innerHTML = "";
+
+  const wrap = document.createElement("div");
+  wrap.className = "dd";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "dd-btn";
+
+  const btnLeft = document.createElement("div");
+  btnLeft.className = "dd-btn-left";
+
+  const textWrap = document.createElement("div");
+  textWrap.className = "dd-btn-text";
+  textWrap.style.minWidth = "0";
+
+  const label = document.createElement("div");
+  label.className = "dd-label";
+
+  const sub = document.createElement("div");
+  sub.className = "dd-sub";
+
+  textWrap.appendChild(label);
+  textWrap.appendChild(sub);
+  btnLeft.appendChild(textWrap);
+
+  const caret = document.createElement("div");
+  caret.className = "dd-caret";
+  caret.textContent = "▾";
+
+  btn.appendChild(btnLeft);
+  btn.appendChild(caret);
+
+  const panel = document.createElement("div");
+  panel.className = "dd-panel";
+
+  const search = document.createElement("input");
+  search.className = "dd-search";
+  search.placeholder = placeholder;
+
+  const list = document.createElement("div");
+  list.className = "dd-list";
+
+  panel.appendChild(search);
+  panel.appendChild(list);
+
+  wrap.appendChild(btn);
+  wrap.appendChild(panel);
+  host.appendChild(wrap);
+
+  function rebuildItems() {
+    list.innerHTML = "";
+
+    const opts = Array.from(native.options)
+      .map(o => ({ value: o.value, text: o.textContent || "" }))
+      .filter(o => o.value);
+
+    for (const o of opts) {
+      const row = document.createElement("div");
+      row.className = "dd-item";
+      row.dataset.value = o.value;
+      row.dataset.search = normSearch(o.text);
+
+      const left = document.createElement("div");
+      left.className = "dd-item-left";
+
+      const main = document.createElement("div");
+      main.className = "dd-item-main";
+
+      const name = document.createElement("div");
+      name.className = "dd-item-name";
+      name.textContent = o.text;
+
+      main.appendChild(name);
+      left.appendChild(main);
+
+      const badges = document.createElement("div");
+      badges.className = "dd-badges";
+
+      if (typeof getRowBadges === "function") {
+        const pills = getRowBadges(o.value, cfg) || [];
+        for (const t of pills) {
+          const pill = document.createElement("span");
+          pill.className = "dd-pill";
+          pill.textContent = String(t);
+          badges.appendChild(pill);
+        }
+      }
+
+      row.appendChild(left);
+      row.appendChild(badges);
+
+      row.addEventListener("click", () => {
+        native.value = o.value;
+        native.dispatchEvent(new Event("change"));
+        close();
+      });
+
+      list.appendChild(row);
+    }
+  }
+
+  function syncButton() {
+    const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
+    label.textContent = txt;
+
+    if (typeof getButtonSubText === "function") {
+      sub.textContent = getButtonSubText(native.value, cfg) || "";
+    } else {
+      sub.textContent = "";
+    }
+  }
+
+  function open() {
+    wrap.classList.add("open");
+    search.value = "";
+    list.querySelectorAll(".dd-item").forEach(el => (el.style.display = ""));
+    list.scrollTop = 0;
+    search.focus();
+  }
+
+  function close() {
+    wrap.classList.remove("open");
+    btn.focus();
+  }
+
+  btn.addEventListener("click", () => {
+    wrap.classList.contains("open") ? close() : open();
+  });
+
+  // Filter + scroll reset
+  let lastQ = "";
+  search.addEventListener("input", () => {
+    const q = normSearch(search.value);
+    if (q !== lastQ) list.scrollTop = 0;
+    lastQ = q;
+
+    list.querySelectorAll(".dd-item").forEach(el => {
+      el.style.display = el.dataset.search.includes(q) ? "" : "none";
+    });
+  });
+
+  // Click outside closes (avoid stacking listeners: one per dropdown is fine,
+  // but we guard by checking wrap.contains)
+  document.addEventListener("pointerdown", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  native.addEventListener("change", syncButton);
+
+  rebuildItems();
+  syncButton();
+}
+
+function mountFancyDinoSelect(cfg){
+  const native = document.getElementById("dinoSelect");
+  const host  = document.getElementById("dinoSelectFancy");
+  if (!native || !host) return;
+
+  // Hide native but keep it functional
+  native.style.position = "absolute";
+  native.style.left = "-9999px";
+  native.style.width = "1px";
+  native.style.height = "1px";
+  native.style.opacity = "0";
+
+  host.innerHTML = "";
+
+  const wrap = document.createElement("div");
+  wrap.className = "dd";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "dd-btn";
+
+  const btnLeft = document.createElement("div");
+  btnLeft.className = "dd-btn-left";
+
+  const textWrap = document.createElement("div");
+    textWrap.className = "dd-btn-text";
+    textWrap.style.minWidth = "0";
+  const label = document.createElement("div");
+  label.className = "dd-label";
+
+  const sub = document.createElement("div");
+  sub.className = "dd-sub";
+
+  textWrap.appendChild(label);
+  textWrap.appendChild(sub);
+
+  // (removed rarity dot)
+  btnLeft.appendChild(textWrap);
+
+  const caret = document.createElement("div");
+  caret.className = "dd-caret";
+  caret.textContent = "▾";
+
+  btn.appendChild(btnLeft);
+  btn.appendChild(caret);
+
+  const panel = document.createElement("div");
+  panel.className = "dd-panel";
+
+  const search = document.createElement("input");
+  search.className = "dd-search";
+  search.placeholder = (currentViewMode === "dino") ? "Search dinos..." : "Search spawn entries...";
+
+  const list = document.createElement("div");
+  list.className = "dd-list";
+
+  panel.appendChild(search);
+  panel.appendChild(list);
+
+  wrap.appendChild(btn);
+  wrap.appendChild(panel);
+  host.appendChild(wrap);
+
+  // build items from native <option>s so your existing setupMainSelect() stays the source of truth
+  function rebuildItems(){
+    list.innerHTML = "";
+
+    const opts = Array.from(native.options)
+      .map(o => ({ value: o.value, text: o.textContent || "" }))
+      .filter(o => o.value);
+
+    for (const o of opts){
+      const row = document.createElement("div");
+      row.className = "dd-item";
+      row.dataset.value = o.value;
+      row.dataset.search = normSearch(o.text);
+
+      const left = document.createElement("div");
+      left.className = "dd-item-left";
+
+      const main = document.createElement("div");
+      main.className = "dd-item-main";
+
+      const name = document.createElement("div");
+      name.className = "dd-item-name";
+      name.textContent = o.text;
+
+      const meta = document.createElement("div");
+      meta.className = "dd-item-meta";
+
+      const badges = document.createElement("div");
+      badges.className = "dd-badges";
+
+      if (currentViewMode === "dino"){
+        const sum = dinoSummaryForFancy(cfg, o.value); // uses your existing helper (entryCount)
+        
+
+        const pill = document.createElement("span");
+        pill.className = "dd-pill";
+        pill.textContent = `${sum.entryCount} entries`;
+        badges.appendChild(pill);
+
+      } else {
+        // Entry mode
+        const rows = entryIndex?.[o.value] || [];
+
+        const pill = document.createElement("span");
+        pill.className = "dd-pill";
+        pill.textContent = `${rows.length} dinos`;
+        badges.appendChild(pill);
+      }
+
+      main.appendChild(name);
+
+      // (removed row rarity dot)
+      left.appendChild(main);
+
+      row.appendChild(left);
+      row.appendChild(badges);
+
+      row.addEventListener("click", () => {
+        native.value = o.value;
+        native.dispatchEvent(new Event("change"));
+        close();
+      });
+
+      list.appendChild(row);
+    }
+  }
+
+  function syncButton(){
+    const v = native.value;
+    const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
+    label.textContent = txt;
+
+    if (currentViewMode === "dino"){
+      const sum = dinoSummaryForFancy(cfg, v);
+      sub.textContent = `${sum.entryCount} entries`;
+    } else {
+      const rows = entryIndex?.[v] || [];
+      sub.textContent = `${rows.length} dinos`;
+    }
+  }
+
+  function open(){
+    wrap.classList.add("open");
+    search.value = "";
+    // show all items
+    list.querySelectorAll(".dd-item").forEach(el => el.style.display = "");
+    list.scrollTop = 0;
+    search.focus(); // note: iOS zoom fix is CSS: .dd-search{font-size:16px;}
+  }
+
+  function close(){
+    wrap.classList.remove("open");
+    btn.focus();
+  }
+
+  btn.addEventListener("click", () => {
+    wrap.classList.contains("open") ? close() : open();
+  });
+
+  // Filter
+  let lastQ = "";
+
+  search.addEventListener("input", () => {
+    const q = normSearch(search.value);
+  
+    if (q !== lastQ) list.scrollTop = 0;  // ✅
+    lastQ = q;
+  
+    list.querySelectorAll(".dd-item").forEach(el => {
+      el.style.display = el.dataset.search.includes(q) ? "" : "none";
+    });
+  });
+
+  // Click outside to close
+  document.addEventListener("pointerdown", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  // Keep fancy button synced whenever native changes (your code changes it a lot)
+  native.addEventListener("change", syncButton);
+
+  rebuildItems();
+  syncButton();
+}
+
+function createIconButton(svgPath, viewBox = "0 0 24 24") {
+  const btn = document.createElement("button");
+  btn.className = "fp-btn";
+  btn.type = "button";
+
+  btn.innerHTML = `
+    <svg viewBox="${viewBox}" width="16" height="16" aria-hidden="true">
+      ${svgPath}
+    </svg>
+  `;
+
+  return btn;
+}
+const CLOSE_ICON = `
+  <path d="M6 6L18 18M18 6L6 18"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"/>
+`;
+
+const CHEVRON_DOWN_ICON = `
+  <path d="M6 9l6 6 6-6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+`;
+
 // ============================================================
 // POIs
 // ============================================================
@@ -257,6 +725,8 @@ function drawPois(cfg) {
   if (!mapObj?.poiLayer) return;
 
   mapObj.poiLayer.clearLayers();
+  
+  if (!showPois) return;
 
   // your current JSON location:
   const pts = cfg?.pois?.tributeTerminals || [];
@@ -302,7 +772,20 @@ function syncModeBtn() {
   const b = document.getElementById("modeToggle");
   if (!b) return;
   b.dataset.mode = currentViewMode;
-  b.textContent = (currentViewMode === "dino") ? "Dino mode" : "Spawn mode";
+  b.textContent = (currentViewMode === "dino") ? "Dino View" : "Spawn View";
+}
+
+function setPoisVisible(show){
+  showPois = !!show;
+
+  if (!mapObj?.map || !mapObj?.poiLayer) return;
+
+  const has = mapObj.map.hasLayer(mapObj.poiLayer);
+
+  if (showPois && !has) mapObj.poiLayer.addTo(mapObj.map);
+  if (!showPois && has) mapObj.map.removeLayer(mapObj.poiLayer);
+
+  updateDockToggles(); // keep dock button highlight in sync
 }
 
 function isEntryVisible(dinoKey, entryIndexNum) {
@@ -352,6 +835,190 @@ async function preloadMapAssets() {
   }
 }
 
+let dockControl = null;
+let dockState = { mapMeta: null, cfg: null };
+
+function isPanelVisible(id){
+  const el = document.getElementById(id);
+  if (!el) return false;
+  return el.style.display !== "none";
+}
+
+function setPanelVisible(id, show){
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.style.display = show ? "" : "none";
+  el.dataset.hidden = show ? "0" : "1";
+
+  // keep your mod FAB off (optional)
+  if (id === "modStylePanel") {
+    const fab = ensureModStyleFab?.();
+    if (fab) fab.style.display = "none";
+  }
+}
+
+function togglePanel(id){
+  setPanelVisible(id, !isPanelVisible(id));
+  updateDockToggles(); // keep pressed state in sync
+}
+
+function updateDockToggles(){
+  const dockEl = document.querySelector(".map-dock");
+  if (!dockEl) return;
+
+  dockEl.querySelectorAll("[data-toggle-panel]").forEach(btn => {
+    const id = btn.getAttribute("data-toggle-panel");
+    const on = isPanelVisible(id);
+    btn.classList.toggle("is-on", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+}
+
+function setMapBackgroundFromDock(btn){
+  const mapMeta = dockState.mapMeta;
+  if (!mapMeta?.backgrounds?.length || !mapObj?.overlay) return;
+
+  const bgs = mapMeta.backgrounds;
+  const cur = btn.dataset.bgIndex ? Number(btn.dataset.bgIndex) : 0;
+  const next = (cur + 1) % bgs.length;
+
+  btn.dataset.bgIndex = String(next);
+  mapObj.overlay.setUrl(bgs[next].url);
+  btn.title = `Background: ${bgs[next].label || bgs[next].id || (next+1)} (tap to cycle)`;
+}
+
+function ensureDockControl(map){
+  if (dockControl) return;
+
+  const Dock = L.Control.extend({
+    options: { position: "bottomleft" },
+
+    onAdd() {
+      const container = L.DomUtil.create("div", "leaflet-control leaflet-bar map-dock");
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+      return container;
+    }
+  });
+
+  dockControl = new Dock();
+  map.addControl(dockControl);
+}
+
+function renderDock(){
+  const container = document.querySelector(".map-dock");
+  if (!container) return;
+
+  const mapMeta = dockState.mapMeta;
+  const isAstraeos = !!(mapMeta?.backgrounds?.length);
+  const isMod = (activeSourceId !== "official");
+
+  container.innerHTML = "";
+  container.style.display = "flex";
+  container.style.overflow = "hidden";
+
+  const mkBtn = ({ title, icon, onClick, togglePanelId=null, extraClass="" }) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `dock-btn ${extraClass}`.trim();
+    btn.title = title;
+    btn.setAttribute("aria-label", title);
+
+    if (togglePanelId) {
+      btn.setAttribute("data-toggle-panel", togglePanelId);
+      btn.setAttribute("aria-pressed", "false");
+    }
+
+    btn.innerHTML = icon;
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick?.(btn);
+      if (document.activeElement?.blur) document.activeElement.blur();
+    });
+
+    container.appendChild(btn);
+    return btn;
+  };
+
+  // 1) BG button — only on Astraeos
+  if (isAstraeos) {
+    const bgs = mapMeta.backgrounds;
+    const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
+    let idx = Math.max(0, bgs.indexOf(def));
+
+    // Ensure overlay is set to default bg when dock appears
+    mapObj?.overlay?.setUrl(bgs[idx].url);
+
+    const bgBtn = mkBtn({
+      title: `Background: ${def.label || def.id || (idx+1)} (tap to cycle)`,
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
+                fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linejoin="round"/>
+        </svg>
+      `,
+      onClick: (btn) => setMapBackgroundFromDock(btn)
+    });
+
+    bgBtn.dataset.bgIndex = String(idx);
+  } else {
+    // non-Astraeos: default background from cfg.image
+    if (dockState.cfg?.image && mapObj?.overlay) {
+      mapObj.overlay.setUrl(dockState.cfg.image);
+    }
+  }
+
+  // 2) Dino Info toggle — always available
+  mkBtn({
+    title: "Toggle Dino Info",
+    icon: `
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    `,
+    togglePanelId: "dinoInfoPanel",
+    onClick: () => togglePanel("dinoInfoPanel")
+  });
+
+    // 3) Mod Style toggle — only on mods
+  if (isMod) {
+    mkBtn({
+      title: "Toggle Mod Style",
+      icon: `...`,
+      togglePanelId: "modStylePanel",
+      onClick: () => togglePanel("modStylePanel")
+    });
+  }
+
+  // 4) POI toggle — only if this map has POIs (works for official + mods)
+  const hasPois = !!(dockState.cfg?.pois?.tributeTerminals?.length);
+  if (hasPois) {
+    const poiBtn = mkBtn({
+      title: showPois ? "Hide markers" : "Show markers",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"
+                fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="10" r="2.5" fill="currentColor"/>
+        </svg>
+      `,
+      onClick: (btn) => {
+        setPoisVisible(!showPois);
+        btn.title = showPois ? "Hide markers" : "Show markers";
+        btn.classList.toggle("is-on", showPois);
+      }
+    });
+
+    poiBtn.classList.toggle("is-on", showPois);
+  }
+
+  updateDockToggles();
+}
 
 // ============================================================
 // Meta lines (3 lines: weight / max / chances)
@@ -479,12 +1146,17 @@ function initMap(cfg) {
     zoomControl: false
   });
 
-  L.control.zoom({ position: "bottomright" }).addTo(map);
+  L.control.zoom({ position: "bottomleft" }).addTo(map);
+
+  // after it’s added, tag it
+  setTimeout(() => {
+    document.querySelector(".leaflet-control-zoom")?.classList.add("zoom-horizontal");
+  }, 0);
 
   // Create overlay ONCE
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
 
-  map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
+  map.fitBounds(bounds, fitOptionsForUI());
   map.setMaxBounds(bounds);
   map.options.maxBoundsViscosity = 1.0;
 
@@ -494,6 +1166,11 @@ function initMap(cfg) {
 
   // NEW: POIs always-on-top layer
   const poiLayer = L.layerGroup().addTo(map);
+  
+  window.addEventListener("resize", () => {
+    if (!mapObj?.map || !mapObj?.bounds) return;
+    mapObj.map.fitBounds(mapObj.bounds, fitOptionsForUI());
+  });
 
   return { map, layer, caveLayer, poiLayer, overlay, bounds };
 }
@@ -514,86 +1191,28 @@ function updateMapForCfg(cfg) {
 
   // Update map constraints + view
   mapObj.map.setMaxBounds(bounds);
-  mapObj.map.fitBounds(bounds, { padding: [20, 20], maxZoom: -1 });
+  mapObj.map.fitBounds(bounds, fitOptionsForUI());
 
   mapObj.bounds = bounds;
 }
 
 // ============================================================
-// Background dropdown
+// Background toggle (Leaflet button) — replaces BG dropdown
 // ============================================================
-function setupBackgroundDropdown(mapMeta, cfg) {
-  const wrap = document.getElementById("bgSelectWrap");
-  const sel = document.getElementById("bgSelect");
-  if (!wrap || !sel || !mapObj) return;
 
-  const bgs = mapMeta?.backgrounds;
+let bgToggleControl = null;
 
-  if (!bgs || !bgs.length) {
-    wrap.style.display = "none";
-    sel.innerHTML = "";
-    mapObj.overlay.setUrl(cfg.image);
-    return;
-  }
+function refitMapForUI() {
+  if (!mapObj?.map || !mapObj?.bounds) return;
 
-  wrap.style.display = "";
-  sel.innerHTML = "";
+  // if the topbar expands/collapses, map container size changes
+  mapObj.map.invalidateSize();
 
-  for (const bg of bgs) {
-    const opt = document.createElement("option");
-    opt.value = bg.url;
-    opt.textContent = bg.label;
-    sel.appendChild(opt);
-  }
-
-  const defaultBg = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
-  sel.value = defaultBg.url;
-  mapObj.overlay.setUrl(sel.value);
-
-  sel.onchange = () => mapObj.overlay.setUrl(sel.value);
+  // re-fit with your asymmetric padding
+  mapObj.map.fitBounds(mapObj.bounds, fitOptionsForUI());
 }
 
 // ============================================================
-// Panels control button (Leaflet ☰)
-// ============================================================
-function addPanelsControl(map) {
-  const PanelsControl = L.Control.extend({
-    options: { position: "bottomright" },
-
-    onAdd() {
-      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
-      container.style.background = "rgba(30,30,30,0.85)";
-      container.style.border = "1px solid rgba(255,255,255,0.15)";
-      container.style.borderRadius = "6px";
-      container.style.overflow = "hidden";
-
-      const btn = L.DomUtil.create("a", "", container);
-      btn.href = "#";
-      btn.title = "Show panels";
-      btn.innerHTML = "┇";
-      btn.style.display = "block";
-      btn.style.width = "30px";
-      btn.style.height = "30px";
-      btn.style.lineHeight = "30px";
-      btn.style.textAlign = "center";
-      btn.style.color = "white";
-      btn.style.textDecoration = "none";
-
-      L.DomEvent.disableClickPropagation(container);
-      L.DomEvent.disableScrollPropagation(container);
-
-      L.DomEvent.on(btn, "click", (e) => {
-        L.DomEvent.preventDefault(e);
-        showPanel("dinoInfoPanel");
-        if (activeSourceId !== "official") showPanel("modStylePanel");
-      });
-
-      return container;
-    }
-  });
-
-  map.addControl(new PanelsControl());
-}
 
 // ============================================================
 // Build entry index
@@ -621,16 +1240,26 @@ function setupMainSelect(cfg) {
   const sel = document.getElementById("dinoSelect");
   if (!sel) return;
 
+  // reset everything
   sel.innerHTML = "";
+  sel.onchange = null;
+
+  const addPlaceholder = (text) => {
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = text;
+    sel.appendChild(opt);
+    sel.value = "";
+  };
 
   if (currentViewMode === "dino") {
     const keys = Object.keys(cfg.dinos || {}).sort((a, b) => a.localeCompare(b));
+
     if (!keys.length) {
-      const opt = document.createElement("option");
-      opt.value = "";
-      opt.textContent = "(No dinos)";
-      sel.appendChild(opt);
+      addPlaceholder("(No dinos)");
       renderInfoPanelBodyEmpty();
+      // ✅ IMPORTANT: still rebuild fancy UI
+      mountFancyDinoSelect(cfg);
       return;
     }
 
@@ -642,20 +1271,22 @@ function setupMainSelect(cfg) {
     }
 
     sel.onchange = () => {
+      lastSelection.dino[activeSourceId] = sel.value; // ✅ remember per source
       drawDino(cfg, sel.value);
       renderInfoPanelForDino(cfg, sel.value);
     };
 
-    sel.value = keys[0];
+    const preferred = lastSelection.dino[activeSourceId];
+    sel.value = (preferred && keys.includes(preferred)) ? preferred : keys[0];
     sel.onchange();
 
   } else {
     const keys = Object.keys(entryIndex || {}).sort((a, b) => a.localeCompare(b));
+
     if (!keys.length) {
-      const opt = document.createElement("option");
-      opt.value = "";
-      opt.textContent = "(No spawn entries)";
-      sel.appendChild(opt);
+      addPlaceholder("(No spawn entries)");
+      // ✅ IMPORTANT: still rebuild fancy UI
+      mountFancyDinoSelect(cfg);
       return;
     }
 
@@ -666,15 +1297,19 @@ function setupMainSelect(cfg) {
       sel.appendChild(opt);
     }
 
-    // ---- ENTRY LIST ----
     sel.onchange = () => {
+      lastSelection.entry[activeSourceId] = sel.value; // ✅ remember per source
       drawSpawnEntry(cfg, sel.value);
       renderInfoPanelForEntry(cfg, sel.value);
     };
 
-    sel.value = keys[0];
+    const preferred = lastSelection.entry[activeSourceId];
+    sel.value = (preferred && keys.includes(preferred)) ? preferred : keys[0];
     sel.onchange();
   }
+
+  // ✅ Always rebuild fancy UI after native options change
+  mountFancyDinoSelect(cfg);
 }
 
 function setInfoPanelTitle(text) {
@@ -689,6 +1324,11 @@ function setViewMode(mode) {
   syncModeBtn();
 
   setInfoPanelTitle(mode === "dino" ? "Dino Info" : "Spawn Entry Info");
+
+  useRarityForMods = (mode === "dino");
+  
+  renderModStylePanelBody();
+  redrawSelected();
 
   if (currentCfg) setupMainSelect(currentCfg);
 }
@@ -707,6 +1347,10 @@ function switchMode(nextMode) {
     drawSpawnEntry(currentCfg, sel.value);
     renderInfoPanelForEntry(currentCfg, sel.value);
   }
+  if (currentViewMode === "entry") {
+    useRarityForMods = false;
+  }
+  renderModStylePanelBody();
 }
 
 // ============================================================
@@ -733,6 +1377,13 @@ function setupSourceDropdown() {
     const mapSel = document.getElementById("mapSelect");
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
+  });
+  mountFancySelect({
+    nativeId: "sourceSelect",
+    hostId: "sourceSelectFancy",
+    placeholder: "Search sources...",
+    getButtonSubText: (v) => (v === "official" ? "Official" : "Mod"),
+    getRowBadges: (v) => [v === "official" ? "official" : "mod"],
   });
 }
 
@@ -767,6 +1418,13 @@ function setupMapDropdown() {
   });
 
   sel.value = MAPS[0].id;
+  mountFancySelect({
+    nativeId: "mapSelect",
+    hostId: "mapSelectFancy",
+    placeholder: "Search maps...",
+    getButtonSubText: (v) => "",
+    getRowBadges: (v) => [], // or ["map"]
+  });
 }
 
 // ============================================================
@@ -782,8 +1440,14 @@ async function loadMapByMeta(mapMeta) {
   // 2) If mod source, swap dinos from mod map
   if (activeSourceId !== "official") {
     const modCfg = await loadModSource(activeSourceId);
+  
+    // ✅ capture mod metadata for UI
+    currentModMeta = modCfg?.mod || null;
+  
     const modMap = modCfg?.maps?.[mapMeta.id];
     effectiveCfg = { ...vanillaCfg, dinos: modMap?.dinos || {} };
+  } else {
+    currentModMeta = null;
   }
 
   // 3) Post-process config
@@ -799,20 +1463,28 @@ async function loadMapByMeta(mapMeta) {
   // 4) Create map ONCE; otherwise update it
   if (!mapObj) {
     mapObj = initMap(currentCfg);
-    addPanelsControl(mapObj.map);     // add once
+    ensureDockControl(mapObj.map);   // ✅ add once (THIS is what was missing)
   } else {
-    updateMapForCfg(currentCfg);      // fast path
+    updateMapForCfg(currentCfg);
   }
   
-  drawPois(currentCfg);
-
+  // keep latest for dock rendering
+  dockState.mapMeta = mapMeta;
+  dockState.cfg = currentCfg;
+  
   // 5) Panels + background dropdown
   ensurePanels();
   setModStylePanelVisible(activeSourceId !== "official");
   renderModStylePanelBody();
+  
+  // rebuild dock buttons based on map + source
+  renderDock();
+  updateDockToggles();
+  
+  setPoisVisible(showPois); // ✅ re-apply on map changes
+  drawPois(currentCfg);
 
   // If Astraeos has alternate bgs, keep your dropdown behavior:
-  setupBackgroundDropdown(mapMeta, currentCfg);
 
   // 6) Populate the ONE dropdown slot based on mode (dino/entry)
   setupMainSelect(currentCfg);
@@ -928,7 +1600,11 @@ function drawDino(cfg, dinoKey) {
       for (const m of entry._mgrDraw) {
         const targetLayer = m.isCave ? mapObj.caveLayer : mapObj.layer;
 
-        const color = isOfficial ? rarityToColor(m.rarity) : modDrawColor;
+        const useRarity = isOfficial || useRarityForMods;
+
+        const color = useRarity
+          ? rarityToColor(m.rarity)
+          : modDrawColor;
 
         const baseWeight = m.isCave ? 3 : 1;
         const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
@@ -975,7 +1651,8 @@ function drawDino(cfg, dinoKey) {
     const untame = entry._untame ?? (entry.bForceUntameable === true);
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
-    const color = isOfficial ? rarityToColor(entry.rarity) : modDrawColor;
+    const useRarity = isOfficial || useRarityForMods;
+    const color = useRarity ? rarityToColor(entry.rarity) : modDrawColor;
 
     const baseWeight = isCave ? 3 : 1;
     const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
@@ -1007,6 +1684,40 @@ function drawDino(cfg, dinoKey) {
   }
 }
 
+let modFab = null;
+
+function ensureModStyleFab(){
+  if (modFab) return modFab;
+
+  const mapEl = document.getElementById("mapWrap");
+  if (!mapEl) return null;
+
+  const btn = document.createElement("button");
+  btn.id = "modStyleFab";
+  btn.type = "button";
+  btn.title = "Mod Style";
+  btn.setAttribute("aria-label", "Show Mod Style panel");
+
+  btn.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
+            fill="currentColor" opacity=".9"/>
+      <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
+            fill="currentColor"/>
+    </svg>
+  `;
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPanel("modStylePanel");
+    btn.style.display = "none";
+  });
+
+  mapEl.appendChild(btn);
+  modFab = btn;
+  return btn;
+}
+
 // ============================================================
 // FLOATING PANELS (Dino Info + Mod Style)
 // ============================================================
@@ -1027,13 +1738,25 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
   panel.innerHTML = `
     <div class="fp-header" data-drag-handle>
       <div class="fp-title">${title}</div>
-      <div class="fp-actions">
-        <button class="fp-btn" data-action="min" title="Collapse">▾</button>
-        <button class="fp-btn" data-action="hide" title="Hide">✕</button>
-      </div>
+      <div class="fp-actions"></div>
     </div>
     <div class="fp-body"></div>
   `;
+  const actions = panel.querySelector(".fp-actions");
+
+  // make SVG icon buttons
+  const minBtn = createIconButton(CHEVRON_DOWN_ICON);
+  minBtn.dataset.action = "min";
+  minBtn.title = "Collapse";
+  minBtn.classList.add("fp-btn-chevron"); // optional (if you want rotation later)
+  
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  
+  // add them
+  actions.appendChild(minBtn);
+  actions.appendChild(hideBtn);
 
   mapEl.appendChild(panel);
 
@@ -1064,7 +1787,14 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
   };
   panel.querySelector('[data-action="hide"]').onclick = () => {
     panel.style.display = "none";
+    updateDockToggles();
     panel.dataset.hidden = "1";
+
+    // If it's the mod panel, show the floating “paintbrush” button
+    if (panel.id === "modStylePanel") {
+      const fab = ensureModStyleFab();
+      if (fab) fab.style.display = "none";
+    }
   };
 
   makePanelDraggable(panel);
@@ -1076,6 +1806,13 @@ function showPanel(id) {
   if (!el) return;
   el.style.display = "";
   el.dataset.hidden = "0";
+
+  // If this is the mod panel, hide the FAB
+  if (id === "modStylePanel") {
+    const fab = ensureModStyleFab();
+    if (fab) fab.style.display = "none";
+  }
+  updateDockToggles();
 }
 
 function makePanelDraggable(panel) {
@@ -1153,7 +1890,7 @@ function ensurePanels() {
     stylePanel = createFloatingPanel({
       id: "modStylePanel",
       title: "Mod Style",
-      defaultPos: { right: 5, top: 2 },
+      defaultPos: { right: 6, top: 2 },
       collapsedByDefault: true
     });
     renderModStylePanelBody();
@@ -1163,7 +1900,7 @@ function ensurePanels() {
     infoPanel = createFloatingPanel({
       id: "dinoInfoPanel",
       title: "Dino Info",
-      defaultPos: { left: 2, top: 2 },
+      defaultPos: { left: 6, top: 2 },
       collapsedByDefault: true
     });
     renderInfoPanelBodyEmpty();
@@ -1175,7 +1912,22 @@ function ensurePanels() {
 function setModStylePanelVisible(show) {
   const el = document.getElementById("modStylePanel");
   if (!el) return;
-  el.style.display = show ? "" : "none";
+
+  // If we're switching away from a mod source, hide both the panel and the FAB.
+  if (!show) {
+    el.style.display = "none";
+    el.dataset.hidden = "0";
+    const fab = ensureModStyleFab();
+    if (fab) fab.style.display = "none";
+    return;
+  }
+
+  // show=true: respect whether the user hid it (dataset.hidden)
+  const hidden = (el.dataset.hidden === "1");
+  el.style.display = hidden ? "none" : "";
+
+  const fab = ensureModStyleFab();
+  if (fab) fab.style.display = hidden ? "" : "none";
 }
 
 function renderModStylePanelBody() {
@@ -1183,7 +1935,17 @@ function renderModStylePanelBody() {
   if (!panel) return;
   const body = panel.querySelector(".fp-body");
 
+  const isSpawnMode = (currentViewMode === "entry");
+
+
   body.innerHTML = `
+    ${!isSpawnMode ? `
+      <label class="fp-row">
+        <input id="modUseRarity" type="checkbox" ${useRarityForMods ? "checked" : ""}>
+        <span>Use rarity colors</span>
+      </label>
+    ` : ``}
+
     <label class="fp-row">
       <span>Color</span>
       <input id="modColor2" type="color" value="${modDrawColor}">
@@ -1203,17 +1965,32 @@ function renderModStylePanelBody() {
     </label>
   `;
 
-  const c = document.getElementById("modColor2");
-  const o = document.getElementById("modOpacity2");
+  const r  = document.getElementById("modUseRarity");
+  const c  = document.getElementById("modColor2");
+  const o  = document.getElementById("modOpacity2");
   const ol = document.getElementById("modOpacityLabel2");
-  const g = document.getElementById("modGlow2");
+  const g  = document.getElementById("modGlow2");
 
-  if (c) c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
+  if (r) r.onchange = () => {
+    useRarityForMods = r.checked;
+    redrawSelected();
+    // optional: if you want color control to instantly disable/enable:
+    renderModStylePanelBody();
+  };
+
+  // ✅ disable mod color picker when rarity is being used
+  if (c) {
+    c.disabled = (useRarityForMods && !isSpawnMode);
+    c.style.opacity = c.disabled ? "0.5" : "1";
+    c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
+  }
+
   if (o) o.oninput = () => {
     modDrawOpacity = Number(o.value);
     if (ol) ol.textContent = modDrawOpacity.toFixed(2);
     requestRedraw();
   };
+
   if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
 }
 
@@ -1337,21 +2114,52 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   }
 
   const displayName = d.displayName || dinoKey;
+  setInfoPanelTitle(displayName);
   const bp = d.bpPath || "";
   const nameTag = d.nameTag || d.nametag || "";
-
+  const extraBps = asArray(d.additionalBpPathsToDisplay);
+  const allBps = [bp, ...extraBps].filter(Boolean);
+  const modId = currentModMeta?.id || "";
+  
   const entries = d.entries || [];
+  
+  const blueprintBlock = `
+    <div class="info-row">
+      <span class="info-label">Blueprint</span>
+      ${allBps[0]
+        ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
+        : ""}
+    </div>
+  
+    ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
+        
+          ${i > 0
+            ? `
+            <div class="info-row">
+              <span class="info-label"></span>
+              <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
+            </div>
+            `
+            : ""}
 
+        <div class="info-mono">
+          ${escapeHtml(p)}
+        </div>
+      `).join("")
+    }
+  `;
+  
   body.innerHTML = `
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
-
-      <div class="info-row">
-        <span class="info-label">Blueprint</span>
-        <button class="info-copy" data-copy="${escapeAttr(bp)}"aria-label="Copy"></button>
-      </div>
-      <div class="info-mono">${escapeHtml(bp || "(none)")}</div>
-
+      ${currentModMeta?.id ? `
+        <div class="info-submeta">
+          Mod: ${escapeHtml(currentModMeta.id)}
+        </div>
+      ` : ``}
+      
+      ${blueprintBlock}
+      
       <div class="info-row">
         <span class="info-label">Nametag</span>
         <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
@@ -1423,14 +2231,21 @@ function boot() {
 
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
     document.getElementById("topbar")?.classList.toggle("show-controls");
+  
+    // let the DOM apply the new layout, then refit
+    requestAnimationFrame(() => {
+      refitMapForUI();
+    });
   });
-
   document.getElementById("modeToggle")?.addEventListener("click", () => {
     const next = (currentViewMode === "dino") ? "entry" : "dino";
     switchMode(next);
   });
 
   syncModeBtn();
+  window.addEventListener("resize", () => {
+    refitMapForUI();
+  });
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
     alert(err.message || String(err));
