@@ -1,0 +1,1771 @@
+{
+  "schemaVersion": 1,
+  "mod": {
+    "id": "1133222",
+    "name": "ARKOLOGY: OE - Desolatitan"
+  },
+  "maps": {
+    "The Island": {
+      "dinos": {
+        "Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Desolatitan_Character_BP.Desolatitan_Character_BP_C",
+          "displayName": "Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 1.0,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.25,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 345.76,
+                  "y": 1496.47,
+                  "w": 253.87,
+                  "h": 224.98,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1189.48,
+                  "y": 1324.11,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1666.12,
+                  "y": 1350.11,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 698.39,
+                  "y": 1162.34,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1036.61,
+                  "y": 1653.42,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Arkology Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/ARKOLOGY_Desolatitan_Character_BP.ARKOLOGY_Desolatitan_Character_BP_C",
+          "displayName": "Arkology Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.0125,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 345.76,
+                  "y": 1496.47,
+                  "w": 253.87,
+                  "h": 224.98,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1189.48,
+                  "y": 1324.11,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1666.12,
+                  "y": 1350.11,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 698.39,
+                  "y": 1162.34,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1036.61,
+                  "y": 1653.42,
+                  "w": 114.79,
+                  "h": 101.73,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Scorched Earth": {
+      "dinos": {
+        "Scorched Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Scorched_Desolatitan_Character_BP.Scorched_Desolatitan_Character_BP_C",
+          "displayName": "Scorched Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "SE_DinoSpawnEntriesSandworm_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 0.05,
+              "spawnLimit": 0.05,
+              "spawnChances": [
+                5.0
+              ],
+              "weight": 0.000625,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 5%"
+              },
+              "boxes": [
+                {
+                  "x": 1593.11,
+                  "y": 69.42,
+                  "w": 199.65,
+                  "h": 473.11,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1127.7,
+                  "y": 78.88,
+                  "w": 417.71,
+                  "h": 213.33,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1195.53,
+                  "y": 1773.29,
+                  "w": 332.92,
+                  "h": 208.08,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1771.91,
+                  "y": 1195.79,
+                  "w": 221.08,
+                  "h": 671.05,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1824.97,
+                  "y": 857.67,
+                  "w": 88.43,
+                  "h": 332.92,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1533.66,
+                  "y": 1773.36,
+                  "w": 265.3,
+                  "h": 221.08,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 857.41,
+                  "y": 1785.64,
+                  "w": 332.92,
+                  "h": 195.07,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 316.41,
+                  "y": 1787.44,
+                  "w": 130.05,
+                  "h": 195.07,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 519.28,
+                  "y": 58.44,
+                  "w": 1212.05,
+                  "h": 221.08,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 69.34,
+                  "y": 745.04,
+                  "w": 220.82,
+                  "h": 516.25,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1778.44,
+                  "y": 181.42,
+                  "w": 208.08,
+                  "h": 671.05,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 73.42,
+                  "y": 1316.67,
+                  "w": 220.82,
+                  "h": 619.5,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 407.17,
+                  "y": 77.61,
+                  "w": 660.78,
+                  "h": 213.33,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 778.83,
+                  "y": 1765.75,
+                  "w": 516.25,
+                  "h": 220.82,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 58.63,
+                  "y": 134.6,
+                  "w": 221.08,
+                  "h": 1779.06,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1341.35,
+                  "y": 1493.3,
+                  "w": 516.25,
+                  "h": 454.92,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1653.5,
+                  "y": 1122.05,
+                  "w": 315.13,
+                  "h": 363.93,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1808.95,
+                  "y": 90.0,
+                  "w": 166.68,
+                  "h": 727.87,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Arkology Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/ARKOLOGY_Desolatitan_Character_BP.ARKOLOGY_Desolatitan_Character_BP_C",
+          "displayName": "Arkology Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "SE_DinoSpawnEntriesSandworm_C",
+              "groupWeight": 0.0025,
+              "spawnMultiplier": 0.05,
+              "spawnLimit": 0.05,
+              "spawnChances": [
+                5.0
+              ],
+              "weight": 3.1e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.0025",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 5%"
+              },
+              "boxes": [
+                {
+                  "x": 1593.11,
+                  "y": 69.42,
+                  "w": 199.65,
+                  "h": 473.11,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1127.7,
+                  "y": 78.88,
+                  "w": 417.71,
+                  "h": 213.33,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1195.53,
+                  "y": 1773.29,
+                  "w": 332.92,
+                  "h": 208.08,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1771.91,
+                  "y": 1195.79,
+                  "w": 221.08,
+                  "h": 671.05,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1824.97,
+                  "y": 857.67,
+                  "w": 88.43,
+                  "h": 332.92,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1533.66,
+                  "y": 1773.36,
+                  "w": 265.3,
+                  "h": 221.08,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 857.41,
+                  "y": 1785.64,
+                  "w": 332.92,
+                  "h": 195.07,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 316.41,
+                  "y": 1787.44,
+                  "w": 130.05,
+                  "h": 195.07,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 519.28,
+                  "y": 58.44,
+                  "w": 1212.05,
+                  "h": 221.08,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 69.34,
+                  "y": 745.04,
+                  "w": 220.82,
+                  "h": 516.25,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1778.44,
+                  "y": 181.42,
+                  "w": 208.08,
+                  "h": 671.05,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 73.42,
+                  "y": 1316.67,
+                  "w": 220.82,
+                  "h": 619.5,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 407.17,
+                  "y": 77.61,
+                  "w": 660.78,
+                  "h": 213.33,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 778.83,
+                  "y": 1765.75,
+                  "w": 516.25,
+                  "h": 220.82,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 58.63,
+                  "y": 134.6,
+                  "w": 221.08,
+                  "h": 1779.06,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1341.35,
+                  "y": 1493.3,
+                  "w": 516.25,
+                  "h": 454.92,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1653.5,
+                  "y": 1122.05,
+                  "w": 315.13,
+                  "h": 363.93,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1808.95,
+                  "y": 90.0,
+                  "w": 166.68,
+                  "h": 727.87,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "The Center": {
+      "dinos": {
+        "Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Desolatitan_Character_BP.Desolatitan_Character_BP_C",
+          "displayName": "Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 1.0,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.25,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 808.22,
+                  "y": 771.78,
+                  "w": 589.89,
+                  "h": 298.57,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 865.39,
+                  "y": 1305.55,
+                  "w": 532.72,
+                  "h": 223.2,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 865.39,
+                  "y": 1091.87,
+                  "w": 532.72,
+                  "h": 223.2,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 865.39,
+                  "y": 1578.3,
+                  "w": 532.72,
+                  "h": 334.95,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 347.27,
+                  "y": 1475.4,
+                  "w": 326.78,
+                  "h": 220.45,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 27.24,
+                  "y": 862.62,
+                  "w": 458.96,
+                  "h": 514.87,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 376.01,
+                  "y": 719.67,
+                  "w": 326.86,
+                  "h": 256.82,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Arkology Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/ARKOLOGY_Desolatitan_Character_BP.ARKOLOGY_Desolatitan_Character_BP_C",
+          "displayName": "Arkology Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.0125,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 808.22,
+                  "y": 771.78,
+                  "w": 589.89,
+                  "h": 298.57,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 865.39,
+                  "y": 1305.55,
+                  "w": 532.72,
+                  "h": 223.2,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 865.39,
+                  "y": 1091.87,
+                  "w": 532.72,
+                  "h": 223.2,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 865.39,
+                  "y": 1578.3,
+                  "w": 532.72,
+                  "h": 334.95,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 347.27,
+                  "y": 1475.4,
+                  "w": 326.78,
+                  "h": 220.45,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 27.24,
+                  "y": 862.62,
+                  "w": 458.96,
+                  "h": 514.87,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 376.01,
+                  "y": 719.67,
+                  "w": 326.86,
+                  "h": 256.82,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Ragnarok": {
+      "dinos": {
+        "Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Desolatitan_Character_BP.Desolatitan_Character_BP_C",
+          "displayName": "Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 1.0,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.25,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 664.24,
+                  "y": 704.44,
+                  "w": 374.05,
+                  "h": 121.26,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 726.4,
+                  "y": 827.47,
+                  "w": 91.13,
+                  "h": 292.26,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1473.78,
+                  "y": 497.7,
+                  "w": 206.49,
+                  "h": 465.26,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1460.77,
+                  "y": 1536.95,
+                  "w": 269.3,
+                  "h": 184.35,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Scorched Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Scorched_Desolatitan_Character_BP.Scorched_Desolatitan_Character_BP_C",
+          "displayName": "Scorched Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "SE_DinoSpawnEntriesSandworm_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 0.05,
+              "spawnLimit": 0.05,
+              "spawnChances": [
+                5.0
+              ],
+              "weight": 0.000625,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 5%"
+              },
+              "boxes": [
+                {
+                  "x": 1609.99,
+                  "y": 555.19,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1473.21,
+                  "y": 555.19,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1609.99,
+                  "y": 769.73,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1473.21,
+                  "y": 769.73,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Arkology Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/ARKOLOGY_Desolatitan_Character_BP.ARKOLOGY_Desolatitan_Character_BP_C",
+          "displayName": "Arkology Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.0125,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 664.24,
+                  "y": 704.44,
+                  "w": 374.05,
+                  "h": 121.26,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 726.4,
+                  "y": 827.47,
+                  "w": 91.13,
+                  "h": 292.26,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1473.78,
+                  "y": 497.7,
+                  "w": 206.49,
+                  "h": 465.26,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1460.77,
+                  "y": 1536.95,
+                  "w": 269.3,
+                  "h": 184.35,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesSandworm_C",
+              "groupWeight": 0.0025,
+              "spawnMultiplier": 0.05,
+              "spawnLimit": 0.05,
+              "spawnChances": [
+                5.0
+              ],
+              "weight": 3.1e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.0025",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 5%"
+              },
+              "boxes": [
+                {
+                  "x": 1609.99,
+                  "y": 555.19,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1473.21,
+                  "y": 555.19,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1609.99,
+                  "y": 769.73,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1473.21,
+                  "y": 769.73,
+                  "w": 126.51,
+                  "h": 198.02,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Valguero": {
+      "dinos": {
+        "Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Desolatitan_Character_BP.Desolatitan_Character_BP_C",
+          "displayName": "Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 1.0,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.25,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 930.3,
+                  "y": 1350.6,
+                  "w": 150.59,
+                  "h": 100.39,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1337.18,
+                  "y": 1204.89,
+                  "w": 125.49,
+                  "h": 75.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1226.28,
+                  "y": 1740.89,
+                  "w": 125.49,
+                  "h": 75.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Arkology Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/ARKOLOGY_Desolatitan_Character_BP.ARKOLOGY_Desolatitan_Character_BP_C",
+          "displayName": "Arkology Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.0125,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 930.3,
+                  "y": 1350.6,
+                  "w": 150.59,
+                  "h": 100.39,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1337.18,
+                  "y": 1204.89,
+                  "w": 125.49,
+                  "h": 75.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1226.28,
+                  "y": 1740.89,
+                  "w": 125.49,
+                  "h": 75.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Extinction": {
+      "dinos": {
+        "Scorched Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Scorched_Desolatitan_Character_BP.Scorched_Desolatitan_Character_BP_C",
+          "displayName": "Scorched Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
+              "groupWeight": 0.1,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.1,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.007353,
+              "display": {
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 1256.93,
+                  "y": 361.04,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 289.37,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 217.7,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 146.03,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 74.36,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 74.36,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 146.03,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1901.97,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1830.3,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1758.63,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1686.96,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1615.29,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1543.62,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1471.94,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 647.73,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1400.27,
+                  "y": 647.73,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 576.06,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 504.38,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 504.38,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 432.71,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Desolatitan_Character_BP.Desolatitan_Character_BP_C",
+          "displayName": "Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
+              "groupWeight": 0.1,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.1,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.006734,
+              "display": {
+                "weightText": "Entry Weight: 0.1",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 1256.93,
+                  "y": 1579.45,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 1651.12,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 1866.13,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 1937.81,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1973.64,
+                  "y": 1436.11,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1901.97,
+                  "y": 1364.44,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1973.64,
+                  "y": 1364.44,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1901.97,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1830.3,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1758.63,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1686.96,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1615.29,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Arkology Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/ARKOLOGY_Desolatitan_Character_BP.ARKOLOGY_Desolatitan_Character_BP_C",
+          "displayName": "Arkology Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Wasteland_SnowBuffer_C",
+              "groupWeight": 0.005,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.1,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.000337,
+              "display": {
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 1256.93,
+                  "y": 1579.45,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 1651.12,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 1866.13,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 1937.81,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1973.64,
+                  "y": 1436.11,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1901.97,
+                  "y": 1364.44,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1973.64,
+                  "y": 1364.44,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1901.97,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1830.3,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1758.63,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1686.96,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1615.29,
+                  "y": 1292.77,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
+              "groupWeight": 0.005,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.1,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.000368,
+              "display": {
+                "weightText": "Entry Weight: 0.005",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 1256.93,
+                  "y": 361.04,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 289.37,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 217.7,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 146.03,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 74.36,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 74.36,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 146.03,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1901.97,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1830.3,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1758.63,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1686.96,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1615.29,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1543.62,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1471.94,
+                  "y": 719.4,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 647.73,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1400.27,
+                  "y": 647.73,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 576.06,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 504.38,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1328.6,
+                  "y": 504.38,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1256.93,
+                  "y": 432.71,
+                  "w": 65.7,
+                  "h": 65.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Astraeos": {
+      "dinos": {
+        "Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/Desolatitan_Character_BP.Desolatitan_Character_BP_C",
+          "displayName": "Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 1.0,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.25,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 556.76,
+                  "y": 1704.79,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1043.14,
+                  "y": 1485.91,
+                  "w": 45.32,
+                  "h": 40.16,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 87.34,
+                  "y": 1891.51,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 289.66,
+                  "y": 1187.21,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 307.43,
+                  "y": 1370.88,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 142.74,
+                  "y": 880.53,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Arkology Desolatitan": {
+          "bpPath": "/ARKOLOGYOE-DESOLATITAN/Content/Desolatitan/ARKOLOGY_Desolatitan_Character_BP.ARKOLOGY_Desolatitan_Character_BP_C",
+          "displayName": "Arkology Desolatitan",
+          "nameTag": "Desolatitan",
+          "sourceModId": "1133222",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesGigant_C",
+              "groupWeight": 0.05,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": [
+                100.0
+              ],
+              "weight": 0.0125,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "boxes": [
+                {
+                  "x": 556.76,
+                  "y": 1704.79,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1043.14,
+                  "y": 1485.91,
+                  "w": 45.32,
+                  "h": 40.16,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 87.34,
+                  "y": 1891.51,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 289.66,
+                  "y": 1187.21,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 307.43,
+                  "y": 1370.88,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 142.74,
+                  "y": 880.53,
+                  "w": 82.81,
+                  "h": 73.38,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}
