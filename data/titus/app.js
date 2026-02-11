@@ -165,7 +165,6 @@ const SOURCES = [
 let currentMapId = "";
 let activeSourceId = "official";
 let loadedMods = {}; // cache
-let currentModMeta = null; // { id, name } from mod file, or null for official
 
 let mapObj = null;
 let currentCfg = null;
@@ -175,10 +174,6 @@ let currentViewMode = "dino";
 
 // entryClass -> array of { dinoKey, entry, entryIndex }
 let entryIndex = {};
-// ============================================================
-// SETTINGS
-// ============================================================
-let useRarityForMods = true; // default; set to false if you want “mod style” by default
 
 const jsonCache = {};
 
@@ -785,175 +780,6 @@ async function preloadMapAssets() {
   }
 }
 
-let dockControl = null;
-let dockState = { mapMeta: null, cfg: null };
-
-function isPanelVisible(id){
-  const el = document.getElementById(id);
-  if (!el) return false;
-  return el.style.display !== "none";
-}
-
-function setPanelVisible(id, show){
-  const el = document.getElementById(id);
-  if (!el) return;
-
-  el.style.display = show ? "" : "none";
-  el.dataset.hidden = show ? "0" : "1";
-
-  // keep your mod FAB off (optional)
-  if (id === "modStylePanel") {
-    const fab = ensureModStyleFab?.();
-    if (fab) fab.style.display = "none";
-  }
-}
-
-function togglePanel(id){
-  setPanelVisible(id, !isPanelVisible(id));
-  updateDockToggles(); // keep pressed state in sync
-}
-
-function updateDockToggles(){
-  const dockEl = document.querySelector(".map-dock");
-  if (!dockEl) return;
-
-  dockEl.querySelectorAll("[data-toggle-panel]").forEach(btn => {
-    const id = btn.getAttribute("data-toggle-panel");
-    const on = isPanelVisible(id);
-    btn.classList.toggle("is-on", on);
-    btn.setAttribute("aria-pressed", on ? "true" : "false");
-  });
-}
-
-function setMapBackgroundFromDock(btn){
-  const mapMeta = dockState.mapMeta;
-  if (!mapMeta?.backgrounds?.length || !mapObj?.overlay) return;
-
-  const bgs = mapMeta.backgrounds;
-  const cur = btn.dataset.bgIndex ? Number(btn.dataset.bgIndex) : 0;
-  const next = (cur + 1) % bgs.length;
-
-  btn.dataset.bgIndex = String(next);
-  mapObj.overlay.setUrl(bgs[next].url);
-  btn.title = `Background: ${bgs[next].label || bgs[next].id || (next+1)} (tap to cycle)`;
-}
-
-function ensureDockControl(map){
-  if (dockControl) return;
-
-  const Dock = L.Control.extend({
-    options: { position: "bottomleft" },
-
-    onAdd() {
-      const container = L.DomUtil.create("div", "leaflet-control leaflet-bar map-dock");
-      L.DomEvent.disableClickPropagation(container);
-      L.DomEvent.disableScrollPropagation(container);
-      return container;
-    }
-  });
-
-  dockControl = new Dock();
-  map.addControl(dockControl);
-}
-
-function renderDock(){
-  const container = document.querySelector(".map-dock");
-  if (!container) return;
-
-  const mapMeta = dockState.mapMeta;
-  const isAstraeos = !!(mapMeta?.backgrounds?.length);
-  const isMod = (activeSourceId !== "official");
-
-  container.innerHTML = "";
-  container.style.display = "flex";
-  container.style.overflow = "hidden";
-
-  const mkBtn = ({ title, icon, onClick, togglePanelId=null, extraClass="" }) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `dock-btn ${extraClass}`.trim();
-    btn.title = title;
-    btn.setAttribute("aria-label", title);
-
-    if (togglePanelId) {
-      btn.setAttribute("data-toggle-panel", togglePanelId);
-      btn.setAttribute("aria-pressed", "false");
-    }
-
-    btn.innerHTML = icon;
-
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      onClick?.(btn);
-      if (document.activeElement?.blur) document.activeElement.blur();
-    });
-
-    container.appendChild(btn);
-    return btn;
-  };
-
-  // 1) BG button — only on Astraeos
-  if (isAstraeos) {
-    const bgs = mapMeta.backgrounds;
-    const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
-    let idx = Math.max(0, bgs.indexOf(def));
-
-    // Ensure overlay is set to default bg when dock appears
-    mapObj?.overlay?.setUrl(bgs[idx].url);
-
-    const bgBtn = mkBtn({
-      title: `Background: ${def.label || def.id || (idx+1)} (tap to cycle)`,
-      icon: `
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
-                fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linejoin="round"/>
-        </svg>
-      `,
-      onClick: (btn) => setMapBackgroundFromDock(btn)
-    });
-
-    bgBtn.dataset.bgIndex = String(idx);
-  } else {
-    // non-Astraeos: default background from cfg.image
-    if (dockState.cfg?.image && mapObj?.overlay) {
-      mapObj.overlay.setUrl(dockState.cfg.image);
-    }
-  }
-
-  // 2) Dino Info toggle — always available
-  mkBtn({
-    title: "Toggle Dino Info",
-    icon: `
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="2"/>
-      </svg>
-    `,
-    togglePanelId: "dinoInfoPanel",
-    onClick: () => togglePanel("dinoInfoPanel")
-  });
-
-  // 3) Mod Style toggle — only on mods
-  if (isMod) {
-    mkBtn({
-      title: "Toggle Mod Style",
-      icon: `
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
-                fill="currentColor" opacity=".9"/>
-          <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
-                fill="currentColor"/>
-        </svg>
-      `,
-      togglePanelId: "modStylePanel",
-      onClick: () => togglePanel("modStylePanel")
-    });
-  }
-
-  updateDockToggles();
-}
 
 // ============================================================
 // Meta lines (3 lines: weight / max / chances)
@@ -1081,12 +907,7 @@ function initMap(cfg) {
     zoomControl: false
   });
 
-  L.control.zoom({ position: "bottomleft" }).addTo(map);
-
-  // after it’s added, tag it
-  setTimeout(() => {
-    document.querySelector(".leaflet-control-zoom")?.classList.add("zoom-horizontal");
-  }, 0);
+  L.control.zoom({ position: "bottomright" }).addTo(map);
 
   // Create overlay ONCE
   const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
@@ -1137,6 +958,75 @@ function updateMapForCfg(cfg) {
 
 let bgToggleControl = null;
 
+function setBgToggle(mapMeta, cfg){
+  // remove existing
+  if (bgToggleControl && mapObj?.map){
+    mapObj.map.removeControl(bgToggleControl);
+    bgToggleControl = null;
+  }
+
+  const bgs = mapMeta?.backgrounds;
+  if (!bgs || !bgs.length || !mapObj?.map){
+    mapObj?.overlay?.setUrl(cfg.image);
+    return;
+  }
+
+  const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
+  let i = Math.max(0, bgs.indexOf(def));
+  mapObj.overlay.setUrl(bgs[i].url);
+
+  const BgControl = L.Control.extend({
+    options: { position: "bottomleft" },
+    onAdd() {
+      const container = L.DomUtil.create("div", "leaflet-control leaflet-bar bg-toggle");
+      const btn = L.DomUtil.create("button", "bg-toggle-btn", container);
+
+      btn.type = "button";
+      btn.title = `Background: ${bgs[i].label || bgs[i].id || (i+1)} (tap to cycle)`;
+      btn.setAttribute("aria-label", "Toggle background");
+
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
+                fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linejoin="round"/>
+        </svg>
+      `;
+
+      // ✅ styles belong HERE (btn exists here)
+      btn.style.width = "34px";
+      btn.style.height = "34px";
+      btn.style.display = "flex";
+      btn.style.alignItems = "center";
+      btn.style.justifyContent = "center";
+      btn.style.lineHeight = "1";
+      btn.style.padding = "0";
+      btn.style.color = "white";
+
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+
+      L.DomEvent.on(btn, "click", (e) => {
+        L.DomEvent.preventDefault(e);
+        L.DomEvent.stopPropagation(e);
+
+        i = (i + 1) % bgs.length;
+        mapObj.overlay.setUrl(bgs[i].url);
+        btn.title = `Background: ${bgs[i].label || bgs[i].id || (i+1)} (tap to cycle)`;
+
+        if (document.activeElement && typeof document.activeElement.blur === "function"){
+          document.activeElement.blur();
+        }
+      });
+
+      return container;
+    }
+  });
+
+  bgToggleControl = new BgControl();
+  mapObj.map.addControl(bgToggleControl);
+}
+
 function refitMapForUI() {
   if (!mapObj?.map || !mapObj?.bounds) return;
 
@@ -1148,6 +1038,85 @@ function refitMapForUI() {
 }
 
 // ============================================================
+function addPanelsControl(map) {
+  const PanelsControl = L.Control.extend({
+    options: { position: "bottomleft" }, // ✅ move near BG button
+
+    onAdd() {
+      const container = L.DomUtil.create("div", "leaflet-control leaflet-bar panel-restore");
+
+      // Style similar to your bg-toggle control
+      container.style.background = "rgba(30,30,30,0.85)";
+      container.style.border = "1px solid rgba(255,255,255,0.15)";
+      container.style.borderRadius = "8px";
+      container.style.overflow = "hidden";
+      container.style.display = "flex";
+      container.style.gap = "0";
+      
+      const mkBtn = ({ title, icon, onClick }) => {
+        const btn = L.DomUtil.create("button", "panel-restore-btn", container);
+        btn.type = "button";
+        btn.title = title;
+        btn.setAttribute("aria-label", title);
+        btn.innerHTML = icon;
+
+        btn.style.width = "34px";
+        btn.style.height = "34px";
+        btn.style.display = "flex";
+        btn.style.alignItems = "center";
+        btn.style.justifyContent = "center";
+        btn.style.padding = "0";
+        btn.style.margin = "0";
+        btn.style.border = "0";
+        btn.style.background = "rgba(30,30,30,.85)";
+        btn.style.color = "white";
+        btn.style.cursor = "pointer";
+
+        L.DomEvent.on(btn, "click", (e) => {
+          L.DomEvent.preventDefault(e);
+          L.DomEvent.stopPropagation(e);
+          onClick?.();
+          if (document.activeElement?.blur) document.activeElement.blur();
+        });
+
+        return btn;
+      };
+
+      // 🦖 Dino Info restore
+      mkBtn({
+        title: "Show Dino Info",
+        icon: `
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        `,
+        onClick: () => showPanel("dinoInfoPanel")
+      });
+
+      // 🎛️ Mod Style restore (only useful when source is mod)
+      mkBtn({
+        title: "Show Mod Style",
+        icon: `
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
+                  fill="currentColor" opacity=".9"/>
+            <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
+                  fill="currentColor"/>
+          </svg>
+        `,
+        onClick: () => showPanel("modStylePanel")
+      });
+
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+
+      return container;
+    }
+  });
+
+  map.addControl(new PanelsControl());
+}
 
 // ============================================================
 // Build entry index
@@ -1256,11 +1225,6 @@ function setViewMode(mode) {
 
   setInfoPanelTitle(mode === "dino" ? "Dino Info" : "Spawn Entry Info");
 
-  useRarityForMods = (mode === "dino");
-  
-  renderModStylePanelBody();
-  redrawSelected();
-
   if (currentCfg) setupMainSelect(currentCfg);
 }
 
@@ -1278,10 +1242,6 @@ function switchMode(nextMode) {
     drawSpawnEntry(currentCfg, sel.value);
     renderInfoPanelForEntry(currentCfg, sel.value);
   }
-  if (currentViewMode === "entry") {
-    useRarityForMods = false;
-  }
-  renderModStylePanelBody();
 }
 
 // ============================================================
@@ -1371,14 +1331,8 @@ async function loadMapByMeta(mapMeta) {
   // 2) If mod source, swap dinos from mod map
   if (activeSourceId !== "official") {
     const modCfg = await loadModSource(activeSourceId);
-  
-    // ✅ capture mod metadata for UI
-    currentModMeta = modCfg?.mod || null;
-  
     const modMap = modCfg?.maps?.[mapMeta.id];
     effectiveCfg = { ...vanillaCfg, dinos: modMap?.dinos || {} };
-  } else {
-    currentModMeta = null;
   }
 
   // 3) Post-process config
@@ -1394,18 +1348,10 @@ async function loadMapByMeta(mapMeta) {
   // 4) Create map ONCE; otherwise update it
   if (!mapObj) {
     mapObj = initMap(currentCfg);
-    ensureDockControl(mapObj.map);   // ✅ add once (THIS is what was missing)
+    addPanelsControl(mapObj.map);     // add once
   } else {
-    updateMapForCfg(currentCfg);
+    updateMapForCfg(currentCfg);      // fast path
   }
-  
-  // keep latest for dock rendering
-  dockState.mapMeta = mapMeta;
-  dockState.cfg = currentCfg;
-  
-  // rebuild dock buttons based on map + source
-  renderDock();
-  updateDockToggles();
   
   drawPois(currentCfg);
 
@@ -1415,7 +1361,7 @@ async function loadMapByMeta(mapMeta) {
   renderModStylePanelBody();
 
   // If Astraeos has alternate bgs, keep your dropdown behavior:
-
+  setBgToggle(mapMeta, currentCfg);
 
   // 6) Populate the ONE dropdown slot based on mode (dino/entry)
   setupMainSelect(currentCfg);
@@ -1531,11 +1477,7 @@ function drawDino(cfg, dinoKey) {
       for (const m of entry._mgrDraw) {
         const targetLayer = m.isCave ? mapObj.caveLayer : mapObj.layer;
 
-        const useRarity = isOfficial || useRarityForMods;
-
-        const color = useRarity
-          ? rarityToColor(m.rarity)
-          : modDrawColor;
+        const color = isOfficial ? rarityToColor(m.rarity) : modDrawColor;
 
         const baseWeight = m.isCave ? 3 : 1;
         const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
@@ -1582,8 +1524,7 @@ function drawDino(cfg, dinoKey) {
     const untame = entry._untame ?? (entry.bForceUntameable === true);
     const targetLayer = isCave ? mapObj.caveLayer : mapObj.layer;
 
-    const useRarity = isOfficial || useRarityForMods;
-    const color = useRarity ? rarityToColor(entry.rarity) : modDrawColor;
+    const color = isOfficial ? rarityToColor(entry.rarity) : modDrawColor;
 
     const baseWeight = isCave ? 3 : 1;
     const weight = (!isOfficial && modGlowEnabled) ? (baseWeight + 2) : baseWeight;
@@ -1706,7 +1647,6 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
   };
   panel.querySelector('[data-action="hide"]').onclick = () => {
     panel.style.display = "none";
-    updateDockToggles();
     panel.dataset.hidden = "1";
 
     // If it's the mod panel, show the floating “paintbrush” button
@@ -1731,7 +1671,6 @@ function showPanel(id) {
     const fab = ensureModStyleFab();
     if (fab) fab.style.display = "none";
   }
-  updateDockToggles();
 }
 
 function makePanelDraggable(panel) {
@@ -1854,17 +1793,7 @@ function renderModStylePanelBody() {
   if (!panel) return;
   const body = panel.querySelector(".fp-body");
 
-  const isSpawnMode = (currentViewMode === "entry");
-
-
   body.innerHTML = `
-    ${!isSpawnMode ? `
-      <label class="fp-row">
-        <input id="modUseRarity" type="checkbox" ${useRarityForMods ? "checked" : ""}>
-        <span>Use rarity colors</span>
-      </label>
-    ` : ``}
-
     <label class="fp-row">
       <span>Color</span>
       <input id="modColor2" type="color" value="${modDrawColor}">
@@ -1884,32 +1813,17 @@ function renderModStylePanelBody() {
     </label>
   `;
 
-  const r  = document.getElementById("modUseRarity");
-  const c  = document.getElementById("modColor2");
-  const o  = document.getElementById("modOpacity2");
+  const c = document.getElementById("modColor2");
+  const o = document.getElementById("modOpacity2");
   const ol = document.getElementById("modOpacityLabel2");
-  const g  = document.getElementById("modGlow2");
+  const g = document.getElementById("modGlow2");
 
-  if (r) r.onchange = () => {
-    useRarityForMods = r.checked;
-    redrawSelected();
-    // optional: if you want color control to instantly disable/enable:
-    renderModStylePanelBody();
-  };
-
-  // ✅ disable mod color picker when rarity is being used
-  if (c) {
-    c.disabled = (useRarityForMods && !isSpawnMode);
-    c.style.opacity = c.disabled ? "0.5" : "1";
-    c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
-  }
-
+  if (c) c.oninput = () => { modDrawColor = c.value; redrawSelected(); };
   if (o) o.oninput = () => {
     modDrawOpacity = Number(o.value);
     if (ol) ol.textContent = modDrawOpacity.toFixed(2);
     requestRedraw();
   };
-
   if (g) g.onchange = () => { modGlowEnabled = g.checked; redrawSelected(); };
 }
 
@@ -2038,7 +1952,6 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const nameTag = d.nameTag || d.nametag || "";
   const extraBps = asArray(d.additionalBpPathsToDisplay);
   const allBps = [bp, ...extraBps].filter(Boolean);
-  const modId = currentModMeta?.id || "";
   
   const entries = d.entries || [];
   
@@ -2071,11 +1984,6 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   body.innerHTML = `
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
-      ${currentModMeta?.id ? `
-        <div class="info-submeta">
-          Mod: ${escapeHtml(currentModMeta.id)}
-        </div>
-      ` : ``}
       
       ${blueprintBlock}
       
