@@ -56,7 +56,7 @@
 /* Toggle “ON” state */
 .leaflet-control.map-dock .dock-btn.is-on{
   background: rgba(0,140,255,.25);
-  box-shadow: inset 0 0 0 1px rgba(59,130,246,.40);
+  box-shadow: inset 0 0 0 1px rgba(59,130,246,.20);
 }
 
 /* Make Leaflet zoom control horizontal (side-by-side) */
