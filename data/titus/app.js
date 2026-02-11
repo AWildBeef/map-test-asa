@@ -175,6 +175,11 @@ let currentViewMode = "dino";
 
 // entryClass -> array of { dinoKey, entry, entryIndex }
 let entryIndex = {};
+
+const lastSelection = {
+  dino: {},   // { [sourceId]: dinoKey }
+  entry: {},  // { [sourceId]: entryClass }
+};
 // ============================================================
 // SETTINGS
 // ============================================================
@@ -1206,11 +1211,13 @@ function setupMainSelect(cfg) {
     }
 
     sel.onchange = () => {
+      lastSelection.dino[activeSourceId] = sel.value; // ✅ remember per source
       drawDino(cfg, sel.value);
       renderInfoPanelForDino(cfg, sel.value);
     };
 
-    sel.value = keys[0];
+    const preferred = lastSelection.dino[activeSourceId];
+    sel.value = (preferred && keys.includes(preferred)) ? preferred : keys[0];
     sel.onchange();
 
   } else {
@@ -1231,11 +1238,13 @@ function setupMainSelect(cfg) {
     }
 
     sel.onchange = () => {
+      lastSelection.entry[activeSourceId] = sel.value; // ✅ remember per source
       drawSpawnEntry(cfg, sel.value);
       renderInfoPanelForEntry(cfg, sel.value);
     };
 
-    sel.value = keys[0];
+    const preferred = lastSelection.entry[activeSourceId];
+    sel.value = (preferred && keys.includes(preferred)) ? preferred : keys[0];
     sel.onchange();
   }
 
