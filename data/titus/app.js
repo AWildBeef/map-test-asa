@@ -1444,6 +1444,11 @@ async function loadMapByMeta(mapMeta) {
   dockState.mapMeta = mapMeta;
   dockState.cfg = currentCfg;
   
+  // 5) Panels + background dropdown
+  ensurePanels();
+  setModStylePanelVisible(activeSourceId !== "official");
+  renderModStylePanelBody();
+  
   // rebuild dock buttons based on map + source
   renderDock();
   updateDockToggles();
@@ -1451,13 +1456,7 @@ async function loadMapByMeta(mapMeta) {
   setPoisVisible(showPois); // ✅ re-apply on map changes
   drawPois(currentCfg);
 
-  // 5) Panels + background dropdown
-  ensurePanels();
-  setModStylePanelVisible(activeSourceId !== "official");
-  renderModStylePanelBody();
-
   // If Astraeos has alternate bgs, keep your dropdown behavior:
-
 
   // 6) Populate the ONE dropdown slot based on mode (dino/entry)
   setupMainSelect(currentCfg);
