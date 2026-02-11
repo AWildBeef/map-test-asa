@@ -327,6 +327,22 @@ body{
     min-width: 0;   /* critical for flexbox */
     max-width: none;
   }
+  
+  .mode-toggle{
+    height:42px;
+    padding:0 16px;
+    font-size:15px;
+  }
+
+  .icon-btn{
+    width:42px;
+    height:42px;
+  }
+
+  .leaflet-control.map-dock .dock-btn{
+    width:40px;
+    height:40px;
+  }
 
 }
 
