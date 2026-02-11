@@ -310,6 +310,26 @@ body{
   touch-action: manipulation;
 }
 
+/* ================================
+   DESKTOP — even dropdown layout
+   ================================ */
+
+@media (min-width: 641px){
+
+  #topbar .controls{
+    flex-wrap: nowrap;      /* prevents wrapping */
+    justify-content: center;
+  }
+
+  /* ALL dropdown hosts get equal width */
+  #topbar .controls > *{
+    flex: 1 1 0;
+    min-width: 0;   /* critical for flexbox */
+    max-width: none;
+  }
+
+}
+
 /* ============================================================
    Fancy dropdown should visually match #topbar select
    ============================================================ */
