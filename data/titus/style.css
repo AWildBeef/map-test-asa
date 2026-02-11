@@ -883,13 +883,23 @@ button {
 }
 
 .floating-panel .fp-btn{
-  width:20px;
-  height:20px;
-  border-radius:5px;
-  background:var(--control-bg);
-  border:1px solid var(--control-border);
-  color:var(--text);
-  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+
+.floating-panel .fp-btn svg{
+  display:block;
+  pointer-events:none;
+  transition: transform .15s ease;
+}
+
+.floating-panel.collapsed .fp-btn-chevron svg{
+  transform: rotate(-90deg);
+}
+
+
 }
 .floating-panel .fp-btn:hover{ border-color:#596273; }
 
