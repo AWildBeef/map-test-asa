@@ -1176,6 +1176,11 @@ button {
     font-size:12px;
     margin-left:5px
   }
+  
+  modeToggle{
+    margin-right: 12px; /* increase to move it left more */
+  }
+
 
   /* bgSelectWrap sizing */
   #topbar .controls > #bgSelectWrap{
