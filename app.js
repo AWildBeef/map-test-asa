@@ -994,7 +994,14 @@ function renderDock(){
   if (isMod) {
     mkBtn({
       title: "Toggle Mod Style",
-      icon: `...`,
+      icon: `
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
+                  fill="currentColor" opacity=".9"/>
+            <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
+                  fill="currentColor"/>
+          </svg>
+        `,
       togglePanelId: "modStylePanel",
       onClick: () => togglePanel("modStylePanel")
     });
