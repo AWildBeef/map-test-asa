@@ -1,0 +1,3675 @@
+{
+  "schemaVersion": 1,
+  "mod": {
+    "id": "1246872",
+    "name": "Cyrus's Critters: Redpanda"
+  },
+  "maps": {
+    "The Island": {
+      "dinos": {
+        "Jungle Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/Variants/JungleRedPanda_Character_BP.JungleRedPanda_Character_BP_C",
+          "displayName": "Jungle Red Panda",
+          "nameTag": "JungleRedpanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesJungle_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 4e-06,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1775.82,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 218.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 131.92,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.5,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.98,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.5,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.14,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1334.77,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1335.25,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1334.77,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1335.25,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1334.77,
+                  "y": 218.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/RedPanda_Character_BP.RedPanda_Character_BP_C",
+          "displayName": "Red Panda",
+          "nameTag": "RedPanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesJungle_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 4e-06,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1775.82,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1775.82,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1688.02,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1687.54,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 218.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 131.92,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.5,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.98,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.5,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.14,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1334.77,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1260.54,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1335.25,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1334.77,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1423.05,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1335.25,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1334.77,
+                  "y": 218.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 1174.02,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 1087.5,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 566.45,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.9,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1511.43,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1599.71,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 479.93,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 392.13,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 305.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "DinoSpawnEntriesRedwoods_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 7e-06,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1247.13,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.14,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 806.8,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 806.8,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 740.14,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 653.61,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 827.3,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1335.25,
+                  "y": 1000.98,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1334.77,
+                  "y": 913.82,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Snow Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/Variants/SnowRedPanda_Character_BP.SnowRedPanda_Character_BP_C",
+          "displayName": "Snow Red Panda",
+          "nameTag": "SnowRedpanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesSnow_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 7e-06,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1247.13,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1246.71,
+                  "y": 1867.1,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.94,
+                  "y": 1867.1,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.57,
+                  "y": 1867.1,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.35,
+                  "y": 1867.1,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 894.12,
+                  "y": 1867.1,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 277.32,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 276.84,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 365.12,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.14,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.5,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.98,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.5,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.98,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.5,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 541.78,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 453.98,
+                  "y": 1347.07,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.14,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.62,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 630.14,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 806.8,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.28,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 895.08,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.67,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 982.19,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1070.47,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1247.13,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1159.33,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1158.85,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 1780.31,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 101.08,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 100.6,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 1606.63,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 101.08,
+                  "y": 1520.11,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 208.83,
+                  "y": 1367.25,
+                  "w": 60.38,
+                  "h": 58.57,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 188.88,
+                  "y": 1693.79,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 718.42,
+                  "y": 1433.59,
+                  "w": 80.5,
+                  "h": 78.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Ragnarok": {
+      "dinos": {
+        "Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/RedPanda_Character_BP.RedPanda_Character_BP_C",
+          "displayName": "Red Panda",
+          "nameTag": "RedPanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Ragnarok_Bison_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 4.4e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1610.75,
+                  "y": 1694.74,
+                  "w": 273.53,
+                  "h": 227.17,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1478.49,
+                  "y": 1562.79,
+                  "w": 216.07,
+                  "h": 143.88,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 684.29,
+                  "y": 843.61,
+                  "w": 149.78,
+                  "h": 230.86,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 158.98,
+                  "y": 1015.56,
+                  "w": 122.13,
+                  "h": 141.63,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1011.5,
+                  "y": 875.84,
+                  "w": 78.29,
+                  "h": 123.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1796.58,
+                  "y": 952.75,
+                  "w": 162.52,
+                  "h": 113.9,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "DinoSpawnEntries_Ragnarok_Scotland_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 2e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1420.5,
+                  "y": 1589.84,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1484.41,
+                  "y": 1515.54,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1548.18,
+                  "y": 1515.54,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1674.81,
+                  "y": 1636.37,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1738.62,
+                  "y": 1564.71,
+                  "w": 57.16,
+                  "h": 134.12,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1420.5,
+                  "y": 1664.51,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1484.41,
+                  "y": 1664.51,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1548.18,
+                  "y": 1664.51,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1611.6,
+                  "y": 1664.51,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1484.41,
+                  "y": 1589.84,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1548.18,
+                  "y": 1589.84,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1611.6,
+                  "y": 1589.84,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1611.6,
+                  "y": 1515.54,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1674.81,
+                  "y": 1561.98,
+                  "w": 57.16,
+                  "h": 67.76,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1616.14,
+                  "y": 1789.19,
+                  "w": 68.6,
+                  "h": 98.93,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1693.11,
+                  "y": 1822.64,
+                  "w": 81.75,
+                  "h": 43.37,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1781.96,
+                  "y": 1733.96,
+                  "w": 39.44,
+                  "h": 128.07,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1826.73,
+                  "y": 1733.96,
+                  "w": 37.73,
+                  "h": 128.07,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Jungle Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/Variants/JungleRedPanda_Character_BP.JungleRedPanda_Character_BP_C",
+          "displayName": "Jungle Red Panda",
+          "nameTag": "JungleRedpanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Ragnarok_Jungle_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 4e-06,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 491.51,
+                  "y": 1644.0,
+                  "w": 52.98,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 468.39,
+                  "y": 1358.78,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 837.29,
+                  "y": 1455.83,
+                  "w": 40.88,
+                  "h": 31.87,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 559.6,
+                  "y": 1412.91,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 536.24,
+                  "y": 1185.84,
+                  "w": 40.88,
+                  "h": 35.77,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 572.69,
+                  "y": 1143.11,
+                  "w": 40.88,
+                  "h": 37.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 514.02,
+                  "y": 1459.19,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 863.68,
+                  "y": 1409.8,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 837.29,
+                  "y": 1491.34,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 491.62,
+                  "y": 1597.88,
+                  "w": 52.98,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 515.43,
+                  "y": 1551.74,
+                  "w": 60.54,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 515.43,
+                  "y": 1505.44,
+                  "w": 60.54,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 445.59,
+                  "y": 1597.88,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 864.57,
+                  "y": 1374.09,
+                  "w": 40.09,
+                  "h": 32.05,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 733.88,
+                  "y": 1184.97,
+                  "w": 40.88,
+                  "h": 37.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 687.79,
+                  "y": 1184.97,
+                  "w": 40.88,
+                  "h": 37.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 536.24,
+                  "y": 1226.04,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 642.21,
+                  "y": 1184.97,
+                  "w": 40.88,
+                  "h": 37.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 596.79,
+                  "y": 1184.97,
+                  "w": 40.88,
+                  "h": 37.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 663.7,
+                  "y": 1143.11,
+                  "w": 40.88,
+                  "h": 37.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 618.2,
+                  "y": 1143.11,
+                  "w": 40.88,
+                  "h": 37.29,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 559.6,
+                  "y": 1459.19,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 514.02,
+                  "y": 1412.91,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        },
+        "Snow Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/Variants/SnowRedPanda_Character_BP.SnowRedPanda_Character_BP_C",
+          "displayName": "Snow Red Panda",
+          "nameTag": "SnowRedpanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Ragnarok_SnowForest_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 1.5e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1299.9,
+                  "y": 1220.24,
+                  "w": 40.88,
+                  "h": 65.4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1369.86,
+                  "y": 1420.63,
+                  "w": 58.35,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1157.41,
+                  "y": 1108.34,
+                  "w": 31.0,
+                  "h": 20.11,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1120.51,
+                  "y": 1094.78,
+                  "w": 35.56,
+                  "h": 20.11,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1102.64,
+                  "y": 1093.56,
+                  "w": 12.13,
+                  "h": 20.11,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1074.01,
+                  "y": 1062.62,
+                  "w": 26.7,
+                  "h": 20.11,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1043.85,
+                  "y": 1100.63,
+                  "w": 20.48,
+                  "h": 42.46,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 866.24,
+                  "y": 1055.99,
+                  "w": 35.45,
+                  "h": 19.74,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 901.57,
+                  "y": 1080.31,
+                  "w": 13.64,
+                  "h": 23.09,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1137.4,
+                  "y": 1270.9,
+                  "w": 19.59,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1197.86,
+                  "y": 1126.71,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1115.97,
+                  "y": 1166.3,
+                  "w": 69.66,
+                  "h": 32.7,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1385.0,
+                  "y": 1353.91,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1047.92,
+                  "y": 1038.3,
+                  "w": 20.6,
+                  "h": 41.4,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1248.07,
+                  "y": 1296.62,
+                  "w": 40.88,
+                  "h": 42.14,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Valguero": {
+      "dinos": {
+        "Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/RedPanda_Character_BP.RedPanda_Character_BP_C",
+          "displayName": "Red Panda",
+          "nameTag": "RedPanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Valguero_Scotland_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 1e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 1644.26,
+                  "y": 1552.66,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1594.14,
+                  "y": 1552.66,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1543.84,
+                  "y": 1552.66,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1493.74,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1493.74,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1443.57,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1443.57,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1393.62,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1393.62,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1343.45,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1343.45,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1293.44,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1293.44,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1243.27,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1243.27,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1143.01,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1143.01,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1092.84,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1249.0,
+                  "y": 1452.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1198.83,
+                  "y": 1452.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1299.58,
+                  "y": 1452.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1371.37,
+                  "y": 1602.92,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1321.2,
+                  "y": 1602.92,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1421.94,
+                  "y": 1602.92,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1170.28,
+                  "y": 1602.92,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1120.1,
+                  "y": 1602.92,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1315.17,
+                  "y": 1177.44,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1315.17,
+                  "y": 1227.42,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1365.48,
+                  "y": 1227.42,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1315.17,
+                  "y": 1277.74,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1365.48,
+                  "y": 1277.74,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 628.98,
+                  "y": 1438.23,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 679.29,
+                  "y": 1438.23,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 628.98,
+                  "y": 1388.11,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 679.29,
+                  "y": 1388.11,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 628.98,
+                  "y": 1338.19,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 679.29,
+                  "y": 1338.19,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1193.18,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1193.18,
+                  "y": 1552.58,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1092.84,
+                  "y": 1502.6,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1220.45,
+                  "y": 1602.92,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1271.02,
+                  "y": 1602.92,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1415.8,
+                  "y": 1227.42,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 628.98,
+                  "y": 1288.69,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 679.29,
+                  "y": 1288.69,
+                  "w": 37.65,
+                  "h": 37.65,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Astraeos": {
+      "dinos": {
+        "Red Panda": {
+          "bpPath": "/CyrusRedPanda/Content/RedPanda/RedPanda_Character_BP.RedPanda_Character_BP_C",
+          "displayName": "Red Panda",
+          "nameTag": "RedPanda",
+          "sourceModId": "1246872",
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Ragnarok_Bison_C",
+              "groupWeight": 0.003,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.003,
+              "spawnChances": [],
+              "weight": 4.4e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.003",
+                "limitText": "Max % To Allow: 0.3%",
+                "chanceText": ""
+              },
+              "boxes": [
+                {
+                  "x": 58.39,
+                  "y": 1277.95,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 443.88,
+                  "y": 1057.05,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 807.81,
+                  "y": 1385.35,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 641.22,
+                  "y": 1611.31,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 568.57,
+                  "y": 1686.37,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 101.01,
+                  "y": 1900.61,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1679.36,
+                  "y": 1933.45,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1994.63,
+                  "y": 1582.53,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                },
+                {
+                  "x": 1477.76,
+                  "y": 1502.52,
+                  "w": 77.46,
+                  "h": 92.53,
+                  "bIsCaveManager": null,
+                  "bForceUntameable": null
+                }
+              ],
+              "bestSharedMin": 0.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}
