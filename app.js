@@ -137,6 +137,7 @@ const SOURCES = [
   { id: "official", name: "Official" },
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
   { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
+  { id: "Desolatitan", name: "ARKOLOGY: OE - Desolatitan", file: "data/mods/Desolatitan.json" },
   { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json" },
   { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json" },
   { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json" },
@@ -160,8 +161,9 @@ const SOURCES = [
   { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json" },
   { id: "WAK_Spinosaurus", name: "BigAL's: WAK Spinosaurus", file: "data/mods/WAK_Spinosaurus.json" },
   { id: "MeraxesTLC", name: "BigAL's: Meraxes", file: "data/mods/MeraxesTLC.json" },
-  { id: "Desolatitan", name: "ARKOLOGY: OE - Desolatitan", file: "data/mods/Desolatitan.json" },
-
+  { id: "JumpingSpider", name: "Cyrus' Critters: [Cuter TLC] Jumping Spider", file: "data/mods/JumpingSpider.json" },
+  { id: "CyrusGecko", name: "Cyrus' Critters: Magna Gecko", file: "data/mods/CyrusGecko.json" },
+  { id: "Redpanda", name: "Cyrus's Critters: Redpanda", file: "data/mods/Redpanda.json" },
 ];
 
 // ============================================================
