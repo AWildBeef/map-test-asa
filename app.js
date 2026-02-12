@@ -149,6 +149,7 @@ const SOURCES = [
   { id: "Xyphias'CreaturesCharnia", name: "Xyphias' Creatures: Charnia", file: "data/mods/Xyphias'CreaturesCharnia.json" },
   { id: "Xyphias'CreaturesDickinsonia", name: "Xyphias' Creatures: Dickinsonia", file: "data/mods/Xyphias'CreaturesDickinsonia.json" },
   { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json" },
+  { id: "Vetulicolians", name: "Xyphias' Creatures: Vetulicolians", file: "data/mods/Vetulicolians.json" },
   { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
   { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json" },
   { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
