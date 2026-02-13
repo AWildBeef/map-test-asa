@@ -495,12 +495,9 @@ function mountDrillSelect({
 
     const isAtRoot = (curNode() === root);
 
-    const ordered = isAtRoot
-      ? kids
-      : [
-          ...kids.filter(n => !isLeaf(n)), // folders first
-          ...kids.filter(n => isLeaf(n))   // leaves after
-        ];
+    const ordered = [...kids].sort((a, b) =>
+      (a.label || "").localeCompare(b.label || "", undefined, { sensitivity: "base" })
+    );
 
     for (const n of ordered) {
       const row = document.createElement("div");
