@@ -815,37 +815,6 @@ button {
   color:#fff;
 }
 
-/* Make sure your “special dino” rules don’t re-shrink/reshape it */
-#dinoSelectFancy .dd-btn{
-  /* intentionally empty – this block exists to override any earlier dino-only dd-btn rules */
-}
-
-/* Mod Style floating bubble (shows when panel hidden) */
-#modStyleFab{
-  position:absolute;
-  z-index:10000;
-  right:10px;
-  top:52px;              /* tweak so it doesn't overlap BG */
-  width:40px;
-  height:40px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(30,30,30,.85);
-  color:#fff;
-  display:none;          /* shown only when panel hidden */
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 10px 22px rgba(0,0,0,.40);
-}
-#modStyleFab:hover{ background:rgba(45,45,45,.92); }
-#modStyleFab:active{ transform:translateY(1px); }
-
-#modStyleFab svg{
-  width:18px;
-  height:18px;
-}
-
 /* ============================================================
    4) FLOATING PANELS (new draggable system)
    ============================================================ */
