@@ -386,9 +386,45 @@ body{
   .leaflet-control-zoom.zoom-horizontal{
     border-radius:10px; /* optional slight upscale */
   }
+  #topbar{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
 
+  /* title row stops forcing 100% width */
+  #topbar .title-row{
+    width: auto;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    gap: 10px;
+  }
 
+  /* dropdown row takes remaining space and stays on one line */
+  #topbar .controls{
+    width: auto;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  /* keep dropdowns from stretching oddly */
+  #topbar .controls > *{
+    flex: 1 1 0;
+    min-width: 180px; /* tweak */
+    max-width: 320px; /* tweak */
+  }
+
+  /* if you want the dino dropdown wider than the others */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 2 1 0;
+    max-width: 660px; /* tweak */
+  }
 }
+
+ 
 
 /* ============================================================
    Fancy dropdown should visually match #topbar select
