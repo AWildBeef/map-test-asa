@@ -346,6 +346,60 @@ body{
 /* ================================
    DESKTOP — even dropdown layout
    ================================ */
+@media (min-width: 641px){
+
+  /* ONE ROW TOP BAR: title | dropdowns | buttons */
+  #topbar{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 14px;
+
+    /* keep your existing padding/border/etc */
+    padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+  }
+
+  /* Put title-row in the left column */
+  .title-row{
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: auto auto auto; /* title | mode | filters */
+    align-items: center;
+    column-gap: 8px;
+    width: max-content; /* don’t stretch */
+  }
+
+  /* Keep the title from wrapping */
+  .title-row .title{
+    white-space: nowrap;
+  }
+
+  /* Put controls in the center column */
+  #topbar .controls{
+    grid-column: 2;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;   /* ✅ centered dropdowns */
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Make each dropdown slot evenly sized */
+  #topbar .controls > *{
+    flex: 1 1 0;
+    min-width: 180px;
+    max-width: 320px;
+  }
+  
+  .icon-btn{
+    width:42px;
+    height:42px;
+  }
+}
 
 
 /* ============================================================
