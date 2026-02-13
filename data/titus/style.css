@@ -408,10 +408,6 @@ body{
   max-width: none;
 }
 
-/* hover/focus match native */
-#dinoSelectFancy .dd-btn:hover{
-  border-color:#596273;
-}
 #dinoSelectFancy .dd-btn:focus{
   outline:none;
   border-color:var(--focus);
