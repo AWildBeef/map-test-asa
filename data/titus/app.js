@@ -189,6 +189,12 @@ const lastSelection = {
 };
 
 let showPois = true;  // default on
+
+// Remember drill path per dropdown instance
+const drillState = {
+  // nativeId -> array of labels representing the folder path, e.g. ["Sources","Mods","Xyphias"]
+  pathByNativeId: {}
+};
 // ============================================================
 // SETTINGS
 // ============================================================
@@ -392,6 +398,31 @@ function mountDrillSelect({
 
   function isLeaf(n) { return n && typeof n === "object" && "value" in n; }
   function childrenOf(n) { return Array.isArray(n?.children) ? n.children : []; }
+  
+  function pathLabels() {
+    return stack.map(n => n.label).filter(Boolean);
+  }
+  
+  function restorePath(labels) {
+    // labels like ["Sources","Mods","Xyphias"]
+    stack.splice(0);           // clear
+    stack.push(root);          // always start at root
+  
+    if (!Array.isArray(labels) || labels.length < 2) return;
+  
+    // walk down folder nodes by label (skip first since it's root)
+    for (let i = 1; i < labels.length; i++) {
+      const want = labels[i];
+      const next = childrenOf(curNode()).find(n => !isLeaf(n) && (n.label === want));
+      if (!next) break;
+      } else {
+        stack.push(n);
+        drillState.pathByNativeId[nativeId] = pathLabels(); // ✅ remember folder
+        search.value = "";
+        renderList();
+      }
+    }
+  }
 
   function syncButton() {
     const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
@@ -418,6 +449,7 @@ function mountDrillSelect({
       c.addEventListener("click", (e) => {
         e.preventDefault();
         stack.splice(idx + 1); // pop to this
+        drillState.pathByNativeId[nativeId] = pathLabels();
         renderList();
       });
 
@@ -491,7 +523,11 @@ function mountDrillSelect({
   function open() {
     wrap.classList.add("open");
     search.value = "";
-    stack.splice(1); // reset to root every open (optional, but keeps it simple)
+  
+    // ✅ restore last folder, if any
+    const saved = drillState.pathByNativeId[nativeId];
+    if (saved) restorePath(saved);
+  
     renderList();
     search.focus();
   }
