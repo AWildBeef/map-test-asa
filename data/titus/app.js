@@ -559,7 +559,7 @@ function mountDrillSelect({
 
   function close() {
     wrap.classList.remove("open");
-    btn.focus();
+    btn.blur();
   }
 
   btn.addEventListener("click", () => {
