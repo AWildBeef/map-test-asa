@@ -405,8 +405,8 @@ function mountDrillSelect({
   
   function restorePath(labels) {
     // labels like ["Sources","Mods","Xyphias"]
-    stack.splice(0);           // clear
-    stack.push(root);          // always start at root
+    stack.splice(0);  // clear
+    stack.push(root); // always start at root
   
     if (!Array.isArray(labels) || labels.length < 2) return;
   
@@ -415,12 +415,7 @@ function mountDrillSelect({
       const want = labels[i];
       const next = childrenOf(curNode()).find(n => !isLeaf(n) && (n.label === want));
       if (!next) break;
-      } else {
-        stack.push(n);
-        drillState.pathByNativeId[nativeId] = pathLabels(); // ✅ remember folder
-        search.value = "";
-        renderList();
-      }
+      stack.push(next); // ✅ this was missing
     }
   }
 
@@ -511,6 +506,7 @@ function mountDrillSelect({
           close();
         } else {
           stack.push(n);
+          drillState.pathByNativeId[nativeId] = pathLabels(); // ✅ remember folder
           search.value = "";
           renderList();
         }
