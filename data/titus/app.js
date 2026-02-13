@@ -498,7 +498,7 @@ function mountDrillSelect({
     const ordered = isAtRoot
       ? kids   // preserve your intentional order
       : [...kids].sort((a, b) =>
-          (a.label || "").localeCompare(b.label || "", undefined, { sensitivity: "base" })
+          (a.label || "").localeCompare(b.label || "", undefined, {sensitivity: "base",numeric: true})
         );
 
     for (const n of ordered) {
