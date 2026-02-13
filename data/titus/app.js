@@ -618,6 +618,7 @@ function mountFancySelect({
   }
 
   list.appendChild(chrome);
+  }
 
   // Helper: render a folder node
   function folderRow(folderName, count) {
