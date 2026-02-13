@@ -221,7 +221,48 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+function buildSourceDrillTree() {
+  const root = { label: "Sources", children: [] };
 
+  // 1) Official as a leaf
+  const official = SOURCES.find(s => s.id === "official");
+  if (official) root.children.push({ label: official.name, value: official.id });
+
+  // 2) Mods folder
+  const modsFolder = { label: "Mods", children: [] };
+
+  // Simple grouping rules (edit anytime)
+  const groups = {
+    "Additional Creatures": (s) => s.name.startsWith("Additional Creatures:"),
+    "Prehistoric Beasts":   (s) => s.id.startsWith("PrehistoricBeasts"),
+    "Xyphias":              (s) => s.name.startsWith("Xyphias' Creatures:"),
+    "Isle of Myths":        (s) => s.name.startsWith("Isle of Myths:"),
+    "Cyrus' Critters":      (s) => s.name.startsWith("Cyrus"),
+    "BigAL":                (s) => s.name.startsWith("BigAL"),
+    "ARKOLOGY":             (s) => s.name.startsWith("ARKOLOGY"),
+    "Other":                (_s) => true
+  };
+
+  const modSources = SOURCES.filter(s => s.id !== "official");
+
+  // assign to first matching group in order
+  const groupNodes = Object.keys(groups).map(g => ({ label: g, children: [] }));
+
+  for (const s of modSources) {
+    for (const g of groupNodes) {
+      if (groups[g.label](s)) {
+        g.children.push({ label: s.name, value: s.id });
+        break;
+      }
+    }
+  }
+
+  // only include non-empty groups
+  modsFolder.children = groupNodes.filter(g => g.children.length);
+
+  root.children.push(modsFolder);
+  return root;
+}
 
 function asArray(x) {
   if (!x) return [];
@@ -257,6 +298,209 @@ function dinoSummaryForFancy(cfg, dinoKey){
 function rarityDotColor(rarity){
   // reuse your existing rarityToColor
   return rarity ? rarityToColor(rarity) : "#777";
+}
+
+function mountDrillSelect({
+  nativeId,
+  hostId,
+  root,                  // tree root node: { label, children:[...] }
+  placeholder = "Search...",
+  getButtonSubText = null // optional (value) => string
+}) {
+  const native = document.getElementById(nativeId);
+  const host = document.getElementById(hostId);
+  if (!native || !host) return;
+
+  // Hide native but keep it functional
+  native.style.position = "absolute";
+  native.style.left = "-9999px";
+  native.style.width = "1px";
+  native.style.height = "1px";
+  native.style.opacity = "0";
+
+  host.innerHTML = "";
+
+  const wrap = document.createElement("div");
+  wrap.className = "dd dd-drill";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "dd-btn";
+
+  const btnLeft = document.createElement("div");
+  btnLeft.className = "dd-btn-left";
+
+  const textWrap = document.createElement("div");
+  textWrap.className = "dd-btn-text";
+  textWrap.style.minWidth = "0";
+
+  const label = document.createElement("div");
+  label.className = "dd-label";
+
+  const sub = document.createElement("div");
+  sub.className = "dd-sub";
+
+  textWrap.appendChild(label);
+  textWrap.appendChild(sub);
+  btnLeft.appendChild(textWrap);
+
+  const caret = document.createElement("div");
+  caret.className = "dd-caret";
+  caret.textContent = "▾";
+
+  btn.appendChild(btnLeft);
+  btn.appendChild(caret);
+
+  const panel = document.createElement("div");
+  panel.className = "dd-panel";
+
+  // breadcrumbs row
+  const crumbs = document.createElement("div");
+  crumbs.className = "dd-crumbs";
+
+  const search = document.createElement("input");
+  search.className = "dd-search";
+  search.placeholder = placeholder;
+
+  const list = document.createElement("div");
+  list.className = "dd-list";
+
+  panel.appendChild(crumbs);
+  panel.appendChild(search);
+  panel.appendChild(list);
+
+  wrap.appendChild(btn);
+  wrap.appendChild(panel);
+  host.appendChild(wrap);
+
+  // ----- nav state -----
+  const stack = [root]; // current path
+  function curNode() { return stack[stack.length - 1]; }
+
+  function isLeaf(n) { return n && typeof n === "object" && "value" in n; }
+  function childrenOf(n) { return Array.isArray(n?.children) ? n.children : []; }
+
+  function syncButton() {
+    const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
+    label.textContent = txt;
+
+    if (typeof getButtonSubText === "function") {
+      sub.textContent = getButtonSubText(native.value) || "";
+    } else {
+      sub.textContent = "";
+    }
+  }
+
+  function renderCrumbs() {
+    crumbs.innerHTML = "";
+
+    // Root crumb is clickable back-to-root
+    stack.forEach((node, idx) => {
+      const c = document.createElement("button");
+      c.type = "button";
+      c.className = "dd-crumb";
+      c.textContent = node.label || (idx === 0 ? "All" : "…");
+      c.disabled = (idx === stack.length - 1);
+
+      c.addEventListener("click", (e) => {
+        e.preventDefault();
+        stack.splice(idx + 1); // pop to this
+        renderList();
+      });
+
+      crumbs.appendChild(c);
+
+      if (idx < stack.length - 1) {
+        const sep = document.createElement("span");
+        sep.className = "dd-crumb-sep";
+        sep.textContent = "›";
+        crumbs.appendChild(sep);
+      }
+    });
+  }
+
+  function renderList() {
+    const q = normSearch(search.value);
+    list.innerHTML = "";
+    renderCrumbs();
+
+    const kids = childrenOf(curNode());
+
+    // folders first, then leaves
+    const folders = kids.filter(n => !isLeaf(n));
+    const leaves  = kids.filter(n => isLeaf(n));
+
+    const ordered = [...folders, ...leaves];
+
+    for (const n of ordered) {
+      const row = document.createElement("div");
+      row.className = "dd-item dd-drill-item";
+      row.dataset.search = normSearch(n.label || "");
+
+      if (q && !row.dataset.search.includes(q)) continue;
+
+      const left = document.createElement("div");
+      left.className = "dd-item-left";
+
+      const main = document.createElement("div");
+      main.className = "dd-item-main";
+
+      const name = document.createElement("div");
+      name.className = "dd-item-name";
+      name.textContent = n.label || "(unnamed)";
+
+      main.appendChild(name);
+      left.appendChild(main);
+
+      const right = document.createElement("div");
+      right.className = "dd-drill-right";
+      right.textContent = isLeaf(n) ? "" : "›";
+
+      row.appendChild(left);
+      row.appendChild(right);
+
+      row.addEventListener("click", () => {
+        if (isLeaf(n)) {
+          native.value = n.value;
+          native.dispatchEvent(new Event("change"));
+          close();
+        } else {
+          stack.push(n);
+          search.value = "";
+          renderList();
+        }
+      });
+
+      list.appendChild(row);
+    }
+  }
+
+  function open() {
+    wrap.classList.add("open");
+    search.value = "";
+    stack.splice(1); // reset to root every open (optional, but keeps it simple)
+    renderList();
+    search.focus();
+  }
+
+  function close() {
+    wrap.classList.remove("open");
+    btn.focus();
+  }
+
+  btn.addEventListener("click", () => {
+    wrap.classList.contains("open") ? close() : open();
+  });
+
+  search.addEventListener("input", () => renderList());
+
+  document.addEventListener("pointerdown", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  native.addEventListener("change", syncButton);
+
+  syncButton();
 }
 
 function mountFancySelect({
@@ -1392,12 +1636,14 @@ function setupSourceDropdown() {
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
   });
-  mountFancySelect({
+  const tree = buildSourceDrillTree();
+
+  mountDrillSelect({
     nativeId: "sourceSelect",
     hostId: "sourceSelectFancy",
-    placeholder: "Search sources...",
+    placeholder: "Search this level...",
+    root: tree,
     getButtonSubText: (v) => (v === "official" ? "Official" : "Mod"),
-    getRowBadges: (v) => [v === "official" ? "official" : "mod"],
   });
 }
 
