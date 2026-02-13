@@ -164,6 +164,7 @@ const SOURCES = [
   { id: "JumpingSpider", name: "Cyrus' Critters: [Cuter TLC] Jumping Spider", file: "data/mods/JumpingSpider.json" },
   { id: "CyrusGecko", name: "Cyrus' Critters: Magna Gecko", file: "data/mods/CyrusGecko.json" },
   { id: "Redpanda", name: "Cyrus's Critters: Redpanda", file: "data/mods/Redpanda.json" },
+  { id: "Test", name: "Cyrus's Critters: Test", file: "data/mods/Test.json" },
 ];
 
 // ============================================================
