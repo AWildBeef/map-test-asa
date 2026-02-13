@@ -134,36 +134,62 @@ const MAPS = [
 // SOURCES (Official + Mods)
 // ============================================================
 const SOURCES = [
-  { id: "official", name: "Official" },
+  { id: "official", name: "Official" order: 0},
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
-  { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
-  { id: "Desolatitan", name: "ARKOLOGY: OE - Desolatitan", file: "data/mods/Desolatitan.json" },
-  { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json" },
-  { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json" },
-  { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json" },
-  { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json" },
-  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json" },
-  { id: "Xyphias'CreaturesHatzegopteryx", name: "Xyphias' Creatures: Hatzegopteryx", file: "data/mods/Xyphias'CreaturesHatzegopteryx.json" },
-  { id: "Xyphias'CreaturesMeiolania", name: "Xyphias' Creatures: Meiolania", file: "data/mods/Xyphias'CreaturesMeiolania.json" },
-  { id: "Xyphias'CreaturesMischoptera", name: "Xyphias' Creatures: Mischoptera", file: "data/mods/Xyphias'CreaturesMischoptera.json" },
-  { id: "Xyphias'CreaturesMegistotherium", name: "Xyphias' Creatures: Megistotherium", file: "data/mods/Xyphias'CreaturesMegistotherium.json" },
-  { id: "Xyphias'CreaturesCharnia", name: "Xyphias' Creatures: Charnia", file: "data/mods/Xyphias'CreaturesCharnia.json" },
-  { id: "Xyphias'CreaturesDickinsonia", name: "Xyphias' Creatures: Dickinsonia", file: "data/mods/Xyphias'CreaturesDickinsonia.json" },
-  { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json" },
-  { id: "Vetulicolians", name: "Xyphias' Creatures: Vetulicolians", file: "data/mods/Vetulicolians.json" },
+  { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json",
+    group: "ARKOLOGY" },
+  { id: "Desolatitan", name: "ARKOLOGY: OE - Desolatitan", file: "data/mods/Desolatitan.json",
+    group: "ARKOLOGY" },
+  { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json",
+    group: "Prehistoric Beasts" },
+  { id: "Xyphias'CreaturesHatzegopteryx", name: "Xyphias' Creatures: Hatzegopteryx", file: "data/mods/Xyphias'CreaturesHatzegopteryx.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesMeiolania", name: "Xyphias' Creatures: Meiolania", file: "data/mods/Xyphias'CreaturesMeiolania.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesMischoptera", name: "Xyphias' Creatures: Mischoptera", file: "data/mods/Xyphias'CreaturesMischoptera.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesMegistotherium", name: "Xyphias' Creatures: Megistotherium", file: "data/mods/Xyphias'CreaturesMegistotherium.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesCharnia", name: "Xyphias' Creatures: Charnia", file: "data/mods/Xyphias'CreaturesCharnia.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesDickinsonia", name: "Xyphias' Creatures: Dickinsonia", file: "data/mods/Xyphias'CreaturesDickinsonia.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json",
+    group: "Xyphias' Creatures" },
+  { id: "Vetulicolians", name: "Xyphias' Creatures: Vetulicolians", file: "data/mods/Vetulicolians.json",
+    group: "Xyphias' Creatures" },
   { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
-  { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json" },
-  { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
-  { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
-  { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json" },
-  { id: "IoMSuchomimus", name: "Isle of Myths: Suchomimus", file: "data/mods/IoMSuchomimus.json" },
+  { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json",
+    group: "Isle of Myths" },
+  { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json",
+    group: "Additional Creatures" },
+  { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json",
+    group: "Additional Creatures" },
+  { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json",
+    group: "Additional Creatures" },
+  { id: "IoMSuchomimus", name: "Isle of Myths: Suchomimus", file: "data/mods/IoMSuchomimus.json",
+    group: "Isle of Myths" },
   { id: "BSSpearcrest", name: "Isle of Myths: Spearcrest", file: "data/mods/BSSpearcrest.json" },
-  { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json" },
-  { id: "WAK_Spinosaurus", name: "BigAL's: WAK Spinosaurus", file: "data/mods/WAK_Spinosaurus.json" },
-  { id: "MeraxesTLC", name: "BigAL's: Meraxes", file: "data/mods/MeraxesTLC.json" },
-  { id: "JumpingSpider", name: "Cyrus' Critters: [Cuter TLC] Jumping Spider", file: "data/mods/JumpingSpider.json" },
-  { id: "CyrusGecko", name: "Cyrus' Critters: Magna Gecko", file: "data/mods/CyrusGecko.json" },
-  { id: "Redpanda", name: "Cyrus's Critters: Redpanda", file: "data/mods/Redpanda.json" },
+  { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json",
+    group: "Isle of Myths" },
+  { id: "WAK_Spinosaurus", name: "BigAL's: WAK Spinosaurus", file: "data/mods/WAK_Spinosaurus.json",
+    group: "Big AL's" },
+  { id: "MeraxesTLC", name: "BigAL's: Meraxes", file: "data/mods/MeraxesTLC.json",
+    group: "Big AL's" },
+  { id: "JumpingSpider", name: "Cyrus' Critters: [Cuter TLC] Jumping Spider", file: "data/mods/JumpingSpider.json",
+    group: "Cyrus' Critters" },
+  { id: "CyrusGecko", name: "Cyrus' Critters: Magna Gecko", file: "data/mods/CyrusGecko.json",
+    group: "Cyrus' Critters" },
+  { id: "Redpanda", name: "Cyrus's Critters: Redpanda", file: "data/mods/Redpanda.json",
+    group: "Cyrus' Critters" },
 ];
 
 // ============================================================
@@ -230,56 +256,57 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 function buildSourceDrillTree() {
   const root = { label: "Sources", children: [] };
 
-  // Official leaf
+  // Official first (controlled)
   const official = SOURCES.find(s => s.id === "official");
-  if (official) root.children.push({ label: official.name, value: official.id });
+  if (official) {
+    root.children.push({ label: official.name, value: official.id });
+  }
 
   const modsFolder = { label: "Mods", children: [] };
 
-  // Group rules (NO "Other")
-  const groups = [
-    { label: "Additional Creatures", match: (s) => s.name.startsWith("Additional Creatures:") },
-    { label: "Prehistoric Beasts",   match: (s) => s.id.startsWith("PrehistoricBeasts") },
-    { label: "Xyphias",              match: (s) => s.name.startsWith("Xyphias' Creatures:") },
-    { label: "Isle of Myths",        match: (s) => s.name.startsWith("Isle of Myths:") },
-    { label: "Cyrus' Critters",      match: (s) => s.name.startsWith("Cyrus") },
-    { label: "BigAL",                match: (s) => s.name.startsWith("BigAL") },
-    { label: "ARKOLOGY",             match: (s) => s.name.startsWith("ARKOLOGY") },
-  ];
-
-  // Create folder nodes
-  const folderNodes = groups.map(g => ({ label: g.label, children: [] }));
-  const looseMods = []; // ✅ unmatched mods go directly under "Mods"
-
   const modSources = SOURCES.filter(s => s.id !== "official");
 
+  // groupName -> folder node
+  const groups = new Map();
+  const loose = [];
+
   for (const s of modSources) {
-    let placed = false;
+    const leaf = { label: s.name, value: s.id, _order: Number.isFinite(s.order) ? s.order : 9999 };
 
-    for (let i = 0; i < groups.length; i++) {
-      if (groups[i].match(s)) {
-        folderNodes[i].children.push({ label: s.name, value: s.id });
-        placed = true;
-        break;
+    if (s.group) {
+      const gname = String(s.group);
+      if (!groups.has(gname)) {
+        groups.set(gname, {
+          label: gname,
+          children: [],
+          _groupOrder: Number.isFinite(s.groupOrder) ? s.groupOrder : 9999
+        });
       }
-    }
-
-    if (!placed) {
-      looseMods.push({ label: s.name, value: s.id }); // ✅ back to Mods level
+      groups.get(gname).children.push(leaf);
+    } else {
+      loose.push(leaf);
     }
   }
 
-  // Optional: sort inside each group + loose list
-  for (const fn of folderNodes) {
-    fn.children.sort((a, b) => a.label.localeCompare(b.label));
+  // sort leaves inside each group
+  for (const g of groups.values()) {
+    g.children.sort((a, b) => (a._order - b._order) || a.label.localeCompare(b.label));
   }
-  looseMods.sort((a, b) => a.label.localeCompare(b.label));
 
-  // Add non-empty groups first, then loose leaves
-  modsFolder.children.push(...folderNodes.filter(f => f.children.length));
-  modsFolder.children.push(...looseMods);
+  // sort loose leaves
+  loose.sort((a, b) => (a._order - b._order) || a.label.localeCompare(b.label));
 
+  // sort group folders
+  const groupFolders = Array.from(groups.values())
+    .sort((a, b) => (a._groupOrder - b._groupOrder) || a.label.localeCompare(b.label))
+    .map(g => ({ label: g.label, children: g.children.map(({ _order, ...x }) => x) }));
+
+  // strip _order from loose too
+  const looseClean = loose.map(({ _order, ...x }) => x);
+
+  modsFolder.children.push(...groupFolders, ...looseClean);
   root.children.push(modsFolder);
+
   return root;
 }
 
