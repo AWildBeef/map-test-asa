@@ -134,7 +134,7 @@ const MAPS = [
 // SOURCES (Official + Mods)
 // ============================================================
 const SOURCES = [
-  { id: "official", name: "Official", order: 0},
+  { id: "official", name: "Official", order: 100},
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
   { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json",
     group: "ARKOLOGY" },
