@@ -27,6 +27,32 @@
   --topbar-pad-x: 16px;
 }
 
+.dd-group{
+  padding: 10px 10px 6px;
+  font-weight: 700;
+  opacity: .8;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.dd-group:first-child{ border-top: 0; }
+
+.dd-item-meta{
+  font-size: 12px;
+  opacity: .7;
+  margin-top: 2px;
+}
+
+.dd-group-collapsible{
+  cursor: pointer;
+  user-select: none;
+}
+
+.dd-group-collapsible.is-closed::after{
+  content: " (collapsed)";
+  font-weight: 500;
+  opacity: .6;
+}
+
 .leaflet-control.map-dock{
   background: rgba(30,30,30,0.85);
   border: 1px solid rgba(255,255,255,0.15);
