@@ -207,7 +207,7 @@ let useRarityForMods = true; // default; set to false if you want “mod style�
  * 5) "path"         = show group path meta line; still flat list (optionally combine w/ sections)
  */
 
-const GROUPING_MODES = ["soft", "sections", "collapsible", "two-stage", "path"];
+const GROUPING_MODES = ["soft", "sections", "collapsible", "two-stage", "path", "drilldown"];
 let groupingMode = localStorage.getItem("groupingMode") || "sections";
 
 // Simple metadata extraction from your SOURCES list (no manual edits required)
@@ -552,6 +552,8 @@ function mountFancySelect({
   host.appendChild(wrap);
 
   const mode = groupMode || groupingMode;
+  // ---- Drilldown state (only used in drilldown mode) ----
+  let drillPath = []; // e.g. ["Xyphias"]
 
   function makeItemRow({ value, text, metaText = "" , pills = [] }) {
     const row = document.createElement("div");
@@ -665,7 +667,9 @@ function mountFancySelect({
     });
 
     // ------------- Render per mode -------------
-    if (mode === "sections" || mode === "collapsible") {
+    if (mode === "drilldown" && nativeId === "sourceSelect") {
+      rebuildItemsDrilldown(rows);
+    } else if (mode === "sections" || mode === "collapsible")
       const collapsible = (mode === "collapsible");
 
       // group function: prefer passed getGroup; otherwise infer for sources
@@ -1046,6 +1050,155 @@ function mountFancySelect({
     } else {
       sub.textContent = "";
     }
+  }
+  function rebuildItemsDrilldown(rows) {
+  list.innerHTML = "";
+
+  // Build groups -> items
+  const official = rows.find(r => r.value === "official");
+  const mods = rows.filter(r => r.value !== "official");
+
+  const groupMap = new Map();
+  for (const r of mods) {
+    const src = SOURCES.find(s => s.id === r.value);
+    const g = metaForSource(src).group || "Other Mods";
+    (groupMap.get(g) || (groupMap.set(g, []), groupMap.get(g))).push(r);
+  }
+
+  // Sort groups + items
+  const groups = Array.from(groupMap.keys()).sort((a,b)=>a.localeCompare(b));
+  for (const g of groups) {
+    groupMap.get(g).sort((a,b)=>a.text.localeCompare(b.text));
+  }
+
+  // Create a "tree" where groups with 1 item are flattened into root
+  const rootItems = [];
+  const rootFolders = [];
+  for (const g of groups) {
+    const items = groupMap.get(g) || [];
+    if (items.length <= 1) {
+      if (items[0]) rootItems.push(items[0]); // flatten singletons
+    } else {
+      rootFolders.push({ name: g, items });
+    }
+  }
+
+  // Current "page"
+  const inFolder = drillPath.length > 0;
+  const curFolder = inFolder ? drillPath[drillPath.length - 1] : null;
+
+  // Top chrome: breadcrumb + back
+  const chrome = document.createElement("div");
+  chrome.style.padding = "8px 10px";
+  chrome.style.borderBottom = "1px solid rgba(255,255,255,.10)";
+  chrome.style.background = "rgba(0,0,0,.25)";
+
+  const crumb = document.createElement("div");
+  crumb.style.fontSize = "12px";
+  crumb.style.opacity = ".85";
+  crumb.textContent = inFolder ? `Sources / ${drillPath.join(" / ")}` : "Sources";
+  chrome.appendChild(crumb);
+
+  if (inFolder) {
+    const back = document.createElement("div");
+    back.className = "dd-item";
+    back.style.borderBottom = "1px solid rgba(255,255,255,.10)";
+    back.style.fontWeight = "700";
+    back.textContent = "◀ Back";
+    back.dataset.search = normSearch("back");
+    back.addEventListener("click", () => {
+      drillPath.pop();
+      rebuildItems();
+    });
+    list.appendChild(back);
+  }
+
+  list.appendChild(chrome);
+
+  // Helper: render a folder node
+  function folderRow(folderName, count) {
+    const row = document.createElement("div");
+    row.className = "dd-item";
+    row.dataset.search = normSearch(`${folderName} folder ${count}`);
+
+    const left = document.createElement("div");
+    left.className = "dd-item-left";
+
+    const main = document.createElement("div");
+    main.className = "dd-item-main";
+
+    const name = document.createElement("div");
+    name.className = "dd-item-name";
+    name.textContent = folderName;
+
+    const meta = document.createElement("div");
+    meta.className = "dd-item-meta";
+    meta.textContent = `${count} mods`;
+
+    main.appendChild(name);
+    main.appendChild(meta);
+    left.appendChild(main);
+
+    const badges = document.createElement("div");
+    badges.className = "dd-badges";
+
+    const pill = document.createElement("span");
+    pill.className = "dd-pill";
+    pill.textContent = "Open ▸";
+    badges.appendChild(pill);
+
+    row.appendChild(left);
+    row.appendChild(badges);
+
+    row.addEventListener("click", () => {
+      drillPath.push(folderName);
+      rebuildItems();
+      // keep search cleared on navigation
+      search.value = "";
+    });
+
+    return row;
+  }
+
+  // Helper: render a normal selectable item
+  function sourceRow(r) {
+    const src = SOURCES.find(s => s.id === r.value);
+    const m = metaForSource(src);
+
+    const pills = (typeof getRowBadges === "function")
+      ? (getRowBadges(r.value, cfg) || []).map(String)
+      : [];
+
+    // nice default pills
+    const mergedPills = Array.from(new Set([...pills, ...(m.tags || [])])).slice(0, 2);
+
+    return makeItemRow({
+      value: r.value,
+      text: r.text,
+      metaText: "", // or m.path if you want
+      pills: mergedPills
+    });
+  }
+
+  // Page content
+  if (!inFolder) {
+    // Root page: Official first (direct), then folders, then flattened singletons
+    if (official) list.appendChild(sourceRow(official));
+
+    // folders
+    for (const f of rootFolders) {
+      list.appendChild(folderRow(f.name, f.items.length));
+    }
+
+    // flattened singles (“one-step” mods)
+    rootItems.sort((a,b)=>a.text.localeCompare(b.text));
+    for (const r of rootItems) list.appendChild(sourceRow(r));
+
+  } else {
+    // Folder page: show all items in that group
+    const folder = rootFolders.find(f => f.name === curFolder);
+    const items = folder?.items || [];
+    for (const r of items) list.appendChild(sourceRow(r));
   }
 
   function open() {
