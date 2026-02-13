@@ -1320,28 +1320,28 @@ button {
   background: rgba(255,255,255,0.08);
 }
 
-#modStyleFab{
-  position:absolute;
-  z-index:10000;
-  right:10px;
-  top:52px; /* tweak if it overlaps other map controls */
-  width:40px;
-  height:40px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(30,30,30,.85);
-  color:#fff;
-  display:none; /* only visible when Mod Style panel is hidden */
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 10px 22px rgba(0,0,0,.40);
+/* ===== Fix iOS “blue/grey stroke” on fancy dropdown buttons ===== */
+.dd-btn{
+  outline: none !important;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-#modStyleFab:hover{ background:rgba(45,45,45,.92); }
-#modStyleFab:active{ transform:translateY(1px); }
+/* Don’t show focus ring on tap/click */
+.dd-btn:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
 
-#modStyleFab svg{
-  width:18px;
-  height:18px;
+/* Only show ring for keyboard focus (desktop/tabbing) */
+.dd-btn:focus-visible{
+  border-color: var(--focus) !important;
+  box-shadow: 0 0 0 3px rgba(122,162,255,.18) !important;
+}
+
+/* iOS long-press / active state */
+.dd-btn:active{
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--control-border) !important;
 }
