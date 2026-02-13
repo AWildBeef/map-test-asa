@@ -30,7 +30,7 @@
 /* Group headers in dropdown list */
 .dd-group{
   position: sticky;
-  top: 0;
+  top: 45;
   z-index: 2;
   padding: 8px 10px;
   font-weight: 700;
@@ -39,7 +39,12 @@
   font-size: 12px;
   opacity: .9;
   background: rgba(0,0,0,.35);
-  border-bottom: 1px solid rgba(255,255,255,.12);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+
+.dd-group + .dd-item{
+  border-top: 0; /* reduce “same-row” feeling */
 }
 
 /* Make collapsible headers look clickable */
