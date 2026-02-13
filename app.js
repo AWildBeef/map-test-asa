@@ -134,36 +134,62 @@ const MAPS = [
 // SOURCES (Official + Mods)
 // ============================================================
 const SOURCES = [
-  { id: "official", name: "Official" },
+  { id: "official", name: "Official", order: 100},
   { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
-  { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json" },
-  { id: "Desolatitan", name: "ARKOLOGY: OE - Desolatitan", file: "data/mods/Desolatitan.json" },
-  { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json" },
-  { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json" },
-  { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json" },
-  { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json" },
-  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json" },
-  { id: "Xyphias'CreaturesHatzegopteryx", name: "Xyphias' Creatures: Hatzegopteryx", file: "data/mods/Xyphias'CreaturesHatzegopteryx.json" },
-  { id: "Xyphias'CreaturesMeiolania", name: "Xyphias' Creatures: Meiolania", file: "data/mods/Xyphias'CreaturesMeiolania.json" },
-  { id: "Xyphias'CreaturesMischoptera", name: "Xyphias' Creatures: Mischoptera", file: "data/mods/Xyphias'CreaturesMischoptera.json" },
-  { id: "Xyphias'CreaturesMegistotherium", name: "Xyphias' Creatures: Megistotherium", file: "data/mods/Xyphias'CreaturesMegistotherium.json" },
-  { id: "Xyphias'CreaturesCharnia", name: "Xyphias' Creatures: Charnia", file: "data/mods/Xyphias'CreaturesCharnia.json" },
-  { id: "Xyphias'CreaturesDickinsonia", name: "Xyphias' Creatures: Dickinsonia", file: "data/mods/Xyphias'CreaturesDickinsonia.json" },
-  { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json" },
-  { id: "Vetulicolians", name: "Xyphias' Creatures: Vetulicolians", file: "data/mods/Vetulicolians.json" },
+  { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json",
+    group: "ARKOLOGY" },
+  { id: "Desolatitan", name: "ARKOLOGY: OE - Desolatitan", file: "data/mods/Desolatitan.json",
+    group: "ARKOLOGY" },
+  { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json",
+    group: "Prehistoric Beasts" },
+  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json",
+    group: "Prehistoric Beasts" },
+  { id: "Xyphias'CreaturesHatzegopteryx", name: "Xyphias' Creatures: Hatzegopteryx", file: "data/mods/Xyphias'CreaturesHatzegopteryx.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesMeiolania", name: "Xyphias' Creatures: Meiolania", file: "data/mods/Xyphias'CreaturesMeiolania.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesMischoptera", name: "Xyphias' Creatures: Mischoptera", file: "data/mods/Xyphias'CreaturesMischoptera.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesMegistotherium", name: "Xyphias' Creatures: Megistotherium", file: "data/mods/Xyphias'CreaturesMegistotherium.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesCharnia", name: "Xyphias' Creatures: Charnia", file: "data/mods/Xyphias'CreaturesCharnia.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesDickinsonia", name: "Xyphias' Creatures: Dickinsonia", file: "data/mods/Xyphias'CreaturesDickinsonia.json",
+    group: "Xyphias' Creatures" },
+  { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json",
+    group: "Xyphias' Creatures" },
+  { id: "Vetulicolians", name: "Xyphias' Creatures: Vetulicolians", file: "data/mods/Vetulicolians.json",
+    group: "Xyphias' Creatures" },
   { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
-  { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json" },
-  { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json" },
-  { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json" },
-  { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json" },
-  { id: "IoMSuchomimus", name: "Isle of Myths: Suchomimus", file: "data/mods/IoMSuchomimus.json" },
+  { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json",
+    group: "Isle of Myths" },
+  { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json",
+    group: "Additional Creatures" },
+  { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json",
+    group: "Additional Creatures" },
+  { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json",
+    group: "Additional Creatures" },
+  { id: "IoMSuchomimus", name: "Isle of Myths: Suchomimus", file: "data/mods/IoMSuchomimus.json",
+    group: "Isle of Myths" },
   { id: "BSSpearcrest", name: "Isle of Myths: Spearcrest", file: "data/mods/BSSpearcrest.json" },
-  { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json" },
-  { id: "WAK_Spinosaurus", name: "BigAL's: WAK Spinosaurus", file: "data/mods/WAK_Spinosaurus.json" },
-  { id: "MeraxesTLC", name: "BigAL's: Meraxes", file: "data/mods/MeraxesTLC.json" },
-  { id: "JumpingSpider", name: "Cyrus' Critters: [Cuter TLC] Jumping Spider", file: "data/mods/JumpingSpider.json" },
-  { id: "CyrusGecko", name: "Cyrus' Critters: Magna Gecko", file: "data/mods/CyrusGecko.json" },
-  { id: "Redpanda", name: "Cyrus's Critters: Redpanda", file: "data/mods/Redpanda.json" },
+  { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json",
+    group: "Isle of Myths" },
+  { id: "WAK_Spinosaurus", name: "BigAL's: WAK Spinosaurus", file: "data/mods/WAK_Spinosaurus.json",
+    group: "Big AL's" },
+  { id: "MeraxesTLC", name: "BigAL's: Meraxes", file: "data/mods/MeraxesTLC.json",
+    group: "Big AL's" },
+  { id: "JumpingSpider", name: "Cyrus' Critters: [Cuter TLC] Jumping Spider", file: "data/mods/JumpingSpider.json",
+    group: "Cyrus' Critters" },
+  { id: "CyrusGecko", name: "Cyrus' Critters: Magna Gecko", file: "data/mods/CyrusGecko.json",
+    group: "Cyrus' Critters" },
+  { id: "Redpanda", name: "Cyrus's Critters: Redpanda", file: "data/mods/Redpanda.json",
+    group: "Cyrus' Critters" },
 ];
 
 // ============================================================
@@ -189,6 +215,12 @@ const lastSelection = {
 };
 
 let showPois = true;  // default on
+
+// Remember drill path per dropdown instance
+const drillState = {
+  // nativeId -> array of labels representing the folder path, e.g. ["Sources","Mods","Xyphias"]
+  pathByNativeId: {}
+};
 // ============================================================
 // SETTINGS
 // ============================================================
@@ -221,7 +253,62 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+function buildSourceDrillTree() {
+  const root = { label: "Sources", children: [] };
 
+  // Official first (controlled)
+  const official = SOURCES.find(s => s.id === "official");
+  if (official) {
+    root.children.push({ label: official.name, value: official.id });
+  }
+
+  const modsFolder = { label: "Mods", children: [] };
+
+  const modSources = SOURCES.filter(s => s.id !== "official");
+
+  // groupName -> folder node
+  const groups = new Map();
+  const loose = [];
+
+  for (const s of modSources) {
+    const leaf = { label: s.name, value: s.id, _order: Number.isFinite(s.order) ? s.order : 9999 };
+
+    if (s.group) {
+      const gname = String(s.group);
+      if (!groups.has(gname)) {
+        groups.set(gname, {
+          label: gname,
+          children: [],
+          _groupOrder: Number.isFinite(s.groupOrder) ? s.groupOrder : 9999
+        });
+      }
+      groups.get(gname).children.push(leaf);
+    } else {
+      loose.push(leaf);
+    }
+  }
+
+  // sort leaves inside each group
+  for (const g of groups.values()) {
+    g.children.sort((a, b) => (a._order - b._order) || a.label.localeCompare(b.label));
+  }
+
+  // sort loose leaves
+  loose.sort((a, b) => (a._order - b._order) || a.label.localeCompare(b.label));
+
+  // sort group folders
+  const groupFolders = Array.from(groups.values())
+    .sort((a, b) => (a._groupOrder - b._groupOrder) || a.label.localeCompare(b.label))
+    .map(g => ({ label: g.label, children: g.children.map(({ _order, ...x }) => x) }));
+
+  // strip _order from loose too
+  const looseClean = loose.map(({ _order, ...x }) => x);
+
+  modsFolder.children.push(...groupFolders, ...looseClean);
+  root.children.push(modsFolder);
+
+  return root;
+}
 
 function asArray(x) {
   if (!x) return [];
@@ -257,6 +344,237 @@ function dinoSummaryForFancy(cfg, dinoKey){
 function rarityDotColor(rarity){
   // reuse your existing rarityToColor
   return rarity ? rarityToColor(rarity) : "#777";
+}
+
+function mountDrillSelect({
+  nativeId,
+  hostId,
+  root,                  // tree root node: { label, children:[...] }
+  placeholder = "Search...",
+  getButtonSubText = null // optional (value) => string
+}) {
+  const native = document.getElementById(nativeId);
+  const host = document.getElementById(hostId);
+  if (!native || !host) return;
+
+  // Hide native but keep it functional
+  native.style.position = "absolute";
+  native.style.left = "-9999px";
+  native.style.width = "1px";
+  native.style.height = "1px";
+  native.style.opacity = "0";
+
+  host.innerHTML = "";
+
+  const wrap = document.createElement("div");
+  wrap.className = "dd dd-drill";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "dd-btn";
+
+  const btnLeft = document.createElement("div");
+  btnLeft.className = "dd-btn-left";
+
+  const textWrap = document.createElement("div");
+  textWrap.className = "dd-btn-text";
+  textWrap.style.minWidth = "0";
+
+  const label = document.createElement("div");
+  label.className = "dd-label";
+
+  const sub = document.createElement("div");
+  sub.className = "dd-sub";
+
+  textWrap.appendChild(label);
+  textWrap.appendChild(sub);
+  btnLeft.appendChild(textWrap);
+
+  const caret = document.createElement("div");
+  caret.className = "dd-caret";
+  caret.textContent = "▾";
+
+  btn.appendChild(btnLeft);
+  btn.appendChild(caret);
+
+  const panel = document.createElement("div");
+  panel.className = "dd-panel";
+
+  // breadcrumbs row
+  const crumbs = document.createElement("div");
+  crumbs.className = "dd-crumbs";
+
+  const search = document.createElement("input");
+  search.className = "dd-search";
+  search.placeholder = placeholder;
+
+  const list = document.createElement("div");
+  list.className = "dd-list";
+
+  panel.appendChild(crumbs);
+  panel.appendChild(search);
+  panel.appendChild(list);
+
+  wrap.appendChild(btn);
+  wrap.appendChild(panel);
+  host.appendChild(wrap);
+
+  // ----- nav state -----
+  const stack = [root]; // current path
+  function curNode() { return stack[stack.length - 1]; }
+
+  function isLeaf(n) { return n && typeof n === "object" && "value" in n; }
+  function childrenOf(n) { return Array.isArray(n?.children) ? n.children : []; }
+  
+  function pathLabels() {
+    return stack.map(n => n.label).filter(Boolean);
+  }
+  
+  function restorePath(labels) {
+    // labels like ["Sources","Mods","Xyphias"]
+    stack.splice(0);  // clear
+    stack.push(root); // always start at root
+  
+    if (!Array.isArray(labels) || labels.length < 2) return;
+  
+    // walk down folder nodes by label (skip first since it's root)
+    for (let i = 1; i < labels.length; i++) {
+      const want = labels[i];
+      const next = childrenOf(curNode()).find(n => !isLeaf(n) && (n.label === want));
+      if (!next) break;
+      stack.push(next); // ✅ this was missing
+    }
+  }
+
+  function syncButton() {
+    const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
+    label.textContent = txt;
+
+    if (typeof getButtonSubText === "function") {
+      sub.textContent = getButtonSubText(native.value) || "";
+    } else {
+      sub.textContent = "";
+    }
+  }
+
+  function renderCrumbs() {
+    crumbs.innerHTML = "";
+
+    // Root crumb is clickable back-to-root
+    stack.forEach((node, idx) => {
+      const c = document.createElement("button");
+      c.type = "button";
+      c.className = "dd-crumb";
+      c.textContent = node.label || (idx === 0 ? "All" : "…");
+      c.disabled = (idx === stack.length - 1);
+
+      c.addEventListener("click", (e) => {
+        e.preventDefault();
+        stack.splice(idx + 1); // pop to this
+        drillState.pathByNativeId[nativeId] = pathLabels();
+        renderList();
+      });
+
+      crumbs.appendChild(c);
+
+      if (idx < stack.length - 1) {
+        const sep = document.createElement("span");
+        sep.className = "dd-crumb-sep";
+        sep.textContent = "›";
+        crumbs.appendChild(sep);
+      }
+    });
+  }
+
+  function renderList() {
+    const q = normSearch(search.value);
+    list.innerHTML = "";
+    renderCrumbs();
+
+    const kids = childrenOf(curNode());
+
+    const isAtRoot = (curNode() === root);
+
+    const ordered = isAtRoot
+      ? kids   // preserve your intentional order
+      : [...kids].sort((a, b) =>
+          (a.label || "").localeCompare(b.label || "", undefined, {sensitivity: "base",numeric: true})
+        );
+
+    for (const n of ordered) {
+      const row = document.createElement("div");
+      row.className = "dd-item dd-drill-item";
+      row.dataset.search = normSearch(n.label || "");
+
+      if (q && !row.dataset.search.includes(q)) continue;
+
+      const left = document.createElement("div");
+      left.className = "dd-item-left";
+
+      const main = document.createElement("div");
+      main.className = "dd-item-main";
+
+      const name = document.createElement("div");
+      name.className = "dd-item-name";
+      name.textContent = n.label || "(unnamed)";
+
+      main.appendChild(name);
+      left.appendChild(main);
+
+      const right = document.createElement("div");
+      right.className = "dd-drill-right";
+      right.textContent = isLeaf(n) ? "" : "›";
+
+      row.appendChild(left);
+      row.appendChild(right);
+
+      row.addEventListener("click", () => {
+        if (isLeaf(n)) {
+          native.value = n.value;
+          native.dispatchEvent(new Event("change"));
+          close();
+        } else {
+          stack.push(n);
+          drillState.pathByNativeId[nativeId] = pathLabels(); // ✅ remember folder
+          search.value = "";
+          renderList();
+        }
+      });
+
+      list.appendChild(row);
+    }
+  }
+
+  function open() {
+    wrap.classList.add("open");
+    search.value = "";
+  
+    // ✅ restore last folder, if any
+    const saved = drillState.pathByNativeId[nativeId];
+    if (saved) restorePath(saved);
+  
+    renderList();
+    search.focus();
+  }
+
+  function close() {
+    wrap.classList.remove("open");
+    btn.blur();
+  }
+
+  btn.addEventListener("click", () => {
+    wrap.classList.contains("open") ? close() : open();
+  });
+
+  search.addEventListener("input", () => renderList());
+
+  document.addEventListener("pointerdown", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  native.addEventListener("change", syncButton);
+
+  syncButton();
 }
 
 function mountFancySelect({
@@ -402,7 +720,7 @@ function mountFancySelect({
 
   function close() {
     wrap.classList.remove("open");
-    btn.focus();
+    btn.blur();
   }
 
   btn.addEventListener("click", () => {
@@ -424,6 +742,7 @@ function mountFancySelect({
   // Click outside closes (avoid stacking listeners: one per dropdown is fine,
   // but we guard by checking wrap.contains)
   document.addEventListener("pointerdown", (e) => {
+    if (!wrap.classList.contains("open")) return;
     if (!wrap.contains(e.target)) close();
   });
 
@@ -588,7 +907,7 @@ function mountFancyDinoSelect(cfg){
 
   function close(){
     wrap.classList.remove("open");
-    btn.focus();
+    btn.blur();
   }
 
   btn.addEventListener("click", () => {
@@ -611,6 +930,7 @@ function mountFancyDinoSelect(cfg){
 
   // Click outside to close
   document.addEventListener("pointerdown", (e) => {
+    if (!wrap.classList.contains("open")) return;
     if (!wrap.contains(e.target)) close();
   });
 
@@ -1392,12 +1712,14 @@ function setupSourceDropdown() {
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
   });
-  mountFancySelect({
+  const tree = buildSourceDrillTree();
+
+  mountDrillSelect({
     nativeId: "sourceSelect",
     hostId: "sourceSelectFancy",
-    placeholder: "Search sources...",
+    placeholder: "Search this level...",
+    root: tree,
     getButtonSubText: (v) => (v === "official" ? "Official" : "Mod"),
-    getRowBadges: (v) => [v === "official" ? "official" : "mod"],
   });
 }
 
