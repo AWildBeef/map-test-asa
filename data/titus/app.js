@@ -720,7 +720,7 @@ function mountFancySelect({
 
   function close() {
     wrap.classList.remove("open");
-    btn.focus();
+    btn.blur();
   }
 
   btn.addEventListener("click", () => {
@@ -742,6 +742,7 @@ function mountFancySelect({
   // Click outside closes (avoid stacking listeners: one per dropdown is fine,
   // but we guard by checking wrap.contains)
   document.addEventListener("pointerdown", (e) => {
+    if (!wrap.classList.contains("open")) return;
     if (!wrap.contains(e.target)) close();
   });
 
@@ -906,7 +907,7 @@ function mountFancyDinoSelect(cfg){
 
   function close(){
     wrap.classList.remove("open");
-    btn.focus();
+    btn.blur();
   }
 
   btn.addEventListener("click", () => {
@@ -929,6 +930,7 @@ function mountFancyDinoSelect(cfg){
 
   // Click outside to close
   document.addEventListener("pointerdown", (e) => {
+    if (!wrap.classList.contains("open")) return;
     if (!wrap.contains(e.target)) close();
   });
 
