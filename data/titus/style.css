@@ -408,27 +408,6 @@ body{
   max-width: none;
 }
 
-/* match the native select look */
-#dinoSelectFancy .dd-btn{
-  width: 100%;
-
-  padding:6px 8px;         /* same as #topbar select */
-  font-size:12px;            /* same as #topbar select */
-  font-weight:400px;
-  border-radius:4px;         /* same as #topbar select */
-
-  border:1px solid var(--control-border);
-  background:var(--control-bg);
-  color:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-
-  cursor:pointer;
-}
-
 /* hover/focus match native */
 #dinoSelectFancy .dd-btn:hover{
   border-color:#596273;
