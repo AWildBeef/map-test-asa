@@ -27,30 +27,40 @@
   --topbar-pad-x: 16px;
 }
 
+/* Group headers in dropdown list */
 .dd-group{
-  padding: 10px 10px 6px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 8px 10px;
   font-weight: 700;
-  opacity: .8;
-  border-top: 1px solid rgba(255,255,255,.08);
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: .9;
+  background: rgba(0,0,0,.35);
+  border-bottom: 1px solid rgba(255,255,255,.12);
 }
 
-.dd-group:first-child{ border-top: 0; }
+/* Make collapsible headers look clickable */
+.dd-group.dd-group-collapsible{
+  cursor: pointer;
+}
+.dd-group.dd-group-collapsible::after{
+  content: "▾";
+  float: right;
+  opacity: .7;
+}
+.dd-group.dd-group-collapsible.is-closed::after{
+  content: "▸";
+}
 
+/* Meta line (path mode) */
 .dd-item-meta{
   font-size: 12px;
-  opacity: .7;
+  opacity: .75;
   margin-top: 2px;
-}
-
-.dd-group-collapsible{
-  cursor: pointer;
-  user-select: none;
-}
-
-.dd-group-collapsible.is-closed::after{
-  content: " (collapsed)";
-  font-weight: 500;
-  opacity: .6;
+  line-height: 1.2;
 }
 
 .leaflet-control.map-dock{
