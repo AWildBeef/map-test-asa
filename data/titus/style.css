@@ -408,12 +408,6 @@ body{
   max-width: none;
 }
 
-#dinoSelectFancy .dd-btn:focus{
-  outline:none;
-  border-color:var(--focus);
-  box-shadow:0 0 0 3px rgba(122,162,255,.18);
-}
-
 /* left area should take space; name left, count right */
 #dinoSelectFancy .dd-btn-left{
   flex: 1 1 auto;
