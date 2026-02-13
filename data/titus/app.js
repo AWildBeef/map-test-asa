@@ -556,68 +556,68 @@ function mountFancySelect({
   let drillPath = []; // e.g. ["Xyphias"]
 
   function rebuildItemsDrilldown(rows) {
-  list.innerHTML = "";
-
-  // Build groups -> items
-  const official = rows.find(r => r.value === "official");
-  const mods = rows.filter(r => r.value !== "official");
-
-  const groupMap = new Map();
-  for (const r of mods) {
-    const src = SOURCES.find(s => s.id === r.value);
-    const g = metaForSource(src).group || "Other Mods";
-    (groupMap.get(g) || (groupMap.set(g, []), groupMap.get(g))).push(r);
-  }
-
-  // Sort groups + items
-  const groups = Array.from(groupMap.keys()).sort((a,b)=>a.localeCompare(b));
-  for (const g of groups) {
-    groupMap.get(g).sort((a,b)=>a.text.localeCompare(b.text));
-  }
-
-  // Create a "tree" where groups with 1 item are flattened into root
-  const rootItems = [];
-  const rootFolders = [];
-  for (const g of groups) {
-    const items = groupMap.get(g) || [];
-    if (items.length <= 1) {
-      if (items[0]) rootItems.push(items[0]); // flatten singletons
-    } else {
-      rootFolders.push({ name: g, items });
+    list.innerHTML = "";
+  
+    // Build groups -> items
+    const official = rows.find(r => r.value === "official");
+    const mods = rows.filter(r => r.value !== "official");
+  
+    const groupMap = new Map();
+    for (const r of mods) {
+      const src = SOURCES.find(s => s.id === r.value);
+      const g = metaForSource(src).group || "Other Mods";
+      (groupMap.get(g) || (groupMap.set(g, []), groupMap.get(g))).push(r);
     }
-  }
-
-  // Current "page"
-  const inFolder = drillPath.length > 0;
-  const curFolder = inFolder ? drillPath[drillPath.length - 1] : null;
-
-  // Top chrome: breadcrumb + back
-  const chrome = document.createElement("div");
-  chrome.style.padding = "8px 10px";
-  chrome.style.borderBottom = "1px solid rgba(255,255,255,.10)";
-  chrome.style.background = "rgba(0,0,0,.25)";
-
-  const crumb = document.createElement("div");
-  crumb.style.fontSize = "12px";
-  crumb.style.opacity = ".85";
-  crumb.textContent = inFolder ? `Sources / ${drillPath.join(" / ")}` : "Sources";
-  chrome.appendChild(crumb);
-
-  if (inFolder) {
-    const back = document.createElement("div");
-    back.className = "dd-item";
-    back.style.borderBottom = "1px solid rgba(255,255,255,.10)";
-    back.style.fontWeight = "700";
-    back.textContent = "◀ Back";
-    back.dataset.search = normSearch("back");
-    back.addEventListener("click", () => {
-      drillPath.pop();
-      rebuildItems();
-    });
-    list.appendChild(back);
-  }
-
-  list.appendChild(chrome);
+  
+    // Sort groups + items
+    const groups = Array.from(groupMap.keys()).sort((a,b)=>a.localeCompare(b));
+    for (const g of groups) {
+      groupMap.get(g).sort((a,b)=>a.text.localeCompare(b.text));
+    }
+  
+    // Create a "tree" where groups with 1 item are flattened into root
+    const rootItems = [];
+    const rootFolders = [];
+    for (const g of groups) {
+      const items = groupMap.get(g) || [];
+      if (items.length <= 1) {
+        if (items[0]) rootItems.push(items[0]); // flatten singletons
+      } else {
+        rootFolders.push({ name: g, items });
+      }
+    }
+  
+    // Current "page"
+    const inFolder = drillPath.length > 0;
+    const curFolder = inFolder ? drillPath[drillPath.length - 1] : null;
+  
+    // Top chrome: breadcrumb + back
+    const chrome = document.createElement("div");
+    chrome.style.padding = "8px 10px";
+    chrome.style.borderBottom = "1px solid rgba(255,255,255,.10)";
+    chrome.style.background = "rgba(0,0,0,.25)";
+  
+    const crumb = document.createElement("div");
+    crumb.style.fontSize = "12px";
+    crumb.style.opacity = ".85";
+    crumb.textContent = inFolder ? `Sources / ${drillPath.join(" / ")}` : "Sources";
+    chrome.appendChild(crumb);
+  
+    if (inFolder) {
+      const back = document.createElement("div");
+      back.className = "dd-item";
+      back.style.borderBottom = "1px solid rgba(255,255,255,.10)";
+      back.style.fontWeight = "700";
+      back.textContent = "◀ Back";
+      back.dataset.search = normSearch("back");
+      back.addEventListener("click", () => {
+        drillPath.pop();
+        rebuildItems();
+      });
+      list.appendChild(back);
+    }
+  
+    list.appendChild(chrome);
   }
 
   // Helper: render a folder node
