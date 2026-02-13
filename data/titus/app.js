@@ -224,41 +224,54 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 function buildSourceDrillTree() {
   const root = { label: "Sources", children: [] };
 
-  // 1) Official as a leaf
+  // Official leaf
   const official = SOURCES.find(s => s.id === "official");
   if (official) root.children.push({ label: official.name, value: official.id });
 
-  // 2) Mods folder
   const modsFolder = { label: "Mods", children: [] };
 
-  // Simple grouping rules (edit anytime)
-  const groups = {
-    "Additional Creatures": (s) => s.name.startsWith("Additional Creatures:"),
-    "Prehistoric Beasts":   (s) => s.id.startsWith("PrehistoricBeasts"),
-    "Xyphias":              (s) => s.name.startsWith("Xyphias' Creatures:"),
-    "Isle of Myths":        (s) => s.name.startsWith("Isle of Myths:"),
-    "Cyrus' Critters":      (s) => s.name.startsWith("Cyrus"),
-    "BigAL":                (s) => s.name.startsWith("BigAL"),
-    "ARKOLOGY":             (s) => s.name.startsWith("ARKOLOGY"),
-    "Other":                (_s) => true
-  };
+  // Group rules (NO "Other")
+  const groups = [
+    { label: "Additional Creatures", match: (s) => s.name.startsWith("Additional Creatures:") },
+    { label: "Prehistoric Beasts",   match: (s) => s.id.startsWith("PrehistoricBeasts") },
+    { label: "Xyphias",              match: (s) => s.name.startsWith("Xyphias' Creatures:") },
+    { label: "Isle of Myths",        match: (s) => s.name.startsWith("Isle of Myths:") },
+    { label: "Cyrus' Critters",      match: (s) => s.name.startsWith("Cyrus") },
+    { label: "BigAL",                match: (s) => s.name.startsWith("BigAL") },
+    { label: "ARKOLOGY",             match: (s) => s.name.startsWith("ARKOLOGY") },
+  ];
+
+  // Create folder nodes
+  const folderNodes = groups.map(g => ({ label: g.label, children: [] }));
+  const looseMods = []; // ✅ unmatched mods go directly under "Mods"
 
   const modSources = SOURCES.filter(s => s.id !== "official");
 
-  // assign to first matching group in order
-  const groupNodes = Object.keys(groups).map(g => ({ label: g, children: [] }));
-
   for (const s of modSources) {
-    for (const g of groupNodes) {
-      if (groups[g.label](s)) {
-        g.children.push({ label: s.name, value: s.id });
+    let placed = false;
+
+    for (let i = 0; i < groups.length; i++) {
+      if (groups[i].match(s)) {
+        folderNodes[i].children.push({ label: s.name, value: s.id });
+        placed = true;
         break;
       }
     }
+
+    if (!placed) {
+      looseMods.push({ label: s.name, value: s.id }); // ✅ back to Mods level
+    }
   }
 
-  // only include non-empty groups
-  modsFolder.children = groupNodes.filter(g => g.children.length);
+  // Optional: sort inside each group + loose list
+  for (const fn of folderNodes) {
+    fn.children.sort((a, b) => a.label.localeCompare(b.label));
+  }
+  looseMods.sort((a, b) => a.label.localeCompare(b.label));
+
+  // Add non-empty groups first, then loose leaves
+  modsFolder.children.push(...folderNodes.filter(f => f.children.length));
+  modsFolder.children.push(...looseMods);
 
   root.children.push(modsFolder);
   return root;
