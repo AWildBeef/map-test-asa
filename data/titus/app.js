@@ -441,7 +441,7 @@ function rebuildSourcesForGroup() {
   // IMPORTANT: ensure change handler still exists
   // (setupSourceDropdown originally attaches it; we replicate minimal handler here)
   sourceSel.onchange = null;
-  sourceSel.addEventListener("change", async () => {
+  sourceSel.onchange = async () => {
     activeSourceId = sourceSel.value;
     setModStylePanelVisible(activeSourceId !== "official");
     renderModStylePanelBody();
@@ -554,6 +554,156 @@ function mountFancySelect({
   const mode = groupMode || groupingMode;
   // ---- Drilldown state (only used in drilldown mode) ----
   let drillPath = []; // e.g. ["Xyphias"]
+
+  function rebuildItemsDrilldown(rows) {
+  list.innerHTML = "";
+
+  // Build groups -> items
+  const official = rows.find(r => r.value === "official");
+  const mods = rows.filter(r => r.value !== "official");
+
+  const groupMap = new Map();
+  for (const r of mods) {
+    const src = SOURCES.find(s => s.id === r.value);
+    const g = metaForSource(src).group || "Other Mods";
+    (groupMap.get(g) || (groupMap.set(g, []), groupMap.get(g))).push(r);
+  }
+
+  // Sort groups + items
+  const groups = Array.from(groupMap.keys()).sort((a,b)=>a.localeCompare(b));
+  for (const g of groups) {
+    groupMap.get(g).sort((a,b)=>a.text.localeCompare(b.text));
+  }
+
+  // Create a "tree" where groups with 1 item are flattened into root
+  const rootItems = [];
+  const rootFolders = [];
+  for (const g of groups) {
+    const items = groupMap.get(g) || [];
+    if (items.length <= 1) {
+      if (items[0]) rootItems.push(items[0]); // flatten singletons
+    } else {
+      rootFolders.push({ name: g, items });
+    }
+  }
+
+  // Current "page"
+  const inFolder = drillPath.length > 0;
+  const curFolder = inFolder ? drillPath[drillPath.length - 1] : null;
+
+  // Top chrome: breadcrumb + back
+  const chrome = document.createElement("div");
+  chrome.style.padding = "8px 10px";
+  chrome.style.borderBottom = "1px solid rgba(255,255,255,.10)";
+  chrome.style.background = "rgba(0,0,0,.25)";
+
+  const crumb = document.createElement("div");
+  crumb.style.fontSize = "12px";
+  crumb.style.opacity = ".85";
+  crumb.textContent = inFolder ? `Sources / ${drillPath.join(" / ")}` : "Sources";
+  chrome.appendChild(crumb);
+
+  if (inFolder) {
+    const back = document.createElement("div");
+    back.className = "dd-item";
+    back.style.borderBottom = "1px solid rgba(255,255,255,.10)";
+    back.style.fontWeight = "700";
+    back.textContent = "◀ Back";
+    back.dataset.search = normSearch("back");
+    back.addEventListener("click", () => {
+      drillPath.pop();
+      rebuildItems();
+    });
+    list.appendChild(back);
+  }
+
+  list.appendChild(chrome);
+
+  // Helper: render a folder node
+  function folderRow(folderName, count) {
+    const row = document.createElement("div");
+    row.className = "dd-item";
+    row.dataset.search = normSearch(`${folderName} folder ${count}`);
+
+    const left = document.createElement("div");
+    left.className = "dd-item-left";
+
+    const main = document.createElement("div");
+    main.className = "dd-item-main";
+
+    const name = document.createElement("div");
+    name.className = "dd-item-name";
+    name.textContent = folderName;
+
+    const meta = document.createElement("div");
+    meta.className = "dd-item-meta";
+    meta.textContent = `${count} mods`;
+
+    main.appendChild(name);
+    main.appendChild(meta);
+    left.appendChild(main);
+
+    const badges = document.createElement("div");
+    badges.className = "dd-badges";
+
+    const pill = document.createElement("span");
+    pill.className = "dd-pill";
+    pill.textContent = "Open ▸";
+    badges.appendChild(pill);
+
+    row.appendChild(left);
+    row.appendChild(badges);
+
+    row.addEventListener("click", () => {
+      drillPath.push(folderName);
+      rebuildItems();
+      // keep search cleared on navigation
+      search.value = "";
+    });
+
+    return row;
+  }
+
+  // Helper: render a normal selectable item
+  function sourceRow(r) {
+    const src = SOURCES.find(s => s.id === r.value);
+    const m = metaForSource(src);
+
+    const pills = (typeof getRowBadges === "function")
+      ? (getRowBadges(r.value, cfg) || []).map(String)
+      : [];
+
+    // nice default pills
+    const mergedPills = Array.from(new Set([...pills, ...(m.tags || [])])).slice(0, 2);
+
+    return makeItemRow({
+      value: r.value,
+      text: r.text,
+      metaText: "", // or m.path if you want
+      pills: mergedPills
+    });
+  }
+
+  // Page content
+  if (!inFolder) {
+    // Root page: Official first (direct), then folders, then flattened singletons
+    if (official) list.appendChild(sourceRow(official));
+
+    // folders
+    for (const f of rootFolders) {
+      list.appendChild(folderRow(f.name, f.items.length));
+    }
+
+    // flattened singles (“one-step” mods)
+    rootItems.sort((a,b)=>a.text.localeCompare(b.text));
+    for (const r of rootItems) list.appendChild(sourceRow(r));
+
+  } else {
+    // Folder page: show all items in that group
+    const folder = rootFolders.find(f => f.name === curFolder);
+    const items = folder?.items || [];
+    for (const r of items) list.appendChild(sourceRow(r));
+  }
 
   function makeItemRow({ value, text, metaText = "" , pills = [] }) {
     const row = document.createElement("div");
@@ -669,10 +819,9 @@ function mountFancySelect({
     // ------------- Render per mode -------------
     if (mode === "drilldown" && nativeId === "sourceSelect") {
       rebuildItemsDrilldown(rows);
-    } else if (mode === "sections" || mode === "collapsible")
+    } else if (mode === "sections" || mode === "collapsible") {
       const collapsible = (mode === "collapsible");
-
-      // group function: prefer passed getGroup; otherwise infer for sources
+    
       const groupFn = (value) => {
         if (typeof getGroup === "function") return getGroup(value, cfg);
         if (nativeId === "sourceSelect") {
@@ -681,27 +830,24 @@ function mountFancySelect({
         }
         return "All";
       };
-
-      // group items
+    
       const map = new Map();
       for (const r of rows) {
         const g = groupFn(r.value) || "Other";
         (map.get(g) || (map.set(g, []), map.get(g))).push(r);
       }
-
+    
       const groupNames = Array.from(map.keys()).sort((a,b) => a.localeCompare(b));
       for (const g of groupNames) {
         list.appendChild(makeGroupHeader(g, collapsible));
         const items = map.get(g) || [];
-        // keep stable order by text
         items.sort((a,b) => a.text.localeCompare(b.text));
-
         for (const r of items) {
           list.appendChild(makeItemRow({ value: r.value, text: r.text, metaText: r.metaText, pills: r.pills }));
         }
       }
     } else {
-      // "soft" or "path" default: flat list
+      // "soft" / "path" / default flat
       rows.sort((a,b) => a.text.localeCompare(b.text));
       for (const r of rows) {
         list.appendChild(makeItemRow({ value: r.value, text: r.text, metaText: r.metaText, pills: r.pills }));
@@ -917,329 +1063,6 @@ function dinoSummaryForFancy(cfg, dinoKey){
 function rarityDotColor(rarity){
   // reuse your existing rarityToColor
   return rarity ? rarityToColor(rarity) : "#777";
-}
-
-function mountFancySelect({
-  nativeId,
-  hostId,
-  placeholder = "Search...",
-  getButtonSubText = null,   // (value, cfg) => string
-  getRowBadges = null,       // (value, cfg) => [ "pill text", ... ]
-  cfg = null
-}) {
-  const native = document.getElementById(nativeId);
-  const host = document.getElementById(hostId);
-  if (!native || !host) return;
-
-  // Hide native but keep it functional
-  native.style.position = "absolute";
-  native.style.left = "-9999px";
-  native.style.width = "1px";
-  native.style.height = "1px";
-  native.style.opacity = "0";
-
-  // Replace any previous fancy UI cleanly
-  host.innerHTML = "";
-
-  const wrap = document.createElement("div");
-  wrap.className = "dd";
-
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "dd-btn";
-
-  const btnLeft = document.createElement("div");
-  btnLeft.className = "dd-btn-left";
-
-  const textWrap = document.createElement("div");
-  textWrap.className = "dd-btn-text";
-  textWrap.style.minWidth = "0";
-
-  const label = document.createElement("div");
-  label.className = "dd-label";
-
-  const sub = document.createElement("div");
-  sub.className = "dd-sub";
-
-  textWrap.appendChild(label);
-  textWrap.appendChild(sub);
-  btnLeft.appendChild(textWrap);
-
-  const caret = document.createElement("div");
-  caret.className = "dd-caret";
-  caret.textContent = "▾";
-
-  btn.appendChild(btnLeft);
-  btn.appendChild(caret);
-
-  const panel = document.createElement("div");
-  panel.className = "dd-panel";
-
-  const search = document.createElement("input");
-  search.className = "dd-search";
-  search.placeholder = placeholder;
-
-  const list = document.createElement("div");
-  list.className = "dd-list";
-
-  panel.appendChild(search);
-  panel.appendChild(list);
-
-  wrap.appendChild(btn);
-  wrap.appendChild(panel);
-  host.appendChild(wrap);
-
-  function rebuildItems() {
-    list.innerHTML = "";
-
-    const opts = Array.from(native.options)
-      .map(o => ({ value: o.value, text: o.textContent || "" }))
-      .filter(o => o.value);
-
-    for (const o of opts) {
-      const row = document.createElement("div");
-      row.className = "dd-item";
-      row.dataset.value = o.value;
-      row.dataset.search = normSearch(o.text);
-
-      const left = document.createElement("div");
-      left.className = "dd-item-left";
-
-      const main = document.createElement("div");
-      main.className = "dd-item-main";
-
-      const name = document.createElement("div");
-      name.className = "dd-item-name";
-      name.textContent = o.text;
-
-      main.appendChild(name);
-      left.appendChild(main);
-
-      const badges = document.createElement("div");
-      badges.className = "dd-badges";
-
-      if (typeof getRowBadges === "function") {
-        const pills = getRowBadges(o.value, cfg) || [];
-        for (const t of pills) {
-          const pill = document.createElement("span");
-          pill.className = "dd-pill";
-          pill.textContent = String(t);
-          badges.appendChild(pill);
-        }
-      }
-
-      row.appendChild(left);
-      row.appendChild(badges);
-
-      row.addEventListener("click", () => {
-        native.value = o.value;
-        native.dispatchEvent(new Event("change"));
-        close();
-      });
-
-      list.appendChild(row);
-    }
-  }
-
-  function syncButton() {
-    const txt = native.selectedOptions?.[0]?.textContent || "(Select)";
-    label.textContent = txt;
-
-    if (typeof getButtonSubText === "function") {
-      sub.textContent = getButtonSubText(native.value, cfg) || "";
-    } else {
-      sub.textContent = "";
-    }
-  }
-  function rebuildItemsDrilldown(rows) {
-  list.innerHTML = "";
-
-  // Build groups -> items
-  const official = rows.find(r => r.value === "official");
-  const mods = rows.filter(r => r.value !== "official");
-
-  const groupMap = new Map();
-  for (const r of mods) {
-    const src = SOURCES.find(s => s.id === r.value);
-    const g = metaForSource(src).group || "Other Mods";
-    (groupMap.get(g) || (groupMap.set(g, []), groupMap.get(g))).push(r);
-  }
-
-  // Sort groups + items
-  const groups = Array.from(groupMap.keys()).sort((a,b)=>a.localeCompare(b));
-  for (const g of groups) {
-    groupMap.get(g).sort((a,b)=>a.text.localeCompare(b.text));
-  }
-
-  // Create a "tree" where groups with 1 item are flattened into root
-  const rootItems = [];
-  const rootFolders = [];
-  for (const g of groups) {
-    const items = groupMap.get(g) || [];
-    if (items.length <= 1) {
-      if (items[0]) rootItems.push(items[0]); // flatten singletons
-    } else {
-      rootFolders.push({ name: g, items });
-    }
-  }
-
-  // Current "page"
-  const inFolder = drillPath.length > 0;
-  const curFolder = inFolder ? drillPath[drillPath.length - 1] : null;
-
-  // Top chrome: breadcrumb + back
-  const chrome = document.createElement("div");
-  chrome.style.padding = "8px 10px";
-  chrome.style.borderBottom = "1px solid rgba(255,255,255,.10)";
-  chrome.style.background = "rgba(0,0,0,.25)";
-
-  const crumb = document.createElement("div");
-  crumb.style.fontSize = "12px";
-  crumb.style.opacity = ".85";
-  crumb.textContent = inFolder ? `Sources / ${drillPath.join(" / ")}` : "Sources";
-  chrome.appendChild(crumb);
-
-  if (inFolder) {
-    const back = document.createElement("div");
-    back.className = "dd-item";
-    back.style.borderBottom = "1px solid rgba(255,255,255,.10)";
-    back.style.fontWeight = "700";
-    back.textContent = "◀ Back";
-    back.dataset.search = normSearch("back");
-    back.addEventListener("click", () => {
-      drillPath.pop();
-      rebuildItems();
-    });
-    list.appendChild(back);
-  }
-
-  list.appendChild(chrome);
-
-  // Helper: render a folder node
-  function folderRow(folderName, count) {
-    const row = document.createElement("div");
-    row.className = "dd-item";
-    row.dataset.search = normSearch(`${folderName} folder ${count}`);
-
-    const left = document.createElement("div");
-    left.className = "dd-item-left";
-
-    const main = document.createElement("div");
-    main.className = "dd-item-main";
-
-    const name = document.createElement("div");
-    name.className = "dd-item-name";
-    name.textContent = folderName;
-
-    const meta = document.createElement("div");
-    meta.className = "dd-item-meta";
-    meta.textContent = `${count} mods`;
-
-    main.appendChild(name);
-    main.appendChild(meta);
-    left.appendChild(main);
-
-    const badges = document.createElement("div");
-    badges.className = "dd-badges";
-
-    const pill = document.createElement("span");
-    pill.className = "dd-pill";
-    pill.textContent = "Open ▸";
-    badges.appendChild(pill);
-
-    row.appendChild(left);
-    row.appendChild(badges);
-
-    row.addEventListener("click", () => {
-      drillPath.push(folderName);
-      rebuildItems();
-      // keep search cleared on navigation
-      search.value = "";
-    });
-
-    return row;
-  }
-
-  // Helper: render a normal selectable item
-  function sourceRow(r) {
-    const src = SOURCES.find(s => s.id === r.value);
-    const m = metaForSource(src);
-
-    const pills = (typeof getRowBadges === "function")
-      ? (getRowBadges(r.value, cfg) || []).map(String)
-      : [];
-
-    // nice default pills
-    const mergedPills = Array.from(new Set([...pills, ...(m.tags || [])])).slice(0, 2);
-
-    return makeItemRow({
-      value: r.value,
-      text: r.text,
-      metaText: "", // or m.path if you want
-      pills: mergedPills
-    });
-  }
-
-  // Page content
-  if (!inFolder) {
-    // Root page: Official first (direct), then folders, then flattened singletons
-    if (official) list.appendChild(sourceRow(official));
-
-    // folders
-    for (const f of rootFolders) {
-      list.appendChild(folderRow(f.name, f.items.length));
-    }
-
-    // flattened singles (“one-step” mods)
-    rootItems.sort((a,b)=>a.text.localeCompare(b.text));
-    for (const r of rootItems) list.appendChild(sourceRow(r));
-
-  } else {
-    // Folder page: show all items in that group
-    const folder = rootFolders.find(f => f.name === curFolder);
-    const items = folder?.items || [];
-    for (const r of items) list.appendChild(sourceRow(r));
-  }
-
-  function open() {
-    wrap.classList.add("open");
-    search.value = "";
-    list.querySelectorAll(".dd-item").forEach(el => (el.style.display = ""));
-    list.scrollTop = 0;
-    search.focus();
-  }
-
-  function close() {
-    wrap.classList.remove("open");
-    btn.focus();
-  }
-
-  btn.addEventListener("click", () => {
-    wrap.classList.contains("open") ? close() : open();
-  });
-
-  // Filter + scroll reset
-  let lastQ = "";
-  search.addEventListener("input", () => {
-    const q = normSearch(search.value);
-    if (q !== lastQ) list.scrollTop = 0;
-    lastQ = q;
-
-    list.querySelectorAll(".dd-item").forEach(el => {
-      el.style.display = el.dataset.search.includes(q) ? "" : "none";
-    });
-  });
-
-  // Click outside closes (avoid stacking listeners: one per dropdown is fine,
-  // but we guard by checking wrap.contains)
-  document.addEventListener("pointerdown", (e) => {
-    if (!wrap.contains(e.target)) close();
-  });
-
-  native.addEventListener("change", syncButton);
-
-  rebuildItems();
-  syncButton();
 }
 
 function mountFancyDinoSelect(cfg){
@@ -2174,40 +1997,6 @@ function switchMode(nextMode) {
     useRarityForMods = false;
   }
   renderModStylePanelBody();
-}
-
-// ============================================================
-// SOURCES dropdown
-// ============================================================
-function setupSourceDropdown() {
-  const sel = document.getElementById("sourceSelect");
-  if (!sel) return;
-
-  sel.innerHTML = "";
-  for (const s of SOURCES) {
-    const opt = document.createElement("option");
-    opt.value = s.id;
-    opt.textContent = s.name;
-    sel.appendChild(opt);
-  }
-  sel.value = activeSourceId;
-
-  sel.addEventListener("change", async () => {
-    activeSourceId = sel.value;
-    setModStylePanelVisible(activeSourceId !== "official");
-    renderModStylePanelBody();
-
-    const mapSel = document.getElementById("mapSelect");
-    const mapMeta = pickById(MAPS, mapSel?.value);
-    await loadMapByMeta(mapMeta);
-  });
-  mountFancySelect({
-    nativeId: "sourceSelect",
-    hostId: "sourceSelectFancy",
-    placeholder: "Search sources...",
-    getButtonSubText: (v) => (v === "official" ? "Official" : "Mod"),
-    getRowBadges: (v) => [v === "official" ? "official" : "mod"],
-  });
 }
 
 async function loadModSource(sourceId) {
