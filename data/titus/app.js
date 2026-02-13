@@ -493,11 +493,14 @@ function mountDrillSelect({
 
     const kids = childrenOf(curNode());
 
-    // folders first, then leaves
-    const folders = kids.filter(n => !isLeaf(n));
-    const leaves  = kids.filter(n => isLeaf(n));
+    const isAtRoot = (curNode() === root);
 
-    const ordered = [...folders, ...leaves];
+    const ordered = isAtRoot
+      ? kids
+      : [
+          ...kids.filter(n => !isLeaf(n)), // folders first
+          ...kids.filter(n => isLeaf(n))   // leaves after
+        ];
 
     for (const n of ordered) {
       const row = document.createElement("div");
