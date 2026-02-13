@@ -27,48 +27,38 @@
   --topbar-pad-x: 16px;
 }
 
-/* Group headers in dropdown list */
-.dd-group{
-  position: sticky;
-  top: 45;
-  z-index: 2;
-  padding: 8px 10px;
-  font-weight: 700;
-  letter-spacing: .3px;
-  text-transform: uppercase;
+.dd-crumbs{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  padding:8px 10px 0;
+  color: var(--muted);
   font-size: 12px;
-  opacity: .9;
-  background: rgba(0,0,0,.35);
-  border-bottom: 1px solid rgba(255,255,255,.10);
-  border-top: 1px solid rgba(255,255,255,.10);
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.dd-group + .dd-item{
-  border-top: 0; /* reduce “same-row” feeling */
+.dd-crumb{
+  border:0;
+  background:transparent;
+  color: inherit;
+  padding:4px 6px;
+  border-radius:6px;
 }
 
-/* Make collapsible headers look clickable */
-.dd-group.dd-group-collapsible{
-  cursor: pointer;
-}
-.dd-group.dd-group-collapsible::after{
-  content: "▾";
-  float: right;
-  opacity: .7;
-}
-.dd-group.dd-group-collapsible.is-closed::after{
-  content: "▸";
+.dd-crumb:disabled{
+  opacity:.75;
 }
 
-/* Meta line (path mode) */
-.dd-item-meta{
-  font-size: 12px;
-  opacity: .75;
-  margin-top: 2px;
-  line-height: 1.2;
+.dd-crumb-sep{
+  opacity:.6;
 }
 
-.dd-group{ background: magenta !important; color: white !important; }
+.dd-drill-right{
+  margin-left:auto;
+  opacity:.7;
+  padding-left:10px;
+}
 
 .leaflet-control.map-dock{
   background: rgba(30,30,30,0.85);
