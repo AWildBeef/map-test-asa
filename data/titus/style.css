@@ -348,69 +348,40 @@ body{
    ================================ */
 @media (min-width: 641px){
 
-  /* 3-column topbar: left | center | right */
+  /* Top bar is one row: title | centered controls | actions */
   #topbar{
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    column-gap: 14px;
-
-    /* keep your existing padding/border/etc */
-    padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:14px;
   }
 
-  /* IMPORTANT: flatten the wrapper so children can be placed in #topbar grid */
+  /* Make title row a left block (title + actions spaced) */
   .title-row{
-    display: contents;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex: 0 0 auto;
+    width:auto;
   }
 
-  /* Place title on the left */
-  .title-row .title{
-    grid-column: 1;
-    justify-self: start;
-    white-space: nowrap;
+  /* push actions to the far right of the whole bar */
+  .title-actions{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:8px;
   }
 
-  /* Place dropdowns in the center */
+  /* Controls take remaining space and center themselves */
   #topbar .controls{
-    grid-column: 2;
-
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-
-    width: 100%;
-    min-width: 0; /* critical so it can shrink */
-  }
-
-  /* Place mode button on the right */
-  #modeToggle{
-    grid-column: 3;
-    justify-self: end;
-  }
-
-  /* Filters button: right side too (or hide on desktop) */
-  #controlsToggle{
-    grid-column: 3;
-    justify-self: end;
-    margin-left: 8px;
-    /* If you want mobile-only, uncomment: */
-    /* display: none; */
-  }
-
-  /* Even sizing for dropdown “slots” */
-  #topbar .controls > *{
-    flex: 1 1 0;
-    min-width: 180px;
-    max-width: 320px;
-  }
-
-  /* Optional: make dino dropdown wider */
-  #topbar .controls > #dinoSelectFancy{
-    flex: 2 1 0;
-    max-width: 660px;
+    flex: 1 1 auto;
+    display:flex;
+    flex-wrap:nowrap;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    min-width:0;
   }
   
   .icon-btn{
