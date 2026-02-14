@@ -225,9 +225,11 @@ const drillState = {
 let showRarityLegend = false;
 
 function syncRarityLegendPopColors(){
-  const pop = document.getElementById("rarityLegendPop");
-  if (!pop) return;
-  pop.querySelectorAll(".sq[data-r]").forEach(sq => {
+  // now targets your centered legend
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+
+  el.querySelectorAll(".sq[data-r]").forEach(sq => {
     const r = sq.getAttribute("data-r");
     sq.style.background = rarityToColor(r);
   });
@@ -235,9 +237,14 @@ function syncRarityLegendPopColors(){
 
 function setLegendOpen(open){
   showRarityLegend = !!open;
-  const pop = document.getElementById("rarityLegendPop");
-  if (pop) pop.classList.toggle("open", showRarityLegend);
+
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+
+  // your HTML uses inline display:none, so flip display directly
+  el.style.display = showRarityLegend ? "" : "none";
 }
+
 // ============================================================
 // SETTINGS
 // ============================================================
