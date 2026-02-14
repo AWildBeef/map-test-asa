@@ -121,6 +121,7 @@
   user-select:none;
   font-variant:all-small-caps;
   font-stretch: condensed;
+  padding:2px;
 }
 
 .rarity-legend .rl-bar{
@@ -131,7 +132,7 @@
 .rarity-legend .rl-sq{
   width:14px;
   height:14px;
-  border-radius:2px;
+  border-radius:0px;
   padding:0;
   margin:0;
 }
