@@ -346,7 +346,7 @@ body{
 /* ================================
    DESKTOP — even dropdown layout
    ================================ */
-@media (min-width: 641px){
+@media (min-width: 956px){
   #topbar{
     display: grid;
     grid-template-columns: auto 1fr auto; /* title | centered controls | actions */
@@ -1079,7 +1079,7 @@ button {
 /* ============================================================
    8) MOBILE OVERRIDES (<= 640px)
    ============================================================ */
-@media (max-width: 640px){
+@media (max-width: 955px){
   /* show Filters button on mobile */
   #controlsToggle{ display:inline-flex; }
 
