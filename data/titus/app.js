@@ -2625,11 +2625,6 @@ function boot() {
   document.addEventListener("pointerdown", (e) => {
     const pop = document.getElementById("rarityLegendPop");
     if (!pop || !showRarityLegend) return;
-  
-    // If click is outside the popover AND outside the dock, close it
-    const dock = document.querySelector(".map-dock");
-    if (!pop.contains(e.target) && !(dock && dock.contains(e.target))) {
-      setLegendOpen(false);
     }
   });
 }
