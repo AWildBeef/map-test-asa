@@ -2625,7 +2625,6 @@ function boot() {
   document.addEventListener("pointerdown", (e) => {
     const pop = document.getElementById("rarityLegendPop");
     if (!pop || !showRarityLegend) return;
-    }
   });
 }
 
