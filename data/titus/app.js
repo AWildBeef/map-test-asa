@@ -1887,11 +1887,11 @@ function rarityToColor(r) {
   if (s.includes("very rare"))      return "#FF0000";
   if (s.includes("rare"))           return "#FF6600";
 
-  if (s.includes("very uncommon"))  return "#FFAA00";
+  if (s.includes("very uncommon"))  return "#FFCC00";
   if (s.includes("uncommon"))       return "#FFFF00";
 
   if (s.includes("very common"))    return "#00FF00"; // ✅ moved above "common"
-  if (s.includes("common"))         return "#CCFF00";
+  if (s.includes("common"))         return "#B2FF00";
 
   return "#000000";
 }
