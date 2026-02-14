@@ -2633,6 +2633,9 @@ function boot() {
     const pop = document.getElementById("rarityLegendPop");
     if (!pop || !showRarityLegend) return;
   });
+  document.querySelectorAll('#rarityLegend [data-r]').forEach(el=>{
+    el.style.background = rarityToColor(el.dataset.r);
+  });
 }
 
 boot();
