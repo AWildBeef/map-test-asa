@@ -606,7 +606,7 @@ function initLegend(){
     e.stopPropagation();
     legendCollapsed = !legendCollapsed;
     syncLegendCollapsed();
-    if (document.activeElement?.blur) document.activeElement.blur();
+    document.activeElement?.blur?.();
   });
 }
 
