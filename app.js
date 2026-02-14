@@ -2490,7 +2490,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       <div class="info-title">${escapeHtml(displayName)}</div>
       ${currentModMeta?.id ? `
         <div class="info-submeta">
-          Mod: ${escapeHtml(currentModMeta.id)}
+          Mod ID: ${escapeHtml(currentModMeta.id)}
         </div>
       ` : ``}
       
