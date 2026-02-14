@@ -221,6 +221,23 @@ const drillState = {
   // nativeId -> array of labels representing the folder path, e.g. ["Sources","Mods","Xyphias"]
   pathByNativeId: {}
 };
+
+let showRarityLegend = false;
+
+function syncRarityLegendPopColors(){
+  const pop = document.getElementById("rarityLegendPop");
+  if (!pop) return;
+  pop.querySelectorAll(".sq[data-r]").forEach(sq => {
+    const r = sq.getAttribute("data-r");
+    sq.style.background = rarityToColor(r);
+  });
+}
+
+function setLegendOpen(open){
+  showRarityLegend = !!open;
+  const pop = document.getElementById("rarityLegendPop");
+  if (pop) pop.classList.toggle("open", showRarityLegend);
+}
 // ============================================================
 // SETTINGS
 // ============================================================
@@ -575,39 +592,6 @@ function mountDrillSelect({
   native.addEventListener("change", syncButton);
 
   syncButton();
-}
-
-let legendCollapsed = (localStorage.getItem("legendCollapsed") === "1");
-
-function syncRarityLegendColors(){
-  const el = document.getElementById("rarityLegend");
-  if (!el) return;
-  el.querySelectorAll(".sq[data-r]").forEach(sq => {
-    const r = sq.getAttribute("data-r");
-    sq.style.background = rarityToColor(r);
-  });
-}
-
-function syncLegendCollapsed(){
-  const el = document.getElementById("rarityLegend");
-  if (!el) return;
-  el.classList.toggle("is-collapsed", legendCollapsed);
-  localStorage.setItem("legendCollapsed", legendCollapsed ? "1" : "0");
-}
-
-function initLegend(){
-  const el = document.getElementById("rarityLegend");
-  if (!el) return;
-
-  syncRarityLegendColors();
-  syncLegendCollapsed();
-
-  el.addEventListener("click", (e) => {
-    e.stopPropagation();
-    legendCollapsed = !legendCollapsed;
-    syncLegendCollapsed();
-    document.activeElement?.blur?.();
-  });
 }
 
 function mountFancySelect({
@@ -1383,6 +1367,23 @@ function renderDock(){
 
     poiBtn.classList.toggle("is-on", showPois);
   }
+  // 5) Rarity legend button — only makes sense when showing rarity colors
+  mkBtn({
+    title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
+    icon: `
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="7.5" r="1.2" fill="currentColor"/>
+      </svg>
+    `,
+    onClick: (btn) => {
+      setLegendOpen(!showRarityLegend);
+      btn.title = showRarityLegend ? "Hide rarity legend" : "Show rarity legend";
+      btn.classList.toggle("is-on", showRarityLegend);
+    },
+    extraClass: showRarityLegend ? "is-on" : ""
+  });
 
   updateDockToggles();
 }
@@ -1849,6 +1850,8 @@ async function loadMapByMeta(mapMeta) {
   // rebuild dock buttons based on map + source
   renderDock();
   updateDockToggles();
+  syncRarityLegendPopColors();
+  setLegendOpen(false); // optional: auto-close on map/source change
   
   setPoisVisible(showPois); // ✅ re-apply on map changes
   drawPois(currentCfg);
@@ -2619,7 +2622,16 @@ function boot() {
     console.error(err);
     alert(err.message || String(err));
   });
-  initLegend();
+  document.addEventListener("pointerdown", (e) => {
+    const pop = document.getElementById("rarityLegendPop");
+    if (!pop || !showRarityLegend) return;
+  
+    // If click is outside the popover AND outside the dock, close it
+    const dock = document.querySelector(".map-dock");
+    if (!pop.contains(e.target) && !(dock && dock.contains(e.target))) {
+      setLegendOpen(false);
+    }
+  });
 }
 
 boot();
