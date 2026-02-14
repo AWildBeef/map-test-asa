@@ -47,24 +47,18 @@
 
   <div id="mapWrap">
     <div id="map"></div>
-    <div id="rarityLegend" class="rarity-legend" aria-label="Rarity legend" title="Tap to collapse">
-      <div class="legend-title">
-        <span class="legend-caret">▾</span>
-        <span class="legend-text">Rarity</span>
+        <div id="rarityLegendPop" aria-label="Rarity colors">
+      <div class="ends">
+        <span>very common</span>
+        <span>very rare</span>
       </div>
-    
-      <div class="rarity-strip" role="img" aria-label="Rarity colors, very common to very rare">
-        <span class="sq" data-r="very common" title="Very common"></span>
-        <span class="sq" data-r="common" title="Common"></span>
-        <span class="sq" data-r="uncommon" title="Uncommon"></span>
-        <span class="sq" data-r="very uncommon" title="Very uncommon"></span>
-        <span class="sq" data-r="rare" title="Rare"></span>
-        <span class="sq" data-r="very rare" title="Very rare"></span>
-      </div>
-    
-      <!-- Optional: tiny end labels (comment out if too much) -->
-      <div class="legend-ends" aria-hidden="true">
-        <span>VC</span><span>VR</span>
+      <div class="strip" role="img" aria-label="Rarity colors left to right">
+        <span class="sq" data-r="very common" data-label="very common"></span>
+        <span class="sq" data-r="common" data-label="common"></span>
+        <span class="sq" data-r="uncommon" data-label="uncommon"></span>
+        <span class="sq" data-r="very uncommon" data-label="very uncommon"></span>
+        <span class="sq" data-r="rare" data-label="rare"></span>
+        <span class="sq" data-r="very rare" data-label="very rare"></span>
       </div>
     </div>
   </div>
