@@ -27,6 +27,77 @@
   --topbar-pad-x: 16px;
 }
 
+.rarity-legend{
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  z-index: 950;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:6px 8px;
+  border-radius:10px;
+  background: rgba(26,29,33,.55);
+  border: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+
+  font-size:11px;
+  color: rgba(255,255,255,.70);
+  user-select:none;
+
+  pointer-events:auto;          /* <-- clickable */
+  cursor:pointer;
+}
+
+.rarity-legend:hover{
+  background: rgba(26,29,33,.70);
+  border-color: rgba(255,255,255,.14);
+}
+
+.rarity-legend .legend-title{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-weight:600;
+  opacity:.85;
+}
+
+.rarity-legend .legend-caret{
+  opacity:.75;
+  transform: rotate(0deg);
+  transition: transform .15s ease;
+}
+
+/* collapsed: hide the row contents, keep title */
+.rarity-legend.is-collapsed .rarity-squares,
+.rarity-legend.is-collapsed .rarity-label{
+  display:none;
+}
+.rarity-legend.is-collapsed .legend-caret{
+  transform: rotate(-90deg);
+}
+
+.rarity-squares{
+  display:flex;
+  gap:4px;
+}
+.rarity-squares .sq{
+  width:12px;
+  height:12px;
+  border-radius:3px;
+  border:1px solid rgba(0,0,0,.35);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
+}
+
+@media (max-width:955px){
+  .rarity-legend{ right:6px; bottom:6px; font-size:10px; padding:5px 7px; gap:6px; }
+  .rarity-squares .sq{ width:11px; height:11px; }
+}
+
+
 .dd-crumbs{
   display:flex;
   gap:6px;
