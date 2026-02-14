@@ -126,16 +126,15 @@
 
 .rarity-legend .rl-bar{
   display:flex;
-  gap:0px;
+  gap:1px;
 }
 
 .rarity-legend .rl-sq{
   width:14px;
   height:14px;
   border-radius:0px;
-  padding:0;
-  margin:0;
-  gap:2px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.08);
 }
 #rarityLegendPop .sq:hover::after{ opacity:1; }
 
