@@ -577,6 +577,39 @@ function mountDrillSelect({
   syncButton();
 }
 
+let legendCollapsed = (localStorage.getItem("legendCollapsed") === "1");
+
+function syncRarityLegendColors(){
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+  el.querySelectorAll(".sq[data-r]").forEach(sq => {
+    const r = sq.getAttribute("data-r");
+    sq.style.background = rarityToColor(r);
+  });
+}
+
+function syncLegendCollapsed(){
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+  el.classList.toggle("is-collapsed", legendCollapsed);
+  localStorage.setItem("legendCollapsed", legendCollapsed ? "1" : "0");
+}
+
+function initLegend(){
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+
+  syncRarityLegendColors();
+  syncLegendCollapsed();
+
+  el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    legendCollapsed = !legendCollapsed;
+    syncLegendCollapsed();
+    if (document.activeElement?.blur) document.activeElement.blur();
+  });
+}
+
 function mountFancySelect({
   nativeId,
   hostId,
@@ -2586,6 +2619,7 @@ function boot() {
     console.error(err);
     alert(err.message || String(err));
   });
+  initLegend();
 }
 
 boot();
