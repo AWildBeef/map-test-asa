@@ -1327,8 +1327,50 @@ button {
     justify-content: center;
     gap: 4px;
   }
-}
 
+  /* keep your grid layout */
+  #topbar{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title actions"
+      "controls controls";
+    align-items: center;
+    row-gap: 8px;
+    column-gap: 8px;
+  }
+
+  #topbar .title{ grid-area: title; justify-self: start; }
+
+  /* buttons stay top-right */
+  #topbar .title-actions{
+    grid-area: actions;
+    justify-self: end;
+    display:flex;
+    gap:6px;
+    align-items:center;
+  }
+
+  /* ✅ HIDE dropdowns by default on mobile */
+  #topbar .controls{
+    grid-area: controls;
+    width: 100%;
+    justify-self: stretch;
+
+    display: none;        /* <-- key */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* ✅ Show dropdowns when Filters is toggled */
+  #topbar.show-controls .controls{
+    display: flex;        /* <-- key */
+  }
+
+  /* make sure the Filters button is visible on mobile */
+  #controlsToggle{ display:inline-flex; }
+}
 /* ============================================================
    Map controls: Background toggle + Mod Style FAB
    ============================================================ */
