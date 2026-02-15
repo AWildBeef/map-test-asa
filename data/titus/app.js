@@ -339,6 +339,36 @@ function asArray(x) {
   return Array.isArray(x) ? x : [x];
 }
 
+const saveBtn = document.getElementById("saveMapBtn");
+
+saveBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const node = document.getElementById("map"); // or "mapWrap" if you want panels too
+
+  try {
+    // If any tiles are cross-origin, this matters:
+    // Ensure your tile layer uses crossOrigin: true (see note below)
+    const dataUrl = await htmlToImage.toPng(node, {
+      cacheBust: true,
+      pixelRatio: Math.min(2, window.devicePixelRatio || 1), // sharper, but not huge
+      backgroundColor: null, // keep your map bg
+    });
+
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = `ark-map-${new Date().toISOString().slice(0,19).replace(/[:T]/g,"-")}.png`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch (err) {
+    console.error(err);
+    alert("Couldn’t export image (likely cross-origin tiles). See console.");
+  }
+});
+
+
 function renderCopyLine(label, value) {
   const v = String(value || "");
   return `
