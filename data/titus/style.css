@@ -465,48 +465,50 @@ body{
 /* ================================
    DESKTOP — even dropdown layout
    ================================ */
+@media (min-width: 956px){
+  #topbar{
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* title | centered controls | actions */
+    align-items: center;
+    column-gap: 14px;
+    padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+  }
 
-@media (min-width: 641px){
+  #topbar .title{
+    justify-self: start;
+    white-space: nowrap;
+  }
 
   #topbar .controls{
-    flex-wrap: nowrap;      /* prevents wrapping */
+    justify-self: center;           /* <-- true center of the bar */
+    width: min(1100px, 100%);
+    display:flex;
+    flex-wrap: nowrap;
     justify-content: center;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
   }
 
-  /* ALL dropdown hosts get equal width */
+  #topbar .title-actions{
+    justify-self: end;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    white-space: nowrap;
+  }
+
+  /* Optional: make each dropdown slot behave like before */
   #topbar .controls > *{
     flex: 1 1 0;
-    min-width: 0;   /* critical for flexbox */
-    max-width: none;
+    min-width: 200px;
+    max-width: 320px;
   }
-  
-  .mode-toggle{
-    height:42px;
-    padding:0 16px;
-    font-size:15px;
-  }
-
+    
   .icon-btn{
     width:42px;
     height:42px;
   }
-
-  .leaflet-control.map-dock .dock-btn{
-    width:40px;
-    height:40px;
-  }
-  
-  .leaflet-control-zoom.zoom-horizontal a{
-    width:40px;
-    height:40px;
-    line-height:40px;
-  }
-
-  .leaflet-control-zoom.zoom-horizontal{
-    border-radius:10px; /* optional slight upscale */
-  }
-
-
 }
 
 /* ============================================================
