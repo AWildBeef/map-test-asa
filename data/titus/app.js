@@ -339,21 +339,49 @@ function asArray(x) {
   return Array.isArray(x) ? x : [x];
 }
 
+function nextFrame() {
+  return new Promise(r => requestAnimationFrame(() => r()));
+}
+
+function setExportUiHidden(hidden) {
+  const ids = ["topbar", "buildInfo", "dinoInfoPanel", "modStylePanel"];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.dataset._exportHide = hidden ? "1" : "0";
+  });
+
+  const dock = document.querySelector(".map-dock");
+  if (dock) dock.dataset._exportHide = hidden ? "1" : "0";
+}
+
+// CSS-based hide (add this to your CSS)
+
 const saveBtn = document.getElementById("saveMapBtn");
 
 saveBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   e.stopPropagation();
 
-  const node = document.getElementById("map"); // or "mapWrap" if you want panels too
+  if (!mapObj?.map) {
+    alert("Map not ready yet.");
+    return;
+  }
+
+  // IMPORTANT: mapObj.map.getContainer() is Leaflet’s real DOM root
+  const node = mapObj.map.getContainer();
 
   try {
-    // If any tiles are cross-origin, this matters:
-    // Ensure your tile layer uses crossOrigin: true (see note below)
+    setExportUiHidden(true);
+
+    // let layout update + Leaflet panes settle
+    mapObj.map.invalidateSize();
+    await nextFrame();
+    await nextFrame();
+
     const dataUrl = await htmlToImage.toPng(node, {
       cacheBust: true,
-      pixelRatio: Math.min(2, window.devicePixelRatio || 1), // sharper, but not huge
-      backgroundColor: null, // keep your map bg
+      pixelRatio: Math.min(2, window.devicePixelRatio || 1),
+      backgroundColor: "#121417", // pick your bg so transparent areas don’t go weird
     });
 
     const a = document.createElement("a");
@@ -364,10 +392,11 @@ saveBtn.addEventListener("click", async (e) => {
     a.remove();
   } catch (err) {
     console.error(err);
-    alert("Couldn’t export image (likely cross-origin tiles). See console.");
+    alert("Export failed. If you’re running from file://, serve it via a local web server.");
+  } finally {
+    setExportUiHidden(false);
   }
 });
-
 
 function renderCopyLine(label, value) {
   const v = String(value || "");
