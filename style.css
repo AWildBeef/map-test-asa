@@ -27,6 +27,125 @@
   --topbar-pad-x: 16px;
 }
 
+/* Popover legend that appears near the dock */
+#rarityLegendPop{
+  position:absolute;
+  left:10px;
+  bottom:54px;              /* sits above bottom-left controls */
+  z-index: 950;
+
+  display:none;
+  padding:6px 8px;
+  border-radius:10px;
+
+  background: rgba(26,29,33,.55);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+
+  color: rgba(255,255,255,.80);
+  font-size:10px;
+  user-select:none;
+}
+
+#rarityLegendPop.open{ display:block; }
+
+#rarityLegendPop .ends{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  opacity:.70;
+  font-size:10px;
+  margin-bottom:6px;
+}
+
+#rarityLegendPop .strip{
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+
+#rarityLegendPop .sq{
+  width:14px;
+  height:14px;
+  border-radius:4px;
+  border:1px solid rgba(0,0,0,.35);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
+  cursor:default;
+  position:relative;
+}
+
+/* Tooltip on hover (desktop) */
+#rarityLegendPop .sq::after{
+  content: attr(data-label);
+  position:absolute;
+  left:50%;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%);
+  white-space:nowrap;
+
+  padding:3px 6px;
+  border-radius:8px;
+  background: rgba(0,0,0,.65);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.92);
+  font-size:10px;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .12s ease;
+}
+.rarity-legend{
+  position:absolute;
+  left:50%;
+  bottom:70px;                 /* adjust so it clears your bottom-left dock */
+  transform:translateX(-50%);
+  z-index:950;                 /* above map, below panels if you want */
+
+  display:flex;
+  align-items:center;
+  gap:0px;
+
+  padding:2px 2px;
+  border-radius:4px;
+  border:1px solid rgba(255,255,255,.04);
+  background:rgba(26,29,33,.32);
+  backdrop-filter: blur(24px);
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
+  pointer-events:auto;
+}
+
+.rarity-legend .rl-end{
+  font-size:9px;
+  color:rgba(255,255,255,.70);
+  white-space:nowrap;
+  user-select:none;
+  font-variant:all-small-caps;
+  font-stretch: condensed;
+  padding:2px;
+}
+
+.rarity-legend .rl-bar{
+  display:flex;
+  gap:1px;
+}
+
+.rarity-legend .rl-sq{
+  width:14px;
+  height:14px;
+  border-radius:0px;
+  border: 1px solid rgba(255,255,255,.18);
+}
+#rarityLegendPop .sq:hover::after{ opacity:1; }
+
+@media (max-width:640px){
+  #rarityLegendPop{
+    left:6px;
+    bottom:64px; /* above mobile control row */
+    padding:6px 7px;
+  }
+  #rarityLegendPop .sq{ width:15px; height:15px; }
+}
+
 .dd-crumbs{
   display:flex;
   gap:6px;
