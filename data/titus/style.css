@@ -1199,6 +1199,14 @@ button {
    8) MOBILE OVERRIDES (<= 640px)
    ============================================================ */
 @media (max-width: 955px){
+
+  #rarityLegend{
+    bottom: 12px;
+    right: 70px; 
+    left: auto;
+    transform: none;
+  }
+
   /* show Filters button on mobile */
   #controlsToggle{ display:inline-flex; }
 
