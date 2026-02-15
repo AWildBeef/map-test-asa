@@ -149,6 +149,17 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.dd-crumbs{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  padding:8px 10px 0;
+  color: var(--muted);
+  font-size: 12px;
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .dd-crumb{
   border:0;
   background:transparent;
