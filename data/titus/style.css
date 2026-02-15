@@ -1296,6 +1296,7 @@ button {
   /* move ONLY the mode button left */
   #modeToggle{
     margin-right: 16px; /* tweak */
+    border-color: var(--control-border);
   }
 
   /* ensure filter stays pinned */
