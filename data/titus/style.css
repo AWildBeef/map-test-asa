@@ -1120,11 +1120,6 @@ button {
   }
 }
 
-.info-copy:hover{
-  color: rgba(255,255,255,1);
-  filter: drop-shadow(0 0 2px rgba(255,255,255,.25));
-}
-
 .info-copy:hover::before{ opacity:1; }
 .info-mono{   /* The scrollable BP and Nametag Fields */
   margin-top:2px;
