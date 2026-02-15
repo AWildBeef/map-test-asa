@@ -1203,6 +1203,79 @@ button {
     padding:1px;
   }
 
+  #controlsToggle{ display:inline-flex; }
+
+  /* mobile layout: title left, actions right, controls below */
+  #topbar{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title actions"
+      "controls controls";
+    align-items:center;
+    row-gap: 8px;
+    column-gap: 8px;
+    padding: 6px 6px 6px;
+    z-index: 2000;
+    position: relative;
+  }
+
+  #topbar .title{
+    grid-area: title;
+    justify-self:start;
+    font-size:12px;
+    margin-left: 5px;
+    white-space:nowrap;
+  }
+
+  #topbar .title-actions{
+    grid-area: actions;
+    justify-self:end;
+    display:flex;
+    gap:6px;
+    align-items:center;
+    white-space:nowrap;
+  }
+
+  /* hide dropdowns by default, show when toggled */
+  #topbar .controls{
+    grid-area: controls;
+    width:100%;
+    justify-self:stretch;
+
+    display:none;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:4px;
+  }
+  #topbar.show-controls .controls{ display:flex; }
+
+  /* make fancy hosts behave well on small screens */
+  #topbar .controls > #sourceSelectFancy,
+  #topbar .controls > #mapSelectFancy{
+    flex: 1 1 0;
+    min-width: 120px;
+    max-width: none;
+    width: auto;
+  }
+
+  /* dino dropdown full width */
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+  }
+
+  /* native selects (if they ever show) */
+  #topbar select{
+    min-width:0;
+    max-width:none;
+    width:100%;
+    padding:7px 7px;
+    font-size:13px;
+    border-radius:4px;
+  }
   /* Slightly larger panel for fat-fingers */
   .floating-panel{
     width: var(--panel-w-mobile);
@@ -1217,29 +1290,7 @@ button {
   #modStylePanel {
     width: var(--modPanel-w-mobile);
   }
-  
-  /* MOBILE: treat fancy dropdown hosts like selects (so they can sit side-by-side) */
-  #topbar .controls > #sourceSelectFancy,
-  #topbar .controls > #mapSelectFancy,
-  #topbar .controls > #bgSelectWrap,
-  #topbar .controls > #dinoSelectFancy{
-    flex: 1 1 140px;   /* same as your selects */
-    min-width:120px;
-    width:auto;        /* IMPORTANT: override any 100% width */
-  }
-  
-  /* Make the dino one span the full row (so source+map stay above it) */
-  #topbar .controls > #dinoSelectFancy{
-    flex: 1 1 100%;
-    min-width:0;
-  }
-  
-  /* If any fancy host got forced to width:100% somewhere, squash it */
-  #topbar .controls > #sourceSelectFancy,
-  #topbar .controls > #mapSelectFancy{
-    max-width:none;
-  }
-  
+    
   .floating-panel .fp-title{
     color:var(--muted);
     font-weight:600;
@@ -1289,117 +1340,15 @@ button {
 
   /* Filters toggle visible */
   #controlsToggle{ display:inline-flex; }
-
-  /* Hide dropdown row unless toggled */
-  #topbar .controls{ 
-    display:none;
-   }
-  #topbar.show-controls .controls{ display:flex; }
-
-  /* Controls layout */
-  #topbar .controls{
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:4px;
-  }
-
-  /* Dropdowns smaller */
-  #topbar select{
-    min-width:0;
-    max-width:none;
-    width:100%;
-    padding:7px 7px;
-    font-size:13px;
-    border-radius:4px;
-  }
-
-  #topbar .controls > select{
-    flex: 1 1 140px;
-    min-width:120px;
-  }
-
-  #topbar{
-    padding:6px 6px 6px;
-    position: relative;
-    z-index: 2000;
-  }
-
-  #topbar .title{
-    font-size:12px;
-    margin-left:5px
-  }
-  
-  modeToggle{
-    margin-right: 12px; /* increase to move it left more */
-    color:#00ff00;
-  }
-  
-
-
-  /* bgSelectWrap sizing */
-  #topbar .controls > #bgSelectWrap{
-    flex: 1 1 140px;
-    min-width:120px;
-  }
-  
-  /* Row 1: source + map */
-  #topbar .controls > #sourceSelectFancy,
-  #topbar .controls > #mapSelectFancy{
-    flex: 1 1 calc(30% - 4px);
-    max-width:none;
-    width:auto;
-  }
-  /* Row 1: source + map */
-  #topbar .controls > #sourceSelectFancy{ 
-    flex: 6 1 0%;
-    max-width:none;
-    width:auto;
-  }
-  
-  #topbar .controls > #mapSelectFancy{
-    flex: 4 1 0%;
-    max-width:none;
-    width:auto;
-  }
-  /* Default: Dino full width */
-  #topbar .controls > #dinoSelectFancy{
-    flex: 1 1 100%;
-    max-width:none;
-    width:auto;
-  }
-  
+    
   #sourceSelectFancy .dd-btn,
   #mapSelectFancy .dd-btn,
-  #dinoSelectFancy .dd-btn,
+  #dinoSelectFancy .dd-btn{
     padding:7px 7px;
     font-size:10px;
     border-radius:4px;
     min-height:34px;
   }
-  /* Make rows align as one "block" (same left edge) */
-  #topbar{ align-items: stretch; }
-
-  #topbar .title-row,
-  #topbar .controls{
-    width: 100%;
-    max-width: 520px;   /* tune */
-    margin: 0 auto;
-  }
-
-  /* Title row uses same 60/40 as Source/Map */
-  .title-row{
-    display:grid;
-    grid-template-columns: 1fr auto auto; /* title | mode | filter */
-    align-items:center;
-    column-gap:2px;
-  }
-
-  /* keep your title nudge */
-  #topbar .title{
-    margin-left: 5px; /* your current good value */
-  }
-
   /* move ONLY the mode button left */
   #modeToggle{
     margin-right: 16px; /* tweak */
@@ -1409,12 +1358,12 @@ button {
   #controlsToggle{
     margin-right: 0;
   }
-
-
   
   #bgSelectWrap select{ width:100%; }
-}
 
+  /* make sure the Filters button is visible on mobile */
+  #controlsToggle{ display:inline-flex; }
+}
 
 /* ============================================================
    Map controls: Background toggle + Mod Style FAB
