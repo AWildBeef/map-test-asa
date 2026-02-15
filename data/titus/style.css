@@ -1103,6 +1103,7 @@ button {
   color: rgba(255,255,255,.80);
 }
 
+/* Icon */
 .info-copy::before{
   content:"";
   display:block;
@@ -1119,8 +1120,8 @@ button {
     filter: drop-shadow(0 0 2px rgba(255,255,255,.25));
   }
 }
-
 .info-copy:hover::before{ opacity:1; }
+
 .info-mono{   /* The scrollable BP and Nametag Fields */
   margin-top:2px;
   padding:4px 6px;
