@@ -392,7 +392,7 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:0px;
+  gap:7px;
   flex: 0 0 auto;
   margin: 0;
 }
@@ -401,7 +401,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:0px;
+  gap:6px;
   width:100%;
 }
 
@@ -409,7 +409,7 @@ body{
   margin-left:auto;
   display:flex;
   align-items:center;
-  gap:0px;
+  gap:8px;
 }
 
 #topbar .title{
@@ -423,7 +423,7 @@ body{
 
 #topbar .controls{
   display:flex;
-  gap:0px;
+  gap:12px;
   flex-wrap:wrap;
   justify-content:center;
   align-items:center;
@@ -465,7 +465,6 @@ body{
 .icon-btn {
   touch-action: manipulation;
 }
-
 /* ================================
    DESKTOP — even dropdown layout
    ================================ */
