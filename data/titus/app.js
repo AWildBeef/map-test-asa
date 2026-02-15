@@ -278,19 +278,46 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+         (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
+
 async function exportAndSharePng(node, filename = "map.png") {
-  const dataUrl = await htmlToImage.toPng(node, { cacheBust: true, pixelRatio: 2 });
+  const dataUrl = await htmlToImage.toPng(node, {
+    cacheBust: true,
+    pixelRatio: Math.min(2, window.devicePixelRatio || 1),
+    backgroundColor: "#121417",
+  });
+
   const blob = await (await fetch(dataUrl)).blob();
   const file = new File([blob], filename, { type: "image/png" });
 
+  // ✅ Best path on iOS: Share Sheet
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     await navigator.share({ files: [file], title: filename });
     return;
   }
 
-  // fallback: open tab
+  // ✅ Desktop / non-iOS: try direct download
+  if (!isIOS()) {
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    return;
+  }
+
+  // ✅ iOS fallback: open image in new tab (then Share → Save Image/Files)
   const w = window.open();
-  if (w) w.document.write(`<img src="${dataUrl}" style="width:100%;height:auto;" />`);
+  if (!w) {
+    alert("Popup blocked. Allow popups, then try again.");
+    return;
+  }
+  w.document.write(`<img src="${dataUrl}" style="width:100%;height:auto;" />`);
+  w.document.title = "Export";
 }
 
 function buildSourceDrillTree() {
@@ -383,32 +410,23 @@ saveBtn.addEventListener("click", async (e) => {
     return;
   }
 
-  // IMPORTANT: mapObj.map.getContainer() is Leaflet’s real DOM root
   const node = mapObj.map.getContainer();
 
   try {
     setExportUiHidden(true);
 
-    // let layout update + Leaflet panes settle
     mapObj.map.invalidateSize();
     await nextFrame();
     await nextFrame();
 
-    const dataUrl = await htmlToImage.toPng(node, {
-      cacheBust: true,
-      pixelRatio: Math.min(2, window.devicePixelRatio || 1),
-      backgroundColor: "#121417", // pick your bg so transparent areas don’t go weird
-    });
+    const filename = `ark-map-${new Date().toISOString().slice(0,19).replace(/[:T]/g,"-")}.png`;
 
-    const a = document.createElement("a");
-    a.href = dataUrl;
-    a.download = `ark-map-${new Date().toISOString().slice(0,19).replace(/[:T]/g,"-")}.png`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    // iOS: Share Sheet (Save Image / Save to Files). Desktop: falls back to download/open-tab.
+    await exportAndSharePng(node, filename);
+
   } catch (err) {
     console.error(err);
-    alert("Export failed. If you’re running from file://, serve it via a local web server.");
+    alert("Export failed. Check console for details.");
   } finally {
     setExportUiHidden(false);
   }
