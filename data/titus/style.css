@@ -500,6 +500,7 @@ body{
   gap:6px;
   padding:8px 10px;
   border-radius:10px;
+  border-color: var(--control-border);
   border:1px solid rgba(255,255,255,.15);
   background:rgba(30,30,30,.85);
   color:#fff;
