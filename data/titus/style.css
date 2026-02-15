@@ -309,7 +309,9 @@ body{
   border-bottom:1px solid var(--panel-border);
   padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
 
-  display:flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 14px; 
   flex-direction:column;
   align-items:center;
   gap:7px;
@@ -339,19 +341,37 @@ body{
   text-transform:uppercase;
   letter-spacing:.4px;
   color:#f2f2f2;
+  justify-self: start;
+  white-space: nowrap;
 }
 
 #topbar .controls{
   display:flex;
+  justify-self: center; 
   gap:12px;
   flex-wrap:wrap;
   justify-content:center;
   align-items:center;
   width:min(1100px, 100%);
+  gap: 12px;
+  min-width: 0;
+}
+#topbar .title-actions{
+  justify-self: end;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space: nowrap;
 }
 
 #topbar .controls > select{
   flex: 1 1 220px;
+}
+
+#topbar .controls > *{
+  flex: 1 1 0;
+  min-width: 200px;
+  max-width: 320px;
 }
 
 #topbar select{
@@ -384,58 +404,9 @@ body{
 .mode-toggle,
 .icon-btn {
   touch-action: manipulation;
+  width:42px;
+  height:42px; 
 }
-
-/* ================================
-   DESKTOP — even dropdown layout
-   ================================ */
-@media (min-width: 956px){
-  #topbar{
-    display: grid;
-    grid-template-columns: auto 1fr auto; /* title | centered controls | actions */
-    align-items: center;
-    column-gap: 14px;
-    padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
-  }
-
-  #topbar .title{
-    justify-self: start;
-    white-space: nowrap;
-  }
-
-  #topbar .controls{
-    justify-self: center;           /* <-- true center of the bar */
-    width: min(1100px, 100%);
-    display:flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-  }
-
-  #topbar .title-actions{
-    justify-self: end;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    white-space: nowrap;
-  }
-
-  /* Optional: make each dropdown slot behave like before */
-  #topbar .controls > *{
-    flex: 1 1 0;
-    min-width: 200px;
-    max-width: 320px;
-  }
-    
-  .icon-btn{
-    width:42px;
-    height:42px;
-  }
-}
-
-
 /* ============================================================
    Fancy dropdown should visually match #topbar select
    ============================================================ */
