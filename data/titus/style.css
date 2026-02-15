@@ -1238,6 +1238,22 @@ button {
     white-space:nowrap;
   }
 
+  #topbar:not(.show-controls){
+    grid-template-areas: "title actions";
+    grid-template-rows: auto;     /* ensures no second row */
+    row-gap: 0;
+    padding-bottom: 0;            /* optional, but usually what you want */
+  }
+
+  /* When controls are shown, restore the 2-row layout */
+  #topbar.show-controls{
+    grid-template-areas:
+      "title actions"
+      "controls controls";
+    grid-template-rows: auto auto;
+    row-gap: 8px;                 /* or whatever you want */
+  }
+
   #topbar .title-actions{
     grid-area: actions;
     justify-self:end;
