@@ -149,17 +149,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.dd-crumbs{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  padding:8px 10px 0;
-  color: var(--muted);
-  font-size: 12px;
-  overflow:auto;
-  -webkit-overflow-scrolling: touch;
-}
-
 .dd-crumb{
   border:0;
   background:transparent;
@@ -380,7 +369,6 @@ body{
   width: 100%;
 }
 
-
 /* ============================================================
    3) TOP BAR (title + controls)
    ============================================================ */
@@ -465,53 +453,52 @@ body{
 .icon-btn {
   touch-action: manipulation;
 }
+
 /* ================================
    DESKTOP — even dropdown layout
    ================================ */
-@media (min-width: 956px){
-  #topbar{
-    display: grid;
-    grid-template-columns: auto 1fr auto; /* title | centered controls | actions */
-    align-items: center;
-    column-gap: 14px;
-    padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
-  }
 
-  #topbar .title{
-    justify-self: start;
-    white-space: nowrap;
-  }
+@media (min-width: 641px){
 
   #topbar .controls{
-    justify-self: center;           /* <-- true center of the bar */
-    width: min(1100px, 100%);
-    display:flex;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap;      /* prevents wrapping */
     justify-content: center;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
   }
 
-  #topbar .title-actions{
-    justify-self: end;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    white-space: nowrap;
-  }
-
-  /* Optional: make each dropdown slot behave like before */
+  /* ALL dropdown hosts get equal width */
   #topbar .controls > *{
     flex: 1 1 0;
-    min-width: 200px;
-    max-width: 320px;
+    min-width: 0;   /* critical for flexbox */
+    max-width: none;
   }
-    
+  
+  .mode-toggle{
+    height:42px;
+    padding:0 16px;
+    font-size:15px;
+  }
+
   .icon-btn{
     width:42px;
     height:42px;
   }
+
+  .leaflet-control.map-dock .dock-btn{
+    width:40px;
+    height:40px;
+  }
+  
+  .leaflet-control-zoom.zoom-horizontal a{
+    width:40px;
+    height:40px;
+    line-height:40px;
+  }
+
+  .leaflet-control-zoom.zoom-horizontal{
+    border-radius:10px; /* optional slight upscale */
+  }
+
+
 }
 
 /* ============================================================
@@ -869,7 +856,6 @@ button {
 .dd-star:hover{ opacity:1; }
 
 
-
 /* ============================================================
    TOPBAR: Make ALL fancy dropdowns match the native selects
    ============================================================ */
@@ -929,7 +915,8 @@ button {
   font-weight:400;
   color:#fff;
 }
-/*/* ============================================================
+
+/* ============================================================
    4) FLOATING PANELS (new draggable system)
    ============================================================ */
 .floating-panel{
@@ -993,6 +980,7 @@ button {
 .floating-panel.collapsed .fp-btn-chevron svg{
   transform: rotate(-90deg);
 }
+
 
 .floating-panel .fp-body{
   padding: var(--panel-body-pad);
@@ -1193,10 +1181,6 @@ button {
     drop-shadow(0 0 6px rgba(0,0,0,.35))
     drop-shadow(0 0 4px currentColor);
 }
-
-/* ============================================================
-   8) MOBILE OVERRIDES (<= 640px)
-   ============================================================ */
 /* ============================================================
    8) MOBILE OVERRIDES (<= 640px)
    ============================================================ */
