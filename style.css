@@ -1007,19 +1007,18 @@ button {
   display:block;
   width:14px;
   height:14px;
-
   background-color: currentColor;
 
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-
-  .info-copy:hover{
-    color: rgba(255,255,255,1);
-    filter: drop-shadow(0 0 2px rgba(255,255,255,.25));
-  }
 }
-.info-copy:hover::before{ opacity:1; }
 
+.info-copy:hover{
+  color: rgba(255,255,255,1);
+  filter: drop-shadow(0 0 2px rgba(255,255,255,.25));
+}
+
+.info-copy:hover::before{ opacity:1; }
 .info-mono{   /* The scrollable BP and Nametag Fields */
   margin-top:2px;
   padding:4px 6px;
