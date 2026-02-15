@@ -1225,8 +1225,8 @@ button {
   #topbar:not(.show-controls){
     grid-template-areas: "title actions";
     grid-template-rows: auto;     /* ensures no second row */
-    row-gap: 0;
-    padding-bottom: 0;            /* optional, but usually what you want */
+    row-gap: 4;
+    padding-bottom: 4;            /* optional, but usually what you want */
   }
 
   /* When controls are shown, restore the 2-row layout */
@@ -1242,7 +1242,7 @@ button {
     grid-area: actions;
     justify-self:end;
     display:flex;
-    gap:0px;
+    gap:4px;
     align-items:center;
     white-space:nowrap;
   }
@@ -1256,7 +1256,7 @@ button {
     display:none;
     flex-wrap:wrap;
     justify-content:center;
-    gap:0px;
+    gap:4px;
   }
   #topbar.show-controls .controls{ display:flex; }
 
@@ -1282,7 +1282,7 @@ button {
     min-width:0;
     max-width:none;
     width:100%;
-    padding:0px 0px;
+    padding:7px 7px;
     font-size:13px;
     border-radius:4px;
   }
