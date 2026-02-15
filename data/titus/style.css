@@ -390,7 +390,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:6px;
+  gap:0px;
   width:100%;
 }
 
@@ -398,7 +398,7 @@ body{
   margin-left:auto;
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:0px;
 }
 
 #topbar .title{
@@ -1214,8 +1214,8 @@ button {
       "controls controls";
     align-items:center;
     row-gap: 8px;
-    column-gap: 0px;
-    padding: 0px 0px 0px;
+    column-gap: 2px;
+    padding: 2px 2px 2px;
     z-index: 2000;
     position: relative;
   }
