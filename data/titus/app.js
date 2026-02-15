@@ -277,6 +277,22 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+
+async function exportAndSharePng(node, filename = "map.png") {
+  const dataUrl = await htmlToImage.toPng(node, { cacheBust: true, pixelRatio: 2 });
+  const blob = await (await fetch(dataUrl)).blob();
+  const file = new File([blob], filename, { type: "image/png" });
+
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    await navigator.share({ files: [file], title: filename });
+    return;
+  }
+
+  // fallback: open tab
+  const w = window.open();
+  if (w) w.document.write(`<img src="${dataUrl}" style="width:100%;height:auto;" />`);
+}
+
 function buildSourceDrillTree() {
   const root = { label: "Sources", children: [] };
 
