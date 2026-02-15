@@ -2696,5 +2696,7 @@ function boot() {
     el.style.background = rarityToColor(el.dataset.r);
   });
 }
-
+window.addEventListener("load", () => {
+  setTimeout(() => mapObj?.map?.invalidateSize(), 100);
+});
 boot();
