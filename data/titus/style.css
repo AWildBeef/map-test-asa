@@ -70,6 +70,8 @@
 }
 #rarityLegendPop .sq:hover::after{ opacity:1; }
 
+[data-_exportHide="1"] { display:none !important; }
+
 .dd-crumbs{
   display:flex;
   gap:6px;
