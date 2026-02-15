@@ -325,9 +325,10 @@
 #mapSelectFancy .dd-btn-text{
   justify-content:center;  /* only if dd-btn-text is a column flex */
 }
+/*
 ============================================================
    1) GLOBAL DEFAULTS / RESETS
-   ============================================================ */
+============================================================ */
 *{ box-sizing:border-box; }
 
 html, body{ 
