@@ -130,21 +130,13 @@
 }
 
 .rarity-legend .rl-sq{
-  width:14px;
-  height:14px;
+  width:12px;
+  height:12px;
   border-radius:0px;
   border: 1px solid rgba(255,255,255,.18);
 }
 #rarityLegendPop .sq:hover::after{ opacity:1; }
 
-@media (max-width:640px){
-  #rarityLegendPop{
-    left:6px;
-    bottom:64px; /* above mobile control row */
-    padding:6px 7px;
-  }
-  #rarityLegendPop .sq{ width:15px; height:15px; }
-}
 
 .dd-crumbs{
   display:flex;
@@ -1205,6 +1197,10 @@ button {
     right: 70px; 
     left: auto;
     transform: none;
+  }
+  .rarity-legend .rl-end{
+    font-size:7px;
+    padding:1px;
   }
 
   /* show Filters button on mobile */
