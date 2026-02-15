@@ -1,143 +1,3 @@
-/* ============================================================
-   0) THEME TOKENS (colors + sizing knobs)
-   ============================================================ */
-:root{
-  --bg:#121417; /* Midnight */
-  --panel:#1a1d21; /* Navy */
-  --panel-border:#2a2f35; /* Dark Grey */
-
-  --text:#e6e6e6; /* almost white */
-  --muted:#b8c0cc; /* Grey */
-
-  --control-bg:#242a30; /* Faded Navy */
-  --control-border:#3a414a; /* Another Grey */
-  --focus:#7aa2ff; /* Light Blue */
-
-  /* Panel sizing knobs (easy to tune) */
-  --panel-w: 420px;
-  --panel-w-mobile: 210px;
-  --dinoPanel-w-mobile: 225px;
-  --modPanel-w-mobile: 150px;
-  --panel-radius: 4px;
-
-  --panel-header-pad: 5px;
-  --panel-body-pad: 7px;
-
-  --topbar-pad-y: 8px;
-  --topbar-pad-x: 10px;
-}
-
-/* Popover legend that appears near the dock */
-#rarityLegendPop{
-  position:absolute;
-  left:10px;
-  bottom:54px;              /* sits above bottom-left controls */
-  z-index: 950;
-
-  display:none;
-  padding:6px 8px;
-  border-radius:10px;
-
-  background: rgba(26,29,33,.55);
-  border: 1px solid rgba(255,255,255,.12);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 10px 22px rgba(0,0,0,.35);
-
-  color: rgba(255,255,255,.80);
-  font-size:10px;
-  user-select:none;
-}
-
-#rarityLegendPop.open{ display:block; }
-
-#rarityLegendPop .ends{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  opacity:.70;
-  font-size:10px;
-  margin-bottom:6px;
-}
-
-#rarityLegendPop .strip{
-  display:flex;
-  gap:4px;
-  align-items:center;
-}
-
-#rarityLegendPop .sq{
-  width:14px;
-  height:14px;
-  border-radius:4px;
-  border:1px solid rgba(0,0,0,.35);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
-  cursor:default;
-  position:relative;
-}
-
-/* Tooltip on hover (desktop) */
-#rarityLegendPop .sq::after{
-  content: attr(data-label);
-  position:absolute;
-  left:50%;
-  bottom: calc(100% + 6px);
-  transform: translateX(-50%);
-  white-space:nowrap;
-
-  padding:3px 6px;
-  border-radius:8px;
-  background: rgba(0,0,0,.65);
-  border: 1px solid rgba(255,255,255,.10);
-  color: rgba(255,255,255,.92);
-  font-size:10px;
-  opacity:0;
-  pointer-events:none;
-  transition: opacity .12s ease;
-}
-.rarity-legend{
-  position:absolute;
-  left:50%;
-  bottom:70px;                 /* adjust so it clears your bottom-left dock */
-  transform:translateX(-50%);
-  z-index:950;                 /* above map, below panels if you want */
-
-  display:flex;
-  align-items:center;
-  gap:0px;
-
-  padding:2px 2px;
-  border-radius:4px;
-  border:1px solid rgba(255,255,255,.04);
-  background:rgba(26,29,33,.32);
-  backdrop-filter: blur(24px);
-  box-shadow:0 10px 24px rgba(0,0,0,.25);
-  pointer-events:auto;
-}
-
-.rarity-legend .rl-end{
-  font-size:9px;
-  color:rgba(255,255,255,.70);
-  white-space:nowrap;
-  user-select:none;
-  font-variant:all-small-caps;
-  font-stretch: condensed;
-  padding:2px;
-}
-
-.rarity-legend .rl-bar{
-  display:flex;
-  gap:1px;
-}
-
-.rarity-legend .rl-sq{
-  width:12px;
-  height:12px;
-  border-radius:0px;
-  border: 1px solid rgba(255,255,255,.18);
-}
-#rarityLegendPop .sq:hover::after{ opacity:1; }
-
-
 .dd-crumbs{
   display:flex;
   gap:6px;
@@ -457,49 +317,52 @@ body{
 /* ================================
    DESKTOP — even dropdown layout
    ================================ */
+@media (min-width: 956px){
+  #topbar{
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* title | centered controls | actions */
+    align-items: center;
+    column-gap: 14px;
+    padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+  }
 
-@media (min-width: 641px){
+  #topbar .title{
+    justify-self: start;
+    white-space: nowrap;
+  }
 
   #topbar .controls{
-    flex-wrap: nowrap;      /* prevents wrapping */
+    justify-self: center;           /* <-- true center of the bar */
+    width: min(1100px, 100%);
+    display:flex;
+    flex-wrap: nowrap;
     justify-content: center;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
   }
 
-  /* ALL dropdown hosts get equal width */
+  #topbar .title-actions{
+    justify-self: end;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    white-space: nowrap;
+  }
+
+  /* Optional: make each dropdown slot behave like before */
   #topbar .controls > *{
     flex: 1 1 0;
-    min-width: 0;   /* critical for flexbox */
-    max-width: none;
+    min-width: 200px;
+    max-width: 320px;
   }
-  
-  .mode-toggle{
-    height:42px;
-    padding:0 16px;
-    font-size:15px;
-  }
-
+    
   .icon-btn{
     width:42px;
     height:42px;
   }
-
-  .leaflet-control.map-dock .dock-btn{
-    width:40px;
-    height:40px;
-  }
-  
-  .leaflet-control-zoom.zoom-horizontal a{
-    width:40px;
-    height:40px;
-    line-height:40px;
-  }
-
-  .leaflet-control-zoom.zoom-horizontal{
-    border-radius:10px; /* optional slight upscale */
-  }
-
-
 }
+
 
 /* ============================================================
    Fancy dropdown should visually match #topbar select
@@ -982,6 +845,9 @@ button {
 }
 
 
+
+.floating-panel .fp-btn:hover{ border-color:#596273; }
+
 .floating-panel .fp-body{
   padding: var(--panel-body-pad);
   max-height:50vh;
@@ -1160,7 +1026,6 @@ button {
   color:var(--muted);
   line-height:1.3;
 }
-
 /* ============================================================
    7) POI ICONS (Leaflet divIcon SVGs)
    ============================================================ */
@@ -1181,6 +1046,7 @@ button {
     drop-shadow(0 0 6px rgba(0,0,0,.35))
     drop-shadow(0 0 4px currentColor);
 }
+
 /* ============================================================
    8) MOBILE OVERRIDES (<= 640px)
    ============================================================ */
