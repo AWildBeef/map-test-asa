@@ -1214,8 +1214,8 @@ button {
       "controls controls";
     align-items:center;
     row-gap: 8px;
-    column-gap: 8px;
-    padding: 6px 6px 6px;
+    column-gap: 0px;
+    padding: 0px 0px 0px;
     z-index: 2000;
     position: relative;
   }
@@ -1232,7 +1232,7 @@ button {
     grid-area: actions;
     justify-self:end;
     display:flex;
-    gap:6px;
+    gap:0px;
     align-items:center;
     white-space:nowrap;
   }
@@ -1246,7 +1246,7 @@ button {
     display:none;
     flex-wrap:wrap;
     justify-content:center;
-    gap:4px;
+    gap:0px;
   }
   #topbar.show-controls .controls{ display:flex; }
 
@@ -1272,7 +1272,7 @@ button {
     min-width:0;
     max-width:none;
     width:100%;
-    padding:7px 7px;
+    padding:0px 0px;
     font-size:13px;
     border-radius:4px;
   }
