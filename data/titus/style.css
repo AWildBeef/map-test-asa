@@ -992,9 +992,6 @@ button {
   transform: rotate(-90deg);
 }
 
-
-.floating-panel .fp-btn:hover{ border-color:#596273; }
-
 .floating-panel .fp-body{
   padding: var(--panel-body-pad);
   max-height:50vh;
