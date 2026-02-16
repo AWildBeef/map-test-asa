@@ -536,6 +536,10 @@ saveBtn.addEventListener("click", async (e) => {
     alert("Map not ready yet.");
     return;
   }
+  // Force Leaflet to settle image layout before export
+  mapObj.map.invalidateSize();
+  await nextFrame();
+  await nextFrame();
 
   const node = mapObj.map.getContainer();
 
