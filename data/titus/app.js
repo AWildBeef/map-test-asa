@@ -283,41 +283,69 @@ function isIOS() {
          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 }
 
+async function waitForImagesIn(node, timeoutMs = 4000) {
+  const imgs = Array.from(node.querySelectorAll("img"));
+  if (!imgs.length) return;
+
+  const waitOne = (img) => new Promise((resolve) => {
+    // already loaded?
+    if (img.complete && img.naturalWidth > 0) return resolve();
+
+    let done = false;
+    const finish = () => { if (!done) { done = true; resolve(); } };
+
+    img.addEventListener("load", finish, { once: true });
+    img.addEventListener("error", finish, { once: true });
+
+    // Safari sometimes never fires; timeout anyway
+    setTimeout(finish, timeoutMs);
+  });
+
+  await Promise.all(imgs.map(waitOne));
+
+  // Give Safari a beat to paint after decode/load
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+}
+
 async function exportAndSharePng(node, filename = "map.png") {
-  const dataUrl = await htmlToImage.toPng(node, {
+  // Ensure any <img> inside the map container is actually ready
+  await waitForImagesIn(node);
+
+  // Use toBlob (way less memory / fewer Safari failures than dataURL)
+  let blob = await htmlToImage.toBlob(node, {
     cacheBust: true,
-    pixelRatio: Math.min(2, window.devicePixelRatio || 1),
+    pixelRatio: isIOS() ? 1 : Math.min(2, window.devicePixelRatio || 1),
     backgroundColor: "#121417",
   });
 
-  const blob = await (await fetch(dataUrl)).blob();
+  // iOS fallback: try again with lower stress if blob is null
+  if (!blob && !isIOS()) {
+    blob = await htmlToImage.toBlob(node, {
+      cacheBust: true,
+      pixelRatio: 1,
+      backgroundColor: "#121417",
+    });
+  }
+
+  if (!blob) throw new Error("Export failed: toBlob returned null");
+
   const file = new File([blob], filename, { type: "image/png" });
 
-  // ✅ Best path on iOS: Share Sheet
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+  // iOS Share Sheet only
+  if (isIOS() && navigator.canShare && navigator.canShare({ files: [file] })) {
     await navigator.share({ files: [file], title: filename });
     return;
   }
 
-  // ✅ Desktop / non-iOS: try direct download
-  if (!isIOS()) {
-    const a = document.createElement("a");
-    a.href = dataUrl;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    return;
-  }
-
-  // ✅ iOS fallback: open image in new tab (then Share → Save Image/Files)
-  const w = window.open();
-  if (!w) {
-    alert("Popup blocked. Allow popups, then try again.");
-    return;
-  }
-  w.document.write(`<img src="${dataUrl}" style="width:100%;height:auto;" />`);
-  w.document.title = "Export";
+  // Desktop download
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
 }
 
 function buildSourceDrillTree() {
@@ -425,8 +453,8 @@ saveBtn.addEventListener("click", async (e) => {
     await exportAndSharePng(node, filename);
 
   } catch (err) {
-    console.error(err);
-    alert("Export failed. Check console for details.");
+    console.error("Export failed:", err);
+    alert(`Export failed: ${err?.name || "Error"}\n${err?.message || String(err)}`);
   } finally {
     setExportUiHidden(false);
   }
@@ -1254,9 +1282,10 @@ function preloadImage(url) {
   if (!url) return;
 
   const img = new Image();
+  img.crossOrigin = "anonymous";
   img.decoding = "async";
-  img.loading = "eager";           // hint: do it now
-  img.referrerPolicy = "no-referrer"; // safe default
+  img.loading = "eager";
+  img.referrerPolicy = "no-referrer";
   img.src = url;
 }
 
@@ -1622,7 +1651,7 @@ function initMap(cfg) {
   }, 0);
 
   // Create overlay ONCE
-  const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
+  const overlay = L.imageOverlay(cfg.image, bounds, { crossOrigin: true }).addTo(map);
 
   map.fitBounds(bounds, fitOptionsForUI());
   map.setMaxBounds(bounds);
