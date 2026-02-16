@@ -278,6 +278,15 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+function ensureLeafletImgsCrossOrigin(node) {
+  node.querySelectorAll("img.leaflet-image-layer, img.leaflet-tile").forEach(img => {
+    // Must be set BEFORE the image loads to fully apply, but setting here still helps
+    // when Leaflet swaps URLs / reloads.
+    img.crossOrigin = "anonymous";
+    img.setAttribute("crossorigin", "anonymous");
+  });
+}
+
 function isIOS() {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
