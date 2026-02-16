@@ -278,6 +278,85 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+function blobToDataURL(blob) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(blob);
+  });
+}
+
+function waitImgLoaded(img, timeoutMs = 4000) {
+  return new Promise((resolve) => {
+    if (!img) return resolve();
+    if (img.complete && img.naturalWidth > 0) return resolve();
+
+    let done = false;
+    const finish = () => { if (!done) { done = true; cleanup(); resolve(); } };
+
+    const onLoad = () => finish();
+    const onErr  = () => finish();
+    const cleanup = () => {
+      img.removeEventListener("load", onLoad);
+      img.removeEventListener("error", onErr);
+    };
+
+    img.addEventListener("load", onLoad, { once: true });
+    img.addEventListener("error", onErr, { once: true });
+
+    setTimeout(finish, timeoutMs);
+  });
+}
+
+// Inlines Leaflet background/tile images as data URLs, returns a restore() function.
+async function inlineLeafletImagesForExport(node) {
+  const imgs = Array.from(
+    node.querySelectorAll("img.leaflet-image-layer, img.leaflet-tile")
+  );
+
+  // Remember original src so we can restore afterward
+  const originals = imgs.map(img => ({ img, src: img.currentSrc || img.src }));
+
+  // Important: do sequentially on iOS to reduce flakiness
+  for (const { img, src } of originals) {
+    try {
+      // If already data: just ensure it's loaded
+      if (src.startsWith("data:")) {
+        await waitImgLoaded(img);
+        continue;
+      }
+
+      // Fetch image bytes and inline
+      const res = await fetch(src, { cache: "no-store" });
+      if (!res.ok) throw new Error(`fetch ${res.status}`);
+      const blob = await res.blob();
+      const dataUrl = await blobToDataURL(blob);
+
+      // Swap src to inlined data
+      img.crossOrigin = "anonymous";
+      img.setAttribute("crossorigin", "anonymous");
+
+      img.src = dataUrl;
+      await waitImgLoaded(img, 6000);
+    } catch (e) {
+      // If we fail to inline (CORS etc.), we just leave it as-is.
+      // The rest may still work.
+      console.warn("Inline img failed:", src, e);
+      await waitImgLoaded(img);
+    }
+  }
+
+  // Restore function
+  return () => {
+    for (const { img, src } of originals) {
+      try {
+        img.src = src;
+      } catch {}
+    }
+  };
+}
+
 function ensureLeafletImgsCrossOrigin(node) {
   node.querySelectorAll("img.leaflet-image-layer, img.leaflet-tile").forEach(img => {
     // Must be set BEFORE the image loads to fully apply, but setting here still helps
@@ -317,44 +396,55 @@ async function waitForImagesIn(node, timeoutMs = 4000) {
 }
 
 async function exportAndSharePng(node, filename = "map.png") {
-  // Ensure any <img> inside the map container is actually ready
-  await waitForImagesIn(node);
+  let restore = null;
 
-  // Use toBlob (way less memory / fewer Safari failures than dataURL)
-  let blob = await htmlToImage.toBlob(node, {
-    cacheBust: true,
-    pixelRatio: isIOS() ? 1 : Math.min(2, window.devicePixelRatio || 1),
-    backgroundColor: "#121417",
-  });
+  try {
+    // 🔥 Make Leaflet background reliable on iOS
+    restore = await inlineLeafletImagesForExport(node);
 
-  // iOS fallback: try again with lower stress if blob is null
-  if (!blob && !isIOS()) {
-    blob = await htmlToImage.toBlob(node, {
+    // Give Safari a beat after swapping src
+    await nextFrame();
+    await nextFrame();
+
+    const blob = await htmlToImage.toBlob(node, {
       cacheBust: true,
-      pixelRatio: 1,
+      pixelRatio: 1,                 // iOS stability > crispness
       backgroundColor: "#121417",
     });
+
+    if (!blob) throw new Error("Export failed: toBlob returned null");
+
+    const file = new File([blob], filename, { type: "image/png" });
+
+    // iOS: prefer Share Sheet if possible
+    if (isIOS() && navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: filename });
+      return;
+    }
+
+    // iOS fallback: open preview tab (Save Image / Save to Files)
+    if (isIOS()) {
+      const url = URL.createObjectURL(blob);
+      const w = window.open(url, "_blank");
+      if (!w) alert("Popup blocked. Allow popups, then try again.");
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+      return;
+    }
+
+    // Desktop download
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+  } finally {
+    // ✅ Always restore original Leaflet image URLs
+    try { restore && restore(); } catch {}
   }
-
-  if (!blob) throw new Error("Export failed: toBlob returned null");
-
-  const file = new File([blob], filename, { type: "image/png" });
-
-  // iOS Share Sheet only
-  if (isIOS() && navigator.canShare && navigator.canShare({ files: [file] })) {
-    await navigator.share({ files: [file], title: filename });
-    return;
-  }
-
-  // Desktop download
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
 }
 
 function buildSourceDrillTree() {
