@@ -322,9 +322,11 @@ function blobToDataURL(blob) {
   });
 }
 
-function waitImgLoaded(img, timeoutMs = 4000) {
-  return new Promise((resolve) => {
-    if (!img) return resolve();
+async function waitImgLoaded(img, timeoutMs = 6000) {
+  if (!img) return;
+
+  // wait for load/error/timeout
+  await new Promise((resolve) => {
     if (img.complete && img.naturalWidth > 0) return resolve();
 
     let done = false;
@@ -339,9 +341,14 @@ function waitImgLoaded(img, timeoutMs = 4000) {
 
     img.addEventListener("load", onLoad, { once: true });
     img.addEventListener("error", onErr, { once: true });
-
     setTimeout(finish, timeoutMs);
   });
+
+  // decode (best signal Safari gives us)
+  try { if (img.decode) await Promise.race([img.decode(), new Promise(r => setTimeout(r, timeoutMs))]); } catch {}
+
+  // allow paint to catch up
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 }
 
 // Inlines Leaflet background/tile images as data URLs, returns a restore() function.
@@ -436,11 +443,11 @@ async function exportAndSharePng(node, filename = "map.png", crop = null) {
   try {
     restore = await inlineLeafletImagesForExport(node);
 
+    await waitForImagesIn(node, 8000);
     await nextFrame();
     await nextFrame();
-
-    const blob = await htmlToImage.toBlob(node, {
-      cacheBust: true,
+    
+    const blob = await htmlToImage.toBlob(...);      cacheBust: true,
       pixelRatio: exportPixelRatio(node),
       backgroundColor: "#121417",
       ...(crop ? { style: { transform: `translate(${-crop.left}px, ${-crop.top}px)` } } : {}),
@@ -569,6 +576,7 @@ saveBtn.addEventListener("click", async (e) => {
   }
 
   mapObj.map.invalidateSize();
+  mapObj.map.fire("moveend"); // nudge some renderers
   await nextFrame();
   await nextFrame();
 
