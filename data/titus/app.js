@@ -278,6 +278,41 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+function mapBoundsToContainerRect(map, bounds) {
+  const nw = map.latLngToContainerPoint(bounds.getNorthWest());
+  const se = map.latLngToContainerPoint(bounds.getSouthEast());
+
+  const left   = Math.floor(Math.min(nw.x, se.x));
+  const top    = Math.floor(Math.min(nw.y, se.y));
+  const width  = Math.ceil(Math.abs(se.x - nw.x));
+  const height = Math.ceil(Math.abs(se.y - nw.y));
+
+  return { left, top, width, height };
+}
+
+function exportPixelRatio(node) {
+  const dpr = window.devicePixelRatio || 1;
+
+  // iOS Safari can OOM on big canvases; scale based on target pixel area.
+  const rect = node?.getBoundingClientRect?.() || { width: 1200, height: 800 };
+  const baseArea = rect.width * rect.height;
+
+  // Rough "safe" tiers
+  // - small: allow 2
+  // - medium: 1.5
+  // - large: 1.25
+  // - huge: 1
+  if (isIOS()) {
+    if (baseArea <= 900_000) return Math.min(2, dpr);       // ~ <= 1000x900
+    if (baseArea <= 1_600_000) return Math.min(1.5, dpr);   // ~ <= 1600x1000
+    if (baseArea <= 2_400_000) return Math.min(1.25, dpr);  // ~ <= 2000x1200
+    return 1;
+  }
+
+  // Desktop / non-iOS: go higher
+  return Math.min(3, dpr);
+}
+
 function blobToDataURL(blob) {
   return new Promise((resolve, reject) => {
     const r = new FileReader();
@@ -395,34 +430,32 @@ async function waitForImagesIn(node, timeoutMs = 4000) {
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 }
 
-async function exportAndSharePng(node, filename = "map.png") {
+async function exportAndSharePng(node, filename = "map.png", crop = null) {
   let restore = null;
 
   try {
-    // 🔥 Make Leaflet background reliable on iOS
     restore = await inlineLeafletImagesForExport(node);
 
-    // Give Safari a beat after swapping src
     await nextFrame();
     await nextFrame();
 
     const blob = await htmlToImage.toBlob(node, {
       cacheBust: true,
-      pixelRatio: 1,                 // iOS stability > crispness
+      pixelRatio: exportPixelRatio(node),
       backgroundColor: "#121417",
+      ...(crop ? { style: { transform: `translate(${-crop.left}px, ${-crop.top}px)` } } : {}),
+      ...(crop ? { width: crop.width, height: crop.height } : {}),
     });
 
     if (!blob) throw new Error("Export failed: toBlob returned null");
 
     const file = new File([blob], filename, { type: "image/png" });
 
-    // iOS: prefer Share Sheet if possible
     if (isIOS() && navigator.canShare && navigator.canShare({ files: [file] })) {
       await navigator.share({ files: [file], title: filename });
       return;
     }
 
-    // iOS fallback: open preview tab (Save Image / Save to Files)
     if (isIOS()) {
       const url = URL.createObjectURL(blob);
       const w = window.open(url, "_blank");
@@ -431,7 +464,6 @@ async function exportAndSharePng(node, filename = "map.png") {
       return;
     }
 
-    // Desktop download
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -442,7 +474,6 @@ async function exportAndSharePng(node, filename = "map.png") {
     URL.revokeObjectURL(url);
 
   } finally {
-    // ✅ Always restore original Leaflet image URLs
     try { restore && restore(); } catch {}
   }
 }
@@ -536,7 +567,7 @@ saveBtn.addEventListener("click", async (e) => {
     alert("Map not ready yet.");
     return;
   }
-  // Force Leaflet to settle image layout before export
+
   mapObj.map.invalidateSize();
   await nextFrame();
   await nextFrame();
@@ -552,8 +583,10 @@ saveBtn.addEventListener("click", async (e) => {
 
     const filename = `ark-map-${new Date().toISOString().slice(0,19).replace(/[:T]/g,"-")}.png`;
 
-    // iOS: Share Sheet (Save Image / Save to Files). Desktop: falls back to download/open-tab.
-    await exportAndSharePng(node, filename);
+    // ✅ crop to image bounds only
+    const crop = mapBoundsToContainerRect(mapObj.map, mapObj.overlay.getBounds());
+
+    await exportAndSharePng(node, filename, crop);
 
   } catch (err) {
     console.error("Export failed:", err);
