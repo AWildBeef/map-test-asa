@@ -446,13 +446,20 @@ async function exportAndSharePng(node, filename = "map.png", crop = null) {
     await waitForImagesIn(node, 8000);
     await nextFrame();
     await nextFrame();
-    
-    const blob = await htmlToImage.toBlob(...);      cacheBust: true,
+
+    const options = {
+      cacheBust: true,
       pixelRatio: exportPixelRatio(node),
       backgroundColor: "#121417",
-      ...(crop ? { style: { transform: `translate(${-crop.left}px, ${-crop.top}px)` } } : {}),
-      ...(crop ? { width: crop.width, height: crop.height } : {}),
-    });
+    };
+
+    if (crop) {
+      options.style = { transform: `translate(${-crop.left}px, ${-crop.top}px)` };
+      options.width = crop.width;
+      options.height = crop.height;
+    }
+
+    const blob = await htmlToImage.toBlob(node, options);
 
     if (!blob) throw new Error("Export failed: toBlob returned null");
 
@@ -463,6 +470,7 @@ async function exportAndSharePng(node, filename = "map.png", crop = null) {
       return;
     }
 
+    // iOS fallback: open in new tab
     if (isIOS()) {
       const url = URL.createObjectURL(blob);
       const w = window.open(url, "_blank");
@@ -471,6 +479,7 @@ async function exportAndSharePng(node, filename = "map.png", crop = null) {
       return;
     }
 
+    // Desktop download
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
