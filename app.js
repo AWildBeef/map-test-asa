@@ -221,6 +221,30 @@ const drillState = {
   // nativeId -> array of labels representing the folder path, e.g. ["Sources","Mods","Xyphias"]
   pathByNativeId: {}
 };
+
+let showRarityLegend = false;
+
+function syncRarityLegendPopColors(){
+  // now targets your centered legend
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+
+  el.querySelectorAll(".sq[data-r]").forEach(sq => {
+    const r = sq.getAttribute("data-r");
+    sq.style.background = rarityToColor(r);
+  });
+}
+
+function setLegendOpen(open){
+  showRarityLegend = !!open;
+
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+
+  // your HTML uses inline display:none, so flip display directly
+  el.style.display = showRarityLegend ? "" : "none";
+}
+
 // ============================================================
 // SETTINGS
 // ============================================================
@@ -314,6 +338,22 @@ function asArray(x) {
   if (!x) return [];
   return Array.isArray(x) ? x : [x];
 }
+
+function nextFrame() {
+  return new Promise(r => requestAnimationFrame(() => r()));
+}
+
+function setExportUiHidden(hidden) {
+  const ids = ["topbar", "buildInfo", "dinoInfoPanel", "modStylePanel"];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.dataset._exportHide = hidden ? "1" : "0";
+  });
+
+  const dock = document.querySelector(".map-dock");
+  if (dock) dock.dataset._exportHide = hidden ? "1" : "0";
+}
+
 
 function renderCopyLine(label, value) {
   const v = String(value || "");
@@ -1137,9 +1177,10 @@ function preloadImage(url) {
   if (!url) return;
 
   const img = new Image();
+  img.crossOrigin = "anonymous";
   img.decoding = "async";
-  img.loading = "eager";           // hint: do it now
-  img.referrerPolicy = "no-referrer"; // safe default
+  img.loading = "eager";
+  img.referrerPolicy = "no-referrer";
   img.src = url;
 }
 
@@ -1350,6 +1391,23 @@ function renderDock(){
 
     poiBtn.classList.toggle("is-on", showPois);
   }
+  // 5) Rarity legend button — only makes sense when showing rarity colors
+  mkBtn({
+    title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
+    icon: `
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="7.5" r="1.2" fill="currentColor"/>
+      </svg>
+    `,
+    onClick: (btn) => {
+      setLegendOpen(!showRarityLegend);
+      btn.title = showRarityLegend ? "Hide rarity legend" : "Show rarity legend";
+      btn.classList.toggle("is-on", showRarityLegend);
+    },
+    extraClass: showRarityLegend ? "is-on" : ""
+  });
 
   updateDockToggles();
 }
@@ -1488,7 +1546,7 @@ function initMap(cfg) {
   }, 0);
 
   // Create overlay ONCE
-  const overlay = L.imageOverlay(cfg.image, bounds).addTo(map);
+  const overlay = L.imageOverlay(cfg.image, bounds, { crossOrigin: true }).addTo(map);
 
   map.fitBounds(bounds, fitOptionsForUI());
   map.setMaxBounds(bounds);
@@ -1816,6 +1874,8 @@ async function loadMapByMeta(mapMeta) {
   // rebuild dock buttons based on map + source
   renderDock();
   updateDockToggles();
+  syncRarityLegendPopColors();
+  setLegendOpen(false); // optional: auto-close on map/source change
   
   setPoisVisible(showPois); // ✅ re-apply on map changes
   drawPois(currentCfg);
@@ -1851,11 +1911,11 @@ function rarityToColor(r) {
   if (s.includes("very rare"))      return "#FF0000";
   if (s.includes("rare"))           return "#FF6600";
 
-  if (s.includes("very uncommon"))  return "#FFAA00";
+  if (s.includes("very uncommon"))  return "#FFCC00";
   if (s.includes("uncommon"))       return "#FFFF00";
 
   if (s.includes("very common"))    return "#00FF00"; // ✅ moved above "common"
-  if (s.includes("common"))         return "#CCFF00";
+  if (s.includes("common"))         return "#B2FF00";
 
   return "#000000";
 }
@@ -2586,6 +2646,15 @@ function boot() {
     console.error(err);
     alert(err.message || String(err));
   });
+  document.addEventListener("pointerdown", (e) => {
+    const pop = document.getElementById("rarityLegendPop");
+    if (!pop || !showRarityLegend) return;
+  });
+  document.querySelectorAll('#rarityLegend [data-r]').forEach(el=>{
+    el.style.background = rarityToColor(el.dataset.r);
+  });
 }
-
+window.addEventListener("load", () => {
+  setTimeout(() => mapObj?.map?.invalidateSize(), 100);
+});
 boot();
