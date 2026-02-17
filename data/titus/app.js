@@ -573,45 +573,56 @@ function setExportUiHidden(hidden) {
 
 // CSS-based hide (add this to your CSS)
 
-const saveBtn = document.getElementById("saveMapBtn");
-
-saveBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-
-  if (!mapObj?.map) {
-    alert("Map not ready yet.");
+function wireExportButton() {
+  const saveBtn = document.getElementById("saveMapBtn");
+  if (!saveBtn) {
+    console.warn("saveMapBtn not found.");
     return;
   }
 
-  mapObj.map.invalidateSize();
-  mapObj.map.fire("moveend"); // nudge some renderers
-  await nextFrame();
-  await nextFrame();
+  saveBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-  const node = mapObj.map.getContainer();
-
-  try {
-    setExportUiHidden(true);
+    if (!mapObj?.map) {
+      alert("Map not ready yet.");
+      return;
+    }
 
     mapObj.map.invalidateSize();
+    mapObj.map.fire("moveend");
+
     await nextFrame();
     await nextFrame();
 
-    const filename = `ark-map-${new Date().toISOString().slice(0,19).replace(/[:T]/g,"-")}.png`;
+    const node = mapObj.map.getContainer();
 
-    // ✅ crop to image bounds only
-    const crop = mapBoundsToContainerRect(mapObj.map, mapObj.overlay.getBounds());
+    try {
+      setExportUiHidden(true);
 
-    await exportAndSharePng(node, filename, crop);
+      mapObj.map.invalidateSize();
+      await nextFrame();
+      await nextFrame();
 
-  } catch (err) {
-    console.error("Export failed:", err);
-    alert(`Export failed: ${err?.name || "Error"}\n${err?.message || String(err)}`);
-  } finally {
-    setExportUiHidden(false);
-  }
-});
+      const filename =
+        `ark-map-${new Date().toISOString().slice(0,19).replace(/[:T]/g,"-")}.png`;
+
+      const crop =
+        mapBoundsToContainerRect(
+          mapObj.map,
+          mapObj.overlay.getBounds()
+        );
+
+      await exportAndSharePng(node, filename, crop);
+
+    } catch (err) {
+      console.error("Export failed:", err);
+      alert(`Export failed: ${err?.name || "Error"}\n${err?.message || String(err)}`);
+    } finally {
+      setExportUiHidden(false);
+    }
+  });
+}
 
 function renderCopyLine(label, value) {
   const v = String(value || "");
@@ -2882,6 +2893,7 @@ function boot() {
 
   // kick off preloading (don’t await — it runs in background)
   preloadMapAssets();
+  wireExportButton();
 
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
     document.getElementById("topbar")?.classList.toggle("show-controls");
