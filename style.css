@@ -31,7 +31,6 @@
   position:absolute;
   margin-left:5px;
   bottom:20px;                 /* adjust so it clears your bottom-left dock */
-  transform:translateX(-50%);
   z-index:950;                 /* above map, below panels if you want */
 
   display:flex;
