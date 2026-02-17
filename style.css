@@ -29,8 +29,8 @@
 
 .rarity-legend{
   position:absolute;
-  margin-left:7px;
-  bottom:40px;                 /* adjust so it clears your bottom-left dock */
+  margin-left:8px;
+  bottom:50px;                 /* adjust so it clears your bottom-left dock */
   z-index:950;                 /* above map, below panels if you want */
 
   display:flex;
@@ -62,8 +62,8 @@
 }
 
 .rarity-legend .rl-sq{
-  width:14px;
-  height:14px;
+  width:13px;
+  height:13px;
   border-radius:0px;
   border: 1px solid rgba(255,255,255,.18);
 }
