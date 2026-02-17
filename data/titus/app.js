@@ -277,15 +277,40 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+async function waitOverlayReady(mapObj, timeoutMs = 4000) {
+  const img = mapObj?.overlay?.getElement?.();
+  if (!img) return;
 
-function mapBoundsToContainerRect(map, bounds) {
-  const nw = map.latLngToContainerPoint(bounds.getNorthWest());
-  const se = map.latLngToContainerPoint(bounds.getSouthEast());
+  // wait for it to load
+  await new Promise((resolve) => {
+    if (img.complete && img.naturalWidth > 0) return resolve();
+    let done = false;
+    const finish = () => { if (!done) { done = true; resolve(); } };
+    img.addEventListener("load", finish, { once: true });
+    img.addEventListener("error", finish, { once: true });
+    setTimeout(finish, timeoutMs);
+  });
 
-  const left   = Math.floor(Math.min(nw.x, se.x));
-  const top    = Math.floor(Math.min(nw.y, se.y));
-  const width  = Math.ceil(Math.abs(se.x - nw.x));
-  const height = Math.ceil(Math.abs(se.y - nw.y));
+  // try decode (helps Safari)
+  try {
+    if (img.decode) await Promise.race([img.decode(), new Promise(r => setTimeout(r, timeoutMs))]);
+  } catch {}
+}
+
+function overlayImageToContainerRect(mapObj, bleed = 2) {
+  const container = mapObj?.map?.getContainer?.();
+  const img = mapObj?.overlay?.getElement?.(); // Leaflet ImageOverlay <img>
+
+  if (!container || !img) return null;
+
+  const c = container.getBoundingClientRect();
+  const r = img.getBoundingClientRect();
+
+  const left = Math.max(0, Math.floor(r.left - c.left) - bleed);
+  const top  = Math.max(0, Math.floor(r.top  - c.top)  - bleed);
+
+  const width  = Math.ceil(r.width)  + bleed * 2;
+  const height = Math.ceil(r.height) + bleed * 2;
 
   return { left, top, width, height };
 }
@@ -443,6 +468,8 @@ async function exportAndSharePng(node, filename = "map.png", crop = null) {
   try {
     restore = await inlineLeafletImagesForExport(node);
 
+    ensureLeafletImgsCrossOrigin(node);
+    await waitOverlayReady(mapObj, 6000);
     await waitForImagesIn(node, 8000);
     await nextFrame();
     await nextFrame();
@@ -607,11 +634,7 @@ function wireExportButton() {
       const filename =
         `ark-map-${new Date().toISOString().slice(0,19).replace(/[:T]/g,"-")}.png`;
 
-      const crop =
-        mapBoundsToContainerRect(
-          mapObj.map,
-          mapObj.overlay.getBounds()
-        );
+      const crop = overlayImageToContainerRect(mapObj, 3);
 
       await exportAndSharePng(node, filename, crop);
 
