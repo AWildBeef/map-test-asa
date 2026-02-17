@@ -30,7 +30,7 @@
 .rarity-legend{
   position:absolute;
   margin-left:5px;
-  bottom:35px;                 /* adjust so it clears your bottom-left dock */
+  bottom:40px;                 /* adjust so it clears your bottom-left dock */
   z-index:950;                 /* above map, below panels if you want */
 
   display:flex;
