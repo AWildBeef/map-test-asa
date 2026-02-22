@@ -1,279 +1,69 @@
 /* ============================================================
-   0) THEME TOKENS (colors + sizing knobs)
+   Atlas Clean Pass -- consolidated + low-specificity CSS
+   Notes:
+   - Keeps BOTH systems supported, but you should pick ONE:
+     (A) Leaflet-control panels (.leaflet-panel)  OR
+     (B) Draggable panels (.floating-panel)
+   - If you are on draggable panels, you can delete section 7 (Leaflet panels).
+   ============================================================ */
+
+/* ============================================================
+   0) THEME TOKENS
    ============================================================ */
 :root{
   color-scheme: dark;
-  --bg:#121417; /* Midnight */
-  --panel:#1a1d21; /* Navy */
-  --panel-border:#2a2f35; /* Dark Grey */
 
-  --text:#e6e6e6; /* almost white */
-  --muted:#b8c0cc; /* Grey */
+  /* Core colors */
+  --bg:#121417;
+  --panel:#1a1d21;
+  --panel-border:#2a2f35;
 
-  --control-bg:#242a30; /* Faded Navy */
-  --control-border:#3a414a; /* Another Grey */
-  --focus:#7aa2ff; /* Light Blue */
+  --text:#e6e6e6;
+  --muted:#b8c0cc;
 
-  /* Panel sizing knobs (easy to tune) */
+  --control-bg:#242a30;
+  --control-border:#3a414a;
+  --focus:#7aa2ff;
+
+  /* Sizing knobs */
   --panel-w: 420px;
   --panel-w-mobile: 210px;
-  --dinoPanel-w-mobile: 225px;
-  --modPanel-w-mobile: 150px;
+
+  /* Mobile panel widths */
+  --dino-w-mobile: 275px;         /* default */
+  --dino-w-mobile-compact: 225px; /* when mod panel expanded */
+  --mod-w-mobile: 150px;          /* expanded */
+  --mod-w-mobile-collapsed: 100px;/* collapsed */
+
   --panel-radius: 4px;
 
-  --panel-header-pad: 5px;
+  --panel-header-pad: 1px 7px;
   --panel-body-pad: 7px;
 
   --topbar-pad-y: 12px;
   --topbar-pad-x: 16px;
 }
 
-.rarity-legend{
-  position:absolute;
-  margin-left:8px;
-  bottom:50px;                 /* adjust so it clears your bottom-left dock */
-  z-index:950;                 /* above map, below panels if you want */
-
-  display:flex;
-  align-items:left;
-  gap:0px;
-
-  padding:2px 2px;
-  border-radius:4px;
-  border:1px solid rgba(255,255,255,.04);
-  background:rgba(26,29,33,.32);
-  backdrop-filter: blur(24px);
-  box-shadow:0 10px 24px rgba(0,0,0,.25);
-  pointer-events:auto;
-}
-
-.rarity-legend .rl-end{
-  font-size:9px;
-  color:rgba(255,255,255,.70);
-  white-space:nowrap;
-  user-select:none;
-  font-variant:all-small-caps;
-  font-stretch: condensed;
-  padding:1px;
-}
-
-.rarity-legend .rl-bar{
-  display:flex;
-  gap:1px;
-}
-
-.rarity-legend .rl-sq{
-  width:13px;
-  height:13px;
-  border-radius:0px;
-  border: 1px solid rgba(255,255,255,.18);
-}
-#rarityLegendPop .sq:hover::after{ opacity:1; }
-
-[data-_exportHide="1"] { display:none !important; }
-
-.dd-crumbs{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  padding:8px 10px 0;
-  color: var(--muted);
-  font-size: 12px;
-  overflow:auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.dd-crumb{
-  border:0;
-  background:transparent;
-  color: inherit;
-  padding:4px 6px;
-  border-radius:6px;
-}
-
-.dd-crumb:disabled{
-  opacity:.75;
-}
-
-.dd-crumb-sep{
-  opacity:.6;
-}
-
-.dd-drill-right{
-  margin-left:auto;
-  opacity:.7;
-  padding-left:10px;
-}
-
-.leaflet-control.map-dock{
-  background: rgba(30,30,30,0.85);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px;
-  overflow: hidden;
-  display:flex;
-}
-
-.leaflet-control.map-dock .dock-btn{
-  width: 34px;
-  height: 34px;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  background: rgba(30,30,30,.85);
-  color: #fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-.leaflet-control.map-dock .dock-btn:hover{
-  background: rgba(255,255,255,0.08);
-}
-
-/* Toggle “ON” state */
-.leaflet-control.map-dock .dock-btn.is-on{
-  background: rgba(0,140,255,.06);
-  box-shadow: inset 0 0 0 1px rgba(122,162,255,.18);
-}
-
-/* Make Leaflet zoom control horizontal (side-by-side) */
-.leaflet-control-zoom.zoom-horizontal{
-  display:flex;
-  flex-direction:row;
-  gap:0;
-  overflow:hidden;            /* keeps the rounded box clean */
-  border-radius:8px;          /* match your dock */
-}
-
-/* Remove the “stacked” separator and use a vertical divider instead */
-.leaflet-control-zoom.zoom-horizontal a{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:34px;
-  height:34px;
-  line-height:34px;
-  border-bottom:0 !important; /* kills the default horizontal divider */
-}
-
-/* Add a divider between + and - */
-.leaflet-control-zoom.zoom-horizontal a + a{
-  border-left:1px solid rgba(255,255,255,0.15);
-}
-
-/* Optional: match your dark glass look */
-.leaflet-control-zoom.zoom-horizontal{
-  background: rgba(30,30,30,0.85);
-  border: 1px solid rgba(255,255,255,0.15);
-}
-.leaflet-control-zoom.zoom-horizontal a{
-  background: transparent;
-  color:#fff;
-}
-.leaflet-control-zoom.zoom-horizontal a:hover{
-  background: rgba(255,255,255,0.08);
-}
-
-/* Put all controls in bottom-left in a horizontal row */
-.leaflet-bottom.leaflet-left {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;   /* keeps them sitting on the same baseline */
-  gap: 8px;                /* spacing between dock / zoom / attribution */
-  padding:8px;
-  box-sizing:border-box;
-}
-
-/* Remove Leaflet's default margins that assume vertical stacking */
-.leaflet-bottom.leaflet-left .leaflet-control {
-  margin: 0 !important;
-}
-
-.leaflet-control-attribution {
-  padding: 1px 1px;
-  line-height: 1.2;
-  font-size: 8px;
-  opacity: 0.40;
-  border-radius: 6px;
-}
-
-/* Treat fancy dino select like a full flex item (same as selects) */
-#topbar .controls > #dinoSelectFancy{
-  flex: 1 1 220px;     /* same as your selects */
-  min-width:200px;     /* match your selects */
-  max-width:320px;     /* match your selects */
-  width:100%;
-}
-
-/* Make the component fill its flex slot */
-#dinoSelectFancy .dd{
-  width:100%;
-  max-width:none;      /* override dd's max-width:320px if needed */
-}
-
-/* Fancy dropdown hosts should size like native selects */
-#topbar .controls > #sourceSelectFancy,
-#topbar .controls > #mapSelectFancy{
-  flex: 1 1 220px;
-  min-width:200px;
-  max-width:320px;
-  width:100%;
-}
-
-/* bgSelectFancy lives inside #bgSelectWrap so target it there */
-#bgSelectWrap #bgSelectFancy{
-  width:100%;
-}
-
-/* Hide right-side badge for source + map dropdowns */
-/* Hide right-side badges for specific fancy dropdown hosts */
-#sourceSelectFancy .dd-badges,
-#mapSelectFancy .dd-badges{
-  display: none !important;
-}
-
-/* Fallback: if the .dd is inserted after the native select */
-#sourceSelect + .dd .dd-badges,
-#mapSelect + .dd .dd-badges{
-  display: none !important;
-}
-
-
-/* Hide the “12 dinos / etc” line in the CLOSED button for source + map */
-#sourceSelectFancy .dd-sub,
-#mapSelectFancy .dd-sub{
-  display:none !important;
-}
-
-/* Optional: keep the label vertically centered when sub is hidden */
-#sourceSelectFancy .dd-btn-text,
-#mapSelectFancy .dd-btn-text{
-  justify-content:center;  /* only if dd-btn-text is a column flex */
-}
 /* ============================================================
-   1) GLOBAL DEFAULTS / RESETS
+   1) GLOBAL DEFAULTS
    ============================================================ */
 *{ box-sizing:border-box; }
 
-html, body{ 
-  height: 100%;
-  margin: 0;
-}
-
-#mapWrap .leaflet-container {
-  background: var(--bg);
+html, body{
+  height:100%;
+  margin:0;
 }
 
 body{
-  margin:0;
   background:var(--bg);
-  color:var(--bg);
+  color:var(--text);
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   display:flex;
   flex-direction:column;
-  min-height: 100%;
+  min-height:100%;
 }
+
+#mapWrap .leaflet-container{ background:var(--bg); }
 
 #buildInfo{
   position:fixed;
@@ -284,39 +74,59 @@ body{
   pointer-events:none;
 }
 
-/* ============================================================
-   2) LAYOUT CONTAINERS (map + wrapper)
-   ============================================================ */
-#mapWrap {
-  flex: 1 1 auto;
-  min-height: 0;        /* critical for Leaflet in flex layouts */
-  position: relative;
-  overflow: hidden;
-  padding-bottom: env(safe-area-inset-bottom);
+/* iOS interaction hygiene */
+:where(#topbar, #topbar button, #topbar select,
+       #topbar .dd-btn, #topbar .dd-item,
+       .floating-panel, .floating-panel button,
+       .leaflet-control.map-dock .dock-btn,
+       #controlsToggle, .mode-toggle, .icon-btn){
+  touch-action: manipulation;
+}
+:where(.dd-btn, .dd-item, #topbar select, button){
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* Focus ring: keyboard only */
+:where(.dd-btn, #topbar select):focus{
+  outline:none !important;
+  box-shadow:none !important;
+}
+:where(.dd-btn, #topbar select):focus-visible{
+  border-color:var(--focus);
+  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+}
+
+/* ============================================================
+   2) LAYOUT: MAP WRAPPER
+   ============================================================ */
+#mapWrap{
+  flex:1 1 auto;
+  min-height:0; /* Leaflet + flex */
+  position:relative;
+  overflow:hidden;
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
 #map{
   position:absolute;
   inset:0;
-  height: 100%;
-  width: 100%;
+  height:100%;
+  width:100%;
 }
 
 /* ============================================================
-   3) TOP BAR (title + controls)
+   3) TOPBAR (title + controls)
    ============================================================ */
 #topbar{
   background:var(--panel);
   border-bottom:1px solid var(--panel-border);
-  padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+  padding:var(--topbar-pad-y) var(--topbar-pad-x) 10px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:7px;
-  flex: 0 0 auto;
-  margin: 0;
+  flex:0 0 auto;
 }
 
 .title-row{
@@ -325,13 +135,6 @@ body{
   justify-content:space-between;
   gap:6px;
   width:100%;
-}
-
-.title-actions{
-  margin-left:auto;
-  display:flex;
-  align-items:center;
-  gap:8px;
 }
 
 #topbar .title{
@@ -343,6 +146,14 @@ body{
   color:#f2f2f2;
 }
 
+#topbar .title-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+
 #topbar .controls{
   display:flex;
   gap:12px;
@@ -352,15 +163,13 @@ body{
   width:min(1100px, 100%);
 }
 
-#topbar .controls > select{
-  flex: 1 1 220px;
-}
+/* Native selects */
+#topbar .controls > select{ flex:1 1 220px; }
 
 #topbar select{
   min-width:200px;
   max-width:320px;
   width:100%;
-
   padding:10px 20px;
   font-size:15px;
   border-radius:8px;
@@ -372,129 +181,38 @@ body{
   outline:none;
   cursor:pointer;
 }
-
-/* Prevent iOS double-tap zoom on UI controls */
-#topbar,
-#topbar button,
-#topbar .dd-btn,
-#topbar .dd-item,
-#topbar select,
-.floating-panel,
-.floating-panel button,
-.leaflet-control.map-dock .dock-btn,
-#controlsToggle,
-.mode-toggle,
-.icon-btn {
-  touch-action: manipulation;
-}
-
-/* ================================
-   DESKTOP — even dropdown layout
-   ================================ */
-@media (min-width: 956px){
-  #topbar{
-    display: grid;
-    grid-template-columns: auto 1fr auto; /* title | centered controls | actions */
-    align-items: center;
-    column-gap: 14px;
-    padding: var(--topbar-pad-y) var(--topbar-pad-x) 10px;
-  }
-
-  #topbar .title{
-    justify-self: start;
-    white-space: nowrap;
-  }
-
-  #topbar .controls{
-    justify-self: center;           /* <-- true center of the bar */
-    width: min(1100px, 100%);
-    display:flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-  }
-
-  #topbar .title-actions{
-    justify-self: end;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    white-space: nowrap;
-  }
-
-  /* Optional: make each dropdown slot behave like before */
-  #topbar .controls > *{
-    flex: 1 1 0;
-    min-width: 200px;
-    max-width: 320px;
-  }
-    
-  .icon-btn{
-    width:42px;
-    height:42px;
-  }
-}
-
-
-/* ============================================================
-   Fancy dropdown should visually match #topbar select
-   ============================================================ */
-
-/* ensure the host behaves like a select in the flex row */
-#topbar .controls > #dinoSelectFancy{
-  flex: 2 1 440px;
-  min-width: 220px;
-  max-width: 660px;          /* optional: prevent it from going silly wide */
-  width: 100%;
-}
-
-/* the fancy wrapper should fill the host */
-#dinoSelectFancy .dd{
-  width: 100%;
-  max-width: none;
-}
-
-/* left area should take space; name left, count right */
-#dinoSelectFancy .dd-btn-left{
-  flex: 1 1 auto;
-  min-width: 0;
-  justify-content:flex-start;
-}
-#dinoSelectFancy .dd-label{
-  text-align:left;
-}
-#dinoSelectFancy .dd-sub{
-  margin-left:auto;
-  white-space:nowrap;
-}
-
-/* optional: make caret feel like native arrow */
-#dinoSelectFancy .dd-caret{
-  opacity:.85;
-}
-
 #topbar select:hover{ border-color:#596273; }
 
-#topbar select:focus{
-  border-color:var(--focus);
-  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+/* Desktop topbar grid */
+@media (min-width:956px){
+  #topbar{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    column-gap:14px;
+  }
+
+  #topbar .title{ justify-self:start; white-space:nowrap; }
+  #topbar .controls{
+    justify-self:center;
+    width:min(1100px, 100%);
+    flex-wrap:nowrap;
+    min-width:0;
+  }
+  #topbar .title-actions{ justify-self:end; }
+
+  #topbar .controls > *{
+    flex:1 1 0;
+    min-width:200px;
+    max-width:320px;
+  }
+
+  .icon-btn{ width:42px; height:42px; }
 }
 
-/* bg dropdown wrapper */
-#bgSelectWrap{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font-size:12px;
-  color:var(--muted);
-}
-#bgSelectWrap select{
-  min-width:180px;
-  opacity:.9;
-}
-
+/* ============================================================
+   4) BUTTONS
+   ============================================================ */
 .mode-toggle{
   display:inline-flex;
   align-items:center;
@@ -502,10 +220,11 @@ body{
   gap:6px;
   padding:8px 10px;
   border-radius:10px;
-  border-color: var(--control-border);
+
   border:1px solid rgba(255,255,255,.15);
   background:rgba(30,30,30,.85);
   color:#fff;
+
   font:inherit;
   cursor:pointer;
   user-select:none;
@@ -522,15 +241,17 @@ body{
   width:34px;
   height:34px;
   border-radius:8px;
+
   border:1px solid rgba(255,255,255,.18);
   background:rgba(30,30,30,.75);
   color:#fff;
+
   cursor:pointer;
 }
 .icon-btn:hover{ background:rgba(45,45,45,.85); }
 .icon-btn:active{ transform:translateY(1px); }
 
-/* Filters button (only visible on mobile) */
+/* Mobile-only Filters button */
 #controlsToggle{
   display:none;
   padding:6px 8px;
@@ -541,23 +262,23 @@ body{
 }
 
 /* ============================================================
-   Fancy dropdown (search + rich rows)
+   5) FANCY DROPDOWN (shared)
    ============================================================ */
 .dd{
   position:relative;
   width:100%;
-  max-width:320px; /* matches your topbar select feel */
+  max-width:320px;
   font-family:inherit;
 }
 
 .dd-btn{
   width:100%;
   display:flex;
-  align-items:left;
+  align-items:center;
   justify-content:space-between;
-  gap:5px;
+  gap:10px;
 
-  padding:6px 8px;
+  padding:6px 10px;
   border-radius:8px;
   border:1px solid var(--control-border);
   background:var(--control-bg);
@@ -565,84 +286,39 @@ body{
 
   cursor:pointer;
   user-select:none;
+
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
 }
 
-/* remove the always-on focus ring */
-.dd-btn:focus{
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: var(--control-border) !important;
-}
-
-/* only show the ring for keyboard focus */
-.dd-btn:focus-visible{
-  border-color: var(--focus);
-  box-shadow: 0 0 0 3px rgba(122,162,255,.18);
-}
-
-/* iOS tap highlight (the blue flash) */
-.dd-btn,
-.dd-item,
-#topbar select,
-button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Prevent Safari's native focus glow from showing */
-.dd-btn:focus,
-#topbar select:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Only show focus styling for real keyboard focus */
-.dd-btn:focus { outline:none; box-shadow:none; }
-
-.dd-btn:focus-visible{
-  border-color: var(--focus);
-  box-shadow: 0 0 0 3px rgba(122,162,255,.18);
-}
-
-.dd-btn-left{
-  display:flex;
-  align-items:left;
-  gap:5px;
-  justify-content:flex-start;
-  min-width:0;
-  width:100%;
-}
-
-/* Closed state: put name + count on the same line */
+.dd-btn-left,
 .dd-btn-text{
   display:flex;
-  align-items:left;
-  gap:5px;
+  align-items:center;
+  gap:10px;
   min-width:0;
   width:100%;
 }
 
-/* The name should ellipsis if needed */
 .dd-btn-text .dd-label{
   flex:1 1 auto;
   min-width:0;
   text-align:left;
 }
 
-/* The count should stay visible and not wrap */
 .dd-btn-text .dd-sub{
   flex:0 0 auto;
-  white-space:nowrap;
-  opacity:.75;
   margin-left:auto;
-}
+  white-space:nowrap;
 
-.dd-btn-text .dd-sub{
   font-size:10px;
   padding:3px 7px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.10);
   background:rgba(0,0,0,.18);
   color:rgba(255,255,255,.72);
+  opacity:.85;
 }
 
 .dd-dot{
@@ -663,18 +339,7 @@ button {
   text-overflow:ellipsis;
 }
 
-.dd-sub{
-  font-size:11px;
-  color:rgba(255,255,255,.55);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.dd-caret{
-  opacity:.85;
-  flex:0 0 auto;
-}
+.dd-caret{ opacity:.85; flex:0 0 auto; }
 
 .dd.open .dd-panel{ display:block; }
 
@@ -694,7 +359,6 @@ button {
   overflow:hidden;
 }
 
-/* sticky search */
 .dd-search{
   width:100%;
   padding:6px 8px;
@@ -711,11 +375,7 @@ button {
   z-index:2;
 }
 
-/* results list */
-.dd-list{
-  max-height:min(33vh, 250px);
-  overflow:auto;
-}
+.dd-list{ max-height:min(33vh, 265px); overflow:auto; }
 
 .dd-item{
   display:flex;
@@ -727,9 +387,7 @@ button {
   cursor:pointer;
   border-bottom:1px solid rgba(255,255,255,.06);
 }
-
 .dd-item:last-child{ border-bottom:none; }
-
 .dd-item:hover{ background:rgba(255,255,255,.05); }
 
 .dd-item-left{
@@ -762,12 +420,7 @@ button {
   text-overflow:ellipsis;
 }
 
-.dd-badges{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  flex:0 0 auto;
-}
+.dd-badges{ display:flex; align-items:center; gap:6px; flex:0 0 auto; }
 
 .dd-pill{
   font-size:10px;
@@ -790,90 +443,119 @@ button {
   align-items:center;
   justify-content:center;
 }
-
 .dd-star:hover{ opacity:1; }
 
-
 /* ============================================================
-   TOPBAR: Make ALL fancy dropdowns match the native selects
+   5.1) TOPBAR: Fancy dropdown slots (host sizing)
    ============================================================ */
-
-/* All fancy hosts behave like native selects in the flex row */
-#topbar .controls > #sourceSelectFancy,
-#topbar .controls > #mapSelectFancy,
-#topbar .controls > #dinoSelectFancy,
-#topbar .controls > #bgSelectWrap{
-  flex: 1 1 220px;
-  min-width: 200px;
-  max-width: 320px;
-  width: 100%;
+#topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy){
+  flex:1 1 220px;
+  min-width:200px;
+  max-width:320px;
+  width:100%;
+}
+#topbar .controls > #dinoSelectFancy{
+  flex:2 1 440px;
+  max-width:660px;
 }
 
-/* bg wrapper should behave like a single “slot” */
-#bgSelectWrap{
-  display:none !important;
-  align-items:center;
-  gap:12px; /* match your controls gap feel */
-}
-
-/* Make the fancy control fill its slot */
-#sourceSelectFancy .dd,
-#mapSelectFancy .dd,
-#dinoSelectFancy .dd,
-#bgSelectFancy .dd{
+:where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy) .dd{
   width:100%;
   max-width:none;
 }
 
-/* The big fix: style ALL fancy buttons like #topbar select */
-#sourceSelectFancy .dd-btn,
-#mapSelectFancy .dd-btn,
-#dinoSelectFancy .dd-btn,
-#bgSelectFancy .dd-btn{
-  padding:6px 10px;            /* match #topbar select */
-  font-size:12px;               /* match #topbar select */
-  border-radius:6px;            /* match #topbar select */
-  min-height:41px;              /* helps equalize height across browsers */
-  border:1px solid var(--control-border);
-  background:var(--panel);
-  color:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-/* Ensure label alignment is consistent */
-#sourceSelectFancy .dd-label,
-#mapSelectFancy .dd-label,
-#dinoSelectFancy .dd-label,
-#bgSelectFancy .dd-label{
+/* Topbar label color */
+:where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy) .dd-label{
   font-size:15px;
   font-weight:400;
   color:#fff;
 }
 
+/* Hide badges & counts for source/map */
+:where(#sourceSelectFancy, #mapSelectFancy) :where(.dd-badges, .dd-sub){
+  display:none !important;
+}
+
 /* ============================================================
-   4) FLOATING PANELS (new draggable system)
+   6) PANELS -- SHARED BASE (leaflet-panel + floating-panel)
+   ============================================================ */
+:where(.leaflet-panel, .floating-panel){
+  border-radius:var(--panel-radius);
+  overflow:hidden;
+  transform:translateZ(0);
+}
+
+/* Smooth body collapse (no display:none) */
+:where(.leaflet-panel, .floating-panel) .fp-body{
+  overflow:hidden;
+  max-height:60vh;
+  opacity:1;
+  transition:max-height .22s ease, opacity .18s ease;
+  will-change:max-height, opacity;
+}
+:where(.leaflet-panel, .floating-panel).collapsed .fp-body{
+  max-height:0;
+  opacity:0;
+}
+
+/* Optional: when collapsed, remove header divider */
+:where(.leaflet-panel, .floating-panel).collapsed .fp-header{
+  border-bottom:none;
+}
+
+/* Smooth body collapse (include padding in the animation) */
+.leaflet-panel .fp-body{
+  padding: var(--panel-body-pad);
+  overflow: hidden;
+  max-height: 70vh;
+  opacity: 1;
+  transition: max-height .22s ease, opacity .18s ease, padding .22s ease;
+}
+
+/* Collapsed: remove padding so no "phantom gap" remains */
+.leaflet-panel.collapsed .fp-body{
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ============================================================
+   7) LEAFLET PANELS (old Leaflet-control style panels)
+   ============================================================ */
+.leaflet-panel{
+  width:var(--panel-w);
+  max-width:min(420px, calc(100vw - 16px));
+}
+#dinoInfoPanel.leaflet-panel{ 
+  width: var(--dinoPanel-w-mobile-f);
+  max-width: calc(100vw - 16px);
+  margin: 2px 0 0 6px;
+}
+#modStylePanel.leaflet-panel{
+  width: var(--modPanel-w-mobile-s);
+  max-width: calc(100vw - 16px);
+  margin: 2px 6px 0 0;
+}
+
+/* ============================================================
+   8) DRAGGABLE FLOATING PANELS (current system)
    ============================================================ */
 .floating-panel{
   position:absolute;
   z-index:900;
 
-  width: var(--panel-w);
-  max-width: min(360px, calc(100vw - 24px));
+  width:var(--panel-w);
+  max-width:min(360px, calc(100vw - 24px));
 
   background:rgba(26,29,33,.92);
   color:var(--text);
   border:1px solid var(--panel-border);
-  border-radius: var(--panel-radius);
   box-shadow:0 10px 28px rgba(0,0,0,.45);
   backdrop-filter: blur(8px);
-  overflow:hidden;
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
 .floating-panel .fp-header{
@@ -881,56 +563,50 @@ button {
   align-items:center;
   justify-content:space-between;
 
-  padding: var(--panel-header-pad);
+  padding:var(--panel-header-pad);
   border-bottom:1px solid rgba(255,255,255,.08);
 
   cursor:grab;
   user-select:none;
   touch-action:none;
 }
-
 .floating-panel.dragging .fp-header{ cursor:grabbing; }
 
-.floating-panel .fp-title{  /* The header "Dino Info" */
-  font-weight:500;
-  font-size:14px;
+.floating-panel .fp-title{
+  font-weight:400;
+  font-size:18px;
   letter-spacing:.3px;
 }
 
-.floating-panel .fp-actions{
-  display:flex;
-  gap:6px;
-}
+.floating-panel .fp-actions{ display:flex; gap:10px; }
 
 .floating-panel .fp-btn{
   display:flex;
   align-items:center;
   justify-content:center;
   padding:0;
+  width:22px;
+  height:22px;
 }
 
 .floating-panel .fp-btn svg{
   display:block;
   pointer-events:none;
-  transition: transform .15s ease;
+  transition:transform .15s ease;
 }
+.floating-panel.collapsed .fp-btn-chevron svg{ transform: rotate(-90deg); }
 
-.floating-panel.collapsed .fp-btn-chevron svg{
-  transform: rotate(-90deg);
-}
-
+/* IMPORTANT:
+   No display:none here -- keeps collapse smooth. */
 .floating-panel .fp-body{
-  padding: var(--panel-body-pad);
-  max-height:50vh;
+  padding:var(--panel-body-pad);
   overflow:auto;
 }
+.floating-panel.collapsed .fp-body{
+  overflow:hidden;
+}
 
-.floating-panel.collapsed .fp-body{ display:none; }
-.floating-panel.collapsed .fp-header{ border-bottom:none; }
-
-/* ============================================================
-   5) INSIDE PANELS — Mod Style controls
-   ============================================================ */
+/* Panel internals */
 .fp-row{
   display:flex;
   align-items:center;
@@ -943,42 +619,30 @@ button {
 .fp-col{ flex-direction:column; align-items:stretch; }
 .fp-between{ width:100%; }
 
-#dinoInfoPanel:not(.collapsed) .fp-title{
-  visibility:hidden;
-}
+/* Dino panel header tweaks */
+#dinoInfoPanel:not(.collapsed) .fp-title{ visibility:hidden; }
+#dinoInfoPanel:not(.collapsed) .fp-header{ border-bottom:none; background-color:transparent; }
+#dinoInfoPanel:not(.collapsed) .info-title{ margin-top:-5px; margin-bottom:0; }
+#dinoInfoPanel .fp-body{ padding-top:0; }
 
-#dinoInfoPanel:not(.collapsed) .fp-header{
-  border-bottom:none;
-  background:transparent;
-}
-
-/* tighten space above title when expanded */
-#dinoInfoPanel:not(.collapsed) .info-title{
-  margin-top:1px;
-}
-
-#dinoInfoPanel .fp-body{
-  padding-top: 0px;
-}
 /* ============================================================
-   6) INSIDE PANELS — Dino Info styling
+   9) DINO INFO CONTENT
    ============================================================ */
-.info-title{    /* Dino Name */
+.info-title{
   font-weight:600;
   font-size:22px;
-  margin-top:0px;
-  margin-bottom:4px;
   color:var(--muted);
+  align-items:flex-start;
 }
 
 .info-submeta{
-  font-size: 12px;
-  opacity: .65;
-  margin-top: -2px;
-  margin-bottom: 6px;
+  font-size:12px;
+  opacity:.65;
+  margin-top:-2px;
+  margin-bottom:0;
 }
 
-.info-subtitle{    /* "Spawn Entries (#) */
+.info-subtitle{
   font-size:11px;
   font-weight:650;
   color:var(--muted);
@@ -988,23 +652,20 @@ button {
 }
 
 .info-section{
-  margin-top:0px;
-  margin-bottom:10px;
+  margin:0 0 10px;
   padding-bottom:6px;
   border-bottom:1px solid rgba(255,255,255,.08);
+  align-items:flex-start;
 }
-.info-section:last-child{
-  border-bottom:none;
-  padding-bottom:0;
-  margin-bottom:0;
-}
+.info-section:last-child{ border-bottom:none; padding-bottom:0; margin-bottom:0; }
 
-.info-row{ /* "Blueprint" & "Nametag" */
+.info-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
   margin-top:8px;
+
   color:var(--muted);
   font-size:11px;
   font-weight:650;
@@ -1018,34 +679,29 @@ button {
   padding:0;
   border:0;
   background:transparent;
-  border-radius:0;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  color: rgba(255,255,255,.80);
+  color:rgba(255,255,255,.80);
+}
+.info-copy:hover{
+  color:rgba(255,255,255,1);
+  filter:drop-shadow(0 0 2px rgba(255,255,255,.25));
 }
 
-/* Icon */
 .info-copy::before{
   content:"";
   display:block;
   width:14px;
   height:14px;
+  background-color:currentColor;
 
-  background-color: currentColor;
-
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-
-  .info-copy:hover{
-    color: rgba(255,255,255,1);
-    filter: drop-shadow(0 0 2px rgba(255,255,255,.25));
-  }
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-.info-copy:hover::before{ opacity:1; }
 
-.info-mono{   /* The scrollable BP and Nametag Fields */
+.info-mono{
   margin-top:2px;
   padding:4px 6px;
   border-radius:6px;
@@ -1070,46 +726,266 @@ button {
   padding:6px 5px;
   border-radius:6px;
 }
-.entry-row:hover{ 
-  background:rgba(255,255,255,.04); 
-}
+.entry-row:hover{ background:rgba(255,255,255,.04); }
 
-.entry-main{ 
-  flex:1; min-width:0; 
-}
-.entry-name{   /* The actual spawn entry name */
-  font-size:14px; 
-  font-weight:650; 
+.entry-main{ flex:1; min-width:0; }
+
+.entry-name{
+  font-size:14px;
+  font-weight:650;
   color:var(--muted);
-}
-.entry-meta{ 
-  margin-top:2px; 
-  font-size:12px; 
-  gap:5px;
 }
 
 .entry-meta-line{
+  margin-top:2px;
   font-size:12px;
   text-indent:2mm;
   font-stretch:semi-condensed;
   font-weight:600;
-  white-space:nowrap; /* use white-space, not text-wrap */
+  white-space:nowrap;
   color:var(--muted);
   line-height:1.3;
 }
+
 /* ============================================================
-   7) POI ICONS (Leaflet divIcon SVGs)
+   10) COPY BUBBLE
    ============================================================ */
-.poi-icon .poi-fill{ fill: currentColor; }
+.copy-on-click{ cursor:pointer; }
 
-/* fallback */
-.poi-icon{ color:#ff00ff; }
+.copy-bubble{
+  position:fixed;
+  z-index:99999;
 
-/* your types (lowercased by cssEscape/normalization) */
-.poi-icon.poi-obeliskblue  { color:#00a5ff; }
-.poi-icon.poi-obeliskgreen { color:#14e800; }
-.poi-icon.poi-obeliskred   { color:#f70102; }
-.poi-icon.poi-tekcave      { color:#b84cff; }
+  background:#1ed760;
+  color:#000;
+  font-weight:600;
+  font-size:12px;
+
+  padding:3px 7px;
+  border-radius:6px;
+
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .18s ease, transform .18s ease;
+}
+.copy-bubble.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ============================================================
+   11) DINO QUICK (badges + stats)
+   ============================================================ */
+.dino-quick{ display:grid; row-gap:6px; }
+
+.dino-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2px;
+  margin-top:2px;
+}
+
+.dino-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:2px;
+  padding:2px 2px;
+  border-radius:4px;
+
+  font-size:10px;
+  line-height:1;
+  letter-spacing:.2px;
+
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.15) inset,
+    0 6px 18px rgba(0,0,0,.25);
+}
+
+.dino-statsline{
+  width:58%;
+  max-width:240px;
+  margin-top:0;
+  padding:0;
+}
+
+.dino-statrow{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+  line-height:1.25;
+}
+
+.dino-statkey{ color:var(--muted); opacity:.95; }
+.dino-statval{
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+  text-align:right;
+  margin-left:auto;
+  min-width:3ch;
+}
+
+/* ============================================================
+   12) RARITY LEGEND
+   ============================================================ */
+.rarity-legend{
+  position:absolute;
+  margin-left:8px;
+  bottom:50px;
+  z-index:950;
+
+  display:flex;
+  gap:0;
+
+  padding:2px;
+  border-radius:4px;
+  border:1px solid rgba(255,255,255,.04);
+  background:rgba(26,29,33,.32);
+  backdrop-filter: blur(24px);
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
+  pointer-events:auto;
+}
+
+.rarity-legend .rl-end{
+  font-size:9px;
+  color:rgba(255,255,255,.70);
+  white-space:nowrap;
+  user-select:none;
+  font-variant:all-small-caps;
+  font-stretch:condensed;
+  padding:1px;
+}
+
+.rarity-legend .rl-bar{ display:flex; gap:1px; }
+
+.rarity-legend .rl-sq{
+  width:13px;
+  height:13px;
+  border:1px solid rgba(255,255,255,.18);
+}
+
+[data-_exportHide="1"]{ display:none !important; }
+
+/* ============================================================
+   13) DRILLDOWN CRUMBS
+   ============================================================ */
+.dd-crumbs{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  padding:8px 10px 0;
+  color:var(--muted);
+  font-size:12px;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.dd-crumb{
+  border:0;
+  background:transparent;
+  color:inherit;
+  padding:4px 6px;
+  border-radius:6px;
+}
+.dd-crumb:disabled{ opacity:.75; }
+.dd-crumb-sep{ opacity:.6; }
+.dd-drill-right{ margin-left:auto; opacity:.7; padding-left:10px; }
+
+/* ============================================================
+   14) LEAFLET CONTROLS: DOCK + ZOOM + ATTRIBUTION
+   ============================================================ */
+:where(.leaflet-control.map-dock, .leaflet-control.bg-toggle){
+  background:rgba(30,30,30,0.85);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;
+}
+
+:where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn){
+  width:34px;
+  height:34px;
+  border:0;
+  margin:0;
+  padding:0;
+
+  background:rgba(30,30,30,.85);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+:where(.leaflet-control.map-dock .dock-btn:hover, .leaflet-control.bg-toggle .bg-toggle-btn:hover){
+  background:rgba(255,255,255,0.08);
+}
+
+.leaflet-control.map-dock .dock-btn.is-on{
+  background:rgba(0,140,255,.06);
+  box-shadow: inset 0 0 0 1px rgba(122,162,255,.18);
+}
+
+/* Horizontal zoom */
+.leaflet-control-zoom.zoom-horizontal{
+  display:flex;
+  flex-direction:row;
+  overflow:hidden;
+  border-radius:8px;
+
+  background:rgba(30,30,30,0.85);
+  border:1px solid rgba(255,255,255,0.15);
+}
+.leaflet-control-zoom.zoom-horizontal a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  line-height:34px;
+
+  border-bottom:0 !important;
+  background:transparent;
+  color:#fff;
+}
+.leaflet-control-zoom.zoom-horizontal a:hover{ background:rgba(255,255,255,0.08); }
+.leaflet-control-zoom.zoom-horizontal a + a{ border-left:1px solid rgba(255,255,255,0.15); }
+
+/* Bottom-left controls in a row */
+.leaflet-bottom.leaflet-left{
+  display:flex;
+  flex-direction:row;
+  align-items:flex-end;
+  gap:8px;
+  padding:8px;
+  box-sizing:border-box;
+}
+.leaflet-bottom.leaflet-left .leaflet-control{ margin:0 !important; }
+
+.leaflet-control-attribution{
+  padding:1px;
+  line-height:1.2;
+  font-size:8px;
+  opacity:.40;
+  border-radius:6px;
+}
+
+/* ============================================================
+   15) POI ICONS
+   ============================================================ */
+.poi-icon .poi-fill{ fill:currentColor; }
+.poi-icon{ color:#ff00ff; } /* fallback */
+.poi-icon.poi-obeliskblue{ color:#00a5ff; }
+.poi-icon.poi-obeliskgreen{ color:#14e800; }
+.poi-icon.poi-obeliskred{ color:#f70102; }
+.poi-icon.poi-tekcave{ color:#b84cff; }
 
 .poi-icon svg{
   filter:
@@ -1119,64 +995,35 @@ button {
 }
 
 /* ============================================================
-   8) MOBILE OVERRIDES (<= 640px)
+   16) MOBILE OVERRIDES (<= 955px)
    ============================================================ */
-@media (max-width: 955px){
-
-  #rarityLegend{
-    bottom: 12px;
-    right: 10px; 
-    left: auto;
-    transform: none;
-  }
-  .rarity-legend .rl-end{
-    font-size:7px;
-    padding:1px;
-  }
-
+@media (max-width:955px){
+  /* Show filters button */
   #controlsToggle{ display:inline-flex; }
 
-  /* mobile layout: title left, actions right, controls below */
+  /* Mobile topbar: title+actions row, controls row toggled */
   #topbar{
     display:grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns:1fr auto;
     grid-template-areas:
       "title actions"
       "controls controls";
     align-items:center;
-    /*row-gap: 8px;
-    column-gap: 2px;*/
-    padding: 6px 6px 6px;
-    z-index: 2000;
-    position: relative;
+    padding:6px;
+    z-index:2000;
+    position:relative;
   }
 
   #topbar .title{
-    grid-area: title;
+    grid-area:title;
     justify-self:start;
     font-size:12px;
-    margin-left: 5px;
+    margin-left:5px;
     white-space:nowrap;
   }
 
-  #topbar:not(.show-controls){
-    grid-template-areas: "title actions";
-    grid-template-rows: auto;     /* ensures no second row */
-    row-gap: 4;
-    padding-bottom: 4;            /* optional, but usually what you want */
-  }
-
-  /* When controls are shown, restore the 2-row layout */
-  #topbar.show-controls{
-    grid-template-areas:
-      "title actions"
-      "controls controls";
-    grid-template-rows: auto auto;
-    row-gap: 8px;                 /* or whatever you want */
-  }
-
   #topbar .title-actions{
-    grid-area: actions;
+    grid-area:actions;
     justify-self:end;
     display:flex;
     gap:4px;
@@ -1184,9 +1031,8 @@ button {
     white-space:nowrap;
   }
 
-  /* hide dropdowns by default, show when toggled */
   #topbar .controls{
-    grid-area: controls;
+    grid-area:controls;
     width:100%;
     justify-self:stretch;
 
@@ -1197,171 +1043,198 @@ button {
   }
   #topbar.show-controls .controls{ display:flex; }
 
-  /* make fancy hosts behave well on small screens */
-  #topbar .controls > #sourceSelectFancy,
-  #topbar .controls > #mapSelectFancy{
-    flex: 1 1 0;
-    min-width: 120px;
-    max-width: none;
-    width: auto;
+  #topbar:not(.show-controls){
+    grid-template-areas:"title actions";
+    grid-template-rows:auto;
+    padding-bottom:4px;
+  }
+  #topbar.show-controls{
+    grid-template-rows:auto auto;
+    row-gap:8px;
   }
 
-  /* dino dropdown full width */
+  /* Fancy hosts: source/map half width, dino full width */
+  #topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy){
+    min-width:130px;
+    max-width:none;
+    width:auto;
+  }
+  
+  #topbar .controls > # sourceSelectFancy{ 
+    flex: 3 1 0; 
+ } /* 60 */
+  #topbar .controls > #mapSelectFancy{    
+    flex: 2 1 0; 
+ } /* 40 */
+ 
   #topbar .controls > #dinoSelectFancy{
-    flex: 1 1 100%;
-    min-width: 0;
-    max-width: none;
-    width: auto;
+    flex:1 1 100%;
+    min-width:0;
+    max-width:none;
+    width:auto;
   }
 
-  /* native selects (if they ever show) */
+  /* Tighten native selects if they appear */
   #topbar select{
     min-width:0;
     max-width:none;
     width:100%;
-    padding:7px 7px;
+    padding:7px;
     font-size:13px;
     border-radius:4px;
   }
-  /* Slightly larger panel for fat-fingers */
+
+  /* Panel default widths */
+  #dinoInfoPanel{ width:var(--dino-w-mobile); }
+  #modStylePanel{ width:var(--mod-w-mobile-collapsed); }
+
+  /* Width transitions */
+  #dinoInfoPanel, #modStylePanel{ transition: width .22s ease; }
+
+  /* Width swap when mod panel expanded */
+  body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{ width:var(--dino-w-mobile-compact); }
+  body:has(#modStylePanel:not(.collapsed)) #modStylePanel{ width:var(--mod-w-mobile); }
+
+  /* If explicitly collapsed, enforce collapsed width */
+  body:has(#modStylePanel.collapsed) #modStylePanel{ width:var(--mod-w-mobile-collapsed); }
+  body:has(#modStylePanel.collapsed) #dinoInfoPanel{ width:var(--dino-w-mobile); }
+
+  /* Smaller draggable panel base sizing */
   .floating-panel{
-    width: var(--panel-w-mobile);
+    width:var(--panel-w-mobile);
     font-size:11px;
   }
-  /* 🦖 Dino Info panel: wider */
-  #dinoInfoPanel {
-    width: var(--dinoPanel-w-mobile);
-  }
 
-  /* 🎛️ Mod Style panel: keep smaller (optional, since default already 200px) */
-  #modStylePanel {
-    width: var(--modPanel-w-mobile);
+  /* Dino header title sizing via container query */
+  #dinoInfoPanel{ container-type:inline-size; }
+  #dinoInfoPanel .fp-header{
+    display:flex;
+    align-items:center;
+    padding:0 8px;
   }
-    
-  .floating-panel .fp-title{
-    color:var(--muted);
-    font-weight:600;
-    font-size:11px;
-    letter-spacing:.2px;
+  #dinoInfoPanel .fp-title{
+    line-height:1;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-size:16px;
   }
-  
-  .entry-name{   /* The actual spawn entry name */
-    font-size:11px; 
-    font-weight:500; 
-  }
-  
-  .entry-meta-line{
-    font-size:9px;
-    font-weight:380;
-  }
-
-  .info-mono{   /* The scrollable BP and Nametag Fields */
-    font-size:10px;
-    color:var(--muted);
-    line-height:1.176;
-    font-weight:500;
-  }
-  
-  .info-subtitle{    /* "Spawn Entries (#) */
-    font-size:10px;
-    font-weight:500;
-  }
-  
-  .info-row{ /* "Blueprint" & "Nametag" */
-    font-size:10px;
-    font-weight:500;
-  }
-  .dd-label{ font-size:16px;
-  }
-  .dd-item-name{ font-size:16px;
-  }
-  .dd-item-meta{ font-size:10px;
-  }
-  .dd-search{ font-size:16px;
-  }
-  
-  #sourceSelectFancy .dd-item-name { font-size: 13px; }
-  #mapSelectFancy .dd-item-name    { font-size: 13px; }
+  @container (max-width:260px){ #dinoInfoPanel .fp-title{ font-size:13px; } }
+  @container (max-width:220px){ #dinoInfoPanel .fp-title{ font-size:11px; } }
 
 
+  /* Pin mod panel to right unless dragging */
+  #modStylePanel:not(.dragging){
+    left:auto !important;
+    right:6px;
+  }
 
-  /* Filters toggle visible */
-  #controlsToggle{ display:inline-flex; }
-    
-  #sourceSelectFancy .dd-btn,
-  #mapSelectFancy .dd-btn,
-  #dinoSelectFancy .dd-btn{
-    padding:7px 7px;
+  /* Mobile density tweaks */
+  .entry-name{ font-size:11px; font-weight:500; }
+  .entry-meta-line{ font-size:9px; font-weight:380; }
+  .info-mono{ font-size:10px; font-weight:500; }
+  :where(.info-subtitle, .info-row){ font-size:10px; font-weight:500; }
+
+  :where(#sourceSelectFancy, #mapSelectFancy) .dd-item-name{ font-size:13px; }
+
+  :where(#sourceSelectFancy .dd-btn, #mapSelectFancy .dd-btn, #dinoSelectFancy .dd-btn){
+    padding:7px;
     font-size:10px;
     border-radius:4px;
     min-height:34px;
   }
-  /* move ONLY the mode button left */
-  #modeToggle{
-    margin-right: 55px; /* tweak */
-    border-color: var(--control-border);
-  }
 
-  /* ensure filter stays pinned */
-  #controlsToggle{
-    margin-right: 0;
+  /* Your custom nudge (if still desired) */
+  #modeToggle{ margin-right:55px; border-color:var(--control-border); }
+
+  /* Rarity legend reposition */
+  #rarityLegend{
+    bottom:12px;
+    right:10px;
+    left:auto;
+    transform:none;
   }
-  
-  /* make sure the Filters button is visible on mobile */
-  #controlsToggle{ display:inline-flex; }
+  .rarity-legend .rl-end{ font-size:7px; padding:1px; }
 }
 
+@media (max-width:955px){
+  /* Make right panel align with dropdown right edge */
+  #modStylePanel:not(.dragging){
+    right: 6px !important; /* match #topbar padding */
+    left: auto !important;
+    margin: 0 !important;
+  }
+
+  /* Optional: make left panel match the same edge rule cleanly */
+  #dinoInfoPanel{
+    left: 6px !important;
+    margin: 0 !important;
+  }
 /* ============================================================
-   Map controls: Background toggle + Mod Style FAB
+   NUCLEAR PANEL LOCK (mobile)
+   Put this at the VERY END of your CSS so it wins.
    ============================================================ */
+@media (max-width:955px){
 
-.leaflet-control.bg-toggle{
-  background: rgba(30,30,30,0.85);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px;
-  overflow: hidden;
-}
+  /* 1) Lock both panels to the same outer geometry */
+  #dinoInfoPanel, #modStylePanel{
+    top: auto;                /* just in case anything weird */
+    margin: 0 !important;
+  }
 
-.leaflet-control.bg-toggle .bg-toggle-btn{
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background: rgba(30,30,30,.85);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
+  #dinoInfoPanel{ left: 6px !important; }
+  #modStylePanel{ right: 6px !important; left: auto !important; }
 
-.leaflet-control.bg-toggle .bg-toggle-btn:hover{
-  background: rgba(255,255,255,0.08);
-}
+  /* 2) Lock header height + padding identically for BOTH panels */
+  #dinoInfoPanel .fp-header,
+  #modStylePanel .fp-header{
+    height: 25px !important;
+    min-height: 25px !important;
+    padding: 0 8px !important;
 
-/* ===== Fix iOS “blue/grey stroke” on fancy dropdown buttons ===== */
-.dd-btn{
-  outline: none !important;
-  -webkit-appearance: none;
-  appearance: none;
-}
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
 
-/* Don’t show focus ring on tap/click */
-.dd-btn:focus{
-  outline: none !important;
-  box-shadow: none !important;
-}
+    line-height: 1 !important;
+  }
 
-/* Only show ring for keyboard focus (desktop/tabbing) */
-.dd-btn:focus-visible{
-  border-color: var(--focus) !important;
-  box-shadow: 0 0 0 3px rgba(122,162,255,.18) !important;
-}
+  /* 3) Make header content deterministic */
+  #dinoInfoPanel .fp-title,
+  #modStylePanel .fp-title{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 
-/* iOS long-press / active state */
-.dd-btn:active{
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: var(--control-border) !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #dinoInfoPanel .fp-actions,
+  #modStylePanel .fp-actions{
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+  }
+
+  #dinoInfoPanel .fp-btn,
+  #modStylePanel .fp-btn{
+    width: 22px !important;
+    height: 22px !important;
+    flex: 0 0 22px !important;
+    padding: 0 !important;
+  }
+
+  /* 4) IMPORTANT: kill the mod-title scaling on mobile header
+        (scaling can change computed height by subpixel rounding) */
+  #modStylePanel .fp-title{
+    transform: none !important;
+  }
+  body:has(#modStylePanel:not(.collapsed)) #modStylePanel .fp-title{
+    transform: none !important;
+  }
 }

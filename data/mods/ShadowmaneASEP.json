@@ -1,0 +1,5827 @@
+{
+  "schemaVersion": 1,
+  "mod": {
+    "id": "1135272",
+    "name": "Shadowmane: Ported"
+  },
+  "maps": {
+    "The Island": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesSwamp_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_109": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 453.98,
+                      "y": 653.61,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_110": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 453.5,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_111": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 541.78,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_112": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 541.78,
+                      "y": 479.93,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_113": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 453.98,
+                      "y": 479.93,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_150": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 630.14,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_151": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 718.42,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_190": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 806.8,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_191": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 895.08,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_193": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 807.28,
+                      "y": 479.93,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_228": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1070.47,
+                      "y": 653.61,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_230": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 982.19,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_231": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1070.47,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_232": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1070.47,
+                      "y": 479.93,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_266": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1158.85,
+                      "y": 740.14,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.75
+                },
+                "NPCZoneManagerBlueprint_Land_272": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1247.13,
+                      "y": 479.93,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_273": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1159.33,
+                      "y": 479.93,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_306": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1334.77,
+                      "y": 740.14,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_309": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1335.25,
+                      "y": 653.61,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_310": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1334.77,
+                      "y": 566.45,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_313": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1335.25,
+                      "y": 479.93,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_341": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1511.9,
+                      "y": 1000.98,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_342": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1511.43,
+                      "y": 913.82,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_344": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1599.71,
+                      "y": 827.3,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_441": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1775.82,
+                      "y": 1000.98,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_442": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1775.82,
+                      "y": 913.82,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_443": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1775.82,
+                      "y": 827.3,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_444": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1688.02,
+                      "y": 827.3,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_445": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1864.68,
+                      "y": 1000.98,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_68": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 365.12,
+                      "y": 653.61,
+                      "w": 80.5,
+                      "h": 78.09
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 20,
+              "spawnMultiplier": 1.5,
+              "spawnLimit": 0.07,
+              "spawnChances": "100, 50",
+              "groupWeight": 0.01,
+              "weight": 0.001094,
+              "display": {
+                "weightText": "Entry Weight: 0.01",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 50%"
+              },
+              "bestSharedMin": 20.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Scorched Earth": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+              "managers": {
+                "NPCZoneManager184": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 1466.29,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager189": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 1398.67,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager190": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 1060.28,
+                      "y": 1398.67,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager194": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 1331.04,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager198": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 925.03,
+                      "y": 1263.42,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager199": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 1263.42,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager203": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 925.03,
+                      "y": 1195.79,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager205": {
+                  "minDesired": 1.0,
+                  "boxes": [
+                    {
+                      "x": 1060.28,
+                      "y": 1195.79,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.083333
+                },
+                "NPCZoneManager307": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 857.41,
+                      "y": 1128.17,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager308": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 925.03,
+                      "y": 1128.17,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager310": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1060.28,
+                      "y": 1128.17,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager313": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 925.03,
+                      "y": 1060.54,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager314": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 1060.54,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager315": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1060.28,
+                      "y": 1060.54,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager319": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 992.92,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager320": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1060.28,
+                      "y": 992.92,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager324": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 925.29,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager326": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1127.91,
+                      "y": 925.29,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager330": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1060.28,
+                      "y": 857.67,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager470": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1398.41,
+                      "y": 654.79,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager475": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1398.41,
+                      "y": 587.17,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_50": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 1601.54,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_51": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 992.66,
+                      "y": 1533.81,
+                      "w": 62.42,
+                      "h": 62.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 1,
+              "spawnMultiplier": 2.0,
+              "spawnLimit": 0.04,
+              "spawnChances": "100, 100",
+              "groupWeight": 0.015,
+              "weight": 0.001221,
+              "display": {
+                "weightText": "Entry Weight: 0.015",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 100%"
+              },
+              "bestSharedMin": 12.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+              "managers": {
+                "NPCZoneManager645": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 592.46,
+                      "y": 1427.96,
+                      "w": 14.16,
+                      "h": 15.82
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager647": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 578.69,
+                      "y": 1372.87,
+                      "w": 17.01,
+                      "h": 19.19
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager648": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 572.89,
+                      "y": 1345.26,
+                      "w": 17.01,
+                      "h": 19.19
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager649": {
+                  "minDesired": 5.0,
+                  "boxes": [
+                    {
+                      "x": 561.66,
+                      "y": 1326.52,
+                      "w": 11.22,
+                      "h": 12.07
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.25
+                },
+                "NPCZoneManager716": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 592.46,
+                      "y": 1427.96,
+                      "w": 14.16,
+                      "h": 15.82
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager718": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 578.69,
+                      "y": 1372.87,
+                      "w": 17.01,
+                      "h": 19.19
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager719": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 572.89,
+                      "y": 1345.26,
+                      "w": 17.01,
+                      "h": 19.19
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager721": {
+                  "minDesired": 5.0,
+                  "boxes": [
+                    {
+                      "x": 561.66,
+                      "y": 1326.52,
+                      "w": 11.22,
+                      "h": 12.07
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.25
+                },
+                "wiki": {
+                  "minDesired": 4.0,
+                  "boxes": [
+                    {
+                      "x": 584.91,
+                      "y": 1395.92,
+                      "w": 20.07,
+                      "h": 27.85
+                    },
+                    {
+                      "x": 584.91,
+                      "y": 1395.92,
+                      "w": 20.07,
+                      "h": 27.85
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.2
+                }
+              },
+              "TheSpawnPointMinimumFloorNormal": 0.6,
+              "MinDesiredNumberOfNPC": 20,
+              "bNPCDontWander": true,
+              "bNPCWildIgnoreWild": true,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.05,
+              "spawnChances": "100",
+              "groupWeight": 0.05,
+              "weight": 0.002137,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "bestSharedMin": 20.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "The Center": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_262": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 670.96,
+                      "y": 926.5,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_263": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 670.96,
+                      "y": 869.07,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_264": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 670.96,
+                      "y": 811.68,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_296": {
+                  "minDesired": 60.0,
+                  "boxes": [
+                    {
+                      "x": 787.61,
+                      "y": 1041.35,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_299": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 811.89,
+                      "y": 1213.7,
+                      "w": 28.93,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_301": {
+                  "minDesired": 60.0,
+                  "boxes": [
+                    {
+                      "x": 787.61,
+                      "y": 1328.59,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_302": {
+                  "minDesired": 60.0,
+                  "boxes": [
+                    {
+                      "x": 787.61,
+                      "y": 1386.04,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_324": {
+                  "minDesired": 60.0,
+                  "boxes": [
+                    {
+                      "x": 729.29,
+                      "y": 983.92,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_325": {
+                  "minDesired": 60.0,
+                  "boxes": [
+                    {
+                      "x": 729.29,
+                      "y": 926.5,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_326": {
+                  "minDesired": 60.0,
+                  "boxes": [
+                    {
+                      "x": 729.29,
+                      "y": 869.07,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_327": {
+                  "minDesired": 10.0,
+                  "boxes": [
+                    {
+                      "x": 729.29,
+                      "y": 811.68,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.166667
+                },
+                "NPCZoneManagerBlueprint_Land_360": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 845.95,
+                      "y": 1098.8,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_361": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 845.95,
+                      "y": 1156.25,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_362": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 845.95,
+                      "y": 1213.7,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_363": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 845.95,
+                      "y": 1271.14,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_108": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 379.23,
+                      "y": 1156.25,
+                      "w": 37.38,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_110": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 379.23,
+                      "y": 1271.14,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_111": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 379.23,
+                      "y": 1328.59,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_254": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 320.94,
+                      "y": 1156.25,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_44": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 612.64,
+                      "y": 1386.04,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.2
+                },
+                "NPCZoneManagerBlueprint_Land_C_45": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 612.64,
+                      "y": 983.92,
+                      "w": 53.22,
+                      "h": 38.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.2
+                },
+                "NPCZoneManagerBlueprint_Land_C_46": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 612.64,
+                      "y": 926.5,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.2
+                },
+                "NPCZoneManagerBlueprint_Land_C_585": {
+                  "minDesired": 48.0,
+                  "boxes": [
+                    {
+                      "x": 729.29,
+                      "y": 1386.04,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.8
+                },
+                "NPCZoneManagerBlueprint_Land_C_61": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 554.26,
+                      "y": 1386.04,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_62": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 554.26,
+                      "y": 983.92,
+                      "w": 53.22,
+                      "h": 38.53
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_774": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 320.94,
+                      "y": 1213.7,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_78": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 495.89,
+                      "y": 1386.04,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_782": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 670.96,
+                      "y": 1386.04,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_805": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 320.94,
+                      "y": 1271.14,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Land_C_94": {
+                  "minDesired": 24.0,
+                  "boxes": [
+                    {
+                      "x": 437.57,
+                      "y": 1328.59,
+                      "w": 53.22,
+                      "h": 51.62
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.4
+                },
+                "wiki": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 379.29,
+                      "y": 1213.64,
+                      "w": 53.25,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 379.29,
+                      "y": 1098.75,
+                      "w": 53.25,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 437.66,
+                      "y": 1041.41,
+                      "w": 53.04,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 495.82,
+                      "y": 1334.89,
+                      "w": 53.25,
+                      "h": 38.91
+                    },
+                    {
+                      "x": 495.82,
+                      "y": 983.86,
+                      "w": 53.25,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 670.92,
+                      "y": 983.86,
+                      "w": 53.25,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 787.66,
+                      "y": 1098.75,
+                      "w": 53.25,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 793.6,
+                      "y": 1156.3,
+                      "w": 41.16,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 722.12,
+                      "y": 1041.41,
+                      "w": 67.58,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 729.29,
+                      "y": 1328.54,
+                      "w": 53.25,
+                      "h": 51.61
+                    },
+                    {
+                      "x": 787.66,
+                      "y": 1271.19,
+                      "w": 53.25,
+                      "h": 51.61
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.2
+                }
+              },
+              "MinDesiredNumberOfNPC": 24,
+              "spawnMultiplier": 1.5,
+              "spawnLimit": 0.07,
+              "spawnChances": "100, 50",
+              "groupWeight": 0.01,
+              "weight": 0.001088,
+              "display": {
+                "weightText": "Entry Weight: 0.01",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 50%"
+              },
+              "bestSharedMin": 60.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Ragnarok": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
+              "managers": {
+                "NPCZoneManager625": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 260.84,
+                      "y": 1184.17,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager627": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 293.78,
+                      "y": 1184.17,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager635": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 326.42,
+                      "y": 1116.97,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager651": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 457.63,
+                      "y": 1184.17,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager653": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 457.63,
+                      "y": 1116.97,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager657": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 359.19,
+                      "y": 982.08,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager665": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 424.19,
+                      "y": 914.39,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager675": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 490.53,
+                      "y": 1185.05,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager677": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 490.53,
+                      "y": 1117.54,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_12": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 424.76,
+                      "y": 1049.59,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_182": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 260.84,
+                      "y": 1251.71,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_2": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 823.74,
+                      "y": 1589.54,
+                      "w": 29.6,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_461": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 293.78,
+                      "y": 1251.71,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_465": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 326.42,
+                      "y": 1251.71,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_467": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 359.19,
+                      "y": 1251.71,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_469": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 392.06,
+                      "y": 1251.71,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_471": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 326.42,
+                      "y": 1184.17,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_473": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 359.19,
+                      "y": 1184.17,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_475": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 392.06,
+                      "y": 982.08,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_477": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 359.19,
+                      "y": 1116.97,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_479": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 424.76,
+                      "y": 982.08,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_481": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 392.06,
+                      "y": 1184.17,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_483": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 392.06,
+                      "y": 1116.97,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_487": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 424.76,
+                      "y": 1184.17,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_489": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 424.76,
+                      "y": 1116.97,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_491": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 457.63,
+                      "y": 1049.59,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_493": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 457.63,
+                      "y": 982.08,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_495": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 490.53,
+                      "y": 1049.59,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_497": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 490.53,
+                      "y": 982.08,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_58": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 359.19,
+                      "y": 1049.59,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_7": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 392.06,
+                      "y": 1049.59,
+                      "w": 29.81,
+                      "h": 60.54
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 15,
+              "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0,
+              "spawnMultiplier": 1.5,
+              "spawnLimit": 0.07,
+              "spawnChances": "100, 50",
+              "groupWeight": 0.01,
+              "weight": 0.001088,
+              "display": {
+                "weightText": "Entry Weight: 0.01",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 50%"
+              },
+              "bestSharedMin": 15.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+              "managers": {
+                "NPCZoneManager1020": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1016.19,
+                      "y": 247.62,
+                      "w": 40.88,
+                      "h": 20.1
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager1021": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1061.65,
+                      "y": 247.62,
+                      "w": 40.88,
+                      "h": 20.1
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager237": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1125.51,
+                      "y": 795.76,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager267": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 917.75,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager268": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 963.95,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager417": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1061.65,
+                      "y": 316.84,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_1030": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1016.19,
+                      "y": 270.62,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_1031": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1061.65,
+                      "y": 270.62,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_774": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1125.51,
+                      "y": 888.25,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_937": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1125.51,
+                      "y": 980.64,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_939": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1152.56,
+                      "y": 409.3,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_940": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1152.56,
+                      "y": 455.49,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_941": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1152.56,
+                      "y": 501.68,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_942": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1152.56,
+                      "y": 547.95,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_943": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.07,
+                      "y": 547.95,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_944": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.07,
+                      "y": 594.13,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_945": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1243.59,
+                      "y": 594.13,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_947": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1243.59,
+                      "y": 640.34,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_948": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1243.59,
+                      "y": 686.54,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_949": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 640.34,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_950": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 686.54,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_951": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 732.8,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_952": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 779.0,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_953": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 825.21,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_954": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1198.05,
+                      "y": 871.41,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_989": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1152.56,
+                      "y": 363.07,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_990": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1016.19,
+                      "y": 363.07,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_992": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 1016.19,
+                      "y": 316.84,
+                      "w": 40.88,
+                      "h": 42.14
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "bForceInEditor": true,
+              "MinDesiredNumberOfNPC": 15,
+              "spawnMultiplier": 2.0,
+              "spawnLimit": 0.04,
+              "spawnChances": "100, 100",
+              "groupWeight": 0.015,
+              "weight": 0.001221,
+              "display": {
+                "weightText": "Entry Weight: 0.015",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 100%"
+              },
+              "bestSharedMin": 15.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Valguero": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
+              "managers": {
+                "NPCZoneManager_380": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1741.0,
+                      "y": 956.39,
+                      "w": 45.26,
+                      "h": 46.44
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_382": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1706.59,
+                      "y": 991.18,
+                      "w": 45.36,
+                      "h": 45.44
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_383": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1706.74,
+                      "y": 1042.86,
+                      "w": 43.75,
+                      "h": 43.71
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_385": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1678.24,
+                      "y": 1143.22,
+                      "w": 44.48,
+                      "h": 43.75
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_386": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1627.11,
+                      "y": 1143.22,
+                      "w": 44.07,
+                      "h": 42.73
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_SwampLands4": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1706.11,
+                      "y": 1092.49,
+                      "w": 45.06,
+                      "h": 44.99
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_SwampLands7": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1655.41,
+                      "y": 1191.86,
+                      "w": 55.69,
+                      "h": 59.84
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_SwampLands8": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1712.15,
+                      "y": 1241.7,
+                      "w": 39.67,
+                      "h": 43.08
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 20,
+              "TheMinimumPlayerDistanceFromSpawnPoint": 10000.0,
+              "spawnMultiplier": 1.5,
+              "spawnLimit": 0.07,
+              "spawnChances": "100, 50",
+              "groupWeight": 0.01,
+              "weight": 0.001088,
+              "display": {
+                "weightText": "Entry Weight: 0.01",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 50%"
+              },
+              "bestSharedMin": 20.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Extinction": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesSwamp_C",
+              "managers": {
+                "NPCZoneManager_137": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 826.9,
+                      "y": 1006.08,
+                      "w": 65.7,
+                      "h": 65.7
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_691": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 826.9,
+                      "y": 934.41,
+                      "w": 65.7,
+                      "h": 65.7
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 20,
+              "TheMinimumPlayerDistanceFromSpawnPoint": 2000.0,
+              "spawnMultiplier": 1.5,
+              "spawnLimit": 0.07,
+              "spawnChances": "100, 50",
+              "groupWeight": 0.01,
+              "weight": 0.001094,
+              "display": {
+                "weightText": "Entry Weight: 0.01",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 50%"
+              },
+              "bestSharedMin": 20.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "Ext_DinoSpawnEntries_Forest_C",
+              "managers": {
+                "NPCZoneManager_UAID_581122A0FC84094802_1212209301": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 65.2,
+                      "y": 1930.14,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1402621317": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 149.29,
+                      "y": 1930.14,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1491720334": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 230.11,
+                      "y": 1991.82,
+                      "w": 66.67,
+                      "h": 44.16
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1537204337": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 149.29,
+                      "y": 1846.37,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1543932340": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 65.1,
+                      "y": 1846.37,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1549848343": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": -18.77,
+                      "y": 1846.37,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1657474360": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 149.29,
+                      "y": 1762.57,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1665695362": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 65.06,
+                      "y": 1762.57,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1681541367": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": -18.8,
+                      "y": 1762.57,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1693083370": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 65.06,
+                      "y": 1678.64,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1724820372": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 233.78,
+                      "y": 1846.37,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1735976375": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.59,
+                      "y": 1846.37,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1742202377": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.59,
+                      "y": 1757.01,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1864219394": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.71,
+                      "y": 1846.37,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1871832397": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.71,
+                      "y": 1762.48,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1883736402": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.71,
+                      "y": 1678.66,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_1994148405": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 485.75,
+                      "y": 1762.48,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_2003566407": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 485.75,
+                      "y": 1846.53,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_2047133409": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 569.64,
+                      "y": 1846.53,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_2059811413": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 653.53,
+                      "y": 1846.53,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_2066881417": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 653.53,
+                      "y": 1930.36,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_2076274418": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 569.54,
+                      "y": 1930.36,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84094802_2130765423": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 485.69,
+                      "y": 1930.36,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840A4802_1200913601": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 233.78,
+                      "y": 1762.42,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840A4802_1358602604": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 485.75,
+                      "y": 1678.69,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840A4802_1662736634": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.71,
+                      "y": 1594.68,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840A4802_1691812639": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 485.78,
+                      "y": 1594.68,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840A4802_1736268640": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 564.7,
+                      "y": 1594.68,
+                      "w": 41.55,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840A4802_1803557643": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 482.71,
+                      "y": 1508.67,
+                      "w": 76.16,
+                      "h": 65.25
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1117526850": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.59,
+                      "y": 1673.1,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1128832855": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.59,
+                      "y": 1589.28,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1140037856": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.59,
+                      "y": 1505.49,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1295341861": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 233.67,
+                      "y": 1505.49,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1424826862": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 149.71,
+                      "y": 1505.49,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1504571867": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 149.71,
+                      "y": 1421.66,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1520829868": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 149.71,
+                      "y": 1337.8,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1697982871": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 233.67,
+                      "y": 1421.25,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1730116876": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 233.67,
+                      "y": 1365.81,
+                      "w": 66.67,
+                      "h": 41.24
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1845576879": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.59,
+                      "y": 1421.6,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1852376880": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.76,
+                      "y": 1421.6,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1861171885": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.76,
+                      "y": 1505.59,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840B4802_1889194888": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 360.15,
+                      "y": 1373.65,
+                      "w": 66.67,
+                      "h": 32.59
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1112807081": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 65.83,
+                      "y": 1505.49,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1262089083": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 569.04,
+                      "y": 1678.69,
+                      "w": 40.01,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1673365085": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.71,
+                      "y": 1930.39,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1707646090": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 401.71,
+                      "y": 2011.53,
+                      "w": 66.67,
+                      "h": 49.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1733316091": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.92,
+                      "y": 2009.18,
+                      "w": 66.67,
+                      "h": 42.81
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1936027094": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 233.67,
+                      "y": 1589.47,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1952100099": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 233.67,
+                      "y": 1672.96,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840C4802_1969395100": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 150.01,
+                      "y": 1672.96,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840D4802_1085894295": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 150.01,
+                      "y": 1589.19,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840D4802_1119615296": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 150.01,
+                      "y": 1505.64,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840D4802_1130957301": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 234.0,
+                      "y": 1505.64,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840D4802_1213447302": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 234.0,
+                      "y": 1695.9,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840D4802_1224822307": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 317.87,
+                      "y": 1695.9,
+                      "w": 66.67,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840D4802_1552890323": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 569.04,
+                      "y": 1762.6,
+                      "w": 40.01,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC840D4802_1565690326": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 609.7,
+                      "y": 1762.6,
+                      "w": 40.01,
+                      "h": 66.43
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84EF4802_1271508664": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": -63.28,
+                      "y": 1873.96,
+                      "w": 66.67,
+                      "h": 22.66
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84F04802_1606976857": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 6.43,
+                      "y": 1863.23,
+                      "w": 70.0,
+                      "h": 48.72
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84F04802_1730574859": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 71.05,
+                      "y": 1822.52,
+                      "w": 63.17,
+                      "h": 63.17
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_581122A0FC84F04802_1808377864": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 130.51,
+                      "y": 1763.06,
+                      "w": 63.17,
+                      "h": 63.17
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "bForceInEditor": true,
+              "MinDesiredNumberOfNPC": 12,
+              "spawnMultiplier": 2.12,
+              "spawnLimit": 0.07,
+              "spawnChances": "100, 70, 60",
+              "groupWeight": 0.04,
+              "weight": 0.002332,
+              "display": {
+                "weightText": "Entry Weight: 0.04",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 70%, 60%"
+              },
+              "bestSharedMin": 12.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Lost Colony": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Cave1_Generic_LC_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB24AB02_1493626456": {
+                  "minDesired": 25.0,
+                  "boxes": [
+                    {
+                      "x": 621.69,
+                      "y": 1889.84,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 642.61,
+                      "y": 1892.07
+                    },
+                    {
+                      "x": 636.11,
+                      "y": 1885.3
+                    },
+                    {
+                      "x": 635.11,
+                      "y": 1885.05
+                    },
+                    {
+                      "x": 635.11,
+                      "y": 1884.04
+                    },
+                    {
+                      "x": 631.96,
+                      "y": 1887.76
+                    },
+                    {
+                      "x": 630.96,
+                      "y": 1887.51
+                    },
+                    {
+                      "x": 630.96,
+                      "y": 1886.5
+                    },
+                    {
+                      "x": 623.87,
+                      "y": 1884.95
+                    },
+                    {
+                      "x": 624.87,
+                      "y": 1885.2
+                    },
+                    {
+                      "x": 623.87,
+                      "y": 1883.94
+                    },
+                    {
+                      "x": 620.34,
+                      "y": 1882.96
+                    },
+                    {
+                      "x": 617.91,
+                      "y": 1889.13
+                    },
+                    {
+                      "x": 618.42,
+                      "y": 1889.88
+                    },
+                    {
+                      "x": 617.66,
+                      "y": 1890.64
+                    },
+                    {
+                      "x": 616.66,
+                      "y": 1890.38
+                    },
+                    {
+                      "x": 616.66,
+                      "y": 1889.38
+                    },
+                    {
+                      "x": 622.18,
+                      "y": 1897.41
+                    },
+                    {
+                      "x": 621.68,
+                      "y": 1896.66
+                    },
+                    {
+                      "x": 617.66,
+                      "y": 1898.16
+                    },
+                    {
+                      "x": 616.66,
+                      "y": 1897.91
+                    },
+                    {
+                      "x": 616.66,
+                      "y": 1896.91
+                    },
+                    {
+                      "x": 618.29,
+                      "y": 1905.78
+                    },
+                    {
+                      "x": 617.29,
+                      "y": 1905.53
+                    },
+                    {
+                      "x": 617.29,
+                      "y": 1904.52
+                    }
+                  ],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2BAB02_1727635722": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 674.02,
+                      "y": 1889.84,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 652.82,
+                      "y": 1898.07
+                    },
+                    {
+                      "x": 655.08,
+                      "y": 1899.33
+                    },
+                    {
+                      "x": 655.96,
+                      "y": 1902.09
+                    },
+                    {
+                      "x": 654.2,
+                      "y": 1902.09
+                    },
+                    {
+                      "x": 674.06,
+                      "y": 1891.53
+                    },
+                    {
+                      "x": 680.53,
+                      "y": 1894.0
+                    },
+                    {
+                      "x": 687.39,
+                      "y": 1900.24
+                    },
+                    {
+                      "x": 684.54,
+                      "y": 1898.77
+                    },
+                    {
+                      "x": 679.83,
+                      "y": 1902.95
+                    },
+                    {
+                      "x": 684.36,
+                      "y": 1907.11
+                    }
+                  ],
+                  "minDesiredPct": 0.6
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2BAB02_1766652727": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 674.02,
+                      "y": 1930.38,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 673.52,
+                      "y": 1921.25
+                    },
+                    {
+                      "x": 671.89,
+                      "y": 1921.25
+                    },
+                    {
+                      "x": 671.89,
+                      "y": 1919.37
+                    },
+                    {
+                      "x": 658.9,
+                      "y": 1922.38
+                    },
+                    {
+                      "x": 656.89,
+                      "y": 1922.38
+                    },
+                    {
+                      "x": 654.34,
+                      "y": 1929.15
+                    },
+                    {
+                      "x": 676.15,
+                      "y": 1925.64
+                    },
+                    {
+                      "x": 677.41,
+                      "y": 1927.4
+                    },
+                    {
+                      "x": 675.65,
+                      "y": 1927.4
+                    },
+                    {
+                      "x": 686.24,
+                      "y": 1942.91
+                    },
+                    {
+                      "x": 685.24,
+                      "y": 1942.91
+                    },
+                    {
+                      "x": 685.24,
+                      "y": 1941.4
+                    },
+                    {
+                      "x": 653.03,
+                      "y": 1938.38
+                    },
+                    {
+                      "x": 651.25,
+                      "y": 1940.35
+                    },
+                    {
+                      "x": 655.76,
+                      "y": 1943.35
+                    },
+                    {
+                      "x": 659.23,
+                      "y": 1942.51
+                    },
+                    {
+                      "x": 664.75,
+                      "y": 1950.58
+                    }
+                  ],
+                  "minDesiredPct": 0.6
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2BAB02_1782026730": {
+                  "minDesired": 25.0,
+                  "boxes": [
+                    {
+                      "x": 621.69,
+                      "y": 1930.38,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 628.43,
+                      "y": 1914.43
+                    },
+                    {
+                      "x": 627.81,
+                      "y": 1915.69
+                    },
+                    {
+                      "x": 629.94,
+                      "y": 1917.07
+                    },
+                    {
+                      "x": 627.81,
+                      "y": 1917.19
+                    },
+                    {
+                      "x": 628.88,
+                      "y": 1918.21
+                    },
+                    {
+                      "x": 627.75,
+                      "y": 1919.34
+                    },
+                    {
+                      "x": 630.0,
+                      "y": 1920.34
+                    },
+                    {
+                      "x": 628.88,
+                      "y": 1920.34
+                    },
+                    {
+                      "x": 629.25,
+                      "y": 1922.35
+                    },
+                    {
+                      "x": 627.37,
+                      "y": 1921.97
+                    },
+                    {
+                      "x": 611.59,
+                      "y": 1924.38
+                    },
+                    {
+                      "x": 611.59,
+                      "y": 1925.76
+                    },
+                    {
+                      "x": 610.09,
+                      "y": 1925.76
+                    },
+                    {
+                      "x": 613.39,
+                      "y": 1927.48
+                    },
+                    {
+                      "x": 613.39,
+                      "y": 1929.86
+                    },
+                    {
+                      "x": 611.64,
+                      "y": 1929.86
+                    },
+                    {
+                      "x": 617.99,
+                      "y": 1934.57
+                    },
+                    {
+                      "x": 619.24,
+                      "y": 1935.45
+                    },
+                    {
+                      "x": 616.61,
+                      "y": 1936.83
+                    },
+                    {
+                      "x": 638.5,
+                      "y": 1944.4
+                    },
+                    {
+                      "x": 633.97,
+                      "y": 1949.73
+                    },
+                    {
+                      "x": 635.23,
+                      "y": 1949.73
+                    }
+                  ],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2BAB02_1820673733": {
+                  "minDesired": 15.0,
+                  "boxes": [
+                    {
+                      "x": 646.54,
+                      "y": 1970.91,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 656.73,
+                      "y": 1953.61
+                    },
+                    {
+                      "x": 658.74,
+                      "y": 1954.74
+                    },
+                    {
+                      "x": 656.73,
+                      "y": 1955.12
+                    },
+                    {
+                      "x": 678.01,
+                      "y": 1968.91
+                    },
+                    {
+                      "x": 676.13,
+                      "y": 1967.78
+                    },
+                    {
+                      "x": 676.13,
+                      "y": 1969.79
+                    },
+                    {
+                      "x": 664.71,
+                      "y": 1971.92
+                    },
+                    {
+                      "x": 666.09,
+                      "y": 1972.67
+                    },
+                    {
+                      "x": 664.71,
+                      "y": 1974.05
+                    },
+                    {
+                      "x": 656.24,
+                      "y": 1960.48
+                    },
+                    {
+                      "x": 633.97,
+                      "y": 1951.61
+                    },
+                    {
+                      "x": 630.17,
+                      "y": 1957.08
+                    },
+                    {
+                      "x": 630.17,
+                      "y": 1959.22
+                    }
+                  ],
+                  "minDesiredPct": 0.6
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2FAC02_1184722401": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 1377.88,
+                      "y": 156.61,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 1352.58,
+                      "y": 148.13
+                    },
+                    {
+                      "x": 1377.28,
+                      "y": 134.09
+                    },
+                    {
+                      "x": 1377.75,
+                      "y": 151.91
+                    },
+                    {
+                      "x": 1372.91,
+                      "y": 148.95
+                    },
+                    {
+                      "x": 1351.56,
+                      "y": 150.86
+                    },
+                    {
+                      "x": 1389.36,
+                      "y": 190.95
+                    },
+                    {
+                      "x": 1390.86,
+                      "y": 185.46
+                    },
+                    {
+                      "x": 1381.46,
+                      "y": 197.22
+                    },
+                    {
+                      "x": 1376.77,
+                      "y": 152.47
+                    },
+                    {
+                      "x": 1376.5,
+                      "y": 192.64
+                    },
+                    {
+                      "x": 1374.56,
+                      "y": 134.34
+                    },
+                    {
+                      "x": 1371.43,
+                      "y": 149.16
+                    },
+                    {
+                      "x": 1381.39,
+                      "y": 147.78
+                    },
+                    {
+                      "x": 1348.73,
+                      "y": 139.2
+                    },
+                    {
+                      "x": 1357.87,
+                      "y": 177.91
+                    },
+                    {
+                      "x": 1376.98,
+                      "y": 193.09
+                    },
+                    {
+                      "x": 1359.73,
+                      "y": 176.23
+                    },
+                    {
+                      "x": 1363.2,
+                      "y": 178.03
+                    },
+                    {
+                      "x": 1382.12,
+                      "y": 144.9
+                    },
+                    {
+                      "x": 1380.5,
+                      "y": 150.21
+                    },
+                    {
+                      "x": 1364.03,
+                      "y": 141.72
+                    },
+                    {
+                      "x": 1396.31,
+                      "y": 185.13
+                    },
+                    {
+                      "x": 1379.09,
+                      "y": 137.98
+                    },
+                    {
+                      "x": 1354.91,
+                      "y": 154.91
+                    },
+                    {
+                      "x": 1391.48,
+                      "y": 132.95
+                    },
+                    {
+                      "x": 1367.8,
+                      "y": 144.46
+                    },
+                    {
+                      "x": 1371.37,
+                      "y": 192.94
+                    },
+                    {
+                      "x": 1391.16,
+                      "y": 192.95
+                    },
+                    {
+                      "x": 1377.91,
+                      "y": 136.79
+                    },
+                    {
+                      "x": 1350.85,
+                      "y": 138.47
+                    },
+                    {
+                      "x": 1381.92,
+                      "y": 166.42
+                    },
+                    {
+                      "x": 1387.91,
+                      "y": 147.24
+                    },
+                    {
+                      "x": 1395.24,
+                      "y": 181.87
+                    },
+                    {
+                      "x": 1365.28,
+                      "y": 161.59
+                    },
+                    {
+                      "x": 1363.92,
+                      "y": 174.69
+                    },
+                    {
+                      "x": 1358.54,
+                      "y": 157.4
+                    },
+                    {
+                      "x": 1369.78,
+                      "y": 174.94
+                    },
+                    {
+                      "x": 1389.86,
+                      "y": 190.64
+                    },
+                    {
+                      "x": 1397.78,
+                      "y": 185.17
+                    },
+                    {
+                      "x": 1365.8,
+                      "y": 173.92
+                    },
+                    {
+                      "x": 1392.19,
+                      "y": 177.03
+                    },
+                    {
+                      "x": 1348.89,
+                      "y": 136.64
+                    },
+                    {
+                      "x": 1394.17,
+                      "y": 186.56
+                    },
+                    {
+                      "x": 1365.06,
+                      "y": 141.64
+                    },
+                    {
+                      "x": 1391.26,
+                      "y": 141.96
+                    },
+                    {
+                      "x": 1377.95,
+                      "y": 139.58
+                    },
+                    {
+                      "x": 1377.03,
+                      "y": 136.59
+                    },
+                    {
+                      "x": 1369.41,
+                      "y": 169.3
+                    },
+                    {
+                      "x": 1366.0,
+                      "y": 174.9
+                    },
+                    {
+                      "x": 1389.46,
+                      "y": 135.12
+                    },
+                    {
+                      "x": 1354.77,
+                      "y": 132.04
+                    },
+                    {
+                      "x": 1368.86,
+                      "y": 148.68
+                    },
+                    {
+                      "x": 1375.23,
+                      "y": 194.86
+                    },
+                    {
+                      "x": 1387.06,
+                      "y": 132.82
+                    },
+                    {
+                      "x": 1367.92,
+                      "y": 140.12
+                    },
+                    {
+                      "x": 1358.17,
+                      "y": 156.03
+                    },
+                    {
+                      "x": 1395.38,
+                      "y": 180.49
+                    },
+                    {
+                      "x": 1389.2,
+                      "y": 188.31
+                    },
+                    {
+                      "x": 1362.89,
+                      "y": 179.22
+                    },
+                    {
+                      "x": 1376.15,
+                      "y": 145.51
+                    },
+                    {
+                      "x": 1365.39,
+                      "y": 175.32
+                    },
+                    {
+                      "x": 1387.98,
+                      "y": 132.14
+                    },
+                    {
+                      "x": 1362.5,
+                      "y": 183.98
+                    },
+                    {
+                      "x": 1363.43,
+                      "y": 173.19
+                    },
+                    {
+                      "x": 1360.8,
+                      "y": 176.56
+                    },
+                    {
+                      "x": 1378.08,
+                      "y": 135.06
+                    },
+                    {
+                      "x": 1359.14,
+                      "y": 178.8
+                    },
+                    {
+                      "x": 1393.91,
+                      "y": 190.45
+                    },
+                    {
+                      "x": 1391.94,
+                      "y": 183.43
+                    },
+                    {
+                      "x": 1383.18,
+                      "y": 171.29
+                    },
+                    {
+                      "x": 1368.41,
+                      "y": 172.3
+                    },
+                    {
+                      "x": 1381.31,
+                      "y": 134.43
+                    },
+                    {
+                      "x": 1392.12,
+                      "y": 192.18
+                    },
+                    {
+                      "x": 1379.98,
+                      "y": 194.9
+                    },
+                    {
+                      "x": 1357.94,
+                      "y": 177.22
+                    },
+                    {
+                      "x": 1361.35,
+                      "y": 159.47
+                    },
+                    {
+                      "x": 1352.86,
+                      "y": 148.82
+                    },
+                    {
+                      "x": 1382.67,
+                      "y": 164.09
+                    }
+                  ],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2FAC02_1280220410": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 1449.16,
+                      "y": 156.61,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 1453.65,
+                      "y": 170.09
+                    },
+                    {
+                      "x": 1455.45,
+                      "y": 159.61
+                    },
+                    {
+                      "x": 1438.47,
+                      "y": 197.19
+                    },
+                    {
+                      "x": 1415.73,
+                      "y": 176.75
+                    },
+                    {
+                      "x": 1439.66,
+                      "y": 193.48
+                    },
+                    {
+                      "x": 1417.37,
+                      "y": 167.88
+                    },
+                    {
+                      "x": 1422.04,
+                      "y": 183.34
+                    },
+                    {
+                      "x": 1449.32,
+                      "y": 135.95
+                    },
+                    {
+                      "x": 1446.67,
+                      "y": 198.15
+                    },
+                    {
+                      "x": 1442.45,
+                      "y": 152.73
+                    },
+                    {
+                      "x": 1419.64,
+                      "y": 170.45
+                    },
+                    {
+                      "x": 1448.49,
+                      "y": 149.1
+                    },
+                    {
+                      "x": 1449.69,
+                      "y": 198.36
+                    },
+                    {
+                      "x": 1430.58,
+                      "y": 169.29
+                    },
+                    {
+                      "x": 1444.94,
+                      "y": 152.13
+                    },
+                    {
+                      "x": 1428.65,
+                      "y": 179.64
+                    },
+                    {
+                      "x": 1417.11,
+                      "y": 160.36
+                    },
+                    {
+                      "x": 1424.58,
+                      "y": 178.36
+                    },
+                    {
+                      "x": 1419.03,
+                      "y": 169.73
+                    },
+                    {
+                      "x": 1452.59,
+                      "y": 198.01
+                    },
+                    {
+                      "x": 1445.76,
+                      "y": 139.38
+                    },
+                    {
+                      "x": 1450.58,
+                      "y": 184.46
+                    },
+                    {
+                      "x": 1424.71,
+                      "y": 171.48
+                    },
+                    {
+                      "x": 1443.97,
+                      "y": 152.47
+                    },
+                    {
+                      "x": 1425.2,
+                      "y": 167.91
+                    },
+                    {
+                      "x": 1442.2,
+                      "y": 196.37
+                    },
+                    {
+                      "x": 1448.67,
+                      "y": 199.24
+                    },
+                    {
+                      "x": 1427.66,
+                      "y": 173.58
+                    },
+                    {
+                      "x": 1415.94,
+                      "y": 167.87
+                    },
+                    {
+                      "x": 1429.33,
+                      "y": 188.96
+                    },
+                    {
+                      "x": 1446.0,
+                      "y": 133.97
+                    },
+                    {
+                      "x": 1418.41,
+                      "y": 160.62
+                    },
+                    {
+                      "x": 1420.13,
+                      "y": 176.84
+                    },
+                    {
+                      "x": 1448.99,
+                      "y": 138.49
+                    },
+                    {
+                      "x": 1445.27,
+                      "y": 199.49
+                    },
+                    {
+                      "x": 1451.76,
+                      "y": 185.11
+                    },
+                    {
+                      "x": 1455.08,
+                      "y": 197.17
+                    },
+                    {
+                      "x": 1443.09,
+                      "y": 148.16
+                    },
+                    {
+                      "x": 1443.62,
+                      "y": 147.38
+                    },
+                    {
+                      "x": 1451.24,
+                      "y": 182.1
+                    },
+                    {
+                      "x": 1441.31,
+                      "y": 197.27
+                    },
+                    {
+                      "x": 1447.32,
+                      "y": 180.24
+                    },
+                    {
+                      "x": 1451.96,
+                      "y": 195.69
+                    },
+                    {
+                      "x": 1451.51,
+                      "y": 183.75
+                    },
+                    {
+                      "x": 1438.96,
+                      "y": 192.55
+                    },
+                    {
+                      "x": 1415.78,
+                      "y": 166.73
+                    },
+                    {
+                      "x": 1448.63,
+                      "y": 132.81
+                    }
+                  ],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2FAC02_1287010413": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 1449.16,
+                      "y": 85.08,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 1465.87,
+                      "y": 108.24
+                    },
+                    {
+                      "x": 1460.84,
+                      "y": 129.69
+                    },
+                    {
+                      "x": 1458.08,
+                      "y": 129.64
+                    },
+                    {
+                      "x": 1441.98,
+                      "y": 126.47
+                    },
+                    {
+                      "x": 1457.63,
+                      "y": 130.24
+                    },
+                    {
+                      "x": 1455.53,
+                      "y": 111.82
+                    },
+                    {
+                      "x": 1452.05,
+                      "y": 129.97
+                    },
+                    {
+                      "x": 1457.29,
+                      "y": 108.13
+                    },
+                    {
+                      "x": 1412.25,
+                      "y": 117.29
+                    },
+                    {
+                      "x": 1419.85,
+                      "y": 114.84
+                    },
+                    {
+                      "x": 1462.6,
+                      "y": 125.78
+                    },
+                    {
+                      "x": 1415.04,
+                      "y": 112.09
+                    },
+                    {
+                      "x": 1456.37,
+                      "y": 128.32
+                    },
+                    {
+                      "x": 1446.56,
+                      "y": 130.84
+                    },
+                    {
+                      "x": 1459.93,
+                      "y": 129.25
+                    },
+                    {
+                      "x": 1413.42,
+                      "y": 119.46
+                    },
+                    {
+                      "x": 1422.18,
+                      "y": 127.56
+                    },
+                    {
+                      "x": 1432.03,
+                      "y": 131.08
+                    },
+                    {
+                      "x": 1443.25,
+                      "y": 125.01
+                    },
+                    {
+                      "x": 1424.04,
+                      "y": 129.68
+                    },
+                    {
+                      "x": 1439.79,
+                      "y": 126.15
+                    },
+                    {
+                      "x": 1460.55,
+                      "y": 125.52
+                    },
+                    {
+                      "x": 1416.02,
+                      "y": 114.73
+                    },
+                    {
+                      "x": 1421.05,
+                      "y": 122.64
+                    },
+                    {
+                      "x": 1461.72,
+                      "y": 132.11
+                    },
+                    {
+                      "x": 1456.46,
+                      "y": 110.47
+                    },
+                    {
+                      "x": 1432.54,
+                      "y": 128.56
+                    },
+                    {
+                      "x": 1443.15,
+                      "y": 127.47
+                    },
+                    {
+                      "x": 1443.19,
+                      "y": 127.52
+                    }
+                  ],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2FAC02_1305401416": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 1377.63,
+                      "y": 85.08,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 1382.18,
+                      "y": 84.49
+                    },
+                    {
+                      "x": 1360.05,
+                      "y": 101.68
+                    },
+                    {
+                      "x": 1366.62,
+                      "y": 110.12
+                    },
+                    {
+                      "x": 1393.62,
+                      "y": 83.04
+                    },
+                    {
+                      "x": 1365.67,
+                      "y": 88.66
+                    },
+                    {
+                      "x": 1397.18,
+                      "y": 91.06
+                    },
+                    {
+                      "x": 1397.74,
+                      "y": 105.95
+                    },
+                    {
+                      "x": 1396.16,
+                      "y": 83.59
+                    },
+                    {
+                      "x": 1351.44,
+                      "y": 126.24
+                    },
+                    {
+                      "x": 1363.75,
+                      "y": 111.99
+                    },
+                    {
+                      "x": 1365.89,
+                      "y": 103.62
+                    },
+                    {
+                      "x": 1370.12,
+                      "y": 116.75
+                    },
+                    {
+                      "x": 1376.48,
+                      "y": 121.74
+                    },
+                    {
+                      "x": 1376.29,
+                      "y": 121.29
+                    },
+                    {
+                      "x": 1356.59,
+                      "y": 104.45
+                    },
+                    {
+                      "x": 1368.69,
+                      "y": 112.51
+                    },
+                    {
+                      "x": 1395.27,
+                      "y": 107.97
+                    },
+                    {
+                      "x": 1377.39,
+                      "y": 115.25
+                    },
+                    {
+                      "x": 1395.22,
+                      "y": 82.25
+                    },
+                    {
+                      "x": 1397.13,
+                      "y": 98.72
+                    },
+                    {
+                      "x": 1395.7,
+                      "y": 106.58
+                    },
+                    {
+                      "x": 1396.42,
+                      "y": 81.6
+                    },
+                    {
+                      "x": 1365.05,
+                      "y": 79.94
+                    },
+                    {
+                      "x": 1361.44,
+                      "y": 100.87
+                    },
+                    {
+                      "x": 1367.43,
+                      "y": 99.2
+                    },
+                    {
+                      "x": 1357.54,
+                      "y": 77.51
+                    },
+                    {
+                      "x": 1377.94,
+                      "y": 116.65
+                    },
+                    {
+                      "x": 1368.19,
+                      "y": 94.62
+                    },
+                    {
+                      "x": 1358.67,
+                      "y": 82.57
+                    },
+                    {
+                      "x": 1372.1,
+                      "y": 109.49
+                    },
+                    {
+                      "x": 1360.96,
+                      "y": 82.99
+                    },
+                    {
+                      "x": 1347.04,
+                      "y": 104.4
+                    },
+                    {
+                      "x": 1372.85,
+                      "y": 110.57
+                    },
+                    {
+                      "x": 1372.54,
+                      "y": 112.84
+                    },
+                    {
+                      "x": 1374.5,
+                      "y": 115.25
+                    },
+                    {
+                      "x": 1359.6,
+                      "y": 100.95
+                    },
+                    {
+                      "x": 1399.33,
+                      "y": 108.99
+                    },
+                    {
+                      "x": 1364.02,
+                      "y": 95.91
+                    },
+                    {
+                      "x": 1354.77,
+                      "y": 132.04
+                    },
+                    {
+                      "x": 1394.9,
+                      "y": 128.21
+                    },
+                    {
+                      "x": 1377.44,
+                      "y": 119.76
+                    },
+                    {
+                      "x": 1373.2,
+                      "y": 110.31
+                    },
+                    {
+                      "x": 1346.46,
+                      "y": 111.46
+                    },
+                    {
+                      "x": 1347.32,
+                      "y": 102.37
+                    },
+                    {
+                      "x": 1396.03,
+                      "y": 111.26
+                    },
+                    {
+                      "x": 1349.98,
+                      "y": 126.53
+                    },
+                    {
+                      "x": 1374.36,
+                      "y": 114.09
+                    },
+                    {
+                      "x": 1356.22,
+                      "y": 131.64
+                    },
+                    {
+                      "x": 1353.33,
+                      "y": 101.81
+                    },
+                    {
+                      "x": 1387.98,
+                      "y": 132.14
+                    },
+                    {
+                      "x": 1362.35,
+                      "y": 80.51
+                    },
+                    {
+                      "x": 1369.15,
+                      "y": 83.58
+                    },
+                    {
+                      "x": 1370.45,
+                      "y": 113.63
+                    },
+                    {
+                      "x": 1376.25,
+                      "y": 114.06
+                    },
+                    {
+                      "x": 1364.68,
+                      "y": 109.27
+                    },
+                    {
+                      "x": 1346.2,
+                      "y": 102.42
+                    },
+                    {
+                      "x": 1352.42,
+                      "y": 99.86
+                    },
+                    {
+                      "x": 1369.13,
+                      "y": 98.01
+                    },
+                    {
+                      "x": 1360.88,
+                      "y": 99.22
+                    },
+                    {
+                      "x": 1367.5,
+                      "y": 119.47
+                    },
+                    {
+                      "x": 1377.55,
+                      "y": 112.8
+                    },
+                    {
+                      "x": 1358.5,
+                      "y": 102.57
+                    },
+                    {
+                      "x": 1399.2,
+                      "y": 102.52
+                    }
+                  ],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB2FAC02_1709395418": {
+                  "minDesired": 10.0,
+                  "boxes": [
+                    {
+                      "x": 1399.72,
+                      "y": 231.4,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 1402.17,
+                      "y": 257.22
+                    },
+                    {
+                      "x": 1379.22,
+                      "y": 271.4
+                    },
+                    {
+                      "x": 1397.99,
+                      "y": 260.93
+                    },
+                    {
+                      "x": 1415.83,
+                      "y": 273.29
+                    },
+                    {
+                      "x": 1381.28,
+                      "y": 264.28
+                    },
+                    {
+                      "x": 1380.78,
+                      "y": 268.82
+                    },
+                    {
+                      "x": 1385.07,
+                      "y": 259.55
+                    },
+                    {
+                      "x": 1396.34,
+                      "y": 262.54
+                    },
+                    {
+                      "x": 1380.3,
+                      "y": 271.1
+                    },
+                    {
+                      "x": 1403.75,
+                      "y": 261.62
+                    },
+                    {
+                      "x": 1394.83,
+                      "y": 258.06
+                    },
+                    {
+                      "x": 1401.7,
+                      "y": 261.32
+                    }
+                  ],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB63AB02_1713138752": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 482.4,
+                      "y": 949.92,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB63AB02_1878841755": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 546.99,
+                      "y": 919.57,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 510.93,
+                      "y": 904.02
+                    },
+                    {
+                      "x": 512.62,
+                      "y": 912.42
+                    },
+                    {
+                      "x": 528.79,
+                      "y": 901.51
+                    },
+                    {
+                      "x": 528.57,
+                      "y": 905.34
+                    },
+                    {
+                      "x": 526.4,
+                      "y": 898.98
+                    },
+                    {
+                      "x": 559.43,
+                      "y": 904.19
+                    },
+                    {
+                      "x": 559.79,
+                      "y": 906.45
+                    },
+                    {
+                      "x": 570.69,
+                      "y": 902.08
+                    },
+                    {
+                      "x": 573.22,
+                      "y": 898.94
+                    },
+                    {
+                      "x": 565.05,
+                      "y": 904.64
+                    },
+                    {
+                      "x": 563.4,
+                      "y": 904.53
+                    },
+                    {
+                      "x": 577.82,
+                      "y": 927.33
+                    },
+                    {
+                      "x": 590.37,
+                      "y": 946.0
+                    },
+                    {
+                      "x": 589.3,
+                      "y": 945.25
+                    },
+                    {
+                      "x": 581.03,
+                      "y": 927.87
+                    },
+                    {
+                      "x": 592.25,
+                      "y": 916.3
+                    },
+                    {
+                      "x": 593.29,
+                      "y": 920.37
+                    },
+                    {
+                      "x": 591.55,
+                      "y": 917.93
+                    }
+                  ],
+                  "minDesiredPct": 0.8
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB64AB02_1401795937": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 581.68,
+                      "y": 988.76,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 548.79,
+                      "y": 1014.45
+                    },
+                    {
+                      "x": 551.17,
+                      "y": 1017.83
+                    },
+                    {
+                      "x": 548.54,
+                      "y": 1017.12
+                    },
+                    {
+                      "x": 570.89,
+                      "y": 1024.29
+                    },
+                    {
+                      "x": 534.15,
+                      "y": 987.86
+                    },
+                    {
+                      "x": 549.11,
+                      "y": 979.75
+                    },
+                    {
+                      "x": 560.07,
+                      "y": 963.66
+                    },
+                    {
+                      "x": 557.41,
+                      "y": 984.12
+                    },
+                    {
+                      "x": 571.47,
+                      "y": 962.08
+                    },
+                    {
+                      "x": 575.09,
+                      "y": 965.53
+                    },
+                    {
+                      "x": 558.94,
+                      "y": 980.55
+                    },
+                    {
+                      "x": 575.05,
+                      "y": 974.93
+                    },
+                    {
+                      "x": 554.57,
+                      "y": 981.61
+                    },
+                    {
+                      "x": 575.79,
+                      "y": 957.48
+                    },
+                    {
+                      "x": 555.35,
+                      "y": 952.44
+                    },
+                    {
+                      "x": 550.79,
+                      "y": 946.95
+                    },
+                    {
+                      "x": 551.53,
+                      "y": 953.55
+                    },
+                    {
+                      "x": 568.82,
+                      "y": 956.3
+                    },
+                    {
+                      "x": 571.73,
+                      "y": 956.51
+                    },
+                    {
+                      "x": 577.66,
+                      "y": 975.63
+                    },
+                    {
+                      "x": 576.69,
+                      "y": 970.37
+                    },
+                    {
+                      "x": 577.55,
+                      "y": 957.52
+                    },
+                    {
+                      "x": 586.3,
+                      "y": 946.08
+                    }
+                  ],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB64AB02_1482976940": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 452.17,
+                      "y": 1027.66,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 438.42,
+                      "y": 1056.39
+                    },
+                    {
+                      "x": 436.09,
+                      "y": 1055.84
+                    },
+                    {
+                      "x": 433.26,
+                      "y": 1051.94
+                    },
+                    {
+                      "x": 455.08,
+                      "y": 1067.9
+                    },
+                    {
+                      "x": 452.77,
+                      "y": 1066.5
+                    },
+                    {
+                      "x": 452.79,
+                      "y": 1068.34
+                    },
+                    {
+                      "x": 458.3,
+                      "y": 1026.05
+                    },
+                    {
+                      "x": 446.59,
+                      "y": 995.46
+                    },
+                    {
+                      "x": 427.05,
+                      "y": 1010.65
+                    },
+                    {
+                      "x": 424.61,
+                      "y": 1012.1
+                    },
+                    {
+                      "x": 453.5,
+                      "y": 1015.34
+                    },
+                    {
+                      "x": 451.35,
+                      "y": 1020.35
+                    },
+                    {
+                      "x": 456.63,
+                      "y": 1020.15
+                    },
+                    {
+                      "x": 451.43,
+                      "y": 1015.81
+                    },
+                    {
+                      "x": 450.75,
+                      "y": 1013.63
+                    },
+                    {
+                      "x": 454.42,
+                      "y": 1008.82
+                    },
+                    {
+                      "x": 445.72,
+                      "y": 992.45
+                    },
+                    {
+                      "x": 432.49,
+                      "y": 983.33
+                    },
+                    {
+                      "x": 445.3,
+                      "y": 981.19
+                    },
+                    {
+                      "x": 440.33,
+                      "y": 979.43
+                    },
+                    {
+                      "x": 432.09,
+                      "y": 985.02
+                    },
+                    {
+                      "x": 473.97,
+                      "y": 1047.59
+                    },
+                    {
+                      "x": 476.9,
+                      "y": 1043.57
+                    },
+                    {
+                      "x": 487.92,
+                      "y": 1028.35
+                    },
+                    {
+                      "x": 492.45,
+                      "y": 1027.24
+                    },
+                    {
+                      "x": 481.34,
+                      "y": 1046.2
+                    },
+                    {
+                      "x": 479.74,
+                      "y": 1048.08
+                    },
+                    {
+                      "x": 487.82,
+                      "y": 1037.94
+                    },
+                    {
+                      "x": 493.34,
+                      "y": 1033.17
+                    },
+                    {
+                      "x": 497.23,
+                      "y": 1012.24
+                    },
+                    {
+                      "x": 489.63,
+                      "y": 1013.25
+                    }
+                  ],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB64AB02_1607206943": {
+                  "minDesired": 0.0,
+                  "boxes": [
+                    {
+                      "x": 551.31,
+                      "y": 1066.31,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 517.73,
+                      "y": 1077.27
+                    },
+                    {
+                      "x": 535.39,
+                      "y": 1078.42
+                    },
+                    {
+                      "x": 538.91,
+                      "y": 1076.75
+                    },
+                    {
+                      "x": 534.94,
+                      "y": 1072.53
+                    },
+                    {
+                      "x": 532.79,
+                      "y": 1076.67
+                    },
+                    {
+                      "x": 527.73,
+                      "y": 1056.65
+                    },
+                    {
+                      "x": 532.08,
+                      "y": 1064.78
+                    },
+                    {
+                      "x": 547.83,
+                      "y": 1057.02
+                    },
+                    {
+                      "x": 547.58,
+                      "y": 1055.46
+                    },
+                    {
+                      "x": 540.24,
+                      "y": 1055.08
+                    },
+                    {
+                      "x": 530.7,
+                      "y": 1046.71
+                    },
+                    {
+                      "x": 531.61,
+                      "y": 1043.52
+                    },
+                    {
+                      "x": 535.53,
+                      "y": 1048.38
+                    },
+                    {
+                      "x": 547.85,
+                      "y": 1032.29
+                    },
+                    {
+                      "x": 550.28,
+                      "y": 1036.76
+                    },
+                    {
+                      "x": 530.15,
+                      "y": 1071.51
+                    },
+                    {
+                      "x": 519.25,
+                      "y": 1030.45
+                    },
+                    {
+                      "x": 519.15,
+                      "y": 1038.07
+                    },
+                    {
+                      "x": 540.14,
+                      "y": 1029.69
+                    },
+                    {
+                      "x": 538.42,
+                      "y": 1037.04
+                    },
+                    {
+                      "x": 541.96,
+                      "y": 1035.36
+                    },
+                    {
+                      "x": 516.66,
+                      "y": 1049.0
+                    },
+                    {
+                      "x": 517.68,
+                      "y": 1051.92
+                    },
+                    {
+                      "x": 555.98,
+                      "y": 1082.87
+                    },
+                    {
+                      "x": 558.62,
+                      "y": 1081.53
+                    },
+                    {
+                      "x": 563.74,
+                      "y": 1058.53
+                    },
+                    {
+                      "x": 567.49,
+                      "y": 1058.21
+                    },
+                    {
+                      "x": 567.73,
+                      "y": 1057.03
+                    },
+                    {
+                      "x": 551.02,
+                      "y": 1024.2
+                    },
+                    {
+                      "x": 552.2,
+                      "y": 1035.2
+                    },
+                    {
+                      "x": 561.05,
+                      "y": 1040.29
+                    },
+                    {
+                      "x": 560.68,
+                      "y": 1042.69
+                    },
+                    {
+                      "x": 557.94,
+                      "y": 1026.28
+                    },
+                    {
+                      "x": 559.85,
+                      "y": 1032.34
+                    },
+                    {
+                      "x": 567.41,
+                      "y": 1039.85
+                    },
+                    {
+                      "x": 568.9,
+                      "y": 1040.55
+                    },
+                    {
+                      "x": 572.62,
+                      "y": 1030.06
+                    },
+                    {
+                      "x": 535.04,
+                      "y": 1017.72
+                    },
+                    {
+                      "x": 507.93,
+                      "y": 1043.68
+                    },
+                    {
+                      "x": 505.0,
+                      "y": 1042.3
+                    },
+                    {
+                      "x": 502.53,
+                      "y": 1046.36
+                    },
+                    {
+                      "x": 512.96,
+                      "y": 1044.6
+                    },
+                    {
+                      "x": 512.33,
+                      "y": 1050.57
+                    },
+                    {
+                      "x": 512.53,
+                      "y": 1049.48
+                    }
+                  ],
+                  "minDesiredPct": 0.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB64AB02_1626462946": {
+                  "minDesired": 25.0,
+                  "boxes": [
+                    {
+                      "x": 504.63,
+                      "y": 1137.59,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 510.36,
+                      "y": 1145.33
+                    },
+                    {
+                      "x": 510.87,
+                      "y": 1136.6
+                    },
+                    {
+                      "x": 492.26,
+                      "y": 1133.59
+                    },
+                    {
+                      "x": 494.02,
+                      "y": 1124.28
+                    },
+                    {
+                      "x": 494.14,
+                      "y": 1132.21
+                    },
+                    {
+                      "x": 495.98,
+                      "y": 1132.65
+                    },
+                    {
+                      "x": 481.39,
+                      "y": 1117.65
+                    },
+                    {
+                      "x": 480.77,
+                      "y": 1105.25
+                    },
+                    {
+                      "x": 512.14,
+                      "y": 1144.71
+                    },
+                    {
+                      "x": 517.7,
+                      "y": 1141.75
+                    },
+                    {
+                      "x": 513.84,
+                      "y": 1136.39
+                    },
+                    {
+                      "x": 523.09,
+                      "y": 1141.23
+                    }
+                  ],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB6EAB02_1841939450": {
+                  "minDesired": 10.0,
+                  "boxes": [
+                    {
+                      "x": 1430.59,
+                      "y": 329.29,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 488.88,
+                      "y": 987.75
+                    },
+                    {
+                      "x": 497.05,
+                      "y": 984.48
+                    },
+                    {
+                      "x": 493.79,
+                      "y": 981.15
+                    },
+                    {
+                      "x": 487.78,
+                      "y": 984.77
+                    },
+                    {
+                      "x": 490.52,
+                      "y": 985.19
+                    },
+                    {
+                      "x": 477.32,
+                      "y": 976.2
+                    },
+                    {
+                      "x": 471.27,
+                      "y": 977.95
+                    },
+                    {
+                      "x": 483.72,
+                      "y": 985.78
+                    },
+                    {
+                      "x": 471.09,
+                      "y": 980.89
+                    },
+                    {
+                      "x": 486.74,
+                      "y": 986.41
+                    },
+                    {
+                      "x": 490.36,
+                      "y": 988.68
+                    },
+                    {
+                      "x": 473.41,
+                      "y": 976.46
+                    },
+                    {
+                      "x": 473.97,
+                      "y": 971.82
+                    },
+                    {
+                      "x": 476.16,
+                      "y": 969.56
+                    },
+                    {
+                      "x": 492.46,
+                      "y": 984.95
+                    },
+                    {
+                      "x": 475.82,
+                      "y": 972.08
+                    },
+                    {
+                      "x": 488.88,
+                      "y": 952.41
+                    },
+                    {
+                      "x": 486.37,
+                      "y": 952.89
+                    },
+                    {
+                      "x": 511.91,
+                      "y": 954.57
+                    },
+                    {
+                      "x": 515.06,
+                      "y": 953.53
+                    },
+                    {
+                      "x": 489.38,
+                      "y": 954.37
+                    },
+                    {
+                      "x": 484.53,
+                      "y": 953.55
+                    },
+                    {
+                      "x": 513.33,
+                      "y": 954.57
+                    },
+                    {
+                      "x": 513.97,
+                      "y": 957.22
+                    },
+                    {
+                      "x": 518.78,
+                      "y": 954.57
+                    },
+                    {
+                      "x": 517.54,
+                      "y": 948.25
+                    },
+                    {
+                      "x": 489.48,
+                      "y": 957.14
+                    },
+                    {
+                      "x": 513.33,
+                      "y": 952.41
+                    },
+                    {
+                      "x": 464.52,
+                      "y": 943.94
+                    },
+                    {
+                      "x": 466.72,
+                      "y": 941.42
+                    },
+                    {
+                      "x": 493.04,
+                      "y": 939.67
+                    },
+                    {
+                      "x": 464.68,
+                      "y": 935.9
+                    },
+                    {
+                      "x": 466.72,
+                      "y": 938.2
+                    },
+                    {
+                      "x": 273.28,
+                      "y": 796.64
+                    },
+                    {
+                      "x": 494.69,
+                      "y": 938.41
+                    },
+                    {
+                      "x": 464.05,
+                      "y": 938.04
+                    },
+                    {
+                      "x": 494.79,
+                      "y": 941.26
+                    },
+                    {
+                      "x": 265.96,
+                      "y": 799.29
+                    },
+                    {
+                      "x": 493.04,
+                      "y": 944.27
+                    },
+                    {
+                      "x": 493.04,
+                      "y": 942.56
+                    },
+                    {
+                      "x": 463.72,
+                      "y": 934.26
+                    },
+                    {
+                      "x": 466.72,
+                      "y": 935.36
+                    },
+                    {
+                      "x": 466.45,
+                      "y": 933.71
+                    },
+                    {
+                      "x": 459.99,
+                      "y": 945.95
+                    },
+                    {
+                      "x": 487.14,
+                      "y": 932.26
+                    },
+                    {
+                      "x": 482.1,
+                      "y": 932.5
+                    },
+                    {
+                      "x": 484.15,
+                      "y": 929.21
+                    },
+                    {
+                      "x": 484.15,
+                      "y": 933.97
+                    },
+                    {
+                      "x": 484.35,
+                      "y": 936.38
+                    },
+                    {
+                      "x": 501.9,
+                      "y": 937.57
+                    },
+                    {
+                      "x": 500.65,
+                      "y": 935.14
+                    },
+                    {
+                      "x": 499.23,
+                      "y": 935.14
+                    },
+                    {
+                      "x": 503.66,
+                      "y": 933.73
+                    },
+                    {
+                      "x": 499.24,
+                      "y": 929.75
+                    }
+                  ],
+                  "minDesiredPct": 0.4
+                },
+                "NPCZoneManagerBlueprint_Cave_C_UAID_C87F54C5CAFB7AAB02_1531564564": {
+                  "minDesired": 10.0,
+                  "boxes": [
+                    {
+                      "x": 1445.15,
+                      "y": 231.4,
+                      "w": 0.25,
+                      "h": 0.25
+                    }
+                  ],
+                  "points": [
+                    {
+                      "x": 1451.72,
+                      "y": 257.47
+                    },
+                    {
+                      "x": 1449.38,
+                      "y": 229.44
+                    },
+                    {
+                      "x": 1453.61,
+                      "y": 236.94
+                    },
+                    {
+                      "x": 1456.87,
+                      "y": 235.82
+                    },
+                    {
+                      "x": 1450.36,
+                      "y": 262.34
+                    },
+                    {
+                      "x": 1454.22,
+                      "y": 256.7
+                    },
+                    {
+                      "x": 1447.18,
+                      "y": 267.19
+                    },
+                    {
+                      "x": 1456.78,
+                      "y": 234.99
+                    },
+                    {
+                      "x": 1448.99,
+                      "y": 264.27
+                    },
+                    {
+                      "x": 1452.92,
+                      "y": 243.02
+                    },
+                    {
+                      "x": 1436.91,
+                      "y": 266.99
+                    },
+                    {
+                      "x": 1436.6,
+                      "y": 270.06
+                    },
+                    {
+                      "x": 1457.49,
+                      "y": 233.22
+                    },
+                    {
+                      "x": 1431.59,
+                      "y": 277.75
+                    },
+                    {
+                      "x": 1456.55,
+                      "y": 232.02
+                    },
+                    {
+                      "x": 1457.8,
+                      "y": 234.79
+                    },
+                    {
+                      "x": 1436.07,
+                      "y": 225.48
+                    },
+                    {
+                      "x": 1456.06,
+                      "y": 233.04
+                    },
+                    {
+                      "x": 1453.67,
+                      "y": 250.72
+                    },
+                    {
+                      "x": 1436.44,
+                      "y": 267.21
+                    },
+                    {
+                      "x": 1437.08,
+                      "y": 269.82
+                    },
+                    {
+                      "x": 1451.29,
+                      "y": 232.18
+                    },
+                    {
+                      "x": 1458.85,
+                      "y": 240.45
+                    },
+                    {
+                      "x": 1453.3,
+                      "y": 246.81
+                    },
+                    {
+                      "x": 1450.22,
+                      "y": 259.14
+                    },
+                    {
+                      "x": 1459.63,
+                      "y": 273.83
+                    },
+                    {
+                      "x": 1455.75,
+                      "y": 235.46
+                    },
+                    {
+                      "x": 1439.92,
+                      "y": 265.6
+                    },
+                    {
+                      "x": 1447.97,
+                      "y": 264.18
+                    }
+                  ],
+                  "minDesiredPct": 0.4
+                }
+              },
+              "MinDesiredNumberOfNPC": 25,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 0.05,
+              "spawnChances": "100",
+              "groupWeight": 0.05,
+              "weight": 0.000655,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "bestSharedMin": 25.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Astraeos": {
+      "dinos": {
+        "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C": {
+          "bpPath": "/ShadowmaneASEP/ModContent/LionfishLion/LionfishLion_Character_BP_ASEP.LionfishLion_Character_BP_ASEP_C",
+          "displayName": "Shadowmane",
+          "nameTag": "Lionfish Lion",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 350.0,
+          "killXpBase": 5.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntriesSwamp_Generic_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86A060902_1969890891": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 368.92,
+                      "y": 1467.93,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86A060902_1989907894": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 377.8,
+                      "y": 1491.61,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1343188471": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 715.54,
+                      "y": 1866.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1364447474": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 715.54,
+                      "y": 1903.19,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1366473477": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 715.54,
+                      "y": 1941.27,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1369593480": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 678.07,
+                      "y": 1941.27,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1375783483": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 678.07,
+                      "y": 1904.53,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1379820489": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 641.04,
+                      "y": 1941.94,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1382960492": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 603.83,
+                      "y": 1941.94,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1384387495": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 567.59,
+                      "y": 1941.94,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1386932498": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 640.83,
+                      "y": 1978.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_UAID_F02F74C9A86AE92E02_1390719501": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 678.5,
+                      "y": 1978.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 20,
+              "spawnMultiplier": 1.5,
+              "spawnLimit": 0.07,
+              "spawnChances": "100, 50",
+              "groupWeight": 0.01,
+              "weight": 0.001088,
+              "display": {
+                "weightText": "Entry Weight: 0.01",
+                "limitText": "Max % To Allow: 7%",
+                "chanceText": "Spawn Chances: 100%, 50%"
+              },
+              "bestSharedMin": 20.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

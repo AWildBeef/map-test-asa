@@ -59,8 +59,8 @@ function rarityFromWeight(w) {
   return "very rare";
 }
 
-function downshiftStepsForMin(bestSharedMin) {
-  const m = Number(bestSharedMin || 0);
+function downshiftStepsForTotalMin(totalMin) {
+  const m = Number(totalMin || 0);
   if (m <= 0) return 0;
   for (const [thr, steps] of MIN_GLOBAL_DOWNSHIFT) {
     if (m <= thr) return steps;
@@ -74,23 +74,6 @@ function downgradeRarity(label, steps) {
   if (i < 0) i = RARITY_ORDER.length - 1;
   const j = Math.min(RARITY_ORDER.length - 1, i + steps);
   return RARITY_ORDER[j];
-}
-
-function applyRarityToConfig(cfg) {
-  const dinos = cfg?.dinos || {};
-  for (const d of Object.values(dinos)) {
-    for (const entry of (d.entries || [])) {
-      const base = rarityFromWeight(entry.weight ?? 0);
-
-      // Prefer exporter-provided global downshift
-      const globalSteps =
-        (entry.minRarityDownshift != null)
-          ? Number(entry.minRarityDownshift || 0)
-          : downshiftStepsForMin(entry.bestSharedMin ?? 0);
-
-      entry.rarity = downgradeRarity(base, globalSteps);
-    }
-  }
 }
 
 function normalizePoiType(type) {
@@ -133,64 +116,32 @@ const MAPS = [
 // ============================================================
 // SOURCES (Official + Mods)
 // ============================================================
-const SOURCES = [
-  { id: "official", name: "Official", order: 100},
-  { id: "runicwyverns", name: "Runic Wyverns", file: "data/mods/RunicWyverns.json" },
-  { id: "ARKOLOGYOEHapipalus", name: "ARKOLOGY: OE - Hapipalus", file: "data/mods/ARKOLOGYOEHapipalus.json",
-    group: "ARKOLOGY" },
-  { id: "Desolatitan", name: "ARKOLOGY: OE - Desolatitan", file: "data/mods/Desolatitan.json",
-    group: "ARKOLOGY" },
-  { id: "PrehistoricBeasts4", name: "Prehistoric Beasts Part IV", file: "data/mods/PrehistoricBeasts4.json",
-    group: "Prehistoric Beasts" },
-  { id: "PrehistoricBeasts5", name: "Prehistoric Beasts Part V", file: "data/mods/PrehistoricBeasts5.json",
-    group: "Prehistoric Beasts" },
-  { id: "PrehistoricBeasts3", name: "Prehistoric Beasts Part III", file: "data/mods/PrehistoricBeasts3.json",
-    group: "Prehistoric Beasts" },
-  { id: "PrehistoricBeasts2", name: "Prehistoric Beasts Part II", file: "data/mods/PrehistoricBeasts2.json",
-    group: "Prehistoric Beasts" },
-  { id: "PrehistoricBeasts1", name: "Prehistoric Beasts", file: "data/mods/PrehistoricBeasts1.json",
-    group: "Prehistoric Beasts" },
-  { id: "Xyphias'CreaturesHatzegopteryx", name: "Xyphias' Creatures: Hatzegopteryx", file: "data/mods/Xyphias'CreaturesHatzegopteryx.json",
-    group: "Xyphias' Creatures" },
-  { id: "Xyphias'CreaturesMeiolania", name: "Xyphias' Creatures: Meiolania", file: "data/mods/Xyphias'CreaturesMeiolania.json",
-    group: "Xyphias' Creatures" },
-  { id: "Xyphias'CreaturesMischoptera", name: "Xyphias' Creatures: Mischoptera", file: "data/mods/Xyphias'CreaturesMischoptera.json",
-    group: "Xyphias' Creatures" },
-  { id: "Xyphias'CreaturesMegistotherium", name: "Xyphias' Creatures: Megistotherium", file: "data/mods/Xyphias'CreaturesMegistotherium.json",
-    group: "Xyphias' Creatures" },
-  { id: "Xyphias'CreaturesCharnia", name: "Xyphias' Creatures: Charnia", file: "data/mods/Xyphias'CreaturesCharnia.json",
-    group: "Xyphias' Creatures" },
-  { id: "Xyphias'CreaturesDickinsonia", name: "Xyphias' Creatures: Dickinsonia", file: "data/mods/Xyphias'CreaturesDickinsonia.json",
-    group: "Xyphias' Creatures" },
-  { id: "Xyphias'CreaturesEnantiophoenix", name: "Xyphias' Creatures: Enantiophoenix", file: "data/mods/Xyphias'CreaturesEnantiophoenix.json",
-    group: "Xyphias' Creatures" },
-  { id: "Vetulicolians", name: "Xyphias' Creatures: Vetulicolians", file: "data/mods/Vetulicolians.json",
-    group: "Xyphias' Creatures" },
-  { id: "TheSunkenWorldAdditions", name: "The Sunken World Additions", file: "data/mods/TheSunkenWorldAdditions.json" },
-  { id: "Skyshroud", name: "Isle of Myths: Skyshroud Drakara", file: "data/mods/Skyshroud.json",
-    group: "Isle of Myths" },
-  { id: "WildARK", name: "Additional Creatures: Wild Ark", file: "data/mods/WildARK.json",
-    group: "Additional Creatures" },
-  { id: "ASAAquaria", name: "Additional Creatures: Aquaria", file: "data/mods/ASAAquaria.json",
-    group: "Additional Creatures" },
-  { id: "EndemicsMod", name: "Additional Creatures: Endemics", file: "data/mods/EndemicsMod.json",
-    group: "Additional Creatures" },
-  { id: "IoMSuchomimus", name: "Isle of Myths: Suchomimus", file: "data/mods/IoMSuchomimus.json",
-    group: "Isle of Myths" },
-  { id: "BSSpearcrest", name: "Isle of Myths: Spearcrest", file: "data/mods/BSSpearcrest.json" },
-  { id: "IoMOxalaia", name: "Isle of Myths: Oxalaia", file: "data/mods/IoMOxalaia.json",
-    group: "Isle of Myths" },
-  { id: "WAK_Spinosaurus", name: "BigAL's: WAK Spinosaurus", file: "data/mods/WAK_Spinosaurus.json",
-    group: "Big AL's" },
-  { id: "MeraxesTLC", name: "BigAL's: Meraxes", file: "data/mods/MeraxesTLC.json",
-    group: "Big AL's" },
-  { id: "JumpingSpider", name: "Cyrus' Critters: [Cuter TLC] Jumping Spider", file: "data/mods/JumpingSpider.json",
-    group: "Cyrus' Critters" },
-  { id: "CyrusGecko", name: "Cyrus' Critters: Magna Gecko", file: "data/mods/CyrusGecko.json",
-    group: "Cyrus' Critters" },
-  { id: "Redpanda", name: "Cyrus's Critters: Redpanda", file: "data/mods/Redpanda.json",
-    group: "Cyrus' Critters" },
-];
+let SOURCES = [];
+
+
+async function buildSources() {
+  const registry = await (await fetch("mods_registry.json")).json();
+
+  const mods = (registry.mods || []).map(m => ({
+    id: String(m.id),
+    name: m.name,
+    file: `data/mods/${m.slug}.json`,
+    ...(m.group ? { group: m.group } : {})
+  }));
+
+  // alphabetical by name
+  mods.sort((a,b)=>a.name.localeCompare(b.name));
+  for (const m of mods) {
+    m.hasFile = await fileExists(m.file);
+  }
+
+  const realMods = mods.filter(m => m.hasFile);
+
+  return [
+    { id:"official", name:"Official", order:100 },
+    ...realMods
+  ];
+}
 
 // ============================================================
 // STATE
@@ -215,6 +166,9 @@ const lastSelection = {
 };
 
 let showPois = true;  // default on
+
+let currentNameToBps = null;   // Map(displayName -> [bp...])
+let currentNames = null;       // [displayName...]
 
 // Remember drill path per dropdown instance
 const drillState = {
@@ -248,7 +202,7 @@ function setLegendOpen(open){
 // ============================================================
 // SETTINGS
 // ============================================================
-let useRarityForMods = true; // default; set to false if you want “mod style” by default
+let useRarityForMods = true; // default; set to false if you want "mod style" by default
 
 const jsonCache = {};
 
@@ -277,6 +231,441 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+
+async function fileExists(url) {
+  try {
+    const r = await fetch(`${url}?v=${ASSET_VER}`, { method: "HEAD", cache: "no-store" });
+    return r.ok;
+  } catch {
+    return false;
+  }
+}
+
+function normBoxLite(b){
+  if (!b || typeof b !== "object") return null;
+  const x = Number(b.x), y = Number(b.y), w = Number(b.w), h = Number(b.h);
+  if (![x,y,w,h].every(Number.isFinite)) return null;
+  return { x, y, w, h };
+}
+function normPointLite(p){
+  if (!p || typeof p !== "object") return null;
+  const x = Number(p.x), y = Number(p.y);
+  if (![x,y].every(Number.isFinite)) return null;
+  return { x, y };
+}
+
+function ensureLeafletPanel({ id, title, position = "topright", collapsedByDefault = false }) {
+  if (!mapObj?.map) return null;
+
+  // If it already exists, reuse it
+  let existing = document.getElementById(id);
+  if (existing) return existing;
+
+  const Panel = L.Control.extend({
+    options: { position },
+    onAdd(map) {
+      const panel = L.DomUtil.create("div", "floating-panel leaflet-panel");
+      panel.id = id;
+
+      panel.innerHTML = `
+        <div class="fp-header">
+          <div class="fp-title">${title}</div>
+          <div class="fp-actions"></div>
+        </div>
+        <div class="fp-body"></div>
+      `;
+
+      // stop map interactions when using the panel
+      L.DomEvent.disableClickPropagation(panel);
+      L.DomEvent.disableScrollPropagation(panel);
+
+      // actions
+      const actions = panel.querySelector(".fp-actions");
+
+      const minBtn = createIconButton(CHEVRON_DOWN_ICON);
+      minBtn.dataset.action = "min";
+      minBtn.title = "Collapse";
+      minBtn.classList.add("fp-btn-chevron");
+
+      const hideBtn = createIconButton(CLOSE_ICON);
+      hideBtn.dataset.action = "hide";
+      hideBtn.title = "Hide";
+
+      actions.appendChild(minBtn);
+      actions.appendChild(hideBtn);
+
+      // collapse behavior
+      const body = panel.querySelector(".fp-body");
+      function setCollapsed(collapsed) {
+        panel.classList.toggle("collapsed", collapsed);
+      }
+
+      minBtn.onclick = () => setCollapsed(!panel.classList.contains("collapsed"));
+
+      hideBtn.onclick = () => {
+        panel.style.display = "none";
+        panel.dataset.hidden = "1";
+        updateDockToggles();
+      };
+
+      // default collapse state
+      panel.dataset.hidden = "0";
+      if (collapsedByDefault) setCollapsed(true);
+
+      return panel;
+    }
+  });
+
+  const ctrl = new Panel();
+  mapObj.map.addControl(ctrl);
+
+  return document.getElementById(id);
+}
+
+document.addEventListener("click", e => {
+
+  const el = e.target.closest(".copy-on-click");
+  if (!el) return;
+
+  const text =
+    el.dataset.copy ??
+    el.textContent ??
+    "";
+
+  navigator.clipboard.writeText(text.trim());
+
+  // --- SHOW COPIED BUBBLE ---
+  showCopiedBubble(el);
+
+});
+
+function showCopiedBubble(target){
+
+  const bubble = document.createElement("div");
+  bubble.className = "copy-bubble";
+  bubble.textContent = "Copied!";
+
+  document.body.appendChild(bubble);
+
+  const r = target.getBoundingClientRect();
+
+  bubble.style.left = (r.right + 6) + "px";
+  bubble.style.top  = (r.top + r.height/2 - 10) + "px";
+
+  requestAnimationFrame(()=>{
+    bubble.classList.add("show");
+  });
+
+  setTimeout(()=>{
+    bubble.classList.remove("show");
+    setTimeout(()=> bubble.remove(), 200);
+  }, 900);
+}
+
+function totalMinDesired(entry){
+  const mgrs = entry?.managers;
+  if (!mgrs || typeof mgrs !== "object") return 0;
+  let sum = 0;
+  for (const m of Object.values(mgrs)) {
+    sum += Number(m?.minDesired || 0);
+  }
+  return sum;
+}
+
+function applyRarityToConfig(cfg) {
+  const dinos = cfg?.dinos || {};
+  for (const d of Object.values(dinos)) {
+    for (const entry of (d.entries || [])) {
+      const base = rarityFromWeight(entry.weight ?? 0);
+
+      // Prefer exporter-provided global downshift if present
+      const exporterSteps =
+        (entry.minRarityDownshift != null)
+          ? Number(entry.minRarityDownshift || 0)
+          : null;
+
+      // Otherwise compute from total minDesired across all managers
+      const totalMin = totalMinDesired(entry);
+      const computedSteps = downshiftStepsForTotalMin(totalMin);
+
+      const globalSteps = (exporterSteps != null) ? exporterSteps : computedSteps;
+
+      // Optional debug fields
+      entry._rarityBase = base;
+      entry._globalSteps = globalSteps;
+      entry._totalMinDesired = totalMin;
+
+      entry.rarity = downgradeRarity(base, globalSteps);
+    }
+  }
+}
+
+function formatSpawnChances(chances) {
+  if (chances == null) return "";
+
+  // array of numbers (already percents)
+  if (Array.isArray(chances)) {
+    const parts = chances
+      .map(n => Number(n))
+      .filter(n => Number.isFinite(n));
+    return parts.length ? `Spawn chances: ${parts.map(n => `${fmt(n)}%`).join(", ")}` : "";
+  }
+
+  // string like "10, 20, 70" or "10%,20%,70%"
+  if (typeof chances === "string") {
+    const parts = chances
+      .split(",")
+      .map(s => s.trim().replace(/%$/, ""))
+      .filter(Boolean)
+      .map(s => Number(s))
+      .filter(n => Number.isFinite(n));
+
+    return parts.length ? `Spawn chances: ${parts.map(n => `${fmt(n)}%`).join(", ")}` : "";
+  }
+
+  // unknown shape
+  return "";
+}
+
+function drawGroupedDino(grouped, displayName) {
+  if (!grouped) return;
+
+  const dino = {
+    displayName,
+    bpPath: grouped.bps?.[0] || "",
+    additionalBpPathsToDisplay: grouped.bps?.slice(1) || [],
+    entries: grouped.entries || [],
+
+    // ✅ NEW
+    nameTag: grouped.nameTag || "",
+    tameable: grouped.tameable,
+    breedable: grouped.breedable,
+    isAlpha: grouped.isAlpha,
+    isBoss: grouped.isBoss,
+    isBossMinion: grouped.isBossMinion,
+    dragWeight: grouped.dragWeight,
+    killXpBase: grouped.killXpBase
+  };
+
+  const fakeCfg = { dinos: { __tmp__: dino } };
+  preprocessCfg(fakeCfg);
+  drawDino(fakeCfg, "__tmp__");
+  renderInfoPanelForDino(fakeCfg, "__tmp__");
+}
+
+function buildNameIndex(dinosByBp) {
+  const nameToBps = new Map(); // displayName -> [bp, bp, ...]
+  for (const [bp, d] of Object.entries(dinosByBp)) {
+    const name = (d.displayName || bp).trim();
+    if (!nameToBps.has(name)) nameToBps.set(name, []);
+    nameToBps.get(name).push(bp);
+  }
+
+  // stable sort within each name group (optional)
+  for (const [name, arr] of nameToBps) arr.sort();
+
+  // dropdown options (unique names)
+  const names = [...nameToBps.keys()].sort((a,b)=>a.localeCompare(b));
+  return { nameToBps, names };
+}
+
+function isTrue01(v) {
+  // supports 1, "1", true
+  return v === 1 || v === "1" || v === true;
+}
+
+function fmtNum(v, decimals = 0) {
+  if (v === null || v === undefined || v === "") return null;
+  const n = Number(v);
+  if (!Number.isFinite(n)) return null;
+  return decimals > 0 ? n.toFixed(decimals) : String(Math.round(n));
+}
+
+function mergeManagers(targetManagers, srcManagers) {
+  for (const [mgrId, m] of Object.entries(srcManagers || {})) {
+    if (!targetManagers[mgrId]) {
+      // deep-ish copy
+      targetManagers[mgrId] = {
+        minDesired: m.minDesired,
+        minDesiredPct: m.minDesiredPct,
+        boxes: [],
+        points: []
+      };
+    }
+    const t = targetManagers[mgrId];
+
+    if (Array.isArray(m.boxes))  t.boxes.push(...m.boxes);
+    if (Array.isArray(m.points)) t.points.push(...m.points);
+
+    // optional: keep the max (or recompute) if these differ
+    if (typeof m.minDesired === "number") t.minDesired = Math.max(t.minDesired ?? 0, m.minDesired);
+    if (typeof m.minDesiredPct === "number") t.minDesiredPct = Math.max(t.minDesiredPct ?? 0, m.minDesiredPct);
+  }
+}
+
+function buildGroupedSelection(mapData, bps) {
+  const picked = bps.map(bp => mapData.dinos[bp]).filter(Boolean);
+
+  function firstNonEmpty(arr, fn) {
+    for (const x of arr) {
+      const v = fn(x);
+      if (v != null && String(v).trim() !== "") return v;
+    }
+    return "";
+  }
+
+  function isTrueLoose(v) {
+    if (v === true || v === 1 || v === "1") return true;
+    const s = String(v ?? "").trim().toLowerCase();
+    return s === "true" || s === "yes" || s === "y" || s === "t";
+  }
+
+  function anyTrue(arr, fn) {
+    return arr.some(x => isTrueLoose(fn(x)));
+  }
+
+  const out = {
+    displayName: picked[0]?.displayName || "Unknown",
+    bps: picked.map(d => d.bpPath || "").filter(Boolean),
+
+    // ✅ identity-ish fields
+    nameTag: firstNonEmpty(picked, d => d.nameTag ?? d.nametag),
+    tameable: anyTrue(picked, d => d.tameable),
+    breedable: anyTrue(picked, d => d.breedable),
+    isAlpha: anyTrue(picked, d => d.isAlpha),
+    isBoss: anyTrue(picked, d => d.isBoss),
+    isBossMinion: anyTrue(picked, d => d.isBossMinion),
+    dragWeight: firstNonEmpty(picked, d => d.dragWeight),
+    killXpBase: firstNonEmpty(picked, d => d.killXpBase),
+
+    perBp: picked,
+    entries: []
+  };
+
+  // ---- merge entries by entryClass (your existing code, unchanged) ----
+  const entryMap = new Map();
+  for (const d of picked) {
+    for (const e of (d.entries || [])) {
+      const key = e.entryClass || e.entryName || "UNKNOWN_ENTRY";
+      if (!entryMap.has(key)) {
+        entryMap.set(key, {
+          entryClass: key,
+          managers: {},
+
+          // ✅ NEW: keep non-manager geometry too
+          boxes: [],
+          points: [],
+
+          // ✅ NEW: keep flags if they exist on entries
+          bIsCaveManager: false,
+          bForceUntameable: false,
+
+          weight: 0,
+          groupWeight: 0,
+          spawnMultiplier: e.spawnMultiplier,
+          spawnLimit: e.spawnLimit,
+          spawnChances: e.spawnChances,
+          byBp: {}
+        });
+      }
+
+      const m = entryMap.get(key);
+      m.weight += (Number(e.weight) || 0);
+      m.groupWeight += (Number(e.groupWeight) || 0);
+
+      if (e.managers && typeof e.managers === "object") {
+        mergeManagers(m.managers, e.managers);
+      } else {
+        // ✅ Mod style: geometry lives directly on the entry
+        if (Array.isArray(e.boxes))  m.boxes.push(...e.boxes.map(normBoxLite).filter(Boolean));
+        if (Array.isArray(e.points)) m.points.push(...e.points.map(normPointLite).filter(Boolean));
+      }
+
+// flags: any true wins
+m.bIsCaveManager = m.bIsCaveManager || (e.bIsCaveManager === true);
+m.bForceUntameable = m.bForceUntameable || (e.bForceUntameable === true);
+
+      const bpKey = d.bpPath || "UNKNOWN_BP";
+      m.byBp[bpKey] ??= { weight: 0, groupWeight: 0 };
+      m.byBp[bpKey].weight += (Number(e.weight) || 0);
+      m.byBp[bpKey].groupWeight += (Number(e.groupWeight) || 0);
+    }
+  }
+
+  out.entries = [...entryMap.values()].map(e => {
+    e.weight = +e.weight.toFixed(6);
+    e.groupWeight = +e.groupWeight.toFixed(6);
+    const base = rarityFromWeight(e.weight);
+    const totalMin = totalMinDesired(e);
+    const steps = downshiftStepsForTotalMin(totalMin);
+    e.rarity = downgradeRarity(base, steps);
+
+    const chancesText = formatSpawnChances(e.spawnChances);
+    e.display = {
+      weightText: `Entry Weight: ${e.groupWeight}`,
+      limitText: `Max % To Allow: ${(Number(e.spawnLimit)||0)*100}%`,
+      chanceText: chancesText
+    };
+    return e;
+  });
+
+  return out;
+}
+
+function renderDinoQuickInfo(dino, badgesEl, statsEl) {
+  // ✅ hard-guard so we never crash if markup changes
+  if (!badgesEl || !statsEl) return;
+
+  // Clear
+  badgesEl.innerHTML = "";
+  statsEl.innerHTML = "";
+
+  if (!dino || typeof dino !== "object") return;
+
+  // ----- Badges -----
+  const badges = [];
+
+  if (isTrue01(dino.isAlpha))       badges.push({ cls: "alpha",    label: "Alpha" });
+  if (isTrue01(dino.isBoss))        badges.push({ cls: "boss",     label: "Boss" });
+  if (isTrue01(dino.isBossMinion))  badges.push({ cls: "minion",   label: "Boss Minion" });
+
+  if (!isTrue01(dino.tameable))     badges.push({ cls: "tameable",  label: "Untameable" });
+  if (!isTrue01(dino.breedable))    badges.push({ cls: "breedable", label: "Unbreedable" });
+
+  for (const b of badges) {
+    const el = document.createElement("span");
+    el.className = `dino-badge ${b.cls}`;
+    el.textContent = b.label;
+    badgesEl.appendChild(el);
+  }
+
+  // ----- Stats -----
+  const drag = fmtNum(dino.dragWeight, 0);
+  const xp   = fmtNum(dino.killXpBase, 0);
+
+  const statBits = [];
+  if (drag !== null) statBits.push({ key: "Drag Weight:", val: drag });
+  if (xp !== null)   statBits.push({ key: "Kill XP:",     val: String(Number(xp) * 4) });
+
+  for (const s of statBits) {
+    const row = document.createElement("div");
+    row.className = "dino-statrow";
+    row.innerHTML = `
+      <div class="dino-statkey">${escapeHtml(s.key)}</div>
+      <div class="dino-statval">${escapeHtml(s.val)}</div>
+    `;
+    statsEl.appendChild(row);
+  }
+
+  // ✅ Hide/show each sub-block so you don't get phantom spacing
+  badgesEl.style.display = badges.length ? "" : "none";
+  statsEl.style.display  = statBits.length ? "" : "none";
+
+  // ✅ Hide whole quick block only if both are empty
+  const quick = badgesEl.closest(".dino-quick");
+  if (quick) quick.style.display = (badges.length || statBits.length) ? "" : "none";
+}
+
 function buildSourceDrillTree() {
   const root = { label: "Sources", children: [] };
 
@@ -360,9 +749,8 @@ function renderCopyLine(label, value) {
   return `
     <div class="info-row">
       <span class="info-label">${escapeHtml(label)}</span>
-      <button class="info-copy" data-copy="${escapeAttr(v)}" aria-label="Copy"></button>
     </div>
-    <div class="info-mono">${escapeHtml(v || "(none)")}</div>
+    <div class="info-mono copy-on-click" data-copy="${escapeAttr(v)}">${escapeHtml(v || "(none)")}</div>
   `;
 }
 
@@ -371,14 +759,13 @@ function normSearch(s){
   return String(s || "").toLowerCase().replace(/[\s_-]/g,"");
 }
 
-function dinoSummaryForFancy(cfg, dinoKey){
-  const d = cfg?.dinos?.[dinoKey];
-  if (!d) return { entryCount: 0, label: dinoKey };
-
-  return {
-    entryCount: (d.entries || []).length,
-    label: (d.displayName || dinoKey),
-  };
+function dinoSummaryForFancy(cfg, displayName){
+  const bps = currentNameToBps?.get(displayName) || [];
+  let entryCount = 0;
+  for (const bp of bps) {
+    entryCount += (cfg?.dinos?.[bp]?.entries || []).length;
+  }
+  return { entryCount, label: displayName };
 }
 
 function rarityDotColor(rarity){
@@ -1165,11 +1552,14 @@ function redrawSelected() {
   if (!currentCfg || !sel?.value) return;
 
   if (currentViewMode === "dino") {
-    drawDino(currentCfg, sel.value);
-    renderInfoPanelForDino(currentCfg, sel.value);
+    // ✅ selection is displayName now
+    const displayName = sel.value;
+    const bps = currentNameToBps?.get(displayName) || [];
+    const grouped = buildGroupedSelection(currentCfg, bps);
+    drawGroupedDino(grouped, displayName);
   } else {
     drawSpawnEntry(currentCfg, sel.value);
-    // later: renderInfoPanelForEntry(...)
+    renderInfoPanelForEntry(currentCfg, sel.value);
   }
 }
 
@@ -1311,7 +1701,7 @@ function renderDock(){
     return btn;
   };
 
-  // 1) BG button — only on Astraeos
+  // 1) BG button -- only on Astraeos
   if (isAstraeos) {
     const bgs = mapMeta.backgrounds;
     const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
@@ -1340,7 +1730,7 @@ function renderDock(){
     }
   }
 
-  // 2) Dino Info toggle — always available
+  // 2) Dino Info toggle -- always available
   mkBtn({
     title: "Toggle Dino Info",
     icon: `
@@ -1353,7 +1743,7 @@ function renderDock(){
     onClick: () => togglePanel("dinoInfoPanel")
   });
 
-    // 3) Mod Style toggle — only on mods
+    // 3) Mod Style toggle -- only on mods
   if (isMod) {
     mkBtn({
       title: "Toggle Mod Style",
@@ -1370,7 +1760,7 @@ function renderDock(){
     });
   }
 
-  // 4) POI toggle — only if this map has POIs (works for official + mods)
+  // 4) POI toggle -- only if this map has POIs (works for official + mods)
   const hasPois = !!(dockState.cfg?.pois?.tributeTerminals?.length);
   if (hasPois) {
     const poiBtn = mkBtn({
@@ -1391,7 +1781,7 @@ function renderDock(){
 
     poiBtn.classList.toggle("is-on", showPois);
   }
-  // 5) Rarity legend button — only makes sense when showing rarity colors
+  // 5) Rarity legend button -- only makes sense when showing rarity colors
   mkBtn({
     title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
     icon: `
@@ -1589,7 +1979,7 @@ function updateMapForCfg(cfg) {
 }
 
 // ============================================================
-// Background toggle (Leaflet button) — replaces BG dropdown
+// Background toggle (Leaflet button) -- replaces BG dropdown
 // ============================================================
 
 let bgToggleControl = null;
@@ -1645,31 +2035,38 @@ function setupMainSelect(cfg) {
   };
 
   if (currentViewMode === "dino") {
-    const keys = Object.keys(cfg.dinos || {}).sort((a, b) => a.localeCompare(b));
+  // Build displayName -> [bp] index
+    const { nameToBps, names } = buildNameIndex(cfg.dinos || {});
+    currentNameToBps = nameToBps;
+    currentNames = names;
 
-    if (!keys.length) {
+    if (!names.length) {
       addPlaceholder("(No dinos)");
       renderInfoPanelBodyEmpty();
-      // ✅ IMPORTANT: still rebuild fancy UI
       mountFancyDinoSelect(cfg);
       return;
     }
 
-    for (const k of keys) {
+    // populate dropdown with UNIQUE display names
+    for (const name of names) {
       const opt = document.createElement("option");
-      opt.value = k;
-      opt.textContent = k;
+      opt.value = name;
+      opt.textContent = name;
       sel.appendChild(opt);
     }
 
+    // when user selects a name
     sel.onchange = () => {
-      lastSelection.dino[activeSourceId] = sel.value; // ✅ remember per source
-      drawDino(cfg, sel.value);
-      renderInfoPanelForDino(cfg, sel.value);
+      const displayName = sel.value;
+      lastSelection.dino[activeSourceId] = displayName; // ✅ remember per source
+
+      const bps = nameToBps.get(displayName) || [];
+      const grouped = buildGroupedSelection(cfg, bps);
+      drawGroupedDino(grouped, displayName);
     };
 
     const preferred = lastSelection.dino[activeSourceId];
-    sel.value = (preferred && keys.includes(preferred)) ? preferred : keys[0];
+    sel.value = (preferred && names.includes(preferred)) ? preferred : names[0];
     sel.onchange();
 
   } else {
@@ -1732,13 +2129,7 @@ function switchMode(nextMode) {
   const sel = document.getElementById("dinoSelect");
   if (!sel?.value || !currentCfg) return;
 
-  if (currentViewMode === "dino") {
-    drawDino(currentCfg, sel.value);
-    renderInfoPanelForDino(currentCfg, sel.value);
-  } else {
-    drawSpawnEntry(currentCfg, sel.value);
-    renderInfoPanelForEntry(currentCfg, sel.value);
-  }
+  requestRedraw();
   if (currentViewMode === "entry") {
     useRarityForMods = false;
   }
@@ -1756,13 +2147,20 @@ function setupSourceDropdown() {
   for (const s of SOURCES) {
     const opt = document.createElement("option");
     opt.value = s.id;
-    opt.textContent = s.name;
+    opt.textContent = s.name + (s.hasFile === false ? " (missing)" : "");
+    if (s.hasFile === false) opt.disabled = true;
     sel.appendChild(opt);
+  }
+
+  // if current selection became invalid, force back to official
+  if (SOURCES.find(s => s.id === activeSourceId)?.hasFile === false) {
+    activeSourceId = "official";
   }
   sel.value = activeSourceId;
 
   sel.addEventListener("change", async () => {
     activeSourceId = sel.value;
+
     setModStylePanelVisible(activeSourceId !== "official");
     renderModStylePanelBody();
 
@@ -1770,25 +2168,35 @@ function setupSourceDropdown() {
     const mapMeta = pickById(MAPS, mapSel?.value);
     await loadMapByMeta(mapMeta);
   });
-  const tree = buildSourceDrillTree();
 
   mountDrillSelect({
     nativeId: "sourceSelect",
     hostId: "sourceSelectFancy",
     placeholder: "Search this level...",
-    root: tree,
+    root: buildSourceDrillTree(),
     getButtonSubText: (v) => (v === "official" ? "Official" : "Mod"),
   });
 }
 
 async function loadModSource(sourceId) {
   const src = SOURCES.find(s => s.id === sourceId);
-  if (!src || !src.file) return null;
+  if (!src?.file) return null;
 
-  if (!loadedMods[sourceId]) {
-    loadedMods[sourceId] = await loadJSON(src.file);
+  // cache hit (including cached null)
+  if (Object.prototype.hasOwnProperty.call(loadedMods, sourceId)) {
+    return loadedMods[sourceId];
   }
-  return loadedMods[sourceId];
+
+  try {
+    const data = await loadJSON(src.file);
+    loadedMods[sourceId] = data;
+    return data;
+  } catch (err) {
+    console.warn("Mod source failed to load:", sourceId, src.file, err);
+    loadedMods[sourceId] = null;   // cache failure
+    src.hasFile = false;           // keep state consistent
+    return null;
+  }
 }
 
 // ============================================================
@@ -2186,7 +2594,7 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
     updateDockToggles();
     panel.dataset.hidden = "1";
 
-    // If it's the mod panel, show the floating “paintbrush” button
+    // If it's the mod panel, show the floating "paintbrush" button
     if (panel.id === "modStylePanel") {
       const fab = ensureModStyleFab();
       if (fab) fab.style.display = "none";
@@ -2280,23 +2688,24 @@ function requestRedraw() {
   });
 }
 
-
 function ensurePanels() {
+  if (!mapObj?.map) return;
+
   if (!stylePanel) {
-    stylePanel = createFloatingPanel({
+    stylePanel = ensureLeafletPanel({
       id: "modStylePanel",
-      title: "Mod Style",
-      defaultPos: { right: 6, top: 2 },
+      title: "Style",
+      position: "topright",
       collapsedByDefault: true
     });
     renderModStylePanelBody();
   }
 
   if (!infoPanel) {
-    infoPanel = createFloatingPanel({
+    infoPanel = ensureLeafletPanel({
       id: "dinoInfoPanel",
       title: "Dino Info",
-      defaultPos: { left: 6, top: 2 },
+      position: "topleft",
       collapsedByDefault: true
     });
     renderInfoPanelBodyEmpty();
@@ -2304,6 +2713,7 @@ function ensurePanels() {
 
   setModStylePanelVisible(activeSourceId !== "official");
 }
+
 
 function setModStylePanelVisible(show) {
   const el = document.getElementById("modStylePanel");
@@ -2438,12 +2848,15 @@ function renderInfoPanelForEntry(cfg, entryClass) {
   body.innerHTML = `
     <div class="info-section">
       <div class="info-title">${escapeHtml(entryClass)}</div>
+        <div class="dino-quick">
+            <div class="dino-badges" data-dino-badges></div>
+            <div class="dino-statsline" data-dino-stats></div>
+      </div>
 
       <div class="info-row">
         <span class="info-label">Entry class</span>
-        <button class="info-copy" data-copy="${escapeAttr(entryClass)}"aria-label="Copy"></button>
       </div>
-      <div class="info-mono">${escapeHtml(entryClass)}</div>
+      <div class="info-mono copy-on-click" data-copy="${escapeAttr(entryClass)}">${escapeHtml(entryClass)}</div>
     </div>
 
     <div class="info-section">
@@ -2455,9 +2868,7 @@ function renderInfoPanelForEntry(cfg, entryClass) {
   `;
 
   // hook copy buttons
-  body.querySelectorAll(".info-copy").forEach(btn => {
-    btn.onclick = () => copyText(btn.dataset.copy || "");
-  });
+  
 }
 
 function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
@@ -2488,10 +2899,9 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
     <div class="info-section" style="padding-bottom:8px;">
       <div class="info-row">
         <span class="info-label">${escapeHtml(displayName)}</span>
-        <button class="info-copy" data-copy="${escapeAttr(bp || nameTag || displayName)}"aria-label="Copy"></button>
       </div>
-      ${bp ? `<div class="info-mono">${escapeHtml(bp)}</div>` : ``}
-      ${nameTag ? `<div class="info-mono" style="margin-top:4px;">${escapeHtml(nameTag)}</div>` : ``}
+      ${bp ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}">${escapeHtml(bp)}</div>` : ``}
+      ${nameTag ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)} style="margin-top:4px;">${escapeHtml(nameTag)}</div>` : ``}
       ${entryLinesHtml}
     </div>
   `;
@@ -2523,7 +2933,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     <div class="info-row">
       <span class="info-label">Blueprint</span>
       ${allBps[0]
-        ? `<button class="info-copy" data-copy="${escapeAttr(allBps[0])}" aria-label="Copy"></button>`
+        ? ``
         : ""}
     </div>
   
@@ -2533,12 +2943,11 @@ function renderInfoPanelForDino(cfg, dinoKey) {
             ? `
             <div class="info-row">
               <span class="info-label"></span>
-              <button class="info-copy" data-copy="${escapeAttr(p)}" aria-label="Copy" style="margin-left:6px;"></button>
             </div>
             `
             : ""}
 
-        <div class="info-mono">
+        <div class="info-mono copy-on-click" data-copy="${escapeAttr(p)}">
           ${escapeHtml(p)}
         </div>
       `).join("")
@@ -2548,6 +2957,10 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   body.innerHTML = `
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
+      <div class="dino-quick">
+        <div class="dino-badges" data-dino-badges></div>
+        <div class="dino-statsline" data-dino-stats></div>
+      </div>
       ${currentModMeta?.id ? `
         <div class="info-submeta">
           Mod ID: ${escapeHtml(currentModMeta.id)}
@@ -2558,9 +2971,8 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       
       <div class="info-row">
         <span class="info-label">Nametag</span>
-        <button class="info-copy" data-copy="${escapeAttr(nameTag)}"aria-label="Copy"></button>
       </div>
-      <div class="info-mono">${escapeHtml(nameTag || "(none)")}</div>
+      <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)} ">${escapeHtml(nameTag || "(none)")}</div>
     </div>
 
     <div class="info-section">
@@ -2570,10 +2982,10 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       </div>
     </div>
   `;
-
-  body.querySelectorAll(".info-copy").forEach(btn => {
-    btn.onclick = () => copyText(btn.dataset.copy || "");
-  });
+  // Fill the quick badges + stats line
+  const badgesEl = body.querySelector("[data-dino-badges]");
+  const statsEl  = body.querySelector("[data-dino-stats]");
+  renderDinoQuickInfo(d, badgesEl, statsEl);
 
   body.querySelectorAll('input[data-entry-toggle="1"]').forEach(chk => {
     chk.onchange = () => {
@@ -2618,43 +3030,42 @@ function renderEntryRow(entry, dinoKey, idx) {
 // ============================================================
 // BOOT
 // ============================================================
-function boot() {
+async function boot() {
+  // ✅ build sources FIRST
+  SOURCES = await buildSources();
+
   setupSourceDropdown();
   setupMapDropdown();
 
-  // kick off preloading (don’t await — it runs in background)
+  // kick off preloading
   preloadMapAssets();
 
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
     document.getElementById("topbar")?.classList.toggle("show-controls");
-  
-    // let the DOM apply the new layout, then refit
-    requestAnimationFrame(() => {
-      refitMapForUI();
-    });
+    requestAnimationFrame(() => refitMapForUI());
   });
+
   document.getElementById("modeToggle")?.addEventListener("click", () => {
     const next = (currentViewMode === "dino") ? "entry" : "dino";
     switchMode(next);
   });
 
   syncModeBtn();
-  window.addEventListener("resize", () => {
-    refitMapForUI();
-  });
+
+  window.addEventListener("resize", () => refitMapForUI());
+
   loadMapByMeta(MAPS[0]).catch(err => {
     console.error(err);
     alert(err.message || String(err));
   });
-  document.addEventListener("pointerdown", (e) => {
-    const pop = document.getElementById("rarityLegendPop");
-    if (!pop || !showRarityLegend) return;
-  });
+
   document.querySelectorAll('#rarityLegend [data-r]').forEach(el=>{
     el.style.background = rarityToColor(el.dataset.r);
   });
 }
-window.addEventListener("load", () => {
-  setTimeout(() => mapObj?.map?.invalidateSize(), 100);
+
+// ✅ call it without breaking top-level
+boot().catch(err => {
+  console.error("BOOT FAILED:", err);
+  alert(err.message || String(err));
 });
-boot();

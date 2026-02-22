@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "mod": {
+    "id": "1386092",
+    "name": "ARKOLOGY: OE - Sanguivern"
+  },
+  "maps": {
+    "Lost Colony": {
+      "dinos": {
+        "/ARKOLOGYOESanguivern/Sanguivern/Sanguivern_Character_BP.Sanguivern_Character_BP_C": {
+          "bpPath": "/ARKOLOGYOESanguivern/Sanguivern/Sanguivern_Character_BP.Sanguivern_Character_BP_C",
+          "displayName": "Sanguivern",
+          "nameTag": "Sanguivern",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 149.0,
+          "killXpBase": 3.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Desmodus_LC_C",
+              "managers": {
+                "NPCZoneManager_UAID_60CF847B67A34CAB02_1646169462": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 1424.79,
+                      "y": 297.69,
+                      "w": 37.65,
+                      "h": 37.65
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34CAB02_2033807466": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 1345.52,
+                      "y": 106.94,
+                      "w": 37.65,
+                      "h": 37.65
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34CAB02_2041292469": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 1419.38,
+                      "y": 113.08,
+                      "w": 37.65,
+                      "h": 37.65
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34CAB02_2048135472": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 1388.94,
+                      "y": 161.06,
+                      "w": 37.65,
+                      "h": 37.65
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34CAB02_2093482475": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 1464.82,
+                      "y": 974.32,
+                      "w": 37.65,
+                      "h": 37.65
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1111969654": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 1563.67,
+                      "y": 896.41,
+                      "w": 26.49,
+                      "h": 26.49
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1254955657": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 498.89,
+                      "y": 1124.9,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1290539660": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 460.38,
+                      "y": 1036.65,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1299697663": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 484.01,
+                      "y": 899.73,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1317847666": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 561.57,
+                      "y": 946.51,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1333695669": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 508.0,
+                      "y": 1035.37,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1397234672": {
+                  "minDesired": 4.0,
+                  "boxes": [
+                    {
+                      "x": 380.95,
+                      "y": 1478.04,
+                      "w": 6.92,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.666667
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1473383675": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 559.3,
+                      "y": 1709.9,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1487843678": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 593.07,
+                      "y": 1757.09,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34DAB02_1516754681": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 628.96,
+                      "y": 1746.27,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A34EAB02_1186281860": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 769.02,
+                      "y": 1902.68,
+                      "w": 21.29,
+                      "h": 21.29
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "bForceInEditor": true,
+              "MinDesiredNumberOfNPC": 6,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": "100",
+              "groupWeight": 0.05,
+              "weight": 0.05,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "bestSharedMin": 6.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "DinoSpawnEntries_Tundra_Megalania_C",
+              "managers": {
+                "NPCZoneManager_UAID_7C10C95E7D403AAC02_1338087354": {
+                  "minDesired": 10.0,
+                  "boxes": [
+                    {
+                      "x": 1103.02,
+                      "y": 701.43,
+                      "w": 36.17,
+                      "h": 40.28
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 10,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": "100",
+              "groupWeight": 0.05,
+              "weight": 0.0125,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "bestSharedMin": 10.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}
