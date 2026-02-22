@@ -8,6 +8,243 @@
   },
   "coordSystem": "pixel",
   "dinos": {
+    "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C",
+      "displayName": "Trilobite",
+      "nameTag": "Trilobite",
+      "tameable": 1,
+      "isBoss": 0,
+      "isBossMinion": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
+      "entries": [
+        {
+          "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Ice_C",
+          "managers": {
+            "NPCZoneManager12": {
+              "minDesired": 60.0,
+              "boxes": [
+                {
+                  "x": 1346.11,
+                  "y": 1569.5,
+                  "w": 195.09,
+                  "h": 280.93
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManager72": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1816.86,
+                  "y": 1843.44,
+                  "w": 49.87,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_51": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1992.75,
+                  "y": 1747.28,
+                  "w": 42.11,
+                  "h": 87.5,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_52": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1992.75,
+                  "y": 1835.38,
+                  "w": 42.11,
+                  "h": 30.46,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_54": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1950.05,
+                  "y": 1855.68,
+                  "w": 42.11,
+                  "h": 35.84,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_57": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1917.8,
+                  "y": 1892.12,
+                  "w": 53.45,
+                  "h": 35.84,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_58": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1830.0,
+                  "y": 1899.28,
+                  "w": 87.2,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_59": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1780.73,
+                  "y": 1935.12,
+                  "w": 48.68,
+                  "h": 25.68,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_60": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1717.12,
+                  "y": 1885.55,
+                  "w": 63.01,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_61": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1753.25,
+                  "y": 1843.44,
+                  "w": 63.01,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_7": {
+              "minDesired": 25.0,
+              "boxes": [
+                {
+                  "x": 1547.72,
+                  "y": 1752.25,
+                  "w": 132.35,
+                  "h": 121.91
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.416667
+            },
+            "NPCZoneManager_8": {
+              "minDesired": 46.0,
+              "boxes": [
+                {
+                  "x": 1661.12,
+                  "y": 1545.5,
+                  "w": 132.35,
+                  "h": 214.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.766667
+            },
+            "wiki": {
+              "minDesired": 30.0,
+              "boxes": [
+                {
+                  "x": 1741.62,
+                  "y": 1960.76,
+                  "w": 80.28,
+                  "h": 80.49
+                },
+                {
+                  "x": 1813.3,
+                  "y": 1937.0,
+                  "w": 80.49,
+                  "h": 80.49
+                },
+                {
+                  "x": 1465.34,
+                  "y": 1603.38,
+                  "w": 80.49,
+                  "h": 80.49
+                },
+                {
+                  "x": 1498.73,
+                  "y": 1551.97,
+                  "w": 80.49,
+                  "h": 80.49
+                },
+                {
+                  "x": 1570.41,
+                  "y": 1551.97,
+                  "w": 80.49,
+                  "h": 80.49
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.5
+            }
+          },
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "spawnMultiplier": 2.8,
+          "spawnLimit": 0.2,
+          "spawnChances": "100, 100, 80",
+          "groupWeight": 1.0,
+          "weight": 0.230169,
+          "display": {
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 20%",
+            "chanceText": "Spawn Chances: 100%, 100%, 80%"
+          },
+          "bestSharedMin": 60.0,
+          "minRarityDownshift": 0
+        }
+      ]
+    },
     "/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C",
       "displayName": "Achatina",
@@ -1016,7 +1253,8 @@
                   "x": 1671.73,
                   "y": -35.24,
                   "w": 35.54,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1029,7 +1267,8 @@
                   "x": 1494.64,
                   "y": 110.49,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1042,7 +1281,8 @@
                   "x": 1922.87,
                   "y": 81.23,
                   "w": 12.54,
-                  "h": 35.24
+                  "h": 35.24,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1055,7 +1295,8 @@
                   "x": 1922.87,
                   "y": 57.93,
                   "w": 13.14,
-                  "h": 18.22
+                  "h": 18.22,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1068,7 +1309,8 @@
                   "x": 1695.02,
                   "y": -78.54,
                   "w": 12.24,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1081,7 +1323,8 @@
                   "x": 1707.86,
                   "y": -61.52,
                   "w": 23.29,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1094,7 +1337,8 @@
                   "x": 1483.59,
                   "y": 99.74,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1107,7 +1351,8 @@
                   "x": 1483.59,
                   "y": 80.33,
                   "w": 13.74,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1120,7 +1365,8 @@
                   "x": 1499.72,
                   "y": 66.59,
                   "w": 15.53,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1133,7 +1379,8 @@
                   "x": 1511.96,
                   "y": 40.91,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1146,7 +1393,8 @@
                   "x": 1519.13,
                   "y": 15.23,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1159,7 +1407,8 @@
                   "x": 1539.14,
                   "y": 13.74,
                   "w": 36.13,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1172,7 +1421,8 @@
                   "x": 1565.41,
                   "y": -11.05,
                   "w": 71.67,
-                  "h": 24.19
+                  "h": 24.19,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1185,7 +1435,8 @@
                   "x": 1623.95,
                   "y": 13.74,
                   "w": 25.38,
-                  "h": 44.5
+                  "h": 44.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1198,7 +1449,8 @@
                   "x": 1649.93,
                   "y": 41.81,
                   "w": 55.84,
-                  "h": 20.31
+                  "h": 20.31,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1224,7 +1476,8 @@
                   "x": 1734.14,
                   "y": -15.83,
                   "w": 17.62,
-                  "h": 57.04
+                  "h": 57.04,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1237,7 +1490,8 @@
                   "x": 1734.14,
                   "y": -75.25,
                   "w": 64.21,
-                  "h": 58.83
+                  "h": 58.83,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1250,7 +1504,8 @@
                   "x": 1799.24,
                   "y": -57.04,
                   "w": 82.12,
-                  "h": 69.88
+                  "h": 69.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1263,7 +1518,8 @@
                   "x": 1813.87,
                   "y": 51.96,
                   "w": 31.65,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1276,7 +1532,8 @@
                   "x": 1849.11,
                   "y": 103.03,
                   "w": 32.25,
-                  "h": 42.11
+                  "h": 42.11,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1289,7 +1546,8 @@
                   "x": 1881.96,
                   "y": 103.33,
                   "w": 57.93,
-                  "h": 51.07
+                  "h": 51.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1302,7 +1560,8 @@
                   "x": 1836.57,
                   "y": 74.36,
                   "w": 44.79,
-                  "h": 28.07
+                  "h": 28.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1315,7 +1574,8 @@
                   "x": 1881.96,
                   "y": 57.93,
                   "w": 40.31,
-                  "h": 33.15
+                  "h": 33.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1328,7 +1588,8 @@
                   "x": 1893.61,
                   "y": -22.99,
                   "w": 37.93,
-                  "h": 80.33
+                  "h": 80.33,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1341,7 +1602,8 @@
                   "x": 1932.13,
                   "y": -25.68,
                   "w": 56.44,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1354,7 +1616,8 @@
                   "x": 1957.52,
                   "y": -73.46,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1367,7 +1630,8 @@
                   "x": 1957.52,
                   "y": -121.54,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1380,7 +1644,8 @@
                   "x": 1715.03,
                   "y": -87.8,
                   "w": 18.52,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1428,25 +1693,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1459,7 +1728,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1508,7 +1778,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1544,7 +1815,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1557,7 +1829,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -1658,7 +1931,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -3689,7 +3962,7 @@
             "chanceText": "Spawn Chances: 60%, 60%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -6084,7 +6357,7 @@
             "chanceText": "Spawn Chances: 80%, 70%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",
@@ -9060,7 +9333,7 @@
             "chanceText": "Spawn Chances: 50%, 50%, 50%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -15066,7 +15339,7 @@
             "chanceText": "Spawn Chances: 70%, 70%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -16526,25 +16799,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -16557,7 +16834,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -16606,7 +16884,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -16642,7 +16921,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -16655,7 +16935,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17825,7 +18106,8 @@
                   "x": 1671.73,
                   "y": -35.24,
                   "w": 35.54,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17838,7 +18120,8 @@
                   "x": 1494.64,
                   "y": 110.49,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17851,7 +18134,8 @@
                   "x": 1922.87,
                   "y": 81.23,
                   "w": 12.54,
-                  "h": 35.24
+                  "h": 35.24,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17864,7 +18148,8 @@
                   "x": 1922.87,
                   "y": 57.93,
                   "w": 13.14,
-                  "h": 18.22
+                  "h": 18.22,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17877,7 +18162,8 @@
                   "x": 1695.02,
                   "y": -78.54,
                   "w": 12.24,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17890,7 +18176,8 @@
                   "x": 1707.86,
                   "y": -61.52,
                   "w": 23.29,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17903,7 +18190,8 @@
                   "x": 1483.59,
                   "y": 99.74,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17916,7 +18204,8 @@
                   "x": 1483.59,
                   "y": 80.33,
                   "w": 13.74,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17929,7 +18218,8 @@
                   "x": 1499.72,
                   "y": 66.59,
                   "w": 15.53,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17942,7 +18232,8 @@
                   "x": 1511.96,
                   "y": 40.91,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17955,7 +18246,8 @@
                   "x": 1519.13,
                   "y": 15.23,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17968,7 +18260,8 @@
                   "x": 1539.14,
                   "y": 13.74,
                   "w": 36.13,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17981,7 +18274,8 @@
                   "x": 1565.41,
                   "y": -11.05,
                   "w": 71.67,
-                  "h": 24.19
+                  "h": 24.19,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -17994,7 +18288,8 @@
                   "x": 1623.95,
                   "y": 13.74,
                   "w": 25.38,
-                  "h": 44.5
+                  "h": 44.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18007,7 +18302,8 @@
                   "x": 1649.93,
                   "y": 41.81,
                   "w": 55.84,
-                  "h": 20.31
+                  "h": 20.31,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18033,7 +18329,8 @@
                   "x": 1734.14,
                   "y": -15.83,
                   "w": 17.62,
-                  "h": 57.04
+                  "h": 57.04,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18046,7 +18343,8 @@
                   "x": 1734.14,
                   "y": -75.25,
                   "w": 64.21,
-                  "h": 58.83
+                  "h": 58.83,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18059,7 +18357,8 @@
                   "x": 1799.24,
                   "y": -57.04,
                   "w": 82.12,
-                  "h": 69.88
+                  "h": 69.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18072,7 +18371,8 @@
                   "x": 1813.87,
                   "y": 51.96,
                   "w": 31.65,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18085,7 +18385,8 @@
                   "x": 1849.11,
                   "y": 103.03,
                   "w": 32.25,
-                  "h": 42.11
+                  "h": 42.11,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18098,7 +18399,8 @@
                   "x": 1881.96,
                   "y": 103.33,
                   "w": 57.93,
-                  "h": 51.07
+                  "h": 51.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18111,7 +18413,8 @@
                   "x": 1836.57,
                   "y": 74.36,
                   "w": 44.79,
-                  "h": 28.07
+                  "h": 28.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18124,7 +18427,8 @@
                   "x": 1881.96,
                   "y": 57.93,
                   "w": 40.31,
-                  "h": 33.15
+                  "h": 33.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18137,7 +18441,8 @@
                   "x": 1893.61,
                   "y": -22.99,
                   "w": 37.93,
-                  "h": 80.33
+                  "h": 80.33,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18150,7 +18455,8 @@
                   "x": 1932.13,
                   "y": -25.68,
                   "w": 56.44,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18163,7 +18469,8 @@
                   "x": 1957.52,
                   "y": -73.46,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18176,7 +18483,8 @@
                   "x": 1957.52,
                   "y": -121.54,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -18189,7 +18497,8 @@
                   "x": 1715.03,
                   "y": -87.8,
                   "w": 18.52,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -19061,25 +19370,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -19092,7 +19405,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -19141,7 +19455,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -19177,7 +19492,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -19190,7 +19506,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -19495,7 +19812,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -24024,7 +24341,7 @@
             "chanceText": "Spawn Chances: 10%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -24049,25 +24366,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -24080,7 +24401,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -24129,7 +24451,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -24165,7 +24488,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -24178,7 +24502,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -24279,7 +24604,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -24764,7 +25089,7 @@
             "chanceText": "Spawn Chances: 80%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -29388,7 +29713,7 @@
             "chanceText": "Spawn Chances: 100%, 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Beavers_EX_C",
@@ -29476,7 +29801,7 @@
             "chanceText": "Spawn Chances: 100%, 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -29565,7 +29890,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -29654,7 +29979,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Hard_C",
@@ -32605,7 +32930,7 @@
             "chanceText": "Spawn Chances: 70%, 70%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_Forest_C",
@@ -34431,10 +34756,10 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Coelacanth/Coel_Character_BP.Coel_Character_BP_C",
       "displayName": "Coelacanth",
       "nameTag": "Coel",
-      "tameable": 0,
+      "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 25.0,
       "killXpBase": 0.5,
       "entries": [
@@ -35002,7 +35327,8 @@
                   "x": 1594.68,
                   "y": -69.88,
                   "w": 55.55,
-                  "h": 102.43
+                  "h": 102.43,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35015,7 +35341,8 @@
                   "x": 1934.82,
                   "y": -149.91,
                   "w": 50.17,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35080,7 +35407,8 @@
                   "x": 1985.59,
                   "y": -149.91,
                   "w": 66.59,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35093,7 +35421,8 @@
                   "x": 1926.16,
                   "y": -81.53,
                   "w": 51.36,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35106,7 +35435,8 @@
                   "x": 1876.29,
                   "y": -81.53,
                   "w": 49.27,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35218,7 +35548,8 @@
                   "x": 1816.86,
                   "y": 1843.44,
                   "w": 49.87,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35231,7 +35562,8 @@
                   "x": 1992.75,
                   "y": 1747.28,
                   "w": 42.11,
-                  "h": 87.5
+                  "h": 87.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35244,7 +35576,8 @@
                   "x": 1992.75,
                   "y": 1835.38,
                   "w": 42.11,
-                  "h": 30.46
+                  "h": 30.46,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35257,7 +35590,8 @@
                   "x": 1950.05,
                   "y": 1855.68,
                   "w": 42.11,
-                  "h": 35.84
+                  "h": 35.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35270,7 +35604,8 @@
                   "x": 1917.8,
                   "y": 1892.12,
                   "w": 53.45,
-                  "h": 35.84
+                  "h": 35.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35283,7 +35618,8 @@
                   "x": 1830.0,
                   "y": 1899.28,
                   "w": 87.2,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35296,7 +35632,8 @@
                   "x": 1780.73,
                   "y": 1935.12,
                   "w": 48.68,
-                  "h": 25.68
+                  "h": 25.68,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35309,7 +35646,8 @@
                   "x": 1717.12,
                   "y": 1885.55,
                   "w": 63.01,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -35322,7 +35660,8 @@
                   "x": 1753.25,
                   "y": 1843.44,
                   "w": 63.01,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -44733,7 +45072,7 @@
             "chanceText": "Spawn Chances: 30%, 20%, 10%, 10%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -52670,7 +53009,7 @@
             "chanceText": "Spawn Chances: 30%, 20%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -56256,7 +56595,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -58401,7 +58740,7 @@
             "chanceText": "Spawn Chances: 30%, 20%, 10%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -69657,7 +69996,7 @@
             "chanceText": "Spawn Chances: 30%, 10%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -74819,7 +75158,7 @@
             "chanceText": "Spawn Chances: 30%, 10%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_Easy_C",
@@ -80790,7 +81129,7 @@
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 300.0,
       "killXpBase": 15.0,
       "entries": [
@@ -82188,7 +82527,7 @@
             "chanceText": "Spawn Chances: 70%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -82212,7 +82551,8 @@
                   "x": 1594.68,
                   "y": -69.88,
                   "w": 55.55,
-                  "h": 102.43
+                  "h": 102.43,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -82225,7 +82565,8 @@
                   "x": 1934.82,
                   "y": -149.91,
                   "w": 50.17,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -82290,7 +82631,8 @@
                   "x": 1985.59,
                   "y": -149.91,
                   "w": 66.59,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -82303,7 +82645,8 @@
                   "x": 1926.16,
                   "y": -81.53,
                   "w": 51.36,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -82316,7 +82659,8 @@
                   "x": 1876.29,
                   "y": -81.53,
                   "w": 49.27,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -82435,7 +82779,7 @@
             "chanceText": "Spawn Chances: 50%, 50%"
           },
           "bestSharedMin": 2.0,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -82524,7 +82868,7 @@
             "chanceText": "Spawn Chances: 100%, 90%, 50%, 20%, 5%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -82969,25 +83313,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -83000,7 +83348,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -83049,7 +83398,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -83085,7 +83435,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -83098,7 +83449,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -90825,7 +91177,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -93081,7 +93433,7 @@
             "chanceText": "Spawn Chances: 100%, 70%, 40%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -93534,7 +93886,8 @@
                   "x": 1313.07,
                   "y": 1715.33,
                   "w": 38.82,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93547,7 +93900,8 @@
                   "x": 1341.44,
                   "y": 1743.4,
                   "w": 17.32,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93560,7 +93914,8 @@
                   "x": 1359.06,
                   "y": 1771.47,
                   "w": 17.32,
-                  "h": 37.63
+                  "h": 37.63,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93573,7 +93928,8 @@
                   "x": 1376.98,
                   "y": 1778.64,
                   "w": 33.45,
-                  "h": 25.38
+                  "h": 25.38,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93586,7 +93942,8 @@
                   "x": 1389.52,
                   "y": 1699.2,
                   "w": 30.16,
-                  "h": 78.84
+                  "h": 78.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93599,7 +93956,8 @@
                   "x": 1420.28,
                   "y": 1686.06,
                   "w": 41.21,
-                  "h": 45.99
+                  "h": 45.99,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93612,7 +93970,8 @@
                   "x": 1462.09,
                   "y": 1700.4,
                   "w": 29.27,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93625,7 +93984,8 @@
                   "x": 1491.95,
                   "y": 1700.4,
                   "w": 60.32,
-                  "h": 40.91
+                  "h": 40.91,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93638,7 +93998,8 @@
                   "x": 1552.87,
                   "y": 1700.4,
                   "w": 40.61,
-                  "h": 49.27
+                  "h": 49.27,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93651,7 +94012,8 @@
                   "x": 1594.08,
                   "y": 1733.24,
                   "w": 40.61,
-                  "h": 27.18
+                  "h": 27.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93664,7 +94026,8 @@
                   "x": 1635.29,
                   "y": 1741.61,
                   "w": 31.65,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93677,7 +94040,8 @@
                   "x": 1656.2,
                   "y": 1667.84,
                   "w": 24.49,
-                  "h": 73.16
+                  "h": 73.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93690,7 +94054,8 @@
                   "x": 1681.28,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93703,7 +94068,8 @@
                   "x": 1681.28,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93729,7 +94095,8 @@
                   "x": 1751.46,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93742,7 +94109,8 @@
                   "x": 1751.46,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93768,7 +94136,8 @@
                   "x": 1821.64,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93781,7 +94150,8 @@
                   "x": 1821.64,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93807,7 +94177,8 @@
                   "x": 1891.82,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93820,19 +94191,22 @@
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93858,7 +94232,8 @@
                   "x": 1961.99,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93871,13 +94246,15 @@
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93890,7 +94267,8 @@
                   "x": 1936.01,
                   "y": 1764.0,
                   "w": 37.63,
-                  "h": 70.78
+                  "h": 70.78,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93903,7 +94281,8 @@
                   "x": 1904.66,
                   "y": 1835.38,
                   "w": 68.98,
-                  "h": 60.02
+                  "h": 60.02,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93916,7 +94295,8 @@
                   "x": 1835.08,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 53.16
+                  "h": 53.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93929,7 +94309,8 @@
                   "x": 1765.5,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 91.98
+                  "h": 91.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93942,7 +94323,8 @@
                   "x": 1695.92,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 42.7
+                  "h": 42.7,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93955,7 +94337,8 @@
                   "x": 1680.39,
                   "y": 1885.55,
                   "w": 32.55,
-                  "h": 85.71
+                  "h": 85.71,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93968,7 +94351,8 @@
                   "x": 1713.54,
                   "y": 1942.58,
                   "w": 67.19,
-                  "h": 66.59
+                  "h": 66.59,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -93981,7 +94365,8 @@
                   "x": 1781.32,
                   "y": 1942.58,
                   "w": 140.95,
-                  "h": 82.72
+                  "h": 82.72,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -94456,7 +94841,7 @@
             "chanceText": "Spawn Chances: 70%, 70%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -100746,7 +101131,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -102022,7 +102407,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 1.5,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -102112,7 +102497,7 @@
             "chanceText": "Spawn Chances: 100%, 100%"
           },
           "bestSharedMin": 0.75,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -102123,7 +102508,7 @@
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 90.0,
       "entries": [
         {
@@ -104431,7 +104816,7 @@
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 149.0,
       "entries": [
         {
@@ -106525,7 +106910,7 @@
             "chanceText": "Spawn Chances: 100%, 80%, 60%, 45%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -107817,7 +108202,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 4.0,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -107907,7 +108292,7 @@
             "chanceText": "Spawn Chances: 100%, 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -112521,7 +112906,9 @@
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesBee_C",
@@ -112915,7 +113302,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -113102,7 +113489,7 @@
             "chanceText": "Spawn Chances: 10%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -113289,7 +113676,7 @@
             "chanceText": "Spawn Chances: 10%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -115179,7 +115566,8 @@
                   "x": 1594.68,
                   "y": -69.88,
                   "w": 55.55,
-                  "h": 102.43
+                  "h": 102.43,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115192,7 +115580,8 @@
                   "x": 1934.82,
                   "y": -149.91,
                   "w": 50.17,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115257,7 +115646,8 @@
                   "x": 1985.59,
                   "y": -149.91,
                   "w": 66.59,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115270,7 +115660,8 @@
                   "x": 1926.16,
                   "y": -81.53,
                   "w": 51.36,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115283,7 +115674,8 @@
                   "x": 1876.29,
                   "y": -81.53,
                   "w": 49.27,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115395,7 +115787,8 @@
                   "x": 1816.86,
                   "y": 1843.44,
                   "w": 49.87,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115408,7 +115801,8 @@
                   "x": 1992.75,
                   "y": 1747.28,
                   "w": 42.11,
-                  "h": 87.5
+                  "h": 87.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115421,7 +115815,8 @@
                   "x": 1992.75,
                   "y": 1835.38,
                   "w": 42.11,
-                  "h": 30.46
+                  "h": 30.46,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115434,7 +115829,8 @@
                   "x": 1950.05,
                   "y": 1855.68,
                   "w": 42.11,
-                  "h": 35.84
+                  "h": 35.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115447,7 +115843,8 @@
                   "x": 1917.8,
                   "y": 1892.12,
                   "w": 53.45,
-                  "h": 35.84
+                  "h": 35.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115460,7 +115857,8 @@
                   "x": 1830.0,
                   "y": 1899.28,
                   "w": 87.2,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115473,7 +115871,8 @@
                   "x": 1780.73,
                   "y": 1935.12,
                   "w": 48.68,
-                  "h": 25.68
+                  "h": 25.68,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115486,7 +115885,8 @@
                   "x": 1717.12,
                   "y": 1885.55,
                   "w": 63.01,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -115499,7 +115899,8 @@
                   "x": 1753.25,
                   "y": 1843.44,
                   "w": 63.01,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -118729,25 +119130,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -118760,7 +119165,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -118809,7 +119215,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -118845,7 +119252,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -118858,7 +119266,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -119242,7 +119651,8 @@
                   "x": 1594.68,
                   "y": -69.88,
                   "w": 55.55,
-                  "h": 102.43
+                  "h": 102.43,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -119255,7 +119665,8 @@
                   "x": 1934.82,
                   "y": -149.91,
                   "w": 50.17,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -119320,7 +119731,8 @@
                   "x": 1985.59,
                   "y": -149.91,
                   "w": 66.59,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -119333,7 +119745,8 @@
                   "x": 1926.16,
                   "y": -81.53,
                   "w": 51.36,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -119346,7 +119759,8 @@
                   "x": 1876.29,
                   "y": -81.53,
                   "w": 49.27,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -120643,7 +121057,7 @@
       "tameable": 0,
       "isBoss": 1,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 10000.0,
       "entries": [
         {
@@ -124604,7 +125018,8 @@
                   "x": 1671.73,
                   "y": -35.24,
                   "w": 35.54,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124617,7 +125032,8 @@
                   "x": 1494.64,
                   "y": 110.49,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124630,7 +125046,8 @@
                   "x": 1922.87,
                   "y": 81.23,
                   "w": 12.54,
-                  "h": 35.24
+                  "h": 35.24,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124643,7 +125060,8 @@
                   "x": 1922.87,
                   "y": 57.93,
                   "w": 13.14,
-                  "h": 18.22
+                  "h": 18.22,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124656,7 +125074,8 @@
                   "x": 1695.02,
                   "y": -78.54,
                   "w": 12.24,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124669,7 +125088,8 @@
                   "x": 1707.86,
                   "y": -61.52,
                   "w": 23.29,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124682,7 +125102,8 @@
                   "x": 1483.59,
                   "y": 99.74,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124695,7 +125116,8 @@
                   "x": 1483.59,
                   "y": 80.33,
                   "w": 13.74,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124708,7 +125130,8 @@
                   "x": 1499.72,
                   "y": 66.59,
                   "w": 15.53,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124721,7 +125144,8 @@
                   "x": 1511.96,
                   "y": 40.91,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124734,7 +125158,8 @@
                   "x": 1519.13,
                   "y": 15.23,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124747,7 +125172,8 @@
                   "x": 1539.14,
                   "y": 13.74,
                   "w": 36.13,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124760,7 +125186,8 @@
                   "x": 1565.41,
                   "y": -11.05,
                   "w": 71.67,
-                  "h": 24.19
+                  "h": 24.19,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124773,7 +125200,8 @@
                   "x": 1623.95,
                   "y": 13.74,
                   "w": 25.38,
-                  "h": 44.5
+                  "h": 44.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124786,7 +125214,8 @@
                   "x": 1649.93,
                   "y": 41.81,
                   "w": 55.84,
-                  "h": 20.31
+                  "h": 20.31,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124812,7 +125241,8 @@
                   "x": 1734.14,
                   "y": -15.83,
                   "w": 17.62,
-                  "h": 57.04
+                  "h": 57.04,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124825,7 +125255,8 @@
                   "x": 1734.14,
                   "y": -75.25,
                   "w": 64.21,
-                  "h": 58.83
+                  "h": 58.83,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124838,7 +125269,8 @@
                   "x": 1799.24,
                   "y": -57.04,
                   "w": 82.12,
-                  "h": 69.88
+                  "h": 69.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124851,7 +125283,8 @@
                   "x": 1813.87,
                   "y": 51.96,
                   "w": 31.65,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124864,7 +125297,8 @@
                   "x": 1849.11,
                   "y": 103.03,
                   "w": 32.25,
-                  "h": 42.11
+                  "h": 42.11,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124877,7 +125311,8 @@
                   "x": 1881.96,
                   "y": 103.33,
                   "w": 57.93,
-                  "h": 51.07
+                  "h": 51.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124890,7 +125325,8 @@
                   "x": 1836.57,
                   "y": 74.36,
                   "w": 44.79,
-                  "h": 28.07
+                  "h": 28.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124903,7 +125339,8 @@
                   "x": 1881.96,
                   "y": 57.93,
                   "w": 40.31,
-                  "h": 33.15
+                  "h": 33.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124916,7 +125353,8 @@
                   "x": 1893.61,
                   "y": -22.99,
                   "w": 37.93,
-                  "h": 80.33
+                  "h": 80.33,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124929,7 +125367,8 @@
                   "x": 1932.13,
                   "y": -25.68,
                   "w": 56.44,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124942,7 +125381,8 @@
                   "x": 1957.52,
                   "y": -73.46,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124955,7 +125395,8 @@
                   "x": 1957.52,
                   "y": -121.54,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -124968,7 +125409,8 @@
                   "x": 1715.03,
                   "y": -87.8,
                   "w": 18.52,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -126596,7 +127038,7 @@
             "chanceText": "Spawn Chances: 100%, 90%, 40%, 30%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "T_Ext_DinoSpawnEntriesSnow_1_C",
@@ -127776,25 +128218,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -127807,7 +128253,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -127856,7 +128303,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -127892,7 +128340,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -127905,7 +128354,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -128004,10 +128454,11 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Dragonfly/Dragonfly_Character_BP.Dragonfly_Character_BP_C",
       "displayName": "Meganeura",
       "nameTag": "Dragonfly",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
       "killXpBase": 3.0,
       "entries": [
         {
@@ -128085,7 +128536,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 100%, 100%, 100%, 100%, 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_C",
@@ -135567,25 +136018,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -135598,7 +136053,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -135647,7 +136103,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -135683,7 +136140,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -135696,7 +136154,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -135797,7 +136256,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 70%, 40%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityTier2_Building_DangerClose_C",
@@ -139354,7 +139813,8 @@
                   "x": 1671.73,
                   "y": -35.24,
                   "w": 35.54,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139367,7 +139827,8 @@
                   "x": 1494.64,
                   "y": 110.49,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139380,7 +139841,8 @@
                   "x": 1922.87,
                   "y": 81.23,
                   "w": 12.54,
-                  "h": 35.24
+                  "h": 35.24,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139393,7 +139855,8 @@
                   "x": 1922.87,
                   "y": 57.93,
                   "w": 13.14,
-                  "h": 18.22
+                  "h": 18.22,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139406,7 +139869,8 @@
                   "x": 1695.02,
                   "y": -78.54,
                   "w": 12.24,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139419,7 +139883,8 @@
                   "x": 1707.86,
                   "y": -61.52,
                   "w": 23.29,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139432,7 +139897,8 @@
                   "x": 1483.59,
                   "y": 99.74,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139445,7 +139911,8 @@
                   "x": 1483.59,
                   "y": 80.33,
                   "w": 13.74,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139458,7 +139925,8 @@
                   "x": 1499.72,
                   "y": 66.59,
                   "w": 15.53,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139471,7 +139939,8 @@
                   "x": 1511.96,
                   "y": 40.91,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139484,7 +139953,8 @@
                   "x": 1519.13,
                   "y": 15.23,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139497,7 +139967,8 @@
                   "x": 1539.14,
                   "y": 13.74,
                   "w": 36.13,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139510,7 +139981,8 @@
                   "x": 1565.41,
                   "y": -11.05,
                   "w": 71.67,
-                  "h": 24.19
+                  "h": 24.19,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139523,7 +139995,8 @@
                   "x": 1623.95,
                   "y": 13.74,
                   "w": 25.38,
-                  "h": 44.5
+                  "h": 44.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139536,7 +140009,8 @@
                   "x": 1649.93,
                   "y": 41.81,
                   "w": 55.84,
-                  "h": 20.31
+                  "h": 20.31,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139562,7 +140036,8 @@
                   "x": 1734.14,
                   "y": -15.83,
                   "w": 17.62,
-                  "h": 57.04
+                  "h": 57.04,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139575,7 +140050,8 @@
                   "x": 1734.14,
                   "y": -75.25,
                   "w": 64.21,
-                  "h": 58.83
+                  "h": 58.83,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139588,7 +140064,8 @@
                   "x": 1799.24,
                   "y": -57.04,
                   "w": 82.12,
-                  "h": 69.88
+                  "h": 69.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139601,7 +140078,8 @@
                   "x": 1813.87,
                   "y": 51.96,
                   "w": 31.65,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139614,7 +140092,8 @@
                   "x": 1849.11,
                   "y": 103.03,
                   "w": 32.25,
-                  "h": 42.11
+                  "h": 42.11,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139627,7 +140106,8 @@
                   "x": 1881.96,
                   "y": 103.33,
                   "w": 57.93,
-                  "h": 51.07
+                  "h": 51.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139640,7 +140120,8 @@
                   "x": 1836.57,
                   "y": 74.36,
                   "w": 44.79,
-                  "h": 28.07
+                  "h": 28.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139653,7 +140134,8 @@
                   "x": 1881.96,
                   "y": 57.93,
                   "w": 40.31,
-                  "h": 33.15
+                  "h": 33.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139666,7 +140148,8 @@
                   "x": 1893.61,
                   "y": -22.99,
                   "w": 37.93,
-                  "h": 80.33
+                  "h": 80.33,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139679,7 +140162,8 @@
                   "x": 1932.13,
                   "y": -25.68,
                   "w": 56.44,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139692,7 +140176,8 @@
                   "x": 1957.52,
                   "y": -73.46,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139705,7 +140190,8 @@
                   "x": 1957.52,
                   "y": -121.54,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -139718,7 +140204,8 @@
                   "x": 1715.03,
                   "y": -87.8,
                   "w": 18.52,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -142261,7 +142748,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -143466,7 +143953,7 @@
             "chanceText": "Spawn Chances: 100%, 67%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -144465,7 +144952,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 50%, 25%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_City_Park2_C",
@@ -145329,7 +145816,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -147381,7 +147868,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -150258,7 +150745,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntriesSwamp_C",
@@ -152176,10 +152663,10 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Piranha/Piranha_Character_BP.Piranha_Character_BP_C",
       "displayName": "Piranha",
       "nameTag": "Piranha",
-      "tameable": 0,
+      "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 21.0,
       "killXpBase": 1.0,
       "entries": [
@@ -152454,7 +152941,8 @@
                   "x": 1594.68,
                   "y": -69.88,
                   "w": 55.55,
-                  "h": 102.43
+                  "h": 102.43,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152467,7 +152955,8 @@
                   "x": 1934.82,
                   "y": -149.91,
                   "w": 50.17,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152532,7 +153021,8 @@
                   "x": 1985.59,
                   "y": -149.91,
                   "w": 66.59,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152545,7 +153035,8 @@
                   "x": 1926.16,
                   "y": -81.53,
                   "w": 51.36,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152558,7 +153049,8 @@
                   "x": 1876.29,
                   "y": -81.53,
                   "w": 49.27,
-                  "h": 67.79
+                  "h": 67.79,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152652,13 +153144,7 @@
     "/Game/PrimalEarth/Dinos/Direbear/Direbear_Character_Polar.Direbear_Character_Polar_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Direbear/Direbear_Character_Polar.Direbear_Character_Polar_C",
       "displayName": "Polar Bear",
-      "nameTag": "Direbear",
-      "tameable": 0,
-      "isBoss": 0,
-      "isBossMinion": 0,
-      "breedable": 1,
-      "dragWeight": 295.0,
-      "killXpBase": 4.0,
+      "nameTag": "",
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesIceCave_C",
@@ -152670,7 +153156,8 @@
                   "x": 1313.07,
                   "y": 1715.33,
                   "w": 38.82,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152683,7 +153170,8 @@
                   "x": 1341.44,
                   "y": 1743.4,
                   "w": 17.32,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152696,7 +153184,8 @@
                   "x": 1359.06,
                   "y": 1771.47,
                   "w": 17.32,
-                  "h": 37.63
+                  "h": 37.63,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152709,7 +153198,8 @@
                   "x": 1376.98,
                   "y": 1778.64,
                   "w": 33.45,
-                  "h": 25.38
+                  "h": 25.38,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152722,7 +153212,8 @@
                   "x": 1389.52,
                   "y": 1699.2,
                   "w": 30.16,
-                  "h": 78.84
+                  "h": 78.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152735,7 +153226,8 @@
                   "x": 1420.28,
                   "y": 1686.06,
                   "w": 41.21,
-                  "h": 45.99
+                  "h": 45.99,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152748,7 +153240,8 @@
                   "x": 1462.09,
                   "y": 1700.4,
                   "w": 29.27,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152761,7 +153254,8 @@
                   "x": 1491.95,
                   "y": 1700.4,
                   "w": 60.32,
-                  "h": 40.91
+                  "h": 40.91,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152774,7 +153268,8 @@
                   "x": 1552.87,
                   "y": 1700.4,
                   "w": 40.61,
-                  "h": 49.27
+                  "h": 49.27,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152787,7 +153282,8 @@
                   "x": 1594.08,
                   "y": 1733.24,
                   "w": 40.61,
-                  "h": 27.18
+                  "h": 27.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152800,7 +153296,8 @@
                   "x": 1635.29,
                   "y": 1741.61,
                   "w": 31.65,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152813,7 +153310,8 @@
                   "x": 1656.2,
                   "y": 1667.84,
                   "w": 24.49,
-                  "h": 73.16
+                  "h": 73.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152826,7 +153324,8 @@
                   "x": 1681.28,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152839,7 +153338,8 @@
                   "x": 1681.28,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152865,7 +153365,8 @@
                   "x": 1751.46,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152878,7 +153379,8 @@
                   "x": 1751.46,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152904,7 +153406,8 @@
                   "x": 1821.64,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152917,7 +153420,8 @@
                   "x": 1821.64,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152943,7 +153447,8 @@
                   "x": 1891.82,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152956,19 +153461,22 @@
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -152994,7 +153502,8 @@
                   "x": 1961.99,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153007,13 +153516,15 @@
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153026,7 +153537,8 @@
                   "x": 1936.01,
                   "y": 1764.0,
                   "w": 37.63,
-                  "h": 70.78
+                  "h": 70.78,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153039,7 +153551,8 @@
                   "x": 1904.66,
                   "y": 1835.38,
                   "w": 68.98,
-                  "h": 60.02
+                  "h": 60.02,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153052,7 +153565,8 @@
                   "x": 1835.08,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 53.16
+                  "h": 53.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153065,7 +153579,8 @@
                   "x": 1765.5,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 91.98
+                  "h": 91.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153078,7 +153593,8 @@
                   "x": 1695.92,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 42.7
+                  "h": 42.7,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153091,7 +153607,8 @@
                   "x": 1680.39,
                   "y": 1885.55,
                   "w": 32.55,
-                  "h": 85.71
+                  "h": 85.71,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153104,7 +153621,8 @@
                   "x": 1713.54,
                   "y": 1942.58,
                   "w": 67.19,
-                  "h": 66.59
+                  "h": 66.59,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -153117,7 +153635,8 @@
                   "x": 1781.32,
                   "y": 1942.58,
                   "w": 140.95,
-                  "h": 82.72
+                  "h": 82.72,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -154331,7 +154850,7 @@
             "chanceText": "Spawn Chances: 100%, 70%, 60%, 25%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -160553,7 +161072,7 @@
             "chanceText": "Spawn Chances: 70%, 70%, 50%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -163963,25 +164482,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -163994,7 +164517,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -164043,7 +164567,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -164079,7 +164604,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -164092,7 +164618,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165017,7 +165544,8 @@
                   "x": 1313.07,
                   "y": 1715.33,
                   "w": 38.82,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165030,7 +165558,8 @@
                   "x": 1341.44,
                   "y": 1743.4,
                   "w": 17.32,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165043,7 +165572,8 @@
                   "x": 1359.06,
                   "y": 1771.47,
                   "w": 17.32,
-                  "h": 37.63
+                  "h": 37.63,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165056,7 +165586,8 @@
                   "x": 1376.98,
                   "y": 1778.64,
                   "w": 33.45,
-                  "h": 25.38
+                  "h": 25.38,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165069,7 +165600,8 @@
                   "x": 1389.52,
                   "y": 1699.2,
                   "w": 30.16,
-                  "h": 78.84
+                  "h": 78.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165082,7 +165614,8 @@
                   "x": 1420.28,
                   "y": 1686.06,
                   "w": 41.21,
-                  "h": 45.99
+                  "h": 45.99,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165095,7 +165628,8 @@
                   "x": 1462.09,
                   "y": 1700.4,
                   "w": 29.27,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165108,7 +165642,8 @@
                   "x": 1491.95,
                   "y": 1700.4,
                   "w": 60.32,
-                  "h": 40.91
+                  "h": 40.91,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165121,7 +165656,8 @@
                   "x": 1552.87,
                   "y": 1700.4,
                   "w": 40.61,
-                  "h": 49.27
+                  "h": 49.27,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165134,7 +165670,8 @@
                   "x": 1594.08,
                   "y": 1733.24,
                   "w": 40.61,
-                  "h": 27.18
+                  "h": 27.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165147,7 +165684,8 @@
                   "x": 1635.29,
                   "y": 1741.61,
                   "w": 31.65,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165160,7 +165698,8 @@
                   "x": 1656.2,
                   "y": 1667.84,
                   "w": 24.49,
-                  "h": 73.16
+                  "h": 73.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165173,7 +165712,8 @@
                   "x": 1681.28,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165186,7 +165726,8 @@
                   "x": 1681.28,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165212,7 +165753,8 @@
                   "x": 1751.46,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165225,7 +165767,8 @@
                   "x": 1751.46,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165251,7 +165794,8 @@
                   "x": 1821.64,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165264,7 +165808,8 @@
                   "x": 1821.64,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165290,7 +165835,8 @@
                   "x": 1891.82,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165303,19 +165849,22 @@
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165341,7 +165890,8 @@
                   "x": 1961.99,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165354,13 +165904,15 @@
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165373,7 +165925,8 @@
                   "x": 1936.01,
                   "y": 1764.0,
                   "w": 37.63,
-                  "h": 70.78
+                  "h": 70.78,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165386,7 +165939,8 @@
                   "x": 1904.66,
                   "y": 1835.38,
                   "w": 68.98,
-                  "h": 60.02
+                  "h": 60.02,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165399,7 +165953,8 @@
                   "x": 1835.08,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 53.16
+                  "h": 53.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165412,7 +165967,8 @@
                   "x": 1765.5,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 91.98
+                  "h": 91.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165425,7 +165981,8 @@
                   "x": 1695.92,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 42.7
+                  "h": 42.7,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165438,7 +165995,8 @@
                   "x": 1680.39,
                   "y": 1885.55,
                   "w": 32.55,
-                  "h": 85.71
+                  "h": 85.71,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165451,7 +166009,8 @@
                   "x": 1713.54,
                   "y": 1942.58,
                   "w": 67.19,
-                  "h": 66.59
+                  "h": 66.59,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165464,7 +166023,8 @@
                   "x": 1781.32,
                   "y": 1942.58,
                   "w": 140.95,
-                  "h": 82.72
+                  "h": 82.72,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -165533,7 +166093,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 2.0,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -165579,7 +166139,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 2.0,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -165669,7 +166229,7 @@
             "chanceText": "Spawn Chances: 100%, 80%, 60%, 40%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -166192,7 +166752,7 @@
             "chanceText": "Spawn Chances: 70%, 70%, 40%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -169515,7 +170075,7 @@
             "chanceText": "Spawn Chances: 100%, 80%, 60%, 40%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -170038,7 +170598,7 @@
             "chanceText": "Spawn Chances: 70%, 70%, 40%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -173296,25 +173856,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -173327,7 +173891,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -173376,7 +173941,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -173412,7 +173978,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -173425,7 +173992,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -173526,7 +174094,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -176060,7 +176628,7 @@
             "chanceText": "Spawn Chances: 80%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -177724,25 +178292,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -177755,7 +178327,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -177804,7 +178377,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -177840,7 +178414,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -177853,7 +178428,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -177954,7 +178530,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityObelisk_C",
@@ -180488,7 +181064,7 @@
             "chanceText": "Spawn Chances: 80%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -182833,7 +183409,8 @@
                   "x": 1671.73,
                   "y": -35.24,
                   "w": 35.54,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182846,7 +183423,8 @@
                   "x": 1494.64,
                   "y": 110.49,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182859,7 +183437,8 @@
                   "x": 1922.87,
                   "y": 81.23,
                   "w": 12.54,
-                  "h": 35.24
+                  "h": 35.24,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182872,7 +183451,8 @@
                   "x": 1922.87,
                   "y": 57.93,
                   "w": 13.14,
-                  "h": 18.22
+                  "h": 18.22,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182885,7 +183465,8 @@
                   "x": 1695.02,
                   "y": -78.54,
                   "w": 12.24,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182898,7 +183479,8 @@
                   "x": 1707.86,
                   "y": -61.52,
                   "w": 23.29,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182911,7 +183493,8 @@
                   "x": 1483.59,
                   "y": 99.74,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182924,7 +183507,8 @@
                   "x": 1483.59,
                   "y": 80.33,
                   "w": 13.74,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182937,7 +183521,8 @@
                   "x": 1499.72,
                   "y": 66.59,
                   "w": 15.53,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182950,7 +183535,8 @@
                   "x": 1511.96,
                   "y": 40.91,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182963,7 +183549,8 @@
                   "x": 1519.13,
                   "y": 15.23,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182976,7 +183563,8 @@
                   "x": 1539.14,
                   "y": 13.74,
                   "w": 36.13,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -182989,7 +183577,8 @@
                   "x": 1565.41,
                   "y": -11.05,
                   "w": 71.67,
-                  "h": 24.19
+                  "h": 24.19,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183002,7 +183591,8 @@
                   "x": 1623.95,
                   "y": 13.74,
                   "w": 25.38,
-                  "h": 44.5
+                  "h": 44.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183015,7 +183605,8 @@
                   "x": 1649.93,
                   "y": 41.81,
                   "w": 55.84,
-                  "h": 20.31
+                  "h": 20.31,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183041,7 +183632,8 @@
                   "x": 1734.14,
                   "y": -15.83,
                   "w": 17.62,
-                  "h": 57.04
+                  "h": 57.04,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183054,7 +183646,8 @@
                   "x": 1734.14,
                   "y": -75.25,
                   "w": 64.21,
-                  "h": 58.83
+                  "h": 58.83,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183067,7 +183660,8 @@
                   "x": 1799.24,
                   "y": -57.04,
                   "w": 82.12,
-                  "h": 69.88
+                  "h": 69.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183080,7 +183674,8 @@
                   "x": 1813.87,
                   "y": 51.96,
                   "w": 31.65,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183093,7 +183688,8 @@
                   "x": 1849.11,
                   "y": 103.03,
                   "w": 32.25,
-                  "h": 42.11
+                  "h": 42.11,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183106,7 +183702,8 @@
                   "x": 1881.96,
                   "y": 103.33,
                   "w": 57.93,
-                  "h": 51.07
+                  "h": 51.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183119,7 +183716,8 @@
                   "x": 1836.57,
                   "y": 74.36,
                   "w": 44.79,
-                  "h": 28.07
+                  "h": 28.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183132,7 +183730,8 @@
                   "x": 1881.96,
                   "y": 57.93,
                   "w": 40.31,
-                  "h": 33.15
+                  "h": 33.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183145,7 +183744,8 @@
                   "x": 1893.61,
                   "y": -22.99,
                   "w": 37.93,
-                  "h": 80.33
+                  "h": 80.33,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183158,7 +183758,8 @@
                   "x": 1932.13,
                   "y": -25.68,
                   "w": 56.44,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183171,7 +183772,8 @@
                   "x": 1957.52,
                   "y": -73.46,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183184,7 +183786,8 @@
                   "x": 1957.52,
                   "y": -121.54,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -183197,7 +183800,8 @@
                   "x": 1715.03,
                   "y": -87.8,
                   "w": 18.52,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -186589,10 +187193,10 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Salmon/Salmon_Character_BP.Salmon_Character_BP_C",
       "displayName": "Sabertooth Salmon",
       "nameTag": "Salmon",
-      "tameable": 0,
+      "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 32.5,
       "killXpBase": 0.5,
       "entries": [
@@ -186958,7 +187562,8 @@
                   "x": 1816.86,
                   "y": 1843.44,
                   "w": 49.87,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -186971,7 +187576,8 @@
                   "x": 1992.75,
                   "y": 1747.28,
                   "w": 42.11,
-                  "h": 87.5
+                  "h": 87.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -186984,7 +187590,8 @@
                   "x": 1992.75,
                   "y": 1835.38,
                   "w": 42.11,
-                  "h": 30.46
+                  "h": 30.46,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -186997,7 +187604,8 @@
                   "x": 1950.05,
                   "y": 1855.68,
                   "w": 42.11,
-                  "h": 35.84
+                  "h": 35.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -187010,7 +187618,8 @@
                   "x": 1917.8,
                   "y": 1892.12,
                   "w": 53.45,
-                  "h": 35.84
+                  "h": 35.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -187023,7 +187632,8 @@
                   "x": 1830.0,
                   "y": 1899.28,
                   "w": 87.2,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -187036,7 +187646,8 @@
                   "x": 1780.73,
                   "y": 1935.12,
                   "w": 48.68,
-                  "h": 25.68
+                  "h": 25.68,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -187049,7 +187660,8 @@
                   "x": 1717.12,
                   "y": 1885.55,
                   "w": 63.01,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -187062,7 +187674,8 @@
                   "x": 1753.25,
                   "y": 1843.44,
                   "w": 63.01,
-                  "h": 61.52
+                  "h": 61.52,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -187520,7 +188133,7 @@
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 149.0,
       "killXpBase": 3.0,
       "entries": [
@@ -189498,7 +190111,7 @@
             "chanceText": "Spawn Chances: 64%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -193920,7 +194533,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -195184,7 +195797,7 @@
             "chanceText": "Spawn Chances: 100%, 80%, 40%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -198463,7 +199076,7 @@
             "chanceText": "Spawn Chances: 100%, 80%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -201804,7 +202417,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -203068,7 +203681,7 @@
             "chanceText": "Spawn Chances: 100%, 80%, 40%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_DesertBuffer_C",
@@ -206347,7 +206960,7 @@
             "chanceText": "Spawn Chances: 100%, 80%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_South_C",
@@ -214553,25 +215166,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -214584,7 +215201,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -214633,7 +215251,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -214669,7 +215288,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -214682,7 +215302,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -214783,7 +215404,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_DangerClose_C",
@@ -215010,25 +215631,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -215041,7 +215666,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -215090,7 +215716,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -215126,7 +215753,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -215139,7 +215767,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -221834,7 +222463,7 @@
             "chanceText": "Spawn Chances: 50%, 20%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_Wasteland_OilFields_C",
@@ -222980,7 +223609,8 @@
                   "x": 1671.73,
                   "y": -35.24,
                   "w": 35.54,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -222993,7 +223623,8 @@
                   "x": 1494.64,
                   "y": 110.49,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223006,7 +223637,8 @@
                   "x": 1922.87,
                   "y": 81.23,
                   "w": 12.54,
-                  "h": 35.24
+                  "h": 35.24,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223019,7 +223651,8 @@
                   "x": 1922.87,
                   "y": 57.93,
                   "w": 13.14,
-                  "h": 18.22
+                  "h": 18.22,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223032,7 +223665,8 @@
                   "x": 1695.02,
                   "y": -78.54,
                   "w": 12.24,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223045,7 +223679,8 @@
                   "x": 1707.86,
                   "y": -61.52,
                   "w": 23.29,
-                  "h": 11.65
+                  "h": 11.65,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223058,7 +223693,8 @@
                   "x": 1483.59,
                   "y": 99.74,
                   "w": 13.74,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223071,7 +223707,8 @@
                   "x": 1483.59,
                   "y": 80.33,
                   "w": 13.74,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223084,7 +223721,8 @@
                   "x": 1499.72,
                   "y": 66.59,
                   "w": 15.53,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223097,7 +223735,8 @@
                   "x": 1511.96,
                   "y": 40.91,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223110,7 +223749,8 @@
                   "x": 1519.13,
                   "y": 15.23,
                   "w": 19.41,
-                  "h": 25.08
+                  "h": 25.08,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223123,7 +223763,8 @@
                   "x": 1539.14,
                   "y": 13.74,
                   "w": 36.13,
-                  "h": 10.15
+                  "h": 10.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223136,7 +223777,8 @@
                   "x": 1565.41,
                   "y": -11.05,
                   "w": 71.67,
-                  "h": 24.19
+                  "h": 24.19,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223149,7 +223791,8 @@
                   "x": 1623.95,
                   "y": 13.74,
                   "w": 25.38,
-                  "h": 44.5
+                  "h": 44.5,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223162,7 +223805,8 @@
                   "x": 1649.93,
                   "y": 41.81,
                   "w": 55.84,
-                  "h": 20.31
+                  "h": 20.31,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223188,7 +223832,8 @@
                   "x": 1734.14,
                   "y": -15.83,
                   "w": 17.62,
-                  "h": 57.04
+                  "h": 57.04,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223201,7 +223846,8 @@
                   "x": 1734.14,
                   "y": -75.25,
                   "w": 64.21,
-                  "h": 58.83
+                  "h": 58.83,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223214,7 +223860,8 @@
                   "x": 1799.24,
                   "y": -57.04,
                   "w": 82.12,
-                  "h": 69.88
+                  "h": 69.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223227,7 +223874,8 @@
                   "x": 1813.87,
                   "y": 51.96,
                   "w": 31.65,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223240,7 +223888,8 @@
                   "x": 1849.11,
                   "y": 103.03,
                   "w": 32.25,
-                  "h": 42.11
+                  "h": 42.11,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223253,7 +223902,8 @@
                   "x": 1881.96,
                   "y": 103.33,
                   "w": 57.93,
-                  "h": 51.07
+                  "h": 51.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223266,7 +223916,8 @@
                   "x": 1836.57,
                   "y": 74.36,
                   "w": 44.79,
-                  "h": 28.07
+                  "h": 28.07,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223279,7 +223930,8 @@
                   "x": 1881.96,
                   "y": 57.93,
                   "w": 40.31,
-                  "h": 33.15
+                  "h": 33.15,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223292,7 +223944,8 @@
                   "x": 1893.61,
                   "y": -22.99,
                   "w": 37.93,
-                  "h": 80.33
+                  "h": 80.33,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223305,7 +223958,8 @@
                   "x": 1932.13,
                   "y": -25.68,
                   "w": 56.44,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223318,7 +223972,8 @@
                   "x": 1957.52,
                   "y": -73.46,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223331,7 +223986,8 @@
                   "x": 1957.52,
                   "y": -121.54,
                   "w": 80.03,
-                  "h": 47.18
+                  "h": 47.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223344,7 +224000,8 @@
                   "x": 1715.03,
                   "y": -87.8,
                   "w": 18.52,
-                  "h": 24.49
+                  "h": 24.49,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -223375,10 +224032,12 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/Ant_Character_BP.Ant_Character_BP_C",
       "displayName": "Titanomyrma Drone",
       "nameTag": "Ant",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesGrassland_C",
@@ -223455,7 +224114,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 100%, 100%, 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -226619,10 +227278,12 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/FlyingAnt_Character_BP.FlyingAnt_Character_BP_C",
       "displayName": "Titanomyrma Soldier",
       "nameTag": "Ant",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesGrassland_C",
@@ -226699,7 +227360,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 100%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -229945,7 +230606,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 5.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "DinoSpawnEntries_CityCenter_C",
@@ -236126,229 +236787,6 @@
         }
       ]
     },
-    "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C": {
-      "bpPath": "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C",
-      "displayName": "Trilobite",
-      "nameTag": "Trilobite",
-      "tameable": 1,
-      "entries": [
-        {
-          "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Ice_C",
-          "managers": {
-            "NPCZoneManager12": {
-              "minDesired": 60.0,
-              "boxes": [
-                {
-                  "x": 1346.11,
-                  "y": 1569.5,
-                  "w": 195.09,
-                  "h": 280.93
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 1.0
-            },
-            "NPCZoneManager72": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1816.86,
-                  "y": 1843.44,
-                  "w": 49.87,
-                  "h": 61.52
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_51": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1992.75,
-                  "y": 1747.28,
-                  "w": 42.11,
-                  "h": 87.5
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_52": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1992.75,
-                  "y": 1835.38,
-                  "w": 42.11,
-                  "h": 30.46
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_54": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1950.05,
-                  "y": 1855.68,
-                  "w": 42.11,
-                  "h": 35.84
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_57": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1917.8,
-                  "y": 1892.12,
-                  "w": 53.45,
-                  "h": 35.84
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_58": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1830.0,
-                  "y": 1899.28,
-                  "w": 87.2,
-                  "h": 61.52
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_59": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1780.73,
-                  "y": 1935.12,
-                  "w": 48.68,
-                  "h": 25.68
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_60": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1717.12,
-                  "y": 1885.55,
-                  "w": 63.01,
-                  "h": 61.52
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_61": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1753.25,
-                  "y": 1843.44,
-                  "w": 63.01,
-                  "h": 61.52
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_7": {
-              "minDesired": 25.0,
-              "boxes": [
-                {
-                  "x": 1547.72,
-                  "y": 1752.25,
-                  "w": 132.35,
-                  "h": 121.91
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.416667
-            },
-            "NPCZoneManager_8": {
-              "minDesired": 46.0,
-              "boxes": [
-                {
-                  "x": 1661.12,
-                  "y": 1545.5,
-                  "w": 132.35,
-                  "h": 214.78
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.766667
-            },
-            "wiki": {
-              "minDesired": 30.0,
-              "boxes": [
-                {
-                  "x": 1741.62,
-                  "y": 1960.76,
-                  "w": 80.28,
-                  "h": 80.49
-                },
-                {
-                  "x": 1813.3,
-                  "y": 1937.0,
-                  "w": 80.49,
-                  "h": 80.49
-                },
-                {
-                  "x": 1465.34,
-                  "y": 1603.38,
-                  "w": 80.49,
-                  "h": 80.49
-                },
-                {
-                  "x": 1498.73,
-                  "y": 1551.97,
-                  "w": 80.49,
-                  "h": 80.49
-                },
-                {
-                  "x": 1570.41,
-                  "y": 1551.97,
-                  "w": 80.49,
-                  "h": 80.49
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.5
-            }
-          },
-          "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 60,
-          "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true,
-          "bForceUntameable": true,
-          "spawnMultiplier": 2.8,
-          "spawnLimit": 0.2,
-          "spawnChances": "100, 100, 80",
-          "groupWeight": 1.0,
-          "weight": 0.230169,
-          "display": {
-            "weightText": "Entry Weight: 1",
-            "limitText": "Max % To Allow: 20%",
-            "chanceText": "Spawn Chances: 100%, 100%, 80%"
-          },
-          "bestSharedMin": 60.0,
-          "minRarityDownshift": 0
-        }
-      ]
-    },
     "/Game/PrimalEarth/Dinos/Troodon/Troodon_Character_BP.Troodon_Character_BP_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Troodon/Troodon_Character_BP.Troodon_Character_BP_C",
       "displayName": "Troodon",
@@ -238279,10 +238717,12 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/JugBug/Jugbug_Water_Character_BP.Jugbug_Water_Character_BP_C",
       "displayName": "Water Jug Bug",
       "nameTag": "Jugbug",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertOasis_C",
@@ -240635,7 +241075,8 @@
                   "x": 1313.07,
                   "y": 1715.33,
                   "w": 38.82,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240648,7 +241089,8 @@
                   "x": 1341.44,
                   "y": 1743.4,
                   "w": 17.32,
-                  "h": 27.47
+                  "h": 27.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240661,7 +241103,8 @@
                   "x": 1359.06,
                   "y": 1771.47,
                   "w": 17.32,
-                  "h": 37.63
+                  "h": 37.63,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240674,7 +241117,8 @@
                   "x": 1376.98,
                   "y": 1778.64,
                   "w": 33.45,
-                  "h": 25.38
+                  "h": 25.38,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240687,7 +241131,8 @@
                   "x": 1389.52,
                   "y": 1699.2,
                   "w": 30.16,
-                  "h": 78.84
+                  "h": 78.84,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240700,7 +241145,8 @@
                   "x": 1420.28,
                   "y": 1686.06,
                   "w": 41.21,
-                  "h": 45.99
+                  "h": 45.99,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240713,7 +241159,8 @@
                   "x": 1462.09,
                   "y": 1700.4,
                   "w": 29.27,
-                  "h": 21.8
+                  "h": 21.8,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240726,7 +241173,8 @@
                   "x": 1491.95,
                   "y": 1700.4,
                   "w": 60.32,
-                  "h": 40.91
+                  "h": 40.91,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240739,7 +241187,8 @@
                   "x": 1552.87,
                   "y": 1700.4,
                   "w": 40.61,
-                  "h": 49.27
+                  "h": 49.27,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240752,7 +241201,8 @@
                   "x": 1594.08,
                   "y": 1733.24,
                   "w": 40.61,
-                  "h": 27.18
+                  "h": 27.18,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240765,7 +241215,8 @@
                   "x": 1635.29,
                   "y": 1741.61,
                   "w": 31.65,
-                  "h": 18.81
+                  "h": 18.81,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240778,7 +241229,8 @@
                   "x": 1656.2,
                   "y": 1667.84,
                   "w": 24.49,
-                  "h": 73.16
+                  "h": 73.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240791,7 +241243,8 @@
                   "x": 1681.28,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240804,7 +241257,8 @@
                   "x": 1681.28,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240830,7 +241284,8 @@
                   "x": 1751.46,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240843,7 +241298,8 @@
                   "x": 1751.46,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240869,7 +241325,8 @@
                   "x": 1821.64,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240882,7 +241339,8 @@
                   "x": 1821.64,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240908,7 +241366,8 @@
                   "x": 1891.82,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240921,19 +241380,22 @@
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1891.82,
                   "y": 1648.73,
                   "w": 69.58,
-                  "h": 68.98
+                  "h": 68.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240959,7 +241421,8 @@
                   "x": 1961.99,
                   "y": 1718.31,
                   "w": 69.58,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240972,13 +241435,15 @@
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 1961.99,
                   "y": 1672.62,
                   "w": 41.81,
-                  "h": 45.09
+                  "h": 45.09,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -240991,7 +241456,8 @@
                   "x": 1936.01,
                   "y": 1764.0,
                   "w": 37.63,
-                  "h": 70.78
+                  "h": 70.78,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241004,7 +241470,8 @@
                   "x": 1904.66,
                   "y": 1835.38,
                   "w": 68.98,
-                  "h": 60.02
+                  "h": 60.02,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241017,7 +241484,8 @@
                   "x": 1835.08,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 53.16
+                  "h": 53.16,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241030,7 +241498,8 @@
                   "x": 1765.5,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 91.98
+                  "h": 91.98,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241043,7 +241512,8 @@
                   "x": 1695.92,
                   "y": 1842.24,
                   "w": 68.98,
-                  "h": 42.7
+                  "h": 42.7,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241056,7 +241526,8 @@
                   "x": 1680.39,
                   "y": 1885.55,
                   "w": 32.55,
-                  "h": 85.71
+                  "h": 85.71,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241069,7 +241540,8 @@
                   "x": 1713.54,
                   "y": 1942.58,
                   "w": 67.19,
-                  "h": 66.59
+                  "h": 66.59,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241082,7 +241554,8 @@
                   "x": 1781.32,
                   "y": 1942.58,
                   "w": 140.95,
-                  "h": 82.72
+                  "h": 82.72,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241130,25 +241603,29 @@
                   "x": 902.33,
                   "y": 1895.27,
                   "w": 22.08,
-                  "h": 16.38
+                  "h": 16.38,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 903.49,
                   "y": 1940.66,
                   "w": 3.2,
-                  "h": 4.29
+                  "h": 4.29,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 929.84,
                   "y": 1938.14,
                   "w": 30.94,
-                  "h": 7.91
+                  "h": 7.91,
+                  "bForceUntameable": true
                 },
                 {
                   "x": 960.19,
                   "y": 1909.64,
                   "w": 70.19,
-                  "h": 25.23
+                  "h": 25.23,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241161,7 +241638,8 @@
                   "x": 936.53,
                   "y": 1967.75,
                   "w": 65.84,
-                  "h": 39.88
+                  "h": 39.88,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241210,7 +241688,8 @@
                   "x": 977.06,
                   "y": 1833.2,
                   "w": 70.19,
-                  "h": 74.75
+                  "h": 74.75,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241246,7 +241725,8 @@
                   "x": 845.35,
                   "y": 1931.71,
                   "w": 34.64,
-                  "h": 87.47
+                  "h": 87.47,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241259,7 +241739,8 @@
                   "x": 888.35,
                   "y": 2019.74,
                   "w": 107.68,
-                  "h": 44.69
+                  "h": 44.69,
+                  "bForceUntameable": true
                 }
               ],
               "points": [],
@@ -241457,7 +241938,7 @@
             "chanceText": "Spawn Chances: 76%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "Ext_DinoSpawnEntries_DesertMountain_C",

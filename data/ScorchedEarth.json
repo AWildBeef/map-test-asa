@@ -341,7 +341,7 @@
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -466,7 +466,7 @@
             "chanceText": "Spawn Chances: 100%, 70%, 35%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -478,7 +478,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -863,7 +865,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -1323,7 +1325,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
@@ -5276,7 +5278,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -5611,7 +5615,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -9240,7 +9244,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -15817,7 +15821,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -15942,7 +15946,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -15954,7 +15958,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -16289,7 +16295,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -16749,7 +16755,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -18773,7 +18779,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
@@ -20346,10 +20352,10 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Coelacanth/Coel_Character_BP.Coel_Character_BP_C",
       "displayName": "Coelacanth",
       "nameTag": "Coel",
-      "tameable": 0,
+      "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 25.0,
       "killXpBase": 0.5,
       "entries": [
@@ -21239,7 +21245,7 @@
             "chanceText": "Spawn Chances: 100%, 55%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -22828,7 +22834,7 @@
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 1000.0,
       "killXpBase": 3000.0,
       "entries": [
@@ -23082,7 +23088,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -23094,7 +23100,7 @@
       "isAlpha": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 1100.0,
       "killXpBase": 15000.0,
       "entries": [
@@ -23348,7 +23354,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -23391,7 +23397,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
@@ -26030,7 +26036,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -28573,7 +28579,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -31093,7 +31099,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 0.75,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -31104,7 +31110,7 @@
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 90.0,
       "entries": [
         {
@@ -37794,7 +37800,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -37838,7 +37844,7 @@
             "chanceText": "Spawn Chances: 100%, 70%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -47745,7 +47751,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -49508,7 +49514,9 @@
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesBee_C",
@@ -49663,7 +49671,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 2.0,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -50123,7 +50131,7 @@
             "chanceText": "Spawn Chances: 100%, 90%, 80%, 70%, 60%, 50%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -54513,7 +54521,7 @@
             "chanceText": "Spawn Chances: 100%, 33%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
@@ -56817,7 +56825,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -57277,7 +57285,7 @@
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -69648,7 +69656,7 @@
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -69773,7 +69781,7 @@
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -69785,7 +69793,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -70120,7 +70130,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -70603,7 +70613,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.0,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -70669,7 +70679,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 4.0,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -74310,7 +74320,7 @@
             "chanceText": "Spawn Chances: 100%, 60%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -77152,7 +77162,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 0.333,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -77160,10 +77170,12 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/JugBug/Jugbug_Oil_Character_BP.Jugbug_Oil_Character_BP_C",
       "displayName": "Oil Jug Bug",
       "nameTag": "Jugbug",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -77610,7 +77622,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -86821,7 +86833,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -86946,7 +86958,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -86958,7 +86970,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -91318,7 +91332,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.0,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -91326,10 +91340,10 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Piranha/Piranha_Character_BP.Piranha_Character_BP_C",
       "displayName": "Piranha",
       "nameTag": "Piranha",
-      "tameable": 0,
+      "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 21.0,
       "killXpBase": 1.0,
       "entries": [
@@ -91362,7 +91376,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 50%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
@@ -91743,7 +91757,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.75,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -94492,7 +94506,7 @@
             "chanceText": "Spawn Chances: 100%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -103074,7 +103088,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -103409,7 +103425,7 @@
             "chanceText": "Spawn Chances: 100%, 67%"
           },
           "bestSharedMin": 3.378,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -104001,7 +104017,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -104835,7 +104851,7 @@
             "chanceText": ""
           },
           "bestSharedMin": 1.0,
-          "minRarityDownshift": 6
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -105295,7 +105311,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
@@ -108824,7 +108840,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -108836,7 +108852,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -109382,7 +109400,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -113489,7 +113507,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -118121,7 +118139,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -120476,7 +120494,7 @@
             "chanceText": "Spawn Chances: 100%, 75%, 67%, 33%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -124396,7 +124414,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -124856,7 +124874,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
@@ -131750,7 +131768,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
@@ -131875,7 +131893,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
@@ -131887,7 +131905,9 @@
                   "x": 311.86,
                   "y": 815.28,
                   "w": 0.52,
-                  "h": 0.52
+                  "h": 0.52,
+                  "bIsCaveManager": true,
+                  "bForceUntameable": true
                 }
               ],
               "points": [
@@ -132222,7 +132242,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 3.378,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -132230,10 +132250,12 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/Ant_Character_BP.Ant_Character_BP_C",
       "displayName": "Titanomyrma Drone",
       "nameTag": "Ant",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -132680,7 +132702,7 @@
             "chanceText": "Spawn Chances: 100%, 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -141184,10 +141206,12 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/FlyingAnt_Character_BP.FlyingAnt_Character_BP_C",
       "displayName": "Titanomyrma Soldier",
       "nameTag": "Ant",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -141634,7 +141658,7 @@
             "chanceText": "Spawn Chances: 50%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
@@ -150141,7 +150165,7 @@
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
       "dragWeight": 3000.0,
       "killXpBase": 20000.0,
       "entries": [
@@ -150234,7 +150258,7 @@
             "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 4.0,
-          "minRarityDownshift": 2
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -150693,7 +150717,7 @@
             "chanceText": "Spawn Chances: 100%, 100%, 100%, 50%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         }
       ]
     },
@@ -151153,7 +151177,7 @@
             "chanceText": "Spawn Chances: 100%, 75%, 50%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
@@ -159166,10 +159190,12 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/JugBug/Jugbug_Water_Character_BP.Jugbug_Water_Character_BP_C",
       "displayName": "Water Jug Bug",
       "nameTag": "Jugbug",
-      "tameable": 1,
+      "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
-      "breedable": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
@@ -159616,7 +159642,7 @@
             "chanceText": "Spawn Chances: 75%"
           },
           "bestSharedMin": 10.0,
-          "minRarityDownshift": 1
+          "minRarityDownshift": 0
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",

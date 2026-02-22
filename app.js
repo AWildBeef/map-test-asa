@@ -1847,7 +1847,16 @@ function preprocessCfg(cfg) {
 
       // entry-level flags cached once
       const isCave = (e.bIsCaveManager === true);
-      const untame = (e.bForceUntameable === true);
+
+      // include dino blueprint untame flag too
+      const dinoUntameable =
+        d?.tameable === 0 ||
+        d?.tameable === false ||
+        d?.tameable === "0";
+
+      const untame =
+        (e.bForceUntameable === true) ||
+        dinoUntameable;
 
       if (mgrs) {
         e._mgrDraw = Object.entries(mgrs).map(([mgrId, mgr]) => {
@@ -2369,7 +2378,7 @@ function drawSpawnEntry(cfg, entryClass) {
       const y1 = box.y, x1 = box.x, y2 = box.y + box.h, x2 = box.x + box.w;
       L.rectangle([[y1, x1], [y2, x2]], {
         color, weight, opacity,
-        dashArray: (isOfficial && untame) ? "3 3" : null,
+        dashArray: (untame) ? "3 3" : null,
         fillColor: color,
         fillOpacity
       }).addTo(targetLayer);
@@ -2430,7 +2439,7 @@ function drawDino(cfg, dinoKey) {
             const y1 = box.y, x1 = box.x, y2 = box.y + box.h, x2 = box.x + box.w;
             L.rectangle([[y1, x1], [y2, x2]], {
               color, weight, opacity,
-              dashArray: (isOfficial && m.untame) ? "3 3" : null,
+              dashArray: (m.untame) ? "3 3" : null,
               fillColor: color,
               fillOpacity
             }).addTo(targetLayer);
@@ -2474,7 +2483,7 @@ function drawDino(cfg, dinoKey) {
         const y1 = box.y, x1 = box.x, y2 = box.y + box.h, x2 = box.x + box.w;
         L.rectangle([[y1, x1], [y2, x2]], {
           color, weight, opacity,
-          dashArray: (isOfficial && untame) ? "3 3" : null,
+          dashArray: (untame) ? "3 3" : null,
           fillColor: color,
           fillOpacity
         }).addTo(targetLayer);
