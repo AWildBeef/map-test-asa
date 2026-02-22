@@ -2966,15 +2966,15 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   body.innerHTML = `
     <div class="info-section">
       <div class="info-title">${escapeHtml(displayName)}</div>
-      <div class="dino-quick">
-        <div class="dino-badges" data-dino-badges></div>
-        <div class="dino-statsline" data-dino-stats></div>
-      </div>
       ${currentModMeta?.id ? `
         <div class="info-submeta">
           Mod ID: ${escapeHtml(currentModMeta.id)}
         </div>
       ` : ``}
+      <div class="dino-quick">
+        <div class="dino-badges" data-dino-badges></div>
+        <div class="dino-statsline" data-dino-stats></div>
+      </div>
       
       ${blueprintBlock}
       
