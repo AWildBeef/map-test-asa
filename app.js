@@ -24,7 +24,7 @@ function downshiftStepsForMinPct(pct) {
 const RARITY_ORDER = ["very common", "common", "uncommon", "very uncommon", "rare", "very rare"];
 
 const MIN_GLOBAL_DOWNSHIFT = [
-  [2,  6],
+  [3,  6],
 ];
 
 function fitOptionsForUI() {
@@ -197,6 +197,132 @@ function setLegendOpen(open){
 
   // your HTML uses inline display:none, so flip display directly
   el.style.display = showRarityLegend ? "" : "none";
+}
+
+// ============================================================
+// INFO PANEL TABS (Dino panel only for now)
+// ============================================================
+let infoTab = "spawns"; // "info" | "spawns" | "loot" | "stats"
+
+const INFO_TABS = [
+  { id: "spawns", label: "Spawns" },
+  { id: "stats",  label: "Stats" },
+  { id: "loot",   label: "Loot" },
+  { id: "info",   label: "Info" },
+];
+
+function setInfoTab(id){
+  const order = INFO_TABS.map(t => t.id);
+  const next = order.includes(id) ? id : "info";
+  infoTab = next;
+
+  const panel = document.getElementById("dinoInfoPanel");
+  const body  = panel?.querySelector(".fp-body");
+  if (!body) return;
+
+  // tabs
+  body.querySelectorAll(".fp-tab").forEach(b => {
+    b.classList.toggle("is-on", b.dataset.tab === infoTab);
+  });
+
+  // dots
+  body.querySelectorAll(".fp-dot").forEach(d => {
+    d.classList.toggle("is-on", d.dataset.dot === infoTab);
+  });
+
+  // slide animation
+  const track = body.querySelector(".fp-track");
+  if (track) {
+    const i = Math.max(0, order.indexOf(infoTab));
+    track.style.transform = `translateX(${-i * 100}%)`;
+  }
+}
+
+function mountInfoSwipe(el){
+  if (!el) return;
+
+  // Prevent Leaflet from eating gestures inside this region
+  try {
+    L?.DomEvent?.disableClickPropagation?.(el);
+    L?.DomEvent?.disableScrollPropagation?.(el);
+  } catch {}
+
+  const order = INFO_TABS.map(t => t.id);
+
+  const EDGE_GUARD_PX = 22;  // leave this for iOS "back" swipe
+  const SWIPE_MIN_PX  = 40;  // distance threshold
+  const SWIPE_MAX_Y   = 60;  // if vertical movement is bigger than this, bail
+
+  let sx = 0, sy = 0;
+  let tracking = false;
+  let decided = false;
+  let isHorizontal = false;
+
+  function idxOf(tab){ return Math.max(0, order.indexOf(tab)); }
+
+  el.addEventListener("touchstart", (e) => {
+    if (!e.touches || e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+
+    // If they start near the left edge, don't fight iOS back gesture
+    if (t.clientX <= EDGE_GUARD_PX) {
+      tracking = false;
+      return;
+    }
+
+    tracking = true;
+    decided = false;
+    isHorizontal = false;
+    sx = t.clientX;
+    sy = t.clientY;
+  }, { passive: true });
+
+  el.addEventListener("touchmove", (e) => {
+    if (!tracking || !e.touches || e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+    const dx = t.clientX - sx;
+    const dy = t.clientY - sy;
+
+    if (!decided) {
+      // decide intent once
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+        decided = true;
+        isHorizontal = Math.abs(dx) > Math.abs(dy);
+      }
+    }
+
+    // If horizontal swipe, prevent page from treating it as scroll/back
+    if (decided && isHorizontal) {
+      e.preventDefault(); // requires passive:false
+    }
+  }, { passive: false });
+
+  el.addEventListener("touchend", (e) => {
+    if (!tracking) return;
+    tracking = false;
+
+    // touchend has changedTouches
+    const t = e.changedTouches?.[0];
+    if (!t) return;
+
+    const dx = t.clientX - sx;
+    const dy = t.clientY - sy;
+
+    if (Math.abs(dy) > SWIPE_MAX_Y) return;
+    if (Math.abs(dx) < SWIPE_MIN_PX) return;
+
+    const i = idxOf(infoTab);
+
+    // dx < 0 => swipe left => next page
+    // dx > 0 => swipe right => previous page
+    const nextIndex = (dx < 0)
+      ? (i + 1) % order.length
+      : (i - 1 + order.length) % order.length;
+
+    setInfoTab(order[nextIndex]);
+  }, { passive: true });
 }
 
 // ============================================================
@@ -2916,74 +3042,69 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
   `;
 }
 
+function renderDinoHero({ displayName, allBps, nameTag, d }) {
+  // NOTE: quick badges + stats placeholders live here (always visible)
+  // We keep blueprint + nametag here too (shared identity info).
+  const modLine = currentModMeta?.id
+    ? `<div class="info-submeta">Mod ID: ${escapeHtml(currentModMeta.id)}</div>`
+    : ``;
 
-function renderInfoPanelForDino(cfg, dinoKey) {
-  const panel = document.getElementById("dinoInfoPanel");
-  if (!panel) return;
-  const body = panel.querySelector(".fp-body");
-
-  const d = cfg?.dinos?.[dinoKey];
-  if (!d) {
-    renderInfoPanelBodyEmpty();
-    return;
-  }
-
-  const displayName = d.displayName || dinoKey;
-  setInfoPanelTitle(displayName);
-  const bp = d.bpPath || "";
-  const nameTag = d.nameTag || d.nametag || "";
-  const extraBps = asArray(d.additionalBpPathsToDisplay);
-  const allBps = [bp, ...extraBps].filter(Boolean);
-  const modId = currentModMeta?.id || "";
-  
-  const entries = d.entries || [];
-  
-  const blueprintBlock = `
-    <div class="info-row">
-      <span class="info-label">Blueprint</span>
-      ${allBps[0]
-        ? ``
-        : ""}
-    </div>
-  
-    ${(allBps.length ? allBps : ["(none)"]).map((p, i) => `
-        
-          ${i > 0
-            ? `
-            <div class="info-row">
-              <span class="info-label"></span>
-            </div>
-            `
-            : ""}
-
-        <div class="info-mono copy-on-click" data-copy="${escapeAttr(p)}">
-          ${escapeHtml(p)}
-        </div>
-      `).join("")
-    }
+  const bpBlock = `
+    <div class="info-subtitle">Blueprint</div>
+    ${(allBps.length ? allBps : ["(none)"]).map((p) => `
+      <div class="info-mono copy-on-click" data-copy="${escapeAttr(p)}">${escapeHtml(p)}</div>
+    `).join("")}
   `;
-  
-  body.innerHTML = `
-    <div class="info-section">
-      <div class="info-title">${escapeHtml(displayName)}</div>
-      ${currentModMeta?.id ? `
-        <div class="info-submeta">
-          Mod ID: ${escapeHtml(currentModMeta.id)}
-        </div>
-      ` : ``}
+
+  const tagBlock = `
+    <div class="info-subtitle" style="margin-top:10px;">Nametag</div>
+    <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}">
+      ${escapeHtml(nameTag || "(none)")}
+    </div>
+  `;
+
+  return `
+    <div class="dino-hero">
+      <div class="dino-hero-title">${escapeHtml(displayName)}</div>
+      ${modLine}
+
       <div class="dino-quick">
         <div class="dino-badges" data-dino-badges></div>
         <div class="dino-statsline" data-dino-stats></div>
       </div>
-      
-      ${blueprintBlock}
-      
-      <div class="info-row">
-        <span class="info-label">Nametag</span>
-      </div>
-      <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)} ">${escapeHtml(nameTag || "(none)")}</div>
-    </div>
 
+      ${bpBlock}
+      ${tagBlock}
+    </div>
+  `;
+}
+
+// INFO tab becomes "extra info" now, since identity moved into hero
+function renderDinoTab_Info({ d }) {
+  // Put anything you want that is NOT identity:
+  // traits, flavor text, toggles, etc.
+  const tame = (d?.tameable == null) ? null : (!!d.tameable);
+  const breed = (d?.breedable == null) ? null : (!!d.breedable);
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Details</div>
+      <div class="entry-meta" style="margin-top:6px;">
+        ${tame === null ? `` : `<div class="entry-meta-line">Tameable: ${tame ? "Yes" : "No"}</div>`}
+        ${breed === null ? `` : `<div class="entry-meta-line">Breedable: ${breed ? "Yes" : "No"}</div>`}
+      </div>
+
+      <div style="color:var(--muted); margin-top:10px;">
+        (Add whatever "Info" content you want here now.)
+      </div>
+    </div>
+  `;
+}
+
+
+
+function renderDinoTab_Spawns({ entries, dinoKey }) {
+  return `
     <div class="info-section">
       <div class="info-subtitle">Spawn entries (${entries.length})</div>
       <div class="entries">
@@ -2991,11 +3112,121 @@ function renderInfoPanelForDino(cfg, dinoKey) {
       </div>
     </div>
   `;
-  // Fill the quick badges + stats line
-  const badgesEl = body.querySelector("[data-dino-badges]");
-  const statsEl  = body.querySelector("[data-dino-stats]");
+}
+
+function renderDinoTab_Stats(d) {
+  // You already show drag + XP in quick info; this can be expanded later
+  const drag = fmtNum(d?.dragWeight, 0);
+  const xp   = fmtNum(d?.killXpBase, 0);
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Stats</div>
+
+      <div class="entry-meta" style="margin-top:6px;">
+        ${drag !== null ? `<div class="entry-meta-line">Drag Weight: ${escapeHtml(drag)}</div>` : ``}
+        ${xp   !== null ? `<div class="entry-meta-line">Kill XP: ${escapeHtml(String(Number(xp)*4))}</div>` : ``}
+      </div>
+
+      <div class="entry-meta" style="margin-top:10px; color:var(--muted);">
+        (More stat breakdown here later if you want.)
+      </div>
+    </div>
+  `;
+}
+
+function renderDinoTab_Loot() {
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Loot</div>
+      <div style="color:var(--muted)">Loot tab (coming soon)</div>
+    </div>
+  `;
+}
+
+function renderInfoPanelForDino(cfg, dinoKey) {
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+
+  const body = panel.querySelector(".fp-body");
+  const d = cfg?.dinos?.[dinoKey];
+
+  if (!d) {
+    renderInfoPanelBodyEmpty();
+    return;
+  }
+
+  const displayName = d.displayName || dinoKey;
+
+  // ✅ Header title = dino name (always visible)
+  setInfoPanelTitle(displayName);
+
+  const bp = d.bpPath || "";
+  const nameTag = d.nameTag || d.nametag || "";
+  const extraBps = asArray(d.additionalBpPathsToDisplay);
+  const allBps = [bp, ...extraBps].filter(Boolean);
+
+  const entries = d.entries || [];
+
+  if (!INFO_TABS.some(t => t.id === infoTab)) infoTab = "info";
+
+  body.innerHTML = `
+    ${renderDinoHero({ displayName, allBps, nameTag, d })}
+
+    <div class="fp-tabs">
+      ${INFO_TABS.map(t => `
+        <button type="button"
+                class="fp-tab ${infoTab===t.id ? "is-on" : ""}"
+                data-tab="${t.id}">
+          ${escapeHtml(t.label)}
+        </button>
+      `).join("")}
+    </div>
+
+    <div class="fp-pages" id="infoPages">
+      <div class="fp-track">
+
+        <div class="fp-page" data-page="spawns">
+          ${renderDinoTab_Spawns({ entries, dinoKey })}
+        </div> 
+
+        <div class="fp-page" data-page="stats">
+          ${renderDinoTab_Stats(d)}
+        </div>
+
+        <div class="fp-page" data-page="loot">
+          ${renderDinoTab_Loot()}
+        </div>
+        
+        <div class="fp-page" data-page="info">
+          ${renderDinoTab_Info({ d })}
+        </div>
+      </div>
+
+      <div class="fp-dots" aria-label="Pages">
+        ${INFO_TABS.map(t => `
+          <div class="fp-dot ${infoTab===t.id ? "is-on" : ""}" data-dot="${t.id}"></div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+
+  // ✅ set correct slide position immediately
+  setInfoTab(infoTab);
+
+  // ✅ swipe mount (still targets #infoPages)
+  mountInfoSwipe(body.querySelector("#infoPages"));
+
+  // ✅ tab clicks
+  body.querySelectorAll(".fp-tab").forEach(btn => {
+    btn.onclick = () => setInfoTab(btn.dataset.tab);
+  });
+
+  // ✅ populate quick info inside the hero (not inside the Info page anymore)
+  const badgesEl = body.querySelector(".dino-hero [data-dino-badges]");
+  const statsEl  = body.querySelector(".dino-hero [data-dino-stats]");
   renderDinoQuickInfo(d, badgesEl, statsEl);
 
+  // ✅ entry toggle wiring (Spawns tab)
   body.querySelectorAll('input[data-entry-toggle="1"]').forEach(chk => {
     chk.onchange = () => {
       const key = chk.dataset.key;

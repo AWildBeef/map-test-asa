@@ -961,8 +961,14 @@
     },
     "/Game/PrimalEarth/Dinos/Salmon/Salmon_Character_Aberrant.Salmon_Character_Aberrant_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Salmon/Salmon_Character_Aberrant.Salmon_Character_Aberrant_C",
-      "displayName": "/Game/PrimalEarth/Dinos/Salmon/Salmon_Character_Aberrant.Salmon_Character_Aberrant_C",
-      "nameTag": "",
+      "displayName": "Aberrant Salmon",
+      "nameTag": "Salmon",
+      "tameable": 1,
+      "isBoss": 0,
+      "isBossMinion": 0,
+      "breedable": 1,
+      "dragWeight": 32.5,
+      "killXpBase": 0.5,
       "entries": [
         {
           "entryClass": "VAL_DinoSpawnEntries_TwitchBioWater_C",
@@ -1899,8 +1905,14 @@
     },
     "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character_Aberrant.Trilobite_Character_Aberrant_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character_Aberrant.Trilobite_Character_Aberrant_C",
-      "displayName": "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character_Aberrant.Trilobite_Character_Aberrant_C",
-      "nameTag": "",
+      "displayName": "Aberrant Trilobite",
+      "nameTag": "Trilobite",
+      "tameable": 1,
+      "isBoss": 0,
+      "isBossMinion": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
       "entries": [
         {
           "entryClass": "VAL_DinoSpawnEntries_TwitchBioWater_C",

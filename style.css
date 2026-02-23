@@ -1,19 +1,17 @@
 /* ============================================================
-   Atlas Clean Pass -- consolidated + low-specificity CSS
-   Notes:
-   - Keeps BOTH systems supported, but you should pick ONE:
-     (A) Leaflet-control panels (.leaflet-panel)  OR
-     (B) Draggable panels (.floating-panel)
-   - If you are on draggable panels, you can delete section 7 (Leaflet panels).
+   ULTRA ATLAS CLEAN CSS (single file, rebuilt + sane)
+   - Fancy dropdowns (.dd) only
+   - Floating panels (.floating-panel) only
+   - Per-dropdown max heights that actually work
+   - Floating panel max-height knob
    ============================================================ */
 
 /* ============================================================
-   0) THEME TOKENS
+   0) THEME TOKENS + KNOBS
    ============================================================ */
 :root{
   color-scheme: dark;
 
-  /* Core colors */
   --bg:#121417;
   --panel:#1a1d21;
   --panel-border:#2a2f35;
@@ -25,23 +23,36 @@
   --control-border:#3a414a;
   --focus:#7aa2ff;
 
-  /* Sizing knobs */
-  --panel-w: 420px;
-  --panel-w-mobile: 210px;
-
-  /* Mobile panel widths */
-  --dino-w-mobile: 275px;         /* default */
-  --dino-w-mobile-compact: 225px; /* when mod panel expanded */
-  --mod-w-mobile: 150px;          /* expanded */
-  --mod-w-mobile-collapsed: 100px;/* collapsed */
-
-  --panel-radius: 4px;
-
-  --panel-header-pad: 1px 7px;
-  --panel-body-pad: 7px;
-
   --topbar-pad-y: 12px;
   --topbar-pad-x: 16px;
+
+  --panel-radius: 6px;
+  --panel-w: 420px;
+  --panel-w-mobile: 210px;
+  --panel-max-w: 360px;
+
+  /* Floating panel body max height */
+  --fp-body-max-h: 65vh;
+  --fp-body-max-h-mobile: 50vh;
+  --leaflet-toolbar-h: 50px;
+
+  /* Mobile panel widths */
+  --dino-w-mobile: 275px;
+  --dino-w-mobile-compact: 225px;
+  --mod-w-mobile: 150px;
+  --mod-w-mobile-collapsed: 100px;
+
+  /* Dropdown list max heights (desktop) */
+  --dd-map-max:    min(33vh, 265px);
+  --dd-source-max: min(33vh, 250px);
+  --dd-dino-max:   min(33vh, 300px);
+
+  /* Dropdown list max heights (mobile) */
+  --dd-map-max-m:    min(38vh, 250px);
+  --dd-source-max-m: min(38vh, 245px);
+  --dd-dino-max-m:   min(34vh, 225px);
+
+  --shadow: 0 14px 34px rgba(0,0,0,.55);
 }
 
 /* ============================================================
@@ -63,18 +74,7 @@ body{
   min-height:100%;
 }
 
-#mapWrap .leaflet-container{ background:var(--bg); }
-
-#buildInfo{
-  position:fixed;
-  bottom:10px;
-  right:6px;
-  font-size:10px;
-  opacity:.4;
-  pointer-events:none;
-}
-
-/* iOS interaction hygiene */
+/* Safe iOS behavior */
 :where(#topbar, #topbar button, #topbar select,
        #topbar .dd-btn, #topbar .dd-item,
        .floating-panel, .floating-panel button,
@@ -86,7 +86,7 @@ body{
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Focus ring: keyboard only */
+/* Keyboard focus ring */
 :where(.dd-btn, #topbar select):focus{
   outline:none !important;
   box-shadow:none !important;
@@ -96,687 +96,34 @@ body{
   box-shadow:0 0 0 3px rgba(122,162,255,.18);
 }
 
+/* Build info */
+#buildInfo{
+  position:fixed;
+  bottom:10px;
+  right:6px;
+  font-size:10px;
+  opacity:.4;
+  pointer-events:none;
+}
+
 /* ============================================================
-   2) LAYOUT: MAP WRAPPER
+   2) MAP WRAPPER
    ============================================================ */
 #mapWrap{
   flex:1 1 auto;
-  min-height:0; /* Leaflet + flex */
+  min-height:0;
   position:relative;
   overflow:hidden;
   padding-bottom: env(safe-area-inset-bottom);
 }
-
 #map{
   position:absolute;
   inset:0;
   height:100%;
   width:100%;
 }
+#mapWrap .leaflet-container{ background:var(--bg); }
 
-/* ============================================================
-   3) TOPBAR (title + controls)
-   ============================================================ */
-#topbar{
-  background:var(--panel);
-  border-bottom:1px solid var(--panel-border);
-  padding:var(--topbar-pad-y) var(--topbar-pad-x) 10px;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:7px;
-  flex:0 0 auto;
-}
-
-.title-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:6px;
-  width:100%;
-}
-
-#topbar .title{
-  font-size:18px;
-  font-weight:700;
-  font-stretch:condensed;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-  color:#f2f2f2;
-}
-
-#topbar .title-actions{
-  margin-left:auto;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  white-space:nowrap;
-}
-
-#topbar .controls{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  width:min(1100px, 100%);
-}
-
-/* Native selects */
-#topbar .controls > select{ flex:1 1 220px; }
-
-#topbar select{
-  min-width:200px;
-  max-width:320px;
-  width:100%;
-  padding:10px 20px;
-  font-size:15px;
-  border-radius:8px;
-
-  border:1px solid var(--control-border);
-  background:var(--control-bg);
-  color:#fff;
-
-  outline:none;
-  cursor:pointer;
-}
-#topbar select:hover{ border-color:#596273; }
-
-/* Desktop topbar grid */
-@media (min-width:956px){
-  #topbar{
-    display:grid;
-    grid-template-columns:auto 1fr auto;
-    align-items:center;
-    column-gap:14px;
-  }
-
-  #topbar .title{ justify-self:start; white-space:nowrap; }
-  #topbar .controls{
-    justify-self:center;
-    width:min(1100px, 100%);
-    flex-wrap:nowrap;
-    min-width:0;
-  }
-  #topbar .title-actions{ justify-self:end; }
-
-  #topbar .controls > *{
-    flex:1 1 0;
-    min-width:200px;
-    max-width:320px;
-  }
-
-  .icon-btn{ width:42px; height:42px; }
-}
-
-/* ============================================================
-   4) BUTTONS
-   ============================================================ */
-.mode-toggle{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  padding:8px 10px;
-  border-radius:10px;
-
-  border:1px solid rgba(255,255,255,.15);
-  background:rgba(30,30,30,.85);
-  color:#fff;
-
-  font:inherit;
-  cursor:pointer;
-  user-select:none;
-}
-.mode-toggle.is-entry{
-  background:rgba(0,140,255,.30);
-  border-color:rgba(0,140,255,.55);
-}
-
-.icon-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:34px;
-  height:34px;
-  border-radius:8px;
-
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(30,30,30,.75);
-  color:#fff;
-
-  cursor:pointer;
-}
-.icon-btn:hover{ background:rgba(45,45,45,.85); }
-.icon-btn:active{ transform:translateY(1px); }
-
-/* Mobile-only Filters button */
-#controlsToggle{
-  display:none;
-  padding:6px 8px;
-  border-radius:8px;
-  background:var(--control-bg);
-  border:1px solid var(--control-border);
-  color:var(--text);
-}
-
-/* ============================================================
-   5) FANCY DROPDOWN (shared)
-   ============================================================ */
-.dd{
-  position:relative;
-  width:100%;
-  max-width:320px;
-  font-family:inherit;
-}
-
-.dd-btn{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-
-  padding:6px 10px;
-  border-radius:8px;
-  border:1px solid var(--control-border);
-  background:var(--control-bg);
-  color:#fff;
-
-  cursor:pointer;
-  user-select:none;
-
-  -webkit-appearance:none;
-  appearance:none;
-  outline:none;
-}
-
-.dd-btn-left,
-.dd-btn-text{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  min-width:0;
-  width:100%;
-}
-
-.dd-btn-text .dd-label{
-  flex:1 1 auto;
-  min-width:0;
-  text-align:left;
-}
-
-.dd-btn-text .dd-sub{
-  flex:0 0 auto;
-  margin-left:auto;
-  white-space:nowrap;
-
-  font-size:10px;
-  padding:3px 7px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.18);
-  color:rgba(255,255,255,.72);
-  opacity:.85;
-}
-
-.dd-dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  flex:0 0 auto;
-  background:#777;
-  box-shadow:0 0 0 2px rgba(0,0,0,.25);
-}
-
-.dd-label{
-  font-size:13px;
-  font-weight:400;
-  color:var(--muted);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.dd-caret{ opacity:.85; flex:0 0 auto; }
-
-.dd.open .dd-panel{ display:block; }
-
-.dd-panel{
-  display:none;
-  position:absolute;
-  left:0;
-  right:0;
-  top:calc(100% + 6px);
-  z-index:99999;
-
-  background:rgba(26,29,33,.72);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:10px;
-  box-shadow:0 14px 34px rgba(0,0,0,.55);
-  backdrop-filter: blur(16px);
-  overflow:hidden;
-}
-
-.dd-search{
-  width:100%;
-  padding:6px 8px;
-  border:0;
-  outline:none;
-  font-size:16px;
-
-  background:rgba(0,0,0,.30);
-  color:var(--text);
-  border-bottom:1px solid rgba(255,255,255,.08);
-
-  position:sticky;
-  top:0;
-  z-index:2;
-}
-
-.dd-list{ max-height:min(33vh, 265px); overflow:auto; }
-
-.dd-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-
-  padding:6px 8px;
-  cursor:pointer;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.dd-item:last-child{ border-bottom:none; }
-.dd-item:hover{ background:rgba(255,255,255,.05); }
-
-.dd-item-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  min-width:0;
-}
-
-.dd-item-main{
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-}
-
-.dd-item-name{
-  font-size:12px;
-  font-weight:400;
-  color:var(--text);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.dd-item-meta{
-  font-size:11px;
-  color:rgba(255,255,255,.55);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.dd-badges{ display:flex; align-items:center; gap:6px; flex:0 0 auto; }
-
-.dd-pill{
-  font-size:10px;
-  padding:3px 7px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.18);
-  color:rgba(255,255,255,.72);
-}
-
-.dd-star{
-  width:26px;
-  height:26px;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(0,0,0,.18);
-  color:#fff;
-  opacity:.85;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-.dd-star:hover{ opacity:1; }
-
-/* ============================================================
-   5.1) TOPBAR: Fancy dropdown slots (host sizing)
-   ============================================================ */
-#topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy){
-  flex:1 1 220px;
-  min-width:200px;
-  max-width:320px;
-  width:100%;
-}
-#topbar .controls > #dinoSelectFancy{
-  flex:2 1 440px;
-  max-width:660px;
-}
-
-:where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy) .dd{
-  width:100%;
-  max-width:none;
-}
-
-/* Topbar label color */
-:where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy) .dd-label{
-  font-size:15px;
-  font-weight:400;
-  color:#fff;
-}
-
-/* Hide badges & counts for source/map */
-:where(#sourceSelectFancy, #mapSelectFancy) :where(.dd-badges, .dd-sub){
-  display:none !important;
-}
-
-/* ============================================================
-   6) PANELS -- SHARED BASE (leaflet-panel + floating-panel)
-   ============================================================ */
-:where(.leaflet-panel, .floating-panel){
-  border-radius:var(--panel-radius);
-  overflow:hidden;
-  transform:translateZ(0);
-}
-
-/* Smooth body collapse (no display:none) */
-:where(.leaflet-panel, .floating-panel) .fp-body{
-  overflow:hidden;
-  max-height:60vh;
-  opacity:1;
-  transition:max-height .22s ease, opacity .18s ease;
-  will-change:max-height, opacity;
-}
-:where(.leaflet-panel, .floating-panel).collapsed .fp-body{
-  max-height:0;
-  opacity:0;
-}
-
-/* Optional: when collapsed, remove header divider */
-:where(.leaflet-panel, .floating-panel).collapsed .fp-header{
-  border-bottom:none;
-}
-
-/* Smooth body collapse (include padding in the animation) */
-.leaflet-panel .fp-body{
-  padding: var(--panel-body-pad);
-  overflow: hidden;
-  max-height: 70vh;
-  opacity: 1;
-  transition: max-height .22s ease, opacity .18s ease, padding .22s ease;
-}
-
-/* Collapsed: remove padding so no "phantom gap" remains */
-.leaflet-panel.collapsed .fp-body{
-  max-height: 0;
-  opacity: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* ============================================================
-   7) LEAFLET PANELS (old Leaflet-control style panels)
-   ============================================================ */
-.leaflet-panel{
-  width:var(--panel-w);
-  max-width:min(420px, calc(100vw - 16px));
-}
-#dinoInfoPanel.leaflet-panel{ 
-  width: var(--dinoPanel-w-mobile-f);
-  max-width: calc(100vw - 16px);
-  margin: 2px 0 0 6px;
-}
-#modStylePanel.leaflet-panel{
-  width: var(--modPanel-w-mobile-s);
-  max-width: calc(100vw - 16px);
-  margin: 2px 6px 0 0;
-}
-
-/* ============================================================
-   8) DRAGGABLE FLOATING PANELS (current system)
-   ============================================================ */
-.floating-panel{
-  position:absolute;
-  z-index:900;
-
-  width:var(--panel-w);
-  max-width:min(360px, calc(100vw - 24px));
-
-  background:rgba(26,29,33,.92);
-  color:var(--text);
-  border:1px solid var(--panel-border);
-  box-shadow:0 10px 28px rgba(0,0,0,.45);
-  backdrop-filter: blur(8px);
-
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-
-.floating-panel .fp-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:var(--panel-header-pad);
-  border-bottom:1px solid rgba(255,255,255,.08);
-
-  cursor:grab;
-  user-select:none;
-  touch-action:none;
-}
-.floating-panel.dragging .fp-header{ cursor:grabbing; }
-
-.floating-panel .fp-title{
-  font-weight:400;
-  font-size:18px;
-  letter-spacing:.3px;
-}
-
-.floating-panel .fp-actions{ display:flex; gap:10px; }
-
-.floating-panel .fp-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:0;
-  width:22px;
-  height:22px;
-}
-
-.floating-panel .fp-btn svg{
-  display:block;
-  pointer-events:none;
-  transition:transform .15s ease;
-}
-.floating-panel.collapsed .fp-btn-chevron svg{ transform: rotate(-90deg); }
-
-/* IMPORTANT:
-   No display:none here -- keeps collapse smooth. */
-.floating-panel .fp-body{
-  padding:var(--panel-body-pad);
-  overflow:auto;
-}
-.floating-panel.collapsed .fp-body{
-  overflow:hidden;
-}
-
-/* Panel internals */
-.fp-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin:10px 0;
-  color:var(--muted);
-  font-size:12px;
-}
-.fp-col{ flex-direction:column; align-items:stretch; }
-.fp-between{ width:100%; }
-
-/* Dino panel header tweaks */
-#dinoInfoPanel:not(.collapsed) .fp-title{ visibility:hidden; }
-#dinoInfoPanel:not(.collapsed) .fp-header{ border-bottom:none; background-color:transparent; }
-#dinoInfoPanel:not(.collapsed) .info-title{ margin-top:-5px; margin-bottom:0; }
-#dinoInfoPanel .fp-body{ padding-top:0; }
-
-/* ============================================================
-   9) DINO INFO CONTENT
-   ============================================================ */
-.info-title{
-  font-weight:600;
-  font-size:22px;
-  color:var(--muted);
-  align-items:flex-start;
-}
-
-.info-submeta{
-  font-size:12px;
-  opacity:.65;
-  margin-top:-2px;
-  margin-bottom:0;
-}
-
-.info-subtitle{
-  font-size:11px;
-  font-weight:650;
-  color:var(--muted);
-  margin-bottom:6px;
-  letter-spacing:.2px;
-  text-transform:uppercase;
-}
-
-.info-section{
-  margin:0 0 10px;
-  padding-bottom:6px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  align-items:flex-start;
-}
-.info-section:last-child{ border-bottom:none; padding-bottom:0; margin-bottom:0; }
-
-.info-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:8px;
-
-  color:var(--muted);
-  font-size:11px;
-  font-weight:650;
-  text-transform:uppercase;
-}
-
-/* Copy button */
-.info-copy{
-  width:18px;
-  height:18px;
-  padding:0;
-  border:0;
-  background:transparent;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  color:rgba(255,255,255,.80);
-}
-.info-copy:hover{
-  color:rgba(255,255,255,1);
-  filter:drop-shadow(0 0 2px rgba(255,255,255,.25));
-}
-
-.info-copy::before{
-  content:"";
-  display:block;
-  width:14px;
-  height:14px;
-  background-color:currentColor;
-
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-
-.info-mono{
-  margin-top:2px;
-  padding:4px 6px;
-  border-radius:6px;
-  background:rgba(0,0,0,.25);
-  border:1px solid rgba(255,255,255,.10);
-
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.176;
-  font-weight:700;
-
-  white-space:nowrap;
-  overflow-x:auto;
-  overflow-y:hidden;
-}
-
-.entry-row{
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  padding:6px 5px;
-  border-radius:6px;
-}
-.entry-row:hover{ background:rgba(255,255,255,.04); }
-
-.entry-main{ flex:1; min-width:0; }
-
-.entry-name{
-  font-size:14px;
-  font-weight:650;
-  color:var(--muted);
-}
-
-.entry-meta-line{
-  margin-top:2px;
-  font-size:12px;
-  text-indent:2mm;
-  font-stretch:semi-condensed;
-  font-weight:600;
-  white-space:nowrap;
-  color:var(--muted);
-  line-height:1.3;
-}
-
-/* ============================================================
-   10) COPY BUBBLE
-   ============================================================ */
-.copy-on-click{ cursor:pointer; }
-
-.copy-bubble{
-  position:fixed;
-  z-index:99999;
-
-  background:#1ed760;
-  color:#000;
-  font-weight:600;
-  font-size:12px;
-
-  padding:3px 7px;
-  border-radius:6px;
-
-  pointer-events:none;
-  opacity:0;
-  transform:translateY(-4px);
-  transition:opacity .18s ease, transform .18s ease;
-}
-.copy-bubble.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ============================================================
-   11) DINO QUICK (badges + stats)
-   ============================================================ */
 .dino-quick{ display:grid; row-gap:6px; }
 
 .dino-badges{
@@ -832,6 +179,1128 @@ body{
 }
 
 /* ============================================================
+   3) TOPBAR
+   ============================================================ */
+#topbar{
+  background:var(--panel);
+  border-bottom:1px solid var(--panel-border);
+  padding:var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+  flex:0 0 auto;
+
+  position:relative;
+  z-index:2000;
+}
+
+.title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  width:100%;
+}
+
+#topbar .title{
+  font-size:18px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:#f2f2f2;
+  white-space:nowrap;
+}
+
+#topbar .title-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+
+#topbar .controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  width:min(1100px, 100%);
+}
+
+/* Native selects (if present) */
+#topbar select{
+  min-width:200px;
+  max-width:320px;
+  width:100%;
+  padding:10px 20px;
+  font-size:15px;
+  border-radius:8px;
+
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  outline:none;
+  cursor:pointer;
+}
+#topbar select:hover{ border-color:#596273; }
+
+/* Desktop topbar grid */
+@media (min-width:956px){
+  #topbar{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    column-gap:14px;
+  }
+  #topbar .controls{
+    justify-self:center;
+    flex-wrap:nowrap;
+    min-width:0;
+  }
+  #topbar .controls > *{
+    flex:1 1 0;
+    min-width:200px;
+    max-width:320px;
+  }
+}
+
+/* ============================================================
+   4) BUTTONS
+   ============================================================ */
+.mode-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:8px 10px;
+  border-radius:10px;
+
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(30,30,30,.85);
+  color:#fff;
+
+  font:inherit;
+  cursor:pointer;
+  user-select:none;
+}
+.mode-toggle.is-entry{
+  background:rgba(0,140,255,.30);
+  border-color:rgba(0,140,255,.55);
+}
+
+.icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border-radius:8px;
+
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(30,30,30,.75);
+  color:#fff;
+
+  cursor:pointer;
+}
+.icon-btn:hover{ background:rgba(45,45,45,.85); }
+.icon-btn:active{ transform:translateY(1px); }
+
+/* Mobile-only Filters button */
+#controlsToggle{
+  display:none;
+  padding:6px 8px;
+  border-radius:8px;
+  background:var(--control-bg);
+  border:1px solid var(--control-border);
+  color:var(--text);
+}
+/* ============================================================
+   5) FANCY DROPDOWN (.dd)
+   ============================================================ */
+.dd{
+  position:relative;
+  width:100%;
+  max-width:320px;
+  font-family:inherit;
+}
+
+.dd-btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  padding:6px 10px;
+  border-radius:8px;
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:#fff;
+
+  cursor:pointer;
+  user-select:none;
+
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
+}
+
+.dd-btn-left,
+.dd-btn-text{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  width:100%;
+}
+
+.dd-btn-text .dd-label{
+  flex:1 1 auto;
+  min-width:0;
+  text-align:left;
+
+  font-size:15px;
+  font-weight:400;
+  color:#fff;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-btn-text .dd-sub{
+  flex:0 0 auto;
+  margin-left:auto;
+  white-space:nowrap;
+
+  font-size:10px;
+  padding:3px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  color:rgba(255,255,255,.72);
+  opacity:.85;
+}
+
+.dd-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  flex:0 0 auto;
+  background:#777;
+  box-shadow:0 0 0 2px rgba(0,0,0,.25);
+}
+
+.dd-caret{ opacity:.85; flex:0 0 auto; }
+
+.dd.open .dd-panel{ display:block; }
+
+.dd-panel{
+  display:none;
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(100% + 6px);
+  z-index:99999;
+
+  background:rgba(26,29,33,.72);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(16px);
+  overflow:hidden;
+}
+
+.dd-search{
+  width:100%;
+  padding:6px 8px;
+  border:0;
+  outline:none;
+  font-size:16px;
+
+  background:rgba(0,0,0,.30);
+  color:var(--text);
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+/* Default list height (fallback) */
+.dd-list{
+  max-height:min(33vh, 265px);
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Items */
+.dd-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  padding:6px 8px;
+  cursor:pointer;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.dd-item:last-child{ border-bottom:none; }
+.dd-item:hover{ background:rgba(255,255,255,.05); }
+
+.dd-item-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.dd-item-main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.dd-item-name{
+  font-size:12px;
+  font-weight:400;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.dd-item-meta{
+  font-size:11px;
+  color:rgba(255,255,255,.55);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dd-badges{ display:flex; align-items:center; gap:6px; flex:0 0 auto; }
+.dd-pill{
+  font-size:10px;
+  padding:3px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  color:rgba(255,255,255,.72);
+}
+.dd-star{
+  width:26px;
+  height:26px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.18);
+  color:#fff;
+  opacity:.85;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.dd-star:hover{ opacity:1; }
+
+/* ============================================================
+   5.1) TOPBAR: Fancy dropdown host sizing + per-dropdown heights
+   ============================================================ */
+#topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy){
+  flex:1 1 220px;
+  min-width:200px;
+  max-width:320px;
+  width:100%;
+}
+#topbar .controls > #dinoSelectFancy{
+  flex:2 1 440px;
+  max-width:660px;
+}
+
+/* Ensure internal .dd uses full host width */
+:where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy) .dd{
+  width:100%;
+  max-width:none;
+}
+
+/* Hide badges for source/map */
+:where(#sourceSelectFancy, #mapSelectFancy) :where(.dd-badges, .dd-sub){
+  display:none !important;
+}
+
+/* ✅ Per-dropdown list max heights (WORKING SELECTORS) */
+#mapSelectFancy    .dd-list{ max-height: var(--dd-map-max); }
+#sourceSelectFancy .dd-list{ max-height: var(--dd-source-max); }
+#dinoSelectFancy   .dd-list{ max-height: var(--dd-dino-max); }
+
+/* ============================================================
+   6) DRAGGABLE FLOATING PANELS
+   ============================================================ */
+.floating-panel{
+  position:absolute;
+  z-index:900;
+
+  width:var(--panel-w);
+  max-width:min(var(--panel-max-w), calc(100vw - 24px));
+
+
+  background:rgba(26,29,33,.92);
+  color:var(--text);
+  border:1px solid var(--panel-border);
+  border-radius:var(--panel-radius);
+  box-shadow:0 10px 28px rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+
+  overflow:hidden;
+  transform:translateZ(0);
+
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.floating-panel .fp-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:2px 2px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  cursor:grab;
+  user-select:none;
+  touch-action:none;
+  margin-bottom:0;
+}
+.floating-panel.dragging .fp-header{ cursor:grabbing; }
+
+.floating-panel .fp-title{
+  font-weight:400;
+  font-size:18px;
+  letter-spacing:.3px;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+#dinoInfoPanel .fp-header{
+  padding: 2px 2px !important;
+  border-bottom: 1px solid rgba(255,255,255,.00);
+}
+
+#dinoInfoPanel .fp-title{
+  font-size: 18px;       /* tweak */
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.floating-panel .fp-actions{ display:flex; gap:10px; }
+.floating-panel .fp-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  width:22px;
+  height:22px;
+}
+.floating-panel .fp-btn svg{
+  display:block;
+  pointer-events:none;
+  transition:transform .15s ease;
+}
+.floating-panel.collapsed .fp-btn-chevron svg{ transform: rotate(-90deg); }
+
+/* ✅ Floating panel body max height knob lives here */
+.floating-panel .fp-body{
+  padding:0px;
+  overflow:hidden;
+  max-height: var(--fp-body-max-h);
+  opacity:1;
+  transition:max-height .22s ease, opacity .18s ease, padding .22s ease;
+  will-change:max-height, opacity;
+}
+.floating-panel.collapsed .fp-body{
+  max-height:0;
+  opacity:0;
+  padding-top:0;
+  padding-bottom:0;
+  overflow:hidden;
+}
+
+/* Internals */
+.fp-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0px;
+  padding:0;
+  margin:0px 0;
+  color:var(--muted);
+  font-size:12px;
+}
+.fp-col{ flex-direction:column; align-items:stretch; }
+
+/* Dino panel header vibe */
+#dinoInfoPanel:not(.collapsed) .fp-header{
+  border-bottom:none;
+  background-color:transparent;
+}
+#dinoInfoPanel .fp-body{
+ padding-top:0;
+ overflow:hidden;
+}
+
+/* Tabs + swipe pages */
+.fp-tabs{
+  display:flex;
+  gap:2px;
+  padding:0px;
+  margin-bottom:0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  overflow:hidden;
+}
+.fp-tab{
+  background: transparent;
+  color: rgba(255,255,255,0.78);
+  padding: 0px 0px;
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  border-color:rgba(0,140,255,.00);
+  border-radius:4px;
+}
+.fp-tab.is-on{
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+}
+
+.fp-pages{
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+#dinoInfoPanel .fp-page{
+  padding-top: 0 !important;
+}
+
+.fp-track{
+  display:flex;
+  width: 100%;
+  will-change: transform;
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1);
+}
+.fp-page{
+  flex: 0 0 100%;
+  min-width: 100%;
+  padding: 6px;
+  display:block;
+}
+
+.fp-dots{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  padding: 6px 0 10px;
+  opacity: 0.75;
+}
+.fp-dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.25);
+}
+.fp-dot.is-on{ background: rgba(255,255,255,0.9); }
+
+.fp-pages::after{
+  content:"";
+  position:absolute;
+  top:0; right:0;
+  width:24px; height:100%;
+  pointer-events:none;
+  background: linear-gradient(to left, rgba(0,0,0,0.25), rgba(0,0,0,0));
+  opacity: 0.6;
+}
+
+/* ============================================================
+   7) DINO INFO CONTENT (kept minimal)
+   ============================================================ */
+.info-title{
+  font-weight:600;
+  font-size:22px;
+  color:var(--muted);
+  align-items:flex-start;
+  margin-top:0;
+}
+.info-submeta{
+  font-size:12px;
+  opacity:.65;
+  margin-top:-2px;
+  margin-bottom:0;
+}
+.info-subtitle{
+  font-size:11px;
+  font-weight:650;
+  color:var(--muted);
+  margin-bottom:6px;
+  letter-spacing:.2px;
+  text-transform:uppercase;
+}
+.info-section{
+  margin:0 0 0px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  align-items:flex-start;
+}
+
+#dinoInfoPanel .info-section:first-child{
+  padding-top: 0 !important;
+  margin-top: -10 !important;
+}
+
+.info-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:650;
+  text-transform:uppercase;
+}
+
+.info-mono{
+  margin-top:2px;
+  padding:4px 6px;
+  border-radius:6px;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.10);
+
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.176;
+  font-weight:700;
+
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+
+.entry-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:6px 5px;
+  border-radius:6px;
+}
+.entry-row:hover{ background:rgba(255,255,255,.04); }
+.entry-main{ flex:1; min-width:0; }
+.entry-name{
+  font-size:14px;
+  font-weight:650;
+  color:var(--muted);
+}
+.entry-meta-line{
+  margin-top:2px;
+  font-size:12px;
+  text-indent:2mm;
+  font-stretch:semi-condensed;
+  font-weight:600;
+  white-space:nowrap;
+  color:var(--muted);
+  line-height:1.3;
+}
+
+/* ============================================================
+   8) LEAFLET CONTROLS (dock/zoom/attrib)
+   ============================================================ */
+:where(.leaflet-control.map-dock, .leaflet-control.bg-toggle){
+  background:rgba(30,30,30,0.85);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;
+}
+
+:where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn){
+  width:34px;
+  height:34px;
+  border:0;
+  margin:0;
+  padding:0;
+
+  background:rgba(30,30,30,.85);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+:where(.leaflet-control.map-dock .dock-btn:hover, .leaflet-control.bg-toggle .bg-toggle-btn:hover){
+  background:rgba(255,255,255,0.08);
+}
+.leaflet-control.map-dock .dock-btn.is-on{
+  background:rgba(0,140,255,.06);
+  box-shadow: inset 0 0 0 1px rgba(122,162,255,.18);
+}
+
+.leaflet-control-zoom.zoom-horizontal{
+  display:flex;
+  flex-direction:row;
+  overflow:hidden;
+  border-radius:8px;
+
+  background:rgba(30,30,30,0.85);
+  border:1px solid rgba(255,255,255,0.15);
+}
+.leaflet-control-zoom.zoom-horizontal a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  line-height:34px;
+
+  border-bottom:0 !important;
+  background:transparent;
+  color:#fff;
+}
+.leaflet-control-zoom.zoom-horizontal a:hover{ background:rgba(255,255,255,0.08); }
+.leaflet-control-zoom.zoom-horizontal a + a{ border-left:1px solid rgba(255,255,255,0.15); }
+
+.leaflet-bottom.leaflet-left{
+  display:flex;
+  flex-direction:row;
+  align-items:flex-end;
+  gap:8px;
+  padding:8px;
+  box-sizing:border-box;
+}
+.leaflet-bottom.leaflet-left .leaflet-control{ margin:0 !important; }
+
+.leaflet-control-attribution{
+  padding:1px;
+  line-height:1.2;
+  font-size:8px;
+  opacity:.40;
+  border-radius:6px;
+}
+
+/* Persistent Dino hero */
+#dinoInfoPanel .dino-hero{
+  padding: 4px 4px 4px;
+  border-bottom: 1px solid rgba(255,255,255,.00);
+}l
+
+/* Optional sticky hero: stays visible while scrolling long spawns */
+#dinoInfoPanel .dino-hero{
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+
+#dinoInfoPanel .dino-hero-title{
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 2px;
+  margin-top:-18px;
+  z-index: 6;
+  overflow: hidden;
+  display:none !important;
+}
+
+#dinoInfoPanel .fp-tabs{
+  display: flex;
+  gap: 6px;
+}
+
+#dinoInfoPanel .fp-tab{
+  flex: 1 1 0;
+  text-align: center;
+  justify-content: center;
+  padding: 8px 0 1px; 
+}
+
+#dinoInfoPanel .fp-tabs{
+  position: relative;
+  z-index: 4;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+#dinoInfoPanel .fp-tab{
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero surface */
+#dinoInfoPanel .dino-hero{
+  border-bottom: 0 !important;     /* remove the hard seam */
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+/* Tabs surface */
+#dinoInfoPanel .fp-tabs{
+  border-top: 0 !important;        /* remove seam */
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  position: sticky;                /* optional: keeps tabs with hero feel */
+  top: 0;                          /* if you keep sticky tabs, adjust this later */
+  z-index: 2;
+}
+
+/* Hero fades into the tabs below */
+#dinoInfoPanel .dino-hero::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom:-1px;
+  height:22px;                     /* tweak: 16–30px */
+  pointer-events:none;
+}
+
+/* Tabs: keep them clean */
+#dinoInfoPanel .fp-tab{
+  position: relative;
+  background: transparent !important;
+  border: 0 !important;
+  overflow: hidden;
+}
+
+/* Active tab: no flat fill, we paint with ::after */
+#dinoInfoPanel .fp-tab.is-on{
+  background: transparent !important;
+  color: #fff;
+}
+
+/* Bottom-strong highlight that fades upward */
+#dinoInfoPanel .fp-tab.is-on::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:100%;
+  pointer-events:none;
+
+  background: linear-gradient(
+    to top,
+    rgba(255,255,255,.14),   /* strongest at bottom */
+    rgba(255,255,255,.08) 45%,
+    rgba(255,255,255,0) 100% /* fades out at top */
+  );
+}
+
+/* --- Frosted sticky hero + tabs that DO NOT show scrolled text behind --- */
+
+/* Panel should clip; only fp-body scrolls */
+#dinoInfoPanel{ overflow: hidden !important; }
+
+#dinoInfoPanel .fp-body{
+  overflow: hidden;
+  position: relative; /* sticky anchor */
+}
+
+/* knob: set this to your hero’s real height */
+#dinoInfoPanel{ --dino-hero-h: 128px; }
+
+/* Shared "glass" recipe */
+#dinoInfoPanel .dino-hero,
+#dinoInfoPanel .fp-tabs{
+  position: sticky;
+  z-index: 50;
+  isolation: isolate;      /* important: keeps pseudo backdrop behaving */
+}
+
+/* hero sticks at top */
+#dinoInfoPanel .dino-hero{
+  top: 0;
+  z-index: 60;
+}
+
+/* tabs stick UNDER hero */
+#dinoInfoPanel .fp-tabs{
+  top: var(--dino-hero-h);
+  z-index: 55;
+}
+
+/* The actual frosted glass surface lives on ::before */
+#dinoInfoPanel .dino-hero::before,
+#dinoInfoPanel .fp-tabs::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+
+  /* THIS is what prevents text from being visible */
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  /* keep edges clean */
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* If you don’t want a border line on hero, override it */
+#dinoInfoPanel .dino-hero::before{
+  border-bottom: 0;
+}
+
+/* make sure content inside stays above the glass layer */
+#dinoInfoPanel .dino-hero > *,
+#dinoInfoPanel .fp-tabs > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* optional: reduce bleed by ensuring pages are below in stacking */
+#dinoInfoPanel .fp-pages{ position: relative; z-index: 1; }
+
+#dinoInfoPanel { overflow:hidden !important; }
+
+#dinoInfoPanel .fp-body{
+  overflow-y:hidden;
+  overflow-x:hidden;
+  position:relative;
+}
+
+#dinoInfoPanel .dino-hero{
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+#dinoInfoPanel .fp-tabs{
+  position:sticky;
+  top:var(--hero-height,110px);
+  z-index:90;
+}
+
+#dinoInfoPanel .dino-hero::before,
+#dinoInfoPanel .fp-tabs::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+}
+
+#dinoInfoPanel .dino-hero,
+#dinoInfoPanel .fp-tabs{
+  isolation:isolate;
+}
+
+#dinoInfoPanel .fp-pages{
+  position:relative;
+  z-index:1;
+}
+
+
+
+/* ============================
+   DINO PANEL -- FINAL CLEAN LAYOUT
+   ============================ */
+
+/* Panel body becomes vertical layout */
+#dinoInfoPanel .fp-body{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  min-height:0;
+}
+
+/* Hero = fixed section */
+#dinoInfoPanel .dino-hero{
+  flex:0 0 auto;
+
+
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+/* Tabs = fixed section */
+#dinoInfoPanel .fp-tabs{
+  flex:0 0 auto;
+
+  display:flex;
+  gap:6px;
+
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+/* Pages = ONLY scroll container */
+#dinoInfoPanel .fp-pages{
+  flex:1 1 auto;
+  overflow-y:auto;
+  overflow-x:hidden;
+  min-height:0;
+}
+
+/* Track stays normal */
+#dinoInfoPanel .fp-track{
+  display:flex;
+  width:100%;
+}
+
+/* Individual pages */
+#dinoInfoPanel .fp-page{
+  flex:0 0 100%;
+  padding:8px;
+}
+
+/* ============================================================
+   9) MOBILE (<= 955px) -- consolidated
+   ============================================================ */
+@media (max-width:955px){
+  #controlsToggle{ display:inline-flex; }
+
+  #topbar{
+    display:grid;
+    grid-template-columns:1fr auto;
+    grid-template-areas:
+      "title actions"
+      "controls controls";
+    align-items:center;
+    padding:6px;
+  }
+  #topbar .title{
+    grid-area:title;
+    justify-self:start;
+    font-size:12px;
+    margin-left:5px;
+  }
+  #topbar .title-actions{
+    grid-area:actions;
+    justify-self:end;
+    display:flex;
+    gap:4px;
+    align-items:center;
+  }
+
+  #topbar .controls{
+    grid-area:controls;
+    width:100%;
+    justify-self:stretch;
+    display:none;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:4px;
+  }
+  #topbar.show-controls .controls{ display:flex; }
+
+  #topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy){
+    min-width:130px;
+    max-width:none;
+    width:auto;
+  }
+  #topbar .controls > #sourceSelectFancy{ flex: 3 1 0; }
+  #topbar .controls > #mapSelectFancy{    flex: 2 1 0; }
+
+  #topbar .controls > #dinoSelectFancy{
+    flex:1 1 100%;
+    min-width:0;
+    max-width:none;
+    width:auto;
+  }
+
+  /* ✅ Per-dropdown heights (mobile) */
+  #mapSelectFancy    .dd-list{ max-height: var(--dd-map-max-m); }
+  #sourceSelectFancy .dd-list{ max-height: var(--dd-source-max-m); }
+  #dinoSelectFancy   .dd-list{ max-height: var(--dd-dino-max-m); }
+
+  :where(#sourceSelectFancy .dd-btn, #mapSelectFancy .dd-btn, #dinoSelectFancy .dd-btn){
+    padding:7px;
+    border-radius:4px;
+    min-height:34px;
+  }
+
+  /* Panels: base sizing */
+  .floating-panel{
+    width:var(--panel-w-mobile);
+    font-size:11px;
+  }
+  
+  .floating-panel .fp-body{
+    padding:0px;
+    max-height: var(--fp-body-max-h-mobile);
+    opacity:1;
+  }
+
+  #dinoInfoPanel, #modStylePanel{ transition: width .22s ease; }
+
+  #dinoInfoPanel{
+    width:var(--dino-w-mobile);
+    left:6px !important;
+    margin:0 !important;
+    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 12px);
+  }
+  #modStylePanel{
+    width:var(--mod-w-mobile-collapsed);
+    right:6px !important;
+    left:auto !important;
+    margin:0 !important;
+  }
+
+  body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{ width:var(--dino-w-mobile-compact); }
+  body:has(#modStylePanel:not(.collapsed)) #modStylePanel{ width:var(--mod-w-mobile); }
+
+  body:has(#modStylePanel.collapsed) #modStylePanel{ width:var(--mod-w-mobile-collapsed); }
+  body:has(#modStylePanel.collapsed) #dinoInfoPanel{ width:var(--dino-w-mobile); }
+
+  /* Header height lock */
+  #modStylePanel .fp-header{
+    height:25px !important;
+    min-height:25px !important;
+    padding:1px 8px !important;
+    line-height:1 !important;
+  }
+  
+  #dinoInfoPanel .fp-header{
+    padding:1px 4px !important;
+    line-height:1 !important;
+  }
+
+
+  /* Density tweaks */
+  .entry-name{ font-size:11px; font-weight:500; }
+  .entry-meta-line{ font-size:9px; font-weight:380; }
+  .info-mono{ font-size:10px; font-weight:500; }
+  :where(.info-subtitle, .info-row){ font-size:10px; font-weight:500; }
+}
+
+/* Utility */
+[data-_exportHide="1"]{ display:none !important; }
+
+/* ============================================================
+   15) POI ICONS
+   ============================================================ */
+.poi-icon .poi-fill{ fill:currentColor; }
+.poi-icon{ color:#ff00ff; } /* fallback */
+.poi-icon.poi-obeliskblue{ color:#00a5ff; }
+.poi-icon.poi-obeliskgreen{ color:#14e800; }
+.poi-icon.poi-obeliskred{ color:#f70102; }
+.poi-icon.poi-tekcave{ color:#b84cff; }
+
+.poi-icon svg{
+  filter:
+    drop-shadow(0 0 2px rgba(0,0,0,.9))
+    drop-shadow(0 0 6px rgba(0,0,0,.35))
+    drop-shadow(0 0 4px currentColor);
+}
+
+/* ============================================================
    12) RARITY LEGEND
    ============================================================ */
 .rarity-legend{
@@ -868,373 +1337,4 @@ body{
   width:13px;
   height:13px;
   border:1px solid rgba(255,255,255,.18);
-}
-
-[data-_exportHide="1"]{ display:none !important; }
-
-/* ============================================================
-   13) DRILLDOWN CRUMBS
-   ============================================================ */
-.dd-crumbs{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  padding:8px 10px 0;
-  color:var(--muted);
-  font-size:12px;
-  overflow:auto;
-  -webkit-overflow-scrolling:touch;
-}
-
-.dd-crumb{
-  border:0;
-  background:transparent;
-  color:inherit;
-  padding:4px 6px;
-  border-radius:6px;
-}
-.dd-crumb:disabled{ opacity:.75; }
-.dd-crumb-sep{ opacity:.6; }
-.dd-drill-right{ margin-left:auto; opacity:.7; padding-left:10px; }
-
-/* ============================================================
-   14) LEAFLET CONTROLS: DOCK + ZOOM + ATTRIBUTION
-   ============================================================ */
-:where(.leaflet-control.map-dock, .leaflet-control.bg-toggle){
-  background:rgba(30,30,30,0.85);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:8px;
-  overflow:hidden;
-  display:flex;
-}
-
-:where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn){
-  width:34px;
-  height:34px;
-  border:0;
-  margin:0;
-  padding:0;
-
-  background:rgba(30,30,30,.85);
-  color:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-:where(.leaflet-control.map-dock .dock-btn:hover, .leaflet-control.bg-toggle .bg-toggle-btn:hover){
-  background:rgba(255,255,255,0.08);
-}
-
-.leaflet-control.map-dock .dock-btn.is-on{
-  background:rgba(0,140,255,.06);
-  box-shadow: inset 0 0 0 1px rgba(122,162,255,.18);
-}
-
-/* Horizontal zoom */
-.leaflet-control-zoom.zoom-horizontal{
-  display:flex;
-  flex-direction:row;
-  overflow:hidden;
-  border-radius:8px;
-
-  background:rgba(30,30,30,0.85);
-  border:1px solid rgba(255,255,255,0.15);
-}
-.leaflet-control-zoom.zoom-horizontal a{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:34px;
-  height:34px;
-  line-height:34px;
-
-  border-bottom:0 !important;
-  background:transparent;
-  color:#fff;
-}
-.leaflet-control-zoom.zoom-horizontal a:hover{ background:rgba(255,255,255,0.08); }
-.leaflet-control-zoom.zoom-horizontal a + a{ border-left:1px solid rgba(255,255,255,0.15); }
-
-/* Bottom-left controls in a row */
-.leaflet-bottom.leaflet-left{
-  display:flex;
-  flex-direction:row;
-  align-items:flex-end;
-  gap:8px;
-  padding:8px;
-  box-sizing:border-box;
-}
-.leaflet-bottom.leaflet-left .leaflet-control{ margin:0 !important; }
-
-.leaflet-control-attribution{
-  padding:1px;
-  line-height:1.2;
-  font-size:8px;
-  opacity:.40;
-  border-radius:6px;
-}
-
-/* ============================================================
-   15) POI ICONS
-   ============================================================ */
-.poi-icon .poi-fill{ fill:currentColor; }
-.poi-icon{ color:#ff00ff; } /* fallback */
-.poi-icon.poi-obeliskblue{ color:#00a5ff; }
-.poi-icon.poi-obeliskgreen{ color:#14e800; }
-.poi-icon.poi-obeliskred{ color:#f70102; }
-.poi-icon.poi-tekcave{ color:#b84cff; }
-
-.poi-icon svg{
-  filter:
-    drop-shadow(0 0 2px rgba(0,0,0,.9))
-    drop-shadow(0 0 6px rgba(0,0,0,.35))
-    drop-shadow(0 0 4px currentColor);
-}
-
-/* ============================================================
-   16) MOBILE OVERRIDES (<= 955px)
-   ============================================================ */
-@media (max-width:955px){
-  /* Show filters button */
-  #controlsToggle{ display:inline-flex; }
-
-  /* Mobile topbar: title+actions row, controls row toggled */
-  #topbar{
-    display:grid;
-    grid-template-columns:1fr auto;
-    grid-template-areas:
-      "title actions"
-      "controls controls";
-    align-items:center;
-    padding:6px;
-    z-index:2000;
-    position:relative;
-  }
-
-  #topbar .title{
-    grid-area:title;
-    justify-self:start;
-    font-size:12px;
-    margin-left:5px;
-    white-space:nowrap;
-  }
-
-  #topbar .title-actions{
-    grid-area:actions;
-    justify-self:end;
-    display:flex;
-    gap:4px;
-    align-items:center;
-    white-space:nowrap;
-  }
-
-  #topbar .controls{
-    grid-area:controls;
-    width:100%;
-    justify-self:stretch;
-
-    display:none;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:4px;
-  }
-  #topbar.show-controls .controls{ display:flex; }
-
-  #topbar:not(.show-controls){
-    grid-template-areas:"title actions";
-    grid-template-rows:auto;
-    padding-bottom:4px;
-  }
-  #topbar.show-controls{
-    grid-template-rows:auto auto;
-    row-gap:8px;
-  }
-
-  /* Fancy hosts: source/map half width, dino full width */
-  #topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy){
-    min-width:130px;
-    max-width:none;
-    width:auto;
-  }
-  
-  #topbar .controls > # sourceSelectFancy{ 
-    flex: 3 1 0; 
- } /* 60 */
-  #topbar .controls > #mapSelectFancy{    
-    flex: 2 1 0; 
- } /* 40 */
- 
-  #topbar .controls > #dinoSelectFancy{
-    flex:1 1 100%;
-    min-width:0;
-    max-width:none;
-    width:auto;
-  }
-
-  /* Tighten native selects if they appear */
-  #topbar select{
-    min-width:0;
-    max-width:none;
-    width:100%;
-    padding:7px;
-    font-size:13px;
-    border-radius:4px;
-  }
-
-  /* Panel default widths */
-  #dinoInfoPanel{ width:var(--dino-w-mobile); }
-  #modStylePanel{ width:var(--mod-w-mobile-collapsed); }
-
-  /* Width transitions */
-  #dinoInfoPanel, #modStylePanel{ transition: width .22s ease; }
-
-  /* Width swap when mod panel expanded */
-  body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{ width:var(--dino-w-mobile-compact); }
-  body:has(#modStylePanel:not(.collapsed)) #modStylePanel{ width:var(--mod-w-mobile); }
-
-  /* If explicitly collapsed, enforce collapsed width */
-  body:has(#modStylePanel.collapsed) #modStylePanel{ width:var(--mod-w-mobile-collapsed); }
-  body:has(#modStylePanel.collapsed) #dinoInfoPanel{ width:var(--dino-w-mobile); }
-
-  /* Smaller draggable panel base sizing */
-  .floating-panel{
-    width:var(--panel-w-mobile);
-    font-size:11px;
-  }
-
-  /* Dino header title sizing via container query */
-  #dinoInfoPanel{ container-type:inline-size; }
-  #dinoInfoPanel .fp-header{
-    display:flex;
-    align-items:center;
-    padding:0 8px;
-  }
-  #dinoInfoPanel .fp-title{
-    line-height:1;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    font-size:16px;
-  }
-  @container (max-width:260px){ #dinoInfoPanel .fp-title{ font-size:13px; } }
-  @container (max-width:220px){ #dinoInfoPanel .fp-title{ font-size:11px; } }
-
-
-  /* Pin mod panel to right unless dragging */
-  #modStylePanel:not(.dragging){
-    left:auto !important;
-    right:6px;
-  }
-
-  /* Mobile density tweaks */
-  .entry-name{ font-size:11px; font-weight:500; }
-  .entry-meta-line{ font-size:9px; font-weight:380; }
-  .info-mono{ font-size:10px; font-weight:500; }
-  :where(.info-subtitle, .info-row){ font-size:10px; font-weight:500; }
-
-  :where(#sourceSelectFancy, #mapSelectFancy) .dd-item-name{ font-size:13px; }
-
-  :where(#sourceSelectFancy .dd-btn, #mapSelectFancy .dd-btn, #dinoSelectFancy .dd-btn){
-    padding:7px;
-    font-size:10px;
-    border-radius:4px;
-    min-height:34px;
-  }
-
-  /* Your custom nudge (if still desired) */
-  #modeToggle{ margin-right:55px; border-color:var(--control-border); }
-
-  /* Rarity legend reposition */
-  #rarityLegend{
-    bottom:12px;
-    right:10px;
-    left:auto;
-    transform:none;
-  }
-  .rarity-legend .rl-end{ font-size:7px; padding:1px; }
-}
-
-@media (max-width:955px){
-  /* Make right panel align with dropdown right edge */
-  #modStylePanel:not(.dragging){
-    right: 6px !important; /* match #topbar padding */
-    left: auto !important;
-    margin: 0 !important;
-  }
-
-  /* Optional: make left panel match the same edge rule cleanly */
-  #dinoInfoPanel{
-    left: 6px !important;
-    margin: 0 !important;
-  }
-/* ============================================================
-   NUCLEAR PANEL LOCK (mobile)
-   Put this at the VERY END of your CSS so it wins.
-   ============================================================ */
-@media (max-width:955px){
-
-  /* 1) Lock both panels to the same outer geometry */
-  #dinoInfoPanel, #modStylePanel{
-    top: auto;                /* just in case anything weird */
-    margin: 0 !important;
-  }
-
-  #dinoInfoPanel{ left: 6px !important; }
-  #modStylePanel{ right: 6px !important; left: auto !important; }
-
-  /* 2) Lock header height + padding identically for BOTH panels */
-  #dinoInfoPanel .fp-header,
-  #modStylePanel .fp-header{
-    height: 25px !important;
-    min-height: 25px !important;
-    padding: 0 8px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-
-    line-height: 1 !important;
-  }
-
-  /* 3) Make header content deterministic */
-  #dinoInfoPanel .fp-title,
-  #modStylePanel .fp-title{
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-
-    line-height: 1 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  #dinoInfoPanel .fp-actions,
-  #modStylePanel .fp-actions{
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    flex: 0 0 auto !important;
-  }
-
-  #dinoInfoPanel .fp-btn,
-  #modStylePanel .fp-btn{
-    width: 22px !important;
-    height: 22px !important;
-    flex: 0 0 22px !important;
-    padding: 0 !important;
-  }
-
-  /* 4) IMPORTANT: kill the mod-title scaling on mobile header
-        (scaling can change computed height by subpixel rounding) */
-  #modStylePanel .fp-title{
-    transform: none !important;
-  }
-  body:has(#modStylePanel:not(.collapsed)) #modStylePanel .fp-title{
-    transform: none !important;
-  }
 }
