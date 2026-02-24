@@ -824,7 +824,7 @@ body{
 .entry-row:hover{ background:rgba(255,255,255,.04); }
 .entry-main{ flex:1; min-width:0; }
 .entry-name{
-  font-size:34px;
+  font-size:14px;
   font-weight:250;
   color:var(--muted);
 }
@@ -1158,7 +1158,7 @@ body{
     font-weight:500;
   }
   .entry-meta-line{
-    font-size:11px;
+    font-size:19px;
     font-weight:385 !important;
   }
   
