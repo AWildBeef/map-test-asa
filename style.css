@@ -184,12 +184,12 @@ body{
 #topbar{
   background:var(--panel);
   border-bottom:1px solid var(--panel-border);
-  padding:var(--topbar-pad-y) var(--topbar-pad-x) 10px;
+  padding:var(--topbar-pad-y) var(--topbar-pad-x) 1px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:7px;
+  gap:0px;
   flex:0 0 auto;
 
   position:relative;
@@ -223,7 +223,7 @@ body{
 
 #topbar .controls{
   display:flex;
-  gap:12px;
+  gap:10px;
   flex-wrap:wrap;
   justify-content:center;
   align-items:center;
@@ -264,8 +264,9 @@ body{
   #topbar .controls > *{
     flex:1 1 0;
     min-width:200px;
-    max-width:320px;
+    max-width:320px;    
   }
+  .icon-btn{ width:42px; height:42px; }
 }
 
 /* ============================================================
@@ -573,9 +574,9 @@ body{
 .floating-panel.dragging .fp-header{ cursor:grabbing; }
 
 .floating-panel .fp-title{
-  font-weight:400;
-  font-size:18px;
-  letter-spacing:.3px;
+  font-weight:300;
+  font-size:16px;
+  letter-spacing:.2px;
   min-width:0;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -583,15 +584,16 @@ body{
 }
 
 #dinoInfoPanel .fp-header{
-  padding: 2px 2px !important;
+  padding: 5px 2px !important;
   border-bottom: 1px solid rgba(255,255,255,.00);
 }
 
 #dinoInfoPanel .fp-title{
-  font-size: 18px;       /* tweak */
-  font-weight: 400;
+  font-size: 17px;       /* tweak */
+  font-weight: 300;
   color: var(--muted);
   line-height: 1;
+  padding-left:1px;
 }
 
 .floating-panel .fp-actions{ display:flex; gap:10px; }
@@ -600,8 +602,8 @@ body{
   align-items:center;
   justify-content:center;
   padding:0;
-  width:22px;
-  height:22px;
+  width:24px;
+  height:24px;
 }
 .floating-panel .fp-btn svg{
   display:block;
@@ -612,7 +614,7 @@ body{
 
 /* ✅ Floating panel body max height knob lives here */
 .floating-panel .fp-body{
-  padding:0px;
+  padding:4px;
   overflow:hidden;
   max-height: var(--fp-body-max-h);
   opacity:1;
@@ -665,11 +667,12 @@ body{
   padding: 0px 0px;
   font-size: 10px;
   line-height: 1;
+  font-variant: all-small-caps;
+  font-stretch: condensed;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
   border-color:rgba(0,140,255,.00);
-  border-radius:4px;
 }
 .fp-tab.is-on{
   background: rgba(255,255,255,0.10);
@@ -740,13 +743,14 @@ body{
   margin-top:-2px;
   margin-bottom:0;
 }
-.info-subtitle{
-  font-size:11px;
-  font-weight:650;
+.info-subtitle{ 
+  font-size:15px;
+  font-weight:450;
   color:var(--muted);
-  margin-bottom:6px;
-  letter-spacing:.2px;
-  text-transform:uppercase;
+  margin-bottom:3px;
+  margin-top:3px;
+  letter-spacing:.3px;
+  font-variant:all-small-caps;
 }
 .info-section{
   margin:0 0 0px;
@@ -768,7 +772,7 @@ body{
   margin-top:8px;
   color:var(--muted);
   font-size:11px;
-  font-weight:650;
+  font-weight:250;
   text-transform:uppercase;
 }
 
@@ -783,7 +787,7 @@ body{
   font-size:12px;
   color:var(--muted);
   line-height:1.176;
-  font-weight:700;
+  font-weight:100;
 
   white-space:nowrap;
   overflow-x:auto;
@@ -800,17 +804,16 @@ body{
 .entry-row:hover{ background:rgba(255,255,255,.04); }
 .entry-main{ flex:1; min-width:0; }
 .entry-name{
-  font-size:14px;
-  font-weight:650;
+  font-size:34px;
+  font-weight:250;
   color:var(--muted);
 }
 .entry-meta-line{
-  margin-top:2px;
   font-size:12px;
   text-indent:2mm;
   font-stretch:semi-condensed;
   font-weight:600;
-  white-space:nowrap;
+  white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
   line-height:1.3;
 }
@@ -880,6 +883,7 @@ body{
   gap:8px;
   padding:8px;
   box-sizing:border-box;
+  border-radius:8px;
 }
 .leaflet-bottom.leaflet-left .leaflet-control{ margin:0 !important; }
 
@@ -891,71 +895,26 @@ body{
   border-radius:6px;
 }
 
-/* Persistent Dino hero */
+/* ============================
+   DINO PANEL -- FINAL CLEAN LAYOUT
+   ============================ */
+
+/* Panel body becomes vertical layout */
+#dinoInfoPanel .fp-body{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  min-height:0;
+}
+
+/* Hero = fixed section */
 #dinoInfoPanel .dino-hero{
-  padding: 4px 4px 4px;
-  border-bottom: 1px solid rgba(255,255,255,.00);
-}l
-
-/* Optional sticky hero: stays visible while scrolling long spawns */
-#dinoInfoPanel .dino-hero{
-  position: sticky;
-  top: 0;
-  z-index: 3;
-}
-
-
-#dinoInfoPanel .dino-hero-title{
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--muted);
-  margin-bottom: 2px;
-  margin-top:-18px;
-  z-index: 6;
-  overflow: hidden;
-  display:none !important;
-}
-
-#dinoInfoPanel .fp-tabs{
-  display: flex;
-  gap: 6px;
-}
-
-#dinoInfoPanel .fp-tab{
-  flex: 1 1 0;
-  text-align: center;
-  justify-content: center;
-  padding: 8px 0 1px; 
-}
-
-#dinoInfoPanel .fp-tabs{
-  position: relative;
-  z-index: 4;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-
-#dinoInfoPanel .fp-tab{
-  position: relative;
-  overflow: hidden;
-}
-
-/* Hero surface */
-#dinoInfoPanel .dino-hero{
-  border-bottom: 0 !important;     /* remove the hard seam */
-  position: sticky;
-  top: 0;
-  z-index: 3;
-}
-
-/* Tabs surface */
-#dinoInfoPanel .fp-tabs{
-  border-top: 0 !important;        /* remove seam */
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  position: sticky;                /* optional: keeps tabs with hero feel */
-  top: 0;                          /* if you keep sticky tabs, adjust this later */
-  z-index: 2;
+  flex:0 0 auto;
+  padding-left:6px;
+  padding-top:0px;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 0 !important;
 }
 
 /* Hero fades into the tabs below */
@@ -968,18 +927,33 @@ body{
   pointer-events:none;
 }
 
+#dinoInfoPanel .dino-hero-title{
+  overflow: hidden;
+  display:none !important;
+}
+
+/* Tabs = fixed section */
+#dinoInfoPanel .fp-tabs{
+  flex:0 0 auto;
+
+  display:flex;
+  gap:6px;
+
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
 /* Tabs: keep them clean */
 #dinoInfoPanel .fp-tab{
   position: relative;
   background: transparent !important;
   border: 0 !important;
   overflow: hidden;
-}
-
-/* Active tab: no flat fill, we paint with ::after */
-#dinoInfoPanel .fp-tab.is-on{
-  background: transparent !important;
-  color: #fff;
+  flex: 1 1 0;
+  text-align: center;
+  justify-content: center;
+  padding: 8px 0 1px;
 }
 
 /* Bottom-strong highlight that fades upward */
@@ -998,154 +972,15 @@ body{
   );
 }
 
-/* --- Frosted sticky hero + tabs that DO NOT show scrolled text behind --- */
-
-/* Panel should clip; only fp-body scrolls */
-#dinoInfoPanel{ overflow: hidden !important; }
-
-#dinoInfoPanel .fp-body{
-  overflow: hidden;
-  position: relative; /* sticky anchor */
-}
-
-/* knob: set this to your hero’s real height */
-#dinoInfoPanel{ --dino-hero-h: 128px; }
-
-/* Shared "glass" recipe */
-#dinoInfoPanel .dino-hero,
-#dinoInfoPanel .fp-tabs{
-  position: sticky;
-  z-index: 50;
-  isolation: isolate;      /* important: keeps pseudo backdrop behaving */
-}
-
-/* hero sticks at top */
-#dinoInfoPanel .dino-hero{
-  top: 0;
-  z-index: 60;
-}
-
-/* tabs stick UNDER hero */
-#dinoInfoPanel .fp-tabs{
-  top: var(--dino-hero-h);
-  z-index: 55;
-}
-
-/* The actual frosted glass surface lives on ::before */
-#dinoInfoPanel .dino-hero::before,
-#dinoInfoPanel .fp-tabs::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-
-  /* THIS is what prevents text from being visible */
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-
-  /* keep edges clean */
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-
-/* If you don’t want a border line on hero, override it */
-#dinoInfoPanel .dino-hero::before{
-  border-bottom: 0;
-}
-
-/* make sure content inside stays above the glass layer */
-#dinoInfoPanel .dino-hero > *,
-#dinoInfoPanel .fp-tabs > *{
-  position: relative;
-  z-index: 1;
-}
-
-/* optional: reduce bleed by ensuring pages are below in stacking */
-#dinoInfoPanel .fp-pages{ position: relative; z-index: 1; }
-
-#dinoInfoPanel { overflow:hidden !important; }
-
-#dinoInfoPanel .fp-body{
-  overflow-y:hidden;
-  overflow-x:hidden;
-  position:relative;
-}
-
-#dinoInfoPanel .dino-hero{
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-
-#dinoInfoPanel .fp-tabs{
-  position:sticky;
-  top:var(--hero-height,110px);
-  z-index:90;
-}
-
-#dinoInfoPanel .dino-hero::before,
-#dinoInfoPanel .fp-tabs::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-
-  backdrop-filter:blur(14px) saturate(140%);
-  -webkit-backdrop-filter:blur(14px) saturate(140%);
-}
-
-#dinoInfoPanel .dino-hero,
-#dinoInfoPanel .fp-tabs{
-  isolation:isolate;
-}
-
-#dinoInfoPanel .fp-pages{
-  position:relative;
-  z-index:1;
-}
-
-
-
-/* ============================
-   DINO PANEL -- FINAL CLEAN LAYOUT
-   ============================ */
-
-/* Panel body becomes vertical layout */
-#dinoInfoPanel .fp-body{
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  min-height:0;
-}
-
-/* Hero = fixed section */
-#dinoInfoPanel .dino-hero{
-  flex:0 0 auto;
-
-
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-/* Tabs = fixed section */
-#dinoInfoPanel .fp-tabs{
-  flex:0 0 auto;
-
-  display:flex;
-  gap:6px;
-
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-
 /* Pages = ONLY scroll container */
 #dinoInfoPanel .fp-pages{
   flex:1 1 auto;
   overflow-y:auto;
   overflow-x:hidden;
   min-height:0;
+  margin-top:1px;
+  position:relative;
+  z-index:1;
 }
 
 /* Track stays normal */
@@ -1173,19 +1008,21 @@ body{
       "title actions"
       "controls controls";
     align-items:center;
-    padding:6px;
+    padding:0px;
   }
   #topbar .title{
     grid-area:title;
     justify-self:start;
-    font-size:12px;
-    margin-left:5px;
+    font-size:16px;
+    font-weight:800;
+    font-stretch:condensed;
+    margin-left:10px;
   }
   #topbar .title-actions{
     grid-area:actions;
     justify-self:end;
     display:flex;
-    gap:4px;
+    gap:30px;
     align-items:center;
   }
 
@@ -1238,7 +1075,7 @@ body{
     opacity:1;
   }
 
-  #dinoInfoPanel, #modStylePanel{ transition: width .22s ease; }
+  #dinoInfoPanel, #modStylePanel{ transition: width .12s ease; }
 
   #dinoInfoPanel{
     width:var(--dino-w-mobile);
@@ -1250,7 +1087,7 @@ body{
     width:var(--mod-w-mobile-collapsed);
     right:6px !important;
     left:auto !important;
-    margin:0 !important;
+    margin:2 !important;
   }
 
   body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{ width:var(--dino-w-mobile-compact); }
@@ -1263,7 +1100,7 @@ body{
   #modStylePanel .fp-header{
     height:25px !important;
     min-height:25px !important;
-    padding:1px 8px !important;
+    padding:1px 4px !important;
     line-height:1 !important;
   }
   
@@ -1272,12 +1109,16 @@ body{
     line-height:1 !important;
   }
 
-
   /* Density tweaks */
-  .entry-name{ font-size:11px; font-weight:500; }
-  .entry-meta-line{ font-size:9px; font-weight:380; }
-  .info-mono{ font-size:10px; font-weight:500; }
-  :where(.info-subtitle, .info-row){ font-size:10px; font-weight:500; }
+  .entry-name{
+    font-size:11px;
+    font-weight:500;
+  }
+  .entry-meta-line{
+    font-size:9px;
+    font-weight:385 !important;
+  }
+  
 }
 
 /* Utility */
@@ -1337,4 +1178,31 @@ body{
   width:13px;
   height:13px;
   border:1px solid rgba(255,255,255,.18);
+}
+
+/* ============================================================
+   10) COPY BUBBLE
+   ============================================================ */
+.copy-on-click{ cursor:pointer; }
+
+.copy-bubble{
+  position:fixed;
+  z-index:99999;
+
+  background:#1ed760;
+  color:#000;
+  font-weight:600;
+  font-size:12px;
+
+  padding:3px 7px;
+  border-radius:6px;
+
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .18s ease, transform .18s ease;
+}
+.copy-bubble.show{
+  opacity:1;
+  transform:translateY(0);
 }

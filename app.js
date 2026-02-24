@@ -144,6 +144,16 @@ async function buildSources() {
 }
 
 // ============================================================
+// CURRENT RENDER CACHE (for smooth toggle redraws)
+// ============================================================
+let currentRender = {
+  mode: null,       // "dino" | "entry"
+  cfg: null,        // the cfg currently being drawn
+  dinoKey: null,    // "__tmp__" in grouped dino view, real key in other cases
+  entryClass: null, // entry mode selection
+};
+
+// ============================================================
 // STATE
 // ============================================================
 let currentMapId = "";
@@ -562,7 +572,6 @@ function drawGroupedDino(grouped, displayName) {
     additionalBpPathsToDisplay: grouped.bps?.slice(1) || [],
     entries: grouped.entries || [],
 
-    // ✅ NEW
     nameTag: grouped.nameTag || "",
     tameable: grouped.tameable,
     breedable: grouped.breedable,
@@ -575,6 +584,13 @@ function drawGroupedDino(grouped, displayName) {
 
   const fakeCfg = { dinos: { __tmp__: dino } };
   preprocessCfg(fakeCfg);
+
+  // ✅ cache what is currently being drawn so toggles can redraw map-only
+  currentRender.mode = "dino";
+  currentRender.cfg = fakeCfg;
+  currentRender.dinoKey = "__tmp__";
+  currentRender.entryClass = null;
+
   drawDino(fakeCfg, "__tmp__");
   renderInfoPanelForDino(fakeCfg, "__tmp__");
 }
@@ -1687,6 +1703,63 @@ function redrawSelected() {
     drawSpawnEntry(currentCfg, sel.value);
     renderInfoPanelForEntry(currentCfg, sel.value);
   }
+}
+
+function redrawMapOnly() {
+  if (!mapObj) return;
+
+  if (currentViewMode === "dino") {
+    // Prefer cached grouped cfg if we have it
+    if (currentRender.mode === "dino" && currentRender.cfg && currentRender.dinoKey) {
+      drawDino(currentRender.cfg, currentRender.dinoKey);
+      return;
+    }
+
+    // fallback: do the grouped build without re-rendering the panel
+    const sel = document.getElementById("dinoSelect");
+    if (!currentCfg || !sel?.value) return;
+
+    const displayName = sel.value;
+    const bps = currentNameToBps?.get(displayName) || [];
+    const grouped = buildGroupedSelection(currentCfg, bps);
+
+    const dino = {
+      displayName,
+      bpPath: grouped.bps?.[0] || "",
+      additionalBpPathsToDisplay: grouped.bps?.slice(1) || [],
+      entries: grouped.entries || [],
+      nameTag: grouped.nameTag || "",
+      tameable: grouped.tameable,
+      breedable: grouped.breedable,
+      isAlpha: grouped.isAlpha,
+      isBoss: grouped.isBoss,
+      isBossMinion: grouped.isBossMinion,
+      dragWeight: grouped.dragWeight,
+      killXpBase: grouped.killXpBase
+    };
+
+    const fakeCfg = { dinos: { __tmp__: dino } };
+    preprocessCfg(fakeCfg);
+
+    currentRender.mode = "dino";
+    currentRender.cfg = fakeCfg;
+    currentRender.dinoKey = "__tmp__";
+    currentRender.entryClass = null;
+
+    drawDino(fakeCfg, "__tmp__");
+    return;
+  }
+
+  // entry mode: just redraw the entry shapes (panel stays as-is)
+  const sel = document.getElementById("dinoSelect");
+  if (!currentCfg || !sel?.value) return;
+
+  currentRender.mode = "entry";
+  currentRender.cfg = currentCfg;
+  currentRender.dinoKey = null;
+  currentRender.entryClass = sel.value;
+
+  drawSpawnEntry(currentCfg, sel.value);
 }
 
 function preloadImage(url) {
@@ -3231,7 +3304,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     chk.onchange = () => {
       const key = chk.dataset.key;
       entryVisibility[key] = chk.checked;
-      redrawSelected();
+      requestAnimationFrame(redrawMapOnly);
     };
   });
 }
