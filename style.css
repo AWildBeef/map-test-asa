@@ -202,6 +202,7 @@ body{
   justify-content:space-between;
   gap:6px;
   width:100%;
+  padding-bottom:4px;
 }
 
 #topbar .title{
@@ -219,6 +220,9 @@ body{
   align-items:center;
   gap:8px;
   white-space:nowrap;
+  padding-top:4px;
+  padding-bottom:4px;
+  padding-right:4px;
 }
 
 #topbar .controls{
@@ -228,6 +232,10 @@ body{
   justify-content:center;
   align-items:center;
   width:min(1100px, 100%);
+  padding-left:4px;
+  padding-right:4px;
+  padding-top:0px;
+  padding-bottom:4px;
 }
 
 /* Native selects (if present) */
@@ -266,7 +274,19 @@ body{
     min-width:200px;
     max-width:320px;    
   }
-  .icon-btn{ width:42px; height:42px; }
+  
+  .leaflet-control.map-dock .dock-btn{
+    width: 42px;
+    height: 42px;
+  }
+  :where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn){
+    width:42px;
+    height:42px;
+  }
+  .leaflet-control-zoom.zoom-horizontal a{
+    width:42px;
+    height:42px;
+  }
 }
 
 /* ============================================================
@@ -590,7 +610,7 @@ body{
 
 #dinoInfoPanel .fp-title{
   font-size: 17px;       /* tweak */
-  font-weight: 300;
+  font-weight: 400;
   color: var(--muted);
   line-height: 1;
   padding-left:1px;
@@ -821,6 +841,29 @@ body{
 /* ============================================================
    8) LEAFLET CONTROLS (dock/zoom/attrib)
    ============================================================ */
+.leaflet-control.map-dock{
+  background: rgba(30,30,30,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  display:flex;
+}
+
+.leaflet-control.map-dock .dock-btn{
+  width: 34px;
+  height: 34px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: rgba(30,30,30,.85);
+  color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+ 
 :where(.leaflet-control.map-dock, .leaflet-control.bg-toggle){
   background:rgba(30,30,30,0.85);
   border:1px solid rgba(255,255,255,0.15);
@@ -1115,7 +1158,7 @@ body{
     font-weight:500;
   }
   .entry-meta-line{
-    font-size:9px;
+    font-size:11px;
     font-weight:385 !important;
   }
   
