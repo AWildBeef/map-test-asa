@@ -256,38 +256,6 @@ body{
 }
 #topbar select:hover{ border-color:#596273; }
 
-/* Desktop topbar grid */
-@media (min-width:956px){
-  #topbar{
-    display:grid;
-    grid-template-columns:auto 1fr auto;
-    align-items:center;
-    column-gap:14px;
-  }
-  #topbar .controls{
-    justify-self:center;
-    flex-wrap:nowrap;
-    min-width:0;
-  }
-  #topbar .controls > *{
-    flex:1 1 0;
-    min-width:200px;
-    max-width:320px;    
-  }
-  
-  .leaflet-control.map-dock .dock-btn{
-    width: 42px;
-    height: 42px;
-  }
-  :where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn){
-    width:42px;
-    height:42px;
-  }
-  .leaflet-control-zoom.zoom-horizontal a{
-    width:42px;
-    height:42px;
-  }
-}
 
 /* ============================================================
    4) BUTTONS
@@ -573,9 +541,6 @@ body{
 
   overflow:hidden;
   transform:translateZ(0);
-
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
 }
 
 .floating-panel .fp-header{
@@ -1248,4 +1213,38 @@ body{
 .copy-bubble.show{
   opacity:1;
   transform:translateY(0);
+}
+
+/* Desktop topbar grid */
+@media (min-width:956px){
+  #topbar{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    column-gap:14px;
+  }
+  #topbar .controls{
+    justify-self:center;
+    flex-wrap:nowrap;
+    min-width:0;
+  }
+  #topbar .controls > *{
+    flex:1 1 0;
+    min-width:200px;
+    max-width:320px;    
+  }
+  
+  .leaflet-control.map-dock .dock-btn{
+    width: 42px;
+    height: 42px;
+  }
+  
+  :where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn){
+    width:42px;
+    height:42px;
+  }
+  .leaflet-control-zoom.zoom-horizontal a{
+    width:42px;
+    height:42px;
+  }
 }
