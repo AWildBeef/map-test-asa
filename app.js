@@ -3091,7 +3091,7 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
     const metaLines = buildEntryMetaLines(e);
 
     return `
-      <div class="entry-meta" style="margin-top:4px;">
+      <div class="entry-meta">
         ${metaLines.map(line => {
           const isChances = String(line).toLowerCase().startsWith("spawn chances");
           const cls = isChances
@@ -3104,12 +3104,12 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
   }).join("");
 
   return `
-    <div class="info-section" style="padding-bottom:8px;">
+    <div class="info-section">
       <div class="info-row">
         <span class="info-label">${escapeHtml(displayName)}</span>
       </div>
       ${bp ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}">${escapeHtml(bp)}</div>` : ``}
-      ${nameTag ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)} style="margin-top:4px;">${escapeHtml(nameTag)}</div>` : ``}
+      ${nameTag ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}>${escapeHtml(nameTag)}</div>` : ``}
       ${entryLinesHtml}
     </div>
   `;
@@ -3130,7 +3130,7 @@ function renderDinoHero({ displayName, allBps, nameTag, d }) {
   `;
 
   const tagBlock = `
-    <div class="info-subtitle" style="margin-top:10px;">Nametag</div>
+    <div class="info-subtitle">Nametag</div>
     <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}">
       ${escapeHtml(nameTag || "(none)")}
     </div>
@@ -3162,12 +3162,13 @@ function renderDinoTab_Info({ d }) {
   return `
     <div class="info-section">
       <div class="info-subtitle">Details</div>
-      <div class="entry-meta" style="margin-top:6px;">
+      <div class="entry-meta">
         ${tame === null ? `` : `<div class="entry-meta-line">Tameable: ${tame ? "Yes" : "No"}</div>`}
         ${breed === null ? `` : `<div class="entry-meta-line">Breedable: ${breed ? "Yes" : "No"}</div>`}
       </div>
+      
 
-      <div style="color:var(--muted); margin-top:10px;">
+      <div style="color:var(--muted);">
         (Add whatever "Info" content you want here now.)
       </div>
     </div>
@@ -3195,12 +3196,12 @@ function renderDinoTab_Stats(d) {
     <div class="info-section">
       <div class="info-subtitle">Stats</div>
 
-      <div class="entry-meta" style="margin-top:6px;">
+      <div class="entry-meta">
         ${drag !== null ? `<div class="entry-meta-line">Drag Weight: ${escapeHtml(drag)}</div>` : ``}
         ${xp   !== null ? `<div class="entry-meta-line">Kill XP: ${escapeHtml(String(Number(xp)*4))}</div>` : ``}
       </div>
 
-      <div class="entry-meta" style="margin-top:10px; color:var(--muted);">
+      <div class="entry-meta" color:var(--muted);">
         (More stat breakdown here later if you want.)
       </div>
     </div>

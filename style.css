@@ -606,6 +606,7 @@ body{
   transition:max-height .22s ease, opacity .18s ease, padding .22s ease;
   will-change:max-height, opacity;
 }
+
 .floating-panel.collapsed .fp-body{
   max-height:0;
   opacity:0;
@@ -615,16 +616,7 @@ body{
 }
 
 /* Internals */
-.fp-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:0px;
-  padding:0;
-  margin:0px 0;
-  color:var(--muted);
-  font-size:12px;
-}
+
 .fp-col{ flex-direction:column; align-items:stretch; }
 
 /* Dino panel header vibe */
@@ -632,85 +624,39 @@ body{
   border-bottom:none;
   background-color:transparent;
 }
-#dinoInfoPanel .fp-body{
- padding-top:0;
- overflow:hidden;
-}
 
-/* Tabs + swipe pages */
-.fp-tabs{
+
+/* Panel body becomes vertical layout */
+
+
+#modStylePanel.collapsed .fp-body{
   display:flex;
-  gap:2px;
-  padding:0px;
-  margin-bottom:0;
-  border-bottom:1px solid rgba(255,255,255,0.08);
+  flex-direction:column;
   overflow:hidden;
-}
-.fp-tab{
-  background: transparent;
-  color: rgba(255,255,255,0.78);
-  padding: 0px 0px;
-  font-size: 10px;
-  line-height: 1;
-  font-variant: all-small-caps;
-  font-stretch: condensed;
-  cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
-  border-color:rgba(0,140,255,.00);
-}
-.fp-tab.is-on{
-  background: rgba(255,255,255,0.10);
-  color: #fff;
+  min-height:0;
+  padding:0px;
 }
 
-.fp-pages{
-  position: relative;
-  overflow: hidden;
-  touch-action: pan-y;
-}
-
-#dinoInfoPanel .fp-page{
-  padding-top: 0 !important;
-}
-
-.fp-track{
+#modStylePanel .fp-body{
   display:flex;
-  width: 100%;
-  will-change: transform;
-  transition: transform 220ms cubic-bezier(.2,.8,.2,1);
-}
-.fp-page{
-  flex: 0 0 100%;
-  min-width: 100%;
-  padding: 6px;
-  display:block;
+  flex-direction:column;
+  overflow:hidden;
+  min-height:0;
+  padding:4px;
 }
 
-.fp-dots{
+.fp-row{
   display:flex;
-  justify-content:center;
-  gap:6px;
-  padding: 6px 0 10px;
-  opacity: 0.75;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:10px 0;
+  color:var(--muted);
+  font-size:12px;
 }
-.fp-dot{
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.25);
-}
-.fp-dot.is-on{ background: rgba(255,255,255,0.9); }
+.fp-col{ flex-direction:column; align-items:stretch; }
+.fp-between{ width:100%; }
 
-.fp-pages::after{
-  content:"";
-  position:absolute;
-  top:0; right:0;
-  width:24px; height:100%;
-  pointer-events:none;
-  background: linear-gradient(to left, rgba(0,0,0,0.25), rgba(0,0,0,0));
-  opacity: 0.6;
-}
 
 /* ============================================================
    7) DINO INFO CONTENT (kept minimal)
@@ -796,7 +742,6 @@ body{
 .entry-meta-line{
   font-size:12px;
   text-indent:2mm;
-  font-stretch:semi-condensed;
   font-weight:600;
   white-space:nowrap; /* use white-space, not text-wrap */
   color:var(--muted);
@@ -962,6 +907,9 @@ body{
   text-align: center;
   justify-content: center;
   padding: 8px 0 1px;
+  text-transform:uppercase;
+  font-size: 10px;
+  color: rgba(255,255,255,0.78);
 }
 
 /* Bottom-strong highlight that fades upward */
@@ -986,7 +934,7 @@ body{
   overflow-y:auto;
   overflow-x:hidden;
   min-height:0;
-  margin-top:1px;
+  margin-top:2px;
   position:relative;
   z-index:1;
 }
@@ -1002,6 +950,21 @@ body{
   flex:0 0 100%;
   padding:8px;
 }
+
+.fp-dots{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  padding: 6px 0 10px;
+  opacity: 0.75;
+}
+.fp-dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.25);
+}
+.fp-dot.is-on{ background: rgba(255,255,255,0.9); }
 
 /* ============================================================
    9) MOBILE (<= 955px) -- consolidated
@@ -1095,7 +1058,7 @@ body{
     width:var(--mod-w-mobile-collapsed);
     right:6px !important;
     left:auto !important;
-    margin:2 !important;
+    margin:0 !important;
   }
 
   body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{ width:var(--dino-w-mobile-compact); }
@@ -1106,8 +1069,6 @@ body{
 
   /* Header height lock */
   #modStylePanel .fp-header{
-    height:25px !important;
-    min-height:25px !important;
     padding:1px 4px !important;
     line-height:1 !important;
   }
@@ -1123,8 +1084,8 @@ body{
     font-weight:500;
   }
   .entry-meta-line{
-    font-size:19px;
-    font-weight:385 !important;
+    font-size:9px;
+    font-weight:400 !important;
   }
   
 }

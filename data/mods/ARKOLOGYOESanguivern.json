@@ -235,10 +235,10 @@
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
               "spawnChances": "100",
-              "groupWeight": 0.05,
-              "weight": 0.05,
+              "groupWeight": 1.0,
+              "weight": 1.0,
               "display": {
-                "weightText": "Entry Weight: 0.05",
+                "weightText": "Entry Weight: 1",
                 "limitText": "Max % To Allow: 100%",
                 "chanceText": "Spawn Chances: 100%"
               },
@@ -266,10 +266,10 @@
               "spawnMultiplier": 1.0,
               "spawnLimit": 1.0,
               "spawnChances": "100",
-              "groupWeight": 0.05,
-              "weight": 0.0125,
+              "groupWeight": 1.0,
+              "weight": 0.25,
               "display": {
-                "weightText": "Entry Weight: 0.05",
+                "weightText": "Entry Weight: 1",
                 "limitText": "Max % To Allow: 100%",
                 "chanceText": "Spawn Chances: 100%"
               },
