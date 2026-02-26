@@ -368,6 +368,41 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+function cleanName(s){
+  const x = String(s ?? "").trim();
+  return x.length ? x : "";
+}
+
+function labelsForDino(d){
+  const f = cleanName(d?.fName);
+  const m = cleanName(d?.mName);
+  const disp = cleanName(d?.displayName);
+
+  // If we have sex names, ONLY use those (no displayName)
+  const out = [];
+  if (f) out.push(f);
+  if (m && m.toLowerCase() !== f.toLowerCase()) out.push(m);
+
+  if (out.length) return out;
+
+  // fallback
+  return disp ? [disp] : [cleanName(d?.nameTag) || cleanName(d?.bpPath)];
+}
+
+function otherSexNameForSelected(d, selectedLabel){
+  const f = cleanName(d?.fName);
+  const m = cleanName(d?.mName);
+  const sel = cleanName(selectedLabel);
+
+  // If selected matches f, return m, and vice versa
+  if (!sel) return "";
+  if (f && sel.toLowerCase() === f.toLowerCase()) return m;
+  if (m && sel.toLowerCase() === m.toLowerCase()) return f;
+
+  // otherwise return both collapsed or nothing
+  if (f && m && f.toLowerCase() !== m.toLowerCase()) return `${f} / ${m}`;
+  return "";
+}
 
 
 async function fileExists(url) {
@@ -570,6 +605,8 @@ function drawGroupedDino(grouped, displayName) {
 
   const dino = {
     displayName,
+    fName: grouped.fName || "",
+    mName: grouped.mName || "",
     bpPath: grouped.bps?.[0] || "",
     additionalBpPathsToDisplay: grouped.bps?.slice(1) || [],
     entries: grouped.entries || [],
@@ -598,17 +635,19 @@ function drawGroupedDino(grouped, displayName) {
 }
 
 function buildNameIndex(dinosByBp) {
-  const nameToBps = new Map(); // displayName -> [bp, bp, ...]
+  const nameToBps = new Map(); // label -> [bp...]
   for (const [bp, d] of Object.entries(dinosByBp)) {
-    const name = (d.displayName || bp).trim();
-    if (!nameToBps.has(name)) nameToBps.set(name, []);
-    nameToBps.get(name).push(bp);
+    const labels = labelsForDino(d); // ✅ now can be [fName, mName]
+    for (const label of labels) {
+      if (!nameToBps.has(label)) nameToBps.set(label, []);
+      nameToBps.get(label).push(bp);
+    }
   }
 
-  // stable sort within each name group (optional)
-  for (const [name, arr] of nameToBps) arr.sort();
+  // stable sort within each label group (optional)
+  for (const [label, arr] of nameToBps) arr.sort();
 
-  // dropdown options (unique names)
+  // dropdown options
   const names = [...nameToBps.keys()].sort((a,b)=>a.localeCompare(b));
   return { nameToBps, names };
 }
@@ -674,6 +713,8 @@ function buildGroupedSelection(mapData, bps) {
 
     // ✅ identity-ish fields
     nameTag: firstNonEmpty(picked, d => d.nameTag ?? d.nametag),
+    fName: firstNonEmpty(picked, d => d.fName),
+    mName: firstNonEmpty(picked, d => d.mName),
     tameable: anyTrue(picked, d => d.tameable),
     breedable: anyTrue(picked, d => d.breedable),
     isAlpha: anyTrue(picked, d => d.isAlpha),
@@ -1727,6 +1768,8 @@ function redrawMapOnly() {
 
     const dino = {
       displayName,
+      fName: grouped.fName || "",
+      mName: grouped.mName || "",
       bpPath: grouped.bps?.[0] || "",
       additionalBpPathsToDisplay: grouped.bps?.slice(1) || [],
       entries: grouped.entries || [],
@@ -3111,15 +3154,13 @@ function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {
         <span class="info-label">${escapeHtml(displayName)}</span>
       </div>
       ${bp ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}">${escapeHtml(bp)}</div>` : ``}
-      ${nameTag ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}>${escapeHtml(nameTag)}</div>` : ``}
+      ${nameTag ? `<div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}">${escapeHtml(nameTag)}</div>` : ``}
       ${entryLinesHtml}
     </div>
   `;
 }
 
-function renderDinoHero({ displayName, allBps, nameTag, d }) {
-  // NOTE: quick badges + stats placeholders live here (always visible)
-  // We keep blueprint + nametag here too (shared identity info).
+function renderDinoHero({ displayName, sexLine = "", allBps, nameTag, d }) {
   const modLine = currentModMeta?.id
     ? `<div class="info-submeta">Mod ID: ${escapeHtml(currentModMeta.id)}</div>`
     : ``;
@@ -3141,6 +3182,7 @@ function renderDinoHero({ displayName, allBps, nameTag, d }) {
   return `
     <div class="dino-hero">
       <div class="dino-hero-title">${escapeHtml(displayName)}</div>
+      ${sexLine || ""}   <!-- ✅ now it actually shows -->
       ${modLine}
 
       <div class="dino-quick">
@@ -3231,7 +3273,16 @@ function renderInfoPanelForDino(cfg, dinoKey) {
     return;
   }
 
-  const displayName = d.displayName || dinoKey;
+  const pickedLabel = document.getElementById("dinoSelect")?.value || "";
+  const f = cleanName(d.fName);
+  const m = cleanName(d.mName);
+
+  const displayName = (f || m)
+    ? [f, m].filter(Boolean).join(" / ")
+    : (d.displayName || dinoKey);
+
+  // keep panel title matching the selected dropdown label (feels best)
+  setInfoPanelTitle(pickedLabel || displayName);
 
   // ✅ Header title = dino name (always visible)
   setInfoPanelTitle(displayName);
@@ -3242,11 +3293,14 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const allBps = [bp, ...extraBps].filter(Boolean);
 
   const entries = d.entries || [];
+  const sexLine = (f || m)
+    ? `<div class="info-submeta">${escapeHtml([f,m].filter(Boolean).join(" / "))}</div>`
+    : ``;
 
   if (!INFO_TABS.some(t => t.id === infoTab)) infoTab = "info";
 
   body.innerHTML = `
-    ${renderDinoHero({ displayName, allBps, nameTag, d })}
+    ${renderDinoHero({ sexLine, displayName, allBps, nameTag, d })}
 
     <div class="fp-tabs">
       ${INFO_TABS.map(t => `
