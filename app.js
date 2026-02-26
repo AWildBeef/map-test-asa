@@ -106,7 +106,7 @@ const MAPS = [
     id: "Astraeos",
     file: "data/Astraeos.json",
     backgrounds: [
-      { id: "hand", label: "In Game",   url: "maps/astraeos_ingame.webp" },
+      { id: "hand", label: "In Game",   url: "maps/Astraeos_IngameMap.webp" },
       { id: "sat",  label: "Satellite", url: "maps/astraeos.webp" }
     ],
     defaultBg: "sat"
@@ -367,6 +367,8 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // ============================================================
 // HELPERS
 // ============================================================
+
+
 
 async function fileExists(url) {
   try {
