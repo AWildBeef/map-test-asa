@@ -434,7 +434,7 @@ async function loadJSON(path) {
 
   if (jsonCache[url]) return jsonCache[url];
 
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
 
   const data = await res.json();
@@ -3658,7 +3658,7 @@ async function boot() {
   setupMapDropdown();
 
   // kick off preloading
-  preloadMapAssets();
+  
 
   document.getElementById("controlsToggle")?.addEventListener("click", () => {
     document.getElementById("topbar")?.classList.toggle("show-controls");
