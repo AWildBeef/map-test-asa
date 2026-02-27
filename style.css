@@ -543,6 +543,13 @@ body{
   transform:translateZ(0);
 }
 
+.leaflet-control .floating-panel{
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+}
+
 .floating-panel .fp-header{
   display:flex;
   align-items:center;
