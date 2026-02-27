@@ -558,12 +558,10 @@ body{
   padding:2px 2px;
   border-bottom:1px solid rgba(255,255,255,.08);
 
-  cursor:grab;
   user-select:none;
   touch-action:none;
   margin-bottom:0;
 }
-.floating-panel.dragging .fp-header{ cursor:grabbing; }
 
 .floating-panel .fp-title{
   font-weight:300;
@@ -607,11 +605,12 @@ body{
 /* ✅ Floating panel body max height knob lives here */
 .floating-panel .fp-body{
   padding:4px;
-  overflow:hidden;
+  overflow:auto;
   max-height: var(--fp-body-max-h);
   opacity:1;
   transition:max-height .22s ease, opacity .18s ease, padding .22s ease;
   will-change:max-height, opacity;
+  -webkit-overflow-scrolling: touch;
 }
 
 .floating-panel.collapsed .fp-body{
