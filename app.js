@@ -162,17 +162,11 @@ async function buildSources() {
     ...(m.group ? { group: m.group } : {})
   }));
 
-  // alphabetical by name
   mods.sort((a,b)=>a.name.localeCompare(b.name));
-  for (const m of mods) {
-    m.hasFile = await fileExists(m.file);
-  }
-
-  const realMods = mods.filter(m => m.hasFile);
 
   return [
     { id:"official", name:"Official", order:100 },
-    ...realMods
+    ...mods
   ];
 }
 
@@ -2204,9 +2198,9 @@ function renderDock(){
       title: showSupplyCrates ? "Hide supply crate points" : "Show supply crate points",
       icon: `
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M4 7h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
-          <path d="M4 11h16" stroke="currentColor" stroke-width="2"/>
-          <path d="M9 7v4M15 7v4" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 2l3 6-3 3-3-3 3-6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M9 8l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M7 12c0 5 5 10 5 10s5-5 5-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       `,
       onClick: (btn) => {
