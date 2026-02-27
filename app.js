@@ -85,7 +85,40 @@ function normalizePoiType(type) {
   return raw;
 }
 // ============================================================
-// DRAWING TUNING
+// SUPPLY CRATE TEST
+
+let showSupplyCrates = false;
+let supplyCrateData = null;        // can be "old" summary OR compact {t,p}
+let supplyCrateLayer = null;       // Leaflet layer group (still unused; you use mapObj.supplyLayer)
+
+function clamp01(v){ return Math.max(0, Math.min(1, v)); }
+
+// world (ARK) -> map pixel (Leaflet CRS.Simple)
+function worldToMapPixel(p, world) {
+  const w = world?.w ?? 0;
+  const h = world?.h ?? 0;
+
+  const lonOrigin = world?.lonOrigin;
+  const lonScale  = world?.lonScale;
+  const latOrigin = world?.latOrigin;
+  const latScale  = world?.latScale;
+
+  if (![w,h,lonOrigin,lonScale,latOrigin,latScale].every(Number.isFinite)) return null;
+
+  const nx = (Number(p.x) - lonOrigin) / (lonScale * 1000);
+  const ny = (Number(p.y) - latOrigin) / (latScale * 1000);
+
+  const x = clamp01(nx) * w;
+  const y = (1 - clamp01(ny)) * h;   // flip Y for Leaflet
+
+  return { x, y };
+}
+
+
+
+
+
+
 // ============================================================
 const BOX_TO_POINT_AREA_THRESHOLD = 1_000;
 const BOX_TO_POINT_MIN_DIM = 10;
@@ -207,6 +240,60 @@ function setLegendOpen(open){
 
   // your HTML uses inline display:none, so flip display directly
   el.style.display = showRarityLegend ? "" : "none";
+}
+
+// ============================================================
+// PLAYER START TEST
+
+let showPlayerStarts = false;
+let playerStartsData = null;     // loaded JSON
+// uses mapObj.playerStartLayer (created in initMap)
+
+function drawPlayerStarts() {
+  if (!mapObj?.playerStartLayer) return;
+
+  mapObj.playerStartLayer.clearLayers();
+  if (!showPlayerStarts) return;
+  if (!playerStartsData) return;
+
+  // Your converted file can be either:
+  //  A) { points:[{px,py,label,...}, ...] }
+  //  B) { regions:{...} } (nested)
+  // We'll support both quickly.
+
+  const pts = [];
+
+  if (Array.isArray(playerStartsData.points)) {
+    pts.push(...playerStartsData.points);
+  } else if (playerStartsData.regions && typeof playerStartsData.regions === "object") {
+    for (const [regionName, region] of Object.entries(playerStartsData.regions)) {
+      for (const p of (region?.points || [])) {
+        pts.push({ ...p, _region: regionName });
+      }
+    }
+  }
+
+  for (const p of pts) {
+    const x = Number(p.px ?? p.x);
+    const y = Number(p.py ?? p.y);
+    if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+
+    const title =
+      p.label ||
+      p.name ||
+      p.id ||
+      p._region ||
+      "Player Start";
+
+    L.circleMarker([y, x], {
+      radius: 3,
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.85
+    })
+      .addTo(mapObj.playerStartLayer)
+      .bindTooltip(title, { direction: "top", opacity: 0.95 });
+  }
 }
 
 // ============================================================
@@ -1660,6 +1747,86 @@ function iconForPoiType(type) {
   return icon;
 }
 
+function drawSupplyCrates() {
+  if (!mapObj?.supplyLayer) return;
+
+  mapObj.supplyLayer.clearLayers();
+  if (!showSupplyCrates) return;
+  if (!supplyCrateData || typeof supplyCrateData !== "object") return;
+
+  // ✅ Astraeos world settings (from PrimalWorldSettings)
+  const world = {
+    w: currentCfg?.imageSize?.width,
+    h: currentCfg?.imageSize?.height,
+    lonOrigin: -800000.0,
+    lonScale:  1625.8,
+    latOrigin: -800000.0,
+    latScale:  1625.8
+  };
+
+  // ---- COMPACT FORMAT: { t:[bp...], p:[{x,y,z,c:[[ti,w]...]}...] } ----
+  const isCompact =
+    Array.isArray(supplyCrateData.t) &&
+    Array.isArray(supplyCrateData.p);
+
+  if (isCompact) {
+    const types = supplyCrateData.t;
+
+    for (const pt of supplyCrateData.p) {
+      const px = worldToMapPixel(pt, world);
+      if (!px) continue;
+
+      // Build a helpful tooltip from the top few crate types at this point
+      const combos = Array.isArray(pt.c) ? pt.c : [];
+
+      const top = combos
+        .map(pair => ({ ti: Number(pair?.[0]), w: Number(pair?.[1] ?? 0) }))
+        .filter(x => Number.isFinite(x.ti) && x.ti >= 0 && x.ti < types.length)
+        .sort((a, b) => (b.w - a.w))
+        .slice(0, 4);
+
+      const pretty = (bp) => {
+        const last = String(bp || "").split("/").pop() || String(bp || "");
+        return last.replace(/_C$/i, "");
+      };
+
+      const title = top.length
+        ? top.map(x => `${pretty(types[x.ti])}${Number.isFinite(x.w) ? ` (${fmt(x.w)})` : ""}`).join(", ")
+        : "Supply Crate";
+
+      L.circleMarker([px.y, px.x], {
+        radius: 4,
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      })
+        .addTo(mapObj.supplyLayer)
+        .bindTooltip(title, { direction: "top", opacity: 0.95 });
+    }
+
+    return;
+  }
+
+  // ---- OLD FORMAT (your previous summary map): { [crateBp]: {points:[{x,y,z}...]} } ----
+  for (const [crateBp, info] of Object.entries(supplyCrateData)) {
+    for (const p of (info?.points || [])) {
+      const px = worldToMapPixel(p, world);
+      if (!px) continue;
+
+      const title = crateBp.split("/").pop() || crateBp;
+
+      L.circleMarker([px.y, px.x], {
+        radius: 4,
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      })
+        .addTo(mapObj.supplyLayer)
+        .bindTooltip(title, { direction: "top", opacity: 0.95 });
+    }
+  }
+}
+
 function drawPois(cfg) {
   if (!mapObj?.poiLayer) return;
 
@@ -2025,6 +2192,62 @@ function renderDock(){
 
     poiBtn.classList.toggle("is-on", showPois);
   }
+  const hasSupply = !!(
+    supplyCrateData &&
+    (
+      (Array.isArray(supplyCrateData.p) && supplyCrateData.p.length) ||   // compact
+      Object.keys(supplyCrateData).length                                  // old
+    )
+  );
+  if (hasSupply) {
+    const scBtn = mkBtn({
+      title: showSupplyCrates ? "Hide supply crate points" : "Show supply crate points",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M4 7h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M4 11h16" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 7v4M15 7v4" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      `,
+      onClick: (btn) => {
+        showSupplyCrates = !showSupplyCrates;
+        drawSupplyCrates();
+        btn.title = showSupplyCrates ? "Hide supply crate points" : "Show supply crate points";
+        btn.classList.toggle("is-on", showSupplyCrates);
+      }
+    });
+
+    scBtn.classList.toggle("is-on", showSupplyCrates);
+  }
+  
+  const hasPlayerStarts =
+    !!(playerStartsData && (
+      Array.isArray(playerStartsData.points) ||
+      (playerStartsData.regions && Object.keys(playerStartsData.regions).length)
+    ));
+
+  if (hasPlayerStarts) {
+    const psBtn = mkBtn({
+      title: showPlayerStarts ? "Hide player starts" : "Show player starts",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"
+                fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 7v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M9.5 10.5 12 13l2.5-2.5" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `,
+      onClick: (btn) => {
+        showPlayerStarts = !showPlayerStarts;
+        drawPlayerStarts();
+        btn.title = showPlayerStarts ? "Hide player starts" : "Show player starts";
+        btn.classList.toggle("is-on", showPlayerStarts);
+      }
+    });
+
+    psBtn.classList.toggle("is-on", showPlayerStarts);
+  }
   // 5) Rarity legend button -- only makes sense when showing rarity colors
   mkBtn({
     title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
@@ -2201,13 +2424,15 @@ function initMap(cfg) {
 
   // NEW: POIs always-on-top layer
   const poiLayer = L.layerGroup().addTo(map);
+  const supplyLayer = L.layerGroup().addTo(map);
+  const playerStartLayer = L.layerGroup().addTo(map);
   
   window.addEventListener("resize", () => {
     if (!mapObj?.map || !mapObj?.bounds) return;
     mapObj.map.fitBounds(mapObj.bounds, fitOptionsForUI());
   });
 
-  return { map, layer, caveLayer, poiLayer, overlay, bounds };
+  return { map, layer, caveLayer, poiLayer, supplyLayer, playerStartLayer, overlay, bounds };
 }
 function updateMapForCfg(cfg) {
   if (!mapObj) return;
@@ -2220,6 +2445,8 @@ function updateMapForCfg(cfg) {
   mapObj.layer.clearLayers();
   mapObj.caveLayer.clearLayers();
   mapObj.poiLayer?.clearLayers();
+  mapObj.supplyLayer?.clearLayers();
+  mapObj.playerStartLayer?.clearLayers();
   // Swap background image + its bounds
   mapObj.overlay.setUrl(cfg.image);
   mapObj.overlay.setBounds(bounds);
@@ -2522,6 +2749,27 @@ async function loadMapByMeta(mapMeta) {
   } else {
     updateMapForCfg(currentCfg);
   }
+  // Load supply crate points only for Astraeos (adjust if you want it for other maps too)
+  if (mapMeta.id === "Astraeos") {
+    try {
+      supplyCrateData = await loadJSON("data/astraeos_supply_poi_compact.json");
+    } catch (e) {
+      console.warn("No supply crate summary JSON found:", e);
+      supplyCrateSummary = null;
+    }
+
+    // ✅ Player starts (pixel points file)
+    try {
+      playerStartsData = await loadJSON("data/astraeos_player_starts.json");
+    } catch (e) {
+      console.warn("No player starts JSON found:", e);
+      playerStartsData = null;
+    }
+
+  } else {
+    supplyCrateData = null;
+    playerStartsData = null; // ✅
+  }
   
   // keep latest for dock rendering
   dockState.mapMeta = mapMeta;
@@ -2540,6 +2788,8 @@ async function loadMapByMeta(mapMeta) {
   
   setPoisVisible(showPois); // ✅ re-apply on map changes
   drawPois(currentCfg);
+  drawSupplyCrates();
+  drawPlayerStarts();
 
   // If Astraeos has alternate bgs, keep your dropdown behavior:
 
