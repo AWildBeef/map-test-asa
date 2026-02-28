@@ -445,65 +445,6 @@ let modGlowEnabled = false;
 // per-dino entry visibility toggles
 let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryIndex}` => boolean
 
-// ============================================================
-// ATLAS DEV MODE -- Live CSS Injector
-// ============================================================
-
-(function () {
-
-  // create style tag once
-  const style = document.createElement("style");
-  style.id = "atlas-dev-css";
-  document.head.appendChild(style);
-
-  // global helper
-  window.devCSS = function(cssText) {
-    style.textContent = cssText;
-  };
-
-})();
-
-(function () {
-
-  const panel = document.createElement("div");
-  panel.id = "atlas-dev-panel";
-
-  panel.innerHTML = `
-    <div class="atlas-dev-header">⚙ Dev CSS</div>
-    <textarea spellcheck="false"></textarea>
-  `;
-
-  document.body.appendChild(panel);
-
-  const textarea = panel.querySelector("textarea");
-
-  textarea.addEventListener("input", () => {
-    devCSS(textarea.value);
-  });
-
-})();
-
-(function () {
-
-  let taps = 0;
-  let timer;
-
-  document.addEventListener("click", () => {
-    taps++;
-
-    clearTimeout(timer);
-    timer = setTimeout(() => taps = 0, 400);
-
-    if (taps === 3) {
-      document
-        .getElementById("atlas-dev-panel")
-        .classList.toggle("open");
-
-      taps = 0;
-    }
-  });
-
-})();
 
 // ============================================================
 // HELPERS
