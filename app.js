@@ -523,7 +523,9 @@ function ensureLeafletPanel({ id, title, position = "topright", collapsedByDefau
 
       panel.innerHTML = `
         <div class="fp-header">
-          <div class="fp-title">${title}</div>
+          <div class="fp-titles">
+            <div class="fp-title">${title}</div>
+          </div> 
           <div class="fp-actions"></div>
         </div>
         <div class="fp-body"></div>
@@ -535,6 +537,10 @@ function ensureLeafletPanel({ id, title, position = "topright", collapsedByDefau
 
       // actions
       const actions = panel.querySelector(".fp-actions");
+      installPanelTitleFitter(panel, {
+        minPx: 11,
+        maxPx: 17
+      });
 
       const minBtn = createIconButton(CHEVRON_DOWN_ICON);
       minBtn.dataset.action = "min";
@@ -3019,6 +3025,63 @@ function ensureModStyleFab(){
   return btn;
 }
 
+// Fit .fp-title text into its available width by shrinking font-size only if needed.
+function fitTitleToSpace(titleEl, opts = {}) {
+  if (!titleEl) return;
+
+  const {
+    minPx = 10,
+    maxPx = 17,   // your "nice" size
+    stepPx = 0.25 // precision; can be 0.5 for even less work
+  } = opts;
+
+  // Reset to max first (so "Achatina" stays big)
+  titleEl.style.fontSize = maxPx + "px";
+
+  // If it already fits, we're done.
+  // (scrollWidth includes the full text width; clientWidth is available space)
+  if (titleEl.scrollWidth <= titleEl.clientWidth) return;
+
+  // Binary search between minPx and maxPx
+  let lo = minPx;
+  let hi = maxPx;
+
+  // guard: avoid infinite loops with tiny step sizes
+  for (let i = 0; i < 16; i++) {
+    const mid = Math.floor(((lo + hi) / 2) / stepPx) * stepPx;
+    titleEl.style.fontSize = mid + "px";
+
+    const fits = titleEl.scrollWidth <= titleEl.clientWidth;
+    if (fits) lo = mid; else hi = mid - stepPx;
+
+    if (hi < lo) break;
+  }
+
+  // lo is the largest size that fit (best-looking)
+  titleEl.style.fontSize = Math.max(minPx, lo) + "px";
+}
+
+function installPanelTitleFitter(panelEl, opts) {
+  const titleEl = panelEl?.querySelector(".fp-title");
+  const titlesWrap = panelEl?.querySelector(".fp-titles") || titleEl?.parentElement;
+
+  if (!panelEl || !titleEl) return;
+
+  // Run once after paint (ensures widths are real)
+  requestAnimationFrame(() => fitTitleToSpace(titleEl, opts));
+
+  // Refit on resize of the title container (or panel)
+  const ro = new ResizeObserver(() => fitTitleToSpace(titleEl, opts));
+  ro.observe(titlesWrap || panelEl);
+
+  // Refit when the title text changes
+  const mo = new MutationObserver(() => fitTitleToSpace(titleEl, opts));
+  mo.observe(titleEl, { childList: true, characterData: true, subtree: true });
+
+  // Optional: expose cleanup so you can destroy panels cleanly
+  panelEl._titleFitCleanup = () => { ro.disconnect(); mo.disconnect(); };
+}
+
 // ============================================================
 // FLOATING PANELS (Dino Info + Mod Style)
 // ============================================================
@@ -3037,8 +3100,10 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
   panel.className = "floating-panel";
 
   panel.innerHTML = `
-    <div class="fp-header" data-drag-handle>
-      <div class="fp-title">${title}</div>
+    <div class="fp-header">
+      <div class="fp-titles">
+        <div class="fp-title">${title}</div>
+      </div> 
       <div class="fp-actions"></div>
     </div>
     <div class="fp-body"></div>
@@ -3528,17 +3593,16 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   // keep panel title matching the selected dropdown label (feels best)
   setInfoPanelTitle(pickedLabel || displayName);
 
-  // ✅ Header title = dino name (always visible)
-  setInfoPanelTitle(displayName);
-
   const bp = d.bpPath || "";
   const nameTag = d.nameTag || d.nametag || "";
   const extraBps = asArray(d.additionalBpPathsToDisplay);
   const allBps = [bp, ...extraBps].filter(Boolean);
 
   const entries = d.entries || [];
-  const sexLine = (f || m)
-    ? `<div class="info-submeta">${escapeHtml([f,m].filter(Boolean).join(" / "))}</div>`
+  const other = otherSexNameForSelected(d, pickedLabel);
+
+  const sexLine = other
+    ? `<div class="info-submeta">${escapeHtml(other)}</div>`
     : ``;
 
   if (!INFO_TABS.some(t => t.id === infoTab)) infoTab = "info";

@@ -525,7 +525,6 @@ body{
    6) DRAGGABLE FLOATING PANELS
    ============================================================ */
 .floating-panel{
-  position:absolute;
   z-index:900;
 
   width:var(--panel-w);
@@ -551,11 +550,13 @@ body{
 }
 
 .floating-panel .fp-header{
-  display:flex;
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+
   align-items:center;
   justify-content:space-between;
 
-  padding:2px 2px;
+  padding:2px 0px;
   border-bottom:1px solid rgba(255,255,255,.08);
 
   user-select:none;
@@ -563,14 +564,24 @@ body{
   margin-bottom:0;
 }
 
+.floating-panel .fp-titles{
+  grid-column: 1;
+  container-type: inline-size;
+  
+  width: 100%;
+  min-width: 0;
+
+  overflow:hidden;
+  white-space:nowrap;
+  gap:8px;
+}
+
 .floating-panel .fp-title{
   font-weight:300;
-  font-size:16px;
   letter-spacing:.2px;
   min-width:0;
-  overflow:hidden;
-  text-overflow:ellipsis;
   white-space:nowrap;
+  font-size: clamp(2px, 7.2cqi, 17px);
 }
 
 #dinoInfoPanel .fp-header{
@@ -579,14 +590,18 @@ body{
 }
 
 #dinoInfoPanel .fp-title{
-  font-size: 17px;       /* tweak */
   font-weight: 400;
   color: var(--muted);
-  line-height: 1;
   padding-left:1px;
 }
 
-.floating-panel .fp-actions{ display:flex; gap:10px; }
+.floating-panel .fp-actions{
+  grid-column: 2;
+  display:flex;
+  flex: 0 0 auto;
+  gap:8px; 
+}
+
 .floating-panel .fp-btn{
   display:flex;
   align-items:center;
@@ -854,6 +869,12 @@ body{
   border-radius:6px;
 }
 
+.leaflet-right .leaflet-control{
+  margin-right:20px;
+} 
+.leaflet-top .leaflet-control{
+  margin-right:4px;
+}
 /* ============================
    DINO PANEL -- FINAL CLEAN LAYOUT
    ============================ */
