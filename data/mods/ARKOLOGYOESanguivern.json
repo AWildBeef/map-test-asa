@@ -279,6 +279,106 @@
           ]
         }
       }
+    },
+    "Astraeos": {
+      "dinos": {
+        "/ARKOLOGYOESanguivern/Sanguivern/Sanguivern_Character_BP.Sanguivern_Character_BP_C": {
+          "bpPath": "/ARKOLOGYOESanguivern/Sanguivern/Sanguivern_Character_BP.Sanguivern_Character_BP_C",
+          "displayName": "Sanguivern",
+          "nameTag": "Sanguivern",
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 149.0,
+          "killXpBase": 3.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_Desmodus_LC_C",
+              "managers": {
+                "NPCZoneManager_UAID_60CF847B67A3DEBD02_1793886385": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 223.62,
+                      "y": 1435.58,
+                      "w": 24.28,
+                      "h": 24.28
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.75
+                },
+                "NPCZoneManager_UAID_60CF847B67A3DEBD02_1865794386": {
+                  "minDesired": 6.0,
+                  "boxes": [
+                    {
+                      "x": 1524.62,
+                      "y": 1785.81,
+                      "w": 27.58,
+                      "h": 27.58
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.75
+                },
+                "NPCZoneManager_UAID_60CF847B67A3DEBD02_1891007387": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1570.24,
+                      "y": 173.91,
+                      "w": 30.37,
+                      "h": 28.73
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A3DEBD02_1918151388": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1495.04,
+                      "y": 1782.06,
+                      "w": 19.07,
+                      "h": 22.1
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManager_UAID_60CF847B67A3DEBD02_1938922389": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 97.6,
+                      "y": 1455.54,
+                      "w": 27.58,
+                      "h": 27.58
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 6,
+              "spawnMultiplier": 1.0,
+              "spawnLimit": 1.0,
+              "spawnChances": "100",
+              "groupWeight": 1.0,
+              "weight": 1.0,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%"
+              },
+              "bestSharedMin": 8.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
     }
   }
 }
