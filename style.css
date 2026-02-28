@@ -107,6 +107,59 @@ body{
 }
 
 /* ============================================================
+   ATLAS DEV MODE
+   ============================================================ */
+
+#atlas-dev-panel{
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  width:min(90vw,400px);
+  height:220px;
+
+  background:rgba(20,22,26,.95);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;
+
+  z-index:999999;
+  display:none;
+  flex-direction:column;
+  backdrop-filter: blur(12px);
+  touch-action: none;
+}
+
+#atlas-dev-panel.open{
+  display:flex;
+}
+
+#atlas-dev-panel textarea{
+  flex:1;
+  resize:none;
+  border:0;
+  outline:none;
+  padding:8px;
+
+  background:#0f1114;
+  color:#9cff9c;
+  font-family:ui-monospace, monospace;
+  font-size:16px;
+  transform: scale(.8);
+  transform-origin: top left;
+  touch-action: manipulation;
+}
+
+.atlas-dev-header{
+  padding:6px 8px;
+  font-size:12px;
+  opacity:.8;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+body:has(#atlas-dev-panel.open){
+  overscroll-behavior: contain;
+}
+
+/* ============================================================
    2) MAP WRAPPER
    ============================================================ */
 #mapWrap{
