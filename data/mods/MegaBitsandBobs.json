@@ -11,6 +11,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -393,6 +435,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -1781,6 +1865,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Oreo.Ursus_Character_BP_Oreo_C",
           "displayName": "Kretzoiarctos",
           "nameTag": "UrsusOreo",
+          "stats": {
+            "Health": [
+              675.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -3520,6 +3646,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -4928,6 +5094,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -6316,6 +6524,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_ABB.Ursus_Character_BP_ABB_C",
           "displayName": "Ursus americanus",
           "nameTag": "UrsusBlack",
+          "stats": {
+            "Health": [
+              360.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -9430,6 +9680,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Grizzly.Ursus_Character_BP_Grizzly_C",
           "displayName": "Ursus arctos horribilis",
           "nameTag": "UrsusGrizzly",
+          "stats": {
+            "Health": [
+              470.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -10766,6 +11058,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Polar.Ursus_Character_BP_Polar_C",
           "displayName": "Ursus maritimus",
           "nameTag": "UrsusPolar",
+          "stats": {
+            "Health": [
+              525.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -11874,6 +12208,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -13465,6 +13841,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -15056,6 +15474,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -15229,6 +15687,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -16824,6 +17324,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -17001,6 +17543,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -18811,6 +19395,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Oreo.Ursus_Character_BP_Oreo_C",
           "displayName": "Kretzoiarctos",
           "nameTag": "UrsusOreo",
+          "stats": {
+            "Health": [
+              675.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -20904,6 +21530,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -21457,6 +22123,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -23267,6 +23975,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_ABB.Ursus_Character_BP_ABB_C",
           "displayName": "Ursus americanus",
           "nameTag": "UrsusBlack",
+          "stats": {
+            "Health": [
+              360.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -27157,6 +27907,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Grizzly.Ursus_Character_BP_Grizzly_C",
           "displayName": "Ursus arctos horribilis",
           "nameTag": "UrsusGrizzly",
+          "stats": {
+            "Health": [
+              470.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -30336,6 +31128,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Polar.Ursus_Character_BP_Polar_C",
           "displayName": "Ursus maritimus",
           "nameTag": "UrsusPolar",
+          "stats": {
+            "Health": [
+              525.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -32102,6 +32936,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -33465,6 +34341,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -35769,6 +36687,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Oreo.Ursus_Character_BP_Oreo_C",
           "displayName": "Kretzoiarctos",
           "nameTag": "UrsusOreo",
+          "stats": {
+            "Health": [
+              675.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -37812,6 +38772,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -38706,6 +39706,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -41010,6 +42052,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_ABB.Ursus_Character_BP_ABB_C",
           "displayName": "Ursus americanus",
           "nameTag": "UrsusBlack",
+          "stats": {
+            "Health": [
+              360.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -44688,6 +45772,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Grizzly.Ursus_Character_BP_Grizzly_C",
           "displayName": "Ursus arctos horribilis",
           "nameTag": "UrsusGrizzly",
+          "stats": {
+            "Health": [
+              470.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -47142,6 +48268,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Polar.Ursus_Character_BP_Polar_C",
           "displayName": "Ursus maritimus",
           "nameTag": "UrsusPolar",
+          "stats": {
+            "Health": [
+              525.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -47929,6 +49097,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -49104,6 +50314,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -50706,6 +51958,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Oreo.Ursus_Character_BP_Oreo_C",
           "displayName": "Kretzoiarctos",
           "nameTag": "UrsusOreo",
+          "stats": {
+            "Health": [
+              675.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -55916,6 +57210,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -57207,6 +58541,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -58809,6 +60185,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_ABB.Ursus_Character_BP_ABB_C",
           "displayName": "Ursus americanus",
           "nameTag": "UrsusBlack",
+          "stats": {
+            "Health": [
+              360.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -65608,6 +67026,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Grizzly.Ursus_Character_BP_Grizzly_C",
           "displayName": "Ursus arctos horribilis",
           "nameTag": "UrsusGrizzly",
+          "stats": {
+            "Health": [
+              470.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -69539,6 +70999,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Polar.Ursus_Character_BP_Polar_C",
           "displayName": "Ursus maritimus",
           "nameTag": "UrsusPolar",
+          "stats": {
+            "Health": [
+              525.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -69653,6 +71155,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -70937,6 +72481,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -72221,6 +73807,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -73504,6 +75130,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -74792,6 +76460,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -77046,6 +78756,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -78488,6 +80240,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Oreo.Ursus_Character_BP_Oreo_C",
           "displayName": "Kretzoiarctos",
           "nameTag": "UrsusOreo",
+          "stats": {
+            "Health": [
+              675.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -79313,6 +81107,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -80137,6 +81971,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -81579,6 +83455,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_ABB.Ursus_Character_BP_ABB_C",
           "displayName": "Ursus americanus",
           "nameTag": "UrsusBlack",
+          "stats": {
+            "Health": [
+              360.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -83833,6 +85751,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Grizzly.Ursus_Character_BP_Grizzly_C",
           "displayName": "Ursus arctos horribilis",
           "nameTag": "UrsusGrizzly",
+          "stats": {
+            "Health": [
+              470.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -85664,6 +87624,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Polar.Ursus_Character_BP_Polar_C",
           "displayName": "Ursus maritimus",
           "nameTag": "UrsusPolar",
+          "stats": {
+            "Health": [
+              525.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -86745,6 +88747,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -93902,6 +95946,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -94081,6 +96167,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -94352,6 +96478,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -94531,6 +96699,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_ABB.Ursus_Character_BP_ABB_C",
           "displayName": "Ursus americanus",
           "nameTag": "UrsusBlack",
+          "stats": {
+            "Health": [
+              360.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -97978,6 +100188,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Grizzly.Ursus_Character_BP_Grizzly_C",
           "displayName": "Ursus arctos horribilis",
           "nameTag": "UrsusGrizzly",
+          "stats": {
+            "Health": [
+              470.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -108790,6 +111042,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Polar.Ursus_Character_BP_Polar_C",
           "displayName": "Ursus maritimus",
           "nameTag": "UrsusPolar",
+          "stats": {
+            "Health": [
+              525.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -110066,6 +112360,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/BoarPig/BoarHog_Character_BP.BoarHog_Character_BP_C",
           "displayName": "BoarHog",
           "nameTag": "BnBBoar",
+          "stats": {
+            "Health": [
+              265.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -110201,6 +112537,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Chimken/GFChicken_Character_BP.GFChicken_Character_BP_C",
           "displayName": "Chicken",
           "nameTag": "BnBChimken",
+          "stats": {
+            "Health": [
+              75.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              450.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              76.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -113110,6 +115488,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Oreo.Ursus_Character_BP_Oreo_C",
           "displayName": "Kretzoiarctos",
           "nameTag": "UrsusOreo",
+          "stats": {
+            "Health": [
+              675.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -115954,6 +118374,46 @@
           "bpPath": "/MegaBitsandBobs/Animals/Parrot/GFMockatoo_Character_BP.GFMockatoo_Character_BP_C",
           "displayName": "Mockatoo",
           "nameTag": "BnBParrot",
+          "stats": {
+            "Health": [
+              125.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              900.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              50.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -118504,6 +120964,76 @@
               },
               "bestSharedMin": 20.0,
               "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesOasis_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1256281291": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1262718294": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1268786297": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.41,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1397131975": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1031.72,
+                      "y": -12.14,
+                      "w": 43.32,
+                      "h": 42.02
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 2.28,
+              "spawnLimit": 0.05,
+              "spawnChances": "100, 80, 60",
+              "groupWeight": 0.05,
+              "weight": 0.004017,
+              "display": {
+                "weightText": "Entry Weight: 0.05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 80%, 60%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
             }
           ]
         },
@@ -118511,6 +121041,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Cow/GFCow_Character_BP.GFCow_Character_BP_C",
           "displayName": "Moo-Cow",
           "nameTag": "BnBCow",
+          "stats": {
+            "Health": [
+              225.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              450.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -121420,6 +123992,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_ABB.Ursus_Character_BP_ABB_C",
           "displayName": "Ursus americanus",
           "nameTag": "UrsusBlack",
+          "stats": {
+            "Health": [
+              360.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -127038,6 +129652,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Grizzly.Ursus_Character_BP_Grizzly_C",
           "displayName": "Ursus arctos horribilis",
           "nameTag": "UrsusGrizzly",
+          "stats": {
+            "Health": [
+              470.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -127459,6 +130115,48 @@
           "bpPath": "/MegaBitsandBobs/Animals/Ursus/Ursus_Character_BP_Polar.Ursus_Character_BP_Polar_C",
           "displayName": "Ursus maritimus",
           "nameTag": "UrsusPolar",
+          "stats": {
+            "Health": [
+              525.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              400.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2500.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,

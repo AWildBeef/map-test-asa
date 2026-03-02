@@ -11,6 +11,49 @@
           "bpPath": "/skyshroud_drakara/Dinos/Atokirina/Atokirina_Character_BP.Atokirina_Character_BP_C",
           "displayName": "Atokirina",
           "nameTag": "Cnidaria",
+          "stats": {
+            "Health": [
+              180.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              120.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              25.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.284
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -2426,6 +2469,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Mudshieldfish/Mudshieldfish_Character.Mudshieldfish_Character_C",
           "displayName": "Mudshieldfish",
           "nameTag": "Salmon",
+          "stats": {
+            "Health": [
+              65.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              18.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -3566,6 +3649,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -5644,6 +5767,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -7721,6 +7884,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -11879,6 +12082,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -13619,6 +13862,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -13793,6 +14076,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -15710,6 +16033,49 @@
           "bpPath": "/skyshroud_drakara/Dinos/Atokirina/Atokirina_Character_BP.Atokirina_Character_BP_C",
           "displayName": "Atokirina",
           "nameTag": "Cnidaria",
+          "stats": {
+            "Health": [
+              180.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              120.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              25.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.284
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -17897,6 +18263,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Mudshieldfish/Mudshieldfish_Character.Mudshieldfish_Character_C",
           "displayName": "Mudshieldfish",
           "nameTag": "Salmon",
+          "stats": {
+            "Health": [
+              65.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              18.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -18428,6 +18834,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -19365,6 +19811,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Arctic.Drakara_Character_BP_Arctic_C",
           "displayName": "Arctic Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              1150.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              600.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              2400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -19487,6 +19973,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -20423,6 +20949,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -22299,6 +22865,49 @@
           "bpPath": "/skyshroud_drakara/Dinos/Atokirina/Atokirina_Character_BP.Atokirina_Character_BP_C",
           "displayName": "Atokirina",
           "nameTag": "Cnidaria",
+          "stats": {
+            "Health": [
+              180.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              120.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              25.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.284
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -23570,6 +24179,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Mudshieldfish/Mudshieldfish_Character.Mudshieldfish_Character_C",
           "displayName": "Mudshieldfish",
           "nameTag": "Salmon",
+          "stats": {
+            "Health": [
+              65.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              18.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -24167,6 +24816,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -26873,6 +27562,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Arctic.Drakara_Character_BP_Arctic_C",
           "displayName": "Arctic Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              1150.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              600.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              2400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -27429,6 +28158,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -29621,6 +30390,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -34522,6 +35331,49 @@
           "bpPath": "/skyshroud_drakara/Dinos/Atokirina/Atokirina_Character_BP.Atokirina_Character_BP_C",
           "displayName": "Atokirina",
           "nameTag": "Cnidaria",
+          "stats": {
+            "Health": [
+              180.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              120.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              25.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.284
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -36241,6 +37093,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Mudshieldfish/Mudshieldfish_Character.Mudshieldfish_Character_C",
           "displayName": "Mudshieldfish",
           "nameTag": "Salmon",
+          "stats": {
+            "Health": [
+              65.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              18.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -37739,6 +38631,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Aberrant.Drakara_Character_BP_Aberrant_C",
           "displayName": "Aberrant Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              900.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              950.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              800.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -38005,6 +38937,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -39342,6 +40314,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -40678,6 +41690,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -43354,6 +44406,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Aberrant.Drakara_Character_BP_Aberrant_C",
           "displayName": "Aberrant Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              900.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              950.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              800.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -44614,6 +45706,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -45879,6 +47011,49 @@
           "bpPath": "/skyshroud_drakara/Dinos/Atokirina/Atokirina_Character_BP.Atokirina_Character_BP_C",
           "displayName": "Atokirina",
           "nameTag": "Cnidaria",
+          "stats": {
+            "Health": [
+              180.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              120.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              25.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.284
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -50924,6 +52099,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Mudshieldfish/Mudshieldfish_Character.Mudshieldfish_Character_C",
           "displayName": "Mudshieldfish",
           "nameTag": "Salmon",
+          "stats": {
+            "Health": [
+              65.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              18.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -51500,6 +52715,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Aberrant.Drakara_Character_BP_Aberrant_C",
           "displayName": "Aberrant Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              900.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              950.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              800.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -52325,6 +53580,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -53208,6 +54503,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -54090,6 +55425,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -55858,6 +57233,49 @@
           "bpPath": "/skyshroud_drakara/Dinos/Atokirina/Atokirina_Character_BP.Atokirina_Character_BP_C",
           "displayName": "Atokirina",
           "nameTag": "Cnidaria",
+          "stats": {
+            "Health": [
+              180.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              120.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              25.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.284
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -57927,6 +59345,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Mudshieldfish/Mudshieldfish_Character.Mudshieldfish_Character_C",
           "displayName": "Mudshieldfish",
           "nameTag": "Salmon",
+          "stats": {
+            "Health": [
+              65.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              18.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -59231,6 +60689,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -60774,6 +62272,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Arctic.Drakara_Character_BP_Arctic_C",
           "displayName": "Arctic Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              1150.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              600.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              2400.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -62093,6 +63631,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -63635,6 +65213,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -68029,6 +69647,49 @@
           "bpPath": "/skyshroud_drakara/Dinos/Atokirina/Atokirina_Character_BP.Atokirina_Character_BP_C",
           "displayName": "Atokirina",
           "nameTag": "Cnidaria",
+          "stats": {
+            "Health": [
+              180.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              120.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              25.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.284
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -74281,6 +75942,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Mudshieldfish/Mudshieldfish_Character.Mudshieldfish_Character_C",
           "displayName": "Mudshieldfish",
           "nameTag": "Salmon",
+          "stats": {
+            "Health": [
+              65.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              18.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -74288,6 +75989,51 @@
           "dragWeight": 32.5,
           "killXpBase": 0.5,
           "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_DucksSalmon_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A31AC002_1776166858": {
+                  "minDesired": 5.0,
+                  "boxes": [
+                    {
+                      "x": 984.34,
+                      "y": 205.91,
+                      "w": 4.7,
+                      "h": 3.39
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A31AC002_1818149861": {
+                  "minDesired": 5.0,
+                  "boxes": [
+                    {
+                      "x": 986.59,
+                      "y": 197.07,
+                      "w": 3.85,
+                      "h": 6.42
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "bForceInEditor": true,
+              "MinDesiredNumberOfNPC": 5,
+              "spawnMultiplier": 2.05,
+              "spawnLimit": 1.0,
+              "spawnChances": "100, 70, 50",
+              "groupWeight": 1.0,
+              "weight": 1.025,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 100%",
+                "chanceText": "Spawn Chances: 100%, 70%, 50%"
+              },
+              "bestSharedMin": 5.0,
+              "minRarityDownshift": 0
+            },
             {
               "entryClass": "DinoSpawnEntries_InlandWater_Generic_C",
               "managers": {
@@ -74842,6 +76588,29 @@
             {
               "entryClass": "DinoSpawnEntries_OceanCaveMedium_Generic_C",
               "managers": {
+                "NPCZoneManagerBlueprint_Cave_UAID_60CF847B67A374A302_1872111915": {
+                  "minDesired": 10.0,
+                  "boxes": [
+                    {
+                      "x": 1461.46,
+                      "y": 341.14,
+                      "w": 8.69,
+                      "h": 9.62,
+                      "bIsCaveManager": true,
+                      "bForceUntameable": true
+                    },
+                    {
+                      "x": 1466.92,
+                      "y": 364.31,
+                      "w": 5.85,
+                      "h": 6.38,
+                      "bIsCaveManager": true,
+                      "bForceUntameable": true
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
                 "NPCZoneManagerBlueprint_Cave_UAID_F02F74C9A86A561A02_1680425155": {
                   "minDesired": 6.666667,
                   "boxes": [
@@ -74871,7 +76640,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.666667
                 }
               },
               "bAllowExtentTest": false,
@@ -74893,7 +76662,7 @@
                 "limitText": "Max % To Allow: 40%",
                 "chanceText": "Spawn Chances: 100%, 100%, 100%"
               },
-              "bestSharedMin": 6.667,
+              "bestSharedMin": 10.0,
               "minRarityDownshift": 0
             },
             {
@@ -75037,6 +76806,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Alpha.Drakara_Character_BP_Alpha_C",
           "displayName": "Alpha Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              9650.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 0,
           "isAlpha": 1,
           "isBoss": 0,
@@ -79058,6 +80867,1225 @@
               },
               "bestSharedMin": 16.0,
               "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesMountain_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1722792840": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 2022.31,
+                      "y": 236.96,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1747624843": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 2022.31,
+                      "y": 271.11,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1749922846": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 209.28,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1756888849": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 172.39,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1758840852": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 136.87,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1760965855": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 100.24,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1763200858": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 63.77,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1764995861": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 26.72,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1768081864": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 26.72,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1771828867": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 63.22,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1773228870": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 99.88,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1775958873": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 136.28,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1777427876": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 172.22,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1779677879": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 208.68,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1781741882": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 208.68,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1784159885": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 172.78,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1786175888": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 136.44,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1787423891": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 99.79,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1789570894": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 63.84,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1901045914": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1849.38,
+                      "y": 248.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1908125917": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1810.94,
+                      "y": 248.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1910488920": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 248.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1914485923": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 285.68,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1916217926": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 322.82,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1918531929": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 360.33,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1922714932": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1811.1,
+                      "y": 360.33,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1925707935": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1847.35,
+                      "y": 351.09,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1929954938": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1811.54,
+                      "y": 285.67,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1932064941": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1811.54,
+                      "y": 323.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1552812441": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.8,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1559493444": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 987.98,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1561808447": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 950.12,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1563424450": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.27,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1569482453": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.27,
+                      "y": 12.37,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1571224456": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 950.02,
+                      "y": 12.37,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1573999459": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.34,
+                      "y": 87.12,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1577548462": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.34,
+                      "y": 123.78,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1579820465": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.34,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1581994468": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 949.73,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1585253471": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 988.09,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1587765474": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.53,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1591697477": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.53,
+                      "y": 123.91,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1593459480": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.53,
+                      "y": 86.59,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1595604483": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 987.57,
+                      "y": 86.59,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1597094486": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 949.86,
+                      "y": 86.59,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1598451489": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 949.86,
+                      "y": 124.03,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1600231492": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 987.7,
+                      "y": 124.03,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1606643495": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.77,
+                      "y": 198.55,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1677465498": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.08,
+                      "y": 124.16,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1681280501": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.03,
+                      "y": 124.16,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1687883507": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.03,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1687910510": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.06,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1691373513": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.03,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1698152525": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1252.84,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1698180528": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1290.86,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1706429531": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1252.84,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1706457534": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1290.86,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1709746537": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1252.84,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1709773540": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1290.86,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1714563543": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.26,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1714591546": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1215.29,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1762168555": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1328.87,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1762196558": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1328.87,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1762198561": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1328.87,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1765552564": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1366.48,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1765581567": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1366.48,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1765583570": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1366.48,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1768640576": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1404.55,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1768643579": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1404.55,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1770495582": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1441.5,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1770523585": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1441.5,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1770525588": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1441.5,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1778350591": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1479.41,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1778379597": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1479.41,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1779916603": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1517.82,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1779918606": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1517.82,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1782371609": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1555.57,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1782397612": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1555.57,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1782400615": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1555.57,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1784278618": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1593.31,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1784305621": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1593.31,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1784307624": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1593.31,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1789100627": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1630.67,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1789128630": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1630.67,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1789131633": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1630.67,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1138736861": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 876.12,
+                      "y": 12.37,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1141341864": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 876.12,
+                      "y": 46.53,
+                      "w": 34.5,
+                      "h": 47.59
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 1.625,
+              "spawnLimit": 0.04,
+              "spawnChances": "100, 50, 25",
+              "groupWeight": 0.003571428571428572,
+              "weight": 0.00024,
+              "display": {
+                "weightText": "Entry Weight: 0.003571",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesOasis_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1256281291": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1262718294": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1268786297": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.41,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1397131975": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1031.72,
+                      "y": -12.14,
+                      "w": 43.32,
+                      "h": 42.02
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 0.8,
+              "spawnLimit": 0.04,
+              "spawnChances": "80",
+              "groupWeight": 0.003571428571428572,
+              "weight": 7.9e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.003571",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 80%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
             }
           ]
         },
@@ -79065,6 +82093,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Bloodfang.Drakara_Character_BP_Bloodfang_C",
           "displayName": "Bloodfang Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              890.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              670.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              680.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -83085,6 +86153,76 @@
               },
               "bestSharedMin": 16.0,
               "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesOasis_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1256281291": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1262718294": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1268786297": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.41,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1397131975": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1031.72,
+                      "y": -12.14,
+                      "w": 43.32,
+                      "h": 42.02
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 0.4,
+              "spawnLimit": 0.04,
+              "spawnChances": "50",
+              "groupWeight": 0.025,
+              "weight": 0.000277,
+              "display": {
+                "weightText": "Entry Weight: 0.025",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 50%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
             }
           ]
         },
@@ -83092,6 +86230,46 @@
           "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP.Drakara_Character_BP_C",
           "displayName": "Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              850.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              700.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              500.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -87111,6 +90289,1225 @@
                 "chanceText": "Spawn Chances: 50%"
               },
               "bestSharedMin": 16.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesMountain_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1722792840": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 2022.31,
+                      "y": 236.96,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1747624843": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 2022.31,
+                      "y": 271.11,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1749922846": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 209.28,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1756888849": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 172.39,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1758840852": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 136.87,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1760965855": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 100.24,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1763200858": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 63.77,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1764995861": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1946.36,
+                      "y": 26.72,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1768081864": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 26.72,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1771828867": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 63.22,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1773228870": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 99.88,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1775958873": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 136.28,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1777427876": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 172.22,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1779677879": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1907.97,
+                      "y": 208.68,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1781741882": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 208.68,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1784159885": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 172.78,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1786175888": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 136.44,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1787423891": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 99.79,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1789570894": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1870.14,
+                      "y": 63.84,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1901045914": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1849.38,
+                      "y": 248.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1908125917": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1810.94,
+                      "y": 248.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1910488920": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 248.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1914485923": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 285.68,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1916217926": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 322.82,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1918531929": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1773.45,
+                      "y": 360.33,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1922714932": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1811.1,
+                      "y": 360.33,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1925707935": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1847.35,
+                      "y": 351.09,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1929954938": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1811.54,
+                      "y": 285.67,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A350A402_1932064941": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1811.54,
+                      "y": 323.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1552812441": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.8,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1559493444": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 987.98,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1561808447": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 950.12,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1563424450": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.27,
+                      "y": 50.18,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1569482453": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.27,
+                      "y": 12.37,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1571224456": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 950.02,
+                      "y": 12.37,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1573999459": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.34,
+                      "y": 87.12,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1577548462": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.34,
+                      "y": 123.78,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1579820465": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 912.34,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1581994468": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 949.73,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1585253471": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 988.09,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1587765474": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.53,
+                      "y": 161.38,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1591697477": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.53,
+                      "y": 123.91,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1593459480": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.53,
+                      "y": 86.59,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1595604483": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 987.57,
+                      "y": 86.59,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1597094486": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 949.86,
+                      "y": 86.59,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1598451489": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 949.86,
+                      "y": 124.03,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1600231492": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 987.7,
+                      "y": 124.03,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1606643495": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1025.77,
+                      "y": 198.55,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1677465498": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.08,
+                      "y": 124.16,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1681280501": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.03,
+                      "y": 124.16,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1687883507": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.03,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1687910510": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.06,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1691373513": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.03,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1698152525": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1252.84,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1698180528": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1290.86,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1706429531": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1252.84,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1706457534": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1290.86,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1709746537": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1252.84,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1709773540": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1290.86,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1714563543": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.26,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1714591546": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1215.29,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1762168555": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1328.87,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1762196558": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1328.87,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1762198561": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1328.87,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1765552564": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1366.48,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1765581567": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1366.48,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1765583570": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1366.48,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1768640576": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1404.55,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1768643579": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1404.55,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1770495582": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1441.5,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1770523585": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1441.5,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1770525588": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1441.5,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1778350591": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1479.41,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1778379597": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1479.41,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1779916603": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1517.82,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1779918606": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1517.82,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1782371609": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1555.57,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1782397612": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1555.57,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1782400615": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1555.57,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1784278618": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1593.31,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1784305621": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1593.31,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1784307624": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1593.31,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1789100627": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1630.67,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1789128630": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1630.67,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1789131633": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1630.67,
+                      "y": 198.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1138736861": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 876.12,
+                      "y": 12.37,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1141341864": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 876.12,
+                      "y": 46.53,
+                      "w": 34.5,
+                      "h": 47.59
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 1.625,
+              "spawnLimit": 0.04,
+              "spawnChances": "100, 50, 25",
+              "groupWeight": 0.021428571428571432,
+              "weight": 0.001438,
+              "display": {
+                "weightText": "Entry Weight: 0.021429",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 50%, 25%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesOasis_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1256281291": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1262718294": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1268786297": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.41,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1397131975": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1031.72,
+                      "y": -12.14,
+                      "w": 43.32,
+                      "h": 42.02
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 0.8,
+              "spawnLimit": 0.04,
+              "spawnChances": "80",
+              "groupWeight": 0.021428571428571432,
+              "weight": 0.000475,
+              "display": {
+                "weightText": "Entry Weight: 0.021429",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 80%"
+              },
+              "bestSharedMin": 14.0,
               "minRarityDownshift": 0
             }
           ]
@@ -91138,6 +95535,76 @@
                 "chanceText": "Spawn Chances: 50%"
               },
               "bestSharedMin": 16.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesOasis_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1256281291": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1262718294": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1268786297": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.41,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1397131975": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1031.72,
+                      "y": -12.14,
+                      "w": 43.32,
+                      "h": 42.02
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 0.1,
+              "spawnLimit": 0.05,
+              "spawnChances": "25",
+              "groupWeight": 0.025,
+              "weight": 8.7e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.025",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 25%"
+              },
+              "bestSharedMin": 14.0,
               "minRarityDownshift": 0
             }
           ]

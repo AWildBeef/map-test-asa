@@ -5441,61 +5441,6 @@
                   ],
                   "points": [],
                   "minDesiredPct": 1.0
-                },
-                "wiki": {
-                  "minDesired": 8.0,
-                  "boxes": [
-                    {
-                      "x": 654.34,
-                      "y": 370.28,
-                      "w": 110.59,
-                      "h": 94.82
-                    },
-                    {
-                      "x": 727.65,
-                      "y": 334.44,
-                      "w": 110.8,
-                      "h": 95.03
-                    },
-                    {
-                      "x": 780.49,
-                      "y": 634.06,
-                      "w": 99.53,
-                      "h": 83.76
-                    },
-                    {
-                      "x": 837.43,
-                      "y": 732.98,
-                      "w": 73.11,
-                      "h": 98.71
-                    },
-                    {
-                      "x": 846.03,
-                      "y": 687.72,
-                      "w": 95.03,
-                      "h": 60.21
-                    },
-                    {
-                      "x": 936.35,
-                      "y": 652.29,
-                      "w": 95.03,
-                      "h": 60.42
-                    },
-                    {
-                      "x": 1168.79,
-                      "y": 658.64,
-                      "w": 85.61,
-                      "h": 102.2
-                    },
-                    {
-                      "x": 1192.55,
-                      "y": 594.33,
-                      "w": 85.4,
-                      "h": 102.2
-                    }
-                  ],
-                  "points": [],
-                  "minDesiredPct": 1.0
                 }
               },
               "MinDesiredNumberOfNPC": 8,
@@ -9032,6 +8977,37 @@
             {
               "entryClass": "DinoSpawnEntries_OceanCaveHard_Generic_C",
               "managers": {
+                "NPCZoneManagerBlueprint_Cave_UAID_60CF847B67A374A302_1994785919": {
+                  "minDesired": 6.666667,
+                  "boxes": [
+                    {
+                      "x": 1451.94,
+                      "y": 334.36,
+                      "w": 7.45,
+                      "h": 7.69,
+                      "bIsCaveManager": true,
+                      "bForceUntameable": true
+                    },
+                    {
+                      "x": 1465.72,
+                      "y": 359.87,
+                      "w": 5.85,
+                      "h": 6.38,
+                      "bIsCaveManager": true,
+                      "bForceUntameable": true
+                    },
+                    {
+                      "x": 1481.76,
+                      "y": 357.48,
+                      "w": 3.44,
+                      "h": 6.15,
+                      "bIsCaveManager": true,
+                      "bForceUntameable": true
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.666667
+                },
                 "NPCZoneManagerBlueprint_Cave_UAID_F02F74C9A86A561A02_2059334160": {
                   "minDesired": 6.666667,
                   "boxes": [
@@ -9317,6 +9293,32 @@
                       "y": 1276.46,
                       "w": 50.8,
                       "h": 54.79
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A3A7A402_1321587225": {
+                  "minDesired": 2.0,
+                  "boxes": [
+                    {
+                      "x": 867.55,
+                      "y": 488.74,
+                      "w": 143.06,
+                      "h": 93.6
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A3A7A402_1398492234": {
+                  "minDesired": 2.0,
+                  "boxes": [
+                    {
+                      "x": 1646.16,
+                      "y": 514.58,
+                      "w": 157.26,
+                      "h": 130.99
                     }
                   ],
                   "points": [],

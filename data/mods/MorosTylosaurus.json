@@ -11,6 +11,48 @@
           "bpPath": "/MorosTylosaurus/Dinos/Tylosaurus/Blueprints/MoroTylosaurus_character_bp.MoroTylosaurus_character_bp_C",
           "displayName": "Tylosaurus",
           "nameTag": "MoroTylo",
+          "stats": {
+            "Health": [
+              2900.0,
+              0.12,
+              0.15,
+              0.3
+            ],
+            "Stamina": [
+              600.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              8000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              1300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.08,
+              0.65,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -2750,6 +2792,48 @@
           "bpPath": "/MorosTylosaurus/Dinos/Tylosaurus/Blueprints/MoroTylosaurus_character_bp.MoroTylosaurus_character_bp_C",
           "displayName": "Tylosaurus",
           "nameTag": "MoroTylo",
+          "stats": {
+            "Health": [
+              2900.0,
+              0.12,
+              0.15,
+              0.3
+            ],
+            "Stamina": [
+              600.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              8000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              1300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.08,
+              0.65,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -4532,6 +4616,48 @@
           "bpPath": "/MorosTylosaurus/Dinos/Tylosaurus/Blueprints/MoroTylosaurus_character_bp.MoroTylosaurus_character_bp_C",
           "displayName": "Tylosaurus",
           "nameTag": "MoroTylo",
+          "stats": {
+            "Health": [
+              2900.0,
+              0.12,
+              0.15,
+              0.3
+            ],
+            "Stamina": [
+              600.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              8000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              1300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.08,
+              0.65,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -5018,6 +5144,512 @@
                       "y": 1137.79,
                       "w": 45.79,
                       "h": 45.4
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 8,
+              "spawnMultiplier": 0.7,
+              "spawnLimit": 0.012,
+              "spawnChances": "70",
+              "groupWeight": 0.2,
+              "weight": 0.000444,
+              "display": {
+                "weightText": "Entry Weight: 0.2",
+                "limitText": "Max % To Allow: 1.2%",
+                "chanceText": "Spawn Chances: 70%"
+              },
+              "bestSharedMin": 8.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Astraeos": {
+      "dinos": {
+        "/MorosTylosaurus/Dinos/Tylosaurus/Blueprints/MoroTylosaurus_character_bp.MoroTylosaurus_character_bp_C": {
+          "bpPath": "/MorosTylosaurus/Dinos/Tylosaurus/Blueprints/MoroTylosaurus_character_bp.MoroTylosaurus_character_bp_C",
+          "displayName": "Tylosaurus",
+          "nameTag": "MoroTylo",
+          "stats": {
+            "Health": [
+              2900.0,
+              0.12,
+              0.15,
+              0.3
+            ],
+            "Stamina": [
+              600.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              8000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              1300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.08,
+              0.65,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 250.0,
+          "killXpBase": 12.0,
+          "entries": [
+            {
+              "entryClass": "DinoSpawnEntries_DeepWater_Generic_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34EA402_1946079253": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1609.13,
+                      "y": 525.2,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1467441432": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1387.85,
+                      "y": 449.15,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1472546435": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1387.85,
+                      "y": 412.32,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1494642438": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1424.92,
+                      "y": 449.15,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1494666441": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1424.92,
+                      "y": 412.32,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1497954444": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1462.48,
+                      "y": 449.15,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1497978447": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1462.48,
+                      "y": 412.32,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1500052450": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1499.19,
+                      "y": 449.15,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1500075453": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1499.19,
+                      "y": 412.32,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1502514456": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1534.39,
+                      "y": 449.15,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1502538459": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1534.39,
+                      "y": 412.32,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1505451462": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1572.77,
+                      "y": 486.88,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1505475465": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1572.77,
+                      "y": 450.06,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1511769468": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1535.25,
+                      "y": 486.88,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1515178471": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1609.1,
+                      "y": 486.88,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1523969474": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1646.83,
+                      "y": 486.88,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1525279477": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1684.68,
+                      "y": 486.88,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1527096480": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1684.68,
+                      "y": 523.57,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1547330483": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1647.37,
+                      "y": 523.57,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1551279486": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1609.1,
+                      "y": 562.68,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1554095489": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1646.65,
+                      "y": 562.68,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1555365492": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1683.93,
+                      "y": 562.68,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1558314495": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1721.61,
+                      "y": 562.68,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1559700498": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1758.65,
+                      "y": 562.68,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1570482501": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1721.8,
+                      "y": 600.27,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1578748504": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1684.44,
+                      "y": 600.27,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1580554507": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1646.71,
+                      "y": 600.27,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1583488510": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1609.25,
+                      "y": 600.27,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1585127513": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1646.51,
+                      "y": 638.22,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1587379516": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1683.98,
+                      "y": 638.22,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1595072519": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1722.07,
+                      "y": 486.73,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1597854522": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1759.87,
+                      "y": 486.73,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Water_UAID_60CF847B67A34FA402_1599299525": {
+                  "minDesired": 8.0,
+                  "boxes": [
+                    {
+                      "x": 1797.0,
+                      "y": 486.73,
+                      "w": 33.47,
+                      "h": 34.5
                     }
                   ],
                   "points": [],

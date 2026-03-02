@@ -11,6 +11,49 @@
           "bpPath": "/PygmyHippo/Content/Hippo_Pygmy_Character_BP.Hippo_Pygmy_Character_BP_C",
           "displayName": "Pygmy Hippo",
           "nameTag": "Pygmy Hippo",
+          "stats": {
+            "Health": [
+              300.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              200.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.35
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -1034,6 +1077,49 @@
           "bpPath": "/PygmyHippo/Content/Hippo_Pygmy_Character_BP.Hippo_Pygmy_Character_BP_C",
           "displayName": "Pygmy Hippo",
           "nameTag": "Pygmy Hippo",
+          "stats": {
+            "Health": [
+              300.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              200.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.35
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -1212,6 +1298,49 @@
           "bpPath": "/PygmyHippo/Content/Hippo_Pygmy_Character_BP.Hippo_Pygmy_Character_BP_C",
           "displayName": "Pygmy Hippo",
           "nameTag": "Pygmy Hippo",
+          "stats": {
+            "Health": [
+              300.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              200.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.35
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -2236,6 +2365,49 @@
           "bpPath": "/PygmyHippo/Content/Hippo_Pygmy_Character_BP.Hippo_Pygmy_Character_BP_C",
           "displayName": "Pygmy Hippo",
           "nameTag": "Pygmy Hippo",
+          "stats": {
+            "Health": [
+              300.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              200.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.35
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -3267,6 +3439,49 @@
           "bpPath": "/PygmyHippo/Content/Hippo_Pygmy_Character_BP.Hippo_Pygmy_Character_BP_C",
           "displayName": "Pygmy Hippo",
           "nameTag": "Pygmy Hippo",
+          "stats": {
+            "Health": [
+              300.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              200.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.35
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -3410,6 +3625,136 @@
                 "chanceText": "Spawn Chances: 10%"
               },
               "bestSharedMin": 6.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Astraeos": {
+      "dinos": {
+        "/PygmyHippo/Content/Hippo_Pygmy_Character_BP.Hippo_Pygmy_Character_BP_C": {
+          "bpPath": "/PygmyHippo/Content/Hippo_Pygmy_Character_BP.Hippo_Pygmy_Character_BP_C",
+          "displayName": "Pygmy Hippo",
+          "nameTag": "Pygmy Hippo",
+          "stats": {
+            "Health": [
+              300.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              200.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              1.0,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01,
+              0.35
+            ]
+          },
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 0,
+          "dragWeight": 25.0,
+          "killXpBase": 0.5,
+          "entries": [
+            {
+              "entryClass": "SE_DinoSpawnEntriesOasis_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1256281291": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1262718294": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1101.09,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1268786297": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1139.41,
+                      "y": 198.71,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1397131975": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1031.72,
+                      "y": -12.14,
+                      "w": 43.32,
+                      "h": 42.02
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 0.1,
+              "spawnLimit": 0.1,
+              "spawnChances": "10",
+              "groupWeight": 1.0,
+              "weight": 0.004221,
+              "display": {
+                "weightText": "Entry Weight: 1",
+                "limitText": "Max % To Allow: 10%",
+                "chanceText": "Spawn Chances: 10%"
+              },
+              "bestSharedMin": 14.0,
               "minRarityDownshift": 0
             }
           ]

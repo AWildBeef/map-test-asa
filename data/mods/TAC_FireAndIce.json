@@ -11,6 +11,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/Cryoraptor_Character_BP.Cryoraptor_Character_BP_C",
           "displayName": "Cryoraptor",
           "nameTag": "TAC_Cryoraptor",
+          "stats": {
+            "Health": [
+              500.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -1017,6 +1059,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/AlphaIceraptor_Character_BP.AlphaIceraptor_Character_BP_C",
           "displayName": "Alpha Cryoraptor",
           "nameTag": "TAC_Alpha_Cryoraptor",
+          "stats": {
+            "Health": [
+              8000.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              140.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -2023,6 +2107,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -2475,6 +2567,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -2927,6 +3061,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -5048,6 +5224,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -7173,6 +7391,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -8199,6 +8425,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -9229,6 +9497,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/Cryoraptor_Character_BP.Cryoraptor_Character_BP_C",
           "displayName": "Cryoraptor",
           "nameTag": "TAC_Cryoraptor",
+          "stats": {
+            "Health": [
+              500.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -10869,6 +11179,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/AlphaIceraptor_Character_BP.AlphaIceraptor_Character_BP_C",
           "displayName": "Alpha Cryoraptor",
           "nameTag": "TAC_Alpha_Cryoraptor",
+          "stats": {
+            "Health": [
+              8000.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              140.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -12509,6 +12861,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -14162,6 +14522,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -15815,6 +16217,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -17041,6 +17485,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -18271,6 +18757,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/Cryoraptor_Character_BP.Cryoraptor_Character_BP_C",
           "displayName": "Cryoraptor",
           "nameTag": "TAC_Cryoraptor",
+          "stats": {
+            "Health": [
+              500.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -19012,6 +19540,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/AlphaIceraptor_Character_BP.AlphaIceraptor_Character_BP_C",
           "displayName": "Alpha Cryoraptor",
           "nameTag": "TAC_Alpha_Cryoraptor",
+          "stats": {
+            "Health": [
+              8000.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              140.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -19753,6 +20323,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -21578,6 +22156,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -23403,6 +24023,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -24684,6 +25346,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -25969,6 +26673,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/Cryoraptor_Character_BP.Cryoraptor_Character_BP_C",
           "displayName": "Cryoraptor",
           "nameTag": "TAC_Cryoraptor",
+          "stats": {
+            "Health": [
+              500.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -28657,6 +29403,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/AlphaIceraptor_Character_BP.AlphaIceraptor_Character_BP_C",
           "displayName": "Alpha Cryoraptor",
           "nameTag": "TAC_Alpha_Cryoraptor",
+          "stats": {
+            "Health": [
+              8000.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              140.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -31345,6 +32133,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -33072,6 +33868,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -34799,6 +35637,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -36363,6 +37243,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -37931,6 +38853,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -40357,7 +41287,7 @@
               },
               "HardLimitWildDinosToVolume": {
                 "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_358'",
-                "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16561"
+                "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16564"
               },
               "MinDesiredNumberOfNPC": 6,
               "bNPCWildIgnoreWild": true,
@@ -40385,6 +41315,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -42811,7 +43783,7 @@
               },
               "HardLimitWildDinosToVolume": {
                 "ObjectName": "NPCZoneVolume'Aberration_WP:PersistentLevel.NPCZoneVolume_358'",
-                "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16561"
+                "ObjectPath": "/Game/Maps/Aberration/Aberration_WP.16564"
               },
               "MinDesiredNumberOfNPC": 6,
               "bNPCWildIgnoreWild": true,
@@ -42839,6 +43811,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -46611,6 +47625,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -50387,6 +51443,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/Cryoraptor_Character_BP.Cryoraptor_Character_BP_C",
           "displayName": "Cryoraptor",
           "nameTag": "TAC_Cryoraptor",
+          "stats": {
+            "Health": [
+              500.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -50885,6 +51983,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/AlphaIceraptor_Character_BP.AlphaIceraptor_Character_BP_C",
           "displayName": "Alpha Cryoraptor",
           "nameTag": "TAC_Alpha_Cryoraptor",
+          "stats": {
+            "Health": [
+              8000.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              140.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -51383,6 +52523,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -51587,6 +52735,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -51791,6 +52981,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -54139,6 +55371,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -56491,6 +57765,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/Cryoraptor_Character_BP.Cryoraptor_Character_BP_C",
           "displayName": "Cryoraptor",
           "nameTag": "TAC_Cryoraptor",
+          "stats": {
+            "Health": [
+              500.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              300.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -56567,6 +57883,48 @@
           "bpPath": "/TAC_FireAndIce/Content/CR/AlphaIceraptor_Character_BP.AlphaIceraptor_Character_BP_C",
           "displayName": "Alpha Cryoraptor",
           "nameTag": "TAC_Alpha_Cryoraptor",
+          "stats": {
+            "Health": [
+              8000.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              1200.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              140.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -56643,6 +58001,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -56688,6 +58054,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -56733,6 +58141,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -56810,6 +58260,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -56891,6 +58383,14 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/Pyroraptor_Character_Bp_Child.Pyroraptor_Character_Bp_Child_C",
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
+          "stats": {
+            "MeleeDamageMultiplier": [
+              1.0
+            ],
+            "SpeedMultiplier": [
+              1.0
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -57250,6 +58750,593 @@
               },
               "bestSharedMin": 6.0,
               "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A322BD02_1883748070": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1402.27,
+                      "y": 222.1,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A322BD02_1887054073": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1431.81,
+                      "y": 223.02,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1142613231": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1544.85,
+                      "y": 225.41,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1175654252": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1327.05,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1458997405": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1138.7,
+                      "y": 13.39,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1461714408": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1138.7,
+                      "y": 50.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1683393504": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 124.16,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1691401516": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1695569519": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1695597522": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1253.41,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1743819552": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1215.14,
+                      "y": 123.96,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1768612573": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1404.55,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1778377594": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1479.41,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1779888600": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1517.82,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1104302849": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1326.22,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1109890852": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1363.94,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1114899855": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1345.14,
+                      "y": 12.29,
+                      "w": 56.61,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1117623858": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1306.63,
+                      "y": 7.07,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1251756918": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1532.72,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1251785921": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1570.44,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1256610924": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1532.72,
+                      "y": 11.81,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1256638927": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1570.44,
+                      "y": 11.81,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1259775930": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1608.93,
+                      "y": -26.43,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1259803933": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1608.93,
+                      "y": 11.29,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1265027936": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1644.9,
+                      "y": -26.43,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1265056939": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1644.9,
+                      "y": 11.29,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1272463942": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1627.94,
+                      "y": 48.81,
+                      "w": 48.03,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                }
+              },
+              "MinDesiredNumberOfNPC": 20,
+              "spawnMultiplier": 2.665,
+              "spawnLimit": 0.05,
+              "spawnChances": "100, 100, 50, 30, 10",
+              "groupWeight": 0.0245,
+              "weight": 0.001518,
+              "display": {
+                "weightText": "Entry Weight: 0.0245",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
+              },
+              "bestSharedMin": 20.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1881048636": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1668.58,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1881077639": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1668.58,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1295122945": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1706.42,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1295151948": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1706.42,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1298670951": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1720.38,
+                      "y": 64.14,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1298702954": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1720.38,
+                      "y": 101.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1301603957": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1678.94,
+                      "y": 64.14,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1301631960": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1678.94,
+                      "y": 101.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 2.665,
+              "spawnLimit": 0.05,
+              "spawnChances": "100, 100, 50, 30, 10",
+              "groupWeight": 0.0245,
+              "weight": 0.003288,
+              "display": {
+                "weightText": "Entry Weight: 0.0245",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2111968643": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 49.54,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2111998646": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 49.54,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2137394649": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 12.97,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2137423652": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 12.97,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2142755655": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1253.19,
+                      "y": 12.81,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2142784658": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1253.19,
+                      "y": 51.14,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 12,
+              "spawnMultiplier": 2.665,
+              "spawnLimit": 0.05,
+              "spawnChances": "100, 100, 50, 30, 10",
+              "groupWeight": 0.00294,
+              "weight": 0.000491,
+              "display": {
+                "weightText": "Entry Weight: 0.00294",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
+              },
+              "bestSharedMin": 12.0,
+              "minRarityDownshift": 0
             }
           ]
         },
@@ -57257,6 +59344,48 @@
           "bpPath": "/TAC_FireAndIce/Content/PR/FireraptorAlpha_Character_Bp.FireraptorAlpha_Character_Bp_C",
           "displayName": "Alpha Pyroraptor",
           "nameTag": "TAC_Alpha_Pyroraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -57616,6 +59745,593 @@
               },
               "bestSharedMin": 6.0,
               "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A322BD02_1883748070": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1402.27,
+                      "y": 222.1,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A322BD02_1887054073": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1431.81,
+                      "y": 223.02,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1142613231": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1544.85,
+                      "y": 225.41,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1175654252": {
+                  "minDesired": 20.0,
+                  "boxes": [
+                    {
+                      "x": 1327.05,
+                      "y": 236.35,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1458997405": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1138.7,
+                      "y": 13.39,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1461714408": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1138.7,
+                      "y": 50.29,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1683393504": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 124.16,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1691401516": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1695569519": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1695597522": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1253.41,
+                      "y": 86.76,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1743819552": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1215.14,
+                      "y": 123.96,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1768612573": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1404.55,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1778377594": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1479.41,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1779888600": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1517.82,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1104302849": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1326.22,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1109890852": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1363.94,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1114899855": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1345.14,
+                      "y": 12.29,
+                      "w": 56.61,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1117623858": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1306.63,
+                      "y": 7.07,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1251756918": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1532.72,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1251785921": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1570.44,
+                      "y": -23.62,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1256610924": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1532.72,
+                      "y": 11.81,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1256638927": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1570.44,
+                      "y": 11.81,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1259775930": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1608.93,
+                      "y": -26.43,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1259803933": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1608.93,
+                      "y": 11.29,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1265027936": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1644.9,
+                      "y": -26.43,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1265056939": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1644.9,
+                      "y": 11.29,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1272463942": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1627.94,
+                      "y": 48.81,
+                      "w": 48.03,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 0.7
+                }
+              },
+              "MinDesiredNumberOfNPC": 20,
+              "spawnMultiplier": 2.665,
+              "spawnLimit": 0.05,
+              "spawnChances": "100, 100, 50, 30, 10",
+              "groupWeight": 0.0005,
+              "weight": 3.1e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.0005",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
+              },
+              "bestSharedMin": 20.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1881048636": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1668.58,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1881077639": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1668.58,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1295122945": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1706.42,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1295151948": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1706.42,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1298670951": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1720.38,
+                      "y": 64.14,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1298702954": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1720.38,
+                      "y": 101.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1301603957": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1678.94,
+                      "y": 64.14,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1301631960": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1678.94,
+                      "y": 101.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 2.665,
+              "spawnLimit": 0.05,
+              "spawnChances": "100, 100, 50, 30, 10",
+              "groupWeight": 0.0005,
+              "weight": 6.7e-05,
+              "display": {
+                "weightText": "Entry Weight: 0.0005",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2111968643": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 49.54,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2111998646": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 49.54,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2137394649": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 12.97,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2137423652": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 12.97,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2142755655": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1253.19,
+                      "y": 12.81,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2142784658": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1253.19,
+                      "y": 51.14,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 12,
+              "spawnMultiplier": 2.665,
+              "spawnLimit": 0.05,
+              "spawnChances": "100, 100, 50, 30, 10",
+              "groupWeight": 6e-05,
+              "weight": 1e-05,
+              "display": {
+                "weightText": "Entry Weight: 6e-05",
+                "limitText": "Max % To Allow: 5%",
+                "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
+              },
+              "bestSharedMin": 12.0,
+              "minRarityDownshift": 0
             }
           ]
         },
@@ -57623,6 +60339,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Venoraptor_Character_BP_Child.Venoraptor_Character_BP_Child_C",
           "displayName": "Venoraptor",
           "nameTag": "TAC_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -60291,6 +63049,19 @@
             {
               "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
               "managers": {
+                "NPCZoneManager_UAID_60CF847B67A375A302_1658490144": {
+                  "minDesired": 26.0,
+                  "boxes": [
+                    {
+                      "x": 1759.25,
+                      "y": 1439.93,
+                      "w": 3.84,
+                      "h": 3.84
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A060902_1916331890": {
                   "minDesired": 12.0,
                   "boxes": [
@@ -60302,7 +63073,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1512007555": {
                   "minDesired": 12.0,
@@ -60315,7 +63086,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1547264558": {
                   "minDesired": 12.0,
@@ -60328,7 +63099,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1548925561": {
                   "minDesired": 12.0,
@@ -60341,7 +63112,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1551829564": {
                   "minDesired": 12.0,
@@ -60354,7 +63125,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1553343567": {
                   "minDesired": 12.0,
@@ -60367,7 +63138,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1554472570": {
                   "minDesired": 12.0,
@@ -60380,7 +63151,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1557472573": {
                   "minDesired": 12.0,
@@ -60393,7 +63164,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1559397576": {
                   "minDesired": 12.0,
@@ -60406,7 +63177,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1564985579": {
                   "minDesired": 12.0,
@@ -60419,10 +63190,14 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 }
               },
-              "MinDesiredNumberOfNPC": 12,
+              "bForceInEditor": true,
+              "MinDesiredNumberOfNPC": 26,
+              "NPCAIRangeMultiplier": 0.7,
+              "bNPCDontWander": true,
+              "bNPCWildIgnoreWild": true,
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
@@ -60433,7 +63208,7 @@
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
-              "bestSharedMin": 12.0,
+              "bestSharedMin": 26.0,
               "minRarityDownshift": 0
             },
             {
@@ -60551,6 +63326,48 @@
           "bpPath": "/TAC_FireAndIce/Content/Venoraptor/Alphapoisonraptor_Character_BP.Alphapoisonraptor_Character_BP_C",
           "displayName": "Alpha Venoraptor",
           "nameTag": "TAC_Alpha_Venoraptor",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.2,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.0125
+            ]
+          },
           "tameable": 0,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -63219,6 +66036,19 @@
             {
               "entryClass": "DinoSpawnEntries_SwampWater_Generic_C",
               "managers": {
+                "NPCZoneManager_UAID_60CF847B67A375A302_1658490144": {
+                  "minDesired": 26.0,
+                  "boxes": [
+                    {
+                      "x": 1759.25,
+                      "y": 1439.93,
+                      "w": 3.84,
+                      "h": 3.84
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86A060902_1916331890": {
                   "minDesired": 12.0,
                   "boxes": [
@@ -63230,7 +66060,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1512007555": {
                   "minDesired": 12.0,
@@ -63243,7 +66073,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1547264558": {
                   "minDesired": 12.0,
@@ -63256,7 +66086,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1548925561": {
                   "minDesired": 12.0,
@@ -63269,7 +66099,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1551829564": {
                   "minDesired": 12.0,
@@ -63282,7 +66112,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1553343567": {
                   "minDesired": 12.0,
@@ -63295,7 +66125,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1554472570": {
                   "minDesired": 12.0,
@@ -63308,7 +66138,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1557472573": {
                   "minDesired": 12.0,
@@ -63321,7 +66151,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1559397576": {
                   "minDesired": 12.0,
@@ -63334,7 +66164,7 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 },
                 "NPCZoneManagerBlueprint_Water_UAID_F02F74C9A86AE92E02_1564985579": {
                   "minDesired": 12.0,
@@ -63347,10 +66177,14 @@
                     }
                   ],
                   "points": [],
-                  "minDesiredPct": 1.0
+                  "minDesiredPct": 0.461538
                 }
               },
-              "MinDesiredNumberOfNPC": 12,
+              "bForceInEditor": true,
+              "MinDesiredNumberOfNPC": 26,
+              "NPCAIRangeMultiplier": 0.7,
+              "bNPCDontWander": true,
+              "bNPCWildIgnoreWild": true,
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
@@ -63361,7 +66195,7 @@
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
-              "bestSharedMin": 12.0,
+              "bestSharedMin": 26.0,
               "minRarityDownshift": 0
             },
             {

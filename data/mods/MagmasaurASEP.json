@@ -11,6 +11,46 @@
           "bpPath": "/MagmasaurASEP/Content/Magmasaur/Cherufe_Character_BP_ASEP.Cherufe_Character_BP_ASEP_C",
           "displayName": "Magmasaur",
           "nameTag": "LavaLizard",
+          "stats": {
+            "Health": [
+              3000.0,
+              0.05,
+              0.1,
+              3000.0
+            ],
+            "Stamina": [
+              500.0,
+              0.05,
+              0.05
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.03,
+              0.03,
+              -0.25,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -277,6 +317,46 @@
           "bpPath": "/MagmasaurASEP/Content/Magmasaur/Cherufe_Character_BP_ASEP.Cherufe_Character_BP_ASEP_C",
           "displayName": "Magmasaur",
           "nameTag": "LavaLizard",
+          "stats": {
+            "Health": [
+              3000.0,
+              0.05,
+              0.1,
+              3000.0
+            ],
+            "Stamina": [
+              500.0,
+              0.05,
+              0.05
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.03,
+              0.03,
+              -0.25,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -954,6 +1034,46 @@
           "bpPath": "/MagmasaurASEP/Content/Magmasaur/Cherufe_Character_BP_ASEP.Cherufe_Character_BP_ASEP_C",
           "displayName": "Magmasaur",
           "nameTag": "LavaLizard",
+          "stats": {
+            "Health": [
+              3000.0,
+              0.05,
+              0.1,
+              3000.0
+            ],
+            "Stamina": [
+              500.0,
+              0.05,
+              0.05
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.03,
+              0.03,
+              -0.25,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -1305,6 +1425,46 @@
           "bpPath": "/MagmasaurASEP/Content/Magmasaur/Cherufe_Character_BP_ASEP.Cherufe_Character_BP_ASEP_C",
           "displayName": "Magmasaur",
           "nameTag": "LavaLizard",
+          "stats": {
+            "Health": [
+              3000.0,
+              0.05,
+              0.1,
+              3000.0
+            ],
+            "Stamina": [
+              500.0,
+              0.05,
+              0.05
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.03,
+              0.03,
+              -0.25,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -1809,6 +1969,46 @@
           "bpPath": "/MagmasaurASEP/Content/Magmasaur/Cherufe_Character_BP_ASEP.Cherufe_Character_BP_ASEP_C",
           "displayName": "Magmasaur",
           "nameTag": "LavaLizard",
+          "stats": {
+            "Health": [
+              3000.0,
+              0.05,
+              0.1,
+              3000.0
+            ],
+            "Stamina": [
+              500.0,
+              0.05,
+              0.05
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.03,
+              0.03,
+              -0.25,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -2342,6 +2542,159 @@
                 "chanceText": "Spawn Chances: 100%, 100%, 100%, 75%, 75%"
               },
               "bestSharedMin": 13.0,
+              "minRarityDownshift": 0
+            }
+          ]
+        }
+      }
+    },
+    "Astraeos": {
+      "dinos": {
+        "/MagmasaurASEP/Content/Magmasaur/Cherufe_Character_BP_ASEP.Cherufe_Character_BP_ASEP_C": {
+          "bpPath": "/MagmasaurASEP/Content/Magmasaur/Cherufe_Character_BP_ASEP.Cherufe_Character_BP_ASEP_C",
+          "displayName": "Magmasaur",
+          "nameTag": "LavaLizard",
+          "stats": {
+            "Health": [
+              3000.0,
+              0.05,
+              0.1,
+              3000.0
+            ],
+            "Stamina": [
+              500.0,
+              0.05,
+              0.05
+            ],
+            "Oxygen": [
+              200.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              550.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.03,
+              0.03,
+              -0.25,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.005
+            ]
+          },
+          "tameable": 1,
+          "isBoss": 0,
+          "isBossMinion": 0,
+          "breedable": 1,
+          "dragWeight": 555.0,
+          "killXpBase": 120.0,
+          "entries": [
+            {
+              "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2111968643": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 49.54,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2111998646": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 49.54,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2137394649": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1177.05,
+                      "y": 12.97,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2137423652": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1215.38,
+                      "y": 12.97,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2142755655": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1253.19,
+                      "y": 12.81,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_2142784658": {
+                  "minDesired": 12.0,
+                  "boxes": [
+                    {
+                      "x": 1253.19,
+                      "y": 51.14,
+                      "w": 33.47,
+                      "h": 34.5
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 12,
+              "spawnMultiplier": 8.5,
+              "spawnLimit": 0.25,
+              "spawnChances": "100, 750",
+              "groupWeight": 0.28,
+              "weight": 0.553488,
+              "display": {
+                "weightText": "Entry Weight: 0.28",
+                "limitText": "Max % To Allow: 25%",
+                "chanceText": "Spawn Chances: 100%, 750%"
+              },
+              "bestSharedMin": 12.0,
               "minRarityDownshift": 0
             }
           ]

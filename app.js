@@ -456,6 +456,175 @@ let entryVisibility = {}; // key: `${sourceId}::${mapId}::${dinoKey}::${entryInd
 // HELPERS
 // ============================================================
 
+const STAT_COLS = [
+  { key: "base", label: "Base" },
+  { key: "iw",   label: "Wild" },
+  { key: "it",   label: "Tamed" },
+  { key: "ta",   label: "Add" },
+  { key: "tm",   label: "Mult" },
+];
+
+// order + labels (fallback to raw key)
+const STAT_ORDER = [
+  "Health",
+  "Stamina",
+  "Oxygen",
+  "Food",
+  "Weight",
+  "MeleeDamageMultiplier",
+  "SpeedMultiplier",
+  "CraftingSpeedMultiplier",
+];
+
+const STAT_LABEL = {
+  Health: "Health",
+  Stamina: "Stamina",
+  Oxygen: "Oxygen",
+  Food: "Food",
+  Weight: "Weight",
+  MeleeDamageMultiplier: "Melee",
+  SpeedMultiplier: "Speed",
+  CraftingSpeedMultiplier: "Craft",
+};
+
+// stats arrays are [base, iw, it, ta, tm] (trimmed)
+function unpackStat(arr) {
+  const a = Array.isArray(arr) ? arr : [];
+  return {
+    base: a.length > 0 ? a[0] : null,
+    iw:   a.length > 1 ? a[1] : null,
+    it:   a.length > 2 ? a[2] : null,
+    ta:   a.length > 3 ? a[3] : null,
+    tm:   a.length > 4 ? a[4] : null,
+  };
+}
+
+function isMultiplierStat(statKey) {
+  return statKey === "MeleeDamageMultiplier"
+      || statKey === "SpeedMultiplier"
+      || statKey === "CraftingSpeedMultiplier";
+}
+
+function fmtStatNum(v) {
+  if (v == null || v === "") return "";
+  const n = Number(v);
+  if (!Number.isFinite(n)) return "";
+
+  // keep it compact but stable
+  const abs = Math.abs(n);
+  if (abs > 0 && abs < 0.001) return n.toPrecision(3);
+
+  // toFixed for stability, then trim *decimal* trailing zeros only
+  let s = n.toFixed(6);
+
+  // remove trailing zeros after decimal, but DO NOT touch integer trailing zeros
+  s = s.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+
+  // optional: "-0" -> "0"
+  if (s === "-0") s = "0";
+
+  return s;
+}
+
+function fmtBaseCell(statKey, v) {
+  // Option: show multiplier base as percent (1.0 => 100%)
+  // If you don’t want that, just return fmtStatNum(v)
+  if (isMultiplierStat(statKey)) {
+    const n = Number(v);
+    if (!Number.isFinite(n)) return "";
+    return `${fmtStatNum(n * 100)}%`;
+  }
+  return fmtStatNum(v);
+}
+
+function renderStatsTable(statsObj) {
+  if (!statsObj || typeof statsObj !== "object") {
+    return `<div style="color:var(--muted)">No stats found.</div>`;
+  }
+
+  // keys in preferred order, then any extras
+  const keys = [];
+  for (const k of STAT_ORDER) if (k in statsObj) keys.push(k);
+  for (const k of Object.keys(statsObj)) if (!keys.includes(k)) keys.push(k);
+
+  if (!keys.length) {
+    return `<div style="color:var(--muted)">No stats found.</div>`;
+  }
+
+  const header = `
+    <div class="statgrid">
+      <div class="statgrid-head">
+        <div class="statgrid-th">Stat</div>
+        ${STAT_COLS.map(c => `<div class="statgrid-th num">${escapeHtml(c.label)}</div>`).join("")}
+      </div>
+  `;
+
+  const rows = keys.map(statKey => {
+    const label = STAT_LABEL[statKey] || statKey;
+    const data = unpackStat(statsObj[statKey]);
+
+    const cells = STAT_COLS.map(c => {
+      let txt = "";
+      if (c.key === "base") txt = fmtBaseCell(statKey, data.base);
+      else txt = fmtStatNum(data[c.key]);
+
+      const muted = txt ? "" : " muted";
+      return `<div class="statgrid-td num${muted}">${escapeHtml(txt || "--")}</div>`;
+    }).join("");
+    
+    return `
+      <div class="statgrid-row">
+        <div class="statgrid-td statname">
+          ${escapeHtml(label)}
+        </div>
+        ${cells}
+      </div>
+    `;
+
+  }).join("");
+
+  return header + rows + `</div>`;
+}
+
+function mergeStatsFromPicked(picked) {
+  // picked = array of per-bp dino objects
+  const out = {};
+  const have = new Set();
+
+  for (const d of (picked || [])) {
+    const s = d?.stats;
+    if (!s || typeof s !== "object") continue;
+
+    for (const [statKey, arr] of Object.entries(s)) {
+      if (!Array.isArray(arr)) continue;
+      have.add(statKey);
+
+      // Ensure target array exists
+      const tgt = out[statKey] ||= [];
+
+      // Merge index-by-index: take first non-null/finite we encounter
+      for (let i = 0; i < arr.length; i++) {
+        const v = arr[i];
+        const ok = (v === null) || Number.isFinite(Number(v));
+        if (!ok) continue;
+
+        // If target slot is empty, fill it
+        if (tgt[i] === undefined) tgt[i] = v;
+      }
+    }
+  }
+
+  // Normalize: make missing slots explicit nulls (optional)
+  for (const k of have) {
+    const a = out[k];
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] === undefined) a[i] = null;
+    }
+  }
+
+  return Object.keys(out).length ? out : null;
+}
+
 function cleanName(s){
   const x = String(s ?? "").trim();
   return x.length ? x : "";
@@ -702,6 +871,8 @@ function drawGroupedDino(grouped, displayName) {
     bpPath: grouped.bps?.[0] || "",
     additionalBpPathsToDisplay: grouped.bps?.slice(1) || [],
     entries: grouped.entries || [],
+    
+    stats: grouped.stats || null,
 
     nameTag: grouped.nameTag || "",
     tameable: grouped.tameable,
@@ -711,6 +882,7 @@ function drawGroupedDino(grouped, displayName) {
     isBossMinion: grouped.isBossMinion,
     dragWeight: grouped.dragWeight,
     killXpBase: grouped.killXpBase
+    
   };
 
   const fakeCfg = { dinos: { __tmp__: dino } };
@@ -814,6 +986,7 @@ function buildGroupedSelection(mapData, bps) {
     isBossMinion: anyTrue(picked, d => d.isBossMinion),
     dragWeight: firstNonEmpty(picked, d => d.dragWeight),
     killXpBase: firstNonEmpty(picked, d => d.killXpBase),
+    stats: mergeStatsFromPicked(picked),
 
     perBp: picked,
     entries: []
@@ -1978,6 +2151,7 @@ function redrawMapOnly() {
       bpPath: grouped.bps?.[0] || "",
       additionalBpPathsToDisplay: grouped.bps?.slice(1) || [],
       entries: grouped.entries || [],
+      stats: grouped.stats || null,
       nameTag: grouped.nameTag || "",
       tameable: grouped.tameable,
       breedable: grouped.breedable,
@@ -3580,9 +3754,12 @@ function renderDinoTab_Spawns({ entries, dinoKey }) {
 }
 
 function renderDinoTab_Stats(d) {
-  // You already show drag + XP in quick info; this can be expanded later
   const drag = fmtNum(d?.dragWeight, 0);
   const xp   = fmtNum(d?.killXpBase, 0);
+
+  // your exported stats object
+  const statsHtml = renderStatsTable(d?.stats);
+
   return `
     <div class="info-section">
       <div class="info-subtitle">Stats</div>
@@ -3592,9 +3769,7 @@ function renderDinoTab_Stats(d) {
         ${xp   !== null ? `<div class="entry-meta-line">Kill XP: ${escapeHtml(String(Number(xp)*4))}</div>` : ``}
       </div>
 
-      <div class="entry-meta" color:var(--muted);">
-        (More stat breakdown here later if you want.)
-      </div>
+      ${statsHtml}
     </div>
   `;
 }

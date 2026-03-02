@@ -5818,6 +5818,128 @@
               },
               "bestSharedMin": 20.0,
               "minRarityDownshift": 0
+            },
+            {
+              "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+              "managers": {
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1881048636": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1668.58,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A351A402_1881077639": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1668.58,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1295122945": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1706.42,
+                      "y": 124.0,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1295151948": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1706.42,
+                      "y": 161.42,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1298670951": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1720.38,
+                      "y": 64.14,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1298702954": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1720.38,
+                      "y": 101.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1301603957": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1678.94,
+                      "y": 64.14,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                },
+                "NPCZoneManagerBlueprint_Land_C_UAID_60CF847B67A352A402_1301631960": {
+                  "minDesired": 14.0,
+                  "boxes": [
+                    {
+                      "x": 1678.94,
+                      "y": 101.56,
+                      "w": 34.5,
+                      "h": 33.47
+                    }
+                  ],
+                  "points": [],
+                  "minDesiredPct": 1.0
+                }
+              },
+              "MinDesiredNumberOfNPC": 14,
+              "spawnMultiplier": 2.0,
+              "spawnLimit": 0.04,
+              "spawnChances": "100, 100",
+              "groupWeight": 0.015,
+              "weight": 0.001221,
+              "display": {
+                "weightText": "Entry Weight: 0.015",
+                "limitText": "Max % To Allow: 4%",
+                "chanceText": "Spawn Chances: 100%, 100%"
+              },
+              "bestSharedMin": 14.0,
+              "minRarityDownshift": 0
             }
           ]
         }

@@ -8,247 +8,50 @@
   },
   "coordSystem": "pixel",
   "dinos": {
-    "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C": {
-      "bpPath": "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C",
-      "displayName": "Trilobite",
-      "nameTag": "Trilobite",
-      "tameable": 1,
-      "isBoss": 0,
-      "isBossMinion": 0,
-      "breedable": 1,
-      "dragWeight": 30.0,
-      "killXpBase": 1.0,
-      "entries": [
-        {
-          "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Ice_C",
-          "managers": {
-            "NPCZoneManager12": {
-              "minDesired": 60.0,
-              "boxes": [
-                {
-                  "x": 1346.11,
-                  "y": 1569.5,
-                  "w": 195.09,
-                  "h": 280.93
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 1.0
-            },
-            "NPCZoneManager72": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1816.86,
-                  "y": 1843.44,
-                  "w": 49.87,
-                  "h": 61.52,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_51": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1992.75,
-                  "y": 1747.28,
-                  "w": 42.11,
-                  "h": 87.5,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_52": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1992.75,
-                  "y": 1835.38,
-                  "w": 42.11,
-                  "h": 30.46,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_54": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1950.05,
-                  "y": 1855.68,
-                  "w": 42.11,
-                  "h": 35.84,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_57": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1917.8,
-                  "y": 1892.12,
-                  "w": 53.45,
-                  "h": 35.84,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_58": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1830.0,
-                  "y": 1899.28,
-                  "w": 87.2,
-                  "h": 61.52,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_59": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1780.73,
-                  "y": 1935.12,
-                  "w": 48.68,
-                  "h": 25.68,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_60": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1717.12,
-                  "y": 1885.55,
-                  "w": 63.01,
-                  "h": 61.52,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_61": {
-              "minDesired": 8.0,
-              "boxes": [
-                {
-                  "x": 1753.25,
-                  "y": 1843.44,
-                  "w": 63.01,
-                  "h": 61.52,
-                  "bForceUntameable": true
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.133333
-            },
-            "NPCZoneManager_7": {
-              "minDesired": 25.0,
-              "boxes": [
-                {
-                  "x": 1547.72,
-                  "y": 1752.25,
-                  "w": 132.35,
-                  "h": 121.91
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.416667
-            },
-            "NPCZoneManager_8": {
-              "minDesired": 46.0,
-              "boxes": [
-                {
-                  "x": 1661.12,
-                  "y": 1545.5,
-                  "w": 132.35,
-                  "h": 214.78
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.766667
-            },
-            "wiki": {
-              "minDesired": 30.0,
-              "boxes": [
-                {
-                  "x": 1741.62,
-                  "y": 1960.76,
-                  "w": 80.28,
-                  "h": 80.49
-                },
-                {
-                  "x": 1813.3,
-                  "y": 1937.0,
-                  "w": 80.49,
-                  "h": 80.49
-                },
-                {
-                  "x": 1465.34,
-                  "y": 1603.38,
-                  "w": 80.49,
-                  "h": 80.49
-                },
-                {
-                  "x": 1498.73,
-                  "y": 1551.97,
-                  "w": 80.49,
-                  "h": 80.49
-                },
-                {
-                  "x": 1570.41,
-                  "y": 1551.97,
-                  "w": 80.49,
-                  "h": 80.49
-                }
-              ],
-              "points": [],
-              "minDesiredPct": 0.5
-            }
-          },
-          "bForceInEditor": true,
-          "MinDesiredNumberOfNPC": 60,
-          "bNPCDontWander": true,
-          "bNPCWildIgnoreWild": true,
-          "bForceUntameable": true,
-          "spawnMultiplier": 2.8,
-          "spawnLimit": 0.2,
-          "spawnChances": "100, 100, 80",
-          "groupWeight": 1.0,
-          "weight": 0.230169,
-          "display": {
-            "weightText": "Entry Weight: 1",
-            "limitText": "Max % To Allow: 20%",
-            "chanceText": "Spawn Chances: 100%, 100%, 80%"
-          },
-          "bestSharedMin": 60.0,
-          "minRarityDownshift": 0
-        }
-      ]
-    },
     "/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C",
       "displayName": "Achatina",
       "nameTag": "Achatina",
+      "stats": {
+        "Health": [
+          75.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          60.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -1676,6 +1479,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Allosaurus/Allo_Character_BP.Allo_Character_BP_C",
       "displayName": "Allosaurus",
       "nameTag": "Allo",
+      "stats": {
+        "Health": [
+          630.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          250.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          380.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          -0.1
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -2343,13 +2189,13 @@
           "MinDesiredNumberOfNPC": 12,
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.1,
-          "spawnChances": null,
+          "spawnChances": "100",
           "groupWeight": 0.08,
           "weight": 0.005252,
           "display": {
             "weightText": "Entry Weight: 0.08",
             "limitText": "Max % To Allow: 10%",
-            "chanceText": ""
+            "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 22.0,
           "minRarityDownshift": 0
@@ -2360,6 +2206,48 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Carno/MegaCarno_Character_BP.MegaCarno_Character_BP_C",
       "displayName": "Alpha Carnotaurus",
       "nameTag": "Carno",
+      "stats": {
+        "Health": [
+          6400.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isAlpha": 1,
       "isBoss": 0,
@@ -2471,6 +2359,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Raptor/MegaRaptor_Character_BP.MegaRaptor_Character_BP_C",
       "displayName": "Alpha Raptor",
       "nameTag": "Raptor",
+      "stats": {
+        "Health": [
+          3600.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          140.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          0.2
+        ]
+      },
       "tameable": 0,
       "isAlpha": 1,
       "isBoss": 0,
@@ -2582,6 +2511,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Rex/MegaRex_Character_BP.MegaRex_Character_BP_C",
       "displayName": "Alpha Rex",
       "nameTag": "Rex",
+      "stats": {
+        "Health": [
+          17500.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          420.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isAlpha": 1,
       "isBoss": 0,
@@ -2693,6 +2662,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ankylo/Ankylo_Character_BP.Ankylo_Character_BP_C",
       "displayName": "Ankylosaurus",
       "nameTag": "Anky",
+      "stats": {
+        "Health": [
+          700.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          175.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          250.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02,
+          0.35
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -8609,6 +8621,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Spider-Small/SpiderS_Character_BP.SpiderS_Character_BP_C",
       "displayName": "Araneo",
       "nameTag": "Spider",
+      "stats": {
+        "Health": [
+          150.0,
+          0.2,
+          0.1,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          100.0,
+          0.02,
+          0.08
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.67
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -11359,6 +11412,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Archaeopteryx/Archa_Character_BP.Archa_Character_BP_C",
       "displayName": "Archaeopteryx",
       "nameTag": "Archa",
+      "stats": {
+        "Health": [
+          125.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          30.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -12895,6 +12988,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Argentavis/Argent_Character_BP.Argent_Character_BP_C",
       "displayName": "Argentavis",
       "nameTag": "Argent",
+      "stats": {
+        "Health": [
+          365.0,
+          0.2,
+          0.225,
+          0.5
+        ],
+        "Stamina": [
+          400.0,
+          0.05,
+          0.075
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.055
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.15,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -15347,6 +15480,49 @@
       "bpPath": "/Game/Packs/Wasteland/Dinos/Doggo/Doggo_Character_BP.Doggo_Character_BP_C",
       "displayName": "Armadoggo",
       "nameTag": "Armadoggo",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.66
+        ],
+        "Stamina": [
+          260.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          200.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -16782,6 +16958,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Arthropluera/Arthro_Character_BP.Arthro_Character_BP_C",
       "displayName": "Arthropluera",
       "nameTag": "Arthro",
+      "stats": {
+        "Health": [
+          500.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          100.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -18529,6 +18746,46 @@
       "bpPath": "/Game/ASA/Dinos/ShoulderDragon/ShoulderDragon_Character_BP_Autumn.ShoulderDragon_Character_BP_Autumn_C",
       "displayName": "Autumn Drakeling",
       "nameTag": "ShoulderDragon",
+      "stats": {
+        "Health": [
+          150.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          65.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -19353,6 +19610,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Baryonyx/Baryonyx_Character_BP.Baryonyx_Character_BP_C",
       "displayName": "Baryonyx",
       "nameTag": "Baryonyx",
+      "stats": {
+        "Health": [
+          440.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          325.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          225.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2250.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          325.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -19585,6 +19883,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Toad/Toad_Character_BP.Toad_Character_BP_C",
       "displayName": "Beelzebufo",
       "nameTag": "Toad",
+      "stats": {
+        "Health": [
+          220.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          190.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          160.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.2,
+          0.25
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -19730,6 +20069,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Sauropod/Sauropod_Character_BP.Sauropod_Character_BP_C",
       "displayName": "Brontosaurus",
       "nameTag": "Bronto",
+      "stats": {
+        "Health": [
+          2277.0,
+          0.2,
+          0.132,
+          0.5
+        ],
+        "Stamina": [
+          240.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          10000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          1600.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -19968,15 +20347,15 @@
             }
           },
           "MinDesiredNumberOfNPC": 10,
-          "spawnMultiplier": 1.0,
+          "spawnMultiplier": 2.0,
           "spawnLimit": 0.01,
-          "spawnChances": null,
+          "spawnChances": "100, 100",
           "groupWeight": 0.04,
-          "weight": 0.00041,
+          "weight": 0.000821,
           "display": {
             "weightText": "Entry Weight: 0.04",
             "limitText": "Max % To Allow: 1%",
-            "chanceText": ""
+            "chanceText": "Spawn Chances: 100%, 100%"
           },
           "bestSharedMin": 15.0,
           "minRarityDownshift": 0
@@ -22083,6 +22462,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Turtle/Turtle_Character_BP.Turtle_Character_BP_C",
       "displayName": "Carbonemys",
       "nameTag": "Turtle",
+      "stats": {
+        "Health": [
+          700.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          270.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.7
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -24162,6 +24582,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Carcharodontosaurus/Carcha_Character_BP.Carcha_Character_BP_C",
       "displayName": "Carcharodontosaurus",
       "nameTag": "Carcha",
+      "stats": {
+        "Health": [
+          70000.0,
+          0.0008,
+          0.004,
+          -54000.0
+        ],
+        "Stamina": [
+          480.0,
+          0.006,
+          0.025
+        ],
+        "Oxygen": [
+          150.0,
+          0.0025,
+          0.025
+        ],
+        "Food": [
+          4000.0,
+          0.0025,
+          0.025
+        ],
+        "Weight": [
+          650.0,
+          0.02,
+          0.01
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.05,
+          -0.8,
+          0.0
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0031
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -24349,6 +24809,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Carno/Carno_Character_BP.Carno_Character_BP_C",
       "displayName": "Carnotaurus",
       "nameTag": "Carno",
+      "stats": {
+        "Health": [
+          420.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0125,
+          0.085
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -28773,15 +29276,15 @@
             }
           },
           "MinDesiredNumberOfNPC": 12,
-          "spawnMultiplier": 3.0,
-          "spawnLimit": 0.005,
-          "spawnChances": "100, 100, 100",
-          "groupWeight": 0.014,
-          "weight": 0.000155,
+          "spawnMultiplier": 4.0,
+          "spawnLimit": 0.6,
+          "spawnChances": "100, 100, 100, 100",
+          "groupWeight": 0.0305,
+          "weight": 0.053943,
           "display": {
-            "weightText": "Entry Weight: 0.014",
-            "limitText": "Max % To Allow: 0.5%",
-            "chanceText": "Spawn Chances: 100%, 100%, 100%"
+            "weightText": "Entry Weight: 0.0305",
+            "limitText": "Max % To Allow: 60%",
+            "chanceText": "Spawn Chances: 100%, 100%, 100%, 100%"
           },
           "bestSharedMin": 22.0,
           "minRarityDownshift": 0
@@ -29604,6 +30107,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Beaver/Beaver_Character_BP.Beaver_Character_BP_C",
       "displayName": "Castoroides",
       "nameTag": "Beaver",
+      "stats": {
+        "Health": [
+          450.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          180.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          750.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.04,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.7
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -29809,6 +30353,48 @@
       "bpPath": "/Game/ASA/Dinos/Cat/Cat_Character_BP.Cat_Character_BP_C",
       "displayName": "Cat",
       "nameTag": "Cat",
+      "stats": {
+        "Health": [
+          125.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          60.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -29898,6 +30484,46 @@
       "bpPath": "/Game/ASA/Dinos/Ceratosaurus/Dinos/Ceratosaurus_Character_BP_ASA.Ceratosaurus_Character_BP_ASA_C",
       "displayName": "Ceratosaurus",
       "nameTag": "CeratosaurusAA",
+      "stats": {
+        "Health": [
+          550.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          400.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          350.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -30655,6 +31281,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Chalicotherium/Chalico_Character_BP.Chalico_Character_BP_C",
       "displayName": "Chalicotherium",
       "nameTag": "Chalico",
+      "stats": {
+        "Health": [
+          600.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          4000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -34756,6 +35422,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Coelacanth/Coel_Character_BP.Coel_Character_BP_C",
       "displayName": "Coelacanth",
       "nameTag": "Coel",
+      "stats": {
+        "Health": [
+          30.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          8.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -35755,6 +36461,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Compy/Compy_Character_BP.Compy_Character_BP_C",
       "displayName": "Compy",
       "nameTag": "Compy",
+      "stats": {
+        "Health": [
+          50.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          25.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -37932,6 +38681,47 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Arthropluera/Arthro_Character_BP_Corrupt.Arthro_Character_BP_Corrupt_C",
       "displayName": "Corrupted Arthropluera",
       "nameTag": "Arthro",
+      "stats": {
+        "Health": [
+          500.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          100.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -38741,6 +39531,49 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Carno/Carno_Character_BP_Corrupt.Carno_Character_BP_Corrupt_C",
       "displayName": "Corrupted Carnotaurus",
       "nameTag": "Carno",
+      "stats": {
+        "Health": [
+          420.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0125,
+          0.085
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -41482,6 +42315,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Chalicotherium/Chalico_Character_BP_Corrupt.Chalico_Character_BP_Corrupt_C",
       "displayName": "Corrupted Chalicotherium",
       "nameTag": "Chalico",
+      "stats": {
+        "Health": [
+          600.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          4000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -44954,6 +45827,49 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Dilo/Dilo_Character_BP_Corrupt.Dilo_Character_BP_Corrupt_C",
       "displayName": "Corrupted Dilophosaur",
       "nameTag": "Dilo",
+      "stats": {
+        "Health": [
+          130.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          45.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          2.0
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -50232,6 +51148,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Giganotosaurus/Gigant_Character_BP_Corrupt.Gigant_Character_BP_Corrupt_C",
       "displayName": "Corrupted Giganotosaurus",
       "nameTag": "Gigant",
+      "stats": {
+        "Health": [
+          65000.0,
+          0.0005,
+          0.002,
+          0.0
+        ],
+        "Stamina": [
+          400.0,
+          0.0005,
+          0.01
+        ],
+        "Oxygen": [
+          150.0,
+          0.0025,
+          0.025
+        ],
+        "Food": [
+          4000.0,
+          0.0025,
+          0.025
+        ],
+        "Weight": [
+          700.0,
+          0.01,
+          0.01
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.05,
+          -0.8,
+          0.0
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0031
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -52024,6 +52980,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Paraceratherium/Paracer_Character_BP_Corrupt.Paracer_Character_BP_Corrupt_C",
       "displayName": "Corrupted Paraceratherium",
       "nameTag": "Paracer",
+      "stats": {
+        "Health": [
+          1026.0,
+          0.2,
+          0.1275,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          850.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -52890,6 +53886,49 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Ptero/Ptero_Character_BP_Corrupt.Ptero_Character_BP_Corrupt_C",
       "displayName": "Corrupted Pteranodon",
       "nameTag": "Ptera",
+      "stats": {
+        "Health": [
+          210.0,
+          0.2,
+          0.15,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.05,
+          0.04
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          120.0,
+          0.02,
+          0.03
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.075,
+          0.65,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02,
+          0.35
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -58621,6 +59660,47 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Raptor/Raptor_Character_BP_Corrupt.Raptor_Character_BP_Corrupt_C",
       "displayName": "Corrupted Raptor",
       "nameTag": "Raptor",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          140.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          0.2
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -61770,6 +62850,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Nameless/Xenomorph_Character_BP_Male_Tamed_Corrupt.Xenomorph_Character_BP_Male_Tamed_Corrupt_C",
       "displayName": "Corrupted Reaper King",
       "nameTag": "Xenomorph",
+      "stats": {
+        "Health": [
+          18500.0,
+          0.001,
+          0.1,
+          0.0
+        ],
+        "Stamina": [
+          480.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          415.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -62979,6 +64099,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Rex/Rex_Character_BP_Corrupt.Rex_Character_BP_Corrupt_C",
       "displayName": "Corrupted Rex",
       "nameTag": "Rex",
+      "stats": {
+        "Health": [
+          1100.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          420.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -66318,6 +67478,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/RockDrake/RockDrake_Character_BP_Corrupt.RockDrake_Character_BP_Corrupt_C",
       "displayName": "Corrupted Rock Drake",
       "nameTag": "RockDrake",
+      "stats": {
+        "Health": [
+          1950.0,
+          0.085,
+          0.15,
+          -1050.0
+        ],
+        "Stamina": [
+          450.0,
+          0.05,
+          0.05
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          -0.25,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -68483,6 +69683,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Spino/Spino_Character_BP_Corrupt.Spino_Character_BP_Corrupt_C",
       "displayName": "Corrupted Spino",
       "nameTag": "Spino",
+      "stats": {
+        "Health": [
+          805.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          650.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2600.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          350.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -69877,6 +71117,47 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Stego/Stego_Character_BP_Corrupt.Stego_Character_BP_Corrupt_C",
       "displayName": "Corrupted Stegosaurus",
       "nameTag": "Stego",
+      "stats": {
+        "Health": [
+          650.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02,
+          0.964
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -75039,6 +76320,47 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Trike/Trike_Character_BP_Corrupt.Trike_Character_BP_Corrupt_C",
       "displayName": "Corrupted Triceratops",
       "nameTag": "Trike",
+      "stats": {
+        "Health": [
+          375.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          365.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          1.2
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -79405,6 +80727,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Wyvern/Wyvern_Character_BP_Fire_Corrupt.Wyvern_Character_BP_Fire_Corrupt_C",
       "displayName": "Corrupted Wyvern",
       "nameTag": "Wyvern",
+      "stats": {
+        "Health": [
+          1295.0,
+          0.15,
+          0.12,
+          -785.0
+        ],
+        "Stamina": [
+          315.0,
+          0.05,
+          0.05
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1800.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          -0.25,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -80107,6 +81469,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Daeodon/Daeodon_Character_BP.Daeodon_Character_BP_C",
       "displayName": "Daeodon",
       "nameTag": "Daeodon",
+      "stats": {
+        "Health": [
+          900.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          250.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2500.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -81126,6 +82531,49 @@
       "bpPath": "/Game/Extinction/Dinos/Tank/Defender_Character_BP.Defender_Character_BP_C",
       "displayName": "Defense Unit",
       "nameTag": "EndTank",
+      "stats": {
+        "Health": [
+          770.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          2000.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          1500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.25
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -82535,6 +83983,14 @@
       "bpPath": "/Game/ASA/Dinos/Deinosuchus/DeinosuchusASA_Character_BP.DeinosuchusASA_Character_BP_C",
       "displayName": "Deinosuchus",
       "nameTag": "DeinosuchusAA",
+      "stats": {
+        "MeleeDamageMultiplier": [
+          1.0
+        ],
+        "SpeedMultiplier": [
+          1.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -82787,6 +84243,47 @@
       "bpPath": "/Game/ASA/Dinos/Deinotherium/Dinos/DeinotheriumASA_Character_BP.DeinotheriumASA_Character_BP_C",
       "displayName": "Deinotherium",
       "nameTag": "DeinotheriumASA",
+      "stats": {
+        "Health": [
+          1750.0,
+          0.2,
+          0.15,
+          0.5
+        ],
+        "Stamina": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          8000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          800.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          1.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -83297,6 +84794,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Dilo/Dilo_Character_BP.Dilo_Character_BP_C",
       "displayName": "Dilophosaur",
       "nameTag": "Dilo",
+      "stats": {
+        "Health": [
+          130.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          45.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          2.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -87531,6 +89071,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Dimetrodon/Dimetro_Character_BP.Dimetro_Character_BP_C",
       "displayName": "Dimetrodon",
       "nameTag": "Dimetro",
+      "stats": {
+        "Health": [
+          350.0,
+          0.2,
+          0.2,
+          0.65
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          500.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          250.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.02,
+          0.04,
+          0.8,
+          0.5
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -90169,6 +91749,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Dimorphodon/Dimorph_Character_BP.Dimorph_Character_BP_C",
       "displayName": "Dimorphodon",
       "nameTag": "Dimorph",
+      "stats": {
+        "Health": [
+          125.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          50.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -91038,6 +92658,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Diplocaulus/Diplocaulus_Character_BP.Diplocaulus_Character_BP_C",
       "displayName": "Diplocaulus",
       "nameTag": "Diplocaulus",
+      "stats": {
+        "Health": [
+          250.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          165.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          1050.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          150.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.25
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -91095,6 +92755,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Diplodocus/Diplodocus_Character_BP.Diplodocus_Character_BP_C",
       "displayName": "Diplodocus",
       "nameTag": "Diplo",
+      "stats": {
+        "Health": [
+          1700.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          550.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          10000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          800.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -92107,6 +93807,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Direbear/Direbear_Character_BP.Direbear_Character_BP_C",
       "displayName": "Dire Bear",
       "nameTag": "Direbear",
+      "stats": {
+        "Health": [
+          400.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          500.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          270.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          650.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.226
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -93869,6 +95610,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Direwolf/Direwolf_Character_BP.Direwolf_Character_BP_C",
       "displayName": "Direwolf",
       "nameTag": "Direwolf",
+      "stats": {
+        "Health": [
+          330.0,
+          0.2,
+          0.2,
+          0.66
+        ],
+        "Stamina": [
+          260.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          170.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -96004,6 +97788,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Dodo/Dodo_Character_BP.Dodo_Character_BP_C",
       "displayName": "Dodo",
       "nameTag": "Dodo",
+      "stats": {
+        "Health": [
+          40.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          50.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          2.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -101049,6 +102876,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Doedicurus/Doed_Character_BP.Doed_Character_BP_C",
       "displayName": "Doedicurus",
       "nameTag": "Doed",
+      "stats": {
+        "Health": [
+          850.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          250.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02,
+          0.6
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -102325,6 +104195,48 @@
       "bpPath": "/Game/ASA/Dinos/DarkPegasus/DarkPegasus_Character_BP.DarkPegasus_Character_BP_C",
       "displayName": "Dreadmare",
       "nameTag": "DarkPegasus",
+      "fName": "Dreadmare",
+      "mName": "Dreadstallion",
+      "stats": {
+        "Health": [
+          1000.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          600.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1750.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          450.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -102415,6 +104327,46 @@
       "bpPath": "/Game/ASA/Dinos/Dreadnoughtus/Dreadnoughtus_Character_BP.Dreadnoughtus_Character_BP_C",
       "displayName": "Dreadnoughtus",
       "nameTag": "Dreadnoughtus",
+      "stats": {
+        "Health": [
+          100000.0,
+          0.032,
+          0.012672,
+          -80000.0
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          13500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          3000.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.033333,
+          0.066667,
+          0.0,
+          0.0
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -102505,6 +104457,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/DungBeetle/DungBeetle_Character_BP.DungBeetle_Character_BP_C",
       "displayName": "Dung Beetle",
       "nameTag": "Beetle",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.1,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          5.0,
+          0.02,
+          0.08
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -103988,6 +105980,47 @@
       "bpPath": "/Game/ASA/Dinos/SpiritBear/SpiritBear_Character_BP.SpiritBear_Character_BP_C",
       "displayName": "Elderclaw",
       "nameTag": "SpiritBear",
+      "stats": {
+        "Health": [
+          800.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          250.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2800.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          650.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.226
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -104813,6 +106846,46 @@
       "bpPath": "/Game/Extinction/Dinos/Enforcer/Enforcer_Character_BP.Enforcer_Character_BP_C",
       "displayName": "Enforcer",
       "nameTag": "Enforcer",
+      "stats": {
+        "Health": [
+          375.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          800.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -106757,6 +108830,46 @@
       "bpPath": "/Game/Extinction/Dinos/Corrupt/Rex/MegaRex_Character_BP_Corrupt.MegaRex_Character_BP_Corrupt_C",
       "displayName": "Enraged Corrupted Rex",
       "nameTag": "Rex",
+      "stats": {
+        "Health": [
+          8500.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          420.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isAlpha": 1,
       "isBoss": 0,
@@ -106828,6 +108941,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Equus/Equus_Character_BP.Equus_Character_BP_C",
       "displayName": "Equus",
       "nameTag": "Equus",
+      "stats": {
+        "Health": [
+          240.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          560.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          350.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0175,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -108117,6 +110271,51 @@
       "bpPath": "/Game/Extinction/Dinos/Gacha/Gacha_Character_BP.Gacha_Character_BP_C",
       "displayName": "Gacha",
       "nameTag": "Gacha",
+      "stats": {
+        "Health": [
+          750.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          325.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          550.0,
+          0.04,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ],
+        "CraftingSpeedMultiplier": [
+          null,
+          0.01,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -108210,6 +110409,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Gallimimus/Galli_Character_BP.Galli_Character_BP_C",
       "displayName": "Gallimimus",
       "nameTag": "Galli",
+      "stats": {
+        "Health": [
+          150.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          270.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.2,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -108410,6 +110649,46 @@
       "bpPath": "/Game/Extinction/Dinos/GasBag/GasBags_Character_BP.GasBags_Character_BP_C",
       "displayName": "Gasbags",
       "nameTag": "GasBags",
+      "stats": {
+        "Health": [
+          650.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          600.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          1000.0,
+          0.09,
+          0.09
+        ],
+        "Food": [
+          3500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          3000.0,
+          0.02,
+          0.0125
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -112903,6 +115182,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Bee/Bee_Queen_Character_BP.Bee_Queen_Character_BP_C",
       "displayName": "Giant Queen Bee",
       "nameTag": "Bee",
+      "stats": {
+        "Health": [
+          80.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          800.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          150.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.0,
+          0.0
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -113310,6 +115629,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Giganotosaurus/BionicGigant_Character_BP.BionicGigant_Character_BP_C",
       "displayName": "Tek Giganotosaurus",
       "nameTag": "Gigant",
+      "stats": {
+        "Health": [
+          80000.0,
+          0.0005,
+          0.002,
+          -63000.0
+        ],
+        "Stamina": [
+          400.0,
+          0.0005,
+          0.01
+        ],
+        "Oxygen": [
+          150.0,
+          0.0025,
+          0.025
+        ],
+        "Food": [
+          4000.0,
+          0.0025,
+          0.025
+        ],
+        "Weight": [
+          700.0,
+          0.01,
+          0.01
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.05,
+          -0.8,
+          0.0
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0031
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -113497,6 +115856,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Giganotosaurus/Gigant_Character_BP.Gigant_Character_BP_C",
       "displayName": "Giganotosaurus",
       "nameTag": "Gigant",
+      "stats": {
+        "Health": [
+          80000.0,
+          0.0005,
+          0.002,
+          -63000.0
+        ],
+        "Stamina": [
+          400.0,
+          0.0005,
+          0.01
+        ],
+        "Oxygen": [
+          150.0,
+          0.0025,
+          0.025
+        ],
+        "Food": [
+          4000.0,
+          0.0025,
+          0.025
+        ],
+        "Weight": [
+          700.0,
+          0.01,
+          0.01
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.05,
+          -0.8,
+          0.0
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.0031
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -113684,6 +116083,48 @@
       "bpPath": "/Game/ASA/Dinos/Gigantoraptor/Gigantoraptor_Character_BP.Gigantoraptor_Character_BP_C",
       "displayName": "Gigantoraptor",
       "nameTag": "Gigantoraptor",
+      "stats": {
+        "Health": [
+          770.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          320.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -115549,6 +117990,48 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Hesperornis/Hesperornis_Character_BP.Hesperornis_Character_BP_C",
       "displayName": "Hesperornis",
       "nameTag": "Hesperornis",
+      "stats": {
+        "Health": [
+          95.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          70.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -115994,6 +118477,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Hyaenodon/Hyaenodon_Character_BP.Hyaenodon_Character_BP_C",
       "displayName": "Hyaenodon",
       "nameTag": "Hyaenodon",
+      "stats": {
+        "Health": [
+          175.0,
+          0.2,
+          0.2,
+          0.66
+        ],
+        "Stamina": [
+          260.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          170.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -116209,6 +118735,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ichthyornis/Ichthyornis_Character_BP.Ichthyornis_Character_BP_C",
       "displayName": "Ichthyornis",
       "nameTag": "Ichthyornis",
+      "stats": {
+        "Health": [
+          50.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          55.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.65,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.365
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -117275,6 +119844,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Iguanodon/Iguanodon_Character_BP.Iguanodon_Character_BP_C",
       "displayName": "Iguanodon",
       "nameTag": "Iguanodon",
+      "stats": {
+        "Health": [
+          250.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1800.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          375.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -119043,6 +121652,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Kairuku/Kairuku_Character_BP.Kairuku_Character_BP_C",
       "displayName": "Kairuku",
       "nameTag": "Kairu",
+      "stats": {
+        "Health": [
+          95.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          70.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          2.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -119113,6 +121765,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Kaprosuchus/Kaprosuchus_Character_BP.Kaprosuchus_Character_BP_C",
       "displayName": "Kaprosuchus",
       "nameTag": "Kaprosuchus",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          140.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -119855,6 +122548,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Kentrosaurus/Kentro_Character_BP.Kentro_Character_BP_C",
       "displayName": "Kentrosaurus",
       "nameTag": "Kentro",
+      "stats": {
+        "Health": [
+          650.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -121054,6 +123787,46 @@
       "bpPath": "/Game/Extinction/Dinos/KingKaiju/KingKaiju_Character_BP_WorldBoss.KingKaiju_Character_BP_WorldBoss_C",
       "displayName": "King Titan",
       "nameTag": "King Titan",
+      "stats": {
+        "Health": [
+          500000.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          100000.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          100.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 1,
       "isBossMinion": 0,
@@ -121138,6 +123911,46 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/Moth/Moth_Character_BP.Moth_Character_BP_C",
       "displayName": "Lymantria",
       "nameTag": "Moth",
+      "stats": {
+        "Health": [
+          260.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.05,
+          0.06
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          175.0,
+          0.02,
+          0.03
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -121572,6 +124385,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Lystrosaurus/Lystro_Character_BP.Lystro_Character_BP_C",
       "displayName": "Lystrosaurus",
       "nameTag": "Lystro",
+      "stats": {
+        "Health": [
+          90.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          215.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          500.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          90.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          2.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -123542,6 +126398,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Mammoth/Mammoth_Character_BP.Mammoth_Character_BP_C",
       "displayName": "Mammoth",
       "nameTag": "Mammoth",
+      "stats": {
+        "Health": [
+          1020.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          330.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          5000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          1.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -124710,6 +127607,49 @@
       "bpPath": "/Game/Extinction/Dinos/IceJumper/IceJumper_Character_BP.IceJumper_Character_BP_C",
       "displayName": "Managarmr",
       "nameTag": "Managarmr",
+      "stats": {
+        "Health": [
+          825.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.06
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          0.5,
+          null,
+          0.0035,
+          0.085
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -125002,6 +127942,47 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/Mantis/Mantis_Character_BP.Mantis_Character_BP_C",
       "displayName": "Mantis",
       "nameTag": "Mantis",
+      "stats": {
+        "Health": [
+          275.0,
+          0.2,
+          0.1,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          220.0,
+          0.02,
+          0.08
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.025,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.67
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -125441,6 +128422,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Megalania/Megalania_Character_BP.Megalania_Character_BP_C",
       "displayName": "Megalania",
       "nameTag": "Megalania",
+      "stats": {
+        "Health": [
+          480.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          400.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -125507,6 +128531,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Stag/Stag_Character_BP.Stag_Character_BP_C",
       "displayName": "Megaloceros",
       "nameTag": "Stag",
+      "stats": {
+        "Health": [
+          300.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          280.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          220.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -128201,6 +131266,48 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Megalosaurus/Megalosaurus_Character_BP_TekCave.Megalosaurus_Character_BP_TekCave_C",
       "displayName": "Megalosaurus",
       "nameTag": "Megalosaurus",
+      "stats": {
+        "Health": [
+          1025.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -128387,6 +131494,48 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Megalosaurus/Megalosaurus_Character_BP.Megalosaurus_Character_BP_C",
       "displayName": "Megalosaurus",
       "nameTag": "Megalosaurus",
+      "stats": {
+        "Health": [
+          1025.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -128454,6 +131603,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Dragonfly/Dragonfly_Character_BP.Dragonfly_Character_BP_C",
       "displayName": "Meganeura",
       "nameTag": "Dragonfly",
+      "stats": {
+        "Health": [
+          45.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          50.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -132273,6 +135462,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Megatherium/Megatherium_Character_BP.Megatherium_Character_BP_C",
       "displayName": "Megatherium",
       "nameTag": "Megatherium",
+      "stats": {
+        "Health": [
+          740.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          400.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          270.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          725.0,
+          0.02,
+          0.045
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -134235,6 +137464,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Monkey/Monkey_Character_BP.Monkey_Character_BP_C",
       "displayName": "Mesopithecus",
       "nameTag": "Monkey",
+      "stats": {
+        "Health": [
+          115.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          70.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -136002,6 +139274,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Microraptor/Microraptor_Character_BP.Microraptor_Character_BP_C",
       "displayName": "Microraptor",
       "nameTag": "Microraptor",
+      "stats": {
+        "Health": [
+          130.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          45.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          2.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -136446,6 +139761,47 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/Camelsaurus/camelsaurus_Character_BP.camelsaurus_Character_BP_C",
       "displayName": "Morellatops",
       "nameTag": "Camelsaurus",
+      "stats": {
+        "Health": [
+          400.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          220.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          440.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.964
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -137826,6 +141182,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Moschops/Moschops_Character_BP.Moschops_Character_BP_C",
       "displayName": "Moschops",
       "nameTag": "Moschops",
+      "stats": {
+        "Health": [
+          375.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          300.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          200.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -139796,6 +143195,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Bat/Bat_Character_BP.Bat_Character_BP_C",
       "displayName": "Onyc",
       "nameTag": "Bat",
+      "stats": {
+        "Health": [
+          250.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          50.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -140236,6 +143675,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Otter/Otter_Character_BP.Otter_Character_BP_C",
       "displayName": "Otter",
       "nameTag": "Otter",
+      "stats": {
+        "Health": [
+          40.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          180.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          600.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          400.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          30.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.04,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.7
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -140587,6 +144067,50 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Oviraptor/Oviraptor_Character_BP.Oviraptor_Character_BP_C",
       "displayName": "Oviraptor",
       "nameTag": "Ovi",
+      "stats": {
+        "Health": [
+          140.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          120.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          100.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.0,
+          0.15
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -142666,6 +146190,48 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Sheep/Sheep_Character_BP.Sheep_Character_BP_C",
       "displayName": "Ovis",
       "nameTag": "Sheep",
+      "stats": {
+        "Health": [
+          null,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          90.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -143872,6 +147438,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Pachy/Pachy_Character_BP.Pachy_Character_BP_C",
       "displayName": "Pachy",
       "nameTag": "Pachy",
+      "stats": {
+        "Health": [
+          165.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          150.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -144870,6 +148477,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Pachyrhinosaurus/Pachyrhino_Character_BP.Pachyrhino_Character_BP_C",
       "displayName": "Pachyrhinosaurus",
       "nameTag": "Pachyrhinosaurus",
+      "stats": {
+        "Health": [
+          375.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          365.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -145070,6 +148717,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Paraceratherium/Paracer_Character_BP.Paracer_Character_BP_C",
       "displayName": "Paraceratherium",
       "nameTag": "Paracer",
+      "stats": {
+        "Health": [
+          1026.0,
+          0.2,
+          0.1275,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          850.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -145734,6 +149421,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Para/BionicPara_Character_BP.BionicPara_Character_BP_C",
       "displayName": "Tek Parasaur",
       "nameTag": "Para",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          480.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.67
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -147786,6 +151514,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Para/Para_Character_BP.Para_Character_BP_C",
       "displayName": "Parasaur",
       "nameTag": "Para",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          480.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.67
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -149838,6 +153607,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Pegomastax/Pegomastax_Character_BP.Pegomastax_Character_BP_C",
       "displayName": "Pegomastax",
       "nameTag": "Pegomastax",
+      "stats": {
+        "Health": [
+          120.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          55.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.5
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -150663,6 +154475,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Phiomia/Phiomia_Character_BP.Phiomia_Character_BP_C",
       "displayName": "Phiomia",
       "nameTag": "Phiomia",
+      "stats": {
+        "Health": [
+          300.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          200.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.35
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -152663,6 +156518,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Piranha/Piranha_Character_BP.Piranha_Character_BP_C",
       "displayName": "Piranha",
       "nameTag": "Piranha",
+      "stats": {
+        "Health": [
+          150.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          120.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          15.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          1.0,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.284
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -153144,7 +157042,54 @@
     "/Game/PrimalEarth/Dinos/Direbear/Direbear_Character_Polar.Direbear_Character_Polar_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Direbear/Direbear_Character_Polar.Direbear_Character_Polar_C",
       "displayName": "Polar Bear",
-      "nameTag": "",
+      "nameTag": "Direbear",
+      "stats": {
+        "Health": [
+          400.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          500.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          270.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          650.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.226
+        ]
+      },
+      "tameable": 0,
+      "isBoss": 0,
+      "isBossMinion": 0,
+      "breedable": 1,
+      "dragWeight": 295.0,
+      "killXpBase": 4.0,
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesIceCave_C",
@@ -153667,6 +157612,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Procoptodon/Procoptodon_Character_BP.Procoptodon_Character_BP_C",
       "displayName": "Procoptodon",
       "nameTag": "Kangaroo",
+      "stats": {
+        "Health": [
+          400.0,
+          0.2,
+          0.2,
+          0.75
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          550.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.2,
+          0.25
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -154768,6 +158754,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ptero/Ptero_Character_BP.Ptero_Character_BP_C",
       "displayName": "Pteranodon",
       "nameTag": "Ptera",
+      "stats": {
+        "Health": [
+          210.0,
+          0.2,
+          0.15,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.05,
+          0.04
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          120.0,
+          0.02,
+          0.03
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.075,
+          0.65,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02,
+          0.35
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -160654,6 +164683,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Scorpion/Scorpion_Character_BP.Scorpion_Character_BP_C",
       "displayName": "Pulmonoscorpius",
       "nameTag": "Scorpion",
+      "stats": {
+        "Health": [
+          280.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          200.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.0
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -164465,6 +168535,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Purlovia/Purlovia_Character_BP.Purlovia_Character_BP_C",
       "displayName": "Purlovia",
       "nameTag": "Purlovia",
+      "stats": {
+        "Health": [
+          275.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          4000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -165527,6 +169637,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Purlovia/Purlovia_Character_BP_Polar.Purlovia_Character_BP_Polar_C",
       "displayName": "Purlovia",
       "nameTag": "Purlovia",
+      "stats": {
+        "Health": [
+          275.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          4000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -166055,6 +170205,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Quetzalcoatlus/BionicQuetz_Character_BP.BionicQuetz_Character_BP_C",
       "displayName": "Tek Quetzal",
       "nameTag": "Quetz",
+      "stats": {
+        "Health": [
+          1200.0,
+          0.2,
+          0.08,
+          0.5
+        ],
+        "Stamina": [
+          800.0,
+          0.05,
+          0.05
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          800.0,
+          0.02,
+          0.05
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.04,
+          0.1,
+          0.4,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.365
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -166101,6 +170294,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Quetzalcoatlus/Quetz_Character_BP.Quetz_Character_BP_C",
       "displayName": "Quetzal",
       "nameTag": "Quetz",
+      "stats": {
+        "Health": [
+          1200.0,
+          0.2,
+          0.08,
+          0.5
+        ],
+        "Stamina": [
+          800.0,
+          0.05,
+          0.05
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          800.0,
+          0.02,
+          0.05
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.04,
+          0.1,
+          0.4,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.365
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -166147,6 +170383,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Raptor/BionicRaptor_Character_BP.BionicRaptor_Character_BP_C",
       "displayName": "Tek Raptor",
       "nameTag": "Raptor",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          140.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -169993,6 +174270,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Raptor/Raptor_Character_BP.Raptor_Character_BP_C",
       "displayName": "Raptor",
       "nameTag": "Raptor",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          140.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -173839,6 +178157,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Rex/BionicRex_Character_BP.BionicRex_Character_BP_C",
       "displayName": "Tek Rex",
       "nameTag": "Rex",
+      "stats": {
+        "Health": [
+          1100.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          420.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -178275,6 +182633,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Rex/Rex_Character_BP.Rex_Character_BP_C",
       "displayName": "Rex",
       "nameTag": "Rex",
+      "stats": {
+        "Health": [
+          1100.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          420.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -182711,6 +187109,46 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/RockGolem/RockGolem_Character_BP.RockGolem_Character_BP_C",
       "displayName": "Rock Elemental",
       "nameTag": "RockElemental",
+      "stats": {
+        "Health": [
+          25000.0,
+          0.0125,
+          0.1,
+          -22000.0
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          660.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.125,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -183392,6 +187830,46 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/RockGolem/RubbleGolem_Character_BP.RubbleGolem_Character_BP_C",
       "displayName": "Rubble Golem",
       "nameTag": "RockElemental",
+      "stats": {
+        "Health": [
+          4000.0,
+          0.0125,
+          0.1,
+          0.0
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          660.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.125,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -183832,6 +188310,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Saber/Saber_Character_BP.Saber_Character_BP_C",
       "displayName": "Sabertooth",
       "nameTag": "Sabertooth",
+      "stats": {
+        "Health": [
+          250.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          200.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.32
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -187193,6 +191714,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Salmon/Salmon_Character_BP.Salmon_Character_BP_C",
       "displayName": "Sabertooth Salmon",
       "nameTag": "Salmon",
+      "stats": {
+        "Health": [
+          65.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          18.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -187769,6 +192330,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Sarco/Sarco_Character_BP.Sarco_Character_BP_C",
       "displayName": "Sarco",
       "nameTag": "Sarco",
+      "stats": {
+        "Health": [
+          400.0,
+          0.2,
+          0.2,
+          0.65
+        ],
+        "Stamina": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.8,
+          0.5
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.6
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -188130,6 +192732,53 @@
       "bpPath": "/Game/Extinction/Dinos/Scout/Scout_Character_BP.Scout_Character_BP_C",
       "displayName": "Scout",
       "nameTag": "Scout",
+      "stats": {
+        "Health": [
+          3.0,
+          0.075,
+          0.0,
+          0.5
+        ],
+        "Stamina": [
+          90.0,
+          2.0,
+          0.0
+        ],
+        "Oxygen": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "Food": [
+          7.0,
+          0.5,
+          0.0,
+          null,
+          0.15
+        ],
+        "Weight": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.0,
+          0.0,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          0.5,
+          0.008,
+          0.0,
+          0.365
+        ],
+        "CraftingSpeedMultiplier": [
+          25000.0,
+          300.0
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -190119,6 +194768,46 @@
       "bpPath": "/Game/Extinction/Dinos/Owl/Owl_Character_BP.Owl_Character_BP_C",
       "displayName": "Snow Owl",
       "nameTag": "Owl",
+      "stats": {
+        "Health": [
+          325.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          375.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -191269,13 +195958,13 @@
           "MinDesiredNumberOfNPC": 12,
           "spawnMultiplier": 1.0,
           "spawnLimit": 0.05,
-          "spawnChances": null,
+          "spawnChances": "100",
           "groupWeight": 0.1,
           "weight": 0.004608,
           "display": {
             "weightText": "Entry Weight: 0.1",
             "limitText": "Max % To Allow: 5%",
-            "chanceText": ""
+            "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 20.0,
           "minRarityDownshift": 0
@@ -191286,6 +195975,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Spino/Spino_Character_BP.Spino_Character_BP_C",
       "displayName": "Spino",
       "nameTag": "Spino",
+      "stats": {
+        "Health": [
+          805.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          650.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2600.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          350.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -192911,6 +197640,46 @@
       "bpPath": "/Game/ASA/Dinos/ShoulderDragon/ShoulderDragon_Character_BP_Spring.ShoulderDragon_Character_BP_Spring_C",
       "displayName": "Spring Drakeling",
       "nameTag": "ShoulderDragon",
+      "stats": {
+        "Health": [
+          150.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          65.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -194451,6 +199220,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Stego/BionicStego_Character_BP.BionicStego_Character_BP_C",
       "displayName": "Tek Stegosaurus",
       "nameTag": "Stego",
+      "stats": {
+        "Health": [
+          650.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02,
+          0.964
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -202335,6 +207145,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Stego/Stego_Character_BP.Stego_Character_BP_C",
       "displayName": "Stegosaurus",
       "nameTag": "Stego",
+      "stats": {
+        "Health": [
+          650.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          6000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.02,
+          0.964
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -210219,6 +215070,46 @@
       "bpPath": "/Game/ASA/Dinos/ShoulderDragon/ShoulderDragon_Character_BP_Summer.ShoulderDragon_Character_BP_Summer_C",
       "displayName": "Summer Drakeling",
       "nameTag": "ShoulderDragon",
+      "stats": {
+        "Health": [
+          150.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          65.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -211320,6 +216211,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Tapejara/Tapejara_Character_BP.Tapejara_Character_BP_C",
       "displayName": "Tapejara",
       "nameTag": "Tapejara",
+      "stats": {
+        "Health": [
+          325.0,
+          0.17,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          250.0,
+          0.05,
+          0.06
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1600.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          280.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.365
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -215149,6 +220083,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/TerrorBird/TerrorBird_Character_BP.TerrorBird_Character_BP_C",
       "displayName": "Terror Bird",
       "nameTag": "TerrorBird",
+      "stats": {
+        "Health": [
+          270.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          160.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          120.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -215614,6 +220589,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Therizinosaurus/Therizino_Character_BP.Therizino_Character_BP_C",
       "displayName": "Therizinosaur",
       "nameTag": "Therizinosaurus",
+      "stats": {
+        "Health": [
+          870.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          365.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -218898,6 +223913,49 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/SpineyLizard/SpineyLizard_Character_BP.SpineyLizard_Character_BP_C",
       "displayName": "Thorny Dragon",
       "nameTag": "SpineyLizard",
+      "stats": {
+        "Health": [
+          260.0,
+          0.2,
+          0.2,
+          0.66
+        ],
+        "Stamina": [
+          350.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          300.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -220000,6 +225058,49 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Thylacoleo/Thylacoleo_Character_BP.Thylacoleo_Character_BP_C",
       "displayName": "Thylacoleo",
       "nameTag": "Thylacoleo",
+      "stats": {
+        "Health": [
+          700.0,
+          0.2,
+          0.14,
+          0.5
+        ],
+        "Stamina": [
+          400.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1,
+          null,
+          0.15
+        ],
+        "Weight": [
+          400.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.4,
+          0.35
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.3
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -222299,6 +227400,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/BoaFrill/BoaFrill_Character_BP.BoaFrill_Character_BP_C",
       "displayName": "Titanoboa",
       "nameTag": "Titanboa",
+      "stats": {
+        "Health": [
+          170.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          150.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -224032,6 +229174,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/Ant_Character_BP.Ant_Character_BP_C",
       "displayName": "Titanomyrma Drone",
       "nameTag": "Ant",
+      "stats": {
+        "Health": [
+          35.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          150.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -227278,6 +232460,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Ant/FlyingAnt_Character_BP.FlyingAnt_Character_BP_C",
       "displayName": "Titanomyrma Soldier",
       "nameTag": "Ant",
+      "stats": {
+        "Health": [
+          50.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          900.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          50.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -230524,6 +235746,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Trike/Trike_Character_BP.Trike_Character_BP_C",
       "displayName": "Triceratops",
       "nameTag": "Trike",
+      "stats": {
+        "Health": [
+          375.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          365.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.015,
+          1.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -236787,10 +242050,328 @@
         }
       ]
     },
+    "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C": {
+      "bpPath": "/Game/PrimalEarth/Dinos/Trilobite/Trilobite_Character.Trilobite_Character_C",
+      "displayName": "Trilobite",
+      "nameTag": "Trilobite",
+      "stats": {
+        "Health": [
+          160.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          150.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
+      "tameable": 1,
+      "isBoss": 0,
+      "isBossMinion": 0,
+      "breedable": 1,
+      "dragWeight": 30.0,
+      "killXpBase": 1.0,
+      "entries": [
+        {
+          "entryClass": "Ext_DinoSpawnEntries_ShallowWater_Ice_C",
+          "managers": {
+            "NPCZoneManager12": {
+              "minDesired": 60.0,
+              "boxes": [
+                {
+                  "x": 1346.11,
+                  "y": 1569.5,
+                  "w": 195.09,
+                  "h": 280.93
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 1.0
+            },
+            "NPCZoneManager72": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1816.86,
+                  "y": 1843.44,
+                  "w": 49.87,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_51": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1992.75,
+                  "y": 1747.28,
+                  "w": 42.11,
+                  "h": 87.5,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_52": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1992.75,
+                  "y": 1835.38,
+                  "w": 42.11,
+                  "h": 30.46,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_54": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1950.05,
+                  "y": 1855.68,
+                  "w": 42.11,
+                  "h": 35.84,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_57": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1917.8,
+                  "y": 1892.12,
+                  "w": 53.45,
+                  "h": 35.84,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_58": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1830.0,
+                  "y": 1899.28,
+                  "w": 87.2,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_59": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1780.73,
+                  "y": 1935.12,
+                  "w": 48.68,
+                  "h": 25.68,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_60": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1717.12,
+                  "y": 1885.55,
+                  "w": 63.01,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_61": {
+              "minDesired": 8.0,
+              "boxes": [
+                {
+                  "x": 1753.25,
+                  "y": 1843.44,
+                  "w": 63.01,
+                  "h": 61.52,
+                  "bForceUntameable": true
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.133333
+            },
+            "NPCZoneManager_7": {
+              "minDesired": 25.0,
+              "boxes": [
+                {
+                  "x": 1547.72,
+                  "y": 1752.25,
+                  "w": 132.35,
+                  "h": 121.91
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.416667
+            },
+            "NPCZoneManager_8": {
+              "minDesired": 46.0,
+              "boxes": [
+                {
+                  "x": 1661.12,
+                  "y": 1545.5,
+                  "w": 132.35,
+                  "h": 214.78
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.766667
+            },
+            "wiki": {
+              "minDesired": 30.0,
+              "boxes": [
+                {
+                  "x": 1741.62,
+                  "y": 1960.76,
+                  "w": 80.28,
+                  "h": 80.49
+                },
+                {
+                  "x": 1813.3,
+                  "y": 1937.0,
+                  "w": 80.49,
+                  "h": 80.49
+                },
+                {
+                  "x": 1465.34,
+                  "y": 1603.38,
+                  "w": 80.49,
+                  "h": 80.49
+                },
+                {
+                  "x": 1498.73,
+                  "y": 1551.97,
+                  "w": 80.49,
+                  "h": 80.49
+                },
+                {
+                  "x": 1570.41,
+                  "y": 1551.97,
+                  "w": 80.49,
+                  "h": 80.49
+                }
+              ],
+              "points": [],
+              "minDesiredPct": 0.5
+            }
+          },
+          "bForceInEditor": true,
+          "MinDesiredNumberOfNPC": 60,
+          "bNPCDontWander": true,
+          "bNPCWildIgnoreWild": true,
+          "bForceUntameable": true,
+          "spawnMultiplier": 2.8,
+          "spawnLimit": 0.2,
+          "spawnChances": "100, 100, 80",
+          "groupWeight": 1.0,
+          "weight": 0.230169,
+          "display": {
+            "weightText": "Entry Weight: 1",
+            "limitText": "Max % To Allow: 20%",
+            "chanceText": "Spawn Chances: 100%, 100%, 80%"
+          },
+          "bestSharedMin": 60.0,
+          "minRarityDownshift": 0
+        }
+      ]
+    },
     "/Game/PrimalEarth/Dinos/Troodon/Troodon_Character_BP.Troodon_Character_BP_C": {
       "bpPath": "/Game/PrimalEarth/Dinos/Troodon/Troodon_Character_BP.Troodon_Character_BP_C",
       "displayName": "Troodon",
       "nameTag": "Troodon",
+      "stats": {
+        "Health": [
+          200.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          200.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          140.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -237615,6 +243196,47 @@
       "bpPath": "/Game/Extinction/Dinos/Spindles/Spindles_Character_BP.Spindles_Character_BP_C",
       "displayName": "Velonasaur",
       "nameTag": "Velonasaur",
+      "stats": {
+        "Health": [
+          440.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          325.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          225.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          2250.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          325.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.2
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -238279,13 +243901,13 @@
           "MinDesiredNumberOfNPC": 12,
           "spawnMultiplier": 1.0,
           "spawnLimit": 1.0,
-          "spawnChances": null,
+          "spawnChances": "100",
           "groupWeight": 0.125,
           "weight": 0.092115,
           "display": {
             "weightText": "Entry Weight: 0.125",
             "limitText": "Max % To Allow: 100%",
-            "chanceText": ""
+            "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 22.0,
           "minRarityDownshift": 0
@@ -238700,13 +244322,13 @@
           "MinDesiredNumberOfNPC": 12,
           "spawnMultiplier": 1.0,
           "spawnLimit": 1.0,
-          "spawnChances": null,
+          "spawnChances": "100",
           "groupWeight": 0.06665,
           "weight": 0.043758,
           "display": {
             "weightText": "Entry Weight: 0.06665",
             "limitText": "Max % To Allow: 100%",
-            "chanceText": ""
+            "chanceText": "Spawn Chances: 100%"
           },
           "bestSharedMin": 22.0,
           "minRarityDownshift": 0
@@ -238717,6 +244339,46 @@
       "bpPath": "/Game/ScorchedEarth/Dinos/JugBug/Jugbug_Water_Character_BP.Jugbug_Water_Character_BP_C",
       "displayName": "Water Jug Bug",
       "nameTag": "Jugbug",
+      "stats": {
+        "Health": [
+          75.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          null,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          450.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          50.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          2.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -239151,6 +244813,46 @@
       "bpPath": "/Game/ASA/Dinos/ShoulderDragon/ShoulderDragon_Character_BP_Winter.ShoulderDragon_Character_BP_Winter_C",
       "displayName": "Winter Drakeling",
       "nameTag": "ShoulderDragon",
+      "stats": {
+        "Health": [
+          150.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          65.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -239890,6 +245592,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/WoollyRhino/Rhino_Character_BP.Rhino_Character_BP_C",
       "displayName": "Woolly Rhino",
       "nameTag": "Rhino",
+      "stats": {
+        "Health": [
+          500.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          120.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          100.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          750.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          1.226
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -241058,6 +246801,47 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Bigfoot/Yeti_Character_BP.Yeti_Character_BP_C",
       "displayName": "Yeti",
       "nameTag": "Bigfoot",
+      "stats": {
+        "Health": [
+          2000.0,
+          0.1,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          1500.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          220.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.04,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01,
+          0.06
+        ]
+      },
       "tameable": 0,
       "isBoss": 0,
       "isBossMinion": 0,
@@ -241586,6 +247370,46 @@
       "bpPath": "/Game/PrimalEarth/Dinos/Yutyrannus/Yutyrannus_Character_BP.Yutyrannus_Character_BP_C",
       "displayName": "Yutyrannus",
       "nameTag": "Yutyrannus",
+      "stats": {
+        "Health": [
+          1100.0,
+          0.2,
+          0.2,
+          0.5
+        ],
+        "Stamina": [
+          420.0,
+          0.1,
+          0.1
+        ],
+        "Oxygen": [
+          150.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          500.0,
+          0.02,
+          0.04
+        ],
+        "MeleeDamageMultiplier": [
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
+        ],
+        "SpeedMultiplier": [
+          1.0,
+          null,
+          0.01
+        ]
+      },
       "tameable": 1,
       "isBoss": 0,
       "isBossMinion": 0,
