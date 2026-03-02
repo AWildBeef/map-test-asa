@@ -236,6 +236,12 @@ function setLegendOpen(open){
   el.style.display = showRarityLegend ? "" : "none";
 }
 
+const ddScrollMemory = {}; // key -> scrollTop number
+
+function ddKeyForDinoList() {
+  return `dinoSelect::${currentViewMode}::${activeSourceId}::${currentMapId}`;
+}
+
 // ============================================================
 // PLAYER START TEST
 
@@ -524,9 +530,7 @@ function ensureLeafletPanel({ id, title, position = "topright", collapsedByDefau
 
       panel.innerHTML = `
         <div class="fp-header">
-          <div class="fp-titles">
-            <div class="fp-title">${title}</div>
-          </div> 
+          <div class="fp-title">${title}</div>
           <div class="fp-actions"></div>
         </div>
         <div class="fp-body"></div>
@@ -886,24 +890,24 @@ m.bForceUntameable = m.bForceUntameable || (e.bForceUntameable === true);
 }
 
 function renderDinoQuickInfo(dino, badgesEl, statsEl) {
-  // ✅ hard-guard so we never crash if markup changes
-  if (!badgesEl || !statsEl) return;
+  // badges are the only required target
+  if (!badgesEl) return;
 
-  // Clear
+  // Clear what exists
   badgesEl.innerHTML = "";
-  statsEl.innerHTML = "";
+  if (statsEl) statsEl.innerHTML = "";
 
   if (!dino || typeof dino !== "object") return;
 
   // ----- Badges -----
   const badges = [];
 
-  if (isTrue01(dino.isAlpha))       badges.push({ cls: "alpha",    label: "Alpha" });
-  if (isTrue01(dino.isBoss))        badges.push({ cls: "boss",     label: "Boss" });
-  if (isTrue01(dino.isBossMinion))  badges.push({ cls: "minion",   label: "Boss Minion" });
+  if (isTrue01(dino.isAlpha))      badges.push({ cls: "alpha",   label: "Alpha" });
+  if (isTrue01(dino.isBoss))       badges.push({ cls: "boss",    label: "Boss" });
+  if (isTrue01(dino.isBossMinion)) badges.push({ cls: "minion",  label: "Boss Minion" });
 
-  if (!isTrue01(dino.tameable))     badges.push({ cls: "tameable",  label: "Untameable" });
-  if (!isTrue01(dino.breedable))    badges.push({ cls: "breedable", label: "Unbreedable" });
+  if (!isTrue01(dino.tameable))    badges.push({ cls: "tameable",  label: "Untameable" });
+  if (!isTrue01(dino.breedable))   badges.push({ cls: "breedable", label: "Unbreedable" });
 
   for (const b of badges) {
     const el = document.createElement("span");
@@ -912,31 +916,37 @@ function renderDinoQuickInfo(dino, badgesEl, statsEl) {
     badgesEl.appendChild(el);
   }
 
-  // ----- Stats -----
-  const drag = fmtNum(dino.dragWeight, 0);
-  const xp   = fmtNum(dino.killXpBase, 0);
-
+  // ----- Stats (only if container exists) -----
   const statBits = [];
-  if (drag !== null) statBits.push({ key: "Drag Weight:", val: drag });
-  if (xp !== null)   statBits.push({ key: "Kill XP:",     val: String(Number(xp) * 4) });
+  if (statsEl) {
+    const drag = fmtNum(dino.dragWeight, 0);
+    const xp   = fmtNum(dino.killXpBase, 0);
 
-  for (const s of statBits) {
-    const row = document.createElement("div");
-    row.className = "dino-statrow";
-    row.innerHTML = `
-      <div class="dino-statkey">${escapeHtml(s.key)}</div>
-      <div class="dino-statval">${escapeHtml(s.val)}</div>
-    `;
-    statsEl.appendChild(row);
+    if (drag !== null) statBits.push({ key: "Drag Weight:", val: drag });
+    if (xp !== null)   statBits.push({ key: "Kill XP:",     val: String(Number(xp) * 4) });
+
+    for (const s of statBits) {
+      const row = document.createElement("div");
+      row.className = "dino-statrow";
+      row.innerHTML = `
+        <div class="dino-statkey">${escapeHtml(s.key)}</div>
+        <div class="dino-statval">${escapeHtml(s.val)}</div>
+      `;
+      statsEl.appendChild(row);
+    }
   }
 
-  // ✅ Hide/show each sub-block so you don't get phantom spacing
+  // Show/hide pieces cleanly
   badgesEl.style.display = badges.length ? "" : "none";
-  statsEl.style.display  = statBits.length ? "" : "none";
+  if (statsEl) statsEl.style.display = statBits.length ? "" : "none";
 
-  // ✅ Hide whole quick block only if both are empty
+  // Hide .dino-quick only if *everything present* is empty
   const quick = badgesEl.closest(".dino-quick");
-  if (quick) quick.style.display = (badges.length || statBits.length) ? "" : "none";
+  if (quick) {
+    const anyBadges = badges.length > 0;
+    const anyStats  = statBits.length > 0;
+    quick.style.display = (anyBadges || anyStats) ? "" : "none";
+  }
 }
 
 function buildSourceDrillTree() {
@@ -1414,11 +1424,13 @@ function mountFancySelect({
     wrap.classList.add("open");
     search.value = "";
     list.querySelectorAll(".dd-item").forEach(el => (el.style.display = ""));
-    list.scrollTop = 0;
+    const scrollKey = ddKeyForDinoList();
+    list.scrollTop = ddScrollMemory[scrollKey] ?? 0;
     search.focus();
   }
 
   function close() {
+    ddScrollMemory[ddKeyForDinoList()] = list.scrollTop;
     wrap.classList.remove("open");
     btn.blur();
   }
@@ -1580,6 +1592,11 @@ function mountFancyDinoSelect(cfg){
 
       list.appendChild(row);
     }
+    function saveScroll() {
+      ddScrollMemory[ddKeyForDinoList()] = list.scrollTop;
+    }
+
+    list.addEventListener("scroll", saveScroll, { passive: true });
   }
 
   function syncButton(){
@@ -1598,14 +1615,34 @@ function mountFancyDinoSelect(cfg){
 
   function open(){
     wrap.classList.add("open");
+
+    // DON'T wipe search if you want it to stay; but if you do wipe it,
+    // do it before restoring scroll.
     search.value = "";
-    // show all items
-    list.querySelectorAll(".dd-item").forEach(el => el.style.display = "");
-    list.scrollTop = 0;
-    search.focus(); // note: iOS zoom fix is CSS: .dd-search{font-size:16px;}
+
+    // show all items (since search cleared)
+    list.querySelectorAll(".dd-item").forEach(el => (el.style.display = ""));
+    // DO NOT force list.scrollTop = 0 here
+
+    // Restore scroll AFTER layout (iOS needs this)
+    const key = ddKeyForDinoList();
+    const saved = ddScrollMemory[key] ?? 0;
+
+    requestAnimationFrame(() => {
+      // sometimes needs 2 frames on iOS when animating / display toggling
+      list.scrollTop = saved;
+      requestAnimationFrame(() => {
+        list.scrollTop = saved;
+      });
+    });
+
+    search.focus();
   }
 
   function close(){
+    // save even if they didn’t scroll this time
+    ddScrollMemory[ddKeyForDinoList()] = list.scrollTop;
+
     wrap.classList.remove("open");
     btn.blur();
   }
@@ -3032,7 +3069,7 @@ function fitTitleToSpace(titleEl, opts = {}) {
 
   const {
     minPx = 10,
-    maxPx = 17,   // your "nice" size
+    maxPx = 20,   // your "nice" size
     stepPx = 0.25 // precision; can be 0.5 for even less work
   } = opts;
 
@@ -3102,9 +3139,7 @@ function createFloatingPanel({ id, title, defaultPos = { right: 12, top: 12 }, c
 
   panel.innerHTML = `
     <div class="fp-header">
-      <div class="fp-titles">
-        <div class="fp-title">${title}</div>
-      </div> 
+      <div class="fp-title">${title}</div>
       <div class="fp-actions"></div>
     </div>
     <div class="fp-body"></div>
@@ -3413,7 +3448,8 @@ function renderInfoPanelForEntry(cfg, entryClass) {
       <div class="info-title">${escapeHtml(entryClass)}</div>
         <div class="dino-quick">
             <div class="dino-badges" data-dino-badges></div>
-            <div class="dino-statsline" data-dino-stats></div>
+            
+            
       </div>
 
       <div class="info-row">
@@ -3497,7 +3533,8 @@ function renderDinoHero({ displayName, sexLine = "", allBps, nameTag, d }) {
 
       <div class="dino-quick">
         <div class="dino-badges" data-dino-badges></div>
-        <div class="dino-statsline" data-dino-stats></div>
+        
+        
       </div>
 
       ${bpBlock}
@@ -3603,7 +3640,7 @@ function renderInfoPanelForDino(cfg, dinoKey) {
   const other = otherSexNameForSelected(d, pickedLabel);
 
   const sexLine = other
-    ? `<div class="info-submeta">${escapeHtml(other)}</div>`
+    ? `<div class="info-submeta">Also: ${escapeHtml(other)}</div>`
     : ``;
 
   if (!INFO_TABS.some(t => t.id === infoTab)) infoTab = "info";
@@ -3640,12 +3677,12 @@ function renderInfoPanelForDino(cfg, dinoKey) {
           ${renderDinoTab_Info({ d })}
         </div>
       </div>
+    </div>
 
-      <div class="fp-dots" aria-label="Pages">
-        ${INFO_TABS.map(t => `
-          <div class="fp-dot ${infoTab===t.id ? "is-on" : ""}" data-dot="${t.id}"></div>
-        `).join("")}
-      </div>
+    <div class="fp-dots" aria-label="Pages">
+      ${INFO_TABS.map(t => `
+        <div class="fp-dot ${infoTab===t.id ? "is-on" : ""}" data-dot="${t.id}"></div>
+      `).join("")}
     </div>
   `;
 
