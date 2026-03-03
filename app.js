@@ -489,6 +489,91 @@ const STAT_LABEL = {
   CraftingSpeedMultiplier: "Craft",
 };
 
+// ============================================================
+// ARK DEFAULT SERVER MULTIPLIERS
+// ============================================================
+
+const ARK_DEFAULT_MULT = {
+  Health:  { iw: 1, it: 0.2, ta: 0.14, tm: 0.44 },
+  Stamina: { iw: 1, it: 1,   ta: 1, tm: 1 },
+  Oxygen:  { iw: 1, it: 1,   ta: 1, tm: 1 },
+  Food:    { iw: 1, it: 1,   ta: 1, tm: 1 },
+  Water:   { iw: 1, it: 1,   ta: 1, tm: 1 },
+  Weight:  { iw: 1, it: 1,   ta: 1, tm: 1 },
+  MeleeDamageMultiplier: { iw: 1, it: 0.17, ta: 0.14, tm: 0.44 },
+  SpeedMultiplier:       { iw: 1, it: 1, ta: 1, tm: 1 },
+  CraftingSpeedMultiplier:{ iw: 1, it: 1, ta: 1, tm: 1 },
+};
+
+function applyServerMultiplier(statKey, colKey, value) {
+  if (value == null) return value;
+
+  const mult =
+    ARK_DEFAULT_MULT?.[statKey]?.[colKey] ?? 1;
+
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+
+  return n * mult;
+}
+
+function computeDisplayValue(statKey, colKey, data, statsObj) {
+  const raw = data[colKey];
+
+  if (raw == null || raw === "") return null;
+
+  const v = Number(raw);
+  if (!Number.isFinite(v)) return null;
+  
+  if (v < 0) {
+    return v;
+  }
+
+  const base = Number(data.base);
+
+  const mult =
+    ARK_DEFAULT_MULT?.[statKey]?.[colKey] ?? 1;
+
+  // ✅ negative values ignore server multipliers
+  const effectiveMult = (v < 0) ? 1 : mult;
+
+  // -----------------------------
+  // COLUMN RULES
+  // -----------------------------
+
+  // Wild = Base * (Iw * server)
+  if (colKey === "iw") {
+    if (!Number.isFinite(base)) return null;
+    return base * (v * effectiveMult);
+  }
+
+  // Tamed Increase = percent
+  if (colKey === "it") {
+    return v * effectiveMult;
+  }
+
+  // Additive
+  if (colKey === "ta") {
+    const result = v * effectiveMult;
+
+    if (isMultiplierStat(statKey))
+      return result;
+
+    if (Number.isFinite(base))
+      return base * result;
+
+    return result;
+  }
+
+  // Multiplier
+  if (colKey === "tm") {
+    return v * effectiveMult;
+  }
+
+  return v;
+}
+
+
 // stats arrays are [base, iw, it, ta, tm] (trimmed)
 function unpackStat(arr) {
   const a = Array.isArray(arr) ? arr : [];
@@ -547,7 +632,10 @@ function renderStatsTable(statsObj) {
   // keys in preferred order, then any extras
   const keys = [];
   for (const k of STAT_ORDER) if (k in statsObj) keys.push(k);
-  for (const k of Object.keys(statsObj)) if (!keys.includes(k)) keys.push(k);
+  for (const k of Object.keys(statsObj)) {
+    if (k.endsWith("_TBM")) continue; // ✅ ignore metadata keys
+    if (!keys.includes(k)) keys.push(k);
+  }
 
   if (!keys.length) {
     return `<div style="color:var(--muted)">No stats found.</div>`;
@@ -577,7 +665,19 @@ function renderStatsTable(statsObj) {
         txt = `TBHM: ${pct}%`;
       }
       else {
-        txt = fmtStatNum(data[c.key]);
+        const eff = computeDisplayValue(statKey, c.key, data, statsObj);
+
+        if (eff == null) {
+          txt = "";
+        }
+        else if (c.key === "iw" || c.key === "ta") {
+          // flat numbers
+          txt = fmtStatNum(eff);
+        }
+        else {
+          // percentages
+          txt = `${fmtStatNum(eff * 100)}%`;
+        }
       }
 
       const muted = txt ? "" : " muted";
