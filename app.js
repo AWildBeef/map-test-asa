@@ -567,8 +567,18 @@ function renderStatsTable(statsObj) {
 
     const cells = STAT_COLS.map(c => {
       let txt = "";
-      if (c.key === "base") txt = fmtBaseCell(statKey, data.base);
-      else txt = fmtStatNum(data[c.key]);
+
+      if (c.key === "base") {
+        txt = fmtBaseCell(statKey, data.base);
+      }
+      else if (c.key === "tm" && statKey === "Health" && statsObj.Health_TBM != null) {
+        // ✅ TBHM override for Health multiplier cell
+        const pct = fmtStatNum(Number(statsObj.Health_TBM) * 100);
+        txt = `TBHM: ${pct}%`;
+      }
+      else {
+        txt = fmtStatNum(data[c.key]);
+      }
 
       const muted = txt ? "" : " muted";
       return `<div class="statgrid-td num${muted}">${escapeHtml(txt || "--")}</div>`;
@@ -598,7 +608,11 @@ function mergeStatsFromPicked(picked) {
     if (!s || typeof s !== "object") continue;
 
     for (const [statKey, arr] of Object.entries(s)) {
-      if (!Array.isArray(arr)) continue;
+      if (!Array.isArray(arr)) {
+        out[statKey] = arr;
+        continue;
+      }
+      
       have.add(statKey);
 
       // Ensure target array exists
