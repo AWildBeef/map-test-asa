@@ -2533,6 +2533,7 @@ function renderDock(){
 
     poiBtn.classList.toggle("is-on", showPois);
   }
+  /*
   const hasSupply = !!(
     supplyCrateData &&
     (
@@ -2589,6 +2590,7 @@ function renderDock(){
 
     psBtn.classList.toggle("is-on", showPlayerStarts);
   }
+  */
   // 5) Rarity legend button -- only makes sense when showing rarity colors
   mkBtn({
     title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
