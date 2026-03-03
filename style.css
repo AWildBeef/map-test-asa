@@ -136,7 +136,7 @@ body{
 
 .statgrid-th,
 .statgrid-td {
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.2;
 }
 
@@ -150,8 +150,8 @@ body{
 
 .statgrid-th {
   display:flex;
-  font-size:8px;
-  font-weight:400;
+  font-size:12px;
+  font-weight:600;
   padding:0;
   padding-left:2px;
   align-items:left;
@@ -165,8 +165,8 @@ body{
   justify-content: center;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  font-size:8px;
-  font-weight:300;
+  font-size:12px;
+  font-weight:500;
   padding:0;
 }
 
@@ -176,8 +176,8 @@ body{
   justify-content: center;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  font-size:8px;
-  font-weight:400;
+  font-size:12px;
+  font-weight:600;
   padding:0;
 }
 
@@ -188,8 +188,8 @@ body{
 .statgrid-td.statname {
   display:flex;
   align-items:left;
-  font-size:8px;
-  font-weight:400;
+  font-size:12px;
+  font-weight:600;
   overflow:wrap;
   padding:1px;
   padding-left:2px;
@@ -462,17 +462,8 @@ body{
 }
 
 .dd-btn-text .dd-sub{
-  flex:0 0 auto;
-  margin-left:auto;
-  white-space:nowrap;
-
-  font-size:10px;
-  padding:3px 7px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.18);
-  color:rgba(255,255,255,.72);
-  opacity:.85;
+  overflow: hidden;
+  display:none !important;
 }
 
 .dd-dot{
@@ -570,12 +561,8 @@ body{
 
 .dd-badges{ display:flex; align-items:center; gap:6px; flex:0 0 auto; }
 .dd-pill{
-  font-size:10px;
-  padding:3px 7px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.18);
-  color:rgba(255,255,255,.72);
+  overflow: hidden;
+  display:none !important;
 }
 .dd-star{
   width:26px;
@@ -1047,7 +1034,7 @@ body{
 /* Tabs = fixed section */
 #dinoInfoPanel .fp-tabs{
   flex:0 0 auto;
-
+  padding-top:8px;
   display:flex;
   gap:6px;
 
@@ -1067,7 +1054,7 @@ body{
   justify-content: center;
   padding: 8px 0 1px;
   text-transform:uppercase;
-  font-size: 10px;
+  font-size: 12px;
   color: rgba(255,255,255,0.78);
 }
 
@@ -1246,6 +1233,38 @@ body{
   .entry-meta-line{
     font-size:9px;
     font-weight:400 !important;
+  }
+  
+  .statgrid-th {
+    font-size:8px;
+    font-weight:400;
+  }
+
+  .statgrid-td.num {
+    font-size:8px;
+    font-weight:300;
+  }
+
+  .statgrid-th.num {
+    font-size:8px;
+    font-weight:400;
+  }
+
+  .statgrid-td.muted {
+    opacity: 0.55;
+  }
+
+  .statgrid-td.statname {
+    font-size:8px;
+    font-weight:400;
+  }
+  
+  #dinoInfoPanel .fp-tabs{
+    padding-top:8px;
+  }
+  
+  #dinoInfoPanel .fp-tab{
+    font-size: 10px;
   }
   
 }
