@@ -15,7 +15,7 @@
             "Health": [
               180.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -2473,11 +2473,11 @@
             "Health": [
               65.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -2487,7 +2487,7 @@
               0.1
             ],
             "Food": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -3653,7 +3653,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -5771,7 +5771,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -7888,7 +7888,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -9997,10 +9997,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -12086,7 +12126,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -13866,7 +13906,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -14080,7 +14120,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -15851,10 +15891,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -16037,7 +16117,7 @@
             "Health": [
               180.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -18267,11 +18347,11 @@
             "Health": [
               65.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -18281,7 +18361,7 @@
               0.1
             ],
             "Food": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -18838,7 +18918,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -19815,7 +19895,7 @@
             "Health": [
               1150.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -19977,7 +20057,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -20953,7 +21033,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -21921,10 +22001,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -22869,7 +22989,7 @@
             "Health": [
               180.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -24183,11 +24303,11 @@
             "Health": [
               65.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -24197,7 +24317,7 @@
               0.1
             ],
             "Food": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -24820,7 +24940,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -27566,7 +27686,7 @@
             "Health": [
               1150.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -28162,7 +28282,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -30394,7 +30514,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -33131,10 +33251,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -35335,7 +35495,7 @@
             "Health": [
               180.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -37097,11 +37257,11 @@
             "Health": [
               65.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -37111,7 +37271,7 @@
               0.1
             ],
             "Food": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -38635,7 +38795,7 @@
             "Health": [
               900.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -38941,7 +39101,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -40318,7 +40478,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -41694,7 +41854,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -43062,10 +43222,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -44410,7 +44610,7 @@
             "Health": [
               900.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -45710,7 +45910,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -47015,7 +47215,7 @@
             "Health": [
               180.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -52103,11 +52303,11 @@
             "Health": [
               65.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -52117,7 +52317,7 @@
               0.1
             ],
             "Food": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -52719,7 +52919,7 @@
             "Health": [
               900.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -53584,7 +53784,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -54507,7 +54707,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -55429,7 +55629,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -56343,10 +56543,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -57237,7 +57477,7 @@
             "Health": [
               180.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -59349,11 +59589,11 @@
             "Health": [
               65.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -59363,7 +59603,7 @@
               0.1
             ],
             "Food": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -59412,13 +59652,13 @@
               "bForceInEditor": true,
               "MinDesiredNumberOfNPC": 20,
               "spawnMultiplier": 5.0,
-              "spawnLimit": 0.25,
+              "spawnLimit": 1.0,
               "spawnChances": "100, 100, 100, 100, 100",
               "groupWeight": 1.0,
-              "weight": 1.25,
+              "weight": 5.0,
               "display": {
                 "weightText": "Entry Weight: 1",
-                "limitText": "Max % To Allow: 25%",
+                "limitText": "Max % To Allow: 100%",
                 "chanceText": "Spawn Chances: 100%, 100%, 100%, 100%, 100%"
               },
               "bestSharedMin": 20.0,
@@ -60693,7 +60933,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -62276,7 +62516,7 @@
             "Health": [
               1150.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -63635,7 +63875,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -65217,7 +65457,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -68097,10 +68337,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,
@@ -69651,7 +69931,7 @@
             "Health": [
               180.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -75946,11 +76226,11 @@
             "Health": [
               65.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -75960,7 +76240,7 @@
               0.1
             ],
             "Food": [
-              null,
+              100.0,
               0.1,
               0.1
             ],
@@ -76810,7 +77090,7 @@
             "Health": [
               9650.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -82097,7 +82377,7 @@
             "Health": [
               890.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -86234,7 +86514,7 @@
             "Health": [
               850.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -91512,10 +91792,50 @@
             }
           ]
         },
-        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C": {
-          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Dwarfs.Drakara_Character_BP_Dwarfs_C",
-          "displayName": "Dwarf Drakara",
+        "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C": {
+          "bpPath": "/skyshroud_drakara/Dinos/Drakara/Drakara_Character_BP_Pyro.Drakara_Character_BP_Pyro_C",
+          "displayName": "Pyro Drakara",
           "nameTag": "Drakara",
+          "stats": {
+            "Health": [
+              350.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              500.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              540.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              3500.0,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              230.0,
+              0.02,
+              0.04
+            ],
+            "MeleeDamageMultiplier": [
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
+            ],
+            "SpeedMultiplier": [
+              1.0,
+              null,
+              0.01
+            ]
+          },
           "tameable": 1,
           "isBoss": 0,
           "isBossMinion": 0,

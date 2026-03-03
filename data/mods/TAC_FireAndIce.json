@@ -15,7 +15,7 @@
             "Health": [
               500.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -34,6 +34,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               300.0,
@@ -1063,7 +1068,7 @@
             "Health": [
               8000.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -1082,6 +1087,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               140.0,
@@ -2108,11 +2118,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -2571,7 +2620,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -2590,6 +2639,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -3065,7 +3119,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -3084,6 +3138,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -5228,7 +5287,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -5247,6 +5306,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -7392,11 +7456,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -8429,7 +8532,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -8448,6 +8551,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -9501,7 +9609,7 @@
             "Health": [
               500.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -9520,6 +9628,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               300.0,
@@ -11183,7 +11296,7 @@
             "Health": [
               8000.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -11202,6 +11315,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               140.0,
@@ -12862,11 +12980,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -14526,7 +14683,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -14545,6 +14702,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -16221,7 +16383,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -16240,6 +16402,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -17489,7 +17656,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -17508,6 +17675,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -18761,7 +18933,7 @@
             "Health": [
               500.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -18780,6 +18952,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               300.0,
@@ -19544,7 +19721,7 @@
             "Health": [
               8000.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -19563,6 +19740,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               140.0,
@@ -20324,11 +20506,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -22160,7 +22381,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -22179,6 +22400,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -24027,7 +24253,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -24046,6 +24272,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -25350,7 +25581,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -25369,6 +25600,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -26677,7 +26913,7 @@
             "Health": [
               500.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -26696,6 +26932,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               300.0,
@@ -29407,7 +29648,7 @@
             "Health": [
               8000.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -29426,6 +29667,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               140.0,
@@ -32134,11 +32380,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -33872,7 +34157,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -33891,6 +34176,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -35641,7 +35931,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -35660,6 +35950,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -37247,7 +37542,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -37266,6 +37561,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -38854,11 +39154,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -41319,7 +41658,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -41338,6 +41677,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -43815,7 +44159,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -43834,6 +44178,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -47629,7 +47978,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -47648,6 +47997,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -51447,7 +51801,7 @@
             "Health": [
               500.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -51466,6 +51820,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               300.0,
@@ -51987,7 +52346,7 @@
             "Health": [
               8000.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -52006,6 +52365,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               140.0,
@@ -52524,11 +52888,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -52739,7 +53142,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -52758,6 +53161,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -52985,7 +53393,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -53004,6 +53412,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -55375,7 +55788,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -55394,6 +55807,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -57769,7 +58187,7 @@
             "Health": [
               500.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -57788,6 +58206,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               300.0,
@@ -57836,10 +58259,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.0294,
-              "weight": 0.001312,
+              "groupWeight": 0.06860000000000001,
+              "weight": 0.003019,
               "display": {
-                "weightText": "Entry Weight: 0.0294",
+                "weightText": "Entry Weight: 0.0686",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -57867,10 +58290,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.049,
-              "weight": 0.002919,
+              "groupWeight": 0.06860000000000001,
+              "weight": 0.004049,
               "display": {
-                "weightText": "Entry Weight: 0.049",
+                "weightText": "Entry Weight: 0.0686",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -57887,7 +58310,7 @@
             "Health": [
               8000.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -57906,6 +58329,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               140.0,
@@ -57954,10 +58382,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.0006,
-              "weight": 2.7e-05,
+              "groupWeight": 0.0014000000000000002,
+              "weight": 6.2e-05,
               "display": {
-                "weightText": "Entry Weight: 0.0006",
+                "weightText": "Entry Weight: 0.0014",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -57985,10 +58413,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.001,
-              "weight": 6e-05,
+              "groupWeight": 0.0014000000000000002,
+              "weight": 8.3e-05,
               "display": {
-                "weightText": "Entry Weight: 0.001",
+                "weightText": "Entry Weight: 0.0014",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -58002,11 +58430,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -58038,10 +58505,10 @@
               "spawnMultiplier": 2.665,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 30, 10",
-              "groupWeight": 0.049,
-              "weight": 0.00256,
+              "groupWeight": 0.0784,
+              "weight": 0.003972,
               "display": {
-                "weightText": "Entry Weight: 0.049",
+                "weightText": "Entry Weight: 0.0784",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
               },
@@ -58058,7 +58525,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -58077,6 +58544,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -58125,10 +58597,10 @@
               "spawnMultiplier": 2.665,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 30, 10",
-              "groupWeight": 0.001,
-              "weight": 5.2e-05,
+              "groupWeight": 0.0016,
+              "weight": 8.1e-05,
               "display": {
-                "weightText": "Entry Weight: 0.001",
+                "weightText": "Entry Weight: 0.0016",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 30%, 10%"
               },
@@ -58145,7 +58617,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -58164,6 +58636,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -58212,10 +58689,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.0294,
-              "weight": 0.00147,
+              "groupWeight": 0.0784,
+              "weight": 0.003801,
               "display": {
-                "weightText": "Entry Weight: 0.0294",
+                "weightText": "Entry Weight: 0.0784",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -58244,10 +58721,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.0294,
-              "weight": 0.001225,
+              "groupWeight": 0.0784,
+              "weight": 0.003214,
               "display": {
-                "weightText": "Entry Weight: 0.0294",
+                "weightText": "Entry Weight: 0.0784",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -58264,7 +58741,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -58283,6 +58760,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -58331,10 +58813,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.0006,
-              "weight": 3e-05,
+              "groupWeight": 0.0016,
+              "weight": 7.8e-05,
               "display": {
-                "weightText": "Entry Weight: 0.0006",
+                "weightText": "Entry Weight: 0.0016",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -58363,10 +58845,10 @@
               "spawnMultiplier": 2.55,
               "spawnLimit": 0.05,
               "spawnChances": "100, 100, 50, 10",
-              "groupWeight": 0.0006,
-              "weight": 2.5e-05,
+              "groupWeight": 0.0016,
+              "weight": 6.6e-05,
               "display": {
-                "weightText": "Entry Weight: 0.0006",
+                "weightText": "Entry Weight: 0.0016",
                 "limitText": "Max % To Allow: 5%",
                 "chanceText": "Spawn Chances: 100%, 100%, 50%, 10%"
               },
@@ -58384,11 +58866,50 @@
           "displayName": "Pyroraptor",
           "nameTag": "TAC_Pyroraptor",
           "stats": {
+            "Health": [
+              450.0,
+              0.2,
+              0.27,
+              0.5
+            ],
+            "Stamina": [
+              300.0,
+              0.1,
+              0.1
+            ],
+            "Oxygen": [
+              150.0,
+              0.1,
+              0.1
+            ],
+            "Food": [
+              2000.0,
+              0.1,
+              0.1,
+              null,
+              0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
+            ],
+            "Weight": [
+              250.0,
+              0.02,
+              0.04
+            ],
             "MeleeDamageMultiplier": [
-              1.0
+              1.0,
+              0.05,
+              0.1,
+              0.5,
+              0.4
             ],
             "SpeedMultiplier": [
-              1.0
+              1.0,
+              null,
+              0.0125
             ]
           },
           "tameable": 1,
@@ -59348,7 +59869,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -59367,6 +59888,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -60343,7 +60869,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -60362,6 +60888,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,
@@ -63330,7 +63861,7 @@
             "Health": [
               350.0,
               0.2,
-              0.2,
+              0.27,
               0.5
             ],
             "Stamina": [
@@ -63349,6 +63880,11 @@
               0.1,
               null,
               0.15
+            ],
+            "Water": [
+              null,
+              0.1,
+              0.1
             ],
             "Weight": [
               250.0,

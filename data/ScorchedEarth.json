@@ -16,11 +16,11 @@
         "Health": [
           75.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -60,6 +60,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -120,6 +121,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -264,6 +266,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -308,6 +311,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCaveNoGolem.SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
           "managers": {
             "NPCZoneManager742": {
               "minDesired": 10.0,
@@ -385,6 +389,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCave.SE_DinoSpawnEntriesRuinsCave_C",
           "managers": {
             "NPCZoneManager724": {
               "minDesired": 10.0,
@@ -510,6 +515,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -618,7 +624,7 @@
         "Health": [
           8000.0,
           0.15,
-          0.12,
+          0.162,
           -785.0
         ],
         "Stamina": [
@@ -664,6 +670,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvern.SE_DinoSpawnEntriesWyvern_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_11": {
               "minDesired": 1.0,
@@ -957,7 +964,7 @@
         "Health": [
           700.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -1005,6 +1012,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -1452,6 +1460,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -1990,6 +1999,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -3568,6 +3578,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -5141,11 +5152,11 @@
         "Health": [
           150.0,
           0.2,
-          0.1,
+          0.135,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -5186,6 +5197,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -5246,6 +5258,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -5390,6 +5403,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -5434,6 +5448,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -5534,6 +5549,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvernTrench.SE_DinoSpawnEntriesWyvernTrench_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_C_0": {
               "minDesired": 3.378378,
@@ -5791,7 +5807,7 @@
         "Health": [
           125.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -5836,6 +5852,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -7422,7 +7439,7 @@
         "Health": [
           365.0,
           0.2,
-          0.225,
+          0.30375,
           0.5
         ],
         "Stamina": [
@@ -7467,6 +7484,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -9040,7 +9058,7 @@
         "Health": [
           500.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -9086,6 +9104,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -9533,6 +9552,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -9593,6 +9613,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -16033,6 +16054,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCaveNoGolem.SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
           "managers": {
             "NPCZoneManager742": {
               "minDesired": 10.0,
@@ -16110,6 +16132,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCave.SE_DinoSpawnEntriesRuinsCave_C",
           "managers": {
             "NPCZoneManager724": {
               "minDesired": 10.0,
@@ -16235,6 +16258,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -16335,6 +16359,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvernTrench.SE_DinoSpawnEntriesWyvernTrench_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_C_0": {
               "minDesired": 3.378378,
@@ -16592,7 +16617,7 @@
         "Health": [
           420.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -16640,6 +16665,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -17087,6 +17113,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -18660,7 +18687,7 @@
         "Health": [
           550.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -18704,6 +18731,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -19151,6 +19179,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -20724,11 +20753,11 @@
         "Health": [
           30.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -20738,7 +20767,7 @@
           0.1
         ],
         "Food": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -20769,6 +20798,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWaterOasisCave.SE_DinoSpawnEntriesWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3CAE201_1515719367": {
               "minDesired": 12.0,
@@ -20852,6 +20882,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWater_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWater.SE_DinoSpawnEntriesWater_C",
           "managers": {
             "NPCZoneManager507": {
               "minDesired": 24.0,
@@ -21205,7 +21236,7 @@
         "Health": [
           900.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -21253,6 +21284,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -21700,6 +21732,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -23286,11 +23319,11 @@
         "Health": [
           20000.0,
           0.002,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -23300,7 +23333,7 @@
           0.1
         ],
         "Food": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -23331,6 +23364,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesSandworm_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesSandworm.SE_DinoSpawnEntriesSandworm_C",
           "managers": {
             "NPCZoneManager639": {
               "minDesired": 3.0,
@@ -23591,11 +23625,11 @@
         "Health": [
           27000.0,
           0.002,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -23605,7 +23639,7 @@
           0.1
         ],
         "Food": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -23637,6 +23671,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesSandworm_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesSandworm.SE_DinoSpawnEntriesSandworm_C",
           "managers": {
             "NPCZoneManager639": {
               "minDesired": 3.0,
@@ -23894,11 +23929,38 @@
       "displayName": "Deinosuchus",
       "nameTag": "DeinosuchusAA",
       "stats": {
+        "Health": [
+          1000.0,
+          0.2,
+          0.27,
+          0.5
+        ],
+        "Stamina": [
+          300.0,
+          0.1,
+          0.1
+        ],
+        "Food": [
+          3000.0,
+          0.1,
+          0.1
+        ],
+        "Weight": [
+          600.0,
+          0.02,
+          0.04
+        ],
         "MeleeDamageMultiplier": [
-          1.0
+          1.0,
+          0.05,
+          0.1,
+          0.5,
+          0.4
         ],
         "SpeedMultiplier": [
-          1.0
+          1.0,
+          null,
+          0.01
         ]
       },
       "tameable": 1,
@@ -23909,6 +23971,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDeepWaterOasisCave.SE_DinoSpawnEntriesDeepWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3D0E201_2139278427": {
               "minDesired": 10.0,
@@ -23940,6 +24003,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWaterOasisCave.SE_DinoSpawnEntriesWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3CAE201_1515719367": {
               "minDesired": 12.0,
@@ -24023,6 +24087,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWater_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWater.SE_DinoSpawnEntriesWater_C",
           "managers": {
             "NPCZoneManager507": {
               "minDesired": 24.0,
@@ -24376,7 +24441,7 @@
         "Health": [
           1750.0,
           0.2,
-          0.15,
+          0.2025,
           0.5
         ],
         "Stamina": [
@@ -24421,6 +24486,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -25999,6 +26065,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -26168,7 +26235,7 @@
         "Health": [
           330.0,
           0.2,
-          0.2,
+          0.27,
           0.66
         ],
         "Stamina": [
@@ -26216,6 +26283,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -26663,6 +26731,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -26980,6 +27049,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -28558,6 +28628,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -28702,6 +28773,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -28754,9 +28826,10 @@
         "Health": [
           850.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
+        "Health_TBM": 0.9,
         "Stamina": [
           300.0,
           0.1,
@@ -28802,6 +28875,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -29249,6 +29323,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -29566,6 +29641,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -30104,6 +30180,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -31692,7 +31769,7 @@
         "Health": [
           1000.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -31737,6 +31814,7 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesDreadmare_C",
+          "entryBpPath": "/Game/ASA/Dinos/DarkPegasus/DinoSpawnEntriesDreadmare.DinoSpawnEntriesDreadmare_C",
           "managers": {
             "NPCZoneManager_UAID_B06EBFC60E80DC2802_1469896455": {
               "minDesired": 0.75,
@@ -31819,11 +31897,11 @@
         "Health": [
           200.0,
           0.2,
-          0.1,
+          0.135,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -31863,6 +31941,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -38303,6 +38382,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvernTrench.SE_DinoSpawnEntriesWyvernTrench_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_C_0": {
               "minDesired": 3.378378,
@@ -38560,7 +38640,7 @@
         "Health": [
           180.0,
           0.2,
-          0.2,
+          0.27,
           -0.2
         ],
         "Stamina": [
@@ -38605,6 +38685,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDeepWaterOasisCave.SE_DinoSpawnEntriesDeepWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3D0E201_2139278427": {
               "minDesired": 10.0,
@@ -38644,7 +38725,7 @@
         "Health": [
           240.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -38690,6 +38771,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -40268,6 +40350,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -41841,7 +41924,7 @@
         "Health": [
           950.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -41886,6 +41969,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -48334,7 +48418,7 @@
         "Health": [
           1295.0,
           0.15,
-          0.12,
+          0.162,
           -785.0
         ],
         "Stamina": [
@@ -48379,6 +48463,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvern.SE_DinoSpawnEntriesWyvern_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_11": {
               "minDesired": 1.0,
@@ -48672,7 +48757,7 @@
         "Health": [
           150.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -48717,6 +48802,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -50295,6 +50381,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -50464,7 +50551,7 @@
         "Health": [
           80.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -50509,6 +50596,7 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesBee_C",
+          "entryBpPath": "/Game/PrimalEarth/CoreBlueprints/Spawners/DinoSpawnEntriesBee.DinoSpawnEntriesBee_C",
           "managers": {
             "BeeZoneManager_3": {
               "minDesired": 2.0,
@@ -50672,7 +50760,7 @@
         "Health": [
           175.0,
           0.2,
-          0.2,
+          0.27,
           0.66
         ],
         "Stamina": [
@@ -50720,6 +50808,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -51167,6 +51256,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -51484,6 +51574,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -53057,7 +53148,7 @@
         "Health": [
           250.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -53102,6 +53193,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -53271,11 +53363,11 @@
         "Health": [
           55.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -53319,6 +53411,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -53857,6 +53950,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -55435,6 +55529,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -55604,7 +55699,7 @@
         "Health": [
           200.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -55650,6 +55745,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDeepWaterOasisCave.SE_DinoSpawnEntriesDeepWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3D0E201_2139278427": {
               "minDesired": 10.0,
@@ -55681,6 +55777,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWaterOasisCave.SE_DinoSpawnEntriesWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3CAE201_1515719367": {
               "minDesired": 12.0,
@@ -55764,6 +55861,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWater_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWater.SE_DinoSpawnEntriesWater_C",
           "managers": {
             "NPCZoneManager507": {
               "minDesired": 24.0,
@@ -56117,7 +56215,7 @@
         "Health": [
           650.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -56162,6 +56260,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -57735,7 +57834,7 @@
         "Health": [
           1295.0,
           0.15,
-          0.12,
+          0.162,
           -785.0
         ],
         "Stamina": [
@@ -57780,6 +57879,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvern.SE_DinoSpawnEntriesWyvern_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_11": {
               "minDesired": 1.0,
@@ -58073,7 +58173,7 @@
         "Health": [
           260.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -58118,6 +58218,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -58565,6 +58666,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -60143,6 +60245,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -61708,6 +61811,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -61877,11 +61981,11 @@
         "Health": [
           90.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -61925,6 +62029,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -62463,6 +62568,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -64041,6 +64147,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -64210,7 +64317,7 @@
         "Health": [
           275.0,
           0.2,
-          0.1,
+          0.135,
           0.5
         ],
         "Stamina": [
@@ -64255,6 +64362,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -64315,6 +64423,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -70755,6 +70864,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -70899,6 +71009,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -70943,6 +71054,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCaveNoGolem.SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
           "managers": {
             "NPCZoneManager742": {
               "minDesired": 10.0,
@@ -71020,6 +71132,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCave.SE_DinoSpawnEntriesRuinsCave_C",
           "managers": {
             "NPCZoneManager724": {
               "minDesired": 10.0,
@@ -71145,6 +71258,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -71245,6 +71359,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvernTrench.SE_DinoSpawnEntriesWyvernTrench_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_C_0": {
               "minDesired": 3.378378,
@@ -71502,7 +71617,7 @@
         "Health": [
           480.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -71549,6 +71664,7 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesMegalania_C",
+          "entryBpPath": "/Game/PrimalEarth/CoreBlueprints/Spawners/DinoSpawnEntriesMegalania.DinoSpawnEntriesMegalania_C",
           "managers": {
             "MegalaniaSpawnManager_4": {
               "minDesired": 3.0,
@@ -72028,7 +72144,7 @@
         "Health": [
           1025.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -72075,6 +72191,7 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesCaveMegalo_C",
+          "entryBpPath": "/Game/PrimalEarth/CoreBlueprints/Spawners/DinoSpawnEntriesCaveMegalo.DinoSpawnEntriesCaveMegalo_C",
           "managers": {
             "NPCZoneManagerBlueprint_Cave_9": {
               "minDesired": 2.0,
@@ -72136,7 +72253,7 @@
         "Health": [
           740.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -72181,6 +72298,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -73767,11 +73885,11 @@
         "Health": [
           130.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -73814,6 +73932,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -75400,7 +75519,7 @@
         "Health": [
           400.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -75417,6 +75536,11 @@
           6000.0,
           0.1,
           0.1
+        ],
+        "Water": [
+          750.0,
+          0.01,
+          0.015
         ],
         "Weight": [
           440.0,
@@ -75446,6 +75570,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -75893,6 +76018,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -76210,6 +76336,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -76748,6 +76875,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -78326,6 +78454,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -78495,7 +78624,7 @@
         "Health": [
           375.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -78543,6 +78672,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -78712,11 +78842,11 @@
         "Health": [
           20000.0,
           0.2,
-          0.17,
+          0.22950000000000004,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -78735,13 +78865,6 @@
           0.02,
           0.04
         ],
-        "MeleeDamageMultiplier": [
-          1.0,
-          0.05,
-          0.1,
-          0.5,
-          0.4
-        ],
         "SpeedMultiplier": [
           1.0,
           null,
@@ -78756,6 +78879,7 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesOasisaur_C",
+          "entryBpPath": "/Game/PrimalEarth/CoreBlueprints/Spawners/DinoSpawnEntriesOasisaur.DinoSpawnEntriesOasisaur_C",
           "managers": {
             "Phoenix_NPCZoneManagerBlueprint_Land_UAID_04421AF203C2CAE201_1144306419": {
               "minDesired": 0.333333,
@@ -78826,11 +78950,11 @@
         "Health": [
           75.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -78871,6 +78995,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -79318,6 +79443,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -79635,6 +79761,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -86075,6 +86202,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -86613,6 +86741,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -88199,11 +88328,11 @@
         "Health": [
           250.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -88244,6 +88373,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -88304,6 +88434,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -88448,6 +88579,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -88492,6 +88624,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCaveNoGolem.SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
           "managers": {
             "NPCZoneManager742": {
               "minDesired": 10.0,
@@ -88569,6 +88702,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCave.SE_DinoSpawnEntriesRuinsCave_C",
           "managers": {
             "NPCZoneManager724": {
               "minDesired": 10.0,
@@ -88694,6 +88828,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -88800,13 +88935,13 @@
       "nameTag": "Sheep",
       "stats": {
         "Health": [
-          null,
+          100.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -88849,6 +88984,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -89018,7 +89154,7 @@
         "Health": [
           1026.0,
           0.2,
-          0.1275,
+          0.17212500000000003,
           0.5
         ],
         "Stamina": [
@@ -89063,6 +89199,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -90641,6 +90778,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -90810,7 +90948,7 @@
         "Health": [
           200.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -90856,6 +90994,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -91402,11 +91541,11 @@
         "Health": [
           120.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -91450,6 +91589,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -93028,6 +93168,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -93197,7 +93338,7 @@
         "Health": [
           640.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -93242,6 +93383,7 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesPhoenix_C",
+          "entryBpPath": "/Game/PrimalEarth/CoreBlueprints/Spawners/DinoSpawnEntriesPhoenix.DinoSpawnEntriesPhoenix_C",
           "managers": {
             "Phoenix_NPCZoneManagerBlueprint_Land": {
               "minDesired": 3.0,
@@ -93282,7 +93424,7 @@
         "Health": [
           150.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -93330,6 +93472,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesDeepWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDeepWaterOasisCave.SE_DinoSpawnEntriesDeepWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3D0E201_2139278427": {
               "minDesired": 10.0,
@@ -93361,6 +93504,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWaterOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWaterOasisCave.SE_DinoSpawnEntriesWaterOasisCave_C",
           "managers": {
             "NPCZoneManager512_UAID_70A8D3B8A4D3CAE201_1515719367": {
               "minDesired": 12.0,
@@ -93452,7 +93596,7 @@
         "Health": [
           1295.0,
           0.15,
-          0.12,
+          0.162,
           -785.0
         ],
         "Stamina": [
@@ -93497,6 +93641,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvern_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvern.SE_DinoSpawnEntriesWyvern_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_11": {
               "minDesired": 1.0,
@@ -93790,7 +93935,7 @@
         "Health": [
           400.0,
           0.2,
-          0.2,
+          0.27,
           0.75
         ],
         "Stamina": [
@@ -93835,6 +93980,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -94373,6 +94519,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -95951,6 +96098,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -96120,7 +96268,7 @@
         "Health": [
           280.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -96166,6 +96314,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -96613,6 +96762,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -96673,6 +96823,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -96990,6 +97141,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -103430,6 +103582,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -103574,6 +103727,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -105139,6 +105293,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -105183,6 +105338,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -105283,6 +105439,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvernTrench.SE_DinoSpawnEntriesWyvernTrench_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_C_0": {
               "minDesired": 3.378378,
@@ -105540,7 +105697,7 @@
         "Health": [
           275.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -105585,6 +105742,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -105910,7 +106068,7 @@
         "Health": [
           600.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -105955,6 +106113,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvernTrench.SE_DinoSpawnEntriesWyvernTrench_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_C_0": {
               "minDesired": 3.378378,
@@ -106212,7 +106371,7 @@
         "Health": [
           200.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -106258,6 +106417,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -106796,6 +106956,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -106965,7 +107126,7 @@
         "Health": [
           1100.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -107010,6 +107171,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntries_RexSolo_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntries_RexSolo.SE_DinoSpawnEntries_RexSolo_C",
           "managers": {
             "NPCZoneManager10": {
               "minDesired": 1.0,
@@ -107127,7 +107289,7 @@
         "Health": [
           25000.0,
           0.0125,
-          0.1,
+          0.135,
           -22000.0
         ],
         "Stamina": [
@@ -107172,6 +107334,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -107619,6 +107782,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -109197,6 +109361,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -110770,7 +110935,7 @@
         "Health": [
           4000.0,
           0.0125,
-          0.1,
+          0.135,
           0.0
         ],
         "Stamina": [
@@ -110815,6 +110980,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -110875,6 +111041,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -111019,6 +111186,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -111063,6 +111231,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCave.SE_DinoSpawnEntriesRuinsCave_C",
           "managers": {
             "NPCZoneManager724": {
               "minDesired": 10.0,
@@ -111188,6 +111357,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -111296,7 +111466,7 @@
         "Health": [
           250.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -111344,6 +111514,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -111791,6 +111962,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -112108,6 +112280,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -113686,6 +113859,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountainCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountainCave.SE_DinoSpawnEntriesMountainCave_C",
           "managers": {
             "NPCZoneManager645": {
               "minDesired": 20.0,
@@ -113830,6 +114004,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -115395,6 +115570,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasisCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasisCave.SE_DinoSpawnEntriesOasisCave_C",
           "managers": {
             "NPCZoneManager_UAID_70A8D3B8A4D3D3E201_1805691973": {
               "minDesired": 32.0,
@@ -115447,7 +115623,7 @@
         "Health": [
           150.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -115491,6 +115667,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -115938,6 +116115,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -116255,6 +116433,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -116793,6 +116972,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -118371,6 +118551,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -118540,7 +118721,7 @@
         "Health": [
           325.0,
           0.17,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -118588,6 +118769,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -120161,7 +120343,7 @@
         "Health": [
           270.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -120207,6 +120389,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -120654,6 +120837,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -120971,6 +121155,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -122557,7 +122742,7 @@
         "Health": [
           260.0,
           0.2,
-          0.2,
+          0.27,
           0.66
         ],
         "Stamina": [
@@ -122605,6 +122790,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -123052,6 +123238,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -123369,6 +123556,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -124947,6 +125135,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -126520,7 +126709,7 @@
         "Health": [
           700.0,
           0.2,
-          0.14,
+          0.18900000000000003,
           0.5
         ],
         "Stamina": [
@@ -126568,6 +126757,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -127023,7 +127213,7 @@
         "Health": [
           170.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -127069,6 +127259,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -127516,6 +127707,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyonCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyonCave.SE_DinoSpawnEntriesCanyonCave_C",
           "managers": {
             "NPCZoneManager712": {
               "minDesired": 20.0,
@@ -127576,6 +127768,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -127893,6 +128086,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -134333,6 +134527,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCaveNoGolem.SE_DinoSpawnEntriesRuinsCaveNoGolem_C",
           "managers": {
             "NPCZoneManager742": {
               "minDesired": 10.0,
@@ -134410,6 +134605,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesRuinsCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesRuinsCave.SE_DinoSpawnEntriesRuinsCave_C",
           "managers": {
             "NPCZoneManager724": {
               "minDesired": 10.0,
@@ -134535,6 +134731,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesTrenchCave_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesTrenchCave.SE_DinoSpawnEntriesTrenchCave_C",
           "managers": {
             "NPCZoneManager715_UAID_04421AF203C2D7E801_1541960004": {
               "minDesired": 40.0,
@@ -134635,6 +134832,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesWyvernTrench_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesWyvernTrench.SE_DinoSpawnEntriesWyvernTrench_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_C_0": {
               "minDesired": 3.378378,
@@ -134892,11 +135090,11 @@
         "Health": [
           35.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -134937,6 +135135,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -135384,6 +135583,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -135701,6 +135901,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -142141,6 +142342,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -143719,6 +143921,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -143888,11 +144091,11 @@
         "Health": [
           50.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -143933,6 +144136,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -144380,6 +144584,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -144697,6 +144902,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -151137,6 +151343,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -152715,6 +152922,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesOasis_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesOasis.SE_DinoSpawnEntriesOasis_C",
           "managers": {
             "NPCZoneManager346": {
               "minDesired": 20.0,
@@ -152884,9 +153092,10 @@
         "Health": [
           230000.0,
           0.2,
-          0.2,
+          0.36000000000000004,
           -80000.0
         ],
+        "Health_TBM": 1.8,
         "Stamina": [
           2000.0,
           0.1,
@@ -152929,6 +153138,7 @@
       "entries": [
         {
           "entryClass": "DinoSpawnEntriesTitano_C",
+          "entryBpPath": "/Game/PrimalEarth/CoreBlueprints/Spawners/DinoSpawnEntriesTitano.DinoSpawnEntriesTitano_C",
           "managers": {
             "NPCZoneManagerBlueprint_Land_6": {
               "minDesired": 0.6,
@@ -153028,7 +153238,7 @@
         "Health": [
           200.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -153073,6 +153283,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -153528,7 +153739,7 @@
         "Health": [
           125.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -153573,6 +153784,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -154020,6 +154232,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -160460,6 +160673,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,
@@ -162033,11 +162247,11 @@
         "Health": [
           75.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
-          null,
+          100.0,
           0.1,
           0.1
         ],
@@ -162078,6 +162292,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesBadlands_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesBadlands.SE_DinoSpawnEntriesBadlands_C",
           "managers": {
             "NPCZoneManager215": {
               "minDesired": 10.0,
@@ -162525,6 +162740,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesCanyons_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesCanyons.SE_DinoSpawnEntriesCanyons_C",
           "managers": {
             "NPCZoneManager184": {
               "minDesired": 1.0,
@@ -162842,6 +163058,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesDunes_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesDunes.SE_DinoSpawnEntriesDunes_C",
           "managers": {
             "NPCZoneManager100": {
               "minDesired": 8.0,
@@ -169282,6 +169499,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesEZMode_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesEZMode.SE_DinoSpawnEntriesEZMode_C",
           "managers": {
             "NPCZoneManager306": {
               "minDesired": 20.0,
@@ -169820,6 +170038,7 @@
         },
         {
           "entryClass": "SE_DinoSpawnEntriesGreenDesert_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesGreenDesert.SE_DinoSpawnEntriesGreenDesert_C",
           "managers": {
             "NPCZoneManager160": {
               "minDesired": 20.0,
@@ -171406,7 +171625,7 @@
         "Health": [
           1100.0,
           0.2,
-          0.2,
+          0.27,
           0.5
         ],
         "Stamina": [
@@ -171451,6 +171670,7 @@
       "entries": [
         {
           "entryClass": "SE_DinoSpawnEntriesMountain_C",
+          "entryBpPath": "/Game/ScorchedEarth/CoreBlueprints/Spawners/SE_DinoSpawnEntriesMountain.SE_DinoSpawnEntriesMountain_C",
           "managers": {
             "NPCZoneManager132": {
               "minDesired": 24.0,

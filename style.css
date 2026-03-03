@@ -795,6 +795,12 @@ body{
   margin-top:-2px;
   margin-bottom:0;
 }
+
+.is-entry .info-submeta{
+  overflow: hidden;
+  display:none !important;
+}
+
 .info-subtitle{ 
   font-size:10px;
   font-weight:450;
@@ -806,8 +812,7 @@ body{
 }
 .info-section{
   margin:0 0 0px;
-  padding-bottom:16px;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  padding-bottom:0px;
   align-items:flex-start;
 }
 
@@ -820,11 +825,11 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  margin-top:8px;
+  gap:5px;
+  margin-top:5px;
   color:var(--muted);
   font-size:11px;
-  font-weight:250;
+  font-weight:420;
   text-transform:uppercase;
 }
 
@@ -997,6 +1002,15 @@ body{
   border-bottom: 0 !important;
 }
 
+#dinoInfoPanel .entry-hero{
+  flex:0 0 auto;
+  padding-left:6px;
+  padding-top:0px;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 0 !important;
+}
+
 /* Hero fades into the tabs below */
 #dinoInfoPanel .dino-hero::after{
   content:"";
@@ -1007,7 +1021,21 @@ body{
   pointer-events:none;
 }
 
+#dinoInfoPanel .entry-hero::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom:-1px;
+  height:22px;                     /* tweak: 16–30px */
+  pointer-events:none;
+}
+
 #dinoInfoPanel .dino-hero-title{
+  overflow: hidden;
+  display:none !important;
+}
+
+#dinoInfoPanel .entry-hero-title{
   overflow: hidden;
   display:none !important;
 }

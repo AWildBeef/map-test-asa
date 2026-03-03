@@ -2936,6 +2936,13 @@ function setViewMode(mode) {
   syncModeBtn();
 
   setInfoPanelTitle(mode === "dino" ? "Dino Info" : "Spawn Entry Info");
+  
+  const panel = document.getElementById("dinoInfoPanel");
+  if (panel) {
+    panel.classList.toggle("is-dino", mode === "dino");
+    panel.classList.toggle("is-entry", mode === "entry");
+  }
+
 
   useRarityForMods = (mode === "dino");
   
@@ -3723,46 +3730,47 @@ function renderInfoPanelBodyEmpty() {
     `<div style="color:var(--muted)">Select a dino to see details.</div>`;
 }
 
-function renderInfoPanelForEntry(cfg, entryClass) {
-  const panel = document.getElementById("dinoInfoPanel"); // keep same panel
-  if (!panel) return;
-  const body = panel.querySelector(".fp-body");
+function renderEntryHero(entryBpPath, entryClass) {
+  const bp = String(entryBpPath || "");
+  const cls = String(entryClass || "");
 
+  return `
+    <div class="entry-hero">
+      <div class="entry-hero-title">${escapeHtml(cls)}</div>
+      <div class="info-submeta">Spawn Entry</div>
+
+      <div class="info-subtitle">Entry Blueprint</div>
+      <div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}">
+        ${escapeHtml(bp || "(none)")}
+      </div>
+
+      <div class="info-subtitle">Entry Class</div>
+      <div class="info-mono copy-on-click" data-copy="${escapeAttr(cls)}">
+        ${escapeHtml(cls || "(none)")}
+      </div>
+    </div>
+  `;
+}
+
+function renderEntryTab_Dinos(cfg, entryClass) {
   const rows = entryIndex?.[entryClass] || [];
   if (!rows.length) {
-    body.innerHTML = `<div style="color:var(--muted)">No data for this spawn entry.</div>`;
-    return;
+    return `<div style="color:var(--muted)">No data for this spawn entry.</div>`;
   }
 
-  // Group by dinoKey so if the same dino appears multiple times (rare), we can show multiple rows
   const byDino = new Map();
   for (const r of rows) {
     if (!byDino.has(r.dinoKey)) byDino.set(r.dinoKey, []);
     byDino.get(r.dinoKey).push(r);
   }
 
-  // Optional: sort dinos by display name (or by total weight)
   const dinoKeys = Array.from(byDino.keys()).sort((a, b) => {
     const an = cfg?.dinos?.[a]?.displayName || a;
     const bn = cfg?.dinos?.[b]?.displayName || b;
     return an.localeCompare(bn);
   });
 
-  body.innerHTML = `
-    <div class="info-section">
-      <div class="info-title">${escapeHtml(entryClass)}</div>
-        <div class="dino-quick">
-            <div class="dino-badges" data-dino-badges></div>
-            
-            
-      </div>
-
-      <div class="info-row">
-        <span class="info-label">Entry class</span>
-      </div>
-      <div class="info-mono copy-on-click" data-copy="${escapeAttr(entryClass)}">${escapeHtml(entryClass)}</div>
-    </div>
-
+  return `
     <div class="info-section">
       <div class="info-subtitle">Dinos (${dinoKeys.length})</div>
       <div class="entries">
@@ -3770,9 +3778,88 @@ function renderInfoPanelForEntry(cfg, entryClass) {
       </div>
     </div>
   `;
+}
 
-  // hook copy buttons
+function renderEntryTab_Info(entryClass) {
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Entry class</div>
+      <div class="info-mono copy-on-click" data-copy="${escapeAttr(entryClass)}">${escapeHtml(entryClass)}</div>
+      <div style="color:var(--muted); margin-top: 8px;">
+        (Put spawn-entry details here later: managers, limits, etc.)
+      </div>
+    </div>
+  `;
+}
+
+function renderInfoPanelForEntry(cfg, entryClass) {
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+  const body = panel.querySelector(".fp-body");
+
+  // title
+  setInfoPanelTitle(entryClass || "Spawn Entry Info");
   
+  const rows = entryIndex?.[entryClass] || [];
+  const entryBpPath = rows[0]?.entry?.entryBpPath || "";
+
+
+  // basic tabs for entry mode
+  const ENTRY_TABS = [
+    { id: "dinos", label: "Dinos" },
+    { id: "info",  label: "Info"  },
+  ];
+
+  // store separately from dino tabs so they don’t collide
+  let entryTab = panel.dataset.entryTab || "dinos";
+  if (!ENTRY_TABS.some(t => t.id === entryTab)) entryTab = "dinos";
+
+  body.innerHTML = `
+    ${renderEntryHero(entryBpPath, entryClass)}
+
+    <div class="fp-tabs">
+      ${ENTRY_TABS.map(t => `
+        <button type="button"
+                class="fp-tab ${entryTab===t.id ? "is-on" : ""}"
+                data-entry-tab="${t.id}">
+          ${escapeHtml(t.label)}
+        </button>
+      `).join("")}
+    </div>
+
+    <div class="fp-pages fp-pages--entry" id="entryPages">
+      <div class="fp-track">
+        <div class="fp-page" data-page="dinos">
+          ${renderEntryTab_Dinos(cfg, entryClass)}
+        </div>
+        <div class="fp-page" data-page="info">
+          ${renderEntryTab_Info(entryClass)}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // simple "tab switches page" (no swipe needed unless you want it)
+  const pages = body.querySelector("#entryPages");
+  const track = pages?.querySelector(".fp-track");
+
+  function setEntryTab(id) {
+    entryTab = id;
+    panel.dataset.entryTab = id;
+
+    body.querySelectorAll("[data-entry-tab]").forEach(b => {
+      b.classList.toggle("is-on", b.dataset.entryTab === entryTab);
+    });
+
+    const i = Math.max(0, ENTRY_TABS.findIndex(t => t.id === entryTab));
+    if (track) track.style.transform = `translateX(${-i * 100}%)`;
+  }
+
+  body.querySelectorAll("[data-entry-tab]").forEach(btn => {
+    btn.onclick = () => setEntryTab(btn.dataset.entryTab);
+  });
+
+  setEntryTab(entryTab);
 }
 
 function renderEntryDinoBlock(cfg, dinoKey, rowsForThisDino) {

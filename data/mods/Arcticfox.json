@@ -7,15 +7,15 @@
   "maps": {
     "The Island": {
       "dinos": {
-        "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C": {
-          "bpPath": "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C",
+        "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C": {
+          "bpPath": "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C",
           "displayName": "Greater Arctic Fox",
-          "nameTag": "GreatArcticFox",
+          "nameTag": "Greaterarcticfox",
           "stats": {
             "Health": [
               250.0,
               0.2,
-              0.2,
+              0.27,
               0.66
             ],
             "Stamina": [
@@ -59,7 +59,7 @@
           "isBossMinion": 0,
           "breedable": 1,
           "dragWeight": 100.0,
-          "killXpBase": 1.0,
+          "killXpBase": 4.0,
           "entries": [
             {
               "entryClass": "DinoSpawnEntriesSnow_C",
@@ -1060,15 +1060,15 @@
     },
     "The Center": {
       "dinos": {
-        "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C": {
-          "bpPath": "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C",
+        "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C": {
+          "bpPath": "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C",
           "displayName": "Greater Arctic Fox",
-          "nameTag": "GreatArcticFox",
+          "nameTag": "Greaterarcticfox",
           "stats": {
             "Health": [
               250.0,
               0.2,
-              0.2,
+              0.27,
               0.66
             ],
             "Stamina": [
@@ -1112,7 +1112,7 @@
           "isBossMinion": 0,
           "breedable": 1,
           "dragWeight": 100.0,
-          "killXpBase": 1.0,
+          "killXpBase": 4.0,
           "entries": [
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -3117,30 +3117,30 @@
           "nameTag": "ArcticFox",
           "stats": {
             "Health": [
-              250.0,
+              60.0,
               0.2,
-              0.2,
+              0.27,
               0.66
             ],
             "Stamina": [
-              250.0,
+              100.0,
               0.1,
               0.1
             ],
             "Oxygen": [
-              150.0,
+              100.0,
               0.1,
               0.1
             ],
             "Food": [
-              1200.0,
+              500.0,
               0.1,
               0.1,
               null,
               0.15
             ],
             "Weight": [
-              170.0,
+              30.0,
               0.02,
               0.04
             ],
@@ -3337,30 +3337,30 @@
                 }
               },
               "MinDesiredNumberOfNPC": 23,
-              "spawnMultiplier": 2501.25,
+              "spawnMultiplier": 1601.25,
               "spawnLimit": 1.0,
-              "spawnChances": "5000, 100, 25",
+              "spawnChances": "2000, 100, 25",
               "groupWeight": 0.525,
-              "weight": 1112.84428,
+              "weight": 712.420551,
               "display": {
                 "weightText": "Entry Weight: 0.525",
                 "limitText": "Max % To Allow: 100%",
-                "chanceText": "Spawn Chances: 5000%, 100%, 25%"
+                "chanceText": "Spawn Chances: 2000%, 100%, 25%"
               },
               "bestSharedMin": 23.0,
               "minRarityDownshift": 0
             }
           ]
         },
-        "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C": {
-          "bpPath": "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C",
+        "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C": {
+          "bpPath": "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C",
           "displayName": "Greater Arctic Fox",
-          "nameTag": "GreatArcticFox",
+          "nameTag": "Greaterarcticfox",
           "stats": {
             "Health": [
               250.0,
               0.2,
-              0.2,
+              0.27,
               0.66
             ],
             "Stamina": [
@@ -3404,7 +3404,7 @@
           "isBossMinion": 0,
           "breedable": 1,
           "dragWeight": 100.0,
-          "killXpBase": 1.0,
+          "killXpBase": 4.0,
           "entries": [
             {
               "entryClass": "DinoSpawnEntriesSnow_Generic_C",
@@ -3778,15 +3778,15 @@
                 }
               },
               "MinDesiredNumberOfNPC": 23,
-              "spawnMultiplier": 52.0,
+              "spawnMultiplier": 82.0,
               "spawnLimit": 1.0,
-              "spawnChances": "5000, 100, 100",
+              "spawnChances": "8000, 100, 100",
               "groupWeight": 0.05000000000000001,
-              "weight": 2.20339,
+              "weight": 3.474576,
               "display": {
                 "weightText": "Entry Weight: 0.05",
                 "limitText": "Max % To Allow: 100%",
-                "chanceText": "Spawn Chances: 5000%, 100%, 100%"
+                "chanceText": "Spawn Chances: 8000%, 100%, 100%"
               },
               "bestSharedMin": 23.0,
               "minRarityDownshift": 0
@@ -4140,15 +4140,15 @@
     },
     "Valguero": {
       "dinos": {
-        "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C": {
-          "bpPath": "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C",
+        "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C": {
+          "bpPath": "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C",
           "displayName": "Greater Arctic Fox",
-          "nameTag": "GreatArcticFox",
+          "nameTag": "Greaterarcticfox",
           "stats": {
             "Health": [
               250.0,
               0.2,
-              0.2,
+              0.27,
               0.66
             ],
             "Stamina": [
@@ -4192,7 +4192,7 @@
           "isBossMinion": 0,
           "breedable": 1,
           "dragWeight": 100.0,
-          "killXpBase": 1.0,
+          "killXpBase": 4.0,
           "entries": [
             {
               "entryClass": "DinoSpawnEntries_Valguero_SnowForest_C",
@@ -6881,30 +6881,30 @@
           "nameTag": "ArcticFox",
           "stats": {
             "Health": [
-              250.0,
+              60.0,
               0.2,
-              0.2,
+              0.27,
               0.66
             ],
             "Stamina": [
-              250.0,
+              100.0,
               0.1,
               0.1
             ],
             "Oxygen": [
-              150.0,
+              100.0,
               0.1,
               0.1
             ],
             "Food": [
-              1200.0,
+              500.0,
               0.1,
               0.1,
               null,
               0.15
             ],
             "Weight": [
-              170.0,
+              30.0,
               0.02,
               0.04
             ],
@@ -7261,15 +7261,15 @@
             }
           ]
         },
-        "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C": {
-          "bpPath": "/Arcticfox/GreatArcticFox_Character_BP.GreatArcticFox_Character_BP_C",
+        "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C": {
+          "bpPath": "/Arcticfox/GreatArcticfox_Character_BP.GreatArcticfox_Character_BP_C",
           "displayName": "Greater Arctic Fox",
-          "nameTag": "GreatArcticFox",
+          "nameTag": "Greaterarcticfox",
           "stats": {
             "Health": [
               250.0,
               0.2,
-              0.2,
+              0.27,
               0.66
             ],
             "Stamina": [
@@ -7313,7 +7313,7 @@
           "isBossMinion": 0,
           "breedable": 1,
           "dragWeight": 100.0,
-          "killXpBase": 1.0,
+          "killXpBase": 4.0,
           "entries": [
             {
               "entryClass": "DinoSpawnEntries_Hotsprings_Outer_C",
