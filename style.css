@@ -595,14 +595,10 @@ body{
    5.1) TOPBAR: Fancy dropdown host sizing + per-dropdown heights
    ============================================================ */
 #topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy){
-  flex:1 1 220px;
-  min-width:200px;
-  max-width:320px;
+  flex:1 1 0;
+  min-width:120px;
+  max-width:400px;
   width:100%;
-}
-#topbar .controls > #dinoSelectFancy{
-  flex:2 1 440px;
-  max-width:660px;
 }
 
 /* Ensure internal .dd uses full host width */
@@ -1133,7 +1129,7 @@ body{
 /* ============================================================
    9) MOBILE (<= 955px) -- consolidated
    ============================================================ */
-@media (max-width:640px){
+@media (max-width:699px){
   #controlsToggle{ display:inline-flex; }
 
   #topbar{
@@ -1341,7 +1337,7 @@ body{
 }
 
 /* Desktop topbar grid */
-@media (min-width:641px){
+@media (min-width:700px){
   #topbar{
     display:grid;
     grid-template-columns:1fr 5fr 1fr;
@@ -1352,18 +1348,6 @@ body{
     justify-self:center;
     flex-wrap:nowrap;
     min-width:0;
-  }
-  
-  #topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy){
-    flex:1 1 0;
-    min-width:125px;
-    max-width:360px;
-  }
-  
-  #topbar .controls > *{
-    flex:1 1 0;
-    min-width:200px;
-    max-width:320px;    
   }
   
   .leaflet-control.map-dock .dock-btn{
