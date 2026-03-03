@@ -296,38 +296,50 @@ function drawPlayerStarts() {
   }
 }
 
+
 // ============================================================
 // INFO PANEL TABS (Dino panel only for now)
 // ============================================================
-let infoTab = "spawns"; // "info" | "spawns" | "loot" | "stats"
 
-const INFO_TABS = [
+// Feature flags
+const ENABLE_DINO_TABS = {
+  spawns: true,
+  stats:  true,
+  loot:   false,
+  info:   false,
+};
+
+const ALL_INFO_TABS = [
   { id: "spawns", label: "Spawns" },
-  { id: "stats",  label: "Stats" },
-  { id: "loot",   label: "Loot" },
-  { id: "info",   label: "Info" },
+  { id: "stats",  label: "Stats"  },
+  { id: "loot",   label: "Loot"   },
+  { id: "info",   label: "Info"   },
 ];
+
+// Only show enabled tabs
+const INFO_TABS = ALL_INFO_TABS.filter(t => ENABLE_DINO_TABS[t.id]);
+
+// Default tab: first enabled
+let infoTab = INFO_TABS[0]?.id || "spawns";
 
 function setInfoTab(id){
   const order = INFO_TABS.map(t => t.id);
-  const next = order.includes(id) ? id : "info";
-  infoTab = next;
+
+  // if requested tab isn't enabled, fall back to first enabled
+  infoTab = order.includes(id) ? id : (order[0] || "spawns");
 
   const panel = document.getElementById("dinoInfoPanel");
   const body  = panel?.querySelector(".fp-body");
   if (!body) return;
 
-  // tabs
   body.querySelectorAll(".fp-tab").forEach(b => {
     b.classList.toggle("is-on", b.dataset.tab === infoTab);
   });
 
-  // dots
   body.querySelectorAll(".fp-dot").forEach(d => {
     d.classList.toggle("is-on", d.dataset.dot === infoTab);
   });
 
-  // slide animation
   const track = body.querySelector(".fp-track");
   if (track) {
     const i = Math.max(0, order.indexOf(infoTab));
@@ -554,15 +566,8 @@ function computeDisplayValue(statKey, colKey, data, statsObj) {
 
   // Additive
   if (colKey === "ta") {
-    const result = v * effectiveMult;
-
-    if (isMultiplierStat(statKey))
-      return result;
-
-    if (Number.isFinite(base))
-      return base * result;
-
-    return result;
+    // Ta is stored as-is (decimal). Only apply server multiplier (unless negative rule blocks it).
+    return v * effectiveMult;
   }
 
   // Multiplier
@@ -670,12 +675,20 @@ function renderStatsTable(statsObj) {
         if (eff == null) {
           txt = "";
         }
-        else if (c.key === "iw" || c.key === "ta") {
-          // flat numbers
+        else if (c.key === "iw") {
+          // Wild is a flat number (already base-applied in computeDisplayValue)
           txt = fmtStatNum(eff);
         }
+        else if (c.key === "ta") {
+          // Ta: number for normal stats, percent for multiplier stats
+          if (isMultiplierStat(statKey)) {
+            txt = `${fmtStatNum(eff * 100)}%`;
+          } else {
+            txt = fmtStatNum(eff);
+          }
+        }
         else {
-          // percentages
+          // it + tm are always percents
           txt = `${fmtStatNum(eff * 100)}%`;
         }
       }
