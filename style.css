@@ -23,7 +23,7 @@
   --control-border:#3a414a;
   --focus:#7aa2ff;
 
-  --topbar-pad-y: 12px;
+  --topbar-pad-y: 1px;
   --topbar-pad-x: 16px;
 
   --panel-radius: 6px;
@@ -1133,7 +1133,7 @@ body{
 /* ============================================================
    9) MOBILE (<= 955px) -- consolidated
    ============================================================ */
-@media (max-width:955px){
+@media (max-width:640px){
   #controlsToggle{ display:inline-flex; }
 
   #topbar{
@@ -1341,10 +1341,10 @@ body{
 }
 
 /* Desktop topbar grid */
-@media (min-width:956px){
+@media (min-width:641px){
   #topbar{
     display:grid;
-    grid-template-columns:auto 1fr auto;
+    grid-template-columns:1fr 5fr 1fr;
     align-items:center;
     column-gap:14px;
   }
@@ -1353,6 +1353,13 @@ body{
     flex-wrap:nowrap;
     min-width:0;
   }
+  
+  #topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy){
+    flex:1 1 0;
+    min-width:125px;
+    max-width:360px;
+  }
+  
   #topbar .controls > *{
     flex:1 1 0;
     min-width:200px;
