@@ -851,6 +851,14 @@ body{
   overflow-y:hidden;
 }
 
+.is-entry .entry-meta{
+  margin-top:5px}
+}
+
+.is-entry .info-label{
+  font-weight:400;
+}
+
 .entry-row{
   display:flex;
   align-items:flex-start;
