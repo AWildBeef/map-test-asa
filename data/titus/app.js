@@ -70,6 +70,11 @@ function rarityToColor(r){
 }
 
 // ---------- Tiny helpers ----------
+function bpClass(bp){
+  return String(bp || "").split(".").pop();
+}
+
+
 const jsonCache = new Map();
 
 async function loadJSON(url){
@@ -200,21 +205,31 @@ function updateMapBase(imageUrl, size=[2048,2048]){
 function rebuildMapIndices(){
   const spawn = Global.spawn;
   const dinos = Global.dinos;
+  console.log("Spawn keys:", Object.keys(spawn || {}));
+  console.log("EntryMaps keys:", Object.keys(spawn?.entryMaps || {}));
+  console.log("Entries keys:", Object.keys(spawn?.entries || {}));
 
   State.mapEntrySet = new Set();
+  console.log("Entries on this map:", State.mapEntrySet.size);
   State.caveEntrySet = new Set();
   State.entryToDinos = new Map();
+  console.log("Entry→Dinos count:", State.entryToDinos.size);
   State.dinoToEntries = new Map();
+  console.log("Dino→Entries count:", State.dinoToEntries.size);
+
 
   // 1) which entries are used on this map?
-  const mapRows = spawn?.maps?.[State.mapId] || [];
-  for (const row of mapRows){
-    // row: [entryName, entryBp, isCave, isUntameable, nodes, ppn, targ]
-    const entryName = row?.[0];
-    const isCave = !!row?.[2];
-    if (!entryName) continue;
-    State.mapEntrySet.add(entryName);
-    if (isCave) State.caveEntrySet.add(entryName);
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const mapShort = mapMeta.short;
+
+  for (const [entryName, maps] of Object.entries(spawn?.entryMaps || {})){
+
+    if (!Array.isArray(maps)) continue;
+
+    if (maps.includes(mapShort)){
+      State.mapEntrySet.add(entryName);
+    }
+
   }
 
   // 2) entry -> dinos, and reverse (only for entries on this map)
