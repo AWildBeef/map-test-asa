@@ -1,8 +1,8 @@
 /* ============================================================
-   app2.js -- Atlas rebuild v3 (robust DOM + correct geo drawing)
+   app2.js -- Atlas rebuild v4 (rarity + cave/untameable styles)
 ============================================================ */
 
-const ASSET_VER = "dev-2026-03-04-C";
+const ASSET_VER = "dev-2026-03-04-D";
 
 const PATHS = {
   spawnGlobal: `data/spawn_global.json`,
@@ -32,7 +32,6 @@ const Global = {
   mapGeom: new Map(), // geomShort -> geom json
 };
 
-
 const State = {
   mapId: MAPS[0].id,
   mode: "dino",
@@ -43,11 +42,9 @@ const State = {
   nameToBps: new Map(),
   names: [],
   entryList: [],
-  entryMeta:new Map(),
 };
 
 // ---------- Rarity Control ----------
-
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
   [0.009,  "common"],
@@ -76,20 +73,38 @@ function rarityToColor(r){
   return "#888888";
 }
 
+function dinoIsUntameable(bp){
+  const d = Global.dinos?.dinos?.[bp];
+  const tame = d?.flags?.tameable;
+
+  // your schema uses 0/1 a lot; tolerate booleans too
+  if (tame === 0 || tame === false) return true;
+  return false;
+}
+
+function nameIsUntameable(name){
+  const bps = State.nameToBps.get(name) || [];
+  return bps.some(dinoIsUntameable);
+}
+
+// Leaflet style object for this entry on this map
 function styleForEntry(meta, color){
   const isCave = !!meta?.isCave;
   const isUntameable = !!meta?.isUntameable;
 
-  return {
+  const style = {
     color,
     weight: isCave ? 3 : 1,
     opacity: 1,
     fillColor: color,
     fillOpacity: isCave ? 0.35 : 0.65,
-    dashArray: isUntameable ? "6 6" : null,
   };
-}
 
+  // Leaflet likes dashArray as a string; omit it entirely if not used
+  if (isUntameable) style.dashArray = "6 6";
+
+  return style;
+}
 
 // ---------- DOM helpers (prevents "sel is null" crashes) ----------
 function byIdAny(...ids){
@@ -99,23 +114,11 @@ function byIdAny(...ids){
   }
   return null;
 }
-
-function getMainSelect(){
-  // try the expected id first, then common alternates
-  return byIdAny("mainSelect", "dinoSelect", "entrySelect", "spawnSelect", "selectMain");
-}
-function getMapSelect(){
-  return byIdAny("mapSelect", "mapDropdown", "selectMap");
-}
-function getModeToggle(){
-  return byIdAny("modeToggle", "viewToggle", "toggleMode");
-}
-function getControlsToggle(){
-  return byIdAny("controlsToggle", "filterToggle", "toggleFilters");
-}
-function getTopbar(){
-  return byIdAny("topbar", "controls", "filters");
-}
+function getMainSelect(){ return byIdAny("mainSelect", "dinoSelect", "entrySelect", "spawnSelect", "selectMain"); }
+function getMapSelect(){ return byIdAny("mapSelect", "mapDropdown", "selectMap"); }
+function getModeToggle(){ return byIdAny("modeToggle", "viewToggle", "toggleMode"); }
+function getControlsToggle(){ return byIdAny("controlsToggle", "filterToggle", "toggleFilters"); }
+function getTopbar(){ return byIdAny("topbar", "controls", "filters"); }
 
 // ---------- misc helpers ----------
 function bpClass(bp){
@@ -153,14 +156,14 @@ function rebuildMapIndices(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const mapCode = mapMeta?.mapCode;
 
-  // 1) map -> entries via spawn.entryMaps: entryName -> [mapCodes]
+  // map -> entries via spawn.entryMaps: entryName -> [mapCodes]
   for (const [entryName, mapList] of Object.entries(spawn.entryMaps || {})){
     if (Array.isArray(mapList) && mapCode && mapList.includes(mapCode)){
       State.mapEntries.add(entryName);
     }
   }
 
-  // 2) entries -> dinos + reverse
+  // entries -> dinos + reverse
   for (const entryName of State.mapEntries){
     const entry = spawn.entries?.[entryName];
     if (!entry) continue;
@@ -178,7 +181,7 @@ function rebuildMapIndices(){
     }
   }
 
-  // 3) build name index (label -> [bps])
+  // build name index (label -> [bps])
   for (const bp of State.dinoToEntries.keys()){
     const cls = bpClass(bp);
 
@@ -218,7 +221,6 @@ function setupTopBarToggle(){
   const btn = getControlsToggle();
   const topbar = getTopbar();
   if (!btn || !topbar) return;
-
   btn.onclick = () => topbar.classList.toggle("show-controls");
 }
 
@@ -250,33 +252,86 @@ function iterEntryGeometry(entryName){
   if (!entry) return [];
 
   const result = [];
+
   const managers = entry.m || {};
-  for (const mgr of Object.values(managers)){
+  for (const [mgrName, mgr] of Object.entries(managers)){
+
+    // schema2 manager flags (c/u) + params (md/ii)
+    const meta = {
+      manager: mgrName,
+      isCave: !!mgr?.c,
+      isUntameable: !!mgr?.u,
+      md: mgr?.md ?? null,
+      ii: mgr?.ii ?? null,
+    };
+
     if (Array.isArray(mgr.b)){
-      for (const box of mgr.b) result.push({ type:"box", data: box });
+      for (const box of mgr.b){
+        result.push({ type:"box", data: box, meta });
+      }
     }
+
     if (Array.isArray(mgr.p)){
-      for (const pt of mgr.p) result.push({ type:"point", data: pt });
+      for (const pt of mgr.p){
+        result.push({ type:"point", data: pt, meta });
+      }
     }
   }
+
   return result;
 }
 
-function drawEntry(entryName, clearFirst = true){
+// helper: entry-level total groupWeight (sum of gw in entry)
+function entryTotalWeight(entryName){
+  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  let sum = 0;
+  for (const r of rows){
+    sum += Number(r?.[1] || 0);
+  }
+  return sum;
+}
+
+// helper: for Dino View: sum groupWeight for ONLY the selected bp(s) inside this entry
+function entryWeightForBps(entryName, bpSet){
+  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  let sum = 0;
+  for (const r of rows){
+    const bp = r?.[0];
+    if (!bp) continue;
+    if (bpSet.has(bp)) sum += Number(r?.[1] || 0);
+  }
+  return sum;
+}
+
+function drawEntry(entryName, clearFirst = true, weightOverride = null, dinoUntameable = false){
   if (clearFirst) clearDraw();
+
+  const weight = (weightOverride != null) ? Number(weightOverride) : entryTotalWeight(entryName);
+  const rarity = rarityFromWeight(weight);
+  const color = rarityToColor(rarity);
 
   const geo = iterEntryGeometry(entryName);
 
   for (const g of geo){
+
+    // manager untameable OR dino untameable
+    const meta = {
+      isCave: !!g.meta?.isCave,
+      isUntameable: !!g.meta?.isUntameable || !!dinoUntameable
+    };
+
+    const style = styleForEntry(meta, color);
+
     if (g.type === "box"){
       const [x,y,w,h] = g.data;
       if (![x,y,w,h].every(Number.isFinite)) continue;
-      L.rectangle([[y,x],[y+h,x+w]], { color:"#00FF00", weight:1 }).addTo(mapObj.layer);
+      L.rectangle([[y,x],[y+h,x+w]], style).addTo(mapObj.layer);
     }
+
     if (g.type === "point"){
       const [x,y] = g.data;
       if (![x,y].every(Number.isFinite)) continue;
-      L.circleMarker([y,x], { radius:3 }).addTo(mapObj.layer);
+      L.circleMarker([y,x], { radius:3, ...style }).addTo(mapObj.layer);
     }
   }
 }
@@ -285,16 +340,23 @@ function drawDino(name){
   clearDraw();
 
   const bps = State.nameToBps.get(name) || [];
-  const entries = new Set();
+  if (!bps.length) return;
 
+  const bpSet = new Set(bps);
+
+  // if ANY bp for this displayed name is untameable, treat the whole dino as untameable styling
+  const dinoUntameable = bps.some(dinoIsUntameable);
+
+  const entries = new Set();
   for (const bp of bps){
     for (const e of (State.dinoToEntries.get(bp) || [])){
       entries.add(e);
     }
   }
 
-  for (const entry of entries){
-    drawEntry(entry, false); // <-- don't clear between entries
+  for (const entryName of entries){
+    const w = entryWeightForBps(entryName, bpSet);
+    drawEntry(entryName, false, w, dinoUntameable);
   }
 }
 
@@ -331,7 +393,6 @@ function fillMainSelect(){
   }
 
   sel.innerHTML = "";
-
   const list = (State.mode === "dino") ? State.names : State.entryList;
 
   for (const v of list){
@@ -352,7 +413,6 @@ function fillMainSelect(){
 
 function render(){
   if (!State.selection) return;
-
   if (State.mode === "dino") drawDino(State.selection);
   else drawEntry(State.selection);
 }
