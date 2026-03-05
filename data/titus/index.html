@@ -1,19 +1,23 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"> 
 
   <!-- 🏷️ What shows in the browser tab -->
   <title>ASA Spawn Maps</title>
+  <link rel="icon" href="favicon.ico">
 
   <!-- 📱 Makes the page scale correctly on phones (without this, mobile looks weird/zoomed) -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- 🗺️ Leaflet CSS: makes the map + controls look correct -->
-  <link rel="stylesheet" href="Leaflet/leaflet.css">
-  <script src="Leaflet/leaflet.js"></script>
-  <script src="libs/html-to-image.js"></script>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- 🧠 Leaflet JS: the actual map engine -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/eruda"></script>
+  <script>
+    eruda.init();
+  </script>
   <!-- 🎨 Your CSS file (all the styling we keep tweaking) -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +25,7 @@
 <body>
 
   <div id="topbar">
-    <div class="title">ASA Spawn Maps (test)</div>
+    <div class="title">ASA Spawn Maps</div>
   
     <div class="controls">
       <select id="sourceSelect"></select>
@@ -65,6 +69,21 @@
 
   <!-- 🧠 Your main JS -->
   <script src="app.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/gh/AWildBeef/atlas-live-css@main/live-css.js?v=3474858"></script>
+  <script>
+    AtlasLiveCSS.init({
+      queryParam: "livecss",
+      enabledOnParam: true,
+      fabText:"🖍️",
+      storageKey: "asa_spawnmaps_live_css_v1",
+      storagePosKey: "asa_spawnmaps_live_css_pos_v1",
+      storageSizeKey: "asa_spawnmaps_live_css_size_v1",
+      storageOpenKey: "asa_spawnmaps_live_css_open_v1",
+      panelWidth: 300,
+      panelHeight: 220,
+      offsetRight: 60,
+      offsetBottom: 10
+    });
+  </script>
 </body>
 </html>
