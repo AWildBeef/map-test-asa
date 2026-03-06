@@ -47,9 +47,9 @@ const State = {
 // ---------- Rarity Control ----------
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
-  [0.009,  "common"],
-  [0.005,  "uncommon"],
-  [0.0009, "very uncommon"],
+  [0.009,   "common"],
+  [0.005,   "uncommon"],
+  [0.0009,  "very uncommon"],
   [0.0001, "rare"],
   [-1,     "very rare"],
 ];
@@ -71,6 +71,30 @@ function rarityToColor(r){
   if (s.includes("very common"))    return "#00FF00";
   if (s.includes("common"))         return "#B2FF00";
   return "#888888";
+}
+
+function buildTooltip(entryName, managerMeta, weight){
+
+  const rarity = rarityFromWeight(weight);
+
+  const lines = [
+    `<b>${entryName}</b>`,
+    `Manager: ${managerMeta.manager}`,
+  ];
+
+  if (managerMeta.md != null)
+    lines.push(`MinDesired: ${managerMeta.md}`);
+
+  if (managerMeta.ii != null)
+    lines.push(`IncreaseInterval: ${managerMeta.ii}`);
+
+  lines.push(`Weight: ${Number(weight).toFixed(5)}`);
+  lines.push(`Rarity: ${rarity}`);
+
+  if (managerMeta.isCave) lines.push(`Cave Spawn`);
+  if (managerMeta.isUntameable) lines.push(`Untameable`);
+
+  return lines.join("<br>");
 }
 
 function dinoIsUntameable(bp){
@@ -97,11 +121,11 @@ function styleForEntry(meta, color){
     weight: isCave ? 3 : 1,
     opacity: 1,
     fillColor: color,
-    fillOpacity: isCave ? 0.35 : 0.65,
+    fillOpacity: isCave ? 0.40 : 0.80,
   };
 
   // Leaflet likes dashArray as a string; omit it entirely if not used
-  if (isUntameable) style.dashArray = "6 6";
+  if (isUntameable) style.dashArray = "3 3";
 
   return style;
 }
@@ -281,26 +305,38 @@ function iterEntryGeometry(entryName){
   return result;
 }
 
-// helper: entry-level total groupWeight (sum of gw in entry)
-function entryTotalWeight(entryName){
+function entryTotalExpected(entryName){
   const rows = Global.spawn?.entries?.[entryName]?.d || [];
   let sum = 0;
   for (const r of rows){
-    sum += Number(r?.[1] || 0);
+    const gw = Number(r?.[1] || 0);
+    const sm = Number(r?.[2] || 1);
+    sum += gw * sm;
   }
   return sum;
 }
 
-// helper: for Dino View: sum groupWeight for ONLY the selected bp(s) inside this entry
-function entryWeightForBps(entryName, bpSet){
+function entryRarityForBps(entryName, bpSet){
   const rows = Global.spawn?.entries?.[entryName]?.d || [];
-  let sum = 0;
+  const total = entryTotalExpected(entryName);
+  if (total <= 0) return 0;
+
+  let rarity = 0;
+
   for (const r of rows){
-    const bp = r?.[0];
-    if (!bp) continue;
-    if (bpSet.has(bp)) sum += Number(r?.[1] || 0);
+    const bp  = r?.[0];
+    if (!bp || !bpSet.has(bp)) continue;
+
+    const gw  = Number(r?.[1] || 0);
+    const sm  = Number(r?.[2] || 1);
+    const lim = Number(r?.[3] || 1);
+
+    const expected = gw * sm;          // E
+    const share = expected / total;    // S
+    rarity += share * lim;             // R
   }
-  return sum;
+
+  return rarity; // typically small decimals
 }
 
 function drawEntry(entryName, clearFirst = true, weightOverride = null, dinoUntameable = false){
@@ -325,13 +361,19 @@ function drawEntry(entryName, clearFirst = true, weightOverride = null, dinoUnta
     if (g.type === "box"){
       const [x,y,w,h] = g.data;
       if (![x,y,w,h].every(Number.isFinite)) continue;
-      L.rectangle([[y,x],[y+h,x+w]], style).addTo(mapObj.layer);
+      const rect = L.rectangle([[y,x],[y+h,x+w]], style).addTo(mapObj.layer);
+
+      const tooltip = buildTooltip(entryName, g.meta, weight);
+      rect.bindTooltip(tooltip);
     }
 
     if (g.type === "point"){
       const [x,y] = g.data;
       if (![x,y].every(Number.isFinite)) continue;
-      L.circleMarker([y,x], { radius:3, ...style }).addTo(mapObj.layer);
+      const pt = L.circleMarker([y,x], { radius:3, ...style }).addTo(mapObj.layer);
+
+      const tooltip = buildTooltip(entryName, g.meta, weight);
+      pt.bindTooltip(tooltip);
     }
   }
 }
@@ -355,8 +397,8 @@ function drawDino(name){
   }
 
   for (const entryName of entries){
-    const w = entryWeightForBps(entryName, bpSet);
-    drawEntry(entryName, false, w, dinoUntameable);
+    const rarity = entryRarityForBps(entryName, bpSet);
+    drawEntry(entryName, false, rarity, dinoUntameable);
   }
 }
 
