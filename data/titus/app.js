@@ -45,13 +45,23 @@ const State = {
 };
 
 // ---------- Rarity Control ----------
+
 const RARITY_THRESHOLDS = [
   [0.03,   "very common"],
-  [0.009,   "common"],
-  [0.005,   "uncommon"],
-  [0.0009,  "very uncommon"],
+  [0.009,  "common"],
+  [0.005,  "uncommon"],
+  [0.0009, "very uncommon"],
   [0.0001, "rare"],
   [-1,     "very rare"],
+];
+
+const RARITY_ORDER = [
+  "very common",
+  "common",
+  "uncommon",
+  "very uncommon",
+  "rare",
+  "very rare"
 ];
 
 function rarityFromWeight(w){
@@ -73,9 +83,99 @@ function rarityToColor(r){
   return "#888888";
 }
 
-function buildTooltip(entryName, managerMeta, weight){
+// ---------- Downshift Rules ----------
 
-  const rarity = rarityFromWeight(weight);
+// global rarity downshift thresholds
+// [ totalMinDesiredMax, steps ]
+const MIN_GLOBAL_DOWNSHIFT = [
+  [3, 6],   // giga spawners etc
+];
+
+// manager rarity downshift
+function downshiftStepsForMinPct(pct){
+  const p = Number(pct || 1);
+  if (p >= 0.51) return 0;
+  return 1;
+}
+
+function downshiftStepsForTotalMin(totalMin){
+  const m = Number(totalMin || 0);
+  if (m <= 0) return 0;
+
+  for (const [thr, steps] of MIN_GLOBAL_DOWNSHIFT){
+    if (m <= thr) return steps;
+  }
+  return 0;
+}
+
+function downgradeRarity(label, steps){
+  if (!steps) return label;
+
+  let i = RARITY_ORDER.indexOf(label);
+  if (i < 0) i = RARITY_ORDER.length - 1;
+
+  const j = Math.min(RARITY_ORDER.length - 1, i + steps);
+  return RARITY_ORDER[j];
+}
+
+function entryManagerMinStats(entryName){
+
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const entry = geom?.entries?.[entryName];
+
+  if (!entry) return { best:0, total:0 };
+
+  const mins = [];
+
+  for (const mgr of Object.values(entry.m || {})){
+    const md = Number(mgr?.md || 0);
+    if (md > 0) mins.push(md);
+  }
+
+  const best = mins.length ? Math.max(...mins) : 0;
+  const total = mins.reduce((a,b)=>a+b,0);
+
+  return { best, total };
+}
+
+function managerMinPct(managerMd, bestMd){
+  const md = Number(managerMd || 0);
+  const best = Number(bestMd || 0);
+
+  if (best <= 0) return 1;
+  if (md <= 0) return 1;
+
+  return md / best;
+}
+
+function finalRarityForManager(entryName, managerMeta, rarityScore){
+
+  const baseLabel = rarityFromWeight(rarityScore);
+
+  const { best, total } = entryManagerMinStats(entryName);
+
+  const globalSteps = downshiftStepsForTotalMin(total);
+
+  const pct = managerMinPct(managerMeta?.md, best);
+  const managerSteps = downshiftStepsForMinPct(pct);
+
+  const finalLabel = downgradeRarity(baseLabel, globalSteps + managerSteps);
+
+  return {
+    baseLabel,
+    finalLabel,
+    baseScore: rarityScore,
+    bestManagerMin: best,
+    totalMin: total,
+    managerMin: Number(managerMeta?.md || 0),
+    managerPct: pct,
+    globalSteps,
+    managerSteps,
+  };
+}
+
+function buildTooltip(entryName, managerMeta, rarityInfo){
 
   const lines = [
     `<b>${entryName}</b>`,
@@ -88,8 +188,18 @@ function buildTooltip(entryName, managerMeta, weight){
   if (managerMeta.ii != null)
     lines.push(`IncreaseInterval: ${managerMeta.ii}`);
 
-  lines.push(`Weight: ${Number(weight).toFixed(5)}`);
-  lines.push(`Rarity: ${rarity}`);
+  lines.push(`Score: ${Number(rarityInfo.baseScore).toFixed(5)}`);
+  lines.push(`Base Rarity: ${rarityInfo.baseLabel}`);
+  lines.push(`Final Rarity: ${rarityInfo.finalLabel}`);
+
+  lines.push(`Entry Total Min: ${rarityInfo.totalMin}`);
+  lines.push(`Manager Share: ${(rarityInfo.managerPct*100).toFixed(1)}%`);
+
+  if (rarityInfo.globalSteps)
+    lines.push(`Global Downshift: +${rarityInfo.globalSteps}`);
+
+  if (rarityInfo.managerSteps)
+    lines.push(`Manager Downshift: +${rarityInfo.managerSteps}`);
 
   if (managerMeta.isCave) lines.push(`Cave Spawn`);
   if (managerMeta.isUntameable) lines.push(`Untameable`);
@@ -109,6 +219,16 @@ function dinoIsUntameable(bp){
 function nameIsUntameable(name){
   const bps = State.nameToBps.get(name) || [];
   return bps.some(dinoIsUntameable);
+}
+
+function entryHasUntameableSelectedBp(entryName, bpSet){
+  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  for (const r of rows){
+    const bp = r?.[0];
+    if (!bp || !bpSet.has(bp)) continue;
+    if (dinoIsUntameable(bp)) return true;
+  }
+  return false;
 }
 
 // Leaflet style object for this entry on this map
@@ -339,41 +459,41 @@ function entryRarityForBps(entryName, bpSet){
   return rarity; // typically small decimals
 }
 
-function drawEntry(entryName, clearFirst = true, weightOverride = null, dinoUntameable = false){
+function drawEntry(entryName, clearFirst = true, scoreOverride = null, dinoUntameable = false){
+
   if (clearFirst) clearDraw();
 
-  const weight = (weightOverride != null) ? Number(weightOverride) : entryTotalWeight(entryName);
-  const rarity = rarityFromWeight(weight);
-  const color = rarityToColor(rarity);
+  const score = Number(scoreOverride ?? 0);
 
   const geo = iterEntryGeometry(entryName);
 
   for (const g of geo){
 
-    // manager untameable OR dino untameable
     const meta = {
-      isCave: !!g.meta?.isCave,
+      ...g.meta,
       isUntameable: !!g.meta?.isUntameable || !!dinoUntameable
     };
+
+    const rarityInfo = finalRarityForManager(entryName, meta, score);
+
+    const color = rarityToColor(rarityInfo.finalLabel);
 
     const style = styleForEntry(meta, color);
 
     if (g.type === "box"){
       const [x,y,w,h] = g.data;
       if (![x,y,w,h].every(Number.isFinite)) continue;
-      const rect = L.rectangle([[y,x],[y+h,x+w]], style).addTo(mapObj.layer);
 
-      const tooltip = buildTooltip(entryName, g.meta, weight);
-      rect.bindTooltip(tooltip);
+      const rect = L.rectangle([[y,x],[y+h,x+w]], style).addTo(mapObj.layer);
+      rect.bindTooltip(buildTooltip(entryName, meta, rarityInfo));
     }
 
     if (g.type === "point"){
       const [x,y] = g.data;
       if (![x,y].every(Number.isFinite)) continue;
-      const pt = L.circleMarker([y,x], { radius:3, ...style }).addTo(mapObj.layer);
 
-      const tooltip = buildTooltip(entryName, g.meta, weight);
-      pt.bindTooltip(tooltip);
+      const pt = L.circleMarker([y,x], { radius:3, ...style }).addTo(mapObj.layer);
+      pt.bindTooltip(buildTooltip(entryName, meta, rarityInfo));
     }
   }
 }
@@ -386,9 +506,7 @@ function drawDino(name){
 
   const bpSet = new Set(bps);
 
-  // if ANY bp for this displayed name is untameable, treat the whole dino as untameable styling
-  const dinoUntameable = bps.some(dinoIsUntameable);
-
+  // gather all entries for these bp(s)
   const entries = new Set();
   for (const bp of bps){
     for (const e of (State.dinoToEntries.get(bp) || [])){
@@ -398,7 +516,11 @@ function drawDino(name){
 
   for (const entryName of entries){
     const rarity = entryRarityForBps(entryName, bpSet);
-    drawEntry(entryName, false, rarity, dinoUntameable);
+
+    // only mark untameable if THIS entry contains an untameable BP among the selected ones
+    const entryDinoUntameable = entryHasUntameableSelectedBp(entryName, bpSet);
+
+    drawEntry(entryName, false, rarity, entryDinoUntameable);
   }
 }
 
