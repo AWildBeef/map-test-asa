@@ -1,59 +1,158 @@
 /* ============================================================
-   app2.js -- Atlas rebuild v4 (rarity + cave/untameable styles)
+   ASA Spawn Maps
+   Atlas V5 – clean full architecture
 ============================================================ */
 
-const ASSET_VER = "dev-2026-03-04-D";
+/* ============================================================
+   CONFIG
+============================================================ */
+
+const ASSET_VER = "dev-2026-03-05-V5";
 
 const PATHS = {
-  spawnGlobal: `data/spawn_global.json`,
-  dinoGlobal: `data/dinos_global.json`,
-  geomDir: `data/MapGeometry`,
-  mapsDir: `maps`,
+  spawnGlobal: "data/spawn_global.json",
+  dinoGlobal: "data/dinos_global.json",
+  geomDir: "data/MapGeometry",
+  mapsDir: "maps"
 };
 
-// IMPORTANT:
-// - geomShort = filename prefix for _geom.json
-// - mapCode   = the code used inside spawn_global.json entryMaps/mapLegend
 const MAPS = [
-  { id:"The Island",     geomShort:"TheIsland",     mapCode:"TheIsland", image:"theisland.webp" },
-  { id:"Scorched Earth", geomShort:"ScorchedEarth", mapCode:"SE",        image:"scorchedearth.webp" },
-  { id:"The Center",     geomShort:"TheCenter",     mapCode:"center",    image:"thecenter.webp" },
-  { id:"Ragnarok",       geomShort:"Ragnarok",      mapCode:"Rag",       image:"ragnarok.webp" },
-  { id:"Valguero",       geomShort:"Valguero",      mapCode:"Val",       image:"valguero.webp" },
-  { id:"Aberration",     geomShort:"Aberration",    mapCode:"AB",        image:"aberration.webp" },
-  { id:"Extinction",     geomShort:"Extinction",    mapCode:"EXT",       image:"extinction.webp" },
-  { id:"Lost Colony",    geomShort:"LostColony",    mapCode:"LC",        image:"lostcolony.webp" },
-  { id:"Astraeos",       geomShort:"Astraeos",      mapCode:"AST",       image:"astraeos.webp" },
+  { id:"The Island", geomShort:"TheIsland", mapCode:"TheIsland", image:"theisland.webp" },
+  { id:"Scorched Earth", geomShort:"ScorchedEarth", mapCode:"SE", image:"scorchedearth.webp" },
+  { id:"The Center", geomShort:"TheCenter", mapCode:"center", image:"thecenter.webp" },
+  { id:"Ragnarok", geomShort:"Ragnarok", mapCode:"Rag", image:"ragnarok.webp" },
+  { id:"Valguero", geomShort:"Valguero", mapCode:"Val", image:"valguero.webp" },
+  { id:"Aberration", geomShort:"Aberration", mapCode:"AB", image:"aberration.webp" },
+  { id:"Extinction", geomShort:"Extinction", mapCode:"EXT", image:"extinction.webp" },
+  { id:"Lost Colony", geomShort:"LostColony", mapCode:"LC", image:"lostcolony.webp" },
+  { id:"Astraeos", geomShort:"Astraeos", mapCode:"AST", image:"astraeos.webp" }
 ];
 
+
+const SOURCES = [
+  { id:"official", label:"Official" }
+];
+
+/* ============================================================
+   GLOBAL DATA
+============================================================ */
+
 const Global = {
-  spawn: null,
-  dinos: null,
-  mapGeom: new Map(), // geomShort -> geom json
+  spawn:null,
+  dinos:null,
+  mapGeom:new Map()
 };
 
 const State = {
-  mapId: MAPS[0].id,
-  mode: "dino",
-  selection: "",
-  mapEntries: new Set(),
-  entryToDinos: new Map(),
-  dinoToEntries: new Map(),
-  nameToBps: new Map(),
-  names: [],
-  entryList: [],
+  mapId:MAPS[0].id,
+  mode:"dino",
+  selection:"",
+
+  mapEntries:new Set(),
+  entryToDinos:new Map(),
+  dinoToEntries:new Map(),
+  nameToBps:new Map(),
+
+  names:[],
+  entryList:[]
 };
 
-// ---------- Rarity Control ----------
+/* ============================================================
+   UI
+============================================================ */
 
-const RARITY_THRESHOLDS = [
-  [0.03,   "very common"],
-  [0.009,  "common"],
-  [0.005,  "uncommon"],
-  [0.0009, "very uncommon"],
-  [0.0001, "rare"],
-  [-1,     "very rare"],
+const UI = {
+
+  sourceSelect: document.getElementById("sourceSelect"),
+  sourceFancy: document.getElementById("sourceSelectFancy"),
+  
+  mapSelect:document.getElementById("mapSelect"),
+  mapFancy:document.getElementById("mapSelectFancy"),
+
+  dinoSelect:document.getElementById("dinoSelect"),
+  dinoFancy:document.getElementById("dinoSelectFancy"),
+
+  modeToggle:document.getElementById("modeToggle"),
+  controlsToggle:document.getElementById("controlsToggle"),
+  topbar:document.getElementById("topbar")
+};
+
+/* ============================================================
+   UTILS
+============================================================ */
+
+function normSearch(s){
+  return String(s||"").toLowerCase().replace(/[\s_-]/g,"");
+}
+
+async function loadJSON(url){
+  const r=await fetch(`${url}?v=${ASSET_VER}`);
+  if(!r.ok) throw new Error(url);
+  return r.json();
+}
+
+function bpClass(bp){
+  return String(bp||"").split(".").pop();
+}
+
+function labelsForDinoObj(d){
+
+  const out = new Set();
+
+  if(!d) return [];
+
+  if(d.n) out.add(String(d.n));
+  if(d.fn) out.add(String(d.fn));
+  if(d.mn) out.add(String(d.mn));
+
+  return [...out];
+}
+/* ============================================================
+   RARITY ENGINE
+============================================================ */
+
+const RARITY_THRESHOLDS=[
+  [0.03,"very common"],
+  [0.009,"common"],
+  [0.005,"uncommon"],
+  [0.0009,"very uncommon"],
+  [0.0001,"rare"],
+  [-1,"very rare"]
 ];
+
+function downshiftStepsForMinPct(pct){
+
+  const p = Number(pct || 1);
+
+  if(p >= 0.51) return 0;
+
+  return 1;
+}
+
+function rarityFromWeight(w){
+  for(const [t,l] of RARITY_THRESHOLDS){
+    if(w>=t) return l;
+  }
+  return "very rare";
+}
+
+const MIN_GLOBAL_DOWNSHIFT = [
+  [3,6]
+];
+
+function downshiftStepsForTotalMin(totalMin){
+
+  const m = Number(totalMin || 0);
+
+  if(m <= 0) return 0;
+
+  for(const [thr,steps] of MIN_GLOBAL_DOWNSHIFT){
+
+    if(m <= thr) return steps;
+  }
+
+  return 0;
+}
 
 const RARITY_ORDER = [
   "very common",
@@ -64,58 +163,94 @@ const RARITY_ORDER = [
   "very rare"
 ];
 
-function rarityFromWeight(w){
-  const x = Number(w || 0);
-  for (const [thr, label] of RARITY_THRESHOLDS){
-    if (x >= thr) return label;
-  }
-  return "very rare";
-}
-
 function rarityToColor(r){
-  const s = String(r || "").toLowerCase();
-  if (s.includes("very rare"))      return "#FF0000";
-  if (s.includes("rare"))           return "#FF6600";
-  if (s.includes("very uncommon"))  return "#FFCC00";
-  if (s.includes("uncommon"))       return "#FFFF00";
-  if (s.includes("very common"))    return "#00FF00";
-  if (s.includes("common"))         return "#B2FF00";
-  return "#888888";
+
+  r=String(r||"").toLowerCase();
+
+  if(r.includes("very rare")) return "#ff0000";
+  if(r.includes("rare")) return "#ff6600";
+  if(r.includes("very uncommon")) return "#ffcc00";
+  if(r.includes("uncommon")) return "#ffff00";
+  if(r.includes("very common")) return "#00ff00";
+  if(r.includes("common")) return "#b2ff00";
+
+  return "#888";
 }
 
-// ---------- Downshift Rules ----------
+function downgradeRarity(label,steps){
 
-// global rarity downshift thresholds
-// [ totalMinDesiredMax, steps ]
-const MIN_GLOBAL_DOWNSHIFT = [
-  [3, 6],   // giga spawners etc
-];
-
-// manager rarity downshift
-function downshiftStepsForMinPct(pct){
-  const p = Number(pct || 1);
-  if (p >= 0.51) return 0;
-  return 1;
-}
-
-function downshiftStepsForTotalMin(totalMin){
-  const m = Number(totalMin || 0);
-  if (m <= 0) return 0;
-
-  for (const [thr, steps] of MIN_GLOBAL_DOWNSHIFT){
-    if (m <= thr) return steps;
-  }
-  return 0;
-}
-
-function downgradeRarity(label, steps){
-  if (!steps) return label;
+  if(!steps) return label;
 
   let i = RARITY_ORDER.indexOf(label);
-  if (i < 0) i = RARITY_ORDER.length - 1;
 
-  const j = Math.min(RARITY_ORDER.length - 1, i + steps);
+  if(i < 0) i = RARITY_ORDER.length-1;
+
+  const j = Math.min(RARITY_ORDER.length-1,i+steps);
+
   return RARITY_ORDER[j];
+}
+/* ============================================================
+   SPAWN RARITY CALCULATION
+============================================================ */
+
+function entryTotalExpected(entryName){
+
+  const rows=Global.spawn?.entries?.[entryName]?.d||[];
+
+  let sum=0;
+
+  for(const r of rows){
+
+    const gw=Number(r?.[1]||0);
+    const sm=Number(r?.[2]||1);
+
+    sum+=gw*sm;
+  }
+
+  return sum;
+}
+
+function entryRarityForBps(entryName, bpSet){
+
+  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  if (!rows.length) return 0;
+
+  let totalExpected = 0;
+  let matchedRarity = 0;
+
+  for (const r of rows){
+    const rawBp = normalizeBp(r?.[0]);
+    if (!rawBp) continue;
+
+    const gw = Number(r?.[1] || 0);
+    const sm = Number(r?.[2] || 1);
+    const lim = Number(r?.[3] || 1);
+
+    const baseExpected = gw * sm;
+    if (baseExpected <= 0) continue;
+
+    const outs = worldOutputsForBp(rawBp);
+
+    for (const out of outs){
+      const finalBp = normalizeBp(out?.[0]);
+      const prob = Number(out?.[1] || 0);
+      if (!finalBp || prob <= 0) continue;
+
+      const expected = baseExpected * prob;
+      totalExpected += expected;
+
+      if (bpSet.has(finalBp)){
+        // same formula you were already using:
+        // rarity += (expected / total) * lim
+        // but total is not known until after full pass, so accumulate numerator first
+        matchedRarity += expected * lim;
+      }
+    }
+  }
+
+  if (totalExpected <= 0) return 0;
+
+  return matchedRarity / totalExpected;
 }
 
 function entryManagerMinStats(entryName){
@@ -124,173 +259,256 @@ function entryManagerMinStats(entryName){
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
   const entry = geom?.entries?.[entryName];
 
-  if (!entry) return { best:0, total:0 };
+  if(!entry) return { best:0,total:0 };
 
-  const mins = [];
+  const mins=[];
 
-  for (const mgr of Object.values(entry.m || {})){
+  for(const mgr of Object.values(entry.m || {})){
+
     const md = Number(mgr?.md || 0);
-    if (md > 0) mins.push(md);
+
+    if(md > 0) mins.push(md);
   }
 
   const best = mins.length ? Math.max(...mins) : 0;
   const total = mins.reduce((a,b)=>a+b,0);
 
-  return { best, total };
+  return { best,total };
 }
 
-function managerMinPct(managerMd, bestMd){
-  const md = Number(managerMd || 0);
-  const best = Number(bestMd || 0);
+function finalRarityForManager(entryName,meta,score){
 
-  if (best <= 0) return 1;
-  if (md <= 0) return 1;
+  const baseLabel = rarityFromWeight(score);
 
-  return md / best;
-}
-
-function finalRarityForManager(entryName, managerMeta, rarityScore){
-
-  const baseLabel = rarityFromWeight(rarityScore);
-
-  const { best, total } = entryManagerMinStats(entryName);
+  const {best,total} = entryManagerMinStats(entryName);
 
   const globalSteps = downshiftStepsForTotalMin(total);
 
-  const pct = managerMinPct(managerMeta?.md, best);
+  const pct = best>0 ? (meta.md || best)/best : 1;
+
   const managerSteps = downshiftStepsForMinPct(pct);
 
-  const finalLabel = downgradeRarity(baseLabel, globalSteps + managerSteps);
-
-  return {
-    baseLabel,
-    finalLabel,
-    baseScore: rarityScore,
-    bestManagerMin: best,
-    totalMin: total,
-    managerMin: Number(managerMeta?.md || 0),
-    managerPct: pct,
-    globalSteps,
-    managerSteps,
-  };
+  return downgradeRarity(baseLabel,globalSteps+managerSteps);
 }
 
-function buildTooltip(entryName, managerMeta, rarityInfo){
+/* ============================================================
+   MAP RENDERING
+============================================================ */
 
-  const lines = [
-    `<b>${entryName}</b>`,
-    `Manager: ${managerMeta.manager}`,
-  ];
+let mapObj=null;
 
-  if (managerMeta.md != null)
-    lines.push(`MinDesired: ${managerMeta.md}`);
+function initMap(img,size=[2048,2048]){
 
-  if (managerMeta.ii != null)
-    lines.push(`IncreaseInterval: ${managerMeta.ii}`);
+  const bounds=[[0,0],[size[1],size[0]]];
 
-  lines.push(`Score: ${Number(rarityInfo.baseScore).toFixed(5)}`);
-  lines.push(`Base Rarity: ${rarityInfo.baseLabel}`);
-  lines.push(`Final Rarity: ${rarityInfo.finalLabel}`);
+  const map=L.map("map",{crs:L.CRS.Simple,minZoom:-3,maxZoom:2});
+  const overlay=L.imageOverlay(img,bounds).addTo(map);
 
-  lines.push(`Entry Total Min: ${rarityInfo.totalMin}`);
-  lines.push(`Manager Share: ${(rarityInfo.managerPct*100).toFixed(1)}%`);
+  const layer=L.layerGroup().addTo(map);
 
-  if (rarityInfo.globalSteps)
-    lines.push(`Global Downshift: +${rarityInfo.globalSteps}`);
+  map.fitBounds(bounds);
 
-  if (rarityInfo.managerSteps)
-    lines.push(`Manager Downshift: +${rarityInfo.managerSteps}`);
-
-  if (managerMeta.isCave) lines.push(`Cave Spawn`);
-  if (managerMeta.isUntameable) lines.push(`Untameable`);
-
-  return lines.join("<br>");
+  return {map,overlay,layer,bounds};
 }
 
-function dinoIsUntameable(bp){
-  const d = Global.dinos?.dinos?.[bp];
-  const tame = d?.flags?.tameable;
-
-  // your schema uses 0/1 a lot; tolerate booleans too
-  if (tame === 0 || tame === false) return true;
-  return false;
+function clearDraw(){
+  mapObj?.layer.clearLayers();
 }
 
-function nameIsUntameable(name){
-  const bps = State.nameToBps.get(name) || [];
-  return bps.some(dinoIsUntameable);
-}
+function styleForEntry(meta,color){
 
-function entryHasUntameableSelectedBp(entryName, bpSet){
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
-  for (const r of rows){
-    const bp = r?.[0];
-    if (!bp || !bpSet.has(bp)) continue;
-    if (dinoIsUntameable(bp)) return true;
-  }
-  return false;
-}
-
-// Leaflet style object for this entry on this map
-function styleForEntry(meta, color){
-  const isCave = !!meta?.isCave;
-  const isUntameable = !!meta?.isUntameable;
-
-  const style = {
+  const style={
     color,
-    weight: isCave ? 3 : 1,
-    opacity: 1,
-    fillColor: color,
-    fillOpacity: isCave ? 0.40 : 0.80,
+    weight:meta?.isCave?3:1,
+    opacity:1,
+    fillColor:color,
+    fillOpacity:meta?.isCave?0.4:0.8
   };
 
-  // Leaflet likes dashArray as a string; omit it entirely if not used
-  if (isUntameable) style.dashArray = "3 3";
+  if(meta?.isUntameable) style.dashArray="3 3";
 
   return style;
 }
 
-// ---------- DOM helpers (prevents "sel is null" crashes) ----------
-function byIdAny(...ids){
-  for (const id of ids){
-    const el = document.getElementById(id);
-    if (el) return el;
+/* ============================================================
+   WORLD REPLACEMENTS
+============================================================ */
+
+function normalizeBp(bp){
+  return String(bp || "").trim();
+}
+
+function getParentBp(bp){
+  const d = Global.dinos?.dinos?.[bp];
+  return normalizeBp(d?.p);
+}
+
+function ancestorDistance(childBp, ancestorBp){
+  childBp = normalizeBp(childBp);
+  ancestorBp = normalizeBp(ancestorBp);
+
+  if (!childBp || !ancestorBp) return null;
+  if (childBp === ancestorBp) return 0;
+
+  let cur = childBp;
+  let dist = 0;
+  const seen = new Set();
+
+  while (cur && !seen.has(cur) && dist < 200){
+    seen.add(cur);
+    cur = getParentBp(cur);
+    dist += 1;
+    if (cur === ancestorBp) return dist;
   }
+
   return null;
 }
-function getMainSelect(){ return byIdAny("mainSelect", "dinoSelect", "entrySelect", "spawnSelect", "selectMain"); }
-function getMapSelect(){ return byIdAny("mapSelect", "mapDropdown", "selectMap"); }
-function getModeToggle(){ return byIdAny("modeToggle", "viewToggle", "toggleMode"); }
-function getControlsToggle(){ return byIdAny("controlsToggle", "filterToggle", "toggleFilters"); }
-function getTopbar(){ return byIdAny("topbar", "controls", "filters"); }
 
-// ---------- misc helpers ----------
-function bpClass(bp){
-  return String(bp || "").split(".").pop();
+function worldRulesForCurrentMap(){
+  const all = Global.spawn?.worldReplacements || {};
+  return Array.isArray(all?.[State.mapId]) ? all[State.mapId] : [];
 }
 
-async function loadJSON(url){
-  const res = await fetch(`${url}?v=${ASSET_VER}`);
-  if (!res.ok) throw new Error(`Failed ${url} (${res.status})`);
-  return res.json();
+function worldOutputsForBp(bp){
+  bp = normalizeBp(bp);
+  if (!bp) return [[bp, 1.0]];
+
+  const rules = worldRulesForCurrentMap();
+
+  // 1) exact rules first
+  for (const r of rules){
+    if (r?.exact && normalizeBp(r?.from) === bp){
+      return Array.isArray(r?.outs) && r.outs.length ? r.outs : [[bp, 1.0]];
+    }
+  }
+
+  // 2) closest non-exact ancestor rule
+  let bestRule = null;
+  let bestDist = null;
+
+  for (const r of rules){
+    if (r?.exact) continue;
+
+    const fromBp = normalizeBp(r?.from);
+    if (!fromBp) continue;
+
+    const dist = ancestorDistance(bp, fromBp);
+    if (dist == null) continue;
+
+    if (bestRule === null || dist < bestDist){
+      bestRule = r;
+      bestDist = dist;
+    }
+  }
+
+  if (bestRule){
+    return Array.isArray(bestRule?.outs) && bestRule.outs.length
+      ? bestRule.outs
+      : [[bp, 1.0]];
+  }
+
+  // 3) no rule
+  return [[bp, 1.0]];
 }
 
-function labelsForDinoObj(d){
-  // your compact schema uses "n" often; fn/mn optional
-  const out = [];
-  if (d?.fn) out.push(d.fn);
-  if (d?.mn && d.mn !== d.fn) out.push(d.mn);
-  if (out.length) return out;
-  if (d?.n) return [d.n];
-  return [];
+function getDinoObjByBp(bp){
+  const dinos = Global.dinos?.dinos || {};
+  if (dinos[bp]) return dinos[bp];
+
+  const cls = bpClass(bp);
+  for (const [k, v] of Object.entries(dinos)){
+    if (bpClass(k) === cls) return v;
+  }
+
+  return null;
+}
+
+/* ============================================================
+   DRAW ENTRY
+============================================================ */
+
+function drawEntry(entryName, rarityScore){
+
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+
+  const entry = geom?.entries?.[entryName];
+  if (!entry) return;
+
+  for (const mgr of Object.values(entry.m || {})) {
+
+    const meta = {
+      isCave: !!mgr?.c,
+      isUntameable: !!mgr?.u,
+      md: mgr?.md || 0
+    };
+
+    const rarityLabel = finalRarityForManager(entryName, meta, rarityScore);
+    const color = rarityToColor(rarityLabel);
+    const style = styleForEntry(meta, color);
+
+    // boxes
+    for (const box of mgr.b || []) {
+      const [x, y, w, h] = box;
+      if (![x, y, w, h].every(Number.isFinite)) continue;
+
+      L.rectangle([[y, x], [y + h, x + w]], style)
+        .addTo(mapObj.layer);
+    }
+
+    // points
+    for (const pt of mgr.p || []) {
+      const [x, y] = pt;
+      if (![x, y].every(Number.isFinite)) continue;
+
+      L.circleMarker([y, x], {
+        radius: 3,
+        color: style.color,
+        weight: style.weight,
+        opacity: style.opacity,
+        fillColor: style.fillColor,
+        fillOpacity: style.fillOpacity,
+        dashArray: style.dashArray
+      }).addTo(mapObj.layer);
+    }
+  }
+}
+
+/* ============================================================
+   DRAW DINO
+============================================================ */
+
+function drawDino(name){
+
+  clearDraw();
+
+  const bps=State.nameToBps.get(name)||[];
+
+  const bpSet=new Set(bps);
+
+  const entries=new Set();
+
+  for(const bp of bps){
+    for(const e of State.dinoToEntries.get(bp)||[]){
+      entries.add(e);
+    }
+  }
+
+  for(const entry of entries){
+
+    const rarity=entryRarityForBps(entry,bpSet);
+
+    drawEntry(entry,rarity);
+  }
 }
 
 /* ============================================================
    INDEX BUILDER
 ============================================================ */
+
 function rebuildMapIndices(){
+
   const spawn = Global.spawn || {};
-  const dinos = Global.dinos?.dinos || {};
 
   State.mapEntries.clear();
   State.entryToDinos.clear();
@@ -300,332 +518,325 @@ function rebuildMapIndices(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const mapCode = mapMeta?.mapCode;
 
-  // map -> entries via spawn.entryMaps: entryName -> [mapCodes]
-  for (const [entryName, mapList] of Object.entries(spawn.entryMaps || {})){
-    if (Array.isArray(mapList) && mapCode && mapList.includes(mapCode)){
+  // 1) which entries are on this map?
+  for (const [entryName, maps] of Object.entries(spawn.entryMaps || {})){
+    if (Array.isArray(maps) && maps.includes(mapCode)){
       State.mapEntries.add(entryName);
     }
   }
 
-  // entries -> dinos + reverse
+  // 2) build entry -> dinos and dino -> entries USING WORLD REPLACEMENTS
   for (const entryName of State.mapEntries){
-    const entry = spawn.entries?.[entryName];
-    if (!entry) continue;
 
-    const rows = Array.isArray(entry.d) ? entry.d : [];
+    const rows = spawn.entries?.[entryName]?.d || [];
+    const finalBpsForEntry = new Set();
+
     for (const r of rows){
-      const bp = r?.[0];
-      if (!bp) continue;
+      const rawBp = normalizeBp(r?.[0]);
+      if (!rawBp) continue;
 
-      if (!State.entryToDinos.has(entryName)) State.entryToDinos.set(entryName, []);
-      State.entryToDinos.get(entryName).push(bp);
+      const outs = worldOutputsForBp(rawBp);
 
-      if (!State.dinoToEntries.has(bp)) State.dinoToEntries.set(bp, []);
-      State.dinoToEntries.get(bp).push(entryName);
-    }
-  }
+      for (const out of outs){
+        const finalBp = normalizeBp(out?.[0]);
+        const prob = Number(out?.[1] || 0);
 
-  // build name index (label -> [bps])
-  for (const bp of State.dinoToEntries.keys()){
-    const cls = bpClass(bp);
+        if (!finalBp || prob <= 0) continue;
 
-    let d = dinos[bp];
+        finalBpsForEntry.add(finalBp);
 
-    // fallback: match by class-name
-    if (!d){
-      for (const [k, v] of Object.entries(dinos)){
-        if (bpClass(k) === cls){
-          d = v;
-          break;
+        if (!State.dinoToEntries.has(finalBp)){
+          State.dinoToEntries.set(finalBp, []);
         }
+        State.dinoToEntries.get(finalBp).push(entryName);
       }
     }
 
+    State.entryToDinos.set(entryName, [...finalBpsForEntry]);
+  }
+
+  // 3) build name -> bp index from FINAL OUTPUT dinos
+  for (const bp of State.dinoToEntries.keys()){
+    const d = getDinoObjByBp(bp);
     if (!d) continue;
 
-    for (const name of labelsForDinoObj(d)){
-      if (!State.nameToBps.has(name)) State.nameToBps.set(name, []);
+    const labels = labelsForDinoObj(d);
+    for (const name of labels){
+      if (!State.nameToBps.has(name)){
+        State.nameToBps.set(name, []);
+      }
       State.nameToBps.get(name).push(bp);
     }
   }
 
-  // sort
-  for (const arr of State.nameToBps.values()) arr.sort();
+  // 4) sort / dedupe
+  for (const [bp, entries] of State.dinoToEntries.entries()){
+    State.dinoToEntries.set(bp, [...new Set(entries)].sort());
+  }
+
+  for (const [entry, bps] of State.entryToDinos.entries()){
+    State.entryToDinos.set(entry, [...new Set(bps)].sort());
+  }
+
+  for (const [name, bps] of State.nameToBps.entries()){
+    State.nameToBps.set(name, [...new Set(bps)].sort());
+  }
+
   State.names = [...State.nameToBps.keys()].sort((a,b)=>a.localeCompare(b));
   State.entryList = [...State.mapEntries].sort((a,b)=>a.localeCompare(b));
-
-  console.log("Map entries:", State.mapEntries.size);
-  console.log("Dinos:", State.names.length);
 }
 
 /* ============================================================
-   TOP BAR TOGGLE
+   DROPDOWN
 ============================================================ */
-function setupTopBarToggle(){
-  const btn = getControlsToggle();
-  const topbar = getTopbar();
-  if (!btn || !topbar) return;
-  btn.onclick = () => topbar.classList.toggle("show-controls");
+
+function mountFancyDropdown(native,host,placeholder){
+
+  native.style.display="none";
+  host.innerHTML="";
+
+  const wrap=document.createElement("div");
+  wrap.className="dd";
+
+  const btn=document.createElement("button");
+  btn.className="dd-btn";
+
+  const label=document.createElement("div");
+  label.className="dd-label";
+
+  const caret=document.createElement("div");
+  caret.className="dd-caret";
+  caret.textContent="▾";
+
+  btn.append(label,caret);
+
+  const panel=document.createElement("div");
+  panel.className="dd-panel";
+
+  const search=document.createElement("input");
+  search.className="dd-search";
+  search.placeholder=placeholder;
+
+  const list=document.createElement("div");
+  list.className="dd-list";
+
+  panel.append(search,list);
+  wrap.append(btn,panel);
+  host.appendChild(wrap);
+
+  function rebuild(){
+
+    list.innerHTML="";
+
+    for(const o of native.options){
+
+      if(!o.value) continue;
+
+      const row=document.createElement("div");
+
+      row.className="dd-item";
+      row.textContent=o.textContent;
+      row.dataset.search=normSearch(o.textContent);
+
+      row.onclick=()=>{
+        native.value=o.value;
+        native.dispatchEvent(new Event("change"));
+        close();
+      };
+
+      list.appendChild(row);
+    }
+  }
+
+  function sync(){
+    label.textContent=native.selectedOptions?.[0]?.textContent||"(Select)";
+  }
+
+  function open(){
+    wrap.classList.add("open");
+    search.focus();
+  }
+
+  function close(){
+    wrap.classList.remove("open");
+  }
+
+  btn.onclick=()=>{
+    wrap.classList.contains("open")?close():open();
+  };
+
+  search.oninput=()=>{
+    const q=normSearch(search.value);
+
+    list.querySelectorAll(".dd-item").forEach(el=>{
+      el.style.display=el.dataset.search.includes(q)?"":"none";
+    });
+  };
+
+  document.addEventListener("pointerdown",e=>{
+    if(!wrap.contains(e.target)) close();
+  });
+
+  native.addEventListener("change",sync);
+
+  rebuild();
+  sync();
 }
 
 /* ============================================================
-   LEAFLET
+   UI SETUP
 ============================================================ */
-let mapObj = null;
 
-function initMap(image, size=[2048,2048]){
-  const bounds = [[0,0],[size[1], size[0]]];
-  const map = L.map("map", { crs: L.CRS.Simple, minZoom: -3, maxZoom: 2 });
-  const overlay = L.imageOverlay(image, bounds).addTo(map);
-  const layer = L.layerGroup().addTo(map);
-  map.fitBounds(bounds);
-  return { map, overlay, layer, bounds };
-}
+function setupUI(){
 
-function clearDraw(){
-  if (mapObj) mapObj.layer.clearLayers();
-}
+  /* SOURCE SELECT */
 
-/* ============================================================
-   DRAW
-============================================================ */
-function iterEntryGeometry(entryName){
-  const mapMeta = MAPS.find(m => m.id === State.mapId);
-  const geom = Global.mapGeom.get(mapMeta?.geomShort);
-  const entry = geom?.entries?.[entryName];
-  if (!entry) return [];
+  UI.sourceSelect.innerHTML = "";
 
-  const result = [];
+  for(const s of SOURCES){
 
-  const managers = entry.m || {};
-  for (const [mgrName, mgr] of Object.entries(managers)){
-
-    // schema2 manager flags (c/u) + params (md/ii)
-    const meta = {
-      manager: mgrName,
-      isCave: !!mgr?.c,
-      isUntameable: !!mgr?.u,
-      md: mgr?.md ?? null,
-      ii: mgr?.ii ?? null,
-    };
-
-    if (Array.isArray(mgr.b)){
-      for (const box of mgr.b){
-        result.push({ type:"box", data: box, meta });
-      }
-    }
-
-    if (Array.isArray(mgr.p)){
-      for (const pt of mgr.p){
-        result.push({ type:"point", data: pt, meta });
-      }
-    }
-  }
-
-  return result;
-}
-
-function entryTotalExpected(entryName){
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
-  let sum = 0;
-  for (const r of rows){
-    const gw = Number(r?.[1] || 0);
-    const sm = Number(r?.[2] || 1);
-    sum += gw * sm;
-  }
-  return sum;
-}
-
-function entryRarityForBps(entryName, bpSet){
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
-  const total = entryTotalExpected(entryName);
-  if (total <= 0) return 0;
-
-  let rarity = 0;
-
-  for (const r of rows){
-    const bp  = r?.[0];
-    if (!bp || !bpSet.has(bp)) continue;
-
-    const gw  = Number(r?.[1] || 0);
-    const sm  = Number(r?.[2] || 1);
-    const lim = Number(r?.[3] || 1);
-
-    const expected = gw * sm;          // E
-    const share = expected / total;    // S
-    rarity += share * lim;             // R
-  }
-
-  return rarity; // typically small decimals
-}
-
-function drawEntry(entryName, clearFirst = true, scoreOverride = null, dinoUntameable = false){
-
-  if (clearFirst) clearDraw();
-
-  const score = Number(scoreOverride ?? 0);
-
-  const geo = iterEntryGeometry(entryName);
-
-  for (const g of geo){
-
-    const meta = {
-      ...g.meta,
-      isUntameable: !!g.meta?.isUntameable || !!dinoUntameable
-    };
-
-    const rarityInfo = finalRarityForManager(entryName, meta, score);
-
-    const color = rarityToColor(rarityInfo.finalLabel);
-
-    const style = styleForEntry(meta, color);
-
-    if (g.type === "box"){
-      const [x,y,w,h] = g.data;
-      if (![x,y,w,h].every(Number.isFinite)) continue;
-
-      const rect = L.rectangle([[y,x],[y+h,x+w]], style).addTo(mapObj.layer);
-      rect.bindTooltip(buildTooltip(entryName, meta, rarityInfo));
-    }
-
-    if (g.type === "point"){
-      const [x,y] = g.data;
-      if (![x,y].every(Number.isFinite)) continue;
-
-      const pt = L.circleMarker([y,x], { radius:3, ...style }).addTo(mapObj.layer);
-      pt.bindTooltip(buildTooltip(entryName, meta, rarityInfo));
-    }
-  }
-}
-
-function drawDino(name){
-  clearDraw();
-
-  const bps = State.nameToBps.get(name) || [];
-  if (!bps.length) return;
-
-  const bpSet = new Set(bps);
-
-  // gather all entries for these bp(s)
-  const entries = new Set();
-  for (const bp of bps){
-    for (const e of (State.dinoToEntries.get(bp) || [])){
-      entries.add(e);
-    }
-  }
-
-  for (const entryName of entries){
-    const rarity = entryRarityForBps(entryName, bpSet);
-
-    // only mark untameable if THIS entry contains an untameable BP among the selected ones
-    const entryDinoUntameable = entryHasUntameableSelectedBp(entryName, bpSet);
-
-    drawEntry(entryName, false, rarity, entryDinoUntameable);
-  }
-}
-
-/* ============================================================
-   UI
-============================================================ */
-function fillMapSelect(){
-  const sel = getMapSelect();
-  if (!sel){
-    console.error("Map select element not found. Expected id='mapSelect' (or fallback ids).");
-    return;
-  }
-
-  sel.innerHTML = "";
-  for (const m of MAPS){
     const o = document.createElement("option");
-    o.value = m.id;
-    o.textContent = m.id;
-    sel.appendChild(o);
+
+    o.value = s.id;
+    o.textContent = s.label;
+
+    UI.sourceSelect.appendChild(o);
   }
 
-  sel.value = State.mapId;
-  sel.onchange = async () => {
-    State.mapId = sel.value;
+  UI.sourceSelect.value = "official";
+
+  UI.sourceSelect.onchange = async ()=>{
+
+    // later this will swap data packs
+    console.log("Source changed:", UI.sourceSelect.value);
+
     await onMapChanged();
   };
-}
 
-function fillMainSelect(){
-  const sel = getMainSelect();
-  if (!sel){
-    console.error("Main select element not found. Expected id='mainSelect' (or fallback ids).");
-    return;
+  mountFancyDropdown(
+    UI.sourceSelect,
+    UI.sourceFancy,
+    "Search sources..."
+  );
+
+  UI.mapSelect.innerHTML="";
+
+  for(const m of MAPS){
+
+    const o=document.createElement("option");
+
+    o.value=m.id;
+    o.textContent=m.id;
+
+    UI.mapSelect.appendChild(o);
   }
 
-  sel.innerHTML = "";
-  const list = (State.mode === "dino") ? State.names : State.entryList;
+  UI.mapSelect.value=State.mapId;
 
-  for (const v of list){
-    const o = document.createElement("option");
-    o.value = v;
-    o.textContent = v;
-    sel.appendChild(o);
-  }
+  UI.mapSelect.onchange=async()=>{
+    State.mapId=UI.mapSelect.value;
+    await onMapChanged();
+  };
 
-  State.selection = list[0] || "";
-  sel.value = State.selection;
+  mountFancyDropdown(UI.mapSelect,UI.mapFancy,"Search maps...");
 
-  sel.onchange = () => {
-    State.selection = sel.value;
+  rebuildDinoSelect();
+
+  UI.modeToggle.onclick=()=>{
+    State.mode=State.mode==="dino"?"entry":"dino";
+    rebuildDinoSelect();
     render();
+  };
+
+  UI.controlsToggle.onclick=()=>{
+    UI.topbar.classList.toggle("show-controls");
   };
 }
 
+function rebuildDinoSelect(){
+
+  const list=State.mode==="dino"?State.names:State.entryList;
+
+  UI.dinoSelect.innerHTML="";
+
+  for(const v of list){
+
+    const o=document.createElement("option");
+
+    o.value=v;
+    o.textContent=v;
+
+    UI.dinoSelect.appendChild(o);
+  }
+
+  State.selection=list[0]||"";
+
+  UI.dinoSelect.value=State.selection;
+
+  UI.dinoSelect.onchange=()=>{
+    State.selection=UI.dinoSelect.value;
+    render();
+  };
+
+  mountFancyDropdown(
+    UI.dinoSelect,
+    UI.dinoFancy,
+    State.mode==="dino"?"Search dinos...":"Search spawn entries..."
+  );
+}
+
+/* ============================================================
+   RENDER
+============================================================ */
+
 function render(){
-  if (!State.selection) return;
-  if (State.mode === "dino") drawDino(State.selection);
-  else drawEntry(State.selection);
+
+  if(!State.selection) return;
+
+  if(State.mode==="dino")
+    drawDino(State.selection);
 }
 
 /* ============================================================
    MAP CHANGE
 ============================================================ */
+
 async function onMapChanged(){
-  const mapMeta = MAPS.find(m => m.id === State.mapId);
 
-  // load geometry file using geomShort (filename prefix)
-  const geom = await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
-  Global.mapGeom.set(mapMeta.geomShort, geom);
+  const mapMeta=MAPS.find(m=>m.id===State.mapId);
 
-  const img = geom.image || `${PATHS.mapsDir}/${mapMeta.image}`;
+  const geom=await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
 
-  if (!mapObj) mapObj = initMap(img, geom.size || [2048,2048]);
-  else mapObj.overlay.setUrl(img);
+  Global.mapGeom.set(mapMeta.geomShort,geom);
+
+  const img=geom.image||`${PATHS.mapsDir}/${mapMeta.image}`;
+
+  if(!mapObj)
+    mapObj=initMap(img,geom.size||[2048,2048]);
+  else
+    mapObj.overlay.setUrl(img);
 
   rebuildMapIndices();
-  fillMainSelect();
+  rebuildDinoSelect();
+
   render();
 }
 
 /* ============================================================
    BOOT
 ============================================================ */
+
 async function boot(){
-  Global.spawn = await loadJSON(PATHS.spawnGlobal);
-  Global.dinos = await loadJSON(PATHS.dinoGlobal);
 
-  setupTopBarToggle();
-  fillMapSelect();
+  Global.spawn=await loadJSON(PATHS.spawnGlobal);
+  Global.dinos=await loadJSON(PATHS.dinoGlobal);
 
-  const modeBtn = getModeToggle();
-  if (modeBtn){
-    modeBtn.onclick = () => {
-      State.mode = (State.mode === "dino") ? "entry" : "dino";
-      fillMainSelect();
-      render();
-    };
-  } else {
-    console.warn("Mode toggle button not found (expected id='modeToggle' or fallback).");
-  }
+  setupUI();
 
   await onMapChanged();
 }
 
-boot().catch(err => {
-  console.error("BOOT FAILED:", err);
-  alert(err.message || String(err));
+boot().catch(e=>{
+  console.error(e);
+  alert(e.message||e);
 });
