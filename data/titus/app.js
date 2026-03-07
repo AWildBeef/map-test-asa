@@ -25,7 +25,17 @@ const MAPS = [
   { id:"Aberration", geomShort:"Aberration", mapCode:"AB", image:"aberration.webp" },
   { id:"Extinction", geomShort:"Extinction", mapCode:"EXT", image:"extinction.webp" },
   { id:"Lost Colony", geomShort:"LostColony", mapCode:"LC", image:"lostcolony.webp" },
-  { id:"Astraeos", geomShort:"Astraeos", mapCode:"AST", image:"astraeos.webp" }
+  {
+    id:"Astraeos",
+    geomShort:"Astraeos",
+    mapCode:"AST",
+    image:"astraeos.webp",
+    backgrounds: [
+      { id:"hand", label:"In Game", url:"maps/Astraeos_IngameMap.webp" },
+      { id:"sat",  label:"Satellite", url:"maps/astraeos.webp" }
+    ],
+    defaultBg:"sat"
+  }
 ];
 
 
@@ -57,6 +67,21 @@ const State = {
   entryList:[]
 };
 
+const entryVisibility = {};
+
+let dockControl = null;
+let dockState = { mapMeta: null, cfg: null };
+
+const poiVisibility = {
+  tributeTerminals: true,
+  supplyCrates: false,
+  playerStarts: false,
+  explorerNotes: false,
+  missions: false
+};
+
+let showRarityLegend = false;
+
 /* ============================================================
    UI
 ============================================================ */
@@ -77,6 +102,24 @@ const UI = {
   topbar:document.getElementById("topbar")
 };
 
+function anyPoisVisible(){
+  return Object.values(poiVisibility).some(Boolean);
+}
+
+function syncModeButton(){
+  if (!UI.modeToggle) return;
+  UI.modeToggle.textContent = State.mode === "dino" ? "Dino View" : "Spawn View";
+}
+
+function entryVisibilityKey(dinoKey, idx){
+  return `${State.mapId}::${State.mode}::${dinoKey}::${idx}`;
+}
+
+function isEntryVisible(dinoKey, idx){
+  const key = entryVisibilityKey(dinoKey, idx);
+  return entryVisibility[key] ?? true;
+}
+
 /* ============================================================
    UTILS
 ============================================================ */
@@ -94,19 +137,1504 @@ async function loadJSON(url){
 function bpClass(bp){
   return String(bp||"").split(".").pop();
 }
+/* ============================================================
+   INFO PANEL SYSTEM
+============================================================ */
+
+function fmt(v){
+  const n = Number(v);
+  if (!Number.isFinite(n)) return "";
+  let s = n.toFixed(6);
+  s = s.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+  if (s === "-0") s = "0";
+  return s;
+}
+
+function formatSpawnChances(chances) {
+  if (chances == null) return "";
+
+  if (Array.isArray(chances)) {
+    const parts = chances
+      .map(n => Number(n))
+      .filter(n => Number.isFinite(n));
+    return parts.length
+      ? `Spawn chances: ${parts.map(n => `${fmt(n)}%`).join(", ")}`
+      : "";
+  }
+
+  if (typeof chances === "string") {
+    const parts = chances
+      .split(",")
+      .map(s => s.trim().replace(/%$/, ""))
+      .filter(Boolean)
+      .map(s => Number(s))
+      .filter(n => Number.isFinite(n));
+
+    return parts.length
+      ? `Spawn chances: ${parts.map(n => `${fmt(n)}%`).join(", ")}`
+      : "";
+  }
+
+  return "";
+}
+
+function showCopiedBubble(target){
+  const bubble = document.createElement("div");
+  bubble.className = "copy-bubble";
+  bubble.textContent = "Copied!";
+
+  document.body.appendChild(bubble);
+
+  const r = target.getBoundingClientRect();
+  bubble.style.left = `${r.right + 6}px`;
+  bubble.style.top = `${r.top + r.height / 2 - 10}px`;
+
+  requestAnimationFrame(() => {
+    bubble.classList.add("show");
+  });
+
+  setTimeout(() => {
+    bubble.classList.remove("show");
+    setTimeout(() => bubble.remove(), 200);
+  }, 900);
+}
+
+let infoPanelState = {
+  dinoTab: "spawns",
+  entryTab: "dinos"
+};
+
+function escapeHtml(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function escapeAttr(s){
+  return escapeHtml(s).replace(/"/g, "&quot;");
+}
+
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch{
+    const ta = document.createElement("textarea");
+    ta.value = String(text || "");
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
+}
+
+function installCopyDelegation(){
+  document.addEventListener("click", async (e) => {
+    const el = e.target.closest(".copy-on-click");
+    if (!el) return;
+
+    const text = el.dataset.copy ?? el.textContent ?? "";
+    await copyText(String(text).trim());
+    showCopiedBubble(el);
+  });
+}
+
+function ensureInfoPanel(){
+  let panel = document.getElementById("dinoInfoPanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "dinoInfoPanel";
+  panel.className = "floating-panel";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">Info</div>
+      <div class="fp-actions">
+        <button type="button" class="fp-btn" data-action="min" title="Collapse">⌄</button>
+        <button type="button" class="fp-btn" data-action="hide" title="Hide">✕</button>
+      </div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  installPanelTitleFitter(panel, {
+    minPx: 11,
+    maxPx: 20
+  });
+  
+  panel.style.display = "";
+  panel.dataset.hidden = "0";
+
+  const body = panel.querySelector(".fp-body");
+
+  // start collapsed
+  body.style.display = "none";
+  panel.classList.add("collapsed");
+
+  panel.querySelector('[data-action="min"]').onclick = () => {
+    const closed = body.style.display === "none";
+    body.style.display = closed ? "" : "none";
+    panel.classList.toggle("collapsed", !closed);
+  };
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+  };
+
+  panel.style.position = "absolute";
+  panel.style.left = "14px";
+  panel.style.top = "14px";
+  panel.style.zIndex = "800";
+
+  return panel;
+}
+
+function setInfoPanelTitle(text){
+  const panel = ensureInfoPanel();
+  const t = panel.querySelector(".fp-title");
+  if (t) t.textContent = text || "Info";
+}
+
+function setInfoPanelHTML(html){
+  const panel = ensureInfoPanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+  body.innerHTML = html || `<div style="color:var(--muted)">No data.</div>`;
+  panel.style.display = "";
+}
+
+function renderInfoPanelBodyEmpty(){
+  setInfoPanelTitle("Info");
+  setInfoPanelHTML(`<div style="color:var(--muted)">Select something to see details.</div>`);
+}
+
+function renderCopyField(label, value){
+  const v = String(value || "");
+  return `
+    <div class="info-subtitle">${escapeHtml(label)}</div>
+    <div class="info-mono copy-on-click" data-copy="${escapeAttr(v)}">
+      ${escapeHtml(v || "(none)")}
+    </div>
+  `;
+}
+
+function renderSection(title, innerHtml){
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">${escapeHtml(title)}</div>
+      ${innerHtml || ""}
+    </div>
+  `;
+}
+
+function renderTabs({ tabs, activeId, dataAttr }){
+  return `
+    <div class="fp-tabs">
+      ${tabs.map(t => `
+        <button type="button"
+                class="fp-tab ${activeId === t.id ? "is-on" : ""}"
+                ${dataAttr}="${escapeAttr(t.id)}">
+          ${escapeHtml(t.label)}
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderPages({ tabs, activeId, renderPage, pageClass = "" }){
+  const idx = Math.max(0, tabs.findIndex(t => t.id === activeId));
+  return `
+    <div class="fp-pages ${pageClass}">
+      <div class="fp-track" style="transform:translateX(${-idx * 100}%);">
+        ${tabs.map(t => `
+          <div class="fp-page" data-page="${escapeAttr(t.id)}">
+            ${renderPage(t.id)}
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function wireTabs(container, { tabs, activeId, dataAttr, onChange }){
+  container.querySelectorAll(`[${dataAttr}]`).forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.getAttribute(dataAttr);
+      if (!tabs.some(t => t.id === id)) return;
+      onChange(id);
+    };
+  });
+}
 
 function labelsForDinoObj(d){
-
   const out = new Set();
+  if (!d) return [];
 
-  if(!d) return [];
-
-  if(d.n) out.add(String(d.n));
-  if(d.fn) out.add(String(d.fn));
-  if(d.mn) out.add(String(d.mn));
+  if (d.n) out.add(String(d.n));
+  if (d.fn) out.add(String(d.fn));
+  if (d.mn) out.add(String(d.mn));
 
   return [...out];
 }
+
+function cleanName(s){
+  const x = String(s ?? "").trim();
+  return x.length ? x : "";
+}
+
+function otherSexNameForSelected(d, selectedLabel){
+  const f = cleanName(d?.fn);
+  const m = cleanName(d?.mn);
+  const sel = cleanName(selectedLabel);
+
+  if (!sel) return "";
+  if (f && sel.toLowerCase() === f.toLowerCase()) return m;
+  if (m && sel.toLowerCase() === m.toLowerCase()) return f;
+
+  if (f && m && f.toLowerCase() !== m.toLowerCase()) return `${f} / ${m}`;
+  return "";
+}
+
+function isTrue01(v){
+  return v === 1 || v === "1" || v === true;
+}
+
+function fmtNum(v, decimals = 0){
+  if (v === null || v === undefined || v === "") return null;
+  const n = Number(v);
+  if (!Number.isFinite(n)) return null;
+  return decimals > 0 ? n.toFixed(decimals) : String(Math.round(n));
+}
+
+
+/* ============================================================
+   DOCK / TOOLBAR
+============================================================ */
+
+function isPanelVisible(id){
+  const el = document.getElementById(id);
+  if (!el) return false;
+  return el.style.display !== "none";
+}
+
+function setPanelVisible(id, show){
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.style.display = show ? "" : "none";
+  el.dataset.hidden = show ? "0" : "1";
+}
+
+function togglePanel(id){
+  setPanelVisible(id, !isPanelVisible(id));
+  updateDockToggles();
+}
+
+function updateDockToggles(){
+  const dockEl = document.querySelector(".map-dock");
+  if (!dockEl) return;
+
+  dockEl.querySelectorAll("[data-toggle-panel]").forEach(btn => {
+    const id = btn.getAttribute("data-toggle-panel");
+    const on = isPanelVisible(id);
+    btn.classList.toggle("is-on", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+}
+
+function setLegendOpen(open){
+  showRarityLegend = !!open;
+
+  const el = document.getElementById("rarityLegend");
+  if (!el) return;
+
+  el.style.display = showRarityLegend ? "" : "none";
+}
+
+function setMapBackgroundFromDock(btn){
+  const mapMeta = dockState.mapMeta;
+  if (!mapMeta?.backgrounds?.length || !mapObj?.overlay) return;
+
+  const bgs = mapMeta.backgrounds;
+  const cur = btn.dataset.bgIndex ? Number(btn.dataset.bgIndex) : 0;
+  const next = (cur + 1) % bgs.length;
+
+  btn.dataset.bgIndex = String(next);
+  mapObj.overlay.setUrl(bgs[next].url);
+  btn.title = `Background: ${bgs[next].label || bgs[next].id || (next + 1)} (tap to cycle)`;
+}
+
+function ensureDockControl(map){
+  if (dockControl) return;
+
+  const Dock = L.Control.extend({
+    options: { position: "bottomleft" },
+
+    onAdd() {
+      const container = L.DomUtil.create("div", "leaflet-control leaflet-bar map-dock");
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+      return container;
+    }
+  });
+
+  dockControl = new Dock();
+  map.addControl(dockControl);
+}
+
+function renderDock(){
+  const container = document.querySelector(".map-dock");
+  if (!container) return;
+
+  const mapMeta = dockState.mapMeta;
+  const cfg = dockState.cfg || {};
+  const isAstraeos = !!(mapMeta?.backgrounds?.length);
+
+  container.innerHTML = "";
+  container.style.display = "flex";
+  container.style.overflow = "hidden";
+
+  const mkBtn = ({ title, icon, onClick, togglePanelId = null, extraClass = "" }) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `dock-btn ${extraClass}`.trim();
+    btn.title = title;
+    btn.setAttribute("aria-label", title);
+
+    if (togglePanelId) {
+      btn.setAttribute("data-toggle-panel", togglePanelId);
+      btn.setAttribute("aria-pressed", "false");
+    }
+
+    btn.innerHTML = icon;
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick?.(btn);
+      if (document.activeElement?.blur) document.activeElement.blur();
+    });
+
+    container.appendChild(btn);
+    return btn;
+  };
+
+  // Astraeos background swap
+  if (isAstraeos) {
+    const bgs = mapMeta.backgrounds;
+    const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
+    const idx = Math.max(0, bgs.indexOf(def));
+
+    if (mapObj?.overlay) {
+      mapObj.overlay.setUrl(bgs[idx].url);
+    }
+
+    const bgBtn = mkBtn({
+      title: `Background: ${def.label || def.id || (idx + 1)} (tap to cycle)`,
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
+                fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linejoin="round"/>
+        </svg>
+      `,
+      onClick: (btn) => setMapBackgroundFromDock(btn)
+    });
+
+    bgBtn.dataset.bgIndex = String(idx);
+  } else {
+    if (cfg?.image && mapObj?.overlay) {
+      mapObj.overlay.setUrl(cfg.image);
+    }
+  }
+
+  // Dino info panel toggle
+  mkBtn({
+    title: "Toggle Dino Info",
+    icon: `
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    `,
+    togglePanelId: "dinoInfoPanel",
+    onClick: () => togglePanel("dinoInfoPanel")
+  });
+
+  // POI toggle
+  mkBtn({
+    title: "Toggle markers menu",
+    icon: `
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"
+              fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="12" cy="10" r="2.5" fill="currentColor"/>
+      </svg>
+    `,
+    togglePanelId: "poiPanel",
+    onClick: () => togglePoiPanel()
+  });
+
+  // Rarity legend toggle
+  mkBtn({
+    title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
+    icon: `
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="7.5" r="1.2" fill="currentColor"/>
+      </svg>
+    `,
+    onClick: (btn) => {
+      setLegendOpen(!showRarityLegend);
+      btn.title = showRarityLegend ? "Hide rarity legend" : "Show rarity legend";
+      btn.classList.toggle("is-on", showRarityLegend);
+    },
+    extraClass: showRarityLegend ? "is-on" : ""
+  });
+
+  updateDockToggles();
+}
+
+function ensurePoiPanel(){
+  let panel = document.getElementById("poiPanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "poiPanel";
+  panel.className = "floating-panel floating-panel--small";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">Markers</div>
+      <div class="fp-actions">
+        <button type="button" class="fp-btn" data-action="hide" title="Hide">✕</button>
+      </div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  panel.style.position = "absolute";
+  panel.style.left = "14px";
+  panel.style.bottom = "90px";
+  panel.style.zIndex = "800";
+  panel.style.display = "none";
+  panel.dataset.hidden = "1";
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+    updateDockToggles();
+  };
+
+  return panel;
+}
+
+function renderPoiPanel(){
+  const panel = ensurePoiPanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const pois = geom?.pois || {};
+
+  const rows = [
+    { key: "tributeTerminals", label: "Tribute Terminals", count: (pois.tributeTerminals || []).length },
+    { key: "supplyCrates", label: "Supply Crates", count: (pois.supplyCrates || []).length },
+    { key: "playerStarts", label: "Player Starts", count: (pois.playerStarts || []).length },
+    { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
+    { key: "missions", label: "Missions", count: (pois.missions || []).length }
+  ].filter(r => r.count > 0);
+
+  body.innerHTML = rows.length ? rows.map(r => `
+    <label class="fp-row">
+      <input type="checkbox" data-poi-toggle="${escapeAttr(r.key)}" ${poiVisibility[r.key] ? "checked" : ""}>
+      <span>${escapeHtml(r.label)} (${r.count})</span>
+    </label>
+  `).join("") : `
+    <div style="color:var(--muted)">No markers on this map.</div>
+  `;
+
+  body.querySelectorAll("[data-poi-toggle]").forEach(chk => {
+    chk.onchange = () => {
+      const key = chk.dataset.poiToggle;
+      poiVisibility[key] = chk.checked;
+      drawPois();
+    };
+  });
+}
+
+function togglePoiPanel(){
+  const panel = ensurePoiPanel();
+
+  const show = panel.style.display === "none";
+
+  if (show){
+    renderPoiPanel();
+    panel.style.display = "";
+    panel.dataset.hidden = "0";
+  } else {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  }
+
+  updateDockToggles();
+}
+/* ============================================================
+   STATS TABLE
+============================================================ */
+const ARK_DEFAULT_MULT = {
+  Health:  { iw: 1, it: 0.2, ta: 0.14, tm: 0.44 },
+  Stamina: { iw: 1, it: 1,   ta: 1,    tm: 1 },
+  Oxygen:  { iw: 1, it: 1,   ta: 1,    tm: 1 },
+  Food:    { iw: 1, it: 1,   ta: 1,    tm: 1 },
+  Water:   { iw: 1, it: 1,   ta: 1,    tm: 1 },
+  Weight:  { iw: 1, it: 1,   ta: 1,    tm: 1 },
+  MeleeDamageMultiplier:   { iw: 1, it: 0.17, ta: 0.14, tm: 0.44 },
+  SpeedMultiplier:         { iw: 1, it: 1,    ta: 1,    tm: 1 },
+  CraftingSpeedMultiplier: { iw: 1, it: 1,    ta: 1,    tm: 1 },
+};
+
+
+const STAT_COLS = [
+  { key: "base", label: "Base" },
+  { key: "iw",   label: "Wild" },
+  { key: "it",   label: "Tamed" },
+  { key: "ta",   label: "Add" },
+  { key: "tm",   label: "Mult" },
+];
+
+const STAT_ORDER = [
+  "Health",
+  "Stamina",
+  "Oxygen",
+  "Food",
+  "Water",
+  "Weight",
+  "MeleeDamageMultiplier",
+  "SpeedMultiplier",
+  "CraftingSpeedMultiplier",
+];
+
+const STAT_LABEL = {
+  Health: "Health",
+  Stamina: "Stamina",
+  Oxygen: "Oxygen",
+  Food: "Food",
+  Water: "Water",
+  Weight: "Weight",
+  MeleeDamageMultiplier: "Melee",
+  SpeedMultiplier: "Speed",
+  CraftingSpeedMultiplier: "Craft",
+};
+
+function applyServerMultiplier(statKey, colKey, value) {
+  if (value == null) return value;
+
+  const mult = ARK_DEFAULT_MULT?.[statKey]?.[colKey] ?? 1;
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+
+  return n * mult;
+}
+
+function computeDisplayValue(statKey, colKey, data, statsObj) {
+  const raw = data[colKey];
+
+  if (raw == null || raw === "") return null;
+
+  const v = Number(raw);
+  if (!Number.isFinite(v)) return null;
+
+  if (v < 0) {
+    return v;
+  }
+
+  const base = Number(data.base);
+  const mult = ARK_DEFAULT_MULT?.[statKey]?.[colKey] ?? 1;
+  const effectiveMult = (v < 0) ? 1 : mult;
+
+  if (colKey === "iw") {
+    if (!Number.isFinite(base)) return null;
+    return base * (v * effectiveMult);
+  }
+
+  if (colKey === "it") {
+    return v * effectiveMult;
+  }
+
+  if (colKey === "ta") {
+    return v * effectiveMult;
+  }
+
+  if (colKey === "tm") {
+    return v * effectiveMult;
+  }
+
+  return v;
+}
+
+function unpackStat(arr){
+  const a = Array.isArray(arr) ? arr : [];
+  return {
+    base: a.length > 0 ? a[0] : null,
+    iw:   a.length > 1 ? a[1] : null,
+    it:   a.length > 2 ? a[2] : null,
+    ta:   a.length > 3 ? a[3] : null,
+    tm:   a.length > 4 ? a[4] : null,
+  };
+}
+
+function fmtStatNum(v){
+  if (v == null || v === "") return "";
+  const n = Number(v);
+  if (!Number.isFinite(n)) return "";
+
+  const abs = Math.abs(n);
+  if (abs > 0 && abs < 0.001) return n.toPrecision(3);
+
+  let s = n.toFixed(6);
+  s = s.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+  if (s === "-0") s = "0";
+  return s;
+}
+
+function isMultiplierStat(statKey){
+  return statKey === "MeleeDamageMultiplier"
+      || statKey === "SpeedMultiplier"
+      || statKey === "CraftingSpeedMultiplier";
+}
+
+function fmtBaseCell(statKey, v){
+  if (isMultiplierStat(statKey)) {
+    const n = Number(v);
+    if (!Number.isFinite(n)) return "";
+    return `${fmtStatNum(n * 100)}%`;
+  }
+  return fmtStatNum(v);
+}
+
+function renderStatsTable(statsObj) {
+  if (!statsObj || typeof statsObj !== "object") {
+    return `<div style="color:var(--muted)">No stats found.</div>`;
+  }
+
+  const keys = [];
+  for (const k of STAT_ORDER) if (k in statsObj) keys.push(k);
+  for (const k of Object.keys(statsObj)) {
+    if (k.endsWith("_TBM")) continue;
+    if (!keys.includes(k)) keys.push(k);
+  }
+
+  if (!keys.length) {
+    return `<div style="color:var(--muted)">No stats found.</div>`;
+  }
+
+  const header = `
+    <div class="statgrid">
+      <div class="statgrid-head">
+        <div class="statgrid-th">Stat</div>
+        ${STAT_COLS.map(c => `<div class="statgrid-th num">${escapeHtml(c.label)}</div>`).join("")}
+      </div>
+  `;
+
+  const rows = keys.map(statKey => {
+    const label = STAT_LABEL[statKey] || statKey;
+    const data = unpackStat(statsObj[statKey]);
+
+    const cells = STAT_COLS.map(c => {
+      let txt = "";
+
+      if (c.key === "base") {
+        txt = fmtBaseCell(statKey, data.base);
+      }
+      else if (c.key === "tm" && statKey === "Health" && statsObj.Health_TBM != null) {
+        const pct = fmtStatNum(Number(statsObj.Health_TBM) * 100);
+        txt = `TBHM: ${pct}%`;
+      }
+      else {
+        const eff = computeDisplayValue(statKey, c.key, data, statsObj);
+
+        if (eff == null) {
+          txt = "";
+        }
+        else if (c.key === "iw") {
+          txt = fmtStatNum(eff);
+        }
+        else if (c.key === "ta") {
+          if (isMultiplierStat(statKey)) {
+            txt = `${fmtStatNum(eff * 100)}%`;
+          } else {
+            txt = fmtStatNum(eff);
+          }
+        }
+        else {
+          txt = `${fmtStatNum(eff * 100)}%`;
+        }
+      }
+
+      const muted = txt ? "" : " muted";
+      return `<div class="statgrid-td num${muted}">${escapeHtml(txt || "--")}</div>`;
+    }).join("");
+
+    return `
+      <div class="statgrid-row">
+        <div class="statgrid-td statname">${escapeHtml(label)}</div>
+        ${cells}
+      </div>
+    `;
+  }).join("");
+
+  return header + rows + `</div>`;
+}
+/* ============================================================
+   ENTRY META / ROWS
+============================================================ */
+
+function buildEntryMetaLines(entry){
+  const lines = [];
+
+  const gw  = entry?.groupWeight ?? entry?.group_weight;
+  const lim = entry?.spawnLimit ?? entry?.spawn_limit;
+  const chances = entry?.spawnChances ?? entry?.spawn_chances;
+
+  if (gw != null) lines.push(`Entry Weight: ${fmt(gw)}`);
+
+  const chancesLine = formatSpawnChances(chances);
+  if (chancesLine) lines.push(chancesLine);
+
+  if (lim != null) lines.push(`Max % To Allow: ${fmt(Number(lim) * 100)}%`);
+
+  return lines;
+}
+
+function renderEntryRow(entry, dinoKey, idx){
+  const key = entryVisibilityKey(dinoKey, idx);
+  const visible = entryVisibility[key] ?? true;
+
+  const entryClass = entry.entryClass || entry.entry || `Entry ${idx + 1}`;
+  const metaLines = buildEntryMetaLines(entry);
+
+  return `
+    <label class="entry-row">
+      <input
+        type="checkbox"
+        data-entry-toggle="1"
+        data-key="${escapeAttr(key)}"
+        ${visible ? "checked" : ""}
+      >
+      <div class="entry-main">
+        <div class="entry-name">${escapeHtml(entryClass)}</div>
+        <div class="entry-meta">
+          ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+        </div>
+      </div>
+    </label>
+  `;
+}
+
+function renderEntryDinoBlock(dinoObj, rowsForThisDino){
+  const displayName = dinoObj?.n || "(Unknown)";
+  const bp = dinoObj?.p || dinoObj?.bp || dinoObj?.blueprint || "";
+  const nameTag = dinoObj?.t || "";
+
+  const entryLinesHtml = rowsForThisDino.map((r) => {
+    const e = r.entry;
+    const metaLines = buildEntryMetaLines(e);
+
+    return `
+      <div class="entry-meta">
+        ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="info-section">
+      <div class="info-row">
+        <span class="info-label">${escapeHtml(displayName)}</span>
+      </div>
+
+      ${bp ? `
+        <div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}">
+          ${escapeHtml(bp)}
+        </div>
+      ` : ""}
+
+      ${nameTag ? `
+        <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}">
+          ${escapeHtml(nameTag)}
+        </div>
+      ` : ""}
+
+      ${entryLinesHtml}
+    </div>
+  `;
+}
+
+/* ============================================================
+   PANEL DATA HELPERS
+============================================================ */
+
+function mountPanelSwipe(container, tabs, getActive, setActive){
+  if (!container) return;
+
+  const order = tabs.map(t => t.id);
+
+  let sx = 0;
+  let sy = 0;
+  let tracking = false;
+  let decided = false;
+  let isHorizontal = false;
+
+  const EDGE_GUARD_PX = 22;
+  const SWIPE_MIN_PX = 40;
+  const SWIPE_MAX_Y = 60;
+
+  container.addEventListener("touchstart", (e) => {
+    if (!e.touches || e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+    if (t.clientX <= EDGE_GUARD_PX){
+      tracking = false;
+      return;
+    }
+
+    tracking = true;
+    decided = false;
+    isHorizontal = false;
+    sx = t.clientX;
+    sy = t.clientY;
+  }, { passive: true });
+
+  container.addEventListener("touchmove", (e) => {
+    if (!tracking || !e.touches || e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+    const dx = t.clientX - sx;
+    const dy = t.clientY - sy;
+
+    if (!decided){
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10){
+        decided = true;
+        isHorizontal = Math.abs(dx) > Math.abs(dy);
+      }
+    }
+
+    if (decided && isHorizontal){
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  container.addEventListener("touchend", (e) => {
+    if (!tracking) return;
+    tracking = false;
+
+    const t = e.changedTouches?.[0];
+    if (!t) return;
+
+    const dx = t.clientX - sx;
+    const dy = t.clientY - sy;
+
+    if (Math.abs(dy) > SWIPE_MAX_Y) return;
+    if (Math.abs(dx) < SWIPE_MIN_PX) return;
+
+    const active = getActive();
+    const i = Math.max(0, order.indexOf(active));
+
+    const nextIndex = (dx < 0)
+      ? Math.min(order.length - 1, i + 1)
+      : Math.max(0, i - 1);
+
+    if (nextIndex !== i){
+      setActive(order[nextIndex]);
+    }
+  }, { passive: true });
+}
+
+function buildEntryIndexForCurrentMap(){
+  const idx = {};
+
+  for (const entryName of State.mapEntries){
+    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+
+    for (const r of rows){
+      const rawBp = normalizeBp(r?.[0]);
+      if (!rawBp) continue;
+
+      const outs = worldOutputsForBp(rawBp);
+
+      for (const out of outs){
+        const finalBp = normalizeBp(out?.[0]);
+        const prob = Number(out?.[1] || 0);
+        if (!finalBp || prob <= 0) continue;
+
+        (idx[entryName] ||= []).push({
+          dinoKey: finalBp,
+          entry: {
+            entryClass: entryName,
+            sourceBp: rawBp,
+            outputBp: finalBp,
+            outputChance: prob,
+            groupWeight: Number(r?.[1] || 0) * prob,
+            spawnMultiplier: Number(r?.[2] || 1),
+            spawnLimit: Number(r?.[3] || 1),
+            spawnChances: r?.[4] || ""
+          }
+        });
+      }
+    }
+  }
+
+  return idx;
+}
+
+function getSelectedDinoGroup(name){
+  const bps = State.nameToBps.get(name) || [];
+  if (!bps.length) return null;
+
+  const first = getDinoObjByBp(bps[0]);
+  const bpSet = new Set(bps);
+
+  const entryList = [...new Set(
+    bps.flatMap(bp => State.dinoToEntries.get(bp) || [])
+  )].sort((a,b)=>a.localeCompare(b));
+
+  const entries = entryList.map(entryName => {
+    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+
+    let groupWeight = 0;
+    let spawnMultiplier = 1;
+    let spawnLimit = 1;
+    let spawnChances = "";
+
+    for (const r of rows){
+      const rawBp = normalizeBp(r?.[0]);
+      if (!rawBp) continue;
+
+      const outs = worldOutputsForBp(rawBp);
+      let matched = false;
+
+      for (const out of outs){
+        const finalBp = normalizeBp(out?.[0]);
+        const prob = Number(out?.[1] || 0);
+        if (!finalBp || prob <= 0) continue;
+
+        if (bpSet.has(finalBp)){
+          groupWeight += Number(r?.[1] || 0) * prob;
+          spawnMultiplier = Number(r?.[2] || 1);
+          spawnLimit = Number(r?.[3] || 1);
+          spawnChances = r?.[4] || "";
+          matched = true;
+        }
+      }
+
+      if (matched) {
+        // keep scanning in case multiple rows contribute
+      }
+    }
+
+    return {
+      entryClass: entryName,
+      groupWeight,
+      spawnMultiplier,
+      spawnLimit,
+      spawnChances
+    };
+  }).filter(e => e.groupWeight > 0);
+
+  return {
+    displayName: name,
+    bpPath: bps[0],
+    additionalBpPathsToDisplay: bps.slice(1),
+    nameTag: first?.t || "",
+    fName: first?.fn || "",
+    mName: first?.mn || "",
+    tameable: first?.flags?.tameable,
+    breedable: first?.flags?.breedable,
+    isAlpha: first?.flags?.isAlpha,
+    isBoss: first?.flags?.isBoss,
+    isBossMinion: first?.flags?.isBossMinion,
+    dragWeight: first?.flags?.dragWeight,
+    killXpBase: first?.flags?.killXpBase,
+    stats: first?.stats || null,
+    entries
+  };
+}
+
+/* ============================================================
+   DINO PANEL
+============================================================ */
+
+const DINO_PANEL_TABS = [
+  { id: "spawns", label: "Spawns" },
+  { id: "stats",  label: "Stats" }
+];
+
+function fitTitleToSpace(titleEl, opts = {}) {
+  if (!titleEl) return;
+
+  const {
+    minPx = 10,
+    maxPx = 20,
+    stepPx = 0.25
+  } = opts;
+
+  titleEl.style.fontSize = maxPx + "px";
+
+  if (titleEl.scrollWidth <= titleEl.clientWidth) return;
+
+  let lo = minPx;
+  let hi = maxPx;
+
+  for (let i = 0; i < 16; i++) {
+    const mid = Math.floor(((lo + hi) / 2) / stepPx) * stepPx;
+    titleEl.style.fontSize = mid + "px";
+
+    const fits = titleEl.scrollWidth <= titleEl.clientWidth;
+    if (fits) lo = mid;
+    else hi = mid - stepPx;
+
+    if (hi < lo) break;
+  }
+
+  titleEl.style.fontSize = Math.max(minPx, lo) + "px";
+}
+
+function installPanelTitleFitter(panelEl, opts = {}) {
+  const titleEl = panelEl?.querySelector(".fp-title");
+  const titleWrap = titleEl?.parentElement;
+
+  if (!panelEl || !titleEl) return;
+
+  requestAnimationFrame(() => fitTitleToSpace(titleEl, opts));
+
+  if (panelEl._titleFitCleanup) {
+    panelEl._titleFitCleanup();
+    panelEl._titleFitCleanup = null;
+  }
+
+  const ro = new ResizeObserver(() => fitTitleToSpace(titleEl, opts));
+  ro.observe(titleWrap || panelEl);
+
+  const mo = new MutationObserver(() => fitTitleToSpace(titleEl, opts));
+  mo.observe(titleEl, { childList: true, characterData: true, subtree: true });
+
+  panelEl._titleFitCleanup = () => {
+    ro.disconnect();
+    mo.disconnect();
+  };
+}
+
+function renderDinoHero(d, selectedName){
+  const bp = d.bpPath || "";
+  const extraBps = Array.isArray(d.additionalBpPathsToDisplay)
+    ? d.additionalBpPathsToDisplay
+    : [];
+
+  const allBps = [bp, ...extraBps].filter(Boolean);
+  const nameTag = d.nameTag || "";
+  const displayName = d.displayName || "(Unknown)";
+  const otherName = otherSexNameForSelected(d, selectedName);
+
+  return `
+    <div class="dino-hero">
+      <div class="dino-hero-title">${escapeHtml(displayName)}</div>
+      ${otherName ? `<div class="info-submeta">Also: ${escapeHtml(otherName)}</div>` : ""}
+
+      ${d.tameable === false || d.tameable === 0 ? `<span class="dino-badge tameable">Untameable</span>` : ""}
+      ${d.breedable === false || d.breedable === 0 ? `<span class="dino-badge breedable">Unbreedable</span>` : ""}
+
+      <div class="info-subtitle">Blueprint</div>
+      ${allBps.length
+        ? allBps.map(v => `
+            <div class="info-mono copy-on-click" data-copy="${escapeAttr(v)}">
+              ${escapeHtml(v)}
+            </div>
+          `).join("")
+        : `
+            <div class="info-mono copy-on-click" data-copy="">
+              (none)
+            </div>
+          `
+      }
+
+      ${renderCopyField("Nametag", nameTag || "")}
+    </div>
+  `;
+}
+
+function renderDinoTabSpawns(d, selectedName){
+  const entries = d.entries || [];
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Spawn Entries (${entries.length})</div>
+      <div class="entries">
+        ${entries.map((e, i) => renderEntryRow(e, selectedName, i)).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderDinoTabStats(d){
+  const drag = fmtNum(d?.dragWeight, 0);
+  const xp = fmtNum(d?.killXpBase, 0);
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Stats</div>
+      <div class="entry-meta">
+        ${drag !== null ? `<div class="entry-meta-line">Drag Weight: ${escapeHtml(drag)}</div>` : ``}
+        ${xp !== null ? `<div class="entry-meta-line">Kill XP: ${escapeHtml(String(Number(xp) * 4))}</div>` : ``}
+      </div>
+      ${renderStatsTable(d?.stats)}
+    </div>
+  `;
+}
+
+function renderDinoPanel(name){
+  const d = getSelectedDinoGroup(name);
+  if (!d){
+    renderInfoPanelBodyEmpty();
+    return;
+  }
+
+  const panel = ensureInfoPanel();
+  const activeTab = DINO_PANEL_TABS.some(t => t.id === infoPanelState.dinoTab)
+    ? infoPanelState.dinoTab
+    : "spawns";
+
+  setInfoPanelTitle(name);
+
+  const html = `
+    ${renderDinoHero(d, name)}
+    ${renderTabs({
+      tabs: DINO_PANEL_TABS,
+      activeId: activeTab,
+      dataAttr: 'data-dino-tab'
+    })}
+    ${renderPages({
+      tabs: DINO_PANEL_TABS,
+      activeId: activeTab,
+      renderPage: (id) => {
+        if (id === "spawns") return renderDinoTabSpawns(d, name);
+        if (id === "stats") return renderDinoTabStats(d);
+        return "";
+      }
+    })}
+  `;
+
+  setInfoPanelHTML(html);
+
+  const body = panel.querySelector(".fp-body");
+  wireTabs(body, {
+    tabs: DINO_PANEL_TABS,
+    activeId: activeTab,
+    dataAttr: "data-dino-tab",
+    onChange: (id) => {
+      infoPanelState.dinoTab = id;
+      renderDinoPanel(name);
+    }
+  });
+  body.querySelectorAll('input[data-entry-toggle="1"]').forEach(chk => {
+    chk.onchange = () => {
+      const key = chk.dataset.key;
+      entryVisibility[key] = chk.checked;
+      drawDino(name);
+    };
+  });
+  mountPanelSwipe(
+    body.querySelector(".fp-pages"),
+    DINO_PANEL_TABS,
+    () => infoPanelState.dinoTab,
+    (id) => {
+      infoPanelState.dinoTab = id;
+      renderDinoPanel(name);
+    }
+  );
+}
+
+function cleanName(s){
+  const x = String(s ?? "").trim();
+  return x.length ? x : "";
+}
+
+function otherSexNameForSelected(d, selectedLabel){
+  const f = cleanName(d?.fName);
+  const m = cleanName(d?.mName);
+  const sel = cleanName(selectedLabel);
+
+  if (!sel) return "";
+
+  if (f && sel.toLowerCase() === f.toLowerCase()) return m;
+  if (m && sel.toLowerCase() === m.toLowerCase()) return f;
+
+  if (f && m && f.toLowerCase() !== m.toLowerCase()) return `${f} / ${m}`;
+  return "";
+}
+
+/* ============================================================
+   ENTRY PANEL
+============================================================ */
+
+const ENTRY_PANEL_TABS = [
+  { id: "dinos", label: "Dinos" },
+  { id: "info",  label: "Info" }
+];
+
+function mapsForEntry(entryName){
+  const codes = Global.spawn?.entryMaps?.[entryName] || [];
+  if (!Array.isArray(codes)) return [];
+
+  return codes.map(code => {
+    return Global.spawn?.mapLegend?.[code] || code;
+  });
+}
+
+function renderEntryHero(entryName){
+  const entryBp = Global.spawn?.entries?.[entryName]?.bp || "";
+
+  return `
+    <div class="entry-hero">
+      <div class="entry-hero-title">${escapeHtml(entryName)}</div>
+      <div class="info-submeta">Spawn Entry</div>
+      ${renderCopyField("Entry Blueprint", entryBp)}
+      ${renderCopyField("Entry Class", entryName)}
+    </div>
+  `;
+}
+
+function renderEntryTabDinos(entryName){
+  const entryIndex = buildEntryIndexForCurrentMap();
+  const rows = entryIndex?.[entryName] || [];
+  if (!rows.length){
+    return `<div style="color:var(--muted)">No dinos found for this spawn entry.</div>`;
+  }
+
+  const byDino = new Map();
+  for (const r of rows){
+    if (!byDino.has(r.dinoKey)) byDino.set(r.dinoKey, []);
+    byDino.get(r.dinoKey).push(r);
+  }
+
+  const dinoKeys = [...byDino.keys()].sort((a, b) => {
+    const da = getDinoObjByBp(a);
+    const db = getDinoObjByBp(b);
+    const an = da?.n || a;
+    const bn = db?.n || b;
+    return an.localeCompare(bn);
+  });
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Dinos (${dinoKeys.length})</div>
+      <div class="entries">
+        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(getDinoObjByBp(dinoKey), byDino.get(dinoKey))).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderEntryTabInfo(entryName){
+  const maps = mapsForEntry(entryName);
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Used On Maps (${maps.length})</div>
+      ${
+        maps.length
+          ? `<div class="entry-meta">
+              ${maps.map(m => `<div class="entry-meta-line">${escapeHtml(m)}</div>`).join("")}
+             </div>`
+          : `<div style="color:var(--muted)">No map list found.</div>`
+      }
+    </div>
+  `;
+}
+
+function renderEntryPanel(entryName){
+  const panel = ensureInfoPanel();
+  const activeTab = ENTRY_PANEL_TABS.some(t => t.id === infoPanelState.entryTab)
+    ? infoPanelState.entryTab
+    : "dinos";
+
+  setInfoPanelTitle(entryName);
+
+  const html = `
+    ${renderEntryHero(entryName)}
+    ${renderTabs({
+      tabs: ENTRY_PANEL_TABS,
+      activeId: activeTab,
+      dataAttr: 'data-entry-tab'
+    })}
+    ${renderPages({
+      tabs: ENTRY_PANEL_TABS,
+      activeId: activeTab,
+      renderPage: (id) => {
+        if (id === "dinos") return renderEntryTabDinos(entryName);
+        if (id === "info") return renderEntryTabInfo(entryName);
+        return "";
+      },
+      pageClass: "fp-pages--entry"
+    })}
+  `;
+
+  setInfoPanelHTML(html);
+
+  const body = panel.querySelector(".fp-body");
+  wireTabs(body, {
+    tabs: ENTRY_PANEL_TABS,
+    activeId: activeTab,
+    dataAttr: "data-entry-tab",
+    onChange: (id) => {
+      infoPanelState.entryTab = id;
+      renderEntryPanel(entryName);
+    }
+  });
+  mountPanelSwipe(
+    body.querySelector(".fp-pages"),
+    ENTRY_PANEL_TABS,
+    () => infoPanelState.entryTab,
+    (id) => {
+      infoPanelState.entryTab = id;
+      renderEntryPanel(entryName);
+    }
+  );
+}
+
+/* ============================================================
+   UNIFIED PANEL RENDER
+============================================================ */
+
+function renderInfoPanel(){
+  if (!State.selection){
+    renderInfoPanelBodyEmpty();
+    return;
+  }
+
+  if (State.mode === "dino"){
+    renderDinoPanel(State.selection);
+  } else {
+    renderEntryPanel(State.selection);
+  }
+}
+
+/* ============================================================
+   POIS
+============================================================ */
+
+function cssEscape(s){
+  return String(s || "").toLowerCase().replace(/[^a-z0-9_-]/g,"");
+}
+
+function makeTerminalIcon(type){
+  const cls = cssEscape(type);
+
+  return L.divIcon({
+    className: `poi-icon poi-${cls}`,
+    html: `
+      <svg width="26" height="34" viewBox="-10 -12 20 26">
+        
+        <!-- white frame -->
+        <path d="M -3 0 L 0 -8 L 3 0 L 0 5 Z"
+              fill="white"
+              opacity="0.95"/>
+
+        <!-- inner core -->
+        <path class="poi-fill"
+              d="M -2 0 L 0 -6 L 2 0 L 0 3.5 Z"
+              fill="currentColor"
+              opacity="0.9"/>
+      </svg>
+    `,
+    iconSize:[22,22],
+    iconAnchor:[11,20]
+  });
+}
+
+function poiColor(type){
+  const t = String(type || "").toLowerCase();
+
+  if (t.includes("blue")) return "#4da3ff";
+  if (t.includes("green")) return "#5cff6b";
+  if (t.includes("red")) return "#ff4d4d";
+  if (t.includes("tek")) return "#b388ff";
+
+  return "#ffffff";
+}
+
+function clearPois(){
+  mapObj?.poiLayer?.clearLayers();
+}
+
+function drawPoiGroup(points, groupName){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility[groupName]) return;
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    const color = poiColor(p.type);
+    const type = String(p.type || "").toLowerCase();
+
+    // TEK terminals get the special icon
+    if (type.includes("tek")) {
+
+      const icon = makeTerminalIcon(type);
+
+      const marker = L.marker([y, x], { 
+        icon,
+        pane: "poiPane"
+      })
+        .addTo(mapObj.poiLayer)
+        .bindTooltip(p.label || p.type || "POI");
+
+      marker.getElement()?.style.setProperty("color", color);
+      continue;
+    }
+
+    // Everything else = circle markers (red/blue/green obelisks)
+    L.circleMarker([y, x], {
+      radius: 8,
+      color: "#111",
+      weight: 2,
+      fillColor: color,
+      fillOpacity: 0.95,
+      pane: "poiPane"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(p.label || p.type || "POI");
+  }
+}
+
+function drawPois(){
+  clearPois();
+
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  if (!geom?.pois) return;
+
+  drawPoiGroup(geom.pois.tributeTerminals, "tributeTerminals");
+  drawPoiGroup(geom.pois.supplyCrates, "supplyCrates");
+  drawPoiGroup(geom.pois.playerStarts, "playerStarts");
+  drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
+  drawPoiGroup(geom.pois.missions, "missions");
+}
+
+
 /* ============================================================
    RARITY ENGINE
 ============================================================ */
@@ -137,7 +1665,7 @@ function rarityFromWeight(w){
 }
 
 const MIN_GLOBAL_DOWNSHIFT = [
-  [3,6]
+  [4,6]
 ];
 
 function downshiftStepsForTotalMin(totalMin){
@@ -226,7 +1754,7 @@ function entryRarityForBps(entryName, bpSet){
     const sm = Number(r?.[2] || 1);
     const lim = Number(r?.[3] || 1);
 
-    const baseExpected = gw * sm;
+    const baseExpected = gw;
     if (baseExpected <= 0) continue;
 
     const outs = worldOutputsForBp(rawBp);
@@ -259,21 +1787,37 @@ function entryManagerMinStats(entryName){
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
   const entry = geom?.entries?.[entryName];
 
-  if(!entry) return { best:0,total:0 };
+  if (!entry) return { best:0, total:0 };
 
-  const mins=[];
+  const rawMins = [];
+  let total = 0;
 
-  for(const mgr of Object.values(entry.m || {})){
+  for (const mgr of Object.values(entry.m || {})) {
 
     const md = Number(mgr?.md || 0);
+    if (md <= 0) continue;
 
-    if(md > 0) mins.push(md);
+    const boxCount = Array.isArray(mgr?.b) ? mgr.b.length : 0;
+    const pointCount = Array.isArray(mgr?.p) ? mgr.p.length : 0;
+    const nodeCount = boxCount + pointCount;
+
+    // keep raw manager min for manager-vs-best downshift
+    rawMins.push(md);
+
+    // global downshift uses shared min across nodes
+    if (nodeCount > 0) {
+      total += (md / nodeCount);
+    } else {
+      total += md;
+    }
   }
 
-  const best = mins.length ? Math.max(...mins) : 0;
-  const total = mins.reduce((a,b)=>a+b,0);
+  const best = rawMins.length ? Math.max(...rawMins) : 0;
 
-  return { best,total };
+  return {
+    best,
+    total
+  };
 }
 
 function finalRarityForManager(entryName,meta,score){
@@ -291,24 +1835,84 @@ function finalRarityForManager(entryName,meta,score){
   return downgradeRarity(baseLabel,globalSteps+managerSteps);
 }
 
+
+function entryRarityForEntry(entryName){
+
+  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  if (!rows.length) return 0;
+
+  let totalExpected = 0;
+  let rarity = 0;
+
+  for (const r of rows){
+    const rawBp = normalizeBp(r?.[0]);
+    if (!rawBp) continue;
+
+    const gw = Number(r?.[1] || 0);
+    const sm = Number(r?.[2] || 1);
+    const lim = Number(r?.[3] || 1);
+
+    const baseExpected = gw * sm;
+    if (baseExpected <= 0) continue;
+
+    const outs = worldOutputsForBp(rawBp);
+
+    for (const out of outs){
+      const finalBp = normalizeBp(out?.[0]);
+      const prob = Number(out?.[1] || 0);
+      if (!finalBp || prob <= 0) continue;
+
+      const expected = baseExpected * prob;
+      totalExpected += expected;
+      rarity += expected * lim;
+    }
+  }
+
+  if (totalExpected <= 0) return 0;
+
+  return rarity / totalExpected;
+}
 /* ============================================================
    MAP RENDERING
 ============================================================ */
 
-let mapObj=null;
+let mapObj = null;
 
 function initMap(img,size=[2048,2048]){
 
   const bounds=[[0,0],[size[1],size[0]]];
 
-  const map=L.map("map",{crs:L.CRS.Simple,minZoom:-3,maxZoom:2});
-  const overlay=L.imageOverlay(img,bounds).addTo(map);
+  const map = L.map("map", {
+    crs: L.CRS.Simple,
+    minZoom: -3,
+    maxZoom: 2,
+    zoomSnap: 0.25,
+    zoomDelta: 0.25,
+    wheelPxPerZoomLevel: 120,
+    zoomControl: false
+  });
 
-  const layer=L.layerGroup().addTo(map);
+  L.control.zoom({ position: "bottomleft" }).addTo(map);
+
+  setTimeout(() => {
+    document.querySelector(".leaflet-control-zoom")?.classList.add("zoom-horizontal");
+  }, 0);
+
+  // panes
+  map.createPane("spawnPane");
+  map.createPane("poiPane");
+
+  map.getPane("spawnPane").style.zIndex = 410;
+  map.getPane("poiPane").style.zIndex = 650;
+
+  const overlay = L.imageOverlay(img, bounds).addTo(map);
+
+  const layer = L.layerGroup().addTo(map);
+  const poiLayer = L.layerGroup().addTo(map);
 
   map.fitBounds(bounds);
 
-  return {map,overlay,layer,bounds};
+  return { map, overlay, layer, poiLayer, bounds };
 }
 
 function clearDraw(){
@@ -452,8 +2056,10 @@ function drawEntry(entryName, rarityScore){
       const [x, y, w, h] = box;
       if (![x, y, w, h].every(Number.isFinite)) continue;
 
-      L.rectangle([[y, x], [y + h, x + w]], style)
-        .addTo(mapObj.layer);
+      L.rectangle([[y, x], [y + h, x + w]], {
+        ...style,
+        pane: "spawnPane"
+      }).addTo(mapObj.layer);
     }
 
     // points
@@ -468,7 +2074,8 @@ function drawEntry(entryName, rarityScore){
         opacity: style.opacity,
         fillColor: style.fillColor,
         fillOpacity: style.fillOpacity,
-        dashArray: style.dashArray
+        dashArray: style.dashArray,
+        pane: "spawnPane"
       }).addTo(mapObj.layer);
     }
   }
@@ -479,26 +2086,18 @@ function drawEntry(entryName, rarityScore){
 ============================================================ */
 
 function drawDino(name){
-
   clearDraw();
 
-  const bps=State.nameToBps.get(name)||[];
+  const grouped = getSelectedDinoGroup(name);
+  if (!grouped) return;
 
-  const bpSet=new Set(bps);
+  for (let i = 0; i < grouped.entries.length; i++){
+    const entry = grouped.entries[i];
+    if (!isEntryVisible(name, i)) continue;
 
-  const entries=new Set();
-
-  for(const bp of bps){
-    for(const e of State.dinoToEntries.get(bp)||[]){
-      entries.add(e);
-    }
-  }
-
-  for(const entry of entries){
-
-    const rarity=entryRarityForBps(entry,bpSet);
-
-    drawEntry(entry,rarity);
+    const bpSet = new Set(State.nameToBps.get(name) || []);
+    const rarity = entryRarityForBps(entry.entryClass, bpSet);
+    drawEntry(entry.entryClass, rarity);
   }
 }
 
@@ -740,10 +2339,12 @@ function setupUI(){
 
   mountFancyDropdown(UI.mapSelect,UI.mapFancy,"Search maps...");
 
+  syncModeButton();
   rebuildDinoSelect();
 
-  UI.modeToggle.onclick=()=>{
-    State.mode=State.mode==="dino"?"entry":"dino";
+  UI.modeToggle.onclick = () => {
+    State.mode = State.mode === "dino" ? "entry" : "dino";
+    syncModeButton();
     rebuildDinoSelect();
     render();
   };
@@ -751,6 +2352,21 @@ function setupUI(){
   UI.controlsToggle.onclick=()=>{
     UI.topbar.classList.toggle("show-controls");
   };
+}
+
+function initRarityLegend(){
+
+  const legend = document.getElementById("rarityLegend");
+  if (!legend) return;
+
+  legend.querySelectorAll(".rl-sq").forEach(el => {
+
+    const rarity = el.dataset.r;
+    const color = rarityToColor(rarity);
+
+    el.style.background = color;
+  });
+
 }
 
 function rebuildDinoSelect(){
@@ -790,11 +2406,23 @@ function rebuildDinoSelect(){
 ============================================================ */
 
 function render(){
+  if (!State.selection) {
+    clearDraw();
+    drawPois();
+    renderInfoPanelBodyEmpty();
+    return;
+  }
 
-  if(!State.selection) return;
-
-  if(State.mode==="dino")
+  if (State.mode === "dino"){
     drawDino(State.selection);
+  } else {
+    clearDraw();
+    const score = entryRarityForEntry(State.selection);
+    drawEntry(State.selection, score);
+  }
+
+  drawPois();
+  renderInfoPanel();
 }
 
 /* ============================================================
@@ -803,21 +2431,28 @@ function render(){
 
 async function onMapChanged(){
 
-  const mapMeta=MAPS.find(m=>m.id===State.mapId);
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
 
-  const geom=await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
+  const geom = await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
+  Global.mapGeom.set(mapMeta.geomShort, geom);
 
-  Global.mapGeom.set(mapMeta.geomShort,geom);
+  const img = geom.image || `${PATHS.mapsDir}/${mapMeta.image}`;
 
-  const img=geom.image||`${PATHS.mapsDir}/${mapMeta.image}`;
-
-  if(!mapObj)
-    mapObj=initMap(img,geom.size||[2048,2048]);
-  else
+  if (!mapObj){
+    mapObj = initMap(img, geom.size || [2048,2048]);
+    ensureDockControl(mapObj.map);
+  } else {
     mapObj.overlay.setUrl(img);
+  }
+
+  dockState.mapMeta = mapMeta;
+  dockState.cfg = {
+    image: img
+  };
 
   rebuildMapIndices();
   rebuildDinoSelect();
+  renderDock();
 
   render();
 }
@@ -831,7 +2466,15 @@ async function boot(){
   Global.spawn=await loadJSON(PATHS.spawnGlobal);
   Global.dinos=await loadJSON(PATHS.dinoGlobal);
 
+  installCopyDelegation();
+  ensureInfoPanel();
+  ensurePoiPanel();
+  renderInfoPanelBodyEmpty();
+  setLegendOpen(false);
+
   setupUI();
+  
+  initRarityLegend();
 
   await onMapChanged();
 }
