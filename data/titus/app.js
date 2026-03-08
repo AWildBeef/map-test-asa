@@ -37,11 +37,43 @@ const MAPS = [
     defaultBg:"sat"
   }
 ];
+const jsonCache = {};
 
+let SOURCES = [];
 
-const SOURCES = [
-  { id:"official", label:"Official" }
-];
+async function buildSources(){
+  const registry = await loadJSON("mods_registry.json");
+
+  const mods = (registry.mods || []).map(m => ({
+    id: String(m.id),
+    name: m.name,
+    label: m.name,
+    file: `data/mods/${m.id}.json`,
+    group: m.group || "",
+    order: Number.isFinite(m.order) ? m.order : 9999,
+    groupOrder: Number.isFinite(m.groupOrder) ? m.groupOrder : 9999
+  }));
+
+  mods.sort((a,b)=>
+    (a.groupOrder - b.groupOrder) ||
+    String(a.group || "").localeCompare(String(b.group || "")) ||
+    (a.order - b.order) ||
+    a.name.localeCompare(b.name)
+  );
+
+  return [
+    {
+      id:"official",
+      name:"Official",
+      label:"Official",
+      spawn: PATHS.spawnGlobal,
+      dinos: PATHS.dinoGlobal,
+      order: 0
+    },
+    ...mods
+  ];
+}
+
 
 /* ============================================================
    GLOBAL DATA
@@ -128,18 +160,246 @@ function normSearch(s){
   return String(s||"").toLowerCase().replace(/[\s_-]/g,"");
 }
 
-async function loadJSON(url){
-  const r=await fetch(`${url}?v=${ASSET_VER}`);
-  if(!r.ok) throw new Error(url);
-  return r.json();
+async function loadJSON(path){
+  const url = `${path}?v=${ASSET_VER}`;
+
+  if (jsonCache[url]) return jsonCache[url];
+
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`Failed to load ${path}`);
+
+  const data = await r.json();
+  jsonCache[url] = data;
+  return data;
 }
 
 function bpClass(bp){
   return String(bp||"").split(".").pop();
 }
+
+function buildSourceDrillTree() {
+  const root = { label: "Sources", children: [] };
+
+  const official = SOURCES.find(s => s.id === "official");
+  if (official) {
+    root.children.push({ label: official.name, value: official.id });
+  }
+
+  const modsFolder = { label: "Mods", children: [] };
+  const modSources = SOURCES.filter(s => s.id !== "official");
+
+  const groups = new Map();
+  const loose = [];
+
+  for (const s of modSources) {
+    const leaf = {
+      label: s.name,
+      value: s.id,
+      _order: Number.isFinite(s.order) ? s.order : 9999
+    };
+
+    if (s.group) {
+      const gname = String(s.group);
+
+      if (!groups.has(gname)) {
+        groups.set(gname, {
+          label: gname,
+          children: [],
+          _groupOrder: Number.isFinite(s.groupOrder) ? s.groupOrder : 9999
+        });
+      }
+
+      groups.get(gname).children.push(leaf);
+    } else {
+      loose.push(leaf);
+    }
+  }
+
+  for (const g of groups.values()) {
+    g.children.sort((a, b) =>
+      (a._order - b._order) || a.label.localeCompare(b.label)
+    );
+  }
+
+  loose.sort((a, b) =>
+    (a._order - b._order) || a.label.localeCompare(b.label)
+  );
+
+  const groupFolders = Array.from(groups.values())
+    .sort((a, b) =>
+      (a._groupOrder - b._groupOrder) || a.label.localeCompare(b.label)
+    )
+    .map(g => ({
+      label: g.label,
+      children: g.children.map(({ _order, ...x }) => x)
+    }));
+
+  const looseClean = loose.map(({ _order, ...x }) => x);
+
+  modsFolder.children.push(...groupFolders, ...looseClean);
+  root.children.push(modsFolder);
+
+  return root;
+}
+function mountSourceDrillDropdown(native, host){
+  native.style.display = "none";
+  host.innerHTML = "";
+
+  const wrap = document.createElement("div");
+  wrap.className = "dd";
+
+  const btn = document.createElement("button");
+  btn.className = "dd-btn";
+
+  const label = document.createElement("div");
+  label.className = "dd-label";
+
+  const caret = document.createElement("div");
+  caret.className = "dd-caret";
+  caret.textContent = "▾";
+
+  btn.append(label, caret);
+
+  const panel = document.createElement("div");
+  panel.className = "dd-panel";
+
+  const crumb = document.createElement("div");
+  crumb.className = "dd-crumb";
+
+  const list = document.createElement("div");
+  list.className = "dd-list";
+
+  panel.append(crumb, list);
+  wrap.append(btn, panel);
+  host.appendChild(wrap);
+
+  const root = buildSourceDrillTree();
+  const stack = [root];
+
+  function currentNode(){
+    return stack[stack.length - 1];
+  }
+
+  function syncLabel(){
+    label.textContent = native.selectedOptions?.[0]?.textContent || "(Select)";
+  }
+
+  function renderLevel(){
+    const node = currentNode();
+    list.innerHTML = "";
+    crumb.innerHTML = "";
+
+    if (stack.length > 1) {
+      const back = document.createElement("button");
+      back.type = "button";
+      back.className = "dd-back";
+      back.textContent = "‹ Back";
+      back.onclick = () => {
+        stack.pop();
+        renderLevel();
+      };
+      crumb.appendChild(back);
+    }
+
+    for (const item of node.children || []) {
+      const row = document.createElement("div");
+      row.className = "dd-item";
+
+      const isFolder = Array.isArray(item.children);
+
+      row.textContent = isFolder ? `▸ ${item.label}` : item.label;
+
+      row.onclick = () => {
+        if (isFolder) {
+          stack.push(item);
+          renderLevel();
+          return;
+        }
+
+        native.value = item.value;
+        native.dispatchEvent(new Event("change"));
+        close();
+      };
+
+      list.appendChild(row);
+    }
+  }
+
+  function open(){
+    stack.length = 1;
+    stack[0] = root;
+    renderLevel();
+    wrap.classList.add("open");
+  }
+
+  function close(){
+    wrap.classList.remove("open");
+  }
+
+  btn.onclick = () => {
+    wrap.classList.contains("open") ? close() : open();
+  };
+
+  document.addEventListener("pointerdown", e => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  native.addEventListener("change", syncLabel);
+  syncLabel();
+}
+
 /* ============================================================
    INFO PANEL SYSTEM
 ============================================================ */
+
+function syncActivePageHeight(pagesEl, activeId, opts = {}) {
+  if (!pagesEl || !activeId) return;
+
+  const {
+    maxHeight = Math.floor(window.innerHeight * 0.42)
+  } = opts;
+
+  const activePage = pagesEl.querySelector(`.fp-page[data-page="${CSS.escape(activeId)}"]`);
+  if (!activePage) return;
+
+  // clear old scrolling first
+  pagesEl.querySelectorAll(".fp-page").forEach(p => {
+    p.style.overflowY = "";
+    p.style.maxHeight = "";
+  });
+
+  // temporarily let wrapper size naturally so measurement is real
+  pagesEl.style.height = "auto";
+
+  const naturalHeight = activePage.scrollHeight;
+  const finalHeight = Number.isFinite(maxHeight)
+    ? Math.min(naturalHeight, maxHeight)
+    : naturalHeight;
+
+  pagesEl.style.height = `${finalHeight}px`;
+
+  if (naturalHeight > finalHeight) {
+    activePage.style.overflowY = "auto";
+    activePage.style.maxHeight = `${finalHeight}px`;
+    activePage.style.webkitOverflowScrolling = "touch";
+  }
+}
+function refreshInfoPanelPageHeight() {
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel || panel.classList.contains("collapsed")) return;
+
+  const body = panel.querySelector(".fp-body");
+  const pagesEl = body?.querySelector(".fp-pages");
+  if (!pagesEl) return;
+
+  const activeId = State.mode === "dino"
+    ? infoPanelState.dinoTab
+    : infoPanelState.entryTab;
+
+  requestAnimationFrame(() => {
+    syncActivePageHeight(pagesEl, activeId);
+  });
+}
 
 function fmt(v){
   const n = Number(v);
@@ -282,6 +542,10 @@ function ensureInfoPanel(){
     const closed = body.style.display === "none";
     body.style.display = closed ? "" : "none";
     panel.classList.toggle("collapsed", !closed);
+
+    if (closed) {
+      refreshInfoPanelPageHeight();
+    }
   };
 
   panel.querySelector('[data-action="hide"]').onclick = () => {
@@ -944,9 +1208,9 @@ function renderEntryRow(entry, dinoKey, idx){
   `;
 }
 
-function renderEntryDinoBlock(dinoObj, rowsForThisDino){
+function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino){
   const displayName = dinoObj?.n || "(Unknown)";
-  const bp = dinoObj?.p || dinoObj?.bp || dinoObj?.blueprint || "";
+  const bp = dinoBp || "";
   const nameTag = dinoObj?.t || "";
 
   const entryLinesHtml = rowsForThisDino.map((r) => {
@@ -1247,11 +1511,13 @@ function renderDinoHero(d, selectedName){
   const nameTag = d.nameTag || "";
   const displayName = d.displayName || "(Unknown)";
   const otherName = otherSexNameForSelected(d, selectedName);
+  const modId = d?.mod_id || d?.modId || "";
 
   return `
     <div class="dino-hero">
       <div class="dino-hero-title">${escapeHtml(displayName)}</div>
       ${otherName ? `<div class="info-submeta">Also: ${escapeHtml(otherName)}</div>` : ""}
+      ${modId ? `<div class="info-submeta">Mod ID: ${escapeHtml(modId)}</div>` : ""}
 
       ${d.tameable === false || d.tameable === 0 ? `<span class="dino-badge tameable">Untameable</span>` : ""}
       ${d.breedable === false || d.breedable === 0 ? `<span class="dino-badge breedable">Unbreedable</span>` : ""}
@@ -1363,6 +1629,9 @@ function renderDinoPanel(name){
       renderDinoPanel(name);
     }
   );
+  refreshInfoPanelPageHeight();
+  const pagesEl = body.querySelector(".fp-pages");
+  syncActivePageHeight(pagesEl, activeTab);
 }
 
 function cleanName(s){
@@ -1440,7 +1709,7 @@ function renderEntryTabDinos(entryName){
     <div class="info-section">
       <div class="info-subtitle">Dinos (${dinoKeys.length})</div>
       <div class="entries">
-        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(getDinoObjByBp(dinoKey), byDino.get(dinoKey))).join("")}
+        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(dinoKey, getDinoObjByBp(dinoKey), byDino.get(dinoKey))).join("")}
       </div>
     </div>
   `;
@@ -1511,6 +1780,9 @@ function renderEntryPanel(entryName){
       renderEntryPanel(entryName);
     }
   );
+  refreshInfoPanelPageHeight();
+  const pagesEl = body.querySelector(".fp-pages");
+  syncActivePageHeight(pagesEl, activeTab);
 }
 
 /* ============================================================
@@ -1970,50 +2242,37 @@ function ancestorDistance(childBp, ancestorBp){
 
 function worldRulesForCurrentMap(){
   const all = Global.spawn?.worldReplacements || {};
-  return Array.isArray(all?.[State.mapId]) ? all[State.mapId] : [];
+
+  const mapRules = Array.isArray(all?.[State.mapId]) ? all[State.mapId] : [];
+  const globalRules = Array.isArray(all?.__global__) ? all.__global__ : [];
+
+  return [...mapRules, ...globalRules];
 }
 
-function worldOutputsForBp(bp){
-  bp = normalizeBp(bp);
-  if (!bp) return [[bp, 1.0]];
+function buildWorldRuleIndex(rules){
+  const exact = new Map();
+  const ancestor = [];
 
-  const rules = worldRulesForCurrentMap();
-
-  // 1) exact rules first
-  for (const r of rules){
-    if (r?.exact && normalizeBp(r?.from) === bp){
-      return Array.isArray(r?.outs) && r.outs.length ? r.outs : [[bp, 1.0]];
-    }
-  }
-
-  // 2) closest non-exact ancestor rule
-  let bestRule = null;
-  let bestDist = null;
-
-  for (const r of rules){
-    if (r?.exact) continue;
-
+  for(const r of rules || []){
     const fromBp = normalizeBp(r?.from);
-    if (!fromBp) continue;
+    if(!fromBp) continue;
 
-    const dist = ancestorDistance(bp, fromBp);
-    if (dist == null) continue;
-
-    if (bestRule === null || dist < bestDist){
-      bestRule = r;
-      bestDist = dist;
+    if(r?.exact){
+      exact.set(fromBp, r);
+    } else {
+      ancestor.push(r);
     }
   }
 
-  if (bestRule){
-    return Array.isArray(bestRule?.outs) && bestRule.outs.length
-      ? bestRule.outs
-      : [[bp, 1.0]];
-  }
-
-  // 3) no rule
-  return [[bp, 1.0]];
+  return { exact, ancestor };
 }
+
+function worldRuleIndexForCurrentMap(){
+  const rules = worldRulesForCurrentMap();
+  return buildWorldRuleIndex(rules);
+}
+
+
 
 function getDinoObjByBp(bp){
   const dinos = Global.dinos?.dinos || {};
@@ -2025,6 +2284,104 @@ function getDinoObjByBp(bp){
   }
 
   return null;
+}
+
+function worldOutputsForBp(bp){
+  bp = normalizeBp(bp);
+  if (!bp) return [[bp, 1]];
+
+  const { exact, ancestor } = worldRuleIndexForCurrentMap();
+
+  function resolveOne(curBp, seen = new Set()){
+    curBp = normalizeBp(curBp);
+    if (!curBp) return [];
+
+    // stop cycles
+    if (seen.has(curBp)) {
+      return [[curBp, 1]];
+    }
+
+    const nextSeen = new Set(seen);
+    nextSeen.add(curBp);
+
+    // 1) exact rule
+    const exactRule = exact.get(curBp);
+    if (exactRule) {
+      const outs = Array.isArray(exactRule.outs) && exactRule.outs.length
+        ? exactRule.outs
+        : [[curBp, 1]];
+
+      let finalOuts = [];
+      for (const o of outs) {
+        const nextBp = normalizeBp(o?.[0]);
+        const nextProb = Number(o?.[1] || 0);
+        if (!nextBp || nextProb <= 0) continue;
+
+        const resolved = resolveOne(nextBp, nextSeen);
+        for (const [rbp, rprob] of resolved) {
+          finalOuts.push([rbp, nextProb * rprob]);
+        }
+      }
+
+      return combineOutputWeights(finalOuts);
+    }
+
+    // 2) closest ancestor rule
+    let bestRule = null;
+    let bestDist = null;
+
+    for (const r of ancestor) {
+      const fromBp = normalizeBp(r?.from);
+      if (!fromBp) continue;
+
+      const dist = ancestorDistance(curBp, fromBp);
+      if (dist == null) continue;
+
+      if (bestRule === null || dist < bestDist) {
+        bestRule = r;
+        bestDist = dist;
+      }
+    }
+
+    if (bestRule) {
+      const outs = Array.isArray(bestRule.outs) && bestRule.outs.length
+        ? bestRule.outs
+        : [[curBp, 1]];
+
+      let finalOuts = [];
+      for (const o of outs) {
+        const nextBp = normalizeBp(o?.[0]);
+        const nextProb = Number(o?.[1] || 0);
+        if (!nextBp || nextProb <= 0) continue;
+
+        const resolved = resolveOne(nextBp, nextSeen);
+        for (const [rbp, rprob] of resolved) {
+          finalOuts.push([rbp, nextProb * rprob]);
+        }
+      }
+
+      return combineOutputWeights(finalOuts);
+    }
+
+    // 3) no rule
+    return [[curBp, 1]];
+  }
+
+  return resolveOne(bp);
+}
+
+function combineOutputWeights(rows){
+  const m = new Map();
+
+  for (const [bp, prob] of rows || []) {
+    const key = normalizeBp(bp);
+    const p = Number(prob || 0);
+    if (!key || p <= 0) continue;
+
+    m.set(key, (m.get(key) || 0) + p);
+  }
+
+  return [...m.entries()];
 }
 
 /* ============================================================
@@ -2306,16 +2663,39 @@ function setupUI(){
 
   UI.sourceSelect.onchange = async ()=>{
 
-    // later this will swap data packs
-    console.log("Source changed:", UI.sourceSelect.value);
+    const srcId = UI.sourceSelect.value;
+    const src = SOURCES.find(s => s.id === srcId);
+    if (!src) return;
 
-    await onMapChanged();
+    if (src.id === "official") {
+      Global.spawn = await loadJSON(src.spawn);
+      Global.dinos = await loadJSON(src.dinos);
+    } else {
+      const mod = await loadJSON(src.file);
+
+      Global.spawn = {
+        mapLegend: mod.mapLegend || {},
+        entryMaps: mod.entryMaps || {},
+        entries: mod.entries || {},
+        maps: mod.maps || {},
+        dinos: mod.spawnDinos || {},
+        worldReplacements: mod.worldReplacements || {}
+      };
+
+      Global.dinos = {
+        dinos: mod.dinos || {}
+      };
+    }
+
+    rebuildMapIndices();
+    rebuildDinoSelect();
+    renderDock();
+    render();
   };
 
-  mountFancyDropdown(
+  mountSourceDrillDropdown(
     UI.sourceSelect,
-    UI.sourceFancy,
-    "Search sources..."
+    UI.sourceFancy
   );
 
   UI.mapSelect.innerHTML="";
@@ -2463,8 +2843,12 @@ async function onMapChanged(){
 
 async function boot(){
 
-  Global.spawn=await loadJSON(PATHS.spawnGlobal);
-  Global.dinos=await loadJSON(PATHS.dinoGlobal);
+  SOURCES = await buildSources();
+
+  const official = SOURCES.find(s => s.id === "official");
+
+  Global.spawn = await loadJSON(official.spawn);
+  Global.dinos = await loadJSON(official.dinos);
 
   installCopyDelegation();
   ensureInfoPanel();
