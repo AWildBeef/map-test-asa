@@ -80,9 +80,12 @@ async function buildSources(){
 ============================================================ */
 
 const Global = {
-  spawn:null,
-  dinos:null,
-  mapGeom:new Map()
+  spawn: null,
+  dinos: null,
+  baseSpawn: null,
+  baseDinos: null,
+  modMeta: null,
+  mapGeom: new Map()
 };
 
 const State = {
@@ -155,6 +158,57 @@ function isEntryVisible(dinoKey, idx){
 /* ============================================================
    UTILS
 ============================================================ */
+
+function mergeEntryTables(baseEntries, modEntries){
+  const out = { ...baseEntries };
+
+  for (const [entryName, modEntry] of Object.entries(modEntries || {})){
+    if (!out[entryName]){
+      out[entryName] = {
+        bp: modEntry?.bp || "",
+        d: [...(modEntry?.d || [])]
+      };
+      continue;
+    }
+
+    const baseRows = Array.isArray(out[entryName].d) ? out[entryName].d : [];
+    const modRows = Array.isArray(modEntry?.d) ? modEntry.d : [];
+
+    out[entryName] = {
+      bp: out[entryName].bp || modEntry?.bp || "",
+      d: [...baseRows, ...modRows]
+    };
+  }
+
+  return out;
+}
+
+function mergeWorldReplacementTables(baseWR, modWR){
+  const out = {};
+
+  const keys = new Set([
+    ...Object.keys(baseWR || {}),
+    ...Object.keys(modWR || {})
+  ]);
+
+  for (const k of keys){
+    out[k] = [
+      ...(Array.isArray(baseWR?.[k]) ? baseWR[k] : []),
+      ...(Array.isArray(modWR?.[k]) ? modWR[k] : [])
+    ];
+  }
+
+  return out;
+}
+
+function activeSourceIsOfficial(){
+  return !Global.modMeta;
+}
+
+function modBlueprintSet(){
+  if (!Global.modMeta?.dinos) return new Set();
+  return new Set(Object.keys(Global.modMeta.dinos));
+}
 
 function normSearch(s){
   return String(s||"").toLowerCase().replace(/[\s_-]/g,"");
@@ -1511,7 +1565,11 @@ function renderDinoHero(d, selectedName){
   const nameTag = d.nameTag || "";
   const displayName = d.displayName || "(Unknown)";
   const otherName = otherSexNameForSelected(d, selectedName);
-  const modId = d?.mod_id || d?.modId || "";
+  const modId = Global.modMeta?.modId || "";
+  /*const modName = Global.modMeta?.modName || "";*/
+  /*
+      ${modName ? `<div class="info-submeta">${escapeHtml(modName)}</div>` : ""}
+      */
 
   return `
     <div class="dino-hero">
@@ -2253,11 +2311,11 @@ function buildWorldRuleIndex(rules){
   const exact = new Map();
   const ancestor = [];
 
-  for(const r of rules || []){
+  for (const r of rules || []){
     const fromBp = normalizeBp(r?.from);
-    if(!fromBp) continue;
+    if (!fromBp) continue;
 
-    if(r?.exact){
+    if (r?.exact){
       exact.set(fromBp, r);
     } else {
       ancestor.push(r);
@@ -2272,18 +2330,18 @@ function worldRuleIndexForCurrentMap(){
   return buildWorldRuleIndex(rules);
 }
 
+function combineOutputWeights(rows){
+  const m = new Map();
 
+  for (const [bp, prob] of rows || []) {
+    const key = normalizeBp(bp);
+    const p = Number(prob || 0);
+    if (!key || p <= 0) continue;
 
-function getDinoObjByBp(bp){
-  const dinos = Global.dinos?.dinos || {};
-  if (dinos[bp]) return dinos[bp];
-
-  const cls = bpClass(bp);
-  for (const [k, v] of Object.entries(dinos)){
-    if (bpClass(k) === cls) return v;
+    m.set(key, (m.get(key) || 0) + p);
   }
 
-  return null;
+  return [...m.entries()];
 }
 
 function worldOutputsForBp(bp){
@@ -2296,7 +2354,6 @@ function worldOutputsForBp(bp){
     curBp = normalizeBp(curBp);
     if (!curBp) return [];
 
-    // stop cycles
     if (seen.has(curBp)) {
       return [[curBp, 1]];
     }
@@ -2304,7 +2361,6 @@ function worldOutputsForBp(bp){
     const nextSeen = new Set(seen);
     nextSeen.add(curBp);
 
-    // 1) exact rule
     const exactRule = exact.get(curBp);
     if (exactRule) {
       const outs = Array.isArray(exactRule.outs) && exactRule.outs.length
@@ -2326,7 +2382,6 @@ function worldOutputsForBp(bp){
       return combineOutputWeights(finalOuts);
     }
 
-    // 2) closest ancestor rule
     let bestRule = null;
     let bestDist = null;
 
@@ -2363,27 +2418,23 @@ function worldOutputsForBp(bp){
       return combineOutputWeights(finalOuts);
     }
 
-    // 3) no rule
     return [[curBp, 1]];
   }
 
   return resolveOne(bp);
 }
 
-function combineOutputWeights(rows){
-  const m = new Map();
+function getDinoObjByBp(bp){
+  const dinos = Global.dinos?.dinos || {};
+  if (dinos[bp]) return dinos[bp];
 
-  for (const [bp, prob] of rows || []) {
-    const key = normalizeBp(bp);
-    const p = Number(prob || 0);
-    if (!key || p <= 0) continue;
-
-    m.set(key, (m.get(key) || 0) + p);
+  const cls = bpClass(bp);
+  for (const [k, v] of Object.entries(dinos)){
+    if (bpClass(k) === cls) return v;
   }
 
-  return [...m.entries()];
+  return null;
 }
-
 /* ============================================================
    DRAW ENTRY
 ============================================================ */
@@ -2512,9 +2563,15 @@ function rebuildMapIndices(){
   }
 
   // 3) build name -> bp index from FINAL OUTPUT dinos
-  for (const bp of State.dinoToEntries.keys()){
-    const d = getDinoObjByBp(bp);
-    if (!d) continue;
+  const allowedModBps = modBlueprintSet();
+
+    for (const bp of State.dinoToEntries.keys()){
+      if (!activeSourceIsOfficial() && !allowedModBps.has(bp)) {
+        continue;
+      }
+
+      const d = getDinoObjByBp(bp);
+      if (!d) continue;
 
     const labels = labelsForDinoObj(d);
     for (const name of labels){
@@ -2668,22 +2725,46 @@ function setupUI(){
     if (!src) return;
 
     if (src.id === "official") {
-      Global.spawn = await loadJSON(src.spawn);
-      Global.dinos = await loadJSON(src.dinos);
+      Global.modMeta = null;
+      Global.spawn = Global.baseSpawn;
+      Global.dinos = Global.baseDinos;
     } else {
       const mod = await loadJSON(src.file);
 
+      Global.modMeta = mod;
+
       Global.spawn = {
-        mapLegend: mod.mapLegend || {},
-        entryMaps: mod.entryMaps || {},
-        entries: mod.entries || {},
-        maps: mod.maps || {},
-        dinos: mod.spawnDinos || {},
-        worldReplacements: mod.worldReplacements || {}
+        mapLegend: {
+          ...(Global.baseSpawn?.mapLegend || {}),
+          ...(mod.mapLegend || {})
+        },
+        entryMaps: {
+          ...(Global.baseSpawn?.entryMaps || {}),
+          ...(mod.entryMaps || {})
+        },
+        entries: mergeEntryTables(
+          Global.baseSpawn?.entries || {},
+          mod.entries || {}
+        ),
+        maps: {
+          ...(Global.baseSpawn?.maps || {}),
+          ...(mod.maps || {})
+        },
+        dinos: {
+          ...(Global.baseSpawn?.dinos || {}),
+          ...(mod.spawnDinos || {})
+        },
+        worldReplacements: mergeWorldReplacementTables(
+          Global.baseSpawn?.worldReplacements || {},
+          mod.worldReplacements || {}
+        )
       };
 
       Global.dinos = {
-        dinos: mod.dinos || {}
+        dinos: {
+          ...(Global.baseDinos?.dinos || {}),
+          ...(mod.dinos || {})
+        }
       };
     }
 
@@ -2847,8 +2928,12 @@ async function boot(){
 
   const official = SOURCES.find(s => s.id === "official");
 
-  Global.spawn = await loadJSON(official.spawn);
-  Global.dinos = await loadJSON(official.dinos);
+  Global.baseSpawn = await loadJSON(official.spawn);
+  Global.baseDinos = await loadJSON(official.dinos);
+
+  Global.spawn = Global.baseSpawn;
+  Global.dinos = Global.baseDinos;
+  Global.modMeta = null;
 
   installCopyDelegation();
   ensureInfoPanel();

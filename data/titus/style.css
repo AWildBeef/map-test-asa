@@ -1076,19 +1076,22 @@ body{
 
 /* Pages = ONLY scroll container */
 #dinoInfoPanel .fp-pages{
-  flex:1 1 auto;
+  flex:0 0 auto;
   overflow-y:auto;
   overflow-x:hidden;
   min-height:0;
   margin-top:2px;
   position:relative;
   z-index:1;
+  transition: height .18s ease;
 }
 
 /* Track stays normal */
 #dinoInfoPanel .fp-track{
   display:flex;
   width:100%;
+  align-items: flex-start;
+  transition: transform .18s ease;
 }
 
 /* Individual pages */
@@ -1096,6 +1099,7 @@ body{
   flex:0 0 100%;
   padding:8px;
   overflow-x: hidden;
+  min-height: 0;
 }
 
 .fp-dots{
