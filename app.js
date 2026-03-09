@@ -158,6 +158,47 @@ function isEntryVisible(dinoKey, idx){
 /* ============================================================
    UTILS
 ============================================================ */
+function poiCount(v){
+  if (Array.isArray(v)) return v.length;
+  if (v && typeof v === "object") return Object.keys(v).length;
+  return 0;
+}
+
+function drawPlayerStarts(groups){
+  if (!mapObj?.poiLayer) return;
+  if (!poiVisibility.playerStarts) return;
+  if (!groups || typeof groups !== "object") return;
+
+  for (const [regionName, block] of Object.entries(groups)) {
+    const difficulty = block?.difficulty;
+    const points = Array.isArray(block?.points) ? block.points : [];
+
+    for (const pt of points) {
+      if (!Array.isArray(pt) || pt.length < 2) continue;
+
+      const x = Number(pt[0]);
+      const y = Number(pt[1]);
+      if (![x, y].every(Number.isFinite)) continue;
+
+      const tip = [
+        regionName,
+        difficulty != null ? `Difficulty ${difficulty}` : null
+      ].filter(Boolean).join(" • ");
+
+      L.circleMarker([y, x], {
+        radius: 5,
+        color: "#111",
+        weight: 2,
+        fillColor: "#ffffff",
+        fillOpacity: 0.95,
+        pane: "poiPane"
+      })
+        .addTo(mapObj.poiLayer)
+        .bindTooltip(tip || "Player Start");
+    }
+  }
+}
+
 function nudgeMapForTopbarToggle(prevHeight, nextHeight){
   if (!mapObj?.map) return;
 
@@ -1335,11 +1376,11 @@ function renderPoiPanel(){
   const pois = geom?.pois || {};
 
   const rows = [
-    { key: "tributeTerminals", label: "Tribute Terminals", count: (pois.tributeTerminals || []).length },
-    { key: "supplyCrates", label: "Supply Crates", count: (pois.supplyCrates || []).length },
-    { key: "playerStarts", label: "Player Starts", count: (pois.playerStarts || []).length },
-    { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
-    { key: "missions", label: "Missions", count: (pois.missions || []).length }
+    { key: "tributeTerminals", label: "Tribute Terminals", count: poiCount(pois.tributeTerminals) },
+    { key: "supplyCrates", label: "Supply Crates (WIP)", count: poiCount(pois.supplyCrates) },
+    { key: "playerStarts", label: "Player Starts", count: poiCount(pois.playerStarts) },
+    { key: "explorerNotes", label: "Explorer Notes", count: poiCount(pois.explorerNotes) },
+    { key: "missions", label: "Missions", count: poiCount(pois.missions) }
   ].filter(r => r.count > 0);
 
   body.innerHTML = rows.length ? rows.map(r => `
@@ -2463,7 +2504,7 @@ function drawPois(){
 
   drawPoiGroup(geom.pois.tributeTerminals, "tributeTerminals");
   drawPoiGroup(geom.pois.supplyCrates, "supplyCrates");
-  drawPoiGroup(geom.pois.playerStarts, "playerStarts");
+  drawPlayerStarts(geom.pois.playerStarts);
   drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
   drawPoiGroup(geom.pois.missions, "missions");
 }
