@@ -623,7 +623,7 @@ function renderMapEntriesPanel(){
   if (!body) return;
 
   body.innerHTML = `
-    <div class="fp-row" style="gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+    <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
       <button type="button" class="fp-tab ${entryBrowserState.filter === "all" ? "is-on" : ""}" data-entry-filter="all">All</button>
       <button type="button" class="fp-tab ${entryBrowserState.filter === "unique" ? "is-on" : ""}" data-entry-filter="unique">Unique</button>
       <button type="button" class="fp-tab ${entryBrowserState.filter === "shared" ? "is-on" : ""}" data-entry-filter="shared">Shared</button>
