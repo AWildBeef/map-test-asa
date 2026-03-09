@@ -158,6 +158,49 @@ function isEntryVisible(dinoKey, idx){
 /* ============================================================
    UTILS
 ============================================================ */
+function nudgeMapForTopbarToggle(prevHeight, nextHeight){
+  if (!mapObj?.map) return;
+
+  const delta = Number(nextHeight || 0) - Number(prevHeight || 0);
+  if (!delta) return;
+
+  mapObj.map.invalidateSize();
+
+  // positive delta = controls opened taller
+  // pan map upward visually by moving center downward in screen space
+  mapObj.map.panBy([0, Math.round(delta * 0.5)], {
+    animate: false
+  });
+}
+
+function fitOptionsForUI(){
+  const isMobile = window.innerWidth <= 640;
+
+  const topbar = UI.topbar || document.getElementById("topbar");
+  const expanded = topbar?.classList.contains("show-controls");
+  const topbarH = expanded ? (topbar?.offsetHeight ?? 0) : 0;
+
+  const bottomSafe = isMobile ? 70 : 40;
+
+  const padX = isMobile ? 6 : 20;
+  const padTop = isMobile ? 6 : 10;
+  const padBottom = isMobile ? Math.max(bottomSafe, 60) : 20;
+
+  return {
+    paddingTopLeft: [padX, padTop + topbarH],
+    paddingBottomRight: [padX, padBottom]
+  };
+}
+
+function refitMapForUI(){
+  if (!mapObj?.map || !mapObj?.bounds) return;
+
+  mapObj.map.invalidateSize();
+  map.fitBounds(bounds, {
+    paddingTopLeft: [6, 6],
+    paddingBottomRight: [6, 70]
+  });
+}
 
 function mergeEntryTables(baseEntries, modEntries){
   const out = { ...baseEntries };
@@ -556,6 +599,37 @@ function installCopyDelegation(){
   });
 }
 
+const CLOSE_ICON = `
+  <path d="M6 6L18 18M18 6L6 18"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"/>
+`;
+
+const CHEVRON_DOWN_ICON = `
+  <path d="M6 9l6 6 6-6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+`;
+
+function createIconButton(svgPath, viewBox = "0 0 24 24"){
+  const btn = document.createElement("button");
+  btn.className = "fp-btn";
+  btn.type = "button";
+
+  btn.innerHTML = `
+    <svg viewBox="${viewBox}" width="16" height="16" aria-hidden="true">
+      ${svgPath}
+    </svg>
+  `;
+
+  return btn;
+}
+
+
 function ensureInfoPanel(){
   let panel = document.getElementById("dinoInfoPanel");
   if (panel) return panel;
@@ -567,13 +641,24 @@ function ensureInfoPanel(){
   panel.innerHTML = `
     <div class="fp-header">
       <div class="fp-title">Info</div>
-      <div class="fp-actions">
-        <button type="button" class="fp-btn" data-action="min" title="Collapse">⌄</button>
-        <button type="button" class="fp-btn" data-action="hide" title="Hide">✕</button>
-      </div>
+      <div class="fp-actions"></div>
     </div>
     <div class="fp-body"></div>
   `;
+  
+  const actions = panel.querySelector(".fp-actions");
+
+  const minBtn = createIconButton(CHEVRON_DOWN_ICON);
+  minBtn.dataset.action = "min";
+  minBtn.title = "Collapse";
+  minBtn.classList.add("fp-btn-chevron");
+
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+
+  actions.appendChild(minBtn);
+  actions.appendChild(hideBtn);
 
   const mapWrap = document.getElementById("mapWrap") || document.body;
   mapWrap.appendChild(panel);
@@ -607,8 +692,8 @@ function ensureInfoPanel(){
   };
 
   panel.style.position = "absolute";
-  panel.style.left = "14px";
-  panel.style.top = "14px";
+  panel.style.left = "2px";
+  panel.style.top = "2px";
   panel.style.zIndex = "800";
 
   return panel;
@@ -932,18 +1017,24 @@ function ensurePoiPanel(){
   panel.innerHTML = `
     <div class="fp-header">
       <div class="fp-title">Markers</div>
-      <div class="fp-actions">
-        <button type="button" class="fp-btn" data-action="hide" title="Hide">✕</button>
-      </div>
+      <div class="fp-actions"></div>
     </div>
     <div class="fp-body"></div>
   `;
+  
+  const actions = panel.querySelector(".fp-actions");
+
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+
+  actions.appendChild(hideBtn);
 
   const mapWrap = document.getElementById("mapWrap") || document.body;
   mapWrap.appendChild(panel);
 
   panel.style.position = "absolute";
-  panel.style.left = "14px";
+  panel.style.left = "2px";
   panel.style.bottom = "90px";
   panel.style.zIndex = "800";
   panel.style.display = "none";
@@ -1216,6 +1307,140 @@ function renderStatsTable(statsObj) {
 
   return header + rows + `</div>`;
 }
+
+/* ============================================================
+   ATTACKS
+============================================================ */
+
+function cleanAttackName(name){
+  return String(name || "").trim();
+}
+
+function attackNameBase(name){
+  return cleanAttackName(name)
+    .replace(/\s*\((ai|ai only)\)\s*$/i, "")
+    .trim();
+}
+
+function attackKeyForCompare(a){
+  const base = attackNameBase(a?.n);
+  const dmg = Number(a?.d);
+  const dmgKey = Number.isFinite(dmg) ? dmg : "__nodmg__";
+  return `${base.toLowerCase()}::${dmgKey}`;
+}
+
+function isMeaninglessAttack(a){
+  const name = cleanAttackName(a?.n);
+  const dmg = Number(a?.d);
+
+  const noName = !name || name.toLowerCase() === "none";
+  const noDamage = !Number.isFinite(dmg) || dmg === 0;
+
+  return noName && noDamage;
+}
+
+function normalizeAttackRow(a){
+  if (!a || typeof a !== "object") return null;
+
+  const out = {
+    n: cleanAttackName(a.n),
+    i: Number(a.i),
+    s: Number(a.s),
+    ri: Number(a.ri),
+    d: Number(a.d),
+    pr: a.pr === 1 || a.pr === "1" || a.pr === true ? 1 : 0
+  };
+
+  if (!Number.isFinite(out.i)) out.i = null;
+  if (!Number.isFinite(out.s)) out.s = null;
+  if (!Number.isFinite(out.ri)) out.ri = null;
+  if (!Number.isFinite(out.d)) out.d = null;
+
+  if (isMeaninglessAttack(out)) return null;
+
+  return out;
+}
+
+function dedupeDisplayAttacks(attacks){
+  const rows = (Array.isArray(attacks) ? attacks : [])
+    .map(normalizeAttackRow)
+    .filter(Boolean);
+
+  if (!rows.length) return [];
+
+  // If an AI-only version exists and a rider-usable version exists
+  // with same base name + same damage, hide the AI-only one.
+  const hasNonAiTwin = new Set();
+
+  for (const a of rows){
+    if (a.pr === 0){
+      hasNonAiTwin.add(attackKeyForCompare(a));
+    }
+  }
+
+  const filtered = rows.filter(a => {
+    if (a.pr !== 1) return true;
+    return !hasNonAiTwin.has(attackKeyForCompare(a));
+  });
+
+  // Final light dedupe in case exact duplicates still exist
+  const seen = new Set();
+  const out = [];
+
+  for (const a of filtered){
+    const key = [
+      attackNameBase(a.n).toLowerCase(),
+      a.i ?? "",
+      a.s ?? "",
+      a.ri ?? "",
+      a.d ?? "",
+      a.pr
+    ].join("::");
+
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(a);
+  }
+
+  return out;
+}
+
+function renderAttacksTable(attacks){
+  const rows = dedupeDisplayAttacks(attacks);
+
+  if (!rows.length){
+    return `<div style="color:var(--muted)"></div>`;
+  }
+
+  return `
+    <div class="info-section" id="attackTable">
+      <div class="info-subtitle">Attacks</div>
+      <div class="info-subtitle-sub">(work in progress)</div>
+
+      <div class="atkgrid">
+        <div class="atkgrid-head">
+          <div class="atkgrid-th">Name</div>
+          <div class="atkgrid-th num">Damage</div>
+          <div class="atkgrid-th num">Interval</div>
+          <div class="atkgrid-th num">Stamina Cost</div>
+        </div>
+
+        ${rows.map(a => `
+          <div class="atkgrid-row">
+            <div class="atkgrid-td name">
+              <div class="atkgrid-td atkname">${escapeHtml(a.n || "(Unnamed)")}</div>
+              <div class="atkgrid-td wildonly">${a.pr ? "Wild Only" : ""}</div>
+            </div>
+            <div class="atkgrid-td num">${escapeHtml(a.d != null ? fmtStatNum(a.d) : "--")}</div>
+            <div class="atkgrid-td num">${escapeHtml(a.i != null ? fmtStatNum(a.i) : "--")}</div>
+            <div class="atkgrid-td num">${escapeHtml(a.s != null ? fmtStatNum(a.s) : "--")}</div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
 /* ============================================================
    ENTRY META / ROWS
 ============================================================ */
@@ -1484,9 +1709,10 @@ function getSelectedDinoGroup(name){
     isAlpha: first?.flags?.isAlpha,
     isBoss: first?.flags?.isBoss,
     isBossMinion: first?.flags?.isBossMinion,
-    dragWeight: first?.flags?.dragWeight,
-    killXpBase: first?.flags?.killXpBase,
+    dragWeight: first?.flags?.dragWeight || 35,
+    killXpBase: first?.flags?.killXpBase || 2,
     stats: first?.stats || null,
+    attacks: first?.attacks || null,
     entries
   };
 }
@@ -1624,6 +1850,8 @@ function renderDinoTabStats(d){
       </div>
       ${renderStatsTable(d?.stats)}
     </div>
+    
+    ${renderAttacksTable(d?.attacks)}
   `;
 }
 
@@ -2219,7 +2447,9 @@ function initMap(img,size=[2048,2048]){
     zoomSnap: 0.25,
     zoomDelta: 0.25,
     wheelPxPerZoomLevel: 120,
-    zoomControl: false
+    zoomControl: false,
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0
   });
 
   L.control.zoom({ position: "bottomleft" }).addTo(map);
@@ -2240,7 +2470,10 @@ function initMap(img,size=[2048,2048]){
   const layer = L.layerGroup().addTo(map);
   const poiLayer = L.layerGroup().addTo(map);
 
-  map.fitBounds(bounds);
+  map.fitBounds(bounds, {
+    paddingTopLeft: [6, 6],
+    paddingBottomRight: [6, 20]
+  });
 
   return { map, overlay, layer, poiLayer, bounds };
 }
@@ -2810,8 +3043,15 @@ function setupUI(){
     render();
   };
 
-  UI.controlsToggle.onclick=()=>{
+  UI.controlsToggle.onclick = () => {
+    const before = UI.topbar?.offsetHeight ?? 0;
+
     UI.topbar.classList.toggle("show-controls");
+
+    requestAnimationFrame(() => {
+      const after = UI.topbar?.offsetHeight ?? 0;
+      nudgeMapForTopbarToggle(before, after);
+    });
   };
 }
 
@@ -2898,6 +3138,9 @@ async function onMapChanged(){
   Global.mapGeom.set(mapMeta.geomShort, geom);
 
   const img = geom.image || `${PATHS.mapsDir}/${mapMeta.image}`;
+
+  const size = geom.size || [2048,2048];
+  const bounds = [[0,0],[size[1],size[0]]];
 
   if (!mapObj){
     mapObj = initMap(img, geom.size || [2048,2048]);

@@ -207,6 +207,126 @@ body{
 
 
 /* ============================================================
+   Attack Test
+   ============================================================ */
+
+.info-subtitle-sub{
+  font-size:7px;
+  color:var(--muted);
+  margin:0;
+  padding:0; 
+}
+
+#attackTable{
+  margin-top:15px;
+  padding-bottom:0px;
+  align-items:flex-start;
+}
+
+/* Stats "table" */
+.atkgrid {
+  margin-top: 5px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  border-radius:0;
+  background:transparant;
+  border:none;
+}
+
+.atkgrid-head,
+.atkgrid-row {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 1fr);
+  column-gap: 0;
+}
+
+.atkgrid-head {
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.atkgrid-th,
+.atkgrid-td {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.atkgrid-th:last-child,
+.atkgrid-td:last-child {
+  border-right: 0;
+}
+
+.atkgrid-row:not(:last-child) {
+}
+
+.atkgrid-th {
+  display:flex;
+  font-size:12px;
+  font-weight:600;
+  padding:0;
+  padding-left:2px;
+  align-items:left;
+  overflow:wrap;
+  opacity: 0.9;
+}
+
+.atkgrid-td.num {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-size:12px;
+  font-weight:500;
+  padding:0;
+}
+
+.atkgrid-th.num {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-size:12px;
+  font-weight:600;
+  padding:0;
+}
+
+.atkgrid-td.muted {
+  opacity: 0.55;
+}
+
+.atkgrid-td.atkname {
+  display:flex;
+  align-items:left;
+  font-size:12px;
+  font-weight:600;
+  overflow:wrap;
+  padding:1px;
+  padding-left:2px;
+}
+
+.atkgrid-td.wildonly {
+  display:flex;
+  align-items:left;
+  font-size:10px;
+  font-weight:600;
+  overflow:wrap;
+  padding:1px;
+  padding-left:2px;
+}
+
+.atk-pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  opacity: 0.85;
+  background: rgba(255,255,255,0.10);
+}
+
+/* ============================================================
    2) MAP WRAPPER
    ============================================================ */
 #mapWrap{
@@ -447,7 +567,7 @@ body{
   width:100%;
 }
 
-.dd-btn-text .dd-label{
+.dd-label{
   flex:1 1 auto;
   min-width:0;
   text-align:left;
@@ -511,6 +631,22 @@ body{
   z-index:2;
 }
 
+.dd-crumb{
+  padding:0px;
+}
+
+.dd-back{
+  color:white;
+  background:transparent;
+  border-color:transparent;
+  margin:0;
+  padding:4px;
+  font-size:11px;
+  font-weight:900;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
 /* Default list height (fallback) */
 .dd-list{
   max-height:min(33vh, 265px);
@@ -543,7 +679,7 @@ body{
   flex-direction:column;
   min-width:0;
 }
-.dd-item-name{
+.dd-item{
   font-size:12px;
   font-weight:400;
   color:var(--text);
@@ -1238,30 +1374,36 @@ body{
     font-size:9px;
     font-weight:400 !important;
   }
-  
+  .atkgrid-th,
   .statgrid-th {
     font-size:8px;
     font-weight:400;
   }
-
+  .atkgrid-td.num,
   .statgrid-td.num {
     font-size:8px;
     font-weight:300;
   }
-
+  .atkgrid-th.num,
   .statgrid-th.num {
     font-size:8px;
     font-weight:400;
   }
-
+  .atkgrid-td.muted,
   .statgrid-td.muted {
     opacity: 0.55;
   }
-
+  .atkgrid-td.atkname,
   .statgrid-td.statname {
     font-size:8px;
     font-weight:400;
   }
+  
+  .atkgrid-td.wildonly {
+    font-size:6px;
+    font-weight:300;
+    color:red;
+  } 
   
   #dinoInfoPanel .fp-tabs{
     padding-top:8px;
