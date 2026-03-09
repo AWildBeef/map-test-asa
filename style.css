@@ -1022,7 +1022,6 @@ body{
 }
 
 #mapEntriesPanel .entry-meta-line{
-  font-size:8px;
   text-wrap-mode:wrap;
 }
 
@@ -1430,6 +1429,9 @@ body{
   .entry-meta-line{
     font-size:9px;
     font-weight:400 !important;
+  }
+  #mapEntriesPanel .entry-meta-line{
+    font-size:8px;
   }
   .atkgrid-th,
   .statgrid-th {
