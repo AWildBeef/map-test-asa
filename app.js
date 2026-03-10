@@ -169,9 +169,12 @@ function drawPlayerStarts(groups){
   if (!poiVisibility.playerStarts) return;
   if (!groups || typeof groups !== "object") return;
 
+  const regionNames = Object.keys(groups);
+
   for (const [regionName, block] of Object.entries(groups)) {
     const difficulty = block?.difficulty;
     const points = Array.isArray(block?.points) ? block.points : [];
+    const fill = playerStartColorByRegionIndex(regionName, regionNames);
 
     for (const pt of points) {
       if (!Array.isArray(pt) || pt.length < 2) continue;
@@ -189,7 +192,7 @@ function drawPlayerStarts(groups){
         radius: 5,
         color: "#111",
         weight: 2,
-        fillColor: "#ffffff",
+        fillColor: fill,
         fillOpacity: 0.95,
         pane: "poiPane"
       })
@@ -1416,6 +1419,23 @@ function togglePoiPanel(){
   }
 
   updateDockToggles();
+}
+
+function hashString(str){
+  let h = 0;
+  for (let i = 0; i < str.length; i++){
+    h = ((h << 5) - h) + str.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
+function playerStartColorByRegionIndex(regionName, allRegionNames){
+  const names = [...new Set(allRegionNames || [])].sort((a, b) => a.localeCompare(b));
+  const idx = Math.max(0, names.indexOf(regionName));
+
+  const hue = Math.round((idx * 137.508) % 360);
+  return `hsl(${hue}, 72%, 52%)`;
 }
 /* ============================================================
    STATS TABLE
