@@ -106,6 +106,7 @@ body{
   pointer-events:none;
 }
 
+
 /* ============================================================
    Stat Test
    ============================================================ */
@@ -1476,7 +1477,7 @@ body{
 [data-_exportHide="1"]{ display:none !important; }
 
 /* ============================================================
-   15) POI ICONS
+   15) ~~POI ICONS
    ============================================================ */
 .poi-icon .poi-fill { fill: currentColor; }
 .poi-icon { color: #ff00ff; } /* fallback */
@@ -1491,6 +1492,31 @@ body{
     drop-shadow(0 0 2px rgba(0,0,0,.9))
     drop-shadow(0 0 6px rgba(0,0,0,.35))
     drop-shadow(0 0 4px currentColor);
+}
+
+.poi-tip-block + .poi-tip-block{
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.poi-tip-title{
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.poi-tip-bp{
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  opacity: 0.85;
+  margin-bottom: 4px;
+  word-break: break-all;
+  cursor: pointer;
+}
+
+.poi-tip-line{
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 /* ============================================================

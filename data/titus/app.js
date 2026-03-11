@@ -7,7 +7,7 @@
    CONFIG
 ============================================================ */
 
-const ASSET_VER = "dev-2026-03-05-V5";
+const ASSET_VER = "dev-2026-03-05-V6";
 
 const PATHS = {
   spawnGlobal: "data/spawn_global.json",
@@ -2338,8 +2338,188 @@ function renderInfoPanel(){
 }
 
 /* ============================================================
-   POIS
+   ~~POIS
 ============================================================ */
+
+function missionLegendForMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+}
+
+function missionTooltipHtml(p){
+  const legend = missionLegendForMap();
+  const rows = Array.isArray(p?.m) ? p.m : [];
+
+  if (!rows.length) return "Mission";
+
+  const grouped = new Map();
+
+  for (const row of rows){
+    if (!Array.isArray(row) || row.length < 1) continue;
+
+    const idx = row[0];
+    const weight = Number(row[1]);
+    const meta = legend[idx];
+    if (!meta) continue;
+
+    const name = meta.n || "Mission";
+    const kind = meta.k || "";
+    const size = meta.s || "";
+    const diff = meta.d || "";
+    const bp = meta.bp || "";
+
+    if (!grouped.has(name)){
+      grouped.set(name, {
+        name,
+        bp,
+        variants: []
+      });
+    }
+
+    grouped.get(name).variants.push({
+      kind,
+      size,
+      diff,
+      weight: Number.isFinite(weight) ? weight : null
+    });
+  }
+
+  const blocks = [];
+
+  for (const g of grouped.values()){
+    const variantLines = g.variants.map(v => {
+      const left = [v.kind, v.size, v.diff].filter(Boolean).join(" • ");
+      const right = v.weight != null ? ` (${fmt(v.weight)})` : "";
+      return `<div class="poi-tip-sub">${escapeHtml(left + right)}</div>`;
+    }).join("");
+
+    blocks.push(`
+      <div class="poi-tip-block">
+        <div class="poi-tip-title">${escapeHtml(g.name)}</div>
+        ${variantLines}
+        ${
+          g.bp
+            ? `<div class="poi-tip-bp">${escapeHtml(g.bp)}</div>`
+            : ""
+        }
+      </div>
+    `);
+  }
+
+  return blocks.join("");
+}
+
+function missionLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+}
+
+function fmtWeightShort(v){
+  const n = Number(v);
+  if (!Number.isFinite(n)) return "";
+  return fmt(n);
+}
+
+function missionVariantLine(meta, weight){
+  const parts = [];
+
+  if (meta?.k) parts.push(meta.k);
+  if (meta?.s) parts.push(meta.s);
+  if (meta?.d) parts.push(meta.d);
+
+  let line = parts.join(" • ");
+  if (!line) line = "Mission Variant";
+
+  const w = fmtWeightShort(weight);
+  if (w) line += ` (${w})`;
+
+  return line;
+}
+
+function buildMissionGroups(point, legend){
+  const rows = Array.isArray(point?.m) ? point.m : [];
+  const grouped = new Map();
+
+  for (const row of rows){
+    if (!Array.isArray(row) || !row.length) continue;
+
+    const idx = Number(row[0]);
+    const weight = row.length > 1 ? row[1] : null;
+
+    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+    const meta = legend[idx];
+    if (!meta) continue;
+
+    const groupName = String(meta.n || "Mission").trim() || "Mission";
+
+    if (!grouped.has(groupName)){
+      grouped.set(groupName, {
+        name: groupName,
+        bp: meta.bp || "",
+        variants: []
+      });
+    }
+
+    grouped.get(groupName).variants.push({
+      bp: meta.bp || "",
+      k: meta.k || "",
+      d: meta.d || "",
+      s: meta.s || "",
+      w: weight
+    });
+  }
+
+  return [...grouped.values()];
+}
+
+function missionMarkerColor(point, legend){
+  const groups = buildMissionGroups(point, legend);
+  const first = groups[0]?.variants?.[0];
+
+  const kind = String(first?.k || "").toLowerCase();
+
+  if (kind.includes("attack")) return "#ff8a3d";
+  if (kind.includes("defense")) return "#4db6ff";
+  if (kind.includes("resource")) return "#7dff7a";
+
+  return "#ff66cc";
+}
+
+
+
+function drawMissionPois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.missions) return;
+
+  const legend = missionLegendForCurrentMap();
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    const fillColor = missionMarkerColor(p, legend);
+
+    L.circleMarker([y, x], {
+      radius: 7,
+      color: "#111",
+      weight: 2,
+      fillColor,
+      fillOpacity: 0.95,
+      pane: "poiPane"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(missionTooltipHtml(p, legend), {
+        direction: "top",
+        sticky: true,
+        opacity: 0.97
+      });
+  }
+}
+
 
 function cssEscape(s){
   return String(s || "").toLowerCase().replace(/[^a-z0-9_-]/g,"");
@@ -2438,7 +2618,7 @@ function drawPois(){
   drawPoiGroup(geom.pois.supplyCrates, "supplyCrates");
   drawPoiGroup(geom.pois.playerStarts, "playerStarts");
   drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
-  drawPoiGroup(geom.pois.missions, "missions");
+  drawMissionPois(geom.pois.missions || []);
 }
 
 
@@ -3125,8 +3305,6 @@ function mountFancyDropdown(native,host,placeholder){
 
     for(const o of native.options){
 
-      if(!o.value) continue;
-
       const row=document.createElement("div");
 
       row.className="dd-item";
@@ -3321,33 +3499,42 @@ function initRarityLegend(){
 
 function rebuildDinoSelect(){
 
-  const list=State.mode==="dino"?State.names:State.entryList;
+  const list = State.mode === "dino" ? State.names : State.entryList;
+  const placeholder = State.mode === "dino"
+    ? "(Select a Dino)"
+    : "(Select a Spawn Entry)"
 
-  UI.dinoSelect.innerHTML="";
+  UI.dinoSelect.innerHTML = "";
 
-  for(const v of list){
+  // blank / none option
+  const emptyOpt = document.createElement("option");
+  emptyOpt.value = "";
+  emptyOpt.textContent = placeholder;
+  UI.dinoSelect.appendChild(emptyOpt);
 
-    const o=document.createElement("option");
-
-    o.value=v;
-    o.textContent=v;
-
+  for (const v of list){
+    const o = document.createElement("option");
+    o.value = v;
+    o.textContent = v;
     UI.dinoSelect.appendChild(o);
   }
 
-  State.selection=list[0]||"";
+  // preserve selection if possible, otherwise blank
+  if (!list.includes(State.selection)) {
+    State.selection = "";
+  }
 
-  UI.dinoSelect.value=State.selection;
+  UI.dinoSelect.value = State.selection;
 
-  UI.dinoSelect.onchange=()=>{
-    State.selection=UI.dinoSelect.value;
+  UI.dinoSelect.onchange = () => {
+    State.selection = UI.dinoSelect.value || "";
     render();
   };
 
   mountFancyDropdown(
     UI.dinoSelect,
     UI.dinoFancy,
-    State.mode==="dino"?"Search dinos...":"Search spawn entries..."
+    State.mode === "dino" ? "Search dinos..." : "Search spawn entries..."
   );
 }
 
