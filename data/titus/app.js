@@ -158,6 +158,7 @@ function isEntryVisible(dinoKey, idx){
 /* ============================================================
    UTILS
 ============================================================ */
+
 function nudgeMapForTopbarToggle(prevHeight, nextHeight){
   if (!mapObj?.map) return;
 
@@ -1310,7 +1311,7 @@ function renderPoiPanel(){
   const rows = [
     { key: "tributeTerminals", label: "Tribute Terminals", count: (pois.tributeTerminals || []).length },
     { key: "supplyCrates", label: "Supply Crates", count: (pois.supplyCrates || []).length },
-    { key: "playerStarts", label: "Player Starts", count: (pois.playerStarts || []).length },
+    { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
     { key: "missions", label: "Missions", count: (pois.missions || []).length }
   ].filter(r => r.count > 0);
@@ -2341,73 +2342,160 @@ function renderInfoPanel(){
    ~~POIS
 ============================================================ */
 
+function playerStartColorByRegionIndex(regionName, allRegionNames){
+  const names = [...new Set(allRegionNames || [])].sort((a, b) => a.localeCompare(b));
+  const idx = Math.max(0, names.indexOf(regionName));
+
+  const hue = Math.round((idx * 137.508) % 360);
+  return `hsl(${hue}, 72%, 52%)`;
+}
+
+function poiCount(v){
+  if (Array.isArray(v)) return v.length;
+  if (v && typeof v === "object") return Object.keys(v).length;
+  return 0;
+}
+
+function drawPlayerStarts(groups){
+  if (!mapObj?.poiLayer) return;
+  if (!poiVisibility.playerStarts) return;
+  if (!groups || typeof groups !== "object") return;
+
+  const regionNames = Object.keys(groups);
+
+  for (const [regionName, block] of Object.entries(groups)) {
+    const difficulty = block?.difficulty;
+    const points = Array.isArray(block?.points) ? block.points : [];
+    const fill = playerStartColorByRegionIndex(regionName, regionNames);
+
+    for (const pt of points) {
+      if (!Array.isArray(pt) || pt.length < 2) continue;
+
+      const x = Number(pt[0]);
+      const y = Number(pt[1]);
+      if (![x, y].every(Number.isFinite)) continue;
+
+      const tip = [
+        regionName,
+        difficulty != null ? `Difficulty ${difficulty}` : null
+      ].filter(Boolean).join(" • ");
+
+      L.circleMarker([y, x], {
+        radius: 5,
+        color: "#111",
+        weight: 2,
+        fillColor: fill,
+        fillOpacity: 0.95,
+        pane: "poiPane"
+      })
+        .addTo(mapObj.poiLayer)
+        .bindTooltip(tip || "Player Start");
+    }
+  }
+}
+
+function crateShortName(bp){
+  const s = String(bp || "");
+  const cls = s.split(".").pop() || s;
+  return cls.replace(/_C$/, "");
+}
+
+function shortBpName(bp){
+  const s = String(bp || "").trim();
+  if (!s) return "";
+
+  const last = s.split("/").pop() || s;
+  return last.split(".")[0] || last;
+}
+
+function supplyCrateTooltipHtml(p){
+  const crates = Array.isArray(p?.crates) ? p.crates : [];
+  const sources = Array.isArray(p?.sources) ? p.sources : [];
+
+  const crateLines = crates.length
+    ? crates.map(row => {
+        if (!Array.isArray(row) || row.length < 1) return "";
+
+        const bp = row[0] || "";
+        const weight = row[1];
+        const name = shortBpName(bp) || String(bp || "Supply Crate");
+        const w = Number(weight);
+        const suffix = Number.isFinite(w) ? ` (${fmt(w)})` : "";
+
+        return `<div class="poi-tip-line">${escapeHtml(name + suffix)}</div>`;
+      }).filter(Boolean).join("")
+    : `<div class="poi-tip-line">No crates listed</div>`;
+
+  const sourceBlock = sources.length
+    ? `
+      <div class="poi-tip-subtitle">Sources</div>
+      ${sources.map(s => `
+        <div class="poi-tip-line poi-tip-bp">${escapeHtml(s)}</div>
+      `).join("")}
+    `
+    : "";
+
+  return `
+    <div class="poi-tip-block">
+      <div class="poi-tip-title">Supply Drops</div>
+      ${crateLines}
+      ${sourceBlock}
+    </div>
+  `;
+}
+
+function drawSupplyCratePois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.supplyCrates) return;
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    L.circleMarker([y, x], {
+      radius: 7,
+      color: "#111",
+      weight: 2,
+      fillColor: "#ffd54a",
+      fillOpacity: 0.95,
+      pane: "poiPane"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(supplyCrateTooltipHtml(p), {
+        direction: "auto",
+        sticky: true,
+        offset: [0, -14],
+        opacity: 0.97,
+        className: "supply-tooltip",
+        autoPan: true
+      });
+  }
+}
+
 function missionLegendForMap(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
   return Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
 }
 
-function missionTooltipHtml(p){
-  const legend = missionLegendForMap();
-  const rows = Array.isArray(p?.m) ? p.m : [];
+function missionTooltipHtml(point, legend){
+  const groups = buildMissionGroups(point, legend);
 
-  if (!rows.length) return "Mission";
-
-  const grouped = new Map();
-
-  for (const row of rows){
-    if (!Array.isArray(row) || row.length < 1) continue;
-
-    const idx = row[0];
-    const weight = Number(row[1]);
-    const meta = legend[idx];
-    if (!meta) continue;
-
-    const name = meta.n || "Mission";
-    const kind = meta.k || "";
-    const size = meta.s || "";
-    const diff = meta.d || "";
-    const bp = meta.bp || "";
-
-    if (!grouped.has(name)){
-      grouped.set(name, {
-        name,
-        bp,
-        variants: []
-      });
-    }
-
-    grouped.get(name).variants.push({
-      kind,
-      size,
-      diff,
-      weight: Number.isFinite(weight) ? weight : null
-    });
+  if (!groups.length){
+    return `<div class="poi-tip-title">Mission</div>`;
   }
 
-  const blocks = [];
-
-  for (const g of grouped.values()){
-    const variantLines = g.variants.map(v => {
-      const left = [v.kind, v.size, v.diff].filter(Boolean).join(" • ");
-      const right = v.weight != null ? ` (${fmt(v.weight)})` : "";
-      return `<div class="poi-tip-sub">${escapeHtml(left + right)}</div>`;
-    }).join("");
-
-    blocks.push(`
-      <div class="poi-tip-block">
-        <div class="poi-tip-title">${escapeHtml(g.name)}</div>
-        ${variantLines}
-        ${
-          g.bp
-            ? `<div class="poi-tip-bp">${escapeHtml(g.bp)}</div>`
-            : ""
-        }
+  return groups.map(g => `
+    <div class="poi-tip-block">
+      <div class="poi-tip-title">${escapeHtml(g.name)}</div>
+      <div class="poi-tip-lines">
+        ${g.variants.map(v => `
+          <div class="poi-tip-line">${escapeHtml(missionVariantLine(v, v.w))}</div>
+        `).join("")}
       </div>
-    `);
-  }
-
-  return blocks.join("");
+    </div>
+  `).join("");
 }
 
 function missionLegendForCurrentMap(){
@@ -2513,9 +2601,11 @@ function drawMissionPois(points){
     })
       .addTo(mapObj.poiLayer)
       .bindTooltip(missionTooltipHtml(p, legend), {
-        direction: "top",
+        direction: "auto",
         sticky: true,
-        opacity: 0.97
+        opacity: 0.97,
+        className: "mission-tooltip",
+        autoPan: true
       });
   }
 }
@@ -2556,7 +2646,7 @@ function poiColor(type){
   if (t.includes("blue")) return "#4da3ff";
   if (t.includes("green")) return "#5cff6b";
   if (t.includes("red")) return "#ff4d4d";
-  if (t.includes("tek")) return "#b388ff";
+  if (t.includes("tek") || t.includes("titan")) return "#b388ff";
 
   return "#ffffff";
 }
@@ -2576,9 +2666,13 @@ function drawPoiGroup(points, groupName){
 
     const color = poiColor(p.type);
     const type = String(p.type || "").toLowerCase();
+    const tooltipHtml =
+      groupName === "supplyCrates"
+        ? supplyCrateTooltipHtml(p)
+        : (p.label || p.type || "POI");
 
     // TEK terminals get the special icon
-    if (type.includes("tek")) {
+    if (type.includes("tek") || type.includes("titan")) {
 
       const icon = makeTerminalIcon(type);
 
@@ -2587,7 +2681,11 @@ function drawPoiGroup(points, groupName){
         pane: "poiPane"
       })
         .addTo(mapObj.poiLayer)
-        .bindTooltip(p.label || p.type || "POI");
+        .bindTooltip(tooltipHtml, {
+          direction: "top",
+          sticky: true,
+          opacity: 0.97
+        });
 
       marker.getElement()?.style.setProperty("color", color);
       continue;
@@ -2615,8 +2713,8 @@ function drawPois(){
   if (!geom?.pois) return;
 
   drawPoiGroup(geom.pois.tributeTerminals, "tributeTerminals");
-  drawPoiGroup(geom.pois.supplyCrates, "supplyCrates");
-  drawPoiGroup(geom.pois.playerStarts, "playerStarts");
+  drawSupplyCratePois(geom.pois.supplyCrates || []);
+  drawPlayerStarts(geom.pois.playerStarts);
   drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
   drawMissionPois(geom.pois.missions || []);
 }
@@ -2892,7 +2990,8 @@ function initMap(img,size=[2048,2048]){
   map.createPane("poiPane");
 
   map.getPane("spawnPane").style.zIndex = 410;
-  map.getPane("poiPane").style.zIndex = 650;
+  map.getPane("poiPane").style.zIndex = 620;
+  map.getPane("tooltipPane").style.zIndex = 900;
 
   const overlay = L.imageOverlay(img, bounds).addTo(map);
 
