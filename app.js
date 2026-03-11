@@ -589,6 +589,12 @@ function getFilteredMapEntryRows(){
 /* ============================================================
    MAP ENTRIES PANEL
 ============================================================ */
+function setMainSelection(value){
+  if (!UI.dinoSelect) return;
+  UI.dinoSelect.value = value;
+  UI.dinoSelect.dispatchEvent(new Event("change"));
+}
+
 
 function ensureMapEntriesPanel(){
   let panel = document.getElementById("mapEntriesPanel");
@@ -679,11 +685,7 @@ function renderMapEntriesList(){
       State.mode = "entry";
       syncModeButton();
       rebuildDinoSelect();
-
-      State.selection = entryName;
-      UI.dinoSelect.value = entryName;
-
-      render();
+      setMainSelection(entryName);
     };
   });
 }
@@ -1379,9 +1381,9 @@ function renderPoiPanel(){
   const pois = geom?.pois || {};
 
   const rows = [
-    { key: "tributeTerminals", label: "Tribute Terminals", count: poiCount(pois.tributeTerminals) },
+    { key: "tributeTerminals", label: "Obelisks/Terminals", count: poiCount(pois.tributeTerminals) },
     { key: "supplyCrates", label: "Supply Crates (WIP)", count: poiCount(pois.supplyCrates) },
-    { key: "playerStarts", label: "Player Starts", count: poiCount(pois.playerStarts) },
+    { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes", label: "Explorer Notes", count: poiCount(pois.explorerNotes) },
     { key: "missions", label: "Missions", count: poiCount(pois.missions) }
   ].filter(r => r.count > 0);
