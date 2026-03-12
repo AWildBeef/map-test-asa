@@ -1510,6 +1510,8 @@ body{
 
 .poi-supply{
   mix-blend-mode: hard-light;
+  filter:
+    drop-shadow(0 0 2px rgba(0,0,0,.9));
 }
 
 .leaflet-tooltip,

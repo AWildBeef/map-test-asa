@@ -2461,12 +2461,13 @@ function drawHordePois(points){
     const fillColor = hordeMarkerColor(p);
 
     L.circleMarker([y, x], {
-      radius: 7,
+      radius: 6,
       color: "#111",
-      weight: 2,
+      weight: 2.2,
       fillColor,
       fillOpacity: 0.95,
-      pane: "poiPane"
+      pane: "poiPane",
+      className:"poi-horde"
     })
       .addTo(mapObj.poiLayer)
       .bindTooltip(hordeTooltipHtml(p, legend), {
@@ -2521,10 +2522,11 @@ function drawPlayerStarts(groups){
       L.circleMarker([y, x], {
         radius: 5,
         color: "#111",
-        weight: 2,
+        weight: 1.5,
         fillColor: fill,
         fillOpacity: 0.95,
-        pane: "poiPane"
+        pane: "poiPane",
+        className:"poi-pstart"
       })
         .addTo(mapObj.poiLayer)
         .bindTooltip(tip || "Player Start"), {
@@ -2613,12 +2615,13 @@ function drawSupplyCratePois(points){
     if (![x, y].every(Number.isFinite)) continue;
 
     L.circleMarker([y, x], {
-      radius: 7,
+      radius: 6,
       color: "#111",
-      weight: 2,
+      weight: 2.2,
       fillColor: "#ffd54a",
       fillOpacity: 0.95,
-      pane: "poiPane"
+      pane: "poiPane",
+      className:"poi-supply"
     })
       .addTo(mapObj.poiLayer)
       .bindTooltip(supplyCrateTooltipHtml(p, legend), {
@@ -2751,12 +2754,13 @@ function drawMissionPois(points){
     const fillColor = missionMarkerColor(p, legend);
 
     L.circleMarker([y, x], {
-      radius: 7,
+      radius: 6,
       color: "#111",
-      weight: 2,
+      weight: 2.2,
       fillColor,
       fillOpacity: 0.95,
-      pane: "poiPane"
+      pane: "poiPane",
+      className:"poi-mission"
     })
       .addTo(mapObj.poiLayer)
       .bindTooltip(missionTooltipHtml(p, legend), {
@@ -2777,14 +2781,18 @@ function cssEscape(s){
 function makeTerminalIcon(type){
   const cls = cssEscape(type);
 
+  const size = 45;
+
   return L.divIcon({
     className: `poi-icon poi-${cls}`,
     html: `
-      <svg width="26" height="34" viewBox="-10 -12 20 26">
-        
+      <svg width="${size}" height="${size}" viewBox="-10 -12 20 26">
+
         <!-- white frame -->
         <path d="M -3 0 L 0 -8 L 3 0 L 0 5 Z"
-              fill="white"
+              fill="black"
+              stroke="white"
+              stroke-width="0.5"
               opacity="0.95"/>
 
         <!-- inner core -->
@@ -2794,9 +2802,25 @@ function makeTerminalIcon(type){
               opacity="0.9"/>
       </svg>
     `,
-    iconSize:[22,22],
-    iconAnchor:[11,20]
+    iconSize:[size,size],
+    iconAnchor:[size/2,size*0.58333]
   });
+}
+
+
+function poiRadius(type){
+  const t = String(type || "").toLowerCase();
+
+  if (t.includes("cityterminal")) return 4;
+  if (t.includes("beacon")) return 3;
+
+  if (t.includes("blue")) return 7;
+  if (t.includes("green")) return 7;
+  if (t.includes("red")) return 7;
+
+  if (t.includes("tek") || t.includes("titan")) return 15;
+
+  return 6;
 }
 
 function poiColor(type){
@@ -2808,6 +2832,7 @@ function poiColor(type){
   if (t.includes("blue")) return "#4da3ff";
   if (t.includes("green")) return "#5cff6b";
   if (t.includes("red")) return "#ff4d4d";
+  if (t.includes("corrupt")) return "#555bcf";
   if (t.includes("tek") || t.includes("titan")) return "#b388ff";
 
   return "#ffffff";
@@ -2844,7 +2869,7 @@ function drawPoiGroup(points, groupName){
       })
         .addTo(mapObj.poiLayer)
         .bindTooltip(tooltipHtml, {
-          direction: "top",
+          direction: "auto",
           sticky: true,
           opacity: 0.97,
           className: "basic-tooltip",
@@ -2857,12 +2882,13 @@ function drawPoiGroup(points, groupName){
 
     // Everything else = circle markers (red/blue/green obelisks)
     L.circleMarker([y, x], {
-      radius: 8,
+      radius: poiRadius(type),
       color: "#111",
-      weight: 2,
+      weight: 1,
       fillColor: color,
       fillOpacity: 0.95,
-      pane: "poiPane"
+      pane: "poiPane",
+      className:"poi-basic"
     })
       .addTo(mapObj.poiLayer)
       .bindTooltip(p.label || p.type || "POI");
