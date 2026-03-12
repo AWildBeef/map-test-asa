@@ -7,7 +7,7 @@
    CONFIG
 ============================================================ */
 
-const ASSET_VER = "dev-2026-03-05-V5";
+const ASSET_VER = "dev-2026-03-05-V6";
 
 const PATHS = {
   spawnGlobal: "data/spawn_global.json",
@@ -112,7 +112,8 @@ const poiVisibility = {
   supplyCrates: false,
   playerStarts: false,
   explorerNotes: false,
-  missions: false
+  missions: false,
+  hordeEvents: false
 };
 
 let showRarityLegend = false;
@@ -158,49 +159,6 @@ function isEntryVisible(dinoKey, idx){
 /* ============================================================
    UTILS
 ============================================================ */
-function poiCount(v){
-  if (Array.isArray(v)) return v.length;
-  if (v && typeof v === "object") return Object.keys(v).length;
-  return 0;
-}
-
-function drawPlayerStarts(groups){
-  if (!mapObj?.poiLayer) return;
-  if (!poiVisibility.playerStarts) return;
-  if (!groups || typeof groups !== "object") return;
-
-  const regionNames = Object.keys(groups);
-
-  for (const [regionName, block] of Object.entries(groups)) {
-    const difficulty = block?.difficulty;
-    const points = Array.isArray(block?.points) ? block.points : [];
-    const fill = playerStartColorByRegionIndex(regionName, regionNames);
-
-    for (const pt of points) {
-      if (!Array.isArray(pt) || pt.length < 2) continue;
-
-      const x = Number(pt[0]);
-      const y = Number(pt[1]);
-      if (![x, y].every(Number.isFinite)) continue;
-
-      const tip = [
-        regionName,
-        difficulty != null ? `Difficulty ${difficulty}` : null
-      ].filter(Boolean).join(" • ");
-
-      L.circleMarker([y, x], {
-        radius: 5,
-        color: "#111",
-        weight: 2,
-        fillColor: fill,
-        fillOpacity: 0.95,
-        pane: "poiPane"
-      })
-        .addTo(mapObj.poiLayer)
-        .bindTooltip(tip || "Player Start");
-    }
-  }
-}
 
 function nudgeMapForTopbarToggle(prevHeight, nextHeight){
   if (!mapObj?.map) return;
@@ -489,33 +447,6 @@ function mountSourceDrillDropdown(native, host){
   syncLabel();
 }
 
-function preloadImage(url){
-  if (!url) return;
-
-  const img = new Image();
-  img.decoding = "async";
-  img.loading = "eager";
-  img.src = url;
-}
-
-async function preloadAllMapImages(){
-  for (const mapMeta of MAPS){
-    try{
-      const geom = await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
-      const img = geom.image || `${PATHS.mapsDir}/${mapMeta.image}`;
-
-      preloadImage(img);
-
-      if (Array.isArray(mapMeta.backgrounds)){
-        for (const bg of mapMeta.backgrounds){
-          preloadImage(bg.url);
-        }
-      }
-    }catch(err){
-      console.warn("Image preload failed for", mapMeta.id, err);
-    }
-  }
-}
 /* ============================================================
    MAP PANEL TEST
 ============================================================ */
@@ -589,12 +520,6 @@ function getFilteredMapEntryRows(){
 /* ============================================================
    MAP ENTRIES PANEL
 ============================================================ */
-function setMainSelection(value){
-  if (!UI.dinoSelect) return;
-  UI.dinoSelect.value = value;
-  UI.dinoSelect.dispatchEvent(new Event("change"));
-}
-
 
 function ensureMapEntriesPanel(){
   let panel = document.getElementById("mapEntriesPanel");
@@ -685,7 +610,11 @@ function renderMapEntriesList(){
       State.mode = "entry";
       syncModeButton();
       rebuildDinoSelect();
-      setMainSelection(entryName);
+
+      State.selection = entryName;
+      UI.dinoSelect.value = entryName;
+
+      render();
     };
   });
 }
@@ -1381,11 +1310,12 @@ function renderPoiPanel(){
   const pois = geom?.pois || {};
 
   const rows = [
-    { key: "tributeTerminals", label: "Obelisks/Terminals", count: poiCount(pois.tributeTerminals) },
-    { key: "supplyCrates", label: "Supply Crates (WIP)", count: poiCount(pois.supplyCrates) },
+    { key: "tributeTerminals", label: "Tribute Terminals", count: (pois.tributeTerminals || []).length },
+    { key: "supplyCrates", label: "Supply Crates", count: (pois.supplyCrates || []).length },
     { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
-    { key: "explorerNotes", label: "Explorer Notes", count: poiCount(pois.explorerNotes) },
-    { key: "missions", label: "Missions", count: poiCount(pois.missions) }
+    { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
+    { key: "missions", label: "Missions", count: (pois.missions || []).length },
+    { key: "hordeEvents", label: "Horde Events", count: (pois.hordeEvents || []).length }
   ].filter(r => r.count > 0);
 
   body.innerHTML = rows.length ? rows.map(r => `
@@ -1421,23 +1351,6 @@ function togglePoiPanel(){
   }
 
   updateDockToggles();
-}
-
-function hashString(str){
-  let h = 0;
-  for (let i = 0; i < str.length; i++){
-    h = ((h << 5) - h) + str.charCodeAt(i);
-    h |= 0;
-  }
-  return Math.abs(h);
-}
-
-function playerStartColorByRegionIndex(regionName, allRegionNames){
-  const names = [...new Set(allRegionNames || [])].sort((a, b) => a.localeCompare(b));
-  const idx = Math.max(0, names.indexOf(regionName));
-
-  const hue = Math.round((idx * 137.508) % 360);
-  return `hsl(${hue}, 72%, 52%)`;
 }
 /* ============================================================
    STATS TABLE
@@ -2428,8 +2341,430 @@ function renderInfoPanel(){
 }
 
 /* ============================================================
-   POIS
+   ~~POIS
 ============================================================ */
+
+function supplyLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+}
+
+function hordeLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.hordeLegend) ? geom.hordeLegend : [];
+}
+
+function hordeDifficultyLabel(d){
+  const n = Number(d);
+
+  if (n === 1) return "Gamma";
+  if (n === 2) return "Beta";
+  if (n === 3) return "Alpha";
+  if (n === 4) return "Legendary";
+
+  return `Difficulty ${d}`;
+}
+
+function hordeTypeLabel(t){
+  const s = String(t || "");
+
+  if (s.includes("NewEnumerator0")) return "OSD";
+  if (s.includes("NewEnumerator1")) return "Element Node";
+  if (s.includes("NewEnumerator2")) return "OSD / Element Node";
+
+  return "Horde Event";
+}
+
+function buildHordeGroups(point, legend){
+  const rows = Array.isArray(point?.h) ? point.h : [];
+  const grouped = new Map();
+
+  for (const rawIdx of rows){
+    const idx = Number(rawIdx);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+    const meta = legend[idx];
+    if (!meta) continue;
+
+    const name = String(meta.n || "Horde Event").trim() || "Horde Event";
+    const diffLabel = hordeDifficultyLabel(meta.d);
+    const typeLabel = hordeTypeLabel(meta.t);
+
+    const key = `${name}::${diffLabel}`;
+
+    if (!grouped.has(key)){
+      grouped.set(key, {
+        name,
+        difficulty: diffLabel,
+        type: typeLabel,
+        bp: meta.bp || ""
+      });
+    }
+  }
+
+  return [...grouped.values()];
+}
+
+function hordeTooltipHtml(point, legend){
+  const groups = buildHordeGroups(point, legend);
+
+  const pointType = hordeTypeLabel(point?.t);
+  const pointDiff = point?.d != null ? hordeDifficultyLabel(point.d) : "";
+
+  if (!groups.length){
+    return `
+      <div class="poi-tip-block">
+        <div class="poi-tip-title">${escapeHtml(pointType)}</div>
+        ${pointDiff ? `<div class="poi-tip-line">${escapeHtml(`Max: ${pointDiff}`)}</div>` : ""}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="poi-tip-block">
+      <div class="poi-tip-title">${escapeHtml(pointType)}</div>
+      ${pointDiff ? `<div class="poi-tip-line">${escapeHtml(`Max Difficulty: ${pointDiff}`)}</div>` : ""}
+      <div class="poi-tip-lines">
+        ${groups.map(g => `
+          <div class="poi-tip-line">${escapeHtml(`${g.name} • ${g.difficulty}`)}</div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function hordeMarkerColor(point){
+  const t = String(point?.t || "");
+
+  if (t.includes("NewEnumerator1")) return "#7dff7a"; // nodes
+  if (t.includes("NewEnumerator2")) return "#ff66cc"; // both
+  return "#ffd54a"; // osd
+}
+
+function drawHordePois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.hordeEvents) return;
+
+  const legend = hordeLegendForCurrentMap();
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    const fillColor = hordeMarkerColor(p);
+
+    L.circleMarker([y, x], {
+      radius: 7,
+      color: "#111",
+      weight: 2,
+      fillColor,
+      fillOpacity: 0.95,
+      pane: "poiPane"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(hordeTooltipHtml(p, legend), {
+        direction: "auto",
+        sticky: true,
+        opacity: 0.97,
+        className: "horde-tooltip",
+        autoPan: true
+      });
+  }
+}
+
+
+function playerStartColorByRegionIndex(regionName, allRegionNames){
+  const names = [...new Set(allRegionNames || [])].sort((a, b) => a.localeCompare(b));
+  const idx = Math.max(0, names.indexOf(regionName));
+
+  const hue = Math.round((idx * 137.508) % 360);
+  return `hsl(${hue}, 72%, 52%)`;
+}
+
+function poiCount(v){
+  if (Array.isArray(v)) return v.length;
+  if (v && typeof v === "object") return Object.keys(v).length;
+  return 0;
+}
+
+function drawPlayerStarts(groups){
+  if (!mapObj?.poiLayer) return;
+  if (!poiVisibility.playerStarts) return;
+  if (!groups || typeof groups !== "object") return;
+
+  const regionNames = Object.keys(groups);
+
+  for (const [regionName, block] of Object.entries(groups)) {
+    const difficulty = block?.difficulty;
+    const points = Array.isArray(block?.points) ? block.points : [];
+    const fill = playerStartColorByRegionIndex(regionName, regionNames);
+
+    for (const pt of points) {
+      if (!Array.isArray(pt) || pt.length < 2) continue;
+
+      const x = Number(pt[0]);
+      const y = Number(pt[1]);
+      if (![x, y].every(Number.isFinite)) continue;
+
+      const tip = [
+        regionName,
+        difficulty != null ? `Difficulty ${difficulty}` : null
+      ].filter(Boolean).join(" • ");
+
+      L.circleMarker([y, x], {
+        radius: 5,
+        color: "#111",
+        weight: 2,
+        fillColor: fill,
+        fillOpacity: 0.95,
+        pane: "poiPane"
+      })
+        .addTo(mapObj.poiLayer)
+        .bindTooltip(tip || "Player Start"), {
+          direction: "auto",
+          sticky: true,
+          opacity: 0.97,
+          className: "pstart-tooltip",
+          autoPan: true
+        };
+    }
+  }
+}
+
+function crateShortName(bp){
+  const s = String(bp || "");
+  const cls = s.split(".").pop() || s;
+  return cls.replace(/_C$/, "");
+}
+
+function shortBpName(bp){
+  const s = String(bp || "").trim();
+  if (!s) return "";
+
+  const last = s.split("/").pop() || s;
+  return last.split(".")[0] || last;
+}
+
+function supplyCrateTooltipHtml(p, legend){
+  const crateRows = Array.isArray(p?.c) ? p.c : [];
+  const sourceIds = Array.isArray(p?.s) ? p.s : [];
+
+  const crateLines = crateRows.length
+    ? crateRows.map(row => {
+        if (!Array.isArray(row) || row.length < 1) return "";
+
+        const idx = Number(row[0]);
+        const weight = row[1];
+
+        const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length
+          ? legend[idx]
+          : null;
+
+        const bp = meta?.bp || "";
+        const name = meta?.n || shortBpName(bp) || "Supply Crate";
+
+        const w = Number(weight);
+        const suffix = Number.isFinite(w) ? ` (${fmt(w)})` : "";
+
+        return `<div class="poi-tip-line">${escapeHtml(name + suffix)}</div>`;
+      }).filter(Boolean).join("")
+    : `<div class="poi-tip-line">No crates listed</div>`;
+
+  const sourceBlock = sourceIds.length
+    ? `
+      <div class="poi-tip-subtitle">Sources</div>
+      ${sourceIds.map(rawIdx => {
+        const idx = Number(rawIdx);
+        const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length
+          ? legend[idx]
+          : null;
+
+        const name = meta?.n || meta?.bp || `Source ${idx}`;
+        return `<div class="poi-tip-line poi-tip-bp">${escapeHtml(name)}</div>`;
+      }).join("")}
+    `
+    : "";
+
+  return `
+    <div class="poi-tip-block">
+      <div class="poi-tip-title">Supply Drops</div>
+      ${crateLines}
+      ${sourceBlock}
+    </div>
+  `;
+}
+
+function drawSupplyCratePois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.supplyCrates) return;
+
+  const legend = supplyLegendForCurrentMap();
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    L.circleMarker([y, x], {
+      radius: 7,
+      color: "#111",
+      weight: 2,
+      fillColor: "#ffd54a",
+      fillOpacity: 0.95,
+      pane: "poiPane"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(supplyCrateTooltipHtml(p, legend), {
+        direction: "auto",
+        sticky: true,
+        offset: [0, -14],
+        opacity: 0.97,
+        className: "supply-tooltip",
+        autoPan: true
+      });
+  }
+}
+
+function missionLegendForMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+}
+
+function missionTooltipHtml(point, legend){
+  const groups = buildMissionGroups(point, legend);
+
+  if (!groups.length){
+    return `<div class="poi-tip-title">Mission</div>`;
+  }
+
+  return groups.map(g => `
+    <div class="poi-tip-block">
+      <div class="poi-tip-title">${escapeHtml(g.name)}</div>
+      <div class="poi-tip-lines">
+        ${g.variants.map(v => `
+          <div class="poi-tip-line">${escapeHtml(missionVariantLine(v, v.w))}</div>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function missionLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+}
+
+function fmtWeightShort(v){
+  const n = Number(v);
+  if (!Number.isFinite(n)) return "";
+  return fmt(n);
+}
+
+function missionVariantLine(meta, weight){
+  const parts = [];
+
+  if (meta?.k) parts.push(meta.k);
+  if (meta?.s) parts.push(meta.s);
+  if (meta?.d) parts.push(meta.d);
+
+  let line = parts.join(" • ");
+  if (!line) line = "Mission Variant";
+
+  const w = fmtWeightShort(weight);
+  if (w) line += ` (${w})`;
+
+  return line;
+}
+
+function buildMissionGroups(point, legend){
+  const rows = Array.isArray(point?.m) ? point.m : [];
+  const grouped = new Map();
+
+  for (const row of rows){
+    if (!Array.isArray(row) || !row.length) continue;
+
+    const idx = Number(row[0]);
+    const weight = row.length > 1 ? row[1] : null;
+
+    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+    const meta = legend[idx];
+    if (!meta) continue;
+
+    const groupName = String(meta.n || "Mission").trim() || "Mission";
+
+    if (!grouped.has(groupName)){
+      grouped.set(groupName, {
+        name: groupName,
+        bp: meta.bp || "",
+        variants: []
+      });
+    }
+
+    grouped.get(groupName).variants.push({
+      bp: meta.bp || "",
+      k: meta.k || "",
+      d: meta.d || "",
+      s: meta.s || "",
+      w: weight
+    });
+  }
+
+  return [...grouped.values()];
+}
+
+function missionMarkerColor(point, legend){
+  const groups = buildMissionGroups(point, legend);
+  const first = groups[0]?.variants?.[0];
+
+  const kind = String(first?.k || "").toLowerCase();
+
+  if (kind.includes("attack")) return "#ff8a3d";
+  if (kind.includes("defense")) return "#4db6ff";
+  if (kind.includes("resource")) return "#7dff7a";
+
+  return "#ff66cc";
+}
+
+
+
+function drawMissionPois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.missions) return;
+
+  const legend = missionLegendForCurrentMap();
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    const fillColor = missionMarkerColor(p, legend);
+
+    L.circleMarker([y, x], {
+      radius: 7,
+      color: "#111",
+      weight: 2,
+      fillColor,
+      fillOpacity: 0.95,
+      pane: "poiPane"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(missionTooltipHtml(p, legend), {
+        direction: "auto",
+        sticky: true,
+        opacity: 0.97,
+        className: "mission-tooltip",
+        autoPan: true
+      });
+  }
+}
+
 
 function cssEscape(s){
   return String(s || "").toLowerCase().replace(/[^a-z0-9_-]/g,"");
@@ -2466,7 +2801,7 @@ function poiColor(type){
   if (t.includes("blue")) return "#4da3ff";
   if (t.includes("green")) return "#5cff6b";
   if (t.includes("red")) return "#ff4d4d";
-  if (t.includes("tek")) return "#b388ff";
+  if (t.includes("tek") || t.includes("titan")) return "#b388ff";
 
   return "#ffffff";
 }
@@ -2486,9 +2821,13 @@ function drawPoiGroup(points, groupName){
 
     const color = poiColor(p.type);
     const type = String(p.type || "").toLowerCase();
+    const tooltipHtml =
+      groupName === "supplyCrates"
+        ? supplyCrateTooltipHtml(p)
+        : (p.label || p.type || "POI");
 
     // TEK terminals get the special icon
-    if (type.includes("tek")) {
+    if (type.includes("tek") || type.includes("titan")) {
 
       const icon = makeTerminalIcon(type);
 
@@ -2497,7 +2836,13 @@ function drawPoiGroup(points, groupName){
         pane: "poiPane"
       })
         .addTo(mapObj.poiLayer)
-        .bindTooltip(p.label || p.type || "POI");
+        .bindTooltip(tooltipHtml, {
+          direction: "top",
+          sticky: true,
+          opacity: 0.97,
+          className: "basic-tooltip",
+          autoPan: true
+        });
 
       marker.getElement()?.style.setProperty("color", color);
       continue;
@@ -2525,10 +2870,11 @@ function drawPois(){
   if (!geom?.pois) return;
 
   drawPoiGroup(geom.pois.tributeTerminals, "tributeTerminals");
-  drawPoiGroup(geom.pois.supplyCrates, "supplyCrates");
+  drawSupplyCratePois(geom.pois.supplyCrates || []);
   drawPlayerStarts(geom.pois.playerStarts);
   drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
-  drawPoiGroup(geom.pois.missions, "missions");
+  drawMissionPois(geom.pois.missions || []);
+  drawHordePois(geom.pois.hordeEvents || []);
 }
 
 
@@ -2802,7 +3148,8 @@ function initMap(img,size=[2048,2048]){
   map.createPane("poiPane");
 
   map.getPane("spawnPane").style.zIndex = 410;
-  map.getPane("poiPane").style.zIndex = 650;
+  map.getPane("poiPane").style.zIndex = 620;
+  map.getPane("tooltipPane").style.zIndex = 900;
 
   const overlay = L.imageOverlay(img, bounds).addTo(map);
 
@@ -3215,8 +3562,6 @@ function mountFancyDropdown(native,host,placeholder){
 
     for(const o of native.options){
 
-      if(!o.value) continue;
-
       const row=document.createElement("div");
 
       row.className="dd-item";
@@ -3411,33 +3756,42 @@ function initRarityLegend(){
 
 function rebuildDinoSelect(){
 
-  const list=State.mode==="dino"?State.names:State.entryList;
+  const list = State.mode === "dino" ? State.names : State.entryList;
+  const placeholder = State.mode === "dino"
+    ? "(Select a Dino)"
+    : "(Select a Spawn Entry)"
 
-  UI.dinoSelect.innerHTML="";
+  UI.dinoSelect.innerHTML = "";
 
-  for(const v of list){
+  // blank / none option
+  const emptyOpt = document.createElement("option");
+  emptyOpt.value = "";
+  emptyOpt.textContent = placeholder;
+  UI.dinoSelect.appendChild(emptyOpt);
 
-    const o=document.createElement("option");
-
-    o.value=v;
-    o.textContent=v;
-
+  for (const v of list){
+    const o = document.createElement("option");
+    o.value = v;
+    o.textContent = v;
     UI.dinoSelect.appendChild(o);
   }
 
-  State.selection=list[0]||"";
+  // preserve selection if possible, otherwise blank
+  if (!list.includes(State.selection)) {
+    State.selection = "";
+  }
 
-  UI.dinoSelect.value=State.selection;
+  UI.dinoSelect.value = State.selection;
 
-  UI.dinoSelect.onchange=()=>{
-    State.selection=UI.dinoSelect.value;
+  UI.dinoSelect.onchange = () => {
+    State.selection = UI.dinoSelect.value || "";
     render();
   };
 
   mountFancyDropdown(
     UI.dinoSelect,
     UI.dinoFancy,
-    State.mode==="dino"?"Search dinos...":"Search spawn entries..."
+    State.mode === "dino" ? "Search dinos..." : "Search spawn entries..."
   );
 }
 
@@ -3532,9 +3886,6 @@ async function boot(){
   initRarityLegend();
 
   await onMapChanged();
-  setTimeout(() => {
-    preloadAllMapImages();
-  }, 300);
 }
 
 boot().catch(e=>{
