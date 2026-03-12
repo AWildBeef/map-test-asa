@@ -2523,7 +2523,13 @@ function drawPlayerStarts(groups){
         pane: "poiPane"
       })
         .addTo(mapObj.poiLayer)
-        .bindTooltip(tip || "Player Start");
+        .bindTooltip(tip || "Player Start"), {
+          direction: "auto",
+          sticky: true,
+          opacity: 0.97,
+          className: "pstart-tooltip",
+          autoPan: true
+        };
     }
   }
 }
@@ -2833,7 +2839,9 @@ function drawPoiGroup(points, groupName){
         .bindTooltip(tooltipHtml, {
           direction: "top",
           sticky: true,
-          opacity: 0.97
+          opacity: 0.97,
+          className: "basic-tooltip",
+          autoPan: true
         });
 
       marker.getElement()?.style.setProperty("color", color);
