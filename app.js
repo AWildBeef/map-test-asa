@@ -113,7 +113,9 @@ const poiVisibility = {
   playerStarts: false,
   explorerNotes: false,
   missions: false,
-  hordeEvents: false
+  hordeEvents: false,
+  cityTerminals: false,
+  beacons: false
 };
 
 let showRarityLegend = false;
@@ -1315,7 +1317,9 @@ function renderPoiPanel(){
     { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
     { key: "missions", label: "Missions", count: (pois.missions || []).length },
-    { key: "hordeEvents", label: "Horde Events", count: (pois.hordeEvents || []).length }
+    { key: "hordeEvents", label: "Horde Events", count: (pois.hordeEvents || []).length },
+    { key: "cityTerminals", label: "City Terminals", count: (pois.cityTerminals || []).length },
+    { key: "beacons", label: "Border Beacons", count: (pois.beacons || []).length }
   ].filter(r => r.count > 0);
 
   body.innerHTML = rows.length ? rows.map(r => `
@@ -2797,6 +2801,9 @@ function makeTerminalIcon(type){
 
 function poiColor(type){
   const t = String(type || "").toLowerCase();
+  
+  if (t.includes("cityterminal")) return "#4db6ff";
+  if (t.includes("beacon")) return "#ff8a3d";
 
   if (t.includes("blue")) return "#4da3ff";
   if (t.includes("green")) return "#5cff6b";
@@ -2875,6 +2882,8 @@ function drawPois(){
   drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
   drawMissionPois(geom.pois.missions || []);
   drawHordePois(geom.pois.hordeEvents || []);
+  drawPoiGroup(geom.pois.cityTerminals, "cityTerminals");
+  drawPoiGroup(geom.pois.beacons, "beacons");
 }
 
 
