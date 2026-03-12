@@ -112,7 +112,8 @@ const poiVisibility = {
   supplyCrates: false,
   playerStarts: false,
   explorerNotes: false,
-  missions: false
+  missions: false,
+  hordeEvents: false
 };
 
 let showRarityLegend = false;
@@ -1313,7 +1314,8 @@ function renderPoiPanel(){
     { key: "supplyCrates", label: "Supply Crates", count: (pois.supplyCrates || []).length },
     { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
-    { key: "missions", label: "Missions", count: (pois.missions || []).length }
+    { key: "missions", label: "Missions", count: (pois.missions || []).length },
+    { key: "hordeEvents", label: "Horde Events", count: (pois.hordeEvents || []).length }
   ].filter(r => r.count > 0);
 
   body.innerHTML = rows.length ? rows.map(r => `
@@ -2342,6 +2344,138 @@ function renderInfoPanel(){
    ~~POIS
 ============================================================ */
 
+function supplyLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+}
+
+function hordeLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return Array.isArray(geom?.hordeLegend) ? geom.hordeLegend : [];
+}
+
+function hordeDifficultyLabel(d){
+  const n = Number(d);
+
+  if (n === 1) return "Gamma";
+  if (n === 2) return "Beta";
+  if (n === 3) return "Alpha";
+  if (n === 4) return "Legendary";
+
+  return `Difficulty ${d}`;
+}
+
+function hordeTypeLabel(t){
+  const s = String(t || "");
+
+  if (s.includes("NewEnumerator0")) return "OSD";
+  if (s.includes("NewEnumerator1")) return "Element Node";
+  if (s.includes("NewEnumerator2")) return "OSD / Element Node";
+
+  return "Horde Event";
+}
+
+function buildHordeGroups(point, legend){
+  const rows = Array.isArray(point?.h) ? point.h : [];
+  const grouped = new Map();
+
+  for (const rawIdx of rows){
+    const idx = Number(rawIdx);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+    const meta = legend[idx];
+    if (!meta) continue;
+
+    const name = String(meta.n || "Horde Event").trim() || "Horde Event";
+    const diffLabel = hordeDifficultyLabel(meta.d);
+    const typeLabel = hordeTypeLabel(meta.t);
+
+    const key = `${name}::${diffLabel}`;
+
+    if (!grouped.has(key)){
+      grouped.set(key, {
+        name,
+        difficulty: diffLabel,
+        type: typeLabel,
+        bp: meta.bp || ""
+      });
+    }
+  }
+
+  return [...grouped.values()];
+}
+
+function hordeTooltipHtml(point, legend){
+  const groups = buildHordeGroups(point, legend);
+
+  const pointType = hordeTypeLabel(point?.t);
+  const pointDiff = point?.d != null ? hordeDifficultyLabel(point.d) : "";
+
+  if (!groups.length){
+    return `
+      <div class="poi-tip-block">
+        <div class="poi-tip-title">${escapeHtml(pointType)}</div>
+        ${pointDiff ? `<div class="poi-tip-line">${escapeHtml(`Max: ${pointDiff}`)}</div>` : ""}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="poi-tip-block">
+      <div class="poi-tip-title">${escapeHtml(pointType)}</div>
+      ${pointDiff ? `<div class="poi-tip-line">${escapeHtml(`Max Difficulty: ${pointDiff}`)}</div>` : ""}
+      <div class="poi-tip-lines">
+        ${groups.map(g => `
+          <div class="poi-tip-line">${escapeHtml(`${g.name} • ${g.difficulty}`)}</div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function hordeMarkerColor(point){
+  const t = String(point?.t || "");
+
+  if (t.includes("NewEnumerator1")) return "#7dff7a"; // nodes
+  if (t.includes("NewEnumerator2")) return "#ff66cc"; // both
+  return "#ffd54a"; // osd
+}
+
+function drawHordePois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.hordeEvents) return;
+
+  const legend = hordeLegendForCurrentMap();
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    const fillColor = hordeMarkerColor(p);
+
+    L.circleMarker([y, x], {
+      radius: 7,
+      color: "#111",
+      weight: 2,
+      fillColor,
+      fillOpacity: 0.95,
+      pane: "poiPane"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(hordeTooltipHtml(p, legend), {
+        direction: "auto",
+        sticky: true,
+        opacity: 0.97,
+        className: "horde-tooltip",
+        autoPan: true
+      });
+  }
+}
+
+
 function playerStartColorByRegionIndex(regionName, allRegionNames){
   const names = [...new Set(allRegionNames || [])].sort((a, b) => a.localeCompare(b));
   const idx = Math.max(0, names.indexOf(regionName));
@@ -2408,17 +2542,24 @@ function shortBpName(bp){
   return last.split(".")[0] || last;
 }
 
-function supplyCrateTooltipHtml(p){
-  const crates = Array.isArray(p?.crates) ? p.crates : [];
-  const sources = Array.isArray(p?.sources) ? p.sources : [];
+function supplyCrateTooltipHtml(p, legend){
+  const crateRows = Array.isArray(p?.c) ? p.c : [];
+  const sourceIds = Array.isArray(p?.s) ? p.s : [];
 
-  const crateLines = crates.length
-    ? crates.map(row => {
+  const crateLines = crateRows.length
+    ? crateRows.map(row => {
         if (!Array.isArray(row) || row.length < 1) return "";
 
-        const bp = row[0] || "";
+        const idx = Number(row[0]);
         const weight = row[1];
-        const name = shortBpName(bp) || String(bp || "Supply Crate");
+
+        const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length
+          ? legend[idx]
+          : null;
+
+        const bp = meta?.bp || "";
+        const name = meta?.n || shortBpName(bp) || "Supply Crate";
+
         const w = Number(weight);
         const suffix = Number.isFinite(w) ? ` (${fmt(w)})` : "";
 
@@ -2426,12 +2567,18 @@ function supplyCrateTooltipHtml(p){
       }).filter(Boolean).join("")
     : `<div class="poi-tip-line">No crates listed</div>`;
 
-  const sourceBlock = sources.length
+  const sourceBlock = sourceIds.length
     ? `
       <div class="poi-tip-subtitle">Sources</div>
-      ${sources.map(s => `
-        <div class="poi-tip-line poi-tip-bp">${escapeHtml(s)}</div>
-      `).join("")}
+      ${sourceIds.map(rawIdx => {
+        const idx = Number(rawIdx);
+        const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length
+          ? legend[idx]
+          : null;
+
+        const name = meta?.n || meta?.bp || `Source ${idx}`;
+        return `<div class="poi-tip-line poi-tip-bp">${escapeHtml(name)}</div>`;
+      }).join("")}
     `
     : "";
 
@@ -2448,6 +2595,8 @@ function drawSupplyCratePois(points){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.supplyCrates) return;
 
+  const legend = supplyLegendForCurrentMap();
+
   for (const p of points){
     const x = Number(p?.x);
     const y = Number(p?.y);
@@ -2462,7 +2611,7 @@ function drawSupplyCratePois(points){
       pane: "poiPane"
     })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(supplyCrateTooltipHtml(p), {
+      .bindTooltip(supplyCrateTooltipHtml(p, legend), {
         direction: "auto",
         sticky: true,
         offset: [0, -14],
@@ -2717,6 +2866,7 @@ function drawPois(){
   drawPlayerStarts(geom.pois.playerStarts);
   drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
   drawMissionPois(geom.pois.missions || []);
+  drawHordePois(geom.pois.hordeEvents || []);
 }
 
 
