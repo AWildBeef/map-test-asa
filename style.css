@@ -1493,6 +1493,25 @@ body{
     drop-shadow(0 0 6px rgba(0,0,0,.35))
     drop-shadow(0 0 4px currentColor);
 }
+
+@keyframes poiPulse{
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.poi-basic{
+  filter:
+    drop-shadow(0 0 2px rgba(0,0,0,.9))
+    drop-shadow(0 0 6px rgba(0,0,0,.35))
+    drop-shadow(0 0 4px currentColor);
+  filter: hue-rotate(90deg);
+}
+
+.poi-supply{
+  mix-blend-mode: hard-light;
+}
+
 .leaflet-tooltip,
 .leaflet-tooltip.basic-tooltip,
 .leaflet-tooltip.pstart-tooltip {
@@ -1515,7 +1534,7 @@ body{
 .leaflet-tooltip.horde-tooltip,
 .leaflet-tooltip.mission-tooltip {
   max-width: 280px;
-  width: 280px;
+  width: 200px;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: anywhere;
