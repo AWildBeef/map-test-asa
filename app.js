@@ -475,6 +475,34 @@ function mountSourceDrillDropdown(native, host){
   syncLabel();
 }
 
+function preloadImage(url){
+  if (!url) return;
+
+  const img = new Image();
+  img.decoding = "async";
+  img.loading = "eager";
+  img.src = url;
+}
+
+async function preloadAllMapImages(){
+  for (const mapMeta of MAPS){
+    try{
+      const geom = await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
+      const img = geom.image || `${PATHS.mapsDir}/${mapMeta.image}`;
+
+      preloadImage(img);
+
+      if (Array.isArray(mapMeta.backgrounds)){
+        for (const bg of mapMeta.backgrounds){
+          preloadImage(bg.url);
+        }
+      }
+    }catch(err){
+      console.warn("Image preload failed for", mapMeta.id, err);
+    }
+  }
+}
+
 /* ============================================================
    ~~STYLE PANEL
 ============================================================ */
@@ -4095,6 +4123,9 @@ async function boot(){
   initRarityLegend();
 
   await onMapChanged();
+  setTimeout(() => {
+    preloadAllMapImages();
+  }, 300);
 }
 
 boot().catch(e=>{
