@@ -12,6 +12,8 @@ const ASSET_VER = "dev-2026-03-05-V6";
 const PATHS = {
   spawnGlobal: "data/spawn_global.json",
   dinoGlobal: "data/dinos_global.json",
+  itemGlobal: "data/items_global.json",
+  lootGlobal: "data/loot_global.json",
   geomDir: "data/MapGeometry",
   mapsDir: "maps"
 };
@@ -82,10 +84,16 @@ async function buildSources(){
 const Global = {
   spawn: null,
   dinos: null,
+  items: null,
+  loot: null,
   baseSpawn: null,
   baseDinos: null,
   modMeta: null,
-  mapGeom: new Map()
+  mapGeom: new Map(),
+
+  resolvedSupplyLegend: new Map(),   // mapShort -> resolved legend rows
+  crateClassToId: new Map(),         // crate class string -> crate id
+  setClassToId: new Map()            // optional for later
 };
 
 const State = {
@@ -110,6 +118,7 @@ let dockState = { mapMeta: null, cfg: null };
 const poiVisibility = {
   tributeTerminals: true,
   supplyCrates: false,
+  artifactCrates: false,
   playerStarts: false,
   explorerNotes: false,
   missions: false,
@@ -127,7 +136,7 @@ const drawStyle = {
 };
 
 /* ============================================================
-   UI
+   ~UI
 ============================================================ */
 
 const UI = {
@@ -165,7 +174,7 @@ function isEntryVisible(dinoKey, idx){
 }
 
 /* ============================================================
-   UTILS
+   ~UTILS
 ============================================================ */
 
 function nudgeMapForTopbarToggle(prevHeight, nextHeight){
@@ -454,6 +463,126 @@ function mountSourceDrillDropdown(native, host){
   native.addEventListener("change", syncLabel);
   syncLabel();
 }
+/* ============================================================
+   ~~NEW LOOT STUFF V1
+============================================================ */
+
+function crateClassFromBp(bp){
+  const s = String(bp || "").trim();
+  if (!s) return "";
+
+  const right = s.split(".").pop() || "";
+  return right;
+}
+
+function buildLootIndexes(){
+  Global.crateClassToId = new Map();
+  Global.setClassToId = new Map();
+
+  const loot = Global.loot || {};
+
+  const crateIndex = Array.isArray(loot.ci) ? loot.ci : [];
+  const setIndex = Array.isArray(loot.si) ? loot.si : [];
+
+  crateIndex.forEach((cls, idx) => {
+    Global.crateClassToId.set(String(cls), idx);
+  });
+
+  setIndex.forEach((cls, idx) => {
+    Global.setClassToId.set(String(cls), idx);
+  });
+}
+
+function buildResolvedSupplyLegend(geom){
+  const legend = Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+  const out = [];
+
+  for (const row of legend){
+    const bp = row?.bp || "";
+    const n = row?.n || "";
+    const cls = crateClassFromBp(bp);
+
+    const crateId = Global.crateClassToId.has(cls)
+      ? Global.crateClassToId.get(cls)
+      : null;
+
+    const crateData = Number.isInteger(crateId)
+      ? Global.loot?.c?.[crateId] || null
+      : null;
+
+    const isArtifact = cls.toLowerCase().includes("artifactcrate");
+    const isSupply = cls.toLowerCase().includes("supplycrate");
+
+    out.push({
+      bp,
+      n,
+      cls,
+      crateId,
+      crateData,
+      isArtifact,
+      isSupply
+    });
+  }
+
+  return out;
+}
+
+function resolvedSupplyLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  if (!mapMeta) return [];
+  return Global.resolvedSupplyLegend.get(mapMeta.geomShort) || [];
+}
+
+function resolvedCratesForPoi(poi){
+  const legend = resolvedSupplyLegendForCurrentMap();
+  const rows = Array.isArray(poi?.c) ? poi.c : [];
+  const out = [];
+
+  for (const row of rows){
+    if (!Array.isArray(row) || !row.length) continue;
+
+    const legendIdx = Number(row[0]);
+    const weight = row[1];
+
+    if (!Number.isInteger(legendIdx) || legendIdx < 0 || legendIdx >= legend.length){
+      continue;
+    }
+
+    const meta = legend[legendIdx];
+    if (!meta) continue;
+
+    out.push({
+      legendIdx,
+      weight,
+      crateId: meta.crateId,
+      cls: meta.cls,
+      bp: meta.bp,
+      n: meta.n,
+      isArtifact: !!meta.isArtifact,
+      isSupply: !!meta.isSupply
+    });
+  }
+
+  return out;
+}
+
+function poiHasArtifactCrate(poi){
+  return resolvedCratesForPoi(poi).some(r => r.isArtifact);
+}
+
+function poiHasSupplyCrate(poi){
+  return resolvedCratesForPoi(poi).some(r => r.isSupply);
+}
+
+function countArtifactPois(points){
+  return (Array.isArray(points) ? points : []).filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p)).length;
+}
+
+function countSupplyPois(points){
+  return (Array.isArray(points) ? points : []).filter(p => poiHasSupplyCrate(p)).length;
+}
+
+
 
 /* ============================================================
    ~~STYLE PANEL
@@ -653,7 +782,7 @@ function getFilteredMapEntryRows(){
 }
 
 /* ============================================================
-   MAP ENTRIES PANEL
+   ~MAP ENTRIES PANEL
 ============================================================ */
 
 function ensureMapEntriesPanel(){
@@ -1190,7 +1319,7 @@ function fmtNum(v, decimals = 0){
 
 
 /* ============================================================
-   DOCK / TOOLBAR
+   ~DOCK / TOOLBAR
 ============================================================ */
 
 function isPanelVisible(id){
@@ -1458,8 +1587,9 @@ function renderPoiPanel(){
   const pois = geom?.pois || {};
 
   const rows = [
-    { key: "tributeTerminals", label: "Tribute Terminals", count: (pois.tributeTerminals || []).length },
-    { key: "supplyCrates", label: "Supply Crates", count: (pois.supplyCrates || []).length },
+    { key: "tributeTerminals", label: "Obelisks & Terminals", count: (pois.tributeTerminals || []).length },
+    { key: "supplyCrates", label: "Supply Drops", count: (pois.supplyCrates || []).length },
+    { key: "artifactCrates", label: "Artifacts", count: (pois.supplyCrates || []).length },
     { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
     { key: "missions", label: "Missions", count: (pois.missions || []).length },
@@ -1503,7 +1633,7 @@ function togglePoiPanel(){
   updateDockToggles();
 }
 /* ============================================================
-   STATS TABLE
+   ~STATS TABLE
 ============================================================ */
 const ARK_DEFAULT_MULT = {
   Health:  { iw: 1, it: 0.2, ta: 0.14, tm: 0.44 },
@@ -1711,7 +1841,7 @@ function renderStatsTable(statsObj) {
 }
 
 /* ============================================================
-   ATTACKS
+   ~ATTACKS
 ============================================================ */
 
 function cleanAttackName(name){
@@ -1844,7 +1974,7 @@ function renderAttacksTable(attacks){
 }
 
 /* ============================================================
-   ENTRY META / ROWS
+   ~ENTRY META / ROWS
 ============================================================ */
 
 function buildEntryMetaLines(entry){
@@ -1929,7 +2059,7 @@ function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino){
 }
 
 /* ============================================================
-   PANEL DATA HELPERS
+   ~PANEL DATA HELPERS
 ============================================================ */
 
 function mountPanelSwipe(container, tabs, getActive, setActive){
@@ -2120,7 +2250,7 @@ function getSelectedDinoGroup(name){
 }
 
 /* ============================================================
-   DINO PANEL
+   ~DINO PANEL
 ============================================================ */
 
 const DINO_PANEL_TABS = [
@@ -2342,7 +2472,7 @@ function otherSexNameForSelected(d, selectedLabel){
 }
 
 /* ============================================================
-   ENTRY PANEL
+   ~ENTRY PANEL
 ============================================================ */
 
 const ENTRY_PANEL_TABS = [
@@ -2474,7 +2604,7 @@ function renderEntryPanel(entryName){
 }
 
 /* ============================================================
-   UNIFIED PANEL RENDER
+   ~UNIFIED PANEL RENDER
 ============================================================ */
 
 function renderInfoPanel(){
@@ -2700,29 +2830,18 @@ function shortBpName(bp){
   return last.split(".")[0] || last;
 }
 
-function supplyCrateTooltipHtml(p, legend){
-  const crateRows = Array.isArray(p?.c) ? p.c : [];
+function supplyCrateTooltipHtml(p){
+  const crates = resolvedCratesForPoi(p);
+  const legend = resolvedSupplyLegendForCurrentMap();
   const sourceIds = Array.isArray(p?.s) ? p.s : [];
 
-  const crateLines = crateRows.length
-    ? crateRows.map(row => {
-        if (!Array.isArray(row) || row.length < 1) return "";
-
-        const idx = Number(row[0]);
-        const weight = row[1];
-
-        const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length
-          ? legend[idx]
-          : null;
-
-        const bp = meta?.bp || "";
-        const name = meta?.n || shortBpName(bp) || "Supply Crate";
-
-        const w = Number(weight);
+  const crateLines = crates.length
+    ? crates.map(row => {
+        const name = row.n || row.cls || "Supply Crate";
+        const w = Number(row.weight);
         const suffix = Number.isFinite(w) ? ` (${fmt(w)})` : "";
-
         return `<div class="poi-tip-line">${escapeHtml(name + suffix)}</div>`;
-      }).filter(Boolean).join("")
+      }).join("")
     : `<div class="poi-tip-line">No crates listed</div>`;
 
   const sourceBlock = sourceIds.length
@@ -2740,9 +2859,13 @@ function supplyCrateTooltipHtml(p, legend){
     `
     : "";
 
+  const title = poiHasArtifactCrate(poi = p) && !poiHasSupplyCrate(poi = p)
+    ? "Artifact Crates"
+    : "Supply Drops";
+
   return `
     <div class="poi-tip-block">
-      <div class="poi-tip-title">Supply Drops</div>
+      <div class="poi-tip-title">${escapeHtml(title)}</div>
       ${crateLines}
       ${sourceBlock}
     </div>
@@ -2751,26 +2874,33 @@ function supplyCrateTooltipHtml(p, legend){
 
 function drawSupplyCratePois(points){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
-  if (!poiVisibility.supplyCrates) return;
-
-  const legend = supplyLegendForCurrentMap();
 
   for (const p of points){
     const x = Number(p?.x);
     const y = Number(p?.y);
     if (![x, y].every(Number.isFinite)) continue;
 
+    const isArtifactOnly = poiHasArtifactCrate(p) && !poiHasSupplyCrate(p);
+    const isSupply = poiHasSupplyCrate(p);
+
+    if (isArtifactOnly && !poiVisibility.artifactCrates) continue;
+    if (isSupply && !poiVisibility.supplyCrates) continue;
+    if (!isArtifactOnly && !isSupply) continue;
+
+    const fillColor = isArtifactOnly ? "#b388ff" : "#ffd54a";
+    const cls = isArtifactOnly ? "poi-artifact" : "poi-supply";
+
     L.circleMarker([y, x], {
       radius: 6,
       color: "#111",
       weight: 2.2,
-      fillColor: "#ffd54a",
+      fillColor,
       fillOpacity: 0.95,
       pane: "poiPane",
-      className:"poi-supply"
+      className: cls
     })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(supplyCrateTooltipHtml(p, legend), {
+      .bindTooltip(supplyCrateTooltipHtml(p), {
         direction: "auto",
         sticky: true,
         offset: [0, -14],
@@ -3060,7 +3190,7 @@ function drawPois(){
 
 
 /* ============================================================
-   RARITY ENGINE
+   ~RARITY ENGINE
 ============================================================ */
 
 const RARITY_THRESHOLDS=[
@@ -3142,7 +3272,7 @@ function downgradeRarity(label,steps){
   return RARITY_ORDER[j];
 }
 /* ============================================================
-   SPAWN RARITY CALCULATION
+   ~SPAWN RARITY CALCULATION
 ============================================================ */
 
 function entryTotalExpected(entryName){
@@ -3297,7 +3427,7 @@ function entryRarityForEntry(entryName){
   return rarity / totalExpected;
 }
 /* ============================================================
-   MAP RENDERING
+   ~MAP RENDERING
 ============================================================ */
 
 let mapObj = null;
@@ -3372,7 +3502,7 @@ function styleForEntry(meta, color){
 }
 
 /* ============================================================
-   WORLD REPLACEMENTS
+   ~WORLD REPLACEMENTS
 ============================================================ */
 
 function normalizeBp(bp){
@@ -3543,7 +3673,7 @@ function getDinoObjByBp(bp){
   return null;
 }
 /* ============================================================
-   DRAW ENTRY
+   ~DRAW ENTRY
 ============================================================ */
 
 function drawEntry(entryName, rarityScore){
@@ -3597,7 +3727,7 @@ function drawEntry(entryName, rarityScore){
 }
 
 /* ============================================================
-   DRAW DINO
+   ~DRAW DINO
 ============================================================ */
 
 function drawDino(name){
@@ -3617,7 +3747,7 @@ function drawDino(name){
 }
 
 /* ============================================================
-   INDEX BUILDER
+   ~INDEX BUILDER
 ============================================================ */
 
 function rebuildMapIndices(){
@@ -3707,7 +3837,7 @@ function rebuildMapIndices(){
 }
 
 /* ============================================================
-   DROPDOWN
+   ~DROPDOWN
 ============================================================ */
 
 function mountFancyDropdown(native,host,placeholder){
@@ -3802,7 +3932,7 @@ function mountFancyDropdown(native,host,placeholder){
 }
 
 /* ============================================================
-   UI SETUP
+   ~UI SETUP
 ============================================================ */
 
 function setupUI(){
@@ -3984,7 +4114,7 @@ function rebuildDinoSelect(){
 }
 
 /* ============================================================
-   RENDER
+   ~RENDER
 ============================================================ */
 
 function render(){
@@ -4008,7 +4138,7 @@ function render(){
 }
 
 /* ============================================================
-   MAP CHANGE
+   ~MAP CHANGE
 ============================================================ */
 
 async function onMapChanged(){
@@ -4017,6 +4147,9 @@ async function onMapChanged(){
 
   const geom = await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
   Global.mapGeom.set(mapMeta.geomShort, geom);
+  
+  const resolvedLegend = buildResolvedSupplyLegend(geom);
+  Global.resolvedSupplyLegend.set(mapMeta.geomShort, resolvedLegend);
 
   const img = geom.image || `${PATHS.mapsDir}/${mapMeta.image}`;
 
@@ -4046,7 +4179,7 @@ async function onMapChanged(){
 }
 
 /* ============================================================
-   BOOT
+   ~BOOT
 ============================================================ */
 
 async function boot(){
@@ -4057,6 +4190,10 @@ async function boot(){
 
   Global.baseSpawn = await loadJSON(official.spawn);
   Global.baseDinos = await loadJSON(official.dinos);
+  Global.items = await loadJSON(PATHS.itemGlobal);
+  Global.loot = await loadJSON(PATHS.lootGlobal);
+  
+  buildLootIndexes();
 
   Global.spawn = Global.baseSpawn;
   Global.dinos = Global.baseDinos;
