@@ -382,6 +382,7 @@ function mountSourceDrillDropdown(native, host){
 
   const root = buildSourceDrillTree();
   const stack = [root];
+  let lastPath = []; // folder labels only, like ["Mods", "My Group"]
 
   function currentNode(){
     return stack[stack.length - 1];
@@ -389,6 +390,24 @@ function mountSourceDrillDropdown(native, host){
 
   function syncLabel(){
     label.textContent = native.selectedOptions?.[0]?.textContent || "(Select)";
+  }
+  
+  function rebuildStackFromPath(){
+    stack.length = 0;
+    stack.push(root);
+
+    let node = root;
+
+    for (const label of lastPath){
+      const next = (node.children || []).find(child =>
+        Array.isArray(child.children) && child.label === label
+      );
+
+      if (!next) break;
+
+      stack.push(next);
+      node = next;
+    }
   }
 
   function renderLevel(){
@@ -403,6 +422,7 @@ function mountSourceDrillDropdown(native, host){
       back.textContent = "‹ Back";
       back.onclick = () => {
         stack.pop();
+        lastPath = stack.slice(1).map(n => n.label);
         renderLevel();
       };
       crumb.appendChild(back);
@@ -419,6 +439,7 @@ function mountSourceDrillDropdown(native, host){
       row.onclick = () => {
         if (isFolder) {
           stack.push(item);
+          lastPath = stack.slice(1).map(n => n.label);
           renderLevel();
           return;
         }
@@ -433,8 +454,7 @@ function mountSourceDrillDropdown(native, host){
   }
 
   function open(){
-    stack.length = 1;
-    stack[0] = root;
+    rebuildStackFromPath();
     renderLevel();
     wrap.classList.add("open");
   }
