@@ -97,17 +97,23 @@ const Global = {
 };
 
 const State = {
-  mapId:MAPS[0].id,
-  mode:"dino",
-  selection:"",
+  mapId: MAPS[0].id,
+  mode: "dino",   // dino | entry | crate | item
+  selection: "",
 
-  mapEntries:new Set(),
-  entryToDinos:new Map(),
-  dinoToEntries:new Map(),
-  nameToBps:new Map(),
+  mapEntries: new Set(),
+  entryToDinos: new Map(),
+  dinoToEntries: new Map(),
+  nameToBps: new Map(),
 
-  names:[],
-  entryList:[]
+  crateNames: [],
+  crateNameToId: new Map(),
+
+  itemNames: [],
+  itemNameToIds: new Map(),
+
+  names: [],
+  entryList: []
 };
 
 const entryVisibility = {};
@@ -161,7 +167,15 @@ function anyPoisVisible(){
 
 function syncModeButton(){
   if (!UI.modeToggle) return;
-  UI.modeToggle.textContent = State.mode === "dino" ? "Dino View" : "Spawn View";
+
+  const labels = {
+    dino: "Dino View",
+    entry: "Spawn View",
+    crate: "Crate View",
+    item: "Item View"
+  };
+
+  UI.modeToggle.textContent = labels[State.mode] || "View";
 }
 
 function entryVisibilityKey(dinoKey, idx){
@@ -582,7 +596,524 @@ function countSupplyPois(points){
   return (Array.isArray(points) ? points : []).filter(p => poiHasSupplyCrate(p)).length;
 }
 
+function currentGeom(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  return Global.mapGeom.get(mapMeta?.geomShort);
+}
 
+function itemData(){
+  return Global.items || { p:{}, i:{} };
+}
+
+function lootData(){
+  return Global.loot || { ci:[], si:[], c:{}, s:{}, r:{} };
+}
+
+function itemDisplayNameById(id){
+  const row = itemData().i?.[String(id)];
+  return row?.n || `Item ${id}`;
+}
+
+function itemBlueprintById(id){
+  const row = itemData().i?.[String(id)];
+  if (!row) return "";
+  const path = itemData().p?.[String(row.p)] || "";
+  const cls = row.c || "";
+  return path && cls ? `${path}${cls}.${cls}_C` : "";
+}
+
+function crateIdToClass(crateId){
+  return lootData().ci?.[Number(crateId)] || "";
+}
+
+function setIdToClass(setId){
+  return lootData().si?.[Number(setId)] || "";
+}
+
+function crateClassToId(crateClass){
+  const arr = lootData().ci || [];
+  const idx = arr.indexOf(crateClass);
+  return idx >= 0 ? idx : -1;
+}
+
+function setClassToId(setClass){
+  const arr = lootData().si || [];
+  const idx = arr.indexOf(setClass);
+  return idx >= 0 ? idx : -1;
+}
+
+function crateMetaById(crateId){
+  const cls = crateIdToClass(crateId);
+  return cls ? lootData().c?.[cls] || null : null;
+}
+
+function setMetaById(setId){
+  const cls = setIdToClass(setId);
+  return cls ? lootData().s?.[cls] || null : null;
+}
+
+function crateDisplayNameById(crateId){
+  const meta = crateMetaById(crateId);
+  const cls = crateIdToClass(crateId);
+  return meta?.n || cls || `Crate ${crateId}`;
+}
+
+function crateDisplayNameByClass(crateClass){
+  const meta = lootData().c?.[crateClass];
+  return meta?.n || crateClass || "";
+}
+
+function poiLegendCrateClass(point, rowIdx = 0){
+  const geom = currentGeom();
+  const legend = Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+  const crateRows = Array.isArray(point?.c) ? point.c : [];
+  const row = crateRows[rowIdx];
+  if (!Array.isArray(row) || row.length < 1) return "";
+  const legendIdx = Number(row[0]);
+  const meta = Number.isInteger(legendIdx) && legendIdx >= 0 && legendIdx < legend.length
+    ? legend[legendIdx]
+    : null;
+  return meta?.n ? `${meta.n}_C` : "";
+}
+
+function poiCrateClasses(point){
+  const geom = currentGeom();
+  const legend = Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+  const out = [];
+
+  for (const row of (Array.isArray(point?.c) ? point.c : [])){
+    if (!Array.isArray(row) || row.length < 1) continue;
+    const legendIdx = Number(row[0]);
+    const meta = Number.isInteger(legendIdx) && legendIdx >= 0 && legendIdx < legend.length
+      ? legend[legendIdx]
+      : null;
+    if (!meta?.n) continue;
+    out.push(`${meta.n}_C`);
+  }
+
+  return [...new Set(out)];
+}
+
+function poiHasArtifactCrate(point){
+  return poiCrateClasses(point).some(cls => cls.toLowerCase().includes("artifactcrate"));
+}
+
+function poiHasSupplyCrate(point){
+  return poiCrateClasses(point).some(cls => !cls.toLowerCase().includes("artifactcrate"));
+}
+
+function poiMatchesCrateClass(point, crateClass){
+  return poiCrateClasses(point).includes(crateClass);
+}
+
+function poiMatchesAnyCrateClass(point, crateClasses){
+  const set = new Set(crateClasses || []);
+  return poiCrateClasses(point).some(cls => set.has(cls));
+}
+
+function itemReverseRows(itemId){
+  return lootData().r?.[String(itemId)] || [];
+}
+
+function crateIdsForItemId(itemId){
+  const rows = itemReverseRows(itemId);
+  const ids = rows.map(r => Array.isArray(r) ? r[0] : null).filter(v => Number.isInteger(v));
+  return [...new Set(ids)];
+}
+
+function rebuildLootIndices(){
+  State.crateNames = [];
+  State.crateNameToId.clear();
+
+  State.itemNames = [];
+  State.itemNameToIds.clear();
+
+  const loot = lootData();
+  const items = itemData();
+
+  // crates
+  (loot.ci || []).forEach((crateClass, crateId) => {
+    if (!crateClass) return;
+    const name = crateDisplayNameById(crateId);
+    State.crateNames.push(name);
+    State.crateNameToId.set(name, crateId);
+  });
+
+  State.crateNames = [...new Set(State.crateNames)].sort((a,b) => a.localeCompare(b));
+
+  // items
+  for (const [itemId, row] of Object.entries(items.i || {})){
+    const name = row?.n || `Item ${itemId}`;
+    if (!State.itemNameToIds.has(name)){
+      State.itemNameToIds.set(name, []);
+    }
+    State.itemNameToIds.get(name).push(Number(itemId));
+  }
+
+  State.itemNames = [...State.itemNameToIds.keys()].sort((a,b) => a.localeCompare(b));
+}
+
+function drawCrate(crateName){
+  clearDraw();
+  clearPois();
+
+  const crateId = State.crateNameToId.get(crateName);
+  if (!Number.isInteger(crateId)) return;
+
+  const crateClass = crateIdToClass(crateId);
+  if (!crateClass) return;
+
+  const geom = currentGeom();
+  const points = geom?.pois?.supplyCrates || [];
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+    if (!poiMatchesCrateClass(p, crateClass)) continue;
+
+    const isArtifact = crateClass.toLowerCase().includes("artifactcrate");
+
+    L.circleMarker([y, x], {
+      radius: 8,
+      color: "#111",
+      weight: 2.5,
+      fillColor: isArtifact ? "#b388ff" : "#ffd54a",
+      fillOpacity: 1,
+      pane: "poiPane",
+      className: isArtifact ? "poi-artifact" : "poi-supply"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(supplyCrateTooltipHtml(p, supplyLegendForCurrentMap()), {
+        direction: "auto",
+        sticky: true,
+        offset: [0, -14],
+        opacity: 0.97,
+        className: "supply-tooltip",
+        autoPan: true
+      });
+  }
+}
+
+function drawItem(itemName){
+  clearDraw();
+  clearPois();
+
+  const itemIds = State.itemNameToIds.get(itemName) || [];
+  if (!itemIds.length) return;
+
+  const crateIdSet = new Set();
+  for (const itemId of itemIds){
+    for (const crateId of crateIdsForItemId(itemId)){
+      crateIdSet.add(crateId);
+    }
+  }
+
+  const crateClasses = [...crateIdSet].map(crateIdToClass).filter(Boolean);
+  if (!crateClasses.length) return;
+
+  const geom = currentGeom();
+  const points = geom?.pois?.supplyCrates || [];
+
+  for (const p of points){
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+    if (!poiMatchesAnyCrateClass(p, crateClasses)) continue;
+
+    const isArtifactOnly = poiHasArtifactCrate(p) && !poiHasSupplyCrate(p);
+
+    L.circleMarker([y, x], {
+      radius: 8,
+      color: "#111",
+      weight: 2.5,
+      fillColor: isArtifactOnly ? "#b388ff" : "#ffd54a",
+      fillOpacity: 1,
+      pane: "poiPane",
+      className: isArtifactOnly ? "poi-artifact" : "poi-supply"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(supplyCrateTooltipHtml(p, supplyLegendForCurrentMap()), {
+        direction: "auto",
+        sticky: true,
+        offset: [0, -14],
+        opacity: 0.97,
+        className: "supply-tooltip",
+        autoPan: true
+      });
+  }
+}
+
+const CRATE_PANEL_TABS = [
+  { id: "sets", label: "Loot" },
+  { id: "info", label: "Info" }
+];
+
+function getSelectedCrate(crateName){
+  const crateId = State.crateNameToId.get(crateName);
+  if (!Number.isInteger(crateId)) return null;
+
+  const crateClass = crateIdToClass(crateId);
+  const meta = crateMetaById(crateId);
+  if (!crateClass || !meta) return null;
+
+  return {
+    id: crateId,
+    class: crateClass,
+    name: meta.n || crateName,
+    level: meta.l,
+    minSets: meta.mn,
+    maxSets: meta.mx,
+    sets: Array.isArray(meta.s) ? meta.s : []
+  };
+}
+
+function renderCrateHero(c){
+  const bp = c.class || "";
+  return `
+    <div class="entry-hero">
+      <div class="entry-hero-title">${escapeHtml(c.name)}</div>
+      <div class="info-submeta">Loot Crate</div>
+      ${renderCopyField("Crate Class", c.class)}
+      ${renderCopyField("Crate Blueprint", bp)}
+    </div>
+  `;
+}
+
+function renderCrateTabInfo(c){
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Crate Info</div>
+      <div class="entry-meta">
+        <div class="entry-meta-line">Required Level: ${escapeHtml(String(c.level ?? "--"))}</div>
+        <div class="entry-meta-line">Min Item Sets: ${escapeHtml(String(c.minSets ?? "--"))}</div>
+        <div class="entry-meta-line">Max Item Sets: ${escapeHtml(String(c.maxSets ?? "--"))}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCrateTabSets(c){
+  const rows = c.sets || [];
+
+  if (!rows.length){
+    return `<div style="color:var(--muted)">No loot sets found.</div>`;
+  }
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Loot Sets (${rows.length})</div>
+      <div class="entries">
+        ${rows.map(row => {
+          const setId = Array.isArray(row) ? row[0] : null;
+          const weight = Array.isArray(row) ? row[1] : null;
+          const setMeta = setMetaById(setId);
+          const name = setMeta?.n || setIdToClass(setId) || `Set ${setId}`;
+
+          return `
+            <div class="info-section">
+              <div class="info-row">
+                <span class="info-label">${escapeHtml(name)}</span>
+              </div>
+              <div class="entry-meta">
+                <div class="entry-meta-line">Weight: ${escapeHtml(fmt(weight) || "--")}</div>
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderCratePanel(crateName){
+  const c = getSelectedCrate(crateName);
+  if (!c){
+    renderInfoPanelBodyEmpty();
+    return;
+  }
+
+  const panel = ensureInfoPanel();
+  const activeTab = CRATE_PANEL_TABS.some(t => t.id === infoPanelState.crateTab)
+    ? infoPanelState.crateTab
+    : "sets";
+
+  setInfoPanelTitle(crateName);
+
+  const html = `
+    ${renderCrateHero(c)}
+    ${renderTabs({
+      tabs: CRATE_PANEL_TABS,
+      activeId: activeTab,
+      dataAttr: 'data-crate-tab'
+    })}
+    ${renderPages({
+      tabs: CRATE_PANEL_TABS,
+      activeId: activeTab,
+      renderPage: (id) => {
+        if (id === "sets") return renderCrateTabSets(c);
+        if (id === "info") return renderCrateTabInfo(c);
+        return "";
+      }
+    })}
+  `;
+
+  setInfoPanelHTML(html);
+
+  const body = panel.querySelector(".fp-body");
+  wireTabs(body, {
+    tabs: CRATE_PANEL_TABS,
+    activeId: activeTab,
+    dataAttr: "data-crate-tab",
+    onChange: (id) => {
+      infoPanelState.crateTab = id;
+      renderCratePanel(crateName);
+    }
+  });
+
+  mountPanelSwipe(
+    body.querySelector(".fp-pages"),
+    CRATE_PANEL_TABS,
+    () => infoPanelState.crateTab,
+    (id) => {
+      infoPanelState.crateTab = id;
+      renderCratePanel(crateName);
+    }
+  );
+
+  refreshInfoPanelPageHeight();
+  syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
+}
+
+const ITEM_PANEL_TABS = [
+  { id: "crates", label: "Crates" },
+  { id: "info", label: "Info" }
+];
+
+function getSelectedItem(itemName){
+  const ids = State.itemNameToIds.get(itemName) || [];
+  if (!ids.length) return null;
+
+  const firstId = ids[0];
+  return {
+    ids,
+    id: firstId,
+    name: itemDisplayNameById(firstId),
+    blueprint: itemBlueprintById(firstId),
+    class: itemData().i?.[String(firstId)]?.c || ""
+  };
+}
+
+function renderItemHero(it){
+  return `
+    <div class="entry-hero">
+      <div class="entry-hero-title">${escapeHtml(it.name)}</div>
+      <div class="info-submeta">Item</div>
+      ${renderCopyField("Item Class", it.class)}
+      ${renderCopyField("Item Blueprint", it.blueprint)}
+    </div>
+  `;
+}
+
+function renderItemTabInfo(it){
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Item Info</div>
+      <div class="entry-meta">
+        <div class="entry-meta-line">Matching Item IDs: ${escapeHtml(String(it.ids.length))}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderItemTabCrates(it){
+  const crateIds = [...new Set(it.ids.flatMap(id => crateIdsForItemId(id)))];
+
+  if (!crateIds.length){
+    return `<div style="color:var(--muted)">No crates found for this item.</div>`;
+  }
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Crates (${crateIds.length})</div>
+      <div class="entries">
+        ${crateIds.map(crateId => {
+          const meta = crateMetaById(crateId);
+          const name = crateDisplayNameById(crateId);
+          return `
+            <div class="info-section">
+              <div class="info-row">
+                <span class="info-label">${escapeHtml(name)}</span>
+              </div>
+              <div class="entry-meta">
+                <div class="entry-meta-line">Required Level: ${escapeHtml(String(meta?.l ?? "--"))}</div>
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderItemPanel(itemName){
+  const it = getSelectedItem(itemName);
+  if (!it){
+    renderInfoPanelBodyEmpty();
+    return;
+  }
+
+  const panel = ensureInfoPanel();
+  const activeTab = ITEM_PANEL_TABS.some(t => t.id === infoPanelState.itemTab)
+    ? infoPanelState.itemTab
+    : "crates";
+
+  setInfoPanelTitle(itemName);
+
+  const html = `
+    ${renderItemHero(it)}
+    ${renderTabs({
+      tabs: ITEM_PANEL_TABS,
+      activeId: activeTab,
+      dataAttr: 'data-item-tab'
+    })}
+    ${renderPages({
+      tabs: ITEM_PANEL_TABS,
+      activeId: activeTab,
+      renderPage: (id) => {
+        if (id === "crates") return renderItemTabCrates(it);
+        if (id === "info") return renderItemTabInfo(it);
+        return "";
+      }
+    })}
+  `;
+
+  setInfoPanelHTML(html);
+
+  const body = panel.querySelector(".fp-body");
+  wireTabs(body, {
+    tabs: ITEM_PANEL_TABS,
+    activeId: activeTab,
+    dataAttr: "data-item-tab",
+    onChange: (id) => {
+      infoPanelState.itemTab = id;
+      renderItemPanel(itemName);
+    }
+  });
+
+  mountPanelSwipe(
+    body.querySelector(".fp-pages"),
+    ITEM_PANEL_TABS,
+    () => infoPanelState.itemTab,
+    (id) => {
+      infoPanelState.itemTab = id;
+      renderItemPanel(itemName);
+    }
+  );
+
+  refreshInfoPanelPageHeight();
+  syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
+}
 
 /* ============================================================
    ~~STYLE PANEL
@@ -873,7 +1404,7 @@ function renderMapEntriesList(){
 
       State.mode = "entry";
       syncModeButton();
-      rebuildDinoSelect();
+      rebuildSelectionSelect();
 
       State.selection = entryName;
       UI.dinoSelect.value = entryName;
@@ -1059,7 +1590,9 @@ function showCopiedBubble(target){
 
 let infoPanelState = {
   dinoTab: "spawns",
-  entryTab: "dinos"
+  entryTab: "dinos",
+  crateTab: "sets",
+  itemTab: "crates"
 };
 
 function escapeHtml(s){
@@ -2615,8 +3148,14 @@ function renderInfoPanel(){
 
   if (State.mode === "dino"){
     renderDinoPanel(State.selection);
-  } else {
+  } else if (State.mode === "entry"){
     renderEntryPanel(State.selection);
+  } else if (State.mode === "crate"){
+    renderCratePanel(State.selection);
+  } else if (State.mode === "item"){
+    renderItemPanel(State.selection);
+  } else {
+    renderInfoPanelBodyEmpty();
   }
 }
 
@@ -4004,7 +4543,8 @@ function setupUI(){
     }
 
     rebuildMapIndices();
-    rebuildDinoSelect();
+    rebuildLootIndices();
+    rebuildSelectionSelect();
     renderDock();
     render();
   };
@@ -4036,12 +4576,14 @@ function setupUI(){
   mountFancyDropdown(UI.mapSelect,UI.mapFancy,"Search maps...");
 
   syncModeButton();
-  rebuildDinoSelect();
+  rebuildSelectionSelect();
 
   UI.modeToggle.onclick = () => {
-    State.mode = State.mode === "dino" ? "entry" : "dino";
+    const order = ["dino", "entry", "crate", "item"];
+    const i = order.indexOf(State.mode);
+    State.mode = order[(i + 1) % order.length];
     syncModeButton();
-    rebuildDinoSelect();
+    rebuildSelectionSelect();
     render();
   };
 
@@ -4072,16 +4614,26 @@ function initRarityLegend(){
 
 }
 
-function rebuildDinoSelect(){
+function rebuildSelectionSelect(){
+  let list = [];
+  let placeholder = "(Select)";
 
-  const list = State.mode === "dino" ? State.names : State.entryList;
-  const placeholder = State.mode === "dino"
-    ? "(Select a Dino)"
-    : "(Select a Spawn Entry)"
+  if (State.mode === "dino"){
+    list = State.names;
+    placeholder = "(Select a Dino)";
+  } else if (State.mode === "entry"){
+    list = State.entryList;
+    placeholder = "(Select a Spawn Entry)";
+  } else if (State.mode === "crate"){
+    list = State.crateNames;
+    placeholder = "(Select a Loot Crate)";
+  } else if (State.mode === "item"){
+    list = State.itemNames;
+    placeholder = "(Select an Item)";
+  }
 
   UI.dinoSelect.innerHTML = "";
 
-  // blank / none option
   const emptyOpt = document.createElement("option");
   emptyOpt.value = "";
   emptyOpt.textContent = placeholder;
@@ -4094,7 +4646,6 @@ function rebuildDinoSelect(){
     UI.dinoSelect.appendChild(o);
   }
 
-  // preserve selection if possible, otherwise blank
   if (!list.includes(State.selection)) {
     State.selection = "";
   }
@@ -4109,7 +4660,7 @@ function rebuildDinoSelect(){
   mountFancyDropdown(
     UI.dinoSelect,
     UI.dinoFancy,
-    State.mode === "dino" ? "Search dinos..." : "Search spawn entries..."
+    placeholder.replace(/[()]/g, "")
   );
 }
 
@@ -4127,13 +4678,18 @@ function render(){
 
   if (State.mode === "dino"){
     drawDino(State.selection);
-  } else {
+    drawPois();
+  } else if (State.mode === "entry"){
     clearDraw();
     const score = entryRarityForEntry(State.selection);
     drawEntry(State.selection, score);
+    drawPois();
+  } else if (State.mode === "crate"){
+    drawCrate(State.selection);
+  } else if (State.mode === "item"){
+    drawItem(State.selection);
   }
 
-  drawPois();
   renderInfoPanel();
 }
 
@@ -4169,7 +4725,8 @@ async function onMapChanged(){
   };
 
   rebuildMapIndices();
-  rebuildDinoSelect();
+  rebuildLootIndices();
+  rebuildSelectionSelect();
   renderDock();
   if (isPanelVisible("mapEntriesPanel")) {
     renderMapEntriesPanel();
