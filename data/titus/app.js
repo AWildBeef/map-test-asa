@@ -120,6 +120,12 @@ const poiVisibility = {
 
 let showRarityLegend = false;
 
+const drawStyle = {
+  useRarity: true,
+  color: "#00ff88",
+  opacity: 0.8
+};
+
 /* ============================================================
    UI
 ============================================================ */
@@ -450,7 +456,134 @@ function mountSourceDrillDropdown(native, host){
 }
 
 /* ============================================================
-   MAP PANEL TEST
+   ~~STYLE PANEL
+============================================================ */
+
+function ensureDrawStylePanel(){
+  let panel = document.getElementById("drawStylePanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "drawStylePanel";
+  panel.className = "floating-panel floating-panel--small";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">Draw Style</div>
+      <div class="fp-actions"></div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const actions = panel.querySelector(".fp-actions");
+
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  actions.appendChild(hideBtn);
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  panel.style.position = "absolute";
+  panel.style.right = "2px";
+  panel.style.bottom = "90px";
+  panel.style.zIndex = "800";
+  panel.style.display = "none";
+  panel.dataset.hidden = "1";
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+    updateDockToggles();
+  };
+
+  return panel;
+}
+
+function renderDrawStylePanel(){
+  const panel = ensureDrawStylePanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+
+  body.innerHTML = `
+    <label class="fp-row">
+      <input id="drawUseRarity" type="checkbox" ${drawStyle.useRarity ? "checked" : ""}>
+      <span>Use rarity colors</span>
+    </label>
+
+    <label class="fp-row">
+      <span>Color</span>
+      <input id="drawColor" type="color" value="${drawStyle.color}">
+    </label>
+
+    <label class="fp-row fp-col">
+      <div class="fp-row fp-between">
+        <span>Opacity</span>
+        <span id="drawOpacityLabel">${drawStyle.opacity.toFixed(2)}</span>
+      </div>
+      <input
+        id="drawOpacity"
+        type="range"
+        min="0.05"
+        max="1"
+        step="0.05"
+        value="${drawStyle.opacity}"
+      >
+    </label>
+  `;
+
+  const rarity = body.querySelector("#drawUseRarity");
+  const color = body.querySelector("#drawColor");
+  const opacity = body.querySelector("#drawOpacity");
+  const opacityLabel = body.querySelector("#drawOpacityLabel");
+
+  if (rarity){
+    rarity.onchange = () => {
+      drawStyle.useRarity = rarity.checked;
+      renderDrawStylePanel();
+      render();
+    };
+  }
+
+  if (color){
+    color.disabled = drawStyle.useRarity;
+    color.style.opacity = drawStyle.useRarity ? "0.5" : "1";
+
+    color.oninput = () => {
+      drawStyle.color = color.value;
+      render();
+    };
+  }
+
+  if (opacity){
+    opacity.oninput = () => {
+      drawStyle.opacity = Number(opacity.value);
+      if (opacityLabel) opacityLabel.textContent = drawStyle.opacity.toFixed(2);
+      render();
+    };
+  }
+}
+
+function toggleDrawStylePanel(){
+  const panel = ensureDrawStylePanel();
+  const show = panel.style.display === "none";
+
+  if (show){
+    renderDrawStylePanel();
+    panel.style.display = "";
+    panel.dataset.hidden = "0";
+  } else {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  }
+
+  updateDockToggles();
+}
+
+
+/* ============================================================
+   ~~MAP PANEL
 ============================================================ */
 
 function mapsForEntry(entryName){
@@ -1208,6 +1341,19 @@ function renderDock(){
     `,
     togglePanelId: "dinoInfoPanel",
     onClick: () => togglePanel("dinoInfoPanel")
+  });
+  mkBtn({
+    title: "Toggle Draw Style",
+    icon: `
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
+              fill="currentColor" opacity=".9"/>
+        <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
+              fill="currentColor"/>
+      </svg>
+    `,
+    togglePanelId: "drawStylePanel",
+    onClick: () => toggleDrawStylePanel()
   });
 
   // POI toggle
@@ -3158,7 +3304,9 @@ let mapObj = null;
 
 function initMap(img,size=[2048,2048]){
 
-  const bounds=[[0,0],[size[1],size[0]]];
+  const bounds = [[0,0],[size[1],size[0]]];
+  const paddedBounds = L.latLngBounds(bounds).pad(0.1);
+
 
   const map = L.map("map", {
     crs: L.CRS.Simple,
@@ -3168,10 +3316,13 @@ function initMap(img,size=[2048,2048]){
     zoomDelta: 0.25,
     wheelPxPerZoomLevel: 120,
     zoomControl: false,
-    maxBounds: bounds,
-    maxBoundsViscosity: 1.0
+    maxBounds: paddedBounds,
+    maxBoundsViscosity: 0.6,
+    zoomAnimation: false,
+    fadeAnimation: false,
+    markerZoomAnimation: false
   });
-
+  
   L.control.zoom({ position: "bottomleft" }).addTo(map);
 
   setTimeout(() => {
@@ -3203,17 +3354,19 @@ function clearDraw(){
   mapObj?.layer.clearLayers();
 }
 
-function styleForEntry(meta,color){
+function styleForEntry(meta, color){
+  const finalColor = drawStyle.useRarity ? color : drawStyle.color;
+  const finalOpacity = Number.isFinite(drawStyle.opacity) ? drawStyle.opacity : 0.8;
 
-  const style={
-    color,
-    weight:meta?.isCave?3:1,
-    opacity:1,
-    fillColor:color,
-    fillOpacity:meta?.isCave?0.4:0.8
+  const style = {
+    color: finalColor,
+    weight: meta?.isCave ? 3 : 1,
+    opacity: 1,
+    fillColor: finalColor,
+    fillOpacity: meta?.isCave ? Math.min(finalOpacity * 0.4, 0.8) : finalOpacity
   };
 
-  if(meta?.isUntameable) style.dashArray="3 3";
+  if (meta?.isUntameable) style.dashArray = "3 3";
 
   return style;
 }
@@ -3913,6 +4066,7 @@ async function boot(){
   ensureInfoPanel();
   ensurePoiPanel();
   ensureMapEntriesPanel();
+  ensureDrawStylePanel();
   renderInfoPanelBodyEmpty();
   setLegendOpen(false);
 
