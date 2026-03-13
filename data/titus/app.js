@@ -98,7 +98,7 @@ const Global = {
 
 const State = {
   mapId: MAPS[0].id,
-  mode: "dino",   // dino | entry | crate | item
+  mode: "dino",
   selection: "",
 
   mapEntries: new Set(),
@@ -111,6 +111,9 @@ const State = {
 
   itemNames: [],
   itemNameToIds: new Map(),
+
+  mapCrateIds: new Set(),
+  mapItemIds: new Set(),
 
   names: [],
   entryList: []
@@ -728,29 +731,68 @@ function rebuildLootIndices(){
   State.itemNames = [];
   State.itemNameToIds.clear();
 
+  State.mapCrateIds = new Set();
+  State.mapItemIds = new Set();
+
   const loot = lootData();
   const items = itemData();
 
-  // crates
-  (loot.ci || []).forEach((crateClass, crateId) => {
-    if (!crateClass) return;
+  const mapCrateClasses = crateClassesUsedOnCurrentMap();
+
+  // --- crates on this map only ---
+  for (const crateClass of mapCrateClasses){
+    const crateId = crateClassToId(crateClass);
+    if (!Number.isInteger(crateId) || crateId < 0) continue;
+
+    State.mapCrateIds.add(crateId);
+
     const name = crateDisplayNameById(crateId);
+    if (!name) continue;
+
     State.crateNames.push(name);
     State.crateNameToId.set(name, crateId);
-  });
+  }
 
-  State.crateNames = [...new Set(State.crateNames)].sort((a,b) => a.localeCompare(b));
+  State.crateNames = [...new Set(State.crateNames)].sort((a,b)=>a.localeCompare(b));
 
-  // items
-  for (const [itemId, row] of Object.entries(items.i || {})){
-    const name = row?.n || `Item ${itemId}`;
+  // --- items reachable from those crates only ---
+  for (const crateId of State.mapCrateIds){
+    const crateMeta = crateMetaById(crateId);
+    const crateSets = Array.isArray(crateMeta?.s) ? crateMeta.s : [];
+
+    for (const setRow of crateSets){
+      const setId = Array.isArray(setRow) ? setRow[0] : null;
+      const setMeta = setMetaById(setId);
+      const entries = Array.isArray(setMeta?.e) ? setMeta.e : [];
+
+      for (const entry of entries){
+        for (const itemId of (Array.isArray(entry?.i) ? entry.i : [])){
+          if (!Number.isInteger(itemId)) continue;
+          State.mapItemIds.add(itemId);
+        }
+      }
+    }
+  }
+
+  // --- item names for this map only ---
+  for (const itemId of State.mapItemIds){
+    const row = items.i?.[String(itemId)];
+    if (!row) continue;
+
+    const name = row.n || `Item ${itemId}`;
+
     if (!State.itemNameToIds.has(name)){
       State.itemNameToIds.set(name, []);
     }
-    State.itemNameToIds.get(name).push(Number(itemId));
+    State.itemNameToIds.get(name).push(itemId);
   }
 
-  State.itemNames = [...State.itemNameToIds.keys()].sort((a,b) => a.localeCompare(b));
+  // dedupe/sort IDs per name
+  for (const [name, ids] of State.itemNameToIds.entries()){
+    State.itemNameToIds.set(name, [...new Set(ids)].sort((a,b)=>a-b));
+  }
+
+  State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 }
 
 function drawCrate(crateName){
@@ -758,13 +800,12 @@ function drawCrate(crateName){
   clearPois();
 
   const crateId = State.crateNameToId.get(crateName);
-  if (!Number.isInteger(crateId)) return;
+  if (!Number.isInteger(crateId) || !State.mapCrateIds.has(crateId)) return;
 
   const crateClass = crateIdToClass(crateId);
   if (!crateClass) return;
 
-  const geom = currentGeom();
-  const points = geom?.pois?.supplyCrates || [];
+  const points = supplyCratePointsForCurrentMap();
 
   for (const p of points){
     const x = Number(p?.x);
@@ -799,21 +840,25 @@ function drawItem(itemName){
   clearDraw();
   clearPois();
 
-  const itemIds = State.itemNameToIds.get(itemName) || [];
+  const itemIds = (State.itemNameToIds.get(itemName) || [])
+    .filter(id => State.mapItemIds.has(id));
+
   if (!itemIds.length) return;
 
   const crateIdSet = new Set();
+
   for (const itemId of itemIds){
     for (const crateId of crateIdsForItemId(itemId)){
-      crateIdSet.add(crateId);
+      if (State.mapCrateIds.has(crateId)){
+        crateIdSet.add(crateId);
+      }
     }
   }
 
   const crateClasses = [...crateIdSet].map(crateIdToClass).filter(Boolean);
   if (!crateClasses.length) return;
 
-  const geom = currentGeom();
-  const points = geom?.pois?.supplyCrates || [];
+  const points = supplyCratePointsForCurrentMap();
 
   for (const p of points){
     const x = Number(p?.x);
@@ -1115,6 +1160,65 @@ function renderItemPanel(itemName){
   syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
 }
 
+function supplyLegendForCurrentMap(){
+  const geom = currentGeom();
+  return Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+}
+
+function supplyCratePointsForCurrentMap(){
+  const geom = currentGeom();
+  return Array.isArray(geom?.pois?.supplyCrates) ? geom.pois.supplyCrates : [];
+}
+
+function crateClassFromLegendRow(row){
+  const bp = row?.bp || "";
+  const short = row?.n || shortBpName(bp);
+  if (!short) return "";
+  return short.endsWith("_C") ? short : `${short}_C`;
+}
+
+function crateClassesUsedOnCurrentMap(){
+  const legend = supplyLegendForCurrentMap();
+  const points = supplyCratePointsForCurrentMap();
+
+  const out = new Set();
+
+  for (const p of points){
+    for (const row of (Array.isArray(p?.c) ? p.c : [])){
+      if (!Array.isArray(row) || row.length < 1) continue;
+
+      const idx = Number(row[0]);
+      if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+      const meta = legend[idx];
+      const crateClass = crateClassFromLegendRow(meta);
+      if (crateClass) out.add(crateClass);
+    }
+  }
+
+  return out;
+}
+
+function buildAllLootableItemNameIndex(){
+  const out = new Map();
+  const loot = lootData();
+  const items = itemData();
+
+  for (const itemId of Object.keys(loot.r || {})){
+    const row = items.i?.[String(itemId)];
+    if (!row) continue;
+
+    const name = row.n || `Item ${itemId}`;
+    if (!out.has(name)) out.set(name, []);
+    out.get(name).push(Number(itemId));
+  }
+
+  for (const [name, ids] of out.entries()){
+    out.set(name, [...new Set(ids)].sort((a,b)=>a-b));
+  }
+
+  return out;
+}
 /* ============================================================
    ~~STYLE PANEL
 ============================================================ */
