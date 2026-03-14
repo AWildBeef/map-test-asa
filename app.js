@@ -4464,9 +4464,10 @@ async function onMapChanged(){
 
 async function boot(){
 
-  SOURCES = await buildSources();
+  const allSources = await buildSources();
+  SOURCES = filterSourcesForEmbed(allSources);
 
-  const official = SOURCES.find(s => s.id === "official");
+  const official = allSources.find(s => s.id === "official");
 
   Global.baseSpawn = await loadJSON(official.spawn);
   Global.baseDinos = await loadJSON(official.dinos);
@@ -4485,9 +4486,9 @@ async function boot(){
 
   setupUI();
   applyEmbedRestrictions();
+
   await loadSelectedSource();
 
-  
   initRarityLegend();
 
   await onMapChanged();
