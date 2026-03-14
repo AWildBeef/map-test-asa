@@ -176,12 +176,32 @@ if (EMBED_MODE) {
 }
 
 function filterSourcesForEmbed(allSources){
-  if (!EMBED_MODE) return allSources;
 
-  const allowed = allowedSourceIdsForEmbed();
-  if (!allowed) return allSources;
+  if(!EMBED_SOURCE && !EMBED_GROUP) return allSources;
 
-  return allSources.filter(s => allowed.has(s.id));
+  // single-source lock
+  if(EMBED_SOURCE){
+    return allSources.filter(s => s.id === EMBED_SOURCE);
+  }
+
+  // group restriction
+  if(EMBED_GROUP){
+
+    const group = allSources.find(s =>
+      s.kind === "group" && s.id === EMBED_GROUP
+    );
+
+    if(!group) return [];
+
+    const allowedIds = new Set([
+      group.id,
+      ...(group.members || [])
+    ]);
+
+    return allSources.filter(s => allowedIds.has(s.id));
+  }
+
+  return allSources;
 }
 
 function selectionListForMode(mode){
