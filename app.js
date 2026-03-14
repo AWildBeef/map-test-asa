@@ -4088,7 +4088,7 @@ function applyEmbedRestrictions(){
       if (firstAllowed) UI.sourceSelect.value = firstAllowed;
     }
 
-    if (EMBED_SOURCE || EMBED_GROUP || EMBED_HIDE_SOURCE) {
+    if (EMBED_SOURCE || EMBED_HIDE_SOURCE) {
       UI.sourceSelect.disabled = true;
       if (UI.sourceFancy) UI.sourceFancy.style.display = "none";
       if (UI.sourceSelect.parentElement && !EMBED_HIDE_SOURCE) {
@@ -4137,6 +4137,128 @@ function applyEmbedRestrictions(){
 /* ============================================================
    UI SETUP
 ============================================================ */
+async function loadSelectedSource() {
+  const srcId = UI.sourceSelect.value;
+  const src = SOURCES.find(s => s.id === srcId);
+  if (!src) return;
+
+  if (src.kind === "official") {
+    Global.modMeta = null;
+    Global.spawn = Global.baseSpawn;
+    Global.dinos = Global.baseDinos;
+  }
+  else if (src.kind === "group") {
+    const memberSources = SOURCES.filter(s => (src.members || []).includes(s.id));
+
+    let mergedSpawn = {
+      mapLegend: { ...(Global.baseSpawn?.mapLegend || {}) },
+      entryMaps: {},
+      entries: {},
+      maps: { ...(Global.baseSpawn?.maps || {}) },
+      dinos: {},
+      worldReplacements: {}
+    };
+
+    let mergedDinos = {
+      dinos: {}
+    };
+
+    for (const member of memberSources) {
+      const mod = await loadJSON(member.file);
+
+      mergedSpawn = {
+        mapLegend: {
+          ...(mergedSpawn.mapLegend || {}),
+          ...(mod.mapLegend || {})
+        },
+        entryMaps: {
+          ...(mergedSpawn.entryMaps || {}),
+          ...(mod.entryMaps || {})
+        },
+        entries: mergeEntryTables(
+          mergedSpawn.entries || {},
+          mod.entries || {}
+        ),
+        maps: {
+          ...(mergedSpawn.maps || {}),
+          ...(mod.maps || {})
+        },
+        dinos: {
+          ...(mergedSpawn.dinos || {}),
+          ...(mod.spawnDinos || {})
+        },
+        worldReplacements: mergeWorldReplacementTables(
+          mergedSpawn.worldReplacements || {},
+          mod.worldReplacements || {}
+        )
+      };
+
+      mergedDinos = {
+        dinos: {
+          ...(mergedDinos.dinos || {}),
+          ...(mod.dinos || {})
+        }
+      };
+    }
+
+    Global.modMeta = {
+      modId: src.id,
+      modName: src.name,
+      isGroup: true,
+      members: src.members || [],
+      dinos: mergedDinos.dinos
+    };
+
+    Global.spawn = mergedSpawn;
+    Global.dinos = mergedDinos;
+  }
+  else {
+    const mod = await loadJSON(src.file);
+
+    Global.modMeta = mod;
+
+    Global.spawn = {
+      mapLegend: {
+        ...(Global.baseSpawn?.mapLegend || {}),
+        ...(mod.mapLegend || {})
+      },
+      entryMaps: {
+        ...(Global.baseSpawn?.entryMaps || {}),
+        ...(mod.entryMaps || {})
+      },
+      entries: mergeEntryTables(
+        Global.baseSpawn?.entries || {},
+        mod.entries || {}
+      ),
+      maps: {
+        ...(Global.baseSpawn?.maps || {}),
+        ...(mod.maps || {})
+      },
+      dinos: {
+        ...(Global.baseSpawn?.dinos || {}),
+        ...(mod.spawnDinos || {})
+      },
+      worldReplacements: mergeWorldReplacementTables(
+        Global.baseSpawn?.worldReplacements || {},
+        mod.worldReplacements || {}
+      )
+    };
+
+    Global.dinos = {
+      dinos: {
+        ...(Global.baseDinos?.dinos || {}),
+        ...(mod.dinos || {})
+      }
+    };
+  }
+
+  rebuildMapIndices();
+  rebuildDinoSelect();
+  applyEmbedRestrictions();
+  renderDock();
+  render();
+}
+
 
 function setupUI(){
 
@@ -4156,127 +4278,8 @@ function setupUI(){
 
   UI.sourceSelect.value = "official";
 
-  UI.sourceSelect.onchange = async ()=>{
-
-    const srcId = UI.sourceSelect.value;
-    const src = SOURCES.find(s => s.id === srcId);
-    if (!src) return;
-
-    if (src.kind === "official") {
-      Global.modMeta = null;
-      Global.spawn = Global.baseSpawn;
-      Global.dinos = Global.baseDinos;
-    }
-    else if (src.kind === "group") {
-      const memberSources = SOURCES.filter(s => (src.members || []).includes(s.id));
-
-      let mergedSpawn = {
-        mapLegend: { ...(Global.baseSpawn?.mapLegend || {}) },
-        entryMaps: {},
-        entries: {},
-        maps: { ...(Global.baseSpawn?.maps || {}) },
-        dinos: {},
-        worldReplacements: {}
-      };
-
-      let mergedDinos = {
-        dinos: {}
-      };
-
-      for (const member of memberSources) {
-        const mod = await loadJSON(member.file);
-
-        mergedSpawn = {
-          mapLegend: {
-            ...(mergedSpawn.mapLegend || {}),
-            ...(mod.mapLegend || {})
-          },
-          entryMaps: {
-            ...(mergedSpawn.entryMaps || {}),
-            ...(mod.entryMaps || {})
-          },
-          entries: mergeEntryTables(
-            mergedSpawn.entries || {},
-            mod.entries || {}
-          ),
-          maps: {
-            ...(mergedSpawn.maps || {}),
-            ...(mod.maps || {})
-          },
-          dinos: {
-            ...(mergedSpawn.dinos || {}),
-            ...(mod.spawnDinos || {})
-          },
-          worldReplacements: mergeWorldReplacementTables(
-            mergedSpawn.worldReplacements || {},
-            mod.worldReplacements || {}
-          )
-        };
-
-        mergedDinos = {
-          dinos: {
-            ...(mergedDinos.dinos || {}),
-            ...(mod.dinos || {})
-          }
-        };
-      }
-
-      Global.modMeta = {
-        modId: src.id,
-        modName: src.name,
-        isGroup: true,
-        members: src.members || [],
-        dinos: mergedDinos.dinos
-      };
-
-      Global.spawn = mergedSpawn;
-      Global.dinos = mergedDinos;
-    }
-    else {
-      const mod = await loadJSON(src.file);
-
-      Global.modMeta = mod;
-
-      Global.spawn = {
-        mapLegend: {
-          ...(Global.baseSpawn?.mapLegend || {}),
-          ...(mod.mapLegend || {})
-        },
-        entryMaps: {
-          ...(Global.baseSpawn?.entryMaps || {}),
-          ...(mod.entryMaps || {})
-        },
-        entries: mergeEntryTables(
-          Global.baseSpawn?.entries || {},
-          mod.entries || {}
-        ),
-        maps: {
-          ...(Global.baseSpawn?.maps || {}),
-          ...(mod.maps || {})
-        },
-        dinos: {
-          ...(Global.baseSpawn?.dinos || {}),
-          ...(mod.spawnDinos || {})
-        },
-        worldReplacements: mergeWorldReplacementTables(
-          Global.baseSpawn?.worldReplacements || {},
-          mod.worldReplacements || {}
-        )
-      };
-
-      Global.dinos = {
-        dinos: {
-          ...(Global.baseDinos?.dinos || {}),
-          ...(mod.dinos || {})
-        }
-      };
-    }
-
-    rebuildMapIndices();
-    rebuildDinoSelect();
-    applyEmbedRestrictions();
-    renderDock();
-    render();
+  UI.sourceSelect.onchange = async () => {
+    await loadSelectedSource();
   };
 
   mountSourceDrillDropdown(
@@ -4482,6 +4485,7 @@ async function boot(){
 
   setupUI();
   applyEmbedRestrictions();
+  await loadSelectedSource();
 
   
   initRarityLegend();
