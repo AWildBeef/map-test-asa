@@ -113,6 +113,10 @@ const State = {
   mapId:MAPS[0].id,
   mode:"dino",
   selection:"",
+  selections: {
+    dino: "",
+    entry: ""
+  },
 
   mapEntries:new Set(),
   entryToDinos:new Map(),
@@ -179,6 +183,22 @@ function filterSourcesForEmbed(allSources){
 
   return allSources.filter(s => allowed.has(s.id));
 }
+
+function selectionListForMode(mode){
+  return mode === "dino" ? State.names : State.entryList;
+}
+
+function syncSelectionForMode(mode){
+  const list = selectionListForMode(mode);
+  const saved = State.selections[mode] || "";
+
+  if (saved && list.includes(saved)) {
+    State.selection = saved;
+  } else {
+    State.selection = "";
+  }
+}
+
 /* ============================================================
    UI
 ============================================================ */
@@ -4290,7 +4310,15 @@ function setupUI(){
   rebuildDinoSelect();
 
   UI.modeToggle.onclick = () => {
+    // save current selection into the mode we're leaving
+    State.selections[State.mode] = State.selection || "";
+
+    // switch mode
     State.mode = State.mode === "dino" ? "entry" : "dino";
+
+    // restore remembered selection for new mode
+    syncSelectionForMode(State.mode);
+
     syncModeButton();
     rebuildDinoSelect();
     applyEmbedRestrictions();
@@ -4329,7 +4357,11 @@ function rebuildDinoSelect(){
   const list = State.mode === "dino" ? State.names : State.entryList;
   const placeholder = State.mode === "dino"
     ? "(Select a Dino)"
-    : "(Select a Spawn Entry)"
+    : "(Select a Spawn Entry)";
+
+  // restore valid remembered selection for current mode
+  const saved = State.selections[State.mode] || "";
+  State.selection = (saved && list.includes(saved)) ? saved : "";
 
   UI.dinoSelect.innerHTML = "";
 
@@ -4338,16 +4370,6 @@ function rebuildDinoSelect(){
   emptyOpt.textContent = placeholder;
   UI.dinoSelect.appendChild(emptyOpt);
 
-  const hadSelection = !!State.selection;
-  const keepMissingSelection = hadSelection && !list.includes(State.selection);
-
-  if (keepMissingSelection) {
-    const missingOpt = document.createElement("option");
-    missingOpt.value = State.selection;
-    missingOpt.textContent = `${State.selection} (not on this map)`;
-    UI.dinoSelect.appendChild(missingOpt);
-  }
-
   for (const v of list){
     const o = document.createElement("option");
     o.value = v;
@@ -4355,14 +4377,11 @@ function rebuildDinoSelect(){
     UI.dinoSelect.appendChild(o);
   }
 
-  if (!hadSelection) {
-    State.selection = "";
-  }
-
   UI.dinoSelect.value = State.selection;
 
   UI.dinoSelect.onchange = () => {
     State.selection = UI.dinoSelect.value || "";
+    State.selections[State.mode] = State.selection;
     render();
   };
 
@@ -4442,7 +4461,7 @@ async function onMapChanged(){
 
 async function boot(){
 
-  SOURCES = filterSourcesForEmbed(await buildSources());
+  SOURCES = await buildSources();
 
   const official = SOURCES.find(s => s.id === "official");
 
