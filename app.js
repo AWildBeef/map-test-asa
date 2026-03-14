@@ -176,29 +176,51 @@ if (EMBED_MODE) {
 }
 
 function filterSourcesForEmbed(allSources){
+  if (!EMBED_MODE) return allSources;
+  if (!EMBED_SOURCE && !EMBED_GROUP) return allSources;
 
-  if(!EMBED_SOURCE && !EMBED_GROUP) return allSources;
+  if (EMBED_SOURCE){
+    const src = allSources.find(s => s.id === EMBED_SOURCE);
+    if (!src) return [];
 
-  // single-source lock
-  if(EMBED_SOURCE){
-    return allSources.filter(s => s.id === EMBED_SOURCE);
+    const allowed = new Set([src.id]);
+
+    if (src.kind === "group") {
+      for (const mid of (src.members || [])) allowed.add(mid);
+    }
+
+    if (EMBED_ALLOW_OFFICIAL) {
+      allowed.add("official");
+    }
+
+    return allSources.filter(s => allowed.has(s.id));
   }
 
-  // group restriction
-  if(EMBED_GROUP){
+  if (EMBED_GROUP){
+    const groupName = EMBED_GROUP.trim().toLowerCase();
 
-    const group = allSources.find(s =>
-      s.kind === "group" && s.id === EMBED_GROUP
+    const allowed = new Set();
+
+    for (const s of allSources){
+      if (String(s.group || "").trim().toLowerCase() === groupName) {
+        allowed.add(s.id);
+      }
+    }
+
+    const groupSource = allSources.find(s =>
+      s.kind === "group" &&
+      String(s.group || "").trim().toLowerCase() === groupName
     );
 
-    if(!group) return [];
+    if (groupSource) {
+      allowed.add(groupSource.id);
+    }
 
-    const allowedIds = new Set([
-      group.id,
-      ...(group.members || [])
-    ]);
+    if (EMBED_ALLOW_OFFICIAL) {
+      allowed.add("official");
+    }
 
-    return allSources.filter(s => allowedIds.has(s.id));
+    return allSources.filter(s => allowed.has(s.id));
   }
 
   return allSources;
@@ -4296,7 +4318,7 @@ function setupUI(){
     UI.sourceSelect.appendChild(o);
   }
 
-  UI.sourceSelect.value = "official";
+  UI.sourceSelect.value = UI.sourceSelect.options[0]?.value || "";
 
   UI.sourceSelect.onchange = async () => {
     await loadSelectedSource();
