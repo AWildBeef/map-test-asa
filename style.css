@@ -608,11 +608,11 @@ body{
   top:calc(100% + 6px);
   z-index:99999;
 
-  background:rgba(26,29,33,.72);
+  background:rgba(26,29,33,.78);
   border:1px solid rgba(255,255,255,.12);
   border-radius:10px;
   box-shadow:var(--shadow);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
   overflow:hidden;
 }
 
@@ -623,7 +623,7 @@ body{
   outline:none;
   font-size:16px;
 
-  background:rgba(0,0,0,.30);
+  background:rgba(0,0,0,.45);
   color:var(--text);
   border-bottom:1px solid rgba(255,255,255,.08);
 
