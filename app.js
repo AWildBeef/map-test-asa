@@ -3039,7 +3039,6 @@ function supplyCrateTooltipHtml(p, legend){
     <div class="poi-tip-block">
       <div class="poi-tip-title">Supply Drops</div>
       ${crateLines}
-      ${sourceBlock}
     </div>
   `;
 }
