@@ -739,7 +739,7 @@ function rebuildLootIndices(){
 
   const mapCrateClasses = crateClassesUsedOnCurrentMap();
 
-  // --- crates on this map only ---
+  // --- crates on this map ---
   for (const crateClass of mapCrateClasses){
     const crateId = crateClassToId(crateClass);
     if (!Number.isInteger(crateId) || crateId < 0) continue;
@@ -753,29 +753,23 @@ function rebuildLootIndices(){
     State.crateNameToId.set(name, crateId);
   }
 
-  State.crateNames = [...new Set(State.crateNames)].sort((a,b)=>a.localeCompare(b));
+  State.crateNames = [...new Set(State.crateNames)].sort((a, b) => a.localeCompare(b));
 
-  // --- items reachable from those crates only ---
-  for (const crateId of State.mapCrateIds){
-    const crateMeta = crateMetaById(crateId);
-    const crateSets = Array.isArray(crateMeta?.s) ? crateMeta.s : [];
+  // --- items on this map ---
+  for (const [itemIdStr, refs] of Object.entries(loot.r || {})){
+    const itemId = Number(itemIdStr);
+    if (!Number.isInteger(itemId)) continue;
 
-    for (const setRow of crateSets){
-      const setId = Array.isArray(setRow) ? setRow[0] : null;
-      const setMeta = setMetaById(setId);
-      const entries = Array.isArray(setMeta?.e) ? setMeta.e : [];
+    const rows = Array.isArray(refs) ? refs : [];
+    const appearsOnMap = rows.some(r => {
+      const crateId = Array.isArray(r) ? Number(r[0]) : NaN;
+      return State.mapCrateIds.has(crateId);
+    });
 
-      for (const entry of entries){
-        for (const itemId of (Array.isArray(entry?.i) ? entry.i : [])){
-          if (!Number.isInteger(itemId)) continue;
-          State.mapItemIds.add(itemId);
-        }
-      }
-    }
-  }
+    if (!appearsOnMap) continue;
 
-  // --- item names for this map only ---
-  for (const itemId of State.mapItemIds){
+    State.mapItemIds.add(itemId);
+
     const row = items.i?.[String(itemId)];
     if (!row) continue;
 
@@ -787,7 +781,6 @@ function rebuildLootIndices(){
     State.itemNameToIds.get(name).push(itemId);
   }
 
-  // dedupe/sort IDs per name
   for (const [name, ids] of State.itemNameToIds.entries()){
     State.itemNameToIds.set(name, [...new Set(ids)].sort((a,b)=>a-b));
   }
@@ -950,19 +943,57 @@ function renderCrateTabSets(c){
       <div class="info-subtitle">Loot Sets (${rows.length})</div>
       <div class="entries">
         ${rows.map(row => {
-          const setId = Array.isArray(row) ? row[0] : null;
+          const setId = Array.isArray(row) ? Number(row[0]) : null;
           const weight = Array.isArray(row) ? row[1] : null;
           const setMeta = setMetaById(setId);
-          const name = setMeta?.n || setIdToClass(setId) || `Set ${setId}`;
+          const setName = setMeta?.n || setIdToClass(setId) || `Set ${setId}`;
+          const entries = Array.isArray(setMeta?.e) ? setMeta.e : [];
 
           return `
             <div class="info-section">
               <div class="info-row">
-                <span class="info-label">${escapeHtml(name)}</span>
+                <span class="info-label">${escapeHtml(setName)}</span>
               </div>
               <div class="entry-meta">
                 <div class="entry-meta-line">Weight: ${escapeHtml(fmt(weight) || "--")}</div>
               </div>
+
+              ${
+                !entries.length
+                  ? `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
+                  : entries.map(entry => `
+                      <div class="info-section" style="margin-top:8px;">
+                        <div class="info-subtitle-sub">${escapeHtml(entry?.n || "Entry")}</div>
+                        <div class="entry-meta">
+                          <div class="entry-meta-line">Entry Weight: ${escapeHtml(fmt(entry?.w) || "--")}</div>
+                          <div class="entry-meta-line">Quantity: ${escapeHtml(fmt(entry?.mn) || "--")} - ${escapeHtml(fmt(entry?.mx) || "--")}</div>
+                          ${
+                            entry?.q1 != null || entry?.q2 != null
+                              ? `<div class="entry-meta-line">Quality: ${escapeHtml(fmt(entry?.q1) || "--")} - ${escapeHtml(fmt(entry?.q2) || "--")}</div>`
+                              : ``
+                          }
+                          ${
+                            entry?.b != null
+                              ? `<div class="entry-meta-line">Blueprint Chance: ${escapeHtml(fmt(Number(entry.b) * 100) || "0")}%</div>`
+                              : ``
+                          }
+                        </div>
+
+                        <div class="entries">
+                          ${(Array.isArray(entry?.i) ? entry.i : []).map(itemId => `
+                            <div class="entry-row">
+                              <div class="entry-main">
+                                <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
+                                <div class="info-mono copy-on-click" data-copy="${escapeAttr(itemBlueprintById(itemId))}">
+                                  ${escapeHtml(itemBlueprintById(itemId) || `Item ${itemId}`)}
+                                </div>
+                              </div>
+                            </div>
+                          `).join("")}
+                        </div>
+                      </div>
+                    `).join("")
+              }
             </div>
           `;
         }).join("")}
@@ -1072,7 +1103,11 @@ function renderItemTabInfo(it){
 }
 
 function renderItemTabCrates(it){
-  const crateIds = [...new Set(it.ids.flatMap(id => crateIdsForItemId(id)))];
+  const crateIds = [...new Set(
+    it.ids
+      .flatMap(id => crateIdsForItemId(id))
+      .filter(crateId => State.mapCrateIds.has(crateId))
+  )];
 
   if (!crateIds.length){
     return `<div style="color:var(--muted)">No crates found for this item.</div>`;
@@ -1625,9 +1660,11 @@ function refreshInfoPanelPageHeight() {
   const pagesEl = body?.querySelector(".fp-pages");
   if (!pagesEl) return;
 
-  const activeId = State.mode === "dino"
-    ? infoPanelState.dinoTab
-    : infoPanelState.entryTab;
+  let activeId = "";
+  if (State.mode === "dino") activeId = infoPanelState.dinoTab;
+  else if (State.mode === "entry") activeId = infoPanelState.entryTab;
+  else if (State.mode === "crate") activeId = infoPanelState.crateTab;
+  else if (State.mode === "item") activeId = infoPanelState.itemTab;
 
   requestAnimationFrame(() => {
     syncActivePageHeight(pagesEl, activeId);
@@ -2225,8 +2262,8 @@ function renderPoiPanel(){
 
   const rows = [
     { key: "tributeTerminals", label: "Obelisks & Terminals", count: (pois.tributeTerminals || []).length },
-    { key: "supplyCrates", label: "Supply Drops", count: (pois.supplyCrates || []).length },
-    { key: "artifactCrates", label: "Artifacts", count: (pois.supplyCrates || []).length },
+    { key: "supplyCrates", label: "Supply Drops", count: countSupplyPois(pois.supplyCrates || []) },
+    { key: "artifactCrates", label: "Artifacts", count: countArtifactPois(pois.supplyCrates || []) },
     { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
     { key: "missions", label: "Missions", count: (pois.missions || []).length },
