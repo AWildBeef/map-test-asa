@@ -144,6 +144,15 @@ const drawStyle = {
   opacity: 0.8
 };
 
+function itemCrateVisibilityKey(itemName, crateId){
+  return `${State.mapId}::item::${itemName}::crate::${crateId}`;
+}
+
+function isItemCrateVisible(itemName, crateId){
+  const key = itemCrateVisibilityKey(itemName, crateId);
+  return entryVisibility[key] ?? true;
+}
+
 /* ============================================================
    ~UI
 ============================================================ */
@@ -629,9 +638,6 @@ function crateIdToClass(crateId){
   return lootData().ci?.[Number(crateId)] || "";
 }
 
-function setIdToClass(setId){
-  return lootData().si?.[Number(setId)] || "";
-}
 
 function crateClassToId(crateClass){
   const arr = lootData().ci || [];
@@ -650,9 +656,8 @@ function crateMetaById(crateId){
   return cls ? lootData().c?.[cls] || null : null;
 }
 
-function setMetaById(setId){
-  const cls = setIdToClass(setId);
-  return cls ? lootData().s?.[cls] || null : null;
+function setClassToMeta(setClass){
+  return setClass ? (lootData().s?.[setClass] || null) : null;
 }
 
 function crateDisplayNameById(crateId){
@@ -680,18 +685,29 @@ function poiLegendCrateClass(point, rowIdx = 0){
 }
 
 function poiCrateClasses(point){
+
   const geom = currentGeom();
   const legend = Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+  const hordeLegend = Array.isArray(geom?.hordeLegend) ? geom.hordeLegend : [];
+
   const out = [];
 
+  // supply crates
   for (const row of (Array.isArray(point?.c) ? point.c : [])){
-    if (!Array.isArray(row) || row.length < 1) continue;
-    const legendIdx = Number(row[0]);
-    const meta = Number.isInteger(legendIdx) && legendIdx >= 0 && legendIdx < legend.length
-      ? legend[legendIdx]
-      : null;
+    const idx = Number(row?.[0]);
+    const meta = legend[idx];
     if (!meta?.n) continue;
     out.push(`${meta.n}_C`);
+  }
+
+  // horde crates
+  for (const idxRaw of (Array.isArray(point?.h) ? point.h : [])){
+    const idx = Number(idxRaw);
+    const meta = hordeLegend[idx];
+    if (!meta?.bp) continue;
+
+    const cls = crateClassFromBp(meta.bp);
+    if (cls) out.push(cls);
   }
 
   return [...new Set(out)];
@@ -798,7 +814,7 @@ function drawCrate(crateName){
   const crateClass = crateIdToClass(crateId);
   if (!crateClass) return;
 
-  const points = supplyCratePointsForCurrentMap();
+  const points = lootPointsForCurrentMap();
 
   for (const p of points){
     const x = Number(p?.x);
@@ -829,6 +845,50 @@ function drawCrate(crateName){
   }
 }
 
+function crateItemSummary(crateClass){
+  const crate = lootData().c?.[crateClass];
+  if (!crate) return [];
+
+  const seen = new Map();
+
+  for (const row of (crate.s || [])){
+    // inline entries
+    for (const entry of (row?.e || [])){
+      for (const itemId of (entry?.i || [])){
+        if (!seen.has(itemId)){
+          seen.set(itemId, {
+            itemId,
+            name: itemDisplayNameById(itemId),
+            bp: itemBlueprintById(itemId),
+            hits: 0
+          });
+        }
+        seen.get(itemId).hits += 1;
+      }
+    }
+
+    // override entries
+    const setRef = row?.o;
+    const setMeta = setRef ? lootData().s?.[setRef] : null;
+    for (const entry of (setMeta?.e || [])){
+      for (const itemId of (entry?.i || [])){
+        if (!seen.has(itemId)){
+          seen.set(itemId, {
+            itemId,
+            name: itemDisplayNameById(itemId),
+            bp: itemBlueprintById(itemId),
+            hits: 0
+          });
+        }
+        seen.get(itemId).hits += 1;
+      }
+    }
+  }
+
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+
 function drawItem(itemName){
   clearDraw();
   clearPois();
@@ -842,7 +902,7 @@ function drawItem(itemName){
 
   for (const itemId of itemIds){
     for (const crateId of crateIdsForItemId(itemId)){
-      if (State.mapCrateIds.has(crateId)){
+      if (State.mapCrateIds.has(crateId) && isItemCrateVisible(itemName, crateId)){
         crateIdSet.add(crateId);
       }
     }
@@ -851,7 +911,7 @@ function drawItem(itemName){
   const crateClasses = [...crateIdSet].map(crateIdToClass).filter(Boolean);
   if (!crateClasses.length) return;
 
-  const points = supplyCratePointsForCurrentMap();
+  const points = lootPointsForCurrentMap();
 
   for (const p of points){
     const x = Number(p?.x);
@@ -871,7 +931,7 @@ function drawItem(itemName){
       className: isArtifactOnly ? "poi-artifact" : "poi-supply"
     })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(supplyCrateTooltipHtml(p, supplyLegendForCurrentMap()), {
+      .bindTooltip(supplyCrateTooltipHtml(p), {
         direction: "auto",
         sticky: true,
         offset: [0, -14],
@@ -907,18 +967,19 @@ function getSelectedCrate(crateName){
 }
 
 function renderCrateHero(c){
-  const bp = c.class || "";
+  const bp = c.bp || "";
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(c.name)}</div>
       <div class="info-submeta">Loot Crate</div>
       ${renderCopyField("Crate Class", c.class)}
-      ${renderCopyField("Crate Blueprint", bp)}
     </div>
   `;
 }
 
 function renderCrateTabInfo(c){
+  const items = crateItemSummary(c.class);
+
   return `
     <div class="info-section">
       <div class="info-subtitle">Crate Info</div>
@@ -927,6 +988,25 @@ function renderCrateTabInfo(c){
         <div class="entry-meta-line">Min Item Sets: ${escapeHtml(String(c.minSets ?? "--"))}</div>
         <div class="entry-meta-line">Max Item Sets: ${escapeHtml(String(c.maxSets ?? "--"))}</div>
       </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-subtitle">Possible Items (${items.length})</div>
+      ${
+        !items.length
+          ? `<div style="color:var(--muted)">No items found.</div>`
+          : `
+            <div class="entries">
+              ${items.map(it => `
+                <div class="entry-row">
+                  <div class="entry-main">
+                    <div class="entry-name">${escapeHtml(it.name)}</div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          `
+      }
     </div>
   `;
 }
@@ -942,61 +1022,96 @@ function renderCrateTabSets(c){
     <div class="info-section">
       <div class="info-subtitle">Loot Sets (${rows.length})</div>
       <div class="entries">
-        ${rows.map(row => {
-          const setId = Array.isArray(row) ? Number(row[0]) : null;
-          const weight = Array.isArray(row) ? row[1] : null;
-          const setMeta = setMetaById(setId);
-          const setName = setMeta?.n || setIdToClass(setId) || `Set ${setId}`;
-          const entries = Array.isArray(setMeta?.e) ? setMeta.e : [];
+        ${rows.map((row, idx) => {
+          const setName = row?.n || `Set ${idx + 1}`;
+          const weight = row?.w;
+          const inlineEntries = Array.isArray(row?.e) ? row.e : [];
+          const overrideRef = row?.o || "";
+          const overrideMeta = overrideRef ? (lootData().s?.[overrideRef] || null) : null;
+          const overrideEntries = Array.isArray(overrideMeta?.e) ? overrideMeta.e : [];
 
           return `
             <div class="info-section">
               <div class="info-row">
-                <span class="info-label">${escapeHtml(setName)}</span>
+                <span class="info-label">${escapeHtml(setName || `Set ${idx + 1}`)}</span>
               </div>
+
               <div class="entry-meta">
                 <div class="entry-meta-line">Weight: ${escapeHtml(fmt(weight) || "--")}</div>
               </div>
 
               ${
-                !entries.length
-                  ? `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
-                  : entries.map(entry => `
-                      <div class="info-section" style="margin-top:8px;">
-                        <div class="info-subtitle-sub">${escapeHtml(entry?.n || "Entry")}</div>
-                        <div class="entry-meta">
-                          <div class="entry-meta-line">Entry Weight: ${escapeHtml(fmt(entry?.w) || "--")}</div>
-                          <div class="entry-meta-line">Quantity: ${escapeHtml(fmt(entry?.mn) || "--")} - ${escapeHtml(fmt(entry?.mx) || "--")}</div>
-                          ${
-                            entry?.q1 != null || entry?.q2 != null
-                              ? `<div class="entry-meta-line">Quality: ${escapeHtml(fmt(entry?.q1) || "--")} - ${escapeHtml(fmt(entry?.q2) || "--")}</div>`
-                              : ``
-                          }
-                          ${
-                            entry?.b != null
-                              ? `<div class="entry-meta-line">Blueprint Chance: ${escapeHtml(fmt(Number(entry.b) * 100) || "0")}%</div>`
-                              : ``
-                          }
-                        </div>
+                overrideRef
+                  ? `
+                    <div class="info-subtitle-sub">Loot Item Set Override</div>
+                    <div class="info-mono copy-on-click" data-copy="${escapeAttr(overrideRef)}">
+                      ${escapeHtml(overrideRef)}
+                    </div>
+                  `
+                  : ``
+              }
 
-                        <div class="entries">
-                          ${(Array.isArray(entry?.i) ? entry.i : []).map(itemId => `
-                            <div class="entry-row">
-                              <div class="entry-main">
-                                <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
-                                <div class="info-mono copy-on-click" data-copy="${escapeAttr(itemBlueprintById(itemId))}">
-                                  ${escapeHtml(itemBlueprintById(itemId) || `Item ${itemId}`)}
-                                </div>
-                              </div>
-                            </div>
-                          `).join("")}
-                        </div>
-                      </div>
-                    `).join("")
+              ${
+                inlineEntries.length
+                  ? `
+                    <div class="info-subtitle-sub" style="margin-top:8px;">Direct Crate Entries</div>
+                    ${inlineEntries.map(renderLootEntryBlock).join("")}
+                  `
+                  : ``
+              }
+
+              ${
+                overrideEntries.length
+                  ? `
+                    <div class="info-subtitle-sub" style="margin-top:8px;">Override Loot Entries</div>
+                    ${overrideEntries.map(renderLootEntryBlock).join("")}
+                  `
+                  : ``
+              }
+
+              ${
+                !inlineEntries.length && !overrideEntries.length
+                  ? `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
+                  : ``
               }
             </div>
           `;
         }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderLootEntryBlock(entry){
+  return `
+    <div class="info-section" style="margin-top:8px;">
+      <div class="info-subtitle-sub">${escapeHtml(entry?.n || "Entry")}</div>
+      <div class="entry-meta">
+        <div class="entry-meta-line">Entry Weight: ${escapeHtml(fmt(entry?.w) || "--")}</div>
+        <div class="entry-meta-line">Quantity: ${escapeHtml(fmt(entry?.mn) || "--")} - ${escapeHtml(fmt(entry?.mx) || "--")}</div>
+        ${
+          entry?.q1 != null || entry?.q2 != null
+            ? `<div class="entry-meta-line">Quality: ${escapeHtml(fmt(entry?.q1) || "--")} - ${escapeHtml(fmt(entry?.q2) || "--")}</div>`
+            : ``
+        }
+        ${
+          entry?.b != null
+            ? `<div class="entry-meta-line">Blueprint Chance: ${escapeHtml(fmt(Number(entry.b) * 100) || "0")}%</div>`
+            : ``
+        }
+      </div>
+
+      <div class="entries">
+        ${(Array.isArray(entry?.i) ? entry.i : []).map(itemId => `
+          <div class="entry-row">
+            <div class="entry-main">
+              <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
+              <div class="info-mono copy-on-click" data-copy="${escapeAttr(itemBlueprintById(itemId))}">
+                ${escapeHtml(itemBlueprintById(itemId) || `Item ${itemId}`)}
+              </div>
+            </div>
+          </div>
+        `).join("")}
       </div>
     </div>
   `;
@@ -1117,18 +1232,29 @@ function renderItemTabCrates(it){
     <div class="info-section">
       <div class="info-subtitle">Crates (${crateIds.length})</div>
       <div class="entries">
-        ${crateIds.map(crateId => {
+        ${crateIds.map((crateId, idx) => {
           const meta = crateMetaById(crateId);
           const name = crateDisplayNameById(crateId);
+          const key = itemCrateVisibilityKey(it.name, crateId);
+          const visible = isItemCrateVisible(it.name, crateId);
+
           return `
-            <div class="info-section">
-              <div class="info-row">
-                <span class="info-label">${escapeHtml(name)}</span>
+            <label class="entry-row">
+              <input
+                type="checkbox"
+                data-item-crate-toggle="1"
+                data-key="${escapeAttr(key)}"
+                data-item-name="${escapeAttr(it.name)}"
+                data-crate-id="${escapeAttr(String(crateId))}"
+                ${visible ? "checked" : ""}
+              >
+              <div class="entry-main">
+                <div class="entry-name">${escapeHtml(name)}</div>
+                <div class="entry-meta">
+                  <div class="entry-meta-line">Required Level: ${escapeHtml(String(meta?.l ?? "--"))}</div>
+                </div>
               </div>
-              <div class="entry-meta">
-                <div class="entry-meta-line">Required Level: ${escapeHtml(String(meta?.l ?? "--"))}</div>
-              </div>
-            </div>
+            </label>
           `;
         }).join("")}
       </div>
@@ -1180,6 +1306,13 @@ function renderItemPanel(itemName){
       renderItemPanel(itemName);
     }
   });
+    body.querySelectorAll('input[data-item-crate-toggle="1"]').forEach(chk => {
+    chk.onchange = () => {
+      const key = chk.dataset.key;
+      entryVisibility[key] = chk.checked;
+      drawItem(itemName);
+    };
+  });
 
   mountPanelSwipe(
     body.querySelector(".fp-pages"),
@@ -1193,6 +1326,28 @@ function renderItemPanel(itemName){
 
   refreshInfoPanelPageHeight();
   syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
+}
+
+function lootPointsForCurrentMap(){
+
+  const geom = currentGeom();
+  if (!geom?.pois) return [];
+
+  const out = [];
+
+  for (const p of (geom.pois.supplyCrates || [])){
+    out.push({ ...p, _type: "supply" });
+  }
+
+  for (const p of (geom.pois.hordeEvents || [])){
+    out.push({ ...p, _type: "horde" });
+  }
+
+  for (const p of (geom.pois.missions || [])){
+    out.push({ ...p, _type: "mission" });
+  }
+
+  return out;
 }
 
 function supplyLegendForCurrentMap(){
@@ -1212,7 +1367,7 @@ function crateClassFromLegendRow(row){
   return short.endsWith("_C") ? short : `${short}_C`;
 }
 
-function crateClassesUsedOnCurrentMap(){
+function supplyCrateClassesUsedOnCurrentMap(){
   const legend = supplyLegendForCurrentMap();
   const points = supplyCratePointsForCurrentMap();
 
@@ -1229,6 +1384,68 @@ function crateClassesUsedOnCurrentMap(){
       const crateClass = crateClassFromLegendRow(meta);
       if (crateClass) out.add(crateClass);
     }
+  }
+
+  return out;
+}
+
+function hordeCrateClassesUsedOnCurrentMap(){
+  const geom = currentGeom();
+  const legend = Array.isArray(geom?.hordeLegend) ? geom.hordeLegend : [];
+  const points = Array.isArray(geom?.pois?.hordeEvents) ? geom.pois.hordeEvents : [];
+  const out = new Set();
+
+  for (const p of points){
+    for (const rawIdx of (Array.isArray(p?.h) ? p.h : [])){
+      const idx = Number(rawIdx);
+      if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+      const meta = legend[idx];
+      const bp = meta?.bp || "";
+      const cls = crateClassFromBp(bp);
+      if (cls) out.add(cls);
+    }
+  }
+
+  return out;
+}
+
+function missionCrateClassesUsedOnCurrentMap(){
+  const geom = currentGeom();
+  const legend = Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+  const points = Array.isArray(geom?.pois?.missions) ? geom.pois.missions : [];
+  const out = new Set();
+
+  for (const p of points){
+    for (const row of (Array.isArray(p?.m) ? p.m : [])){
+      if (!Array.isArray(row) || !row.length) continue;
+
+      const idx = Number(row[0]);
+      if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+      const meta = legend[idx];
+      const bp = meta?.bp || "";
+      const cls = crateClassFromBp(bp);
+      if (cls) out.add(cls);
+    }
+  }
+
+  return out;
+}
+
+function crateClassesUsedOnCurrentMap(){
+  const out = new Set();
+
+  for (const cls of supplyCrateClassesUsedOnCurrentMap()){
+    out.add(cls);
+  }
+
+  for (const cls of hordeCrateClassesUsedOnCurrentMap()){
+    out.add(cls);
+  }
+
+  for (const cls of missionCrateClassesUsedOnCurrentMap()){
+    out.add(cls);
   }
 
   return out;
@@ -3547,7 +3764,6 @@ function supplyCrateTooltipHtml(p){
     <div class="poi-tip-block">
       <div class="poi-tip-title">${escapeHtml(title)}</div>
       ${crateLines}
-      ${sourceBlock}
     </div>
   `;
 }
