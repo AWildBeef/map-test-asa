@@ -1,71 +1,4 @@
-/* Split from app_embed.js lines 2788-3355 */
 
-/* ============================================================
-   ~~POIS
-============================================================ */
-
-function supplyLegendForCurrentMap(){
-  const mapMeta = MAPS.find(m => m.id === State.mapId);
-  const geom = Global.mapGeom.get(mapMeta?.geomShort);
-  return Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
-}
-
-function hordeLegendForCurrentMap(){
-  const mapMeta = MAPS.find(m => m.id === State.mapId);
-  const geom = Global.mapGeom.get(mapMeta?.geomShort);
-  return Array.isArray(geom?.hordeLegend) ? geom.hordeLegend : [];
-}
-
-function hordeDifficultyLabel(d){
-  const n = Number(d);
-
-  if (n === 1) return "Gamma";
-  if (n === 2) return "Beta";
-  if (n === 3) return "Alpha";
-  if (n === 4) return "Legendary";
-
-  return `Difficulty ${d}`;
-}
-
-function hordeTypeLabel(t){
-  const s = String(t || "");
-
-  if (s.includes("NewEnumerator0")) return "OSD";
-  if (s.includes("NewEnumerator1")) return "Element Node";
-  if (s.includes("NewEnumerator2")) return "OSD / Element Node";
-
-  return "Horde Event";
-}
-
-function buildHordeGroups(point, legend){
-  const rows = Array.isArray(point?.h) ? point.h : [];
-  const grouped = new Map();
-
-  for (const rawIdx of rows){
-    const idx = Number(rawIdx);
-    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
-
-    const meta = legend[idx];
-    if (!meta) continue;
-
-    const name = String(meta.n || "Horde Event").trim() || "Horde Event";
-    const diffLabel = hordeDifficultyLabel(meta.d);
-    const typeLabel = hordeTypeLabel(meta.t);
-
-    const key = `${name}::${diffLabel}`;
-
-    if (!grouped.has(key)){
-      grouped.set(key, {
-        name,
-        difficulty: diffLabel,
-        type: typeLabel,
-        bp: meta.bp || ""
-      });
-    }
-  }
-
-  return [...grouped.values()];
-}
 
 function hordeTooltipHtml(point, legend){
   const groups = buildHordeGroups(point, legend);
@@ -95,6 +28,7 @@ function hordeTooltipHtml(point, legend){
   `;
 }
 
+
 function hordeMarkerColor(point){
   const t = String(point?.t || "");
 
@@ -102,6 +36,7 @@ function hordeMarkerColor(point){
   if (t.includes("NewEnumerator2")) return "#ff66cc"; // both
   return "#ffd54a"; // osd
 }
+
 
 function drawHordePois(points){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
@@ -136,79 +71,6 @@ function drawHordePois(points){
   }
 }
 
-
-function playerStartColorByRegionIndex(regionName, allRegionNames){
-  const names = [...new Set(allRegionNames || [])].sort((a, b) => a.localeCompare(b));
-  const idx = Math.max(0, names.indexOf(regionName));
-
-  const hue = Math.round((idx * 137.508) % 360);
-  return `hsl(${hue}, 72%, 52%)`;
-}
-
-function poiCount(v){
-  if (Array.isArray(v)) return v.length;
-  if (v && typeof v === "object") return Object.keys(v).length;
-  return 0;
-}
-
-function drawPlayerStarts(groups){
-  if (!mapObj?.poiLayer) return;
-  if (!poiVisibility.playerStarts) return;
-  if (!groups || typeof groups !== "object") return;
-
-  const regionNames = Object.keys(groups);
-
-  for (const [regionName, block] of Object.entries(groups)) {
-    const difficulty = block?.difficulty;
-    const points = Array.isArray(block?.points) ? block.points : [];
-    const fill = playerStartColorByRegionIndex(regionName, regionNames);
-
-    for (const pt of points) {
-      if (!Array.isArray(pt) || pt.length < 2) continue;
-
-      const x = Number(pt[0]);
-      const y = Number(pt[1]);
-      if (![x, y].every(Number.isFinite)) continue;
-
-      const tip = [
-        regionName,
-        difficulty != null ? `Difficulty ${difficulty}` : null
-      ].filter(Boolean).join(" • ");
-
-      L.circleMarker([y, x], {
-        radius: 5,
-        color: "#111",
-        weight: 1.5,
-        fillColor: fill,
-        fillOpacity: 0.95,
-        pane: "poiPane",
-        className:"poi-pstart"
-      })
-        .addTo(mapObj.poiLayer)
-        .bindTooltip(tip || "Player Start"), {
-          direction: "auto",
-          sticky: true,
-          opacity: 0.97,
-          className: "pstart-tooltip",
-          autoPan: true
-        };
-    }
-  }
-}
-
-function crateShortName(bp){
-  const s = String(bp || "");
-  const cls = s.split(".").pop() || s;
-  return cls.replace(/_C$/, "");
-}
-
-function shortBpName(bp){
-  const s = String(bp || "").trim();
-  if (!s) return "";
-
-  const last = s.split("/").pop() || s;
-  return last.split(".")[0] || last;
-}
 
 function supplyCrateTooltipHtml(p, legend){
   const crateRows = Array.isArray(p?.c) ? p.c : [];
@@ -258,6 +120,7 @@ function supplyCrateTooltipHtml(p, legend){
   `;
 }
 
+
 function drawSupplyCratePois(points){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.supplyCrates) return;
@@ -290,11 +153,6 @@ function drawSupplyCratePois(points){
   }
 }
 
-function missionLegendForMap(){
-  const mapMeta = MAPS.find(m => m.id === State.mapId);
-  const geom = Global.mapGeom.get(mapMeta?.geomShort);
-  return Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
-}
 
 function missionTooltipHtml(point, legend){
   const groups = buildMissionGroups(point, legend);
@@ -315,70 +173,6 @@ function missionTooltipHtml(point, legend){
   `).join("");
 }
 
-function missionLegendForCurrentMap(){
-  const mapMeta = MAPS.find(m => m.id === State.mapId);
-  const geom = Global.mapGeom.get(mapMeta?.geomShort);
-  return Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
-}
-
-function fmtWeightShort(v){
-  const n = Number(v);
-  if (!Number.isFinite(n)) return "";
-  return fmt(n);
-}
-
-function missionVariantLine(meta, weight){
-  const parts = [];
-
-  if (meta?.k) parts.push(meta.k);
-  if (meta?.s) parts.push(meta.s);
-  if (meta?.d) parts.push(meta.d);
-
-  let line = parts.join(" • ");
-  if (!line) line = "Mission Variant";
-
-  const w = fmtWeightShort(weight);
-  if (w) line += ` (${w})`;
-
-  return line;
-}
-
-function buildMissionGroups(point, legend){
-  const rows = Array.isArray(point?.m) ? point.m : [];
-  const grouped = new Map();
-
-  for (const row of rows){
-    if (!Array.isArray(row) || !row.length) continue;
-
-    const idx = Number(row[0]);
-    const weight = row.length > 1 ? row[1] : null;
-
-    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
-
-    const meta = legend[idx];
-    if (!meta) continue;
-
-    const groupName = String(meta.n || "Mission").trim() || "Mission";
-
-    if (!grouped.has(groupName)){
-      grouped.set(groupName, {
-        name: groupName,
-        bp: meta.bp || "",
-        variants: []
-      });
-    }
-
-    grouped.get(groupName).variants.push({
-      bp: meta.bp || "",
-      k: meta.k || "",
-      d: meta.d || "",
-      s: meta.s || "",
-      w: weight
-    });
-  }
-
-  return [...grouped.values()];
-}
 
 function missionMarkerColor(point, legend){
   const groups = buildMissionGroups(point, legend);
@@ -392,7 +186,6 @@ function missionMarkerColor(point, legend){
 
   return "#ff66cc";
 }
-
 
 
 function drawMissionPois(points){
@@ -429,37 +222,10 @@ function drawMissionPois(points){
 }
 
 
-function cssEscape(s){
-  return String(s || "").toLowerCase().replace(/[^a-z0-9_-]/g,"");
-}
-
-function makeTerminalIcon(type){
-  const cls = cssEscape(type);
-
-  const size = 45;
-
-  return L.divIcon({
-    className: `poi-icon poi-${cls}`,
-    html: `
-      <svg width="${size}" height="${size}" viewBox="-10 -12 20 26">
-
-        <!-- white frame -->
-        <path d="M -3 0 L 0 -8 L 3 0 L 0 5 Z"
-              fill="black"
-              stroke="white"
-              stroke-width="0.5"
-              opacity="0.95"/>
-
-        <!-- inner core -->
-        <path class="poi-fill"
-              d="M -2 0 L 0 -6 L 2 0 L 0 3.5 Z"
-              fill="currentColor"
-              opacity="0.9"/>
-      </svg>
-    `,
-    iconSize:[size,size],
-    iconAnchor:[size/2,size*0.58333]
-  });
+function poiCount(v){
+  if (Array.isArray(v)) return v.length;
+  if (v && typeof v === "object") return Object.keys(v).length;
+  return 0;
 }
 
 
@@ -478,6 +244,7 @@ function poiRadius(type){
   return 6;
 }
 
+
 function poiColor(type){
   const t = String(type || "").toLowerCase();
   
@@ -493,9 +260,11 @@ function poiColor(type){
   return "#ffffff";
 }
 
+
 function clearPois(){
   mapObj?.poiLayer?.clearLayers();
 }
+
 
 function drawPoiGroup(points, groupName){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
@@ -550,6 +319,7 @@ function drawPoiGroup(points, groupName){
   }
 }
 
+
 function drawPois(){
   clearPois();
 
@@ -565,4 +335,107 @@ function drawPois(){
   drawHordePois(geom.pois.hordeEvents || []);
   drawPoiGroup(geom.pois.cityTerminals, "cityTerminals");
   drawPoiGroup(geom.pois.beacons, "beacons");
+}
+
+
+function anyPoisVisible(){
+  return Object.values(poiVisibility).some(Boolean);
+}
+
+
+function hordeDifficultyLabel(d){
+  const n = Number(d);
+
+  if (n === 1) return "Gamma";
+  if (n === 2) return "Beta";
+  if (n === 3) return "Alpha";
+  if (n === 4) return "Legendary";
+
+  return `Difficulty ${d}`;
+}
+
+
+function hordeTypeLabel(t){
+  const s = String(t || "");
+
+  if (s.includes("NewEnumerator0")) return "OSD";
+  if (s.includes("NewEnumerator1")) return "Element Node";
+  if (s.includes("NewEnumerator2")) return "OSD / Element Node";
+
+  return "Horde Event";
+}
+
+
+function crateShortName(bp){
+  const s = String(bp || "");
+  const cls = s.split(".").pop() || s;
+  return cls.replace(/_C$/, "");
+}
+
+
+function shortBpName(bp){
+  const s = String(bp || "").trim();
+  if (!s) return "";
+
+  const last = s.split("/").pop() || s;
+  return last.split(".")[0] || last;
+}
+
+
+function fmtWeightShort(v){
+  const n = Number(v);
+  if (!Number.isFinite(n)) return "";
+  return fmt(n);
+}
+
+
+function missionVariantLine(meta, weight){
+  const parts = [];
+
+  if (meta?.k) parts.push(meta.k);
+  if (meta?.s) parts.push(meta.s);
+  if (meta?.d) parts.push(meta.d);
+
+  let line = parts.join(" • ");
+  if (!line) line = "Mission Variant";
+
+  const w = fmtWeightShort(weight);
+  if (w) line += ` (${w})`;
+
+  return line;
+}
+
+
+function cssEscape(s){
+  return String(s || "").toLowerCase().replace(/[^a-z0-9_-]/g,"");
+}
+
+
+function makeTerminalIcon(type){
+  const cls = cssEscape(type);
+
+  const size = 45;
+
+  return L.divIcon({
+    className: `poi-icon poi-${cls}`,
+    html: `
+      <svg width="${size}" height="${size}" viewBox="-10 -12 20 26">
+
+        <!-- white frame -->
+        <path d="M -3 0 L 0 -8 L 3 0 L 0 5 Z"
+              fill="black"
+              stroke="white"
+              stroke-width="0.5"
+              opacity="0.95"/>
+
+        <!-- inner core -->
+        <path class="poi-fill"
+              d="M -2 0 L 0 -6 L 2 0 L 0 3.5 Z"
+              fill="currentColor"
+              opacity="0.9"/>
+      </svg>
+    `,
+    iconSize:[size,size],
+    iconAnchor:[size/2,size*0.58333]
+  });
 }
