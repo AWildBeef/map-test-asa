@@ -245,6 +245,8 @@ function mountPanelSwipe(container, tabs, getActive, setActive){
 
 
 function renderInfoPanel() {
+  console.log("MODE:", State.mode);
+  console.log("SELECTION:", State.selection);
   syncInfoPanelState();
   if (!State.selection) {
     renderInfoPanelBodyEmpty();

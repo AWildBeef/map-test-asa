@@ -741,6 +741,11 @@ function friendlyCrateNameFromClass(crateClass){
   return crateDisplayNameByClass(crateClass);
 }
 
+function lootSetClassById(setId){
+  const arr = lootData().si || [];
+  return arr[Number(setId)] || "";
+}
+
 
 function lootSetMetaFromRef(ref){
   if (ref == null || ref === "") return null;

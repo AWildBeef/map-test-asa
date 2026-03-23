@@ -17,10 +17,16 @@ function missionDisplayName(missionClass){
 }
 
 function crateDisplayNameByClass(crateClass){
-  const meta = lootData().c?.[crateClass];
-  if (!meta) return crateClass || "";
+  const cls = String(crateClass || "");
+  const meta = lootData().c?.[cls];
 
-  return meta.dn || meta.n || crateClass;
+  if (!meta) return cls;
+
+  if (cls.toLowerCase().includes("artifactcrate")) {
+    return meta.n || cls;
+  }
+
+  return meta.dn || meta.n || cls;
 }
 
 function crateDisplayNameById(crateId){
