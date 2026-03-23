@@ -1055,6 +1055,150 @@ body{
     rgba(255,255,255,0) 100% /* fades out at top */
   );
 }
+
+.crate-submeta{
+  font-size:12px;
+  padding-left:2mm;
+  font-weight:500;
+  white-space:nowrap; /* use white-space, not text-wrap */
+  color:var(--muted);
+  line-height:1.3;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .info-submeta {
+  margin-top:0;
+  margin-bottom:2px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .entry-row {
+  padding:0px;
+  padding-left:2mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .mission-subtitle {
+  padding-top:3mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-subtitle-sub {
+  font-size:12px;
+  font-weight:450;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries {
+  margin-top:3px;
+  margin-left:5mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .entry-meta-lines {
+  font-size:9px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-name {
+  font-size:12px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-row {
+  padding:0px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-submeta {
+  margin-top:0;
+  margin-bottom:2px;
+}
+
+.meta-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:4px 12px;
+  margin-top:4px;
+  margin-bottom:4px;
+}
+
+.meta-grid.meta-grid-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.meta-cell{
+  min-width:0;
+}
+
+.meta-label{
+  font-size:9px;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  color:rgba(255,255,255,.55);
+  margin-bottom:2px;
+}
+
+.meta-value{
+  font-size:12px;
+  line-height:1.15;
+  font-weight:500;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries {
+  margin-top:6px;
+  margin-left:2mm;
+  margin-right:2mm;
+  padding-left:2mm;
+  padding-right:2mm;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-bottom:10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap:2px;
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,30,50,.15);
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .set-meta {
+  margin-top:6px;
+  margin-left:4mm;
+  margin-bottom:10px;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-name {
+  margin-top:1px;
+  padding-left:3mm;
+  margin-bottom:1px;
+  font-size:11px;
+  color:var(--muted);
+  text-align:left;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-row {
+  align-self:center;
+  justify-self:space-around;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub {
+  border-radius:8px;
+  margin:5px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,40,70,.10);
+  padding:5px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section {
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(15,45,90,.10);
+  padding:5px;
+  margin-bottom:5px;
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+
 /* ============================================================
    8) LEAFLET CONTROLS (dock/zoom/attrib)
    ============================================================ */

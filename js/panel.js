@@ -131,6 +131,7 @@ function setInfoPanelHTML(html){
   if (!body) return;
   body.innerHTML = html || `<div style="color:var(--muted)">No data.</div>`;
   panel.style.display = "";
+  syncInfoPanelState();
 }
 
 
@@ -243,19 +244,26 @@ function mountPanelSwipe(container, tabs, getActive, setActive){
 }
 
 
-function renderInfoPanel(){
-  if (!State.selection){
+function renderInfoPanel() {
+  syncInfoPanelState();
+  if (!State.selection) {
     renderInfoPanelBodyEmpty();
     return;
   }
-
-  if (State.mode === "dino"){
+  
+  if (State.mode === "dino") {
     renderDinoPanel(State.selection);
-  } else {
+    
+  } else if (State.mode === "entry") {
     renderEntryPanel(State.selection);
+    
+  } else if (State.mode === "crate") {
+    renderCratePanel(State.selection);
+    
+  } else if (State.mode === "item") {
+    renderItemPanel(State.selection);
   }
 }
-
 
 function ensureDrawStylePanel(){
   let panel = document.getElementById("drawStylePanel");
@@ -588,9 +596,11 @@ function refreshInfoPanelPageHeight() {
   const pagesEl = body?.querySelector(".fp-pages");
   if (!pagesEl) return;
 
-  const activeId = State.mode === "dino"
-    ? infoPanelState.dinoTab
-    : infoPanelState.entryTab;
+  let activeId = "";
+  if (State.mode === "dino") activeId = infoPanelState.dinoTab;
+  else if (State.mode === "entry") activeId = infoPanelState.entryTab;
+  else if (State.mode === "crate") activeId = infoPanelState.crateTab;
+  else if (State.mode === "item") activeId = infoPanelState.itemTab;
 
   requestAnimationFrame(() => {
     syncActivePageHeight(pagesEl, activeId);
@@ -672,29 +682,12 @@ function fmtNum(v, decimals = 0){
   return decimals > 0 ? n.toFixed(decimals) : String(Math.round(n));
 }
 
-
-
-
-
-
-
-
-
-
-
-
 let infoPanelState = {
   dinoTab: "spawns",
-  entryTab: "dinos"
+  entryTab: "dinos",
+  crateTab: "sets",
+  itemTab: "crates"
 };
-
-
-
-
-
-
-
-
 
 
 const CLOSE_ICON = `
@@ -715,3 +708,34 @@ const CHEVRON_DOWN_ICON = `
         stroke-linecap="round"
         stroke-linejoin="round"/>
 `;
+
+function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer } = {}) {
+  if (!layer || !Array.isArray(points)) return;
+
+  const legend = supplyLegendForCurrentMap();
+
+  for (const p of points) {
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    L.circleMarker([y, x], {
+      radius: 6,
+      color: "#111",
+      weight: 2.2,
+      fillColor: "#ffd54a",
+      fillOpacity: 0.95,
+      pane: "poiPane",
+      className:"poi-supply"
+    })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(supplyCrateTooltipHtml(p, legend), {
+        direction: "auto",
+        sticky: true,
+        offset: [0, -14],
+        opacity: 0.97,
+        className: "supply-tooltip",
+        autoPan: true
+      });
+  }
+}

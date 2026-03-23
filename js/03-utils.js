@@ -22,11 +22,18 @@ const UI = {
 
 
 
-function syncModeButton(){
+function syncModeButton() {
   if (!UI.modeToggle) return;
-  UI.modeToggle.textContent = State.mode === "dino" ? "Dino View" : "Spawn View";
+  
+  const labels = {
+    dino: "Dino View",
+    entry: "Spawn View",
+    crate: "Crate View",
+    item: "Item View"
+  };
+  
+  UI.modeToggle.textContent = labels[State.mode] || "View";
 }
-
 
 
 

@@ -4,22 +4,27 @@
    RENDER
 ============================================================ */
 
-function render(){
+function render() {
   if (!State.selection) {
     clearDraw();
     drawPois();
     renderInfoPanelBodyEmpty();
     return;
   }
-
-  if (State.mode === "dino"){
+  
+  if (State.mode === "dino") {
     drawDino(State.selection);
-  } else {
+    drawPois();
+  } else if (State.mode === "entry") {
     clearDraw();
     const score = entryRarityForEntry(State.selection);
     drawEntry(State.selection, score);
+    drawPois();
+  } else if (State.mode === "crate") {
+    drawCrate(State.selection);
+  } else if (State.mode === "item") {
+    drawItem(State.selection);
   }
-
-  drawPois();
+  
   renderInfoPanel();
 }

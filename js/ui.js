@@ -63,20 +63,23 @@ function setupUI(){
   mountFancyDropdown(UI.mapSelect,UI.mapFancy,"Search maps...");
 
   syncModeButton();
-  rebuildDinoSelect();
+  rebuildSelectionSelect();
 
   UI.modeToggle.onclick = () => {
     // save current selection into the mode we're leaving
     State.selections[State.mode] = State.selection || "";
 
     // switch mode
-    State.mode = State.mode === "dino" ? "entry" : "dino";
+    const MODES = ["dino", "entry", "crate", "item"];
 
+    const i = MODES.indexOf(State.mode);
+    State.mode = MODES[(i + 1) % MODES.length];
     // restore remembered selection for new mode
     syncSelectionForMode(State.mode);
 
     syncModeButton();
-    rebuildDinoSelect();
+    syncModeClass();
+    rebuildSelectionSelect();
     applyEmbedRestrictions();
     render();
   };
@@ -878,4 +881,79 @@ function initRarityLegend(){
     el.style.background = color;
   });
 
+}
+
+
+function syncModeClass() {
+  document.body.dataset.mode = State.mode;
+}
+
+
+function syncInfoPanelState() {
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+  
+  panel.dataset.mode = State.mode;
+  
+  if (State.mode === "dino") {
+    panel.dataset.tab = infoPanelState.dinoTab;
+  } else if (State.mode === "entry") {
+    panel.dataset.tab = infoPanelState.entryTab;
+  } else if (State.mode === "crate") {
+    panel.dataset.tab = infoPanelState.crateTab;
+  } else if (State.mode === "item") {
+    panel.dataset.tab = infoPanelState.itemTab;
+  } else {
+    panel.dataset.tab = "";
+  }
+}
+
+function rebuildSelectionSelect() {
+  let placeholder = "(Select)";
+  let options = [];
+  
+  if (State.mode === "dino") {
+    placeholder = "(Select a Dino)";
+    options = State.names.map(v => ({ value: v, label: v }));
+  } else if (State.mode === "entry") {
+    placeholder = "(Select a Spawn Entry)";
+    options = State.entryList.map(v => ({ value: v, label: v }));
+  } else if (State.mode === "crate") {
+    placeholder = "(Select a Loot Crate)";
+    options = State.crateOptions.map(v => ({ value: v.value, label: v.label }));
+  } else if (State.mode === "item") {
+    placeholder = "(Select an Item)";
+    options = State.itemNames.map(v => ({ value: v, label: v }));
+  }
+  
+  UI.dinoSelect.innerHTML = "";
+  
+  const emptyOpt = document.createElement("option");
+  emptyOpt.value = "";
+  emptyOpt.textContent = placeholder;
+  UI.dinoSelect.appendChild(emptyOpt);
+  
+  for (const opt of options) {
+    const o = document.createElement("option");
+    o.value = opt.value;
+    o.textContent = opt.label;
+    UI.dinoSelect.appendChild(o);
+  }
+  
+  if (!options.some(opt => opt.value === State.selection)) {
+    State.selection = "";
+  }
+  
+  UI.dinoSelect.value = State.selection;
+  
+  UI.dinoSelect.onchange = () => {
+    State.selection = UI.dinoSelect.value || "";
+    render();
+  };
+  
+  mountFancyDropdown(
+    UI.dinoSelect,
+    UI.dinoFancy,
+    placeholder.replace(/[()]/g, "")
+  );
 }

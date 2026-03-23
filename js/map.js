@@ -286,8 +286,9 @@ async function onMapChanged(){
   };
 
   rebuildMapIndices();
-  rebuildDinoSelect();
-  applyEmbedRestrictions();
+  rebuildLootIndices();
+  syncSelectionForMode(State.mode);
+  rebuildSelectionSelect();
   renderDock();
   if (isPanelVisible("mapEntriesPanel")) {
     renderMapEntriesPanel();

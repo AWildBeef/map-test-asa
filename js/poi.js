@@ -37,10 +37,8 @@ function hordeMarkerColor(point){
   return "#ffd54a"; // osd
 }
 
-
-function drawHordePois(points){
-  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
-  if (!poiVisibility.hordeEvents) return;
+function addHordeMarkers(points, { layer = mapObj?.poiLayer } = {}) {
+  if (!layer || !Array.isArray(points)) return;
 
   const legend = hordeLegendForCurrentMap();
 
@@ -58,9 +56,9 @@ function drawHordePois(points){
       fillColor,
       fillOpacity: 0.95,
       pane: "poiPane",
-      className:"poi-horde"
+      className: "poi-horde"
     })
-      .addTo(mapObj.poiLayer)
+      .addTo(layer)
       .bindTooltip(hordeTooltipHtml(p, legend), {
         direction: "auto",
         sticky: true,
@@ -69,6 +67,13 @@ function drawHordePois(points){
         autoPan: true
       });
   }
+}
+
+function drawHordePois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.hordeEvents) return;
+
+  addHordeMarkers(points, { layer: mapObj.poiLayer });
 }
 
 
@@ -121,36 +126,11 @@ function supplyCrateTooltipHtml(p, legend){
 }
 
 
-function drawSupplyCratePois(points){
+function drawSupplyCratePois(points) {
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.supplyCrates) return;
 
-  const legend = supplyLegendForCurrentMap();
-
-  for (const p of points){
-    const x = Number(p?.x);
-    const y = Number(p?.y);
-    if (![x, y].every(Number.isFinite)) continue;
-
-    L.circleMarker([y, x], {
-      radius: 6,
-      color: "#111",
-      weight: 2.2,
-      fillColor: "#ffd54a",
-      fillOpacity: 0.95,
-      pane: "poiPane",
-      className:"poi-supply"
-    })
-      .addTo(mapObj.poiLayer)
-      .bindTooltip(supplyCrateTooltipHtml(p, legend), {
-        direction: "auto",
-        sticky: true,
-        offset: [0, -14],
-        opacity: 0.97,
-        className: "supply-tooltip",
-        autoPan: true
-      });
-  }
+  addSupplyCrateMarkers(points, { layer: mapObj.poiLayer });
 }
 
 
@@ -187,10 +167,8 @@ function missionMarkerColor(point, legend){
   return "#ff66cc";
 }
 
-
-function drawMissionPois(points){
-  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
-  if (!poiVisibility.missions) return;
+function addMissionMarkers(points, { layer = mapObj?.poiLayer } = {}) {
+  if (!layer || !Array.isArray(points)) return;
 
   const legend = missionLegendForCurrentMap();
 
@@ -208,9 +186,9 @@ function drawMissionPois(points){
       fillColor,
       fillOpacity: 0.95,
       pane: "poiPane",
-      className:"poi-mission"
+      className: "poi-mission"
     })
-      .addTo(mapObj.poiLayer)
+      .addTo(layer)
       .bindTooltip(missionTooltipHtml(p, legend), {
         direction: "auto",
         sticky: true,
@@ -219,6 +197,13 @@ function drawMissionPois(points){
         autoPan: true
       });
   }
+}
+
+function drawMissionPois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.missions) return;
+
+  addMissionMarkers(points, { layer: mapObj.poiLayer });
 }
 
 

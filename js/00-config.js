@@ -14,6 +14,8 @@ const ASSET_VER = "dev-2026-03-05-V6";
 const PATHS = {
   spawnGlobal: "data/spawn_global.json",
   dinoGlobal: "data/dinos_global.json",
+  itemGlobal: "data/items_global.json",
+  lootGlobal: "data/loot_global.json",
   geomDir: "data/MapGeometry",
   mapsDir: "maps"
 };
