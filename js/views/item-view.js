@@ -202,7 +202,7 @@ function renderItemTabCrates(it){
           : `
             <div class="entries">
               ${renderToggleAllRow({
-                label: "Toggle All Sources",
+                label: "Toggle All",
                 checked: allChecked,
                 dataAttr: "data-item-toggle-all"
               })}

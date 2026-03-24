@@ -12,6 +12,89 @@ function updateDockToggles(){
   });
 }
 
+function ensureModeMenu(){
+  let menu = document.getElementById("modeMenu");
+  if (menu) return menu;
+
+  menu = document.createElement("div");
+  menu.id = "modeMenu";
+  menu.className = "mode-menu";
+  menu.style.display = "none";
+
+  document.body.appendChild(menu);
+
+  document.addEventListener("pointerdown", (e) => {
+    const btn = UI.modeToggle;
+    if (!menu || menu.style.display === "none") return;
+
+    if (menu.contains(e.target) || btn?.contains(e.target)) return;
+    closeModeMenu();
+  });
+
+  window.addEventListener("resize", () => {
+    if (menu.style.display !== "none") {
+      positionModeMenu();
+    }
+  });
+
+  return menu;
+}
+
+function positionModeMenu(){
+  const menu = document.getElementById("modeMenu");
+  const btn = UI.modeToggle;
+  if (!menu || !btn) return;
+
+  const r = btn.getBoundingClientRect();
+
+  menu.style.position = "fixed";
+  menu.style.left = `${Math.max(8, r.left)}px`;
+  menu.style.top = `${r.bottom + 6}px`;
+  menu.style.zIndex = "1200";
+}
+
+function renderModeMenu(){
+  const menu = ensureModeMenu();
+
+  menu.innerHTML = MODE_OPTIONS.map(opt => `
+    <button
+      type="button"
+      class="mode-menu-item ${State.mode === opt.id ? "is-on" : ""}"
+      data-mode-value="${escapeAttr(opt.id)}"
+    >
+      <span class="mode-menu-label">${escapeHtml(opt.label)}</span>
+      <span class="mode-menu-check" aria-hidden="true">${State.mode === opt.id ? "✓" : ""}</span>
+    </button>
+  `).join("");
+
+  menu.querySelectorAll("[data-mode-value]").forEach(btn => {
+    btn.onclick = () => {
+      const mode = btn.getAttribute("data-mode-value");
+      closeModeMenu();
+      setMode(mode);
+    };
+  });
+}
+
+function openModeMenu(){
+  const menu = ensureModeMenu();
+  renderModeMenu();
+  positionModeMenu();
+  menu.style.display = "";
+}
+
+function closeModeMenu(){
+  const menu = document.getElementById("modeMenu");
+  if (!menu) return;
+  menu.style.display = "none";
+}
+
+function toggleModeMenu(){
+  const menu = ensureModeMenu();
+  if (menu.style.display === "none") openModeMenu();
+  else closeModeMenu();
+}
+
 
 function setupUI(){
 
@@ -65,23 +148,10 @@ function setupUI(){
   syncModeButton();
   rebuildSelectionSelect();
 
-  UI.modeToggle.onclick = () => {
-    // save current selection into the mode we're leaving
-    State.selections[State.mode] = State.selection || "";
-
-    // switch mode
-    const MODES = ["dino", "entry", "crate", "item"];
-
-    const i = MODES.indexOf(State.mode);
-    State.mode = MODES[(i + 1) % MODES.length];
-    // restore remembered selection for new mode
-    syncSelectionForMode(State.mode);
-
-    syncModeButton();
-    syncModeClass();
-    rebuildSelectionSelect();
-    applyEmbedRestrictions();
-    render();
+  UI.modeToggle.onclick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleModeMenu();
   };
 
   UI.controlsToggle.onclick = () => {
@@ -626,6 +696,7 @@ function applyEmbedRestrictions(){
   if (EMBED_MODE_LOCK || EMBED_HIDE_MODE) {
     if (UI.modeToggle) UI.modeToggle.disabled = true;
     if (EMBED_HIDE_MODE && UI.modeToggle) UI.modeToggle.style.display = "none";
+    closeModeMenu();
   }
 }
 

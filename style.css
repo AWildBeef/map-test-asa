@@ -105,7 +105,112 @@ body{
   opacity:.4;
   pointer-events:none;
 }
+/*=======================
+   New Buttons
+==================*/
 
+.poi-menu{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:2px;
+}
+
+.poi-menu-item{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  padding:10px 12px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:var(--text);
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+
+.poi-menu-item:hover{
+  background:rgba(255,255,255,.06);
+}
+
+.poi-menu-item.is-on{
+  background:rgba(255,255,255,.10);
+}
+
+.poi-menu-label{
+  min-width:0;
+  flex:1;
+  font-size:13px;
+  line-height:1.1;
+  color:var(--text);
+}
+
+.poi-menu-check{
+  flex:0 0 auto;
+  width:15px;
+  text-align:center;
+  font-size:15px;
+  line-height:1;
+  font-weight:700;
+  color:rgba(255,255,255,.9);
+  opacity:.9;
+}
+
+.mode-menu{
+  min-width: 180px;
+  max-width: 220px;
+  padding: 6px;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background: rgba(26,29,33,.96);
+  box-shadow: 0 10px 28px rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+  position: fixed !important;
+  z-index: 999999 !important;
+}
+
+.mode-menu-item{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mode-menu-item:hover{
+  background: rgba(255,255,255,.06);
+}
+
+.mode-menu-item.is-on{
+  background: rgba(255,255,255,.10);
+}
+
+.mode-menu-label{
+  min-width: 0;
+  flex: 1;
+}
+
+.mode-menu-check{
+  opacity: .9;
+  font-weight: 700;
+}
+
+.mode-toggle-caret{
+  margin-left: 8px;
+  opacity: .8;
+}
+ 
 
 /* ============================================================
    Stat Test
@@ -606,7 +711,7 @@ body{
   left:0;
   right:0;
   top:calc(100% + 6px);
-  z-index:99999;
+  z-index:3000;
 
   background:rgba(26,29,33,.78);
   border:1px solid rgba(255,255,255,.12);
@@ -1720,7 +1825,7 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section {
 
   /* Density tweaks */
   .entry-name{
-    font-size:10px;
+    font-size:11px;
     font-weight:420;
   }
   .entry-meta-line{

@@ -103,7 +103,7 @@ function renderDinoTabSpawns(d, selectedName){
         ${
           entries.length
             ? renderToggleAllRow({
-                label: "Toggle All Entries",
+                label: "Toggle All",
                 checked: allChecked,
                 dataAttr: "data-dino-toggle-all"
               })

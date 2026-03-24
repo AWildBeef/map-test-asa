@@ -597,19 +597,37 @@ function renderPoiPanel(){
     { key: "beacons", label: "Border Beacons", count: (pois.beacons || []).length }
   ].filter(r => r.count > 0);
 
-  body.innerHTML = rows.length ? rows.map(r => `
-    <label class="fp-row">
-      <span>${escapeHtml(r.label)} (${r.count})</span>
-      <input type="checkbox" data-poi-toggle="${escapeAttr(r.key)}" ${poiVisibility[r.key] ? "checked" : ""}>
-    </label>
-  `).join("") : `
+  body.innerHTML = rows.length ? `
+    <div class="poi-menu">
+      ${rows.map(r => `
+        <button
+          type="button"
+          class="poi-menu-item ${poiVisibility[r.key] ? "is-on" : ""}"
+          data-poi-toggle="${escapeAttr(r.key)}"
+          aria-pressed="${poiVisibility[r.key] ? "true" : "false"}"
+        >
+          <span class="poi-menu-label">${escapeHtml(r.label)} (${r.count})</span>
+          <span class="poi-menu-check">${poiVisibility[r.key] ? "✓" : ""}</span>
+        </button>
+      `).join("")}
+    </div>
+  ` : `
     <div style="color:var(--muted)">No markers on this map.</div>
   `;
 
-  body.querySelectorAll("[data-poi-toggle]").forEach(chk => {
-    chk.onchange = () => {
-      const key = chk.dataset.poiToggle;
-      poiVisibility[key] = chk.checked;
+  body.querySelectorAll("[data-poi-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const key = btn.dataset.poiToggle;
+      if (!key) return;
+
+      poiVisibility[key] = !poiVisibility[key];
+
+      btn.classList.toggle("is-on", poiVisibility[key]);
+      btn.setAttribute("aria-pressed", poiVisibility[key] ? "true" : "false");
+
+      const check = btn.querySelector(".poi-menu-check");
+      if (check) check.textContent = poiVisibility[key] ? "✓" : "";
+
       drawPois();
     };
   });

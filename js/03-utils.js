@@ -24,15 +24,18 @@ const UI = {
 
 function syncModeButton() {
   if (!UI.modeToggle) return;
-  
+
   const labels = {
     dino: "Dino View",
     entry: "Spawn View",
     crate: "Crate View",
     item: "Item View"
   };
-  
-  UI.modeToggle.textContent = labels[State.mode] || "View";
+
+  UI.modeToggle.innerHTML = `
+    <span>${labels[State.mode] || "View"}</span>
+    <span class="mode-toggle-caret" aria-hidden="true">▾</span>
+  `;
 }
 
 

@@ -103,6 +103,28 @@ if (EMBED_MODE) {
   document.body.classList.add("embed-mode");
 }
 
+const MODE_OPTIONS = [
+  { id: "dino",  label: "Dino View" },
+  { id: "entry", label: "Spawn View" },
+  { id: "crate", label: "Crate View" },
+  { id: "item",  label: "Item View" }
+];
+
+function setMode(mode){
+  if (!MODE_OPTIONS.some(m => m.id === mode)) return;
+  if (State.mode === mode) return;
+
+  State.selections[State.mode] = State.selection || "";
+  State.mode = mode;
+  syncSelectionForMode(State.mode);
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  applyEmbedRestrictions();
+  render();
+}
+
 function openCrateView(crateValue){
   if (!crateValue) return;
 
@@ -114,6 +136,7 @@ function openCrateView(crateValue){
   syncModeButton();
   syncModeClass();
   rebuildSelectionSelect();
+  applyEmbedRestrictions();
   render();
 }
 
