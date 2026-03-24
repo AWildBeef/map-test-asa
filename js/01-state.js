@@ -56,6 +56,7 @@ let dockState = { mapMeta: null, cfg: null };
 const poiVisibility = {
   tributeTerminals: true,
   supplyCrates: false,
+  artifactCrates: false,
   playerStarts: false,
   explorerNotes: false,
   missions: false,

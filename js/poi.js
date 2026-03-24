@@ -1,4 +1,241 @@
 
+function makeArtifactIcon() {
+  const size = 18;
+
+  return L.divIcon({
+    className: "poi-artifact-icon",
+    html: `
+      <svg width="${size}" height="${size}" viewBox="-10 -10 20 20" aria-hidden="true">
+        <path
+          d="M 0 -7 L 7 6 L -7 6 Z"
+          fill="#ffd54a"
+          stroke="#111"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+      </svg>
+    `,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2]
+  });
+}
+
+function artifactTooltipHtml(p, legend){
+  return supplyCrateTooltipHtml(p, legend);
+}
+
+function addArtifactMarkers(points, { layer = mapObj.poiLayer } = {}) {
+  if (!layer || !Array.isArray(points)) return;
+
+  const legend = supplyLegendForCurrentMap();
+  const icon = makeArtifactIcon();
+
+  for (const p of points) {
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    L.marker([y, x], {
+      icon,
+      pane: "poiPane"
+    })
+      .addTo(layer)
+      .bindTooltip(artifactTooltipHtml(p, legend), {
+        direction: "auto",
+        sticky: true,
+        offset: [0, -12],
+        opacity: 0.97,
+        className: "supply-tooltip",
+        autoPan: true
+      });
+  }
+}
+
+function drawArtifactCratePois(points){
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.artifactCrates) return;
+
+  const artifactRows = points.filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p));
+  addArtifactMarkers(artifactRows, { layer: mapObj.poiLayer });
+}
+
+function supplyCrateColor(crateClass, name = ""){
+  const s = `${crateClass || ""} ${name || ""}`.toLowerCase();
+
+  if (s.includes("white")) return "#f5f5f5";
+  if (s.includes("green")) return "#5cff6b";
+  if (s.includes("blue")) return "#4da3ff";
+  if (s.includes("purple")) return "#c77dff";
+  if (s.includes("yellow")) return "#ffd54a";
+  if (s.includes("red")) return "#ff4d4d";
+  if (s.includes("lime")) return "#bfff00";
+
+  if (s.includes("artifact")) return "#ffffff";
+
+  return "#ff4d4d";
+}
+
+
+function supplyCrateSlicesForPoint(point, legend){
+  const rows = Array.isArray(point?.c) ? point.c : [];
+  const slices = [];
+
+  for (const row of rows){
+    if (!Array.isArray(row) || row.length < 1) continue;
+
+    const idx = Number(row[0]);
+    const weight = Number(row[1]);
+
+    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+    const meta = legend[idx];
+    if (!meta) continue;
+
+    const bp = meta.bp || "";
+    const crateClass = crateClassFromLegendRow(meta);
+    const name =
+      crateDisplayNameByClass(crateClass) ||
+      meta.n ||
+      shortBpName(bp) ||
+      "Supply Crate";
+
+    slices.push({
+      idx,
+      weight: Number.isFinite(weight) && weight > 0 ? weight : 1,
+      crateClass,
+      name,
+      color: supplyCrateColor(crateClass, name)
+    });
+  }
+
+  return slices;
+}
+
+
+function polarToCartesian(cx, cy, r, angleDeg){
+  const rad = (angleDeg - 90) * Math.PI / 180;
+  return {
+    x: cx + (r * Math.cos(rad)),
+    y: cy + (r * Math.sin(rad))
+  };
+}
+
+
+function describePieSlice(cx, cy, r, startAngle, endAngle){
+  const start = polarToCartesian(cx, cy, r, endAngle);
+  const end = polarToCartesian(cx, cy, r, startAngle);
+  const largeArcFlag = (endAngle - startAngle) <= 180 ? "0" : "1";
+
+  return [
+    `M ${cx} ${cy}`,
+    `L ${start.x} ${start.y}`,
+    `A ${r} ${r} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`,
+    "Z"
+  ].join(" ");
+}
+
+
+function makeSupplyPieIcon(slices, opts = {}){
+  const size = opts.size || 18;
+  const radius = opts.radius || 8;
+  const stroke = opts.stroke || "#111";
+  const strokeWidth = opts.strokeWidth || 2;
+
+  const total = slices.reduce((sum, s) => sum + (Number(s.weight) || 0), 0) || 1;
+
+  let startAngle = 0;
+  const cx = size / 2;
+  const cy = size / 2;
+
+  const paths = slices.map(slice => {
+    const frac = (Number(slice.weight) || 0) / total;
+    const endAngle = startAngle + frac * 360;
+
+    const d = describePieSlice(cx, cy, radius, startAngle, endAngle);
+    startAngle = endAngle;
+
+    return `<path d="${d}" fill="${slice.color}" />`;
+  }).join("");
+
+  return L.divIcon({
+    className: "poi-icon poi-supply-pie",
+    html: `
+      <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+        ${paths}
+        <circle
+          cx="${cx}"
+          cy="${cy}"
+          r="${radius}"
+          fill="none"
+          stroke="${stroke}"
+          stroke-width="${strokeWidth}"
+        />
+      </svg>
+    `,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2]
+  });
+}
+
+
+function makeSupplySolidIcon(color, opts = {}){
+  const size = opts.size || 18;
+  const radius = opts.radius || 8;
+
+  return L.divIcon({
+    className: "poi-icon poi-supply-solid",
+    html: `
+      <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+        <circle
+          cx="${size / 2}"
+          cy="${size / 2}"
+          r="${radius}"
+          fill="${color}"
+          stroke="#111"
+          stroke-width="2"
+        />
+      </svg>
+    `,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2]
+  });
+}
+
+
+function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer } = {}) {
+  if (!layer || !Array.isArray(points)) return;
+
+  const legend = supplyLegendForCurrentMap();
+
+  for (const p of points) {
+    const x = Number(p?.x);
+    const y = Number(p?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+
+    const slices = supplyCrateSlicesForPoint(p, legend);
+
+    let icon;
+    if (slices.length <= 1) {
+      icon = makeSupplySolidIcon(slices[0]?.color || "#ffd54a");
+    } else {
+      icon = makeSupplyPieIcon(slices);
+    }
+
+    L.marker([y, x], {
+      icon,
+      pane: "poiPane"
+    })
+      .addTo(layer)
+      .bindTooltip(supplyCrateTooltipHtml(p, legend), {
+        direction: "auto",
+        sticky: true,
+        offset: [0, -14],
+        opacity: 0.97,
+        className: "supply-tooltip",
+        autoPan: true
+      });
+  }
+}
 
 function hordeTooltipHtml(point, legend){
   const groups = buildHordeGroups(point, legend);
@@ -93,7 +330,12 @@ function supplyCrateTooltipHtml(p, legend){
           : null;
 
         const bp = meta?.bp || "";
-        const name = meta?.n || shortBpName(bp) || "Supply Crate";
+        const crateClass = meta ? crateClassFromLegendRow(meta) : "";
+        const name =
+          crateDisplayNameByClass(crateClass) ||
+          meta?.n ||
+          shortBpName(bp) ||
+          "Supply Crate";
 
         const w = Number(weight);
         const suffix = Number.isFinite(w) ? ` (${fmt(w)})` : "";
@@ -111,7 +353,13 @@ function supplyCrateTooltipHtml(p, legend){
           ? legend[idx]
           : null;
 
-        const name = meta?.n || meta?.bp || `Source ${idx}`;
+        const crateClass = meta ? crateClassFromLegendRow(meta) : "";
+        const name =
+          crateDisplayNameByClass(crateClass) ||
+          meta?.n ||
+          meta?.bp ||
+          `Source ${idx}`;
+
         return `<div class="poi-tip-line poi-tip-bp">${escapeHtml(name)}</div>`;
       }).join("")}
     `
@@ -121,6 +369,7 @@ function supplyCrateTooltipHtml(p, legend){
     <div class="poi-tip-block">
       <div class="poi-tip-title">Supply Drops</div>
       ${crateLines}
+      ${sourceBlock}
     </div>
   `;
 }
@@ -130,7 +379,8 @@ function drawSupplyCratePois(points) {
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.supplyCrates) return;
 
-  addSupplyCrateMarkers(points, { layer: mapObj.poiLayer });
+  const supplyRows = points.filter(p => poiHasSupplyCrate(p));
+  addSupplyCrateMarkers(supplyRows, { layer: mapObj.poiLayer });
 }
 
 
@@ -314,6 +564,7 @@ function drawPois(){
 
   drawPoiGroup(geom.pois.tributeTerminals, "tributeTerminals");
   drawSupplyCratePois(geom.pois.supplyCrates || []);
+  drawArtifactCratePois(geom.pois.supplyCrates || []);
   drawPlayerStarts(geom.pois.playerStarts);
   drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
   drawMissionPois(geom.pois.missions || []);

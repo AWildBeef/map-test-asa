@@ -267,6 +267,9 @@ async function onMapChanged(){
 
   const geom = await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
   Global.mapGeom.set(mapMeta.geomShort, geom);
+  
+  const resolvedLegend = buildResolvedSupplyLegend(geom);
+  Global.resolvedSupplyLegend.set(mapMeta.geomShort, resolvedLegend);
 
   const img = geom.image || `${PATHS.mapsDir}/${mapMeta.image}`;
 

@@ -482,6 +482,96 @@ function ensurePoiPanel(){
 }
 
 
+function buildResolvedSupplyLegend(geom){
+  const legend = Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
+  const out = [];
+
+  for (const row of legend){
+    const bp = row?.bp || "";
+    const n = row?.n || "";
+    const cls = crateClassFromBp(bp);
+
+    const crateId = Global.crateClassToId.has(cls)
+      ? Global.crateClassToId.get(cls)
+      : null;
+
+    const crateData = Number.isInteger(crateId)
+      ? Global.loot?.c?.[crateId] || null
+      : null;
+
+    const isArtifact = cls.toLowerCase().includes("artifactcrate");
+    const isSupply = cls.toLowerCase().includes("supplycrate");
+
+    out.push({
+      bp,
+      n,
+      cls,
+      crateId,
+      crateData,
+      isArtifact,
+      isSupply
+    });
+  }
+
+  return out;
+}
+
+function resolvedSupplyLegendForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  if (!mapMeta) return [];
+  return Global.resolvedSupplyLegend.get(mapMeta.geomShort) || [];
+}
+
+function resolvedCratesForPoi(poi){
+  const legend = resolvedSupplyLegendForCurrentMap();
+  const rows = Array.isArray(poi?.c) ? poi.c : [];
+  const out = [];
+
+  for (const row of rows){
+    if (!Array.isArray(row) || !row.length) continue;
+
+    const legendIdx = Number(row[0]);
+    const weight = row[1];
+
+    if (!Number.isInteger(legendIdx) || legendIdx < 0 || legendIdx >= legend.length){
+      continue;
+    }
+
+    const meta = legend[legendIdx];
+    if (!meta) continue;
+
+    out.push({
+      legendIdx,
+      weight,
+      crateId: meta.crateId,
+      cls: meta.cls,
+      bp: meta.bp,
+      n: meta.n,
+      isArtifact: !!meta.isArtifact,
+      isSupply: !!meta.isSupply
+    });
+  }
+
+  return out;
+}
+
+function poiHasArtifactCrate(poi){
+  return resolvedCratesForPoi(poi).some(r => r.isArtifact);
+}
+
+function poiHasSupplyCrate(poi){
+  return resolvedCratesForPoi(poi).some(r => r.isSupply);
+}
+
+function countArtifactPois(points){
+  return (Array.isArray(points) ? points : []).filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p)).length;
+}
+
+function countSupplyPois(points){
+  return (Array.isArray(points) ? points : []).filter(p => poiHasSupplyCrate(p)).length;
+}
+
+
 function renderPoiPanel(){
   const panel = ensurePoiPanel();
   const body = panel.querySelector(".fp-body");
@@ -490,10 +580,15 @@ function renderPoiPanel(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
   const pois = geom?.pois || {};
+  console.log("raw supply crate points:", (pois.supplyCrates || []).length);
+  console.log("resolved legend current map:", resolvedSupplyLegendForCurrentMap());
+  console.log("supply count:", countSupplyPois(pois.supplyCrates || []));
+  console.log("artifact count:", countArtifactPois(pois.supplyCrates || []));
 
   const rows = [
     { key: "tributeTerminals", label: "Tribute Terminals", count: (pois.tributeTerminals || []).length },
-    { key: "supplyCrates", label: "Supply Crates", count: (pois.supplyCrates || []).length },
+    { key: "supplyCrates", label: "Supply Drops", count: countSupplyPois(pois.supplyCrates || []) },
+    { key: "artifactCrates", label: "Artifacts", count: countArtifactPois(pois.supplyCrates || []) },
     { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
     { key: "missions", label: "Missions", count: (pois.missions || []).length },
@@ -504,8 +599,8 @@ function renderPoiPanel(){
 
   body.innerHTML = rows.length ? rows.map(r => `
     <label class="fp-row">
-      <input type="checkbox" data-poi-toggle="${escapeAttr(r.key)}" ${poiVisibility[r.key] ? "checked" : ""}>
       <span>${escapeHtml(r.label)} (${r.count})</span>
+      <input type="checkbox" data-poi-toggle="${escapeAttr(r.key)}" ${poiVisibility[r.key] ? "checked" : ""}>
     </label>
   `).join("") : `
     <div style="color:var(--muted)">No markers on this map.</div>
@@ -519,7 +614,6 @@ function renderPoiPanel(){
     };
   });
 }
-
 
 function togglePoiPanel(){
   const panel = ensurePoiPanel();
@@ -757,33 +851,3 @@ const CHEVRON_DOWN_ICON = `
         stroke-linejoin="round"/>
 `;
 
-function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer } = {}) {
-  if (!layer || !Array.isArray(points)) return;
-
-  const legend = supplyLegendForCurrentMap();
-
-  for (const p of points) {
-    const x = Number(p?.x);
-    const y = Number(p?.y);
-    if (![x, y].every(Number.isFinite)) continue;
-
-    L.circleMarker([y, x], {
-      radius: 6,
-      color: "#111",
-      weight: 2.2,
-      fillColor: "#ffd54a",
-      fillOpacity: 0.95,
-      pane: "poiPane",
-      className:"poi-supply"
-    })
-      .addTo(mapObj.poiLayer)
-      .bindTooltip(supplyCrateTooltipHtml(p, legend), {
-        direction: "auto",
-        sticky: true,
-        offset: [0, -14],
-        opacity: 0.97,
-        className: "supply-tooltip",
-        autoPan: true
-      });
-  }
-}
