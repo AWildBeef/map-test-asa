@@ -88,10 +88,28 @@ function renderDinoHero(d, selectedName){
 
 function renderDinoTabSpawns(d, selectedName){
   const entries = d.entries || [];
+
+  const allChecked = entries.length
+    ? entries.every((e, i) => {
+        const key = entryVisibilityKey(selectedName, i);
+        return entryVisibility[key] ?? true;
+      })
+    : true;
+
   return `
     <div class="info-section">
       <div class="info-subtitle">Spawn Entries (${entries.length})</div>
       <div class="entries">
+        ${
+          entries.length
+            ? renderToggleAllRow({
+                label: "Toggle All Entries",
+                checked: allChecked,
+                dataAttr: "data-dino-toggle-all"
+              })
+            : ``
+        }
+
         ${entries.map((e, i) => renderEntryRow(e, selectedName, i)).join("")}
       </div>
     </div>
@@ -137,7 +155,7 @@ function renderDinoPanel(name){
     ${renderTabs({
       tabs: DINO_PANEL_TABS,
       activeId: activeTab,
-      dataAttr: 'data-dino-tab'
+      dataAttr: "data-dino-tab"
     })}
     ${renderPages({
       tabs: DINO_PANEL_TABS,
@@ -153,6 +171,7 @@ function renderDinoPanel(name){
   setInfoPanelHTML(html);
 
   const body = panel.querySelector(".fp-body");
+
   wireTabs(body, {
     tabs: DINO_PANEL_TABS,
     activeId: activeTab,
@@ -162,13 +181,31 @@ function renderDinoPanel(name){
       renderDinoPanel(name);
     }
   });
+
   body.querySelectorAll('input[data-entry-toggle="1"]').forEach(chk => {
     chk.onchange = () => {
       const key = chk.dataset.key;
+      if (!key) return;
+
       entryVisibility[key] = chk.checked;
       drawDino(name);
+
+      const master = body.querySelector('input[data-dino-toggle-all]');
+      if (master){
+        const allChecked = [...body.querySelectorAll('input[data-entry-toggle="1"]')]
+          .every(el => el.checked);
+        master.checked = allChecked;
+      }
     };
   });
+
+  wireToggleAll(body, {
+    masterSelector: 'input[data-dino-toggle-all]',
+    itemSelector: 'input[data-entry-toggle="1"]',
+    getItemKey: (el) => el.dataset.key,
+    onAfterChange: () => drawDino(name)
+  });
+
   mountPanelSwipe(
     body.querySelector(".fp-pages"),
     DINO_PANEL_TABS,
@@ -178,6 +215,7 @@ function renderDinoPanel(name){
       renderDinoPanel(name);
     }
   );
+
   refreshInfoPanelPageHeight();
   const pagesEl = body.querySelector(".fp-pages");
   syncActivePageHeight(pagesEl, activeTab);

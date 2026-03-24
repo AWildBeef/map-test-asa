@@ -1,4 +1,50 @@
+function renderToggleAllRow({
+  label = "Toggle All",
+  checked = true,
+  dataAttr = "data-toggle-all",
+  value = "1"
+} = {}){
+  return `
+    <div class="entry-row">
+      <label class="entry-main" style="display:flex; align-items:flex-start; gap:10px; min-width:0;">
+        <input
+          type="checkbox"
+          ${dataAttr}="${escapeAttr(value)}"
+          ${checked ? "checked" : ""}
+          style="margin-top:4px;"
+        >
+        <div style="min-width:0; flex:1;">
+          <div class="entry-name">${escapeHtml(label)}</div>
+        </div>
+      </label>
+    </div>
+  `;
+}
 
+
+function wireToggleAll(container, {
+  masterSelector,
+  itemSelector,
+  getItemKey,
+  onAfterChange
+}){
+  const master = container.querySelector(masterSelector);
+  if (!master) return;
+
+  master.onchange = () => {
+    const checked = master.checked;
+
+    container.querySelectorAll(itemSelector).forEach(el => {
+      const key = getItemKey(el);
+      if (!key) return;
+
+      el.checked = checked;
+      entryVisibility[key] = checked;
+    });
+
+    onAfterChange?.();
+  };
+}
 
 function isPanelVisible(id){
   const el = document.getElementById(id);

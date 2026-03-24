@@ -185,14 +185,28 @@ function renderItemTabCrates(it){
     ...[...missionMap.values()].sort((a, b) => a.name.localeCompare(b.name))
   ];
 
+  const allChecked = rows.length
+    ? rows.every(row => {
+        const key = itemCrateVisibilityKey(it.name, row.crateValue);
+        return entryVisibility[key] ?? true;
+      })
+    : true;
+
   return `
     <div class="info-section">
       <div class="info-subtitle">Sources (${rows.length})</div>
+
       ${
         !rows.length
           ? `<div style="color:var(--muted)">No crate or mission sources found on this map.</div>`
           : `
             <div class="entries">
+              ${renderToggleAllRow({
+                label: "Toggle All Sources",
+                checked: allChecked,
+                dataAttr: "data-item-toggle-all"
+              })}
+
               ${rows.map(row => {
                 const key = itemCrateVisibilityKey(it.name, row.crateValue);
                 const checked = entryVisibility[key] ?? true;
@@ -249,10 +263,6 @@ function renderItemTabCrates(it){
 }
 
 function renderItemPanel(itemName){
-  console.log("renderItemPanel itemName:", itemName);
-  console.log("item ids:", State.itemNameToIds.get(itemName));
-  console.log("selected item obj:", getSelectedItem(itemName));
-
   const it = getSelectedItem(itemName);
   if (!it){
     renderInfoPanelBodyEmpty();
@@ -304,23 +314,27 @@ function renderItemPanel(itemName){
       if (!key) return;
       entryVisibility[key] = chk.checked;
       drawItem(itemName);
+
+      const master = body.querySelector('input[data-item-toggle-all]');
+      if (master){
+        const allChecked = [...body.querySelectorAll('input[data-item-crate-toggle="1"]')]
+          .every(el => el.checked);
+        master.checked = allChecked;
+      }
     };
+  });
+
+  wireToggleAll(body, {
+    masterSelector: 'input[data-item-toggle-all]',
+    itemSelector: 'input[data-item-crate-toggle="1"]',
+    getItemKey: (el) => el.dataset.key,
+    onAfterChange: () => drawItem(itemName)
   });
 
   body.querySelectorAll("[data-open-crate]").forEach(btn => {
     btn.onclick = () => {
       const crateValue = btn.dataset.openCrate;
-      if (!crateValue) return;
-
-      State.selections[State.mode] = State.selection || "";
-      State.mode = "crate";
-      State.selection = crateValue;
-      State.selections.crate = crateValue;
-
-      syncModeButton();
-      syncModeClass();
-      rebuildSelectionSelect();
-      render();
+      if (crateValue) openCrateView(crateValue);
     };
   });
 
