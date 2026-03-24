@@ -2,19 +2,74 @@ function drawItem(itemName) {
   clearDraw();
   clearPois();
 
-  const visibleClasses = visibleCrateClassesForItem(itemName);
+  const itemIds = (State.itemNameToIds.get(itemName) || [])
+    .filter(id => State.mapItemIds.has(id));
 
+  if (!itemIds.length) return;
+
+  // --- visible normal/horde crate classes ---
+  const visibleClasses = new Set();
+
+  // --- visible mission classes ---
+  const visibleMissionClasses = new Set();
+
+  for (const itemId of itemIds) {
+    // normal crate refs
+    for (const crateId of crateIdsForItemId(itemId)) {
+      if (!State.mapCrateIds.has(crateId)) continue;
+
+      const crateValue = `crate:${crateId}`;
+      const key = itemCrateVisibilityKey(itemName, crateValue);
+      const visible = entryVisibility[key] ?? true;
+      if (!visible) continue;
+
+      const crateClass = crateIdToClass(crateId);
+      if (crateClass) visibleClasses.add(crateClass);
+    }
+
+    // mission refs
+    for (const missionClass of itemMissionRefsForItemId(itemId)) {
+      const missionClassesOnMap = missionClassesUsedOnCurrentMap();
+      if (!missionClassesOnMap.has(missionClass)) continue;
+
+      const mission = lootData().m?.[missionClass];
+      const structs = Array.isArray(mission?.ls) ? mission.ls : [];
+
+      for (const structClass of structs) {
+        if (!structClass || !lootData().ls?.[structClass]) continue;
+
+        const crateValue = `mission:${missionClass}:${structClass}`;
+        const key = itemCrateVisibilityKey(itemName, crateValue);
+        const visible = entryVisibility[key] ?? true;
+        if (!visible) continue;
+
+        visibleMissionClasses.add(missionClass);
+      }
+    }
+  }
+
+  // supply crates
   const supplyRows = cratePoiRowsForItem(itemName).filter(p => {
     const poiClasses = poiCrateClasses(p) || [];
     return poiClasses.some(cls => visibleClasses.has(cls));
   });
   addSupplyCrateMarkers(supplyRows, { layer: mapObj.poiLayer });
 
+  // horde crates
   const hordeRows = hordePoiRowsForItem(itemName).filter(p => {
     const poiClasses = poiCrateClasses(p) || [];
     return poiClasses.some(cls => visibleClasses.has(cls));
   });
   addHordeMarkers(hordeRows, { layer: mapObj.poiLayer });
+
+  // missions
+  const missionRows = (currentGeom()?.pois?.missions || []).filter(p => {
+    for (const missionClass of visibleMissionClasses) {
+      if (missionPointHasClass(p, missionClass)) return true;
+    }
+    return false;
+  });
+  addMissionMarkers(missionRows, { layer: mapObj.poiLayer });
 }
 
 function getSelectedItem(itemName){
