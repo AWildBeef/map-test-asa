@@ -1,4 +1,3 @@
-
 function missionSizeLabelFromClass(missionClass){
   const s = String(missionClass || "");
 
@@ -164,23 +163,31 @@ function renderCrateHero(c) {
           : `
             <div class="meta-grid">
               <div class="meta-cell">
-                <div class="meta-label">Required Level</div>
-                <div class="meta-value">${escapeHtml(String(c.level ?? "--"))}</div>
+                <div class="meta-stack">
+                  <div class="meta-label">Required Level</div>
+                  <div class="meta-value">${escapeHtml(String(c.level ?? "--"))}</div>
+                </div>
               </div>
               <div class="meta-cell">
-                <div class="meta-label">Min Loot Sets</div>
-                <div class="meta-value">${escapeHtml(String(c.minSets ?? "--"))}</div>
+                <div class="meta-stack">
+                  <div class="meta-label">Min Loot Sets</div>
+                  <div class="meta-value">${escapeHtml(String(c.minSets ?? "--"))}</div>
+                </div>
               </div>
               <div class="meta-cell">
-                <div class="meta-label">Max Loot Sets</div>
-                <div class="meta-value">${escapeHtml(String(c.maxSets ?? "--"))}</div>
+                <div class="meta-stack">
+                  <div class="meta-label">Max Loot Sets</div>
+                  <div class="meta-value">${escapeHtml(String(c.maxSets ?? "--"))}</div>
+                </div>
               </div>
               ${
                 c.qmin != null || c.qmax != null
                   ? `
                     <div class="meta-cell">
-                      <div class="meta-label">Quality Mult</div>
-                      <div class="meta-value">${escapeHtml(fmtRange(c.qmin, c.qmax))}</div>
+                      <div class="meta-stack">
+                        <div class="meta-label">Quality Mult</div>
+                        <div class="meta-value">${escapeHtml(fmtRange(c.qmin, c.qmax))}</div>
+                      </div>
                     </div>
                   `
                   : ``
@@ -209,7 +216,6 @@ function renderCrateTabInfo(c){
     const lootItems = missionLootItemIds(c.missionClass);
 
     return `
-
       ${
         rewardIds.length
           ? `
@@ -227,7 +233,6 @@ function renderCrateTabInfo(c){
                             : ``
                         }
                       </div>
-                      
                     </div>
                   </div>
                 `).join("")}
@@ -245,7 +250,6 @@ function renderCrateTabInfo(c){
               <div class="entry-meta">
                 <div class="entry-meta-line">${escapeHtml(String(sig[0]))} × ${escapeHtml(itemDisplayNameById(sig[1]))}</div>
               </div>
-              
             </div>
           `
           : ``
@@ -261,7 +265,6 @@ function renderCrateTabInfo(c){
                   <div class="entry-row">
                     <div class="entry-main">
                       <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
-                      
                     </div>
                   </div>
                 `).join("")}
@@ -282,7 +285,6 @@ function renderCrateTabInfo(c){
                   <div class="entry-row">
                     <div class="entry-main">
                       <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
-                      
                     </div>
                   </div>
                 `).join("")}
@@ -341,16 +343,20 @@ function renderCrateTabSets(c){
 
               <div class="meta-grid">
                 <div class="meta-cell">
-                  <div class="meta-label">Set Weight</div>
-                  <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
+                  <div class="meta-stack">
+                    <div class="meta-label">Set Weight</div>
+                    <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
+                  </div>
                 </div>
 
                 ${
                   setMeta?.smn != null || setMeta?.smx != null
                     ? `
                       <div class="meta-cell">
-                        <div class="meta-label">Items Chosen</div>
-                        <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
+                        <div class="meta-stack">
+                          <div class="meta-label">Items Chosen</div>
+                          <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
+                        </div>
                       </div>
                     `
                     : ``
@@ -381,21 +387,27 @@ function renderLootEntryBlock(entry){
 
       <div class="meta-grid">
         <div class="meta-cell">
-          <div class="meta-label">Entry Weight</div>
-          <div class="meta-value">${escapeHtml(fmt(entry?.w) || "--")}</div>
+          <div class="meta-stack">
+            <div class="meta-label">Entry Weight</div>
+            <div class="meta-value">${escapeHtml(fmt(entry?.w) || "--")}</div>
+          </div>
         </div>
 
         <div class="meta-cell">
-          <div class="meta-label">Quantity</div>
-          <div class="meta-value">${escapeHtml(fmtRange(entry?.mn, entry?.mx))}</div>
+          <div class="meta-stack">
+            <div class="meta-label">Quantity</div>
+            <div class="meta-value">${escapeHtml(fmtRange(entry?.mn, entry?.mx))}</div>
+          </div>
         </div>
 
         ${
           entry?.q1 != null || entry?.q2 != null
             ? `
               <div class="meta-cell">
-                <div class="meta-label">Quality</div>
-                <div class="meta-value">${escapeHtml(fmtRange(entry?.q1, entry?.q2))}</div>
+                <div class="meta-stack">
+                  <div class="meta-label">Quality</div>
+                  <div class="meta-value">${escapeHtml(fmtRange(entry?.q1, entry?.q2))}</div>
+                </div>
               </div>
             `
             : ``
@@ -405,8 +417,10 @@ function renderLootEntryBlock(entry){
           entry?.b != null
             ? `
               <div class="meta-cell">
-                <div class="meta-label">BP Chance</div>
-                <div class="meta-value">${escapeHtml(pct(entry.b) || "0%")}</div>
+                <div class="meta-stack">
+                  <div class="meta-label">BP Chance</div>
+                  <div class="meta-value">${escapeHtml(pct(entry.b) || "0%")}</div>
+                </div>
               </div>
             `
             : ``
@@ -416,8 +430,10 @@ function renderLootEntryBlock(entry){
           isTrue01(entry?.fb)
             ? `
               <div class="meta-cell">
-                <div class="meta-label">Force BP</div>
-                <div class="meta-value">Yes</div>
+                <div class="meta-stack">
+                  <div class="meta-label">Force BP</div>
+                  <div class="meta-value">Yes</div>
+                </div>
               </div>
             `
             : ``
@@ -427,8 +443,10 @@ function renderLootEntryBlock(entry){
           isTrue01(entry?.aq)
             ? `
               <div class="meta-cell">
-                <div class="meta-label">Single Qty</div>
-                <div class="meta-value">Yes</div>
+                <div class="meta-stack">
+                  <div class="meta-label">Single Qty</div>
+                  <div class="meta-value">Yes</div>
+                </div>
               </div>
             `
             : ``
@@ -483,7 +501,7 @@ function renderCratePanel(crateName){
     ? infoPanelState.crateTab
     : "sets";
 
-  setInfoPanelTitle(c.name);;
+  setInfoPanelTitle(c.name);
 
   const html = `
     ${renderCrateHero(c)}
@@ -519,7 +537,6 @@ function renderCratePanel(crateName){
   refreshInfoPanelPageHeight();
   syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
 }
-
 
 
 const CRATE_PANEL_TABS = [

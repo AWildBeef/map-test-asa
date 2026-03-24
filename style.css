@@ -37,7 +37,7 @@
   --leaflet-toolbar-h: 50px;
 
   /* Mobile panel widths */
-  --dino-w-mobile: 275px;
+  --dino-w-mobile: 300px;
   --dino-w-mobile-compact: 225px;
   --mod-w-mobile: 150px;
   --mod-w-mobile-collapsed: 100px;
@@ -1196,6 +1196,24 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section {
   margin-bottom:5px;
   margin-left:-5px;
   margin-right:-5px;
+}
+
+.meta-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:center;
+}
+
+.meta-stack {
+  display: inline-flex;
+  flex-direction: column;
+  width: max-content;
+  gap:2px;
+}
+
+.meta-value {
+  text-align: center;
 }
 
 
