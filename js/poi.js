@@ -78,7 +78,7 @@ function supplyCrateColor(crateClass, name = ""){
 
 function supplyCrateSlicesForPoint(point, legend){
   const rows = Array.isArray(point?.c) ? point.c : [];
-  const slices = [];
+  const byColor = new Map();
 
   for (const row of rows){
     if (!Array.isArray(row) || row.length < 1) continue;
@@ -99,16 +99,30 @@ function supplyCrateSlicesForPoint(point, legend){
       shortBpName(bp) ||
       "Supply Crate";
 
-    slices.push({
-      idx,
-      weight: Number.isFinite(weight) && weight > 0 ? weight : 1,
-      crateClass,
-      name,
-      color: supplyCrateColor(crateClass, name)
-    });
+    const color = supplyCrateColor(crateClass, name);
+    const safeWeight = Number.isFinite(weight) && weight > 0 ? weight : 1;
+
+    if (!byColor.has(color)) {
+      byColor.set(color, {
+        color,
+        weight: safeWeight,
+        crateClasses: new Set([crateClass]),
+        names: new Set([name])
+      });
+    } else {
+      const existing = byColor.get(color);
+      existing.weight += safeWeight;
+      existing.crateClasses.add(crateClass);
+      existing.names.add(name);
+    }
   }
 
-  return slices;
+  return [...byColor.values()].map(s => ({
+    color: s.color,
+    weight: s.weight,
+    crateClass: [...s.crateClasses][0] || "",
+    name: [...s.names][0] || ""
+  }));
 }
 
 
@@ -140,20 +154,26 @@ function makeSupplyPieIcon(slices, opts = {}){
   const radius = opts.radius || 8;
   const stroke = opts.stroke || "#111";
   const strokeWidth = opts.strokeWidth || 2;
+  const minFrac = opts.minFrac || 0.08; // 8% minimum visible slice
 
-  const total = slices.reduce((sum, s) => sum + (Number(s.weight) || 0), 0) || 1;
+  const rawWeights = slices.map(s => Math.max(0, Number(s.weight) || 0));
+  const rawTotal = rawWeights.reduce((a, b) => a + b, 0) || 1;
+
+  let fracs = rawWeights.map(w => w / rawTotal);
+
+  // enforce a minimum visible slice size
+  const boosted = fracs.map(f => Math.max(f, minFrac));
+  const boostedTotal = boosted.reduce((a, b) => a + b, 0) || 1;
+  fracs = boosted.map(f => f / boostedTotal);
 
   let startAngle = 0;
   const cx = size / 2;
   const cy = size / 2;
 
-  const paths = slices.map(slice => {
-    const frac = (Number(slice.weight) || 0) / total;
-    const endAngle = startAngle + frac * 360;
-
+  const paths = slices.map((slice, i) => {
+    const endAngle = startAngle + fracs[i] * 360;
     const d = describePieSlice(cx, cy, radius, startAngle, endAngle);
     startAngle = endAngle;
-
     return `<path d="${d}" fill="${slice.color}" />`;
   }).join("");
 
@@ -176,7 +196,6 @@ function makeSupplyPieIcon(slices, opts = {}){
     iconAnchor: [size / 2, size / 2]
   });
 }
-
 
 function makeSupplySolidIcon(color, opts = {}){
   const size = opts.size || 18;
