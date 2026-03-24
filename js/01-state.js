@@ -102,7 +102,19 @@ if (EMBED_MODE) {
   document.body.classList.add("embed-mode");
 }
 
+function openCrateView(crateValue){
+  if (!crateValue) return;
 
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "crate";
+  State.selection = crateValue;
+  State.selections.crate = crateValue;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  render();
+}
 
 
 

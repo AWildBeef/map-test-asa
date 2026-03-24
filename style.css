@@ -1216,6 +1216,16 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section {
   text-align: center;
 }
 
+.entry-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.entry-row .fp-btn {
+  flex: 0 0 auto;
+}
 
 /* ============================================================
    8) LEAFLET CONTROLS (dock/zoom/attrib)
