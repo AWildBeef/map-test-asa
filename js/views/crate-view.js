@@ -113,14 +113,54 @@ function getSelectedCrate(selectionValue){
 
 function renderCrateHero(c) {
   const mission = missionMetaByClass(c.missionClass);
-  
+  const rewardIds = Array.isArray(mission?.ri) ? mission.ri : [];
+  const rewardQty = Array.isArray(mission?.rq) ? mission.rq : [null, null];
+  const sig = Array.isArray(mission?.sig) ? mission.sig : [null, null];
+
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(c.name)}</div>
 
       ${
         c.kind === "mission"
-          ? `<div class="info-submeta">${escapeHtml(String(mission?.t || "--"))}</div>`
+          ? `
+            <div class="meta-grid">
+              <div class="meta-cell">
+                <div class="meta-stack">
+                  <div class="meta-label">Mission Type</div>
+                  <div class="meta-value">${escapeHtml(String(mission?.t || "--"))}</div>
+                </div>
+              </div>
+
+              ${rewardIds.map(itemId => `
+                <div class="meta-cell">
+                  <div class="meta-stack">
+                    <div class="meta-label">${escapeHtml(itemDisplayNameById(itemId))}</div>
+                    <div class="meta-value">
+                      ${
+                        rewardQty[0] != null && rewardQty[1] != null
+                          ? escapeHtml(`${rewardQty[0]}–${rewardQty[1]}`)
+                          : "--"
+                      }
+                    </div>
+                  </div>
+                </div>
+              `).join("")}
+
+              ${
+                sig[0] != null && sig[1] != null
+                  ? `
+                    <div class="meta-cell">
+                      <div class="meta-stack">
+                        <div class="meta-label">${escapeHtml(itemDisplayNameById(sig[1]))}s</div>
+                        <div class="meta-value">${escapeHtml(String(sig[0]))}</div>
+                      </div>
+                    </div>
+                  `
+                  : ``
+              }
+            </div>
+          `
           : `
             <div class="meta-grid">
               <div class="meta-cell">
@@ -287,7 +327,6 @@ function renderCrateTabSets(c){
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Loot Sets (${rows.length})</div>
       <div class="entries">
         ${rows.map((row, idx) => {
           const { inlineEntries, overrideEntries, allEntries, setMeta } = lootSetEntriesFromRow(row);
@@ -312,17 +351,6 @@ function renderCrateTabSets(c){
                       <div class="meta-cell">
                         <div class="meta-label">Items Chosen</div>
                         <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
-                      </div>
-                    `
-                    : ``
-                }
-
-                ${
-                  row?.o != null && row?.o !== ""
-                    ? `
-                      <div class="meta-cell" style="grid-column:1 / -1;">
-                        <div class="meta-label">Override Set</div>
-                        <div class="meta-value">${escapeHtml(setMeta?.n || String(row.o))}</div>
                       </div>
                     `
                     : ``
