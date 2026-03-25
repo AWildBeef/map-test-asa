@@ -99,23 +99,33 @@ function renderDinoTabSpawns(d, selectedName){
   return `
     <div class="info-section">
       <div class="info-subtitle">Spawn Entries (${entries.length})</div>
-      <div class="entries">
+
+      <div class="entries mode-menu-like-list">
         ${
           entries.length
-            ? renderToggleAllRow({
-                label: "Toggle All",
-                checked: allChecked,
-                dataAttr: "data-dino-toggle-all"
-              })
+            ? `
+              <div class="dino-spawn-tggl-wrap">
+                <button
+                  type="button"
+                  class="dino-spawn-tggl dino-spawn-tggl--all ${allChecked ? "is-on" : ""}"
+                  data-dino-toggle-all="1"
+                >
+                  <span class="dino-spawn-tggl-main">
+                    <span class="dino-spawn-tggl-title">Toggle All</span>
+                  </span>
+
+                  <span class="dino-spawn-tggl-check">${allChecked ? "✓" : ""}</span>
+                </button>
+              </div>
+            `
             : ``
         }
 
-        ${entries.map((e, i) => renderEntryRow(e, selectedName, i)).join("")}
+        ${entries.map((e, i) => renderDinoSpawnMenuRow(e, selectedName, i)).join("")}
       </div>
     </div>
   `;
 }
-
 
 function renderDinoTabStats(d){
   const drag = fmtNum(d?.dragWeight, 0);
@@ -170,7 +180,7 @@ function renderDinoPanel(name){
 
   setInfoPanelHTML(html);
 
-  const body = panel.querySelector(".fp-body");
+    const body = panel.querySelector(".fp-body");
 
   wireTabs(body, {
     tabs: DINO_PANEL_TABS,
@@ -182,28 +192,76 @@ function renderDinoPanel(name){
     }
   });
 
-  body.querySelectorAll('input[data-entry-toggle="1"]').forEach(chk => {
-    chk.onchange = () => {
-      const key = chk.dataset.key;
+  body.querySelectorAll("[data-dino-entry-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const key = btn.dataset.key;
       if (!key) return;
 
-      entryVisibility[key] = chk.checked;
-      drawDino(name);
+      const next = !(entryVisibility[key] ?? true);
+      entryVisibility[key] = next;
 
-      const master = body.querySelector('input[data-dino-toggle-all]');
+      btn.classList.toggle("is-on", next);
+
+      const check = btn.querySelector(".dino-spawn-check");
+      if (check) check.textContent = next ? "✓" : "";
+
+      const master = body.querySelector("[data-dino-toggle-all]");
       if (master){
-        const allChecked = [...body.querySelectorAll('input[data-entry-toggle="1"]')]
-          .every(el => el.checked);
-        master.checked = allChecked;
+        const allOn = [...body.querySelectorAll("[data-dino-entry-toggle]")]
+          .every(el => el.classList.contains("is-on"));
+
+        master.classList.toggle("is-on", allOn);
+
+        const masterCheck = master.querySelector(".dino-spawn-check");
+        if (masterCheck) masterCheck.textContent = allOn ? "✓" : "";
       }
+
+      drawDino(name);
     };
   });
 
-  wireToggleAll(body, {
-    masterSelector: 'input[data-dino-toggle-all]',
-    itemSelector: 'input[data-entry-toggle="1"]',
-    getItemKey: (el) => el.dataset.key,
-    onAfterChange: () => drawDino(name)
+  const master = body.querySelector("[data-dino-toggle-all]");
+  if (master){
+    master.onclick = () => {
+      const rows = [...body.querySelectorAll("[data-dino-entry-toggle]")];
+      const allOn = rows.every(el => el.classList.contains("is-on"));
+      const next = !allOn;
+
+      rows.forEach(el => {
+        const key = el.dataset.key;
+        if (!key) return;
+
+        entryVisibility[key] = next;
+        el.classList.toggle("is-on", next);
+
+        const check = el.querySelector(".dino-spawn-check");
+        if (check) check.textContent = next ? "✓" : "";
+      });
+
+      master.classList.toggle("is-on", next);
+
+      const masterCheck = master.querySelector(".dino-spawn-check");
+      if (masterCheck) masterCheck.textContent = next ? "✓" : "";
+
+      drawDino(name);
+    };
+  }
+
+  body.querySelectorAll("[data-open-entry]").forEach(btn => {
+    btn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const entryName = btn.dataset.openEntry;
+      openEntryView(entryName);
+    };
+  });
+  body.querySelectorAll("[data-open-entry]").forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const entryName = btn.dataset.openEntry;
+      openEntryView(entryName);
+    };
   });
 
   mountPanelSwipe(
@@ -460,6 +518,64 @@ function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino){
   `;
 }
 
+function renderDinoSpawnMenuRow(entry, selectedName, idx){
+  const key = entryVisibilityKey(selectedName, idx);
+  const checked = entryVisibility[key] ?? true;
+
+  const metaLines = [];
+
+  if (entry.groupWeight != null){
+    metaLines.push(`Entry Weight: ${fmt(entry.groupWeight)}`);
+  }
+
+  if (entry.spawnChances){
+    metaLines.push(`Spawn chances: ${entry.spawnChances}`);
+  }
+
+  if (entry.spawnLimit != null){
+    metaLines.push(`Max % To Allow: ${fmt(entry.spawnLimit * 100)}%`);
+  }
+
+  return `
+    <div class="dino-spawn-card-wrap">
+      <button
+        type="button"
+        class="dino-spawn-card ${checked ? "is-on" : ""}"
+        data-dino-entry-toggle="1"
+        data-key="${escapeAttr(key)}"
+      >
+        <span class="dino-spawn-card-main">
+          <span class="dino-spawn-title">${escapeHtml(entry.entryClass)}</span>
+
+          <span class="dino-spawn-meta">
+            ${metaLines.map(line => `
+              <span class="dino-spawn-meta-line">${escapeHtml(line)}</span>
+            `).join("")}
+          </span>
+        </span>
+
+        <span class="dino-spawn-check">${checked ? "✓" : ""}</span>
+      </button>
+
+      <button
+        type="button"
+        class="dino-spawn-corner-jump"
+        data-open-entry="${escapeAttr(entry.entryClass)}"
+        title="Open in spawn view"
+        aria-label="Open in spawn view"
+      >
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path d="M9 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  `;
+}
 
 function renderEntryTabDinos(entryName){
   const entryIndex = buildEntryIndexForCurrentMap();

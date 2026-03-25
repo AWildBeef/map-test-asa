@@ -472,16 +472,7 @@ function renderMapEntriesList(){
   list.querySelectorAll("[data-entry-jump]").forEach(row => {
     row.onclick = () => {
       const entryName = row.dataset.entryJump;
-      if (!entryName) return;
-
-      State.mode = "entry";
-      syncModeButton();
-      rebuildDinoSelect();
-
-      State.selection = entryName;
-      UI.dinoSelect.value = entryName;
-
-      render();
+      openEntryView(entryName);
     };
   });
 }

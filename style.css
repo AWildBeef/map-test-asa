@@ -110,6 +110,175 @@ body{
    Crate Collapsing 
 ==================*/
 
+.mode-menu-like-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:8px;
+}
+
+.dino-spawn-menu-wrap{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 52px;
+  gap:10px;
+  align-items:stretch;
+}
+
+.dino-spawn-row{
+  min-height:88px;
+  padding:14px 16px;
+  border-radius:18px;
+  align-items:flex-start;
+}
+
+.dino-spawn-row--all{
+  min-height:56px;
+  align-items:center;
+}
+
+.dino-spawn-label{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
+  min-width:0;
+}
+
+.dino-spawn-title{
+  display:block;
+  font-size:15px;
+  line-height:1.2;
+  font-weight:500;
+  color:var(--text);
+  white-space:normal;
+  word-break:break-word;
+  text-align:left;
+}
+
+.dino-spawn-meta{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+
+.dino-spawn-meta-line{
+  display:block;
+  font-size:12px;
+  line-height:1.25;
+  color:rgba(255,255,255,.68);
+  text-align:left;
+  white-space:normal;
+  word-break:break-word;
+}
+
+.dino-spawn-jump-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:52px;
+  min-width:52px;
+  border:0;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.dino-spawn-jump-btn:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.dino-spawn-jump-btn svg{
+  opacity:.9;
+}
+
+#dinoInfoPanel .mode-menu-item.dino-spawn-row{
+  justify-content:space-between;
+}
+
+#dinoInfoPanel .mode-menu-item.dino-spawn-row .mode-menu-check{
+  align-self:center;
+  flex:0 0 auto;
+  min-width:20px;
+  text-align:right;
+  font-size:18px;
+}
+  
+.mode-menu-like-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.dino-spawn-menu-wrap{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:8px;
+  align-items:stretch;
+}
+
+.dino-spawn-row{
+  min-width:0;
+  width:100%;
+  align-items:flex-start;
+  padding:14px 16px;
+}
+
+.dino-spawn-row .mode-menu-label{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  min-width:0;
+}
+
+.dino-spawn-title{
+  display:block;
+  font-size:14px;
+  line-height:1.2;
+  color:rgba(255,255,255,.92);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dino-spawn-meta{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+
+.dino-spawn-meta-line{
+  display:block;
+  font-size:12px;
+  line-height:1.25;
+  color:rgba(255,255,255,.62);
+}
+
+.dino-spawn-jump-btn{
+  width:44px;
+  min-width:44px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.dino-spawn-jump-btn:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.dino-spawn-row--all{
+  justify-content:space-between;
+  align-items:center;
+}
 
 .col-exp-row{
   display:flex;
@@ -1199,7 +1368,7 @@ body{
 }
 
 #mapEntriesPanel .entry-meta-line{
-  font-size:8px;
+  font-size:12px;
   text-wrap-mode:wrap;
 }
 
@@ -1797,6 +1966,37 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
    9) MOBILE (<= 955px) -- consolidated
    ============================================================ */
 @media (max-width:699px){
+
+  .dino-spawn-menu-wrap{
+    grid-template-columns:minmax(0, 1fr) 46px;
+    gap:8px;
+  }
+
+  .dino-spawn-row{
+    min-height:76px;
+    padding:12px 14px;
+    border-radius:16px;
+  }
+
+  .dino-spawn-row--all{
+    min-height:50px;
+  }
+
+  .dino-spawn-title{
+    font-size:13px;
+  }
+
+  .dino-spawn-meta-line{
+    font-size:11px;
+  }
+
+  .dino-spawn-jump-btn{
+    width:46px;
+    min-width:46px;
+    border-radius:16px;
+  }
+
+
   #controlsToggle{ display:inline-flex; }
 
   #topbar{
@@ -2175,4 +2375,129 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
     width:42px;
     height:42px;
   }
+}
+
+/* ============================================================
+   DINO SPAWN ROWS -- STRONG OVERRIDES
+   put near bottom of css
+   ============================================================ */
+
+
+
+
+
+   
+/*============
+========*/ 
+
+.dino-spawn-card-wrap{
+  position: relative;
+  margin-top: 10px;
+}
+
+.dino-spawn-card{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+
+  text-align: left;
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(140,180,255,0.16);
+  border-radius: 20px;
+
+  padding: 16px 64px 16px 18px;
+  cursor: pointer;
+}
+
+.dino-spawn-card:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(140,180,255,0.24);
+}
+
+.dino-spawn-card.is-on{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(140,180,255,0.30);
+  box-shadow: inset 0 0 0 1px rgba(120,170,255,0.10);
+}
+
+.dino-spawn-card--all{
+  min-height: 72px;
+  align-items: center;
+}
+
+.dino-spawn-card-main{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dino-spawn-title{
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: rgba(255,255,255,0.94);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.dino-spawn-meta{
+  display: block;
+  margin-top: 10px;
+}
+
+.dino-spawn-meta-line{
+  display: block;
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.70);
+}
+
+.dino-spawn-check{
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,255,255,0.92);
+  pointer-events: none;
+}
+
+.dino-spawn-corner-jump{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.86);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dino-spawn-corner-jump:hover{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.dino-spawn-corner-jump svg{
+  display: block;
+}
+
+/* optional: a little extra room so arrow never overlaps long titles */
+.dino-spawn-card-wrap .dino-spawn-card{
+  padding-right: 72px;
 }

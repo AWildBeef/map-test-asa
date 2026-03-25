@@ -142,5 +142,18 @@ function openCrateView(crateValue){
 
 const crateSetOpenState = {};
 
+function openEntryView(entryName){
+  if (!entryName) return;
+
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "entry";
+  State.selection = entryName;
+  State.selections.entry = entryName;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  render();
+}
 
 
