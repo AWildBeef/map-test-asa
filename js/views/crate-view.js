@@ -1,3 +1,69 @@
+function setAllCrateSetsOpen(crateObj, open){
+  const rows = crateObj?.sets || [];
+  for (let i = 0; i < rows.length; i++){
+    setCrateSetOpen(crateObj, i, open);
+  }
+}
+
+function areAllCrateSetsOpen(crateObj){
+  const rows = crateObj?.sets || [];
+  if (!rows.length) return true;
+  return rows.every((_, i) => isCrateSetOpen(crateObj, i));
+}
+
+function crateSetStateKey(crateObj, idx){
+  const id =
+    crateObj.kind === "mission"
+      ? `${crateObj.missionClass}::${crateObj.lootStructClass}`
+      : crateObj.class;
+
+  return `${State.mapId}::${id}::set::${idx}`;
+}
+
+function isCrateSetOpen(crateObj, idx){
+  const key = crateSetStateKey(crateObj, idx);
+  return crateSetOpenState[key] ?? true; // default open
+}
+
+function setCrateSetOpen(crateObj, idx, open){
+  const key = crateSetStateKey(crateObj, idx);
+  crateSetOpenState[key] = !!open;
+}
+
+function getActiveInfoPanelScroll(){
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return 0;
+
+  const body = panel.querySelector(".fp-body");
+  const activePage = body?.querySelector('.fp-page[style*="overflow"], .fp-page[style*="overflow-y"], .fp-page[data-page]');
+  const pagesEl = body?.querySelector(".fp-pages");
+
+  // prefer actual scrolling page if one is scrollable
+  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(infoPanelState.crateTab || "")}"]`);
+  if (page && page.scrollHeight > page.clientHeight) {
+    return page.scrollTop || 0;
+  }
+
+  return pagesEl?.scrollTop || 0;
+}
+
+function restoreActiveInfoPanelScroll(scrollTop){
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+
+  const body = panel.querySelector(".fp-body");
+  const pagesEl = body?.querySelector(".fp-pages");
+  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(infoPanelState.crateTab || "")}"]`);
+
+  requestAnimationFrame(() => {
+    if (page && page.scrollHeight > page.clientHeight) {
+      page.scrollTop = scrollTop || 0;
+    } else if (pagesEl) {
+      pagesEl.scrollTop = scrollTop || 0;
+    }
+  });
+}
+
 function missionSizeLabelFromClass(missionClass){
   const s = String(missionClass || "");
 
@@ -330,44 +396,64 @@ function renderCrateTabSets(c){
   return `
     <div class="info-section">
       <div class="entries">
+        <div class="col-exp-row">
+          <button
+            type="button"
+            class="loot-set-toggle-all"
+            data-crate-set-toggle-all="1"
+          >
+            ${areAllCrateSetsOpen(c) ? "Collapse All" : "Expand All"}
+          </button>
+        </div>
         ${rows.map((row, idx) => {
-          const { inlineEntries, overrideEntries, allEntries, setMeta } = lootSetEntriesFromRow(row);
+          const { allEntries, setMeta } = lootSetEntriesFromRow(row);
           const setName = lootSetNameFromRow(row, `Set ${idx + 1}`);
           const weight = row?.w;
+          const isOpen = isCrateSetOpen(c, idx);
 
           return `
-            <div class="loot-set-section">
-              <div class="info-row">
-                <span class="info-label">${escapeHtml(setName)}</span>
-              </div>
-
-              <div class="meta-grid">
-                <div class="meta-cell">
-                  <div class="meta-stack">
-                    <div class="meta-label">Set Weight</div>
-                    <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
+            <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"}">
+              <button
+                type="button"
+                class="loot-set-toggle"
+                data-crate-set-toggle="${escapeAttr(String(idx))}"
+              >
+                <div class="loot-set-toggle-main">
+                  <div class="info-row">
+                    <span class="info-label">${escapeHtml(setName)}</span>
                   </div>
                 </div>
 
-                ${
-                  setMeta?.smn != null || setMeta?.smx != null
-                    ? `
-                      <div class="meta-cell">
-                        <div class="meta-stack">
+                <div class="loot-set-toggle-right">
+                  <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
+                </div>
+              </button>
+
+              <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+                <div class="meta-grid">
+                  <div class="meta-cell">
+                    <div class="meta-label">Set Weight</div>
+                    <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
+                  </div>
+
+                  ${
+                    setMeta?.smn != null || setMeta?.smx != null
+                      ? `
+                        <div class="meta-cell">
                           <div class="meta-label">Items Chosen</div>
                           <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
                         </div>
-                      </div>
-                    `
-                    : ``
+                      `
+                      : ``
+                  }
+                </div>
+
+                ${
+                  allEntries.length
+                    ? allEntries.map(renderLootEntryBlock).join("")
+                    : `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
                 }
               </div>
-
-              ${
-                allEntries.length
-                  ? allEntries.map(renderLootEntryBlock).join("")
-                  : `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
-              }
             </div>
           `;
         }).join("")}
@@ -524,6 +610,7 @@ function renderCratePanel(crateName){
   setInfoPanelHTML(html);
 
   const body = panel.querySelector(".fp-body");
+
   wireTabs(body, {
     tabs: crateTabs,
     activeId: activeTab,
@@ -532,6 +619,31 @@ function renderCratePanel(crateName){
       infoPanelState.crateTab = id;
       renderCratePanel(crateName);
     }
+  });
+
+  body.querySelectorAll("[data-crate-set-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const idx = Number(btn.dataset.crateSetToggle);
+      if (!Number.isInteger(idx)) return;
+
+      const prevScroll = getActiveInfoPanelScroll();
+
+      setCrateSetOpen(c, idx, !isCrateSetOpen(c, idx));
+      renderCratePanel(crateName);
+
+      restoreActiveInfoPanelScroll(prevScroll);
+    };
+  });
+  body.querySelectorAll("[data-crate-set-toggle-all]").forEach(btn => {
+    btn.onclick = () => {
+      const prevScroll = getActiveInfoPanelScroll();
+
+      const nextOpen = !areAllCrateSetsOpen(c);
+      setAllCrateSetsOpen(c, nextOpen);
+      renderCratePanel(crateName);
+
+      restoreActiveInfoPanelScroll(prevScroll);
+    };
   });
 
   refreshInfoPanelPageHeight();

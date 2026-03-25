@@ -5,7 +5,7 @@ function renderToggleAllRow({
   value = "1"
 } = {}){
   return `
-    <div class="entry-row">
+    <div class="col-exp-row">
       <label class="entry-main" style="display:flex; align-items:flex-start; gap:10px; min-width:0;">
         <input
           type="checkbox"

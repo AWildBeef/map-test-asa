@@ -140,6 +140,7 @@ function openCrateView(crateValue){
   render();
 }
 
+const crateSetOpenState = {};
 
 
 
