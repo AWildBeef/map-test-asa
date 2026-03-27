@@ -13,10 +13,6 @@ async function boot() {
   
   Global.baseSpawn = await loadJSON(official.spawn);
   Global.baseDinos = await loadJSON(official.dinos);
-  Global.items = await loadJSON(PATHS.itemGlobal);
-  Global.loot = await loadJSON(PATHS.lootGlobal);
-  
-  buildLootIndexes();
   
   Global.spawn = Global.baseSpawn;
   Global.dinos = Global.baseDinos;
@@ -38,10 +34,19 @@ async function boot() {
   
   initRarityLegend();
   
+  setTimeout(() => {
+    ensureLootAndItemsLoaded().catch(err => {
+      console.warn("Deferred loot/item load failed", err);
+    });
+  }, 300);
+  
+  buildLootIndexes();
+  
   await onMapChanged();
+
   setTimeout(() => {
     preloadAllMapImages();
-  }, 300);
+  }, 1200);
 }
 
 boot().catch(e=>{

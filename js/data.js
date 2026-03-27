@@ -1634,3 +1634,45 @@ function hordePoiRowsForItem(itemName) {
     return poiClasses.some(cls => crateClasses.has(cls));
   });
 }
+
+let lootItemsPromise = null;
+
+async function ensureLootAndItemsLoaded() {
+  if (Global.items && Global.loot) return;
+
+  if (!lootItemsPromise) {
+    lootItemsPromise = (async () => {
+      const [items, loot] = await Promise.all([
+        loadJSON(PATHS.itemGlobal),
+        loadJSON(PATHS.lootGlobal)
+      ]);
+
+      Global.items = items;
+      Global.loot = loot;
+
+      buildLootIndexes();
+
+      // Rebuild current map-dependent loot data now that loot exists
+      const mapMeta = MAPS.find(m => m.id === State.mapId);
+      const geomShort = mapMeta?.geomShort;
+      const geom = Global.mapGeom.get(geomShort);
+
+      if (geom && geomShort) {
+        const resolvedLegend = buildResolvedSupplyLegend(geom);
+        Global.resolvedSupplyLegend.set(geomShort, resolvedLegend);
+      }
+
+      rebuildLootIndices();
+
+      // If we're currently in a loot-dependent mode, refresh the UI
+      if (State.mode === "crate" || State.mode === "item") {
+        rebuildSelectionSelect();
+        render();
+      }
+    })().finally(() => {
+      lootItemsPromise = null;
+    });
+  }
+
+  await lootItemsPromise;
+}
