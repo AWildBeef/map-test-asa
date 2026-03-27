@@ -59,8 +59,8 @@
    1) GLOBAL DEFAULTS
    ============================================================ */
    
-body.discord-activity {
-  padding-top: calc(env(safe-area-inset-top) + 56px);
+body.discord-activity #topbar {
+  margin-top: 90px !important;
 }
    
    
