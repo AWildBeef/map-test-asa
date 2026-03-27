@@ -58,6 +58,13 @@
 /* ============================================================
    1) GLOBAL DEFAULTS
    ============================================================ */
+   
+body.discord-activity {
+  padding-top: calc(env(safe-area-inset-top) + 56px);
+}
+   
+   
+    
 *{ box-sizing:border-box; }
 
 html, body{
