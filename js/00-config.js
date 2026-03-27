@@ -9,7 +9,9 @@
    CONFIG
 ============================================================ */
 
-const ASSET_VER = "dev-2026-03-05-V6";
+const RUNTIME = window.ASA_RUNTIME || {};
+
+const ASSET_VER = RUNTIME.assetVersion || "dev-2026-03-05-V6";
 
 const PATHS = {
   spawnGlobal: "data/spawn_global.json",

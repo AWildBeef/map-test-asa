@@ -74,13 +74,20 @@ const drawStyle = {
 };
 
 const urlParams = new URLSearchParams(window.location.search);
+const runtime = window.ASA_RUNTIME || {};
+const launch = runtime.launchConfig || {};
 
-const EMBED_MODE = urlParams.get("embed") === "1" || window.self !== window.top;
+const IS_DISCORD_ACTIVITY = !!runtime.isDiscordActivity;
 
-const EMBED_SOURCE = urlParams.get("source") || "";
-const EMBED_GROUP = urlParams.get("group") || "";
-const EMBED_MAP = urlParams.get("map") || "";
-const EMBED_MODE_LOCK = urlParams.get("mode") || "";
+const EMBED_MODE =
+  IS_DISCORD_ACTIVITY ||
+  urlParams.get("embed") === "1" ||
+  window.self !== window.top;
+
+const EMBED_SOURCE = launch.source || urlParams.get("source") || "";
+const EMBED_GROUP = launch.group || urlParams.get("group") || "";
+const EMBED_MAP = launch.map || urlParams.get("map") || "";
+const EMBED_MODE_LOCK = launch.mode || urlParams.get("mode") || "";
 
 const EMBED_ALLOW_OFFICIAL = urlParams.get("allowOfficial") === "1";
 const EMBED_HIDE_SOURCE = urlParams.get("hideSource") === "1";

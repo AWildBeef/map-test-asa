@@ -343,8 +343,6 @@ body{
   margin-top:2px;
 }
 
-
-
 /*=======================
    New Buttons
 ==================*/
@@ -2571,4 +2569,84 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.dino-spawn-card{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  color: var(--text);
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,25,40,.05);
+  border-radius: 8px;
+
+  padding: 6px 4px 6px 8px;
+  cursor: pointer;
+}
+
+.dino-spawn-card:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(140,180,255,0.24);
+}
+
+.dino-spawn-card.is-on{
+  border:1px solid rgba(205,235,255,.08);
+  background:rgba(10,30,50,.20);
+  box-shadow: inset 0 0 0 1px rgba(120,170,255,0.0);
+}
+
+.dino-spawn-card--all{
+  min-height: 72px;
+  align-items: center;
+}
+
+.dino-spawn-card-main{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dino-spawn-title{
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: rgba(255,255,255,0.94);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.dino-spawn-meta{
+  display: block;
+  margin-top: 5px;
+  margin-left:6px;
+}
+
+.dino-spawn-meta-line{
+  display: block;
+  font-size: 10px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.70);
+}
+
+.dino-spawn-card-wrap .dino-spawn-card {
+  padding-right: 20px;
+}
+
+
+.dino-spawn-check{
+  position: absolute;
+  right: 10px;
+  top: 75%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,255,255,0.92);
+  pointer-events: none;
 }
