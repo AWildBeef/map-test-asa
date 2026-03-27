@@ -2652,13 +2652,13 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
 }
 
 body.discord-activity #topbar {
-  margin-top: calc(env(safe-area-inset-top) + 36px);
+  margin-top: calc(env(safe-area-inset-top) + 56px);
 }
 
 body.discord-activity {
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 }
 
 body.discord-activity .leaflet-control.map-dock {
-  margin-left: 20px;
+  margin-left: 50px;
 }
