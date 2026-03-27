@@ -2659,6 +2659,6 @@ body.discord-activity {
   padding-bottom: 10px;
 }
 
-.leaflet-control.map-dock.discord-activity {
-  margin-left:20px;
-} 
+body.discord-activity .leaflet-control.map-dock {
+  margin-left: 20px;
+}
