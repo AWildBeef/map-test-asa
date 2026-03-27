@@ -2656,10 +2656,10 @@ body.discord-activity #topbar {
 }
 
 body.discord-activity {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 /* Option B */
-body.discord-activity .leaflet-control.map-dock {
+body.discord-activity .leaflet-bottom.leaflet-left {
   left: 20px;
 }
