@@ -107,7 +107,8 @@ const State = {
   nameToBps: new Map(),
 
   crateNames: [],
-  crateNameToId: new Map(),
+  crateNameToRef: new Map(),
+  crateOptions: [],
 
   itemNames: [],
   itemNameToIds: new Map(),
@@ -197,6 +198,30 @@ function entryVisibilityKey(dinoKey, idx){
 function isEntryVisible(dinoKey, idx){
   const key = entryVisibilityKey(dinoKey, idx);
   return entryVisibility[key] ?? true;
+}
+
+function syncModeClass(){
+  document.body.dataset.mode = State.mode;
+}
+
+
+function syncInfoPanelState(){
+  const panel = document.getElementById("dinoInfoPanel");
+  if (!panel) return;
+
+  panel.dataset.mode = State.mode;
+
+  if (State.mode === "dino") {
+    panel.dataset.tab = infoPanelState.dinoTab;
+  } else if (State.mode === "entry") {
+    panel.dataset.tab = infoPanelState.entryTab;
+  } else if (State.mode === "crate") {
+    panel.dataset.tab = infoPanelState.crateTab;
+  } else if (State.mode === "item") {
+    panel.dataset.tab = infoPanelState.itemTab;
+  } else {
+    panel.dataset.tab = "";
+  }
 }
 
 /* ============================================================
@@ -493,6 +518,342 @@ function mountSourceDrillDropdown(native, host){
    ~~NEW LOOT STUFF V1
 ============================================================ */
 
+function extractLevel(cls){
+  const s = String(cls || "");
+  const m = s.match(/Level[_ ]?(\d+)/i);
+  return m ? Number(m[1]) : null;
+}
+
+function extractTier(cls){
+  const s = String(cls || "");
+  const m = s.match(/Tier[_ ]?(\d+)/i);
+  return m ? Number(m[1]) : null;
+}
+
+function surfaceColorFromLevel(level){
+  const n = Number(level);
+  if (!Number.isFinite(n)) return "Supply";
+
+  if (n <= 03) return "White";
+  if (n <= 15) return "Green";
+  if (n <= 25) return "Blue";
+  if (n <= 35) return "Purple";
+  if (n <= 45) return "Yellow";
+  if (n <= 60) return "Red";
+  return "Cyan";
+}
+
+function surfaceDropName(cls){
+  const s = String(cls || "");
+  const level = extractLevel(s);
+  const isRinged = /double|ring/i.test(s);
+  const color = surfaceColorFromLevel(level);
+  return `${color} Supply Crate${isRinged ? " - Ringed" : ""}`;
+}
+
+function caveColorFromTier(tier){
+  const n = Number(tier);
+  if (n === 1) return "Green";
+  if (n === 2) return "Blue";
+  if (n === 3) return "Yellow";
+  if (n === 4) return "Red";
+  return null;
+}
+
+function caveDropName(cls){
+  const s = String(cls || "");
+  const tier = extractTier(s);
+  const color = caveColorFromTier(tier);
+
+  if (/swamp/i.test(s)) {
+    return color ? `${color} Swamp Cave Crate` : "Swamp Cave Crate";
+  }
+
+  return color ? `${color} Cave Crate` : "Cave Crate";
+}
+
+function iceCaveDropName(cls){
+  const s = String(cls || "");
+  const tier = extractTier(s);
+  const color = caveColorFromTier(tier);
+  return color ? `${color} Ice Cave Crate` : "Ice Cave Crate";
+}
+
+function orbitalDisplayName(cls){
+  const s = String(cls || "");
+  if (/legendary/i.test(s)) return "Legendary Orbital Supply Drop";
+  if (/alpha|hard/i.test(s)) return "Alpha Orbital Supply Drop";
+  if (/beta|medium/i.test(s)) return "Beta Orbital Supply Drop";
+  if (/gamma|easy/i.test(s)) return "Gamma Orbital Supply Drop";
+  return "Orbital Supply Drop";
+}
+
+function friendlyCrateNameFromClass(crateClass){
+  const cls = String(crateClass || "");
+  if (!cls) return "Unknown Crate";
+
+  if (/OrbitalSupplyDrop/i.test(cls)) {
+    return orbitalDisplayName(cls);
+  }
+
+  if (/IceCave|SnowCave/i.test(cls)) {
+    return iceCaveDropName(cls);
+  }
+
+  if (/Swamp/i.test(cls) && /Cave/i.test(cls)) {
+    return caveDropName(cls);
+  }
+
+  if (/SupplyCrate.*Cave.*Quality.*Tier/i.test(cls) || /Cave_QualityTier/i.test(cls)) {
+    return caveDropName(cls);
+  }
+
+  if (/SupplyCrate.*Level/i.test(cls)) {
+    return surfaceDropName(cls);
+  }
+
+  return crateDisplayNameByClass(cls) || cls;
+}
+
+
+function lootSetMetaFromRef(ref){
+  if (ref == null || ref === "") return null;
+
+  // numeric indexed ref
+  if (Number.isInteger(ref)) {
+    const cls = lootSetClassById(ref);
+    return cls ? (lootData().s?.[cls] || null) : null;
+  }
+
+  // numeric string ref
+  if (typeof ref === "string" && /^\d+$/.test(ref)) {
+    const cls = lootSetClassById(Number(ref));
+    return cls ? (lootData().s?.[cls] || null) : null;
+  }
+
+  // class string ref
+  if (typeof ref === "string") {
+    return lootData().s?.[ref] || null;
+  }
+
+  return null;
+}
+
+function lootSetNameFromRow(row, fallback = "Set"){
+  const meta = lootSetMetaFromRef(row?.o);
+  return meta?.n || row?.n || fallback;
+}
+
+function lootSetEntriesFromRow(row){
+  const inlineEntries = Array.isArray(row?.e) ? row.e : [];
+  const meta = lootSetMetaFromRef(row?.o);
+  const overrideEntries = Array.isArray(meta?.e) ? meta.e : [];
+
+  return {
+    inlineEntries,
+    overrideEntries,
+    allEntries: [...inlineEntries, ...overrideEntries],
+    setMeta: meta
+  };
+}
+
+function fmtRange(a, b, empty = "--"){
+  const fa = fmt(a);
+  const fb = fmt(b);
+
+  if (!fa && !fb) return empty;
+  if (fa && fb) return `${fa} - ${fb}`;
+  return fa || fb || empty;
+}
+
+function yesNo(v){
+  return isTrue01(v) ? "Yes" : "No";
+}
+
+function pct(v){
+  const n = Number(v);
+  if (!Number.isFinite(n)) return "";
+  return `${fmt(n * 100)}%`;
+}
+
+function missionMetaByClass(missionClass){
+  return lootData().m?.[missionClass] || null;
+}
+
+function missionRewardItemIds(missionClass){
+  const m = missionMetaByClass(missionClass);
+  if (!m) return [];
+
+  const out = [];
+
+  for (const iid of (Array.isArray(m.ri) ? m.ri : [])){
+    if (Number.isInteger(iid)) out.push(iid);
+  }
+
+  const sig = Array.isArray(m.sig) ? m.sig : [];
+  if (Number.isInteger(sig[1])) out.push(sig[1]);
+
+  for (const iid of (Array.isArray(m.cos) ? m.cos : [])){
+    if (Number.isInteger(iid)) out.push(iid);
+  }
+
+  return [...new Set(out)];
+}
+
+function missionLootItemIds(missionClass){
+  const m = missionMetaByClass(missionClass);
+  if (!m) return [];
+
+  const out = [];
+
+  for (const structClass of (Array.isArray(m.ls) ? m.ls : [])){
+    const ls = lootData().ls?.[structClass];
+    if (!ls) continue;
+
+    for (const setRow of (Array.isArray(ls.s) ? ls.s : [])){
+      for (const entry of (Array.isArray(setRow?.e) ? setRow.e : [])){
+        for (const iid of (Array.isArray(entry?.i) ? entry.i : [])){
+          if (Number.isInteger(iid)) out.push(iid);
+        }
+      }
+    }
+  }
+
+  return [...new Set(out)];
+}
+
+function missionAllItemIds(missionClass){
+  return [...new Set([
+    ...missionRewardItemIds(missionClass),
+    ...missionLootItemIds(missionClass)
+  ])];
+}
+
+function missionItemSummary(missionClass){
+  const seen = new Map();
+
+  for (const itemId of missionAllItemIds(missionClass)){
+    if (!seen.has(itemId)){
+      seen.set(itemId, {
+        itemId,
+        name: itemDisplayNameById(itemId),
+        bp: itemBlueprintById(itemId)
+      });
+    }
+  }
+
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function itemMissionRefsForItemId(itemId){
+  const rows = itemReverseRows(itemId);
+  const out = [];
+
+  for (const r of rows){
+    if (!Array.isArray(r) || !r.length) continue;
+    if (r[0] !== "m") continue;
+
+    const missionClass = typeof r[1] === "number"
+      ? lootData().mi?.[r[1]]
+      : r[1];
+
+    if (!missionClass) continue;
+
+    out.push(missionClass);
+  }
+
+  return [...new Set(out)];
+}
+
+function missionDiffLabelFromClass(cls){
+  const s = String(cls || "");
+  if (s.includes("_Alpha_") || s.endsWith("_Alpha_C")) return "Alpha";
+  if (s.includes("_Beta_") || s.endsWith("_Beta_C")) return "Beta";
+  return "Gamma";
+}
+
+function missionClassesUsedOnCurrentMap(){
+  if (State.mapId !== "Lost Colony") return new Set();
+
+  const geom = currentGeom();
+  const legend = Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+  const points = Array.isArray(geom?.pois?.missions) ? geom.pois.missions : [];
+
+  const out = new Set();
+
+  for (const p of points){
+    for (const row of (Array.isArray(p?.m) ? p.m : [])){
+      if (!Array.isArray(row) || !row.length) continue;
+
+      const idx = Number(row[0]);
+      if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+      const meta = legend[idx];
+      const bp = normalizeBp(meta?.bp);
+      const cls = bpClass(bp);
+
+      if (cls && lootData().m?.[cls]){
+        out.add(cls);
+      }
+    }
+  }
+
+  return out;
+}
+
+function missionPointHasClass(point, missionClass){
+  const geom = currentGeom();
+  const legend = Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+
+  for (const row of (Array.isArray(point?.m) ? point.m : [])){
+    if (!Array.isArray(row) || !row.length) continue;
+
+    const idx = Number(row[0]);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+
+    const meta = legend[idx];
+    const bp = normalizeBp(meta?.bp);
+    const cls = bpClass(bp);
+
+    if (cls === missionClass) return true;
+  }
+
+  return false;
+}
+
+function missionLootDisplayName(missionClass){
+  const m = lootData().m?.[missionClass];
+  if (!m) return missionClass;
+
+  const diff = missionDiffLabelFromClass(missionClass);
+  return `${m.n || missionClass} (${diff})`;
+}
+
+function lootStructureItemSummary(structClass){
+  const meta = lootData().ls?.[structClass];
+  if (!meta) return [];
+
+  const seen = new Map();
+
+  for (const row of (meta.s || [])){
+    for (const entry of (row?.e || [])){
+      for (const itemId of (entry?.i || [])){
+        if (!seen.has(itemId)){
+          seen.set(itemId, {
+            itemId,
+            name: itemDisplayNameById(itemId),
+            bp: itemBlueprintById(itemId),
+            hits: 0
+          });
+        }
+        seen.get(itemId).hits += 1;
+      }
+    }
+  }
+
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
 function crateClassFromBp(bp){
   const s = String(bp || "").trim();
   if (!s) return "";
@@ -734,15 +1095,51 @@ function itemReverseRows(itemId){
   return lootData().r?.[String(itemId)] || [];
 }
 
-function crateIdsForItemId(itemId){
+function lootSourcesForItemId(itemId){
   const rows = itemReverseRows(itemId);
-  const ids = rows.map(r => Array.isArray(r) ? r[0] : null).filter(v => Number.isInteger(v));
+  const out = [];
+
+  for (const r of rows){
+    if (!Array.isArray(r) || !r.length) continue;
+
+    if (typeof r[0] === "number"){
+      out.push({
+        kind: "crate",
+        crateId: r[0]
+      });
+      continue;
+    }
+
+    if (r[0] === "m"){
+      const missionClass = typeof r[1] === "number"
+        ? lootData().mi?.[r[1]]
+        : r[1];
+
+      if (!missionClass) continue;
+
+      out.push({
+        kind: "mission",
+        missionClass
+      });
+    }
+  }
+
+  return out;
+}
+
+function crateIdsForItemId(itemId){
+  const refs = lootSourcesForItemId(itemId);
+  const ids = refs
+    .filter(r => r.kind === "crate" && Number.isInteger(r.crateId))
+    .map(r => r.crateId);
+
   return [...new Set(ids)];
 }
 
 function rebuildLootIndices(){
   State.crateNames = [];
-  State.crateNameToId.clear();
+  State.crateNameToRef = new Map();
+  State.crateOptions = [];
 
   State.itemNames = [];
   State.itemNameToIds.clear();
@@ -755,21 +1152,50 @@ function rebuildLootIndices(){
 
   const mapCrateClasses = crateClassesUsedOnCurrentMap();
 
-  // --- crates on this map ---
+  // --- normal crates on this map ---
   for (const crateClass of mapCrateClasses){
     const crateId = crateClassToId(crateClass);
     if (!Number.isInteger(crateId) || crateId < 0) continue;
 
     State.mapCrateIds.add(crateId);
 
-    const name = crateDisplayNameById(crateId);
-    if (!name) continue;
+    const value = `crate:${crateId}`;
+    const label = friendlyCrateNameFromClass(crateClass);
 
-    State.crateNames.push(name);
-    State.crateNameToId.set(name, crateId);
+    State.crateOptions.push({ value, label });
+    State.crateNameToRef.set(value, {
+      kind: "crate",
+      crateId,
+      crateClass
+    });
   }
 
-  State.crateNames = [...new Set(State.crateNames)].sort((a, b) => a.localeCompare(b));
+  // --- mission loot sources on this map ---
+  const missionClasses = missionClassesUsedOnCurrentMap();
+
+  for (const missionClass of missionClasses){
+    const m = loot.m?.[missionClass];
+    if (!m) continue;
+
+    const structs = Array.isArray(m.ls) ? m.ls : [];
+    for (const structClass of structs){
+      if (!structClass || !loot.ls?.[structClass]) continue;
+
+      const value = `mission:${missionClass}:${structClass}`;
+      const label = missionLootDisplayName(missionClass);
+
+      State.crateOptions.push({ value, label });
+      State.crateNameToRef.set(value, {
+        kind: "mission",
+        missionClass,
+        missionName: m.n || missionClass,
+        lootStructClass: structClass
+      });
+    }
+  }
+
+  State.crateOptions.sort((a, b) => a.label.localeCompare(b.label));
+  State.crateNames = State.crateOptions.map(x => x.label);
 
   // --- items on this map ---
   for (const [itemIdStr, refs] of Object.entries(loot.r || {})){
@@ -777,9 +1203,24 @@ function rebuildLootIndices(){
     if (!Number.isInteger(itemId)) continue;
 
     const rows = Array.isArray(refs) ? refs : [];
+    const missionClassesOnMap = missionClassesUsedOnCurrentMap();
+
     const appearsOnMap = rows.some(r => {
-      const crateId = Array.isArray(r) ? Number(r[0]) : NaN;
-      return State.mapCrateIds.has(crateId);
+      if (!Array.isArray(r) || !r.length) return false;
+
+      if (typeof r[0] === "number"){
+        return State.mapCrateIds.has(r[0]);
+      }
+
+      if (r[0] === "m"){
+        const missionRef = typeof r[1] === "number"
+          ? loot.mi?.[r[1]]
+          : r[1];
+
+        return missionClassesOnMap.has(missionRef);
+      }
+
+      return false;
     });
 
     if (!appearsOnMap) continue;
@@ -808,40 +1249,76 @@ function drawCrate(crateName){
   clearDraw();
   clearPois();
 
-  const crateId = State.crateNameToId.get(crateName);
-  if (!Number.isInteger(crateId) || !State.mapCrateIds.has(crateId)) return;
-
-  const crateClass = crateIdToClass(crateId);
-  if (!crateClass) return;
+  const ref = State.crateNameToRef.get(crateName);
+  if (!ref) return;
 
   const points = lootPointsForCurrentMap();
 
-  for (const p of points){
-    const x = Number(p?.x);
-    const y = Number(p?.y);
-    if (![x, y].every(Number.isFinite)) continue;
-    if (!poiMatchesCrateClass(p, crateClass)) continue;
+  // normal crates
+  if (ref.kind === "crate"){
+    const crateClass = ref.crateClass;
+    if (!crateClass) return;
 
-    const isArtifact = crateClass.toLowerCase().includes("artifactcrate");
+    for (const p of points){
+      const x = Number(p?.x);
+      const y = Number(p?.y);
+      if (![x, y].every(Number.isFinite)) continue;
+      if (!poiMatchesCrateClass(p, crateClass)) continue;
 
-    L.circleMarker([y, x], {
-      radius: 8,
-      color: "#111",
-      weight: 2.5,
-      fillColor: isArtifact ? "#b388ff" : "#ffd54a",
-      fillOpacity: 1,
-      pane: "poiPane",
-      className: isArtifact ? "poi-artifact" : "poi-supply"
-    })
-      .addTo(mapObj.poiLayer)
-      .bindTooltip(supplyCrateTooltipHtml(p, supplyLegendForCurrentMap()), {
-        direction: "auto",
-        sticky: true,
-        offset: [0, -14],
-        opacity: 0.97,
-        className: "supply-tooltip",
-        autoPan: true
-      });
+      const isArtifact = crateClass.toLowerCase().includes("artifactcrate");
+
+      L.circleMarker([y, x], {
+        radius: 8,
+        color: "#111",
+        weight: 2.5,
+        fillColor: isArtifact ? "#b388ff" : "#ffd54a",
+        fillOpacity: 1,
+        pane: "poiPane",
+        className: isArtifact ? "poi-artifact" : "poi-supply"
+      })
+        .addTo(mapObj.poiLayer)
+        .bindTooltip(supplyCrateTooltipHtml(p), {
+          direction: "auto",
+          sticky: true,
+          offset: [0, -14],
+          opacity: 0.97,
+          className: "supply-tooltip",
+          autoPan: true
+        });
+    }
+
+    return;
+  }
+
+  // mission loot sources
+  if (ref.kind === "mission"){
+    const legend = missionLegendForCurrentMap();
+
+    for (const p of (currentGeom()?.pois?.missions || [])){
+      const x = Number(p?.x);
+      const y = Number(p?.y);
+      if (![x, y].every(Number.isFinite)) continue;
+      if (!missionPointHasClass(p, ref.missionClass)) continue;
+
+      L.circleMarker([y, x], {
+        radius: 8,
+        color: "#111",
+        weight: 2.5,
+        fillColor: "#ff8a3d",
+        fillOpacity: 1,
+        pane: "poiPane",
+        className: "poi-mission"
+      })
+        .addTo(mapObj.poiLayer)
+        .bindTooltip(missionTooltipHtml(p, legend), {
+          direction: "auto",
+          sticky: true,
+          offset: [0, -14],
+          opacity: 0.97,
+          className: "mission-tooltip",
+          autoPan: true
+        });
+    }
   }
 }
 
@@ -852,25 +1329,9 @@ function crateItemSummary(crateClass){
   const seen = new Map();
 
   for (const row of (crate.s || [])){
-    // inline entries
-    for (const entry of (row?.e || [])){
-      for (const itemId of (entry?.i || [])){
-        if (!seen.has(itemId)){
-          seen.set(itemId, {
-            itemId,
-            name: itemDisplayNameById(itemId),
-            bp: itemBlueprintById(itemId),
-            hits: 0
-          });
-        }
-        seen.get(itemId).hits += 1;
-      }
-    }
+    const { allEntries } = lootSetEntriesFromRow(row);
 
-    // override entries
-    const setRef = row?.o;
-    const setMeta = setRef ? lootData().s?.[setRef] : null;
-    for (const entry of (setMeta?.e || [])){
+    for (const entry of allEntries){
       for (const itemId of (entry?.i || [])){
         if (!seen.has(itemId)){
           seen.set(itemId, {
@@ -899,99 +1360,282 @@ function drawItem(itemName){
   if (!itemIds.length) return;
 
   const crateIdSet = new Set();
+  const missionSet = new Set();
 
   for (const itemId of itemIds){
-    for (const crateId of crateIdsForItemId(itemId)){
-      if (State.mapCrateIds.has(crateId) && isItemCrateVisible(itemName, crateId)){
-        crateIdSet.add(crateId);
+    for (const ref of lootSourcesForItemId(itemId)){
+      if (ref.kind === "crate"){
+        if (State.mapCrateIds.has(ref.crateId) && isItemCrateVisible(itemName, ref.crateId)){
+          crateIdSet.add(ref.crateId);
+        }
+      }
+
+      if (ref.kind === "mission"){
+        const missionClasses = missionClassesUsedOnCurrentMap();
+        if (missionClasses.has(ref.missionClass)){
+          missionSet.add(ref.missionClass);
+        }
       }
     }
   }
 
   const crateClasses = [...crateIdSet].map(crateIdToClass).filter(Boolean);
-  if (!crateClasses.length) return;
-
   const points = lootPointsForCurrentMap();
+  const missionLegend = missionLegendForCurrentMap();
 
   for (const p of points){
     const x = Number(p?.x);
     const y = Number(p?.y);
     if (![x, y].every(Number.isFinite)) continue;
-    if (!poiMatchesAnyCrateClass(p, crateClasses)) continue;
 
-    const isArtifactOnly = poiHasArtifactCrate(p) && !poiHasSupplyCrate(p);
+    let matched = false;
+    let fillColor = "#ffd54a";
+    let className = "poi-supply";
+    let tooltip = supplyCrateTooltipHtml(p);
+
+    if (poiMatchesAnyCrateClass(p, crateClasses)){
+      matched = true;
+      const isArtifactOnly = poiHasArtifactCrate(p) && !poiHasSupplyCrate(p);
+      fillColor = isArtifactOnly ? "#b388ff" : "#ffd54a";
+      className = isArtifactOnly ? "poi-artifact" : "poi-supply";
+      tooltip = supplyCrateTooltipHtml(p);
+    }
+
+    if (!matched && p?._type === "mission"){
+      for (const missionClass of missionSet){
+        if (missionPointHasClass(p, missionClass)){
+          matched = true;
+          fillColor = "#ff8a3d";
+          className = "poi-mission";
+          tooltip = missionTooltipHtml(p, missionLegend);
+          break;
+        }
+      }
+    }
+
+    if (!matched) continue;
 
     L.circleMarker([y, x], {
       radius: 8,
       color: "#111",
       weight: 2.5,
-      fillColor: isArtifactOnly ? "#b388ff" : "#ffd54a",
+      fillColor,
       fillOpacity: 1,
       pane: "poiPane",
-      className: isArtifactOnly ? "poi-artifact" : "poi-supply"
+      className
     })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(supplyCrateTooltipHtml(p), {
+      .bindTooltip(tooltip, {
         direction: "auto",
         sticky: true,
         offset: [0, -14],
         opacity: 0.97,
-        className: "supply-tooltip",
+        className: className === "poi-mission" ? "mission-tooltip" : "supply-tooltip",
         autoPan: true
       });
   }
 }
 
 const CRATE_PANEL_TABS = [
-  { id: "sets", label: "Loot" },
-  { id: "info", label: "Info" }
+  { id: "sets", label: "Loot Sets" },
+  { id: "info", label: "All Items" }
 ];
 
-function getSelectedCrate(crateName){
-  const crateId = State.crateNameToId.get(crateName);
-  if (!Number.isInteger(crateId)) return null;
+function getSelectedCrate(selectionValue){
+  const ref = State.crateNameToRef.get(selectionValue);
+  if (!ref) return null;
 
-  const crateClass = crateIdToClass(crateId);
-  const meta = crateMetaById(crateId);
-  if (!crateClass || !meta) return null;
+  if (ref.kind === "crate"){
+    const crateClass = crateIdToClass(ref.crateId);
+    const meta = crateMetaById(ref.crateId);
+    if (!crateClass || !meta) return null;
 
-  return {
-    id: crateId,
-    class: crateClass,
-    name: meta.n || crateName,
-    level: meta.l,
-    minSets: meta.mn,
-    maxSets: meta.mx,
-    sets: Array.isArray(meta.s) ? meta.s : []
-  };
+    return {
+      kind: "crate",
+      id: ref.crateId,
+      class: crateClass,
+      name: friendlyCrateNameFromClass(crateClass),
+      rawName: meta.n || crateClass,
+      level: meta.l,
+      minSets: meta.mn,
+      maxSets: meta.mx,
+      qmin: meta.qm1,
+      qmax: meta.qm2,
+      sets: Array.isArray(meta.s) ? meta.s : []
+    };
+  }
+
+  if (ref.kind === "mission"){
+    const meta = lootData().ls?.[ref.lootStructClass];
+    const mission = lootData().m?.[ref.missionClass];
+    if (!meta || !mission) return null;
+
+    return {
+      kind: "mission",
+      missionClass: ref.missionClass,
+      lootStructClass: ref.lootStructClass,
+      class: ref.lootStructClass,
+      name: missionLootDisplayName(ref.missionClass),
+      rawName: ref.lootStructClass,
+      level: null,
+      minSets: null,
+      maxSets: null,
+      qmin: null,
+      qmax: null,
+      sets: Array.isArray(meta.s) ? meta.s : []
+    };
+  }
+
+  return null;
 }
 
 function renderCrateHero(c){
-  const bp = c.bp || "";
+  const mission = missionMetaByClass(c.missionClass);
+
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(c.name)}</div>
-      <div class="info-submeta">Loot Crate</div>
-      ${renderCopyField("Crate Class", c.class)}
+
+      ${
+        c.kind === "mission"
+          ? `<div class="info-submeta">${escapeHtml(String(mission?.t || "--"))}</div>`
+          : `
+            <div class="meta-grid">
+              <div class="meta-cell">
+                <div class="meta-label">Required Level</div>
+                <div class="meta-value">${escapeHtml(String(c.level ?? "--"))}</div>
+              </div>
+              <div class="meta-cell">
+                <div class="meta-label">Min Loot Sets</div>
+                <div class="meta-value">${escapeHtml(String(c.minSets ?? "--"))}</div>
+              </div>
+              <div class="meta-cell">
+                <div class="meta-label">Max Loot Sets</div>
+                <div class="meta-value">${escapeHtml(String(c.maxSets ?? "--"))}</div>
+              </div>
+              ${
+                c.qmin != null || c.qmax != null
+                  ? `
+                    <div class="meta-cell">
+                      <div class="meta-label">Quality Mult</div>
+                      <div class="meta-value">${escapeHtml(fmtRange(c.qmin, c.qmax))}</div>
+                    </div>
+                  `
+                  : ``
+              }
+            </div>
+          `
+      }
+
+      ${renderCopyField("Loot Class", c.class)}
+      ${
+        c.kind === "mission"
+          ? renderCopyField("Mission Class", c.missionClass || "")
+          : ""
+      }
     </div>
   `;
 }
 
 function renderCrateTabInfo(c){
+  if (c.kind === "mission"){
+    const mission = missionMetaByClass(c.missionClass);
+    const rewardIds = Array.isArray(mission?.ri) ? mission.ri : [];
+    const rewardQty = Array.isArray(mission?.rq) ? mission.rq : [null, null];
+    const sig = Array.isArray(mission?.sig) ? mission.sig : [0, null];
+    const cosmeticIds = Array.isArray(mission?.cos) ? mission.cos : [];
+    const lootItems = missionLootItemIds(c.missionClass);
+
+    return `
+
+      ${
+        rewardIds.length
+          ? `
+            <div class="info-section">
+              <div class="mission-subtitle">Direct Rewards (${rewardIds.length})</div>
+              <div class="entries">
+                ${rewardIds.map(itemId => `
+                  <div class="entry-row">
+                    <div class="entry-main">
+                      <div class="entry-name">
+                        ${escapeHtml(itemDisplayNameById(itemId))}
+                        ${
+                          rewardQty[0] != null && rewardQty[1] != null
+                            ? `<span class="entry-qty"> (${rewardQty[0]}–${rewardQty[1]})</span>`
+                            : ``
+                        }
+                      </div>
+                      
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          `
+          : ``
+      }
+
+      ${
+        sig[0] && sig[1]
+          ? `
+            <div class="info-section">
+              <div class="mission-subtitle">Sigil Reward</div>
+              <div class="entry-meta">
+                <div class="entry-meta-line">${escapeHtml(String(sig[0]))} × ${escapeHtml(itemDisplayNameById(sig[1]))}</div>
+              </div>
+              
+            </div>
+          `
+          : ``
+      }
+
+      ${
+        cosmeticIds.length
+          ? `
+            <div class="info-section">
+              <div class="mission-subtitle">Possible Cosmetics (${cosmeticIds.length})</div>
+              <div class="entries">
+                ${cosmeticIds.map(itemId => `
+                  <div class="entry-row">
+                    <div class="entry-main">
+                      <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
+                      
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          `
+          : ``
+      }
+
+      <div class="info-section">
+        <div class="mission-subtitle">All Possible Items (${lootItems.length})</div>
+        ${
+          !lootItems.length
+            ? `<div style="color:var(--muted)">No loot items found.</div>`
+            : `
+              <div class="entries">
+                ${lootItems.map(itemId => `
+                  <div class="entry-row">
+                    <div class="entry-main">
+                      <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
+                      
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            `
+        }
+      </div>
+    `;
+  }
+
   const items = crateItemSummary(c.class);
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Crate Info</div>
-      <div class="entry-meta">
-        <div class="entry-meta-line">Required Level: ${escapeHtml(String(c.level ?? "--"))}</div>
-        <div class="entry-meta-line">Min Item Sets: ${escapeHtml(String(c.minSets ?? "--"))}</div>
-        <div class="entry-meta-line">Max Item Sets: ${escapeHtml(String(c.maxSets ?? "--"))}</div>
-      </div>
-    </div>
-
-    <div class="info-section">
-      <div class="info-subtitle">Possible Items (${items.length})</div>
+      <div class="info-subtitle">All Possible Items (${items.length})</div>
       ${
         !items.length
           ? `<div style="color:var(--muted)">No items found.</div>`
@@ -1023,56 +1667,49 @@ function renderCrateTabSets(c){
       <div class="info-subtitle">Loot Sets (${rows.length})</div>
       <div class="entries">
         ${rows.map((row, idx) => {
-          const setName = row?.n || `Set ${idx + 1}`;
+          const { inlineEntries, overrideEntries, allEntries, setMeta } = lootSetEntriesFromRow(row);
+          const setName = lootSetNameFromRow(row, `Set ${idx + 1}`);
           const weight = row?.w;
-          const inlineEntries = Array.isArray(row?.e) ? row.e : [];
-          const overrideRef = row?.o || "";
-          const overrideMeta = overrideRef ? (lootData().s?.[overrideRef] || null) : null;
-          const overrideEntries = Array.isArray(overrideMeta?.e) ? overrideMeta.e : [];
 
           return `
-            <div class="info-section">
+            <div class="loot-set-section">
               <div class="info-row">
-                <span class="info-label">${escapeHtml(setName || `Set ${idx + 1}`)}</span>
+                <span class="info-label">${escapeHtml(setName)}</span>
               </div>
 
-              <div class="entry-meta">
-                <div class="entry-meta-line">Weight: ${escapeHtml(fmt(weight) || "--")}</div>
+              <div class="meta-grid">
+                <div class="meta-cell">
+                  <div class="meta-label">Set Weight</div>
+                  <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
+                </div>
+
+                ${
+                  setMeta?.smn != null || setMeta?.smx != null
+                    ? `
+                      <div class="meta-cell">
+                        <div class="meta-label">Items Chosen</div>
+                        <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
+                      </div>
+                    `
+                    : ``
+                }
+
+                ${
+                  row?.o != null && row?.o !== ""
+                    ? `
+                      <div class="meta-cell" style="grid-column:1 / -1;">
+                        <div class="meta-label">Override Set</div>
+                        <div class="meta-value">${escapeHtml(setMeta?.n || String(row.o))}</div>
+                      </div>
+                    `
+                    : ``
+                }
               </div>
 
               ${
-                overrideRef
-                  ? `
-                    <div class="info-subtitle-sub">Loot Item Set Override</div>
-                    <div class="info-mono copy-on-click" data-copy="${escapeAttr(overrideRef)}">
-                      ${escapeHtml(overrideRef)}
-                    </div>
-                  `
-                  : ``
-              }
-
-              ${
-                inlineEntries.length
-                  ? `
-                    <div class="info-subtitle-sub" style="margin-top:8px;">Direct Crate Entries</div>
-                    ${inlineEntries.map(renderLootEntryBlock).join("")}
-                  `
-                  : ``
-              }
-
-              ${
-                overrideEntries.length
-                  ? `
-                    <div class="info-subtitle-sub" style="margin-top:8px;">Override Loot Entries</div>
-                    ${overrideEntries.map(renderLootEntryBlock).join("")}
-                  `
-                  : ``
-              }
-
-              ${
-                !inlineEntries.length && !overrideEntries.length
-                  ? `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
-                  : ``
+                allEntries.length
+                  ? allEntries.map(renderLootEntryBlock).join("")
+                  : `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
               }
             </div>
           `;
@@ -1083,35 +1720,89 @@ function renderCrateTabSets(c){
 }
 
 function renderLootEntryBlock(entry){
+  const itemIds = Array.isArray(entry?.i) ? entry.i : [];
+  const itemWeights = Array.isArray(entry?.iw) ? entry.iw : [];
+
   return `
-    <div class="info-section" style="margin-top:8px;">
+    <div class="info-section-sub" style="margin-top:8px;">
       <div class="info-subtitle-sub">${escapeHtml(entry?.n || "Entry")}</div>
-      <div class="entry-meta">
-        <div class="entry-meta-line">Entry Weight: ${escapeHtml(fmt(entry?.w) || "--")}</div>
-        <div class="entry-meta-line">Quantity: ${escapeHtml(fmt(entry?.mn) || "--")} - ${escapeHtml(fmt(entry?.mx) || "--")}</div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-label">Entry Weight</div>
+          <div class="meta-value">${escapeHtml(fmt(entry?.w) || "--")}</div>
+        </div>
+
+        <div class="meta-cell">
+          <div class="meta-label">Quantity</div>
+          <div class="meta-value">${escapeHtml(fmtRange(entry?.mn, entry?.mx))}</div>
+        </div>
+
         ${
           entry?.q1 != null || entry?.q2 != null
-            ? `<div class="entry-meta-line">Quality: ${escapeHtml(fmt(entry?.q1) || "--")} - ${escapeHtml(fmt(entry?.q2) || "--")}</div>`
+            ? `
+              <div class="meta-cell">
+                <div class="meta-label">Quality</div>
+                <div class="meta-value">${escapeHtml(fmtRange(entry?.q1, entry?.q2))}</div>
+              </div>
+            `
             : ``
         }
+
         ${
           entry?.b != null
-            ? `<div class="entry-meta-line">Blueprint Chance: ${escapeHtml(fmt(Number(entry.b) * 100) || "0")}%</div>`
+            ? `
+              <div class="meta-cell">
+                <div class="meta-label">BP Chance</div>
+                <div class="meta-value">${escapeHtml(pct(entry.b) || "0%")}</div>
+              </div>
+            `
+            : ``
+        }
+
+        ${
+          isTrue01(entry?.fb)
+            ? `
+              <div class="meta-cell">
+                <div class="meta-label">Force BP</div>
+                <div class="meta-value">Yes</div>
+              </div>
+            `
+            : ``
+        }
+
+        ${
+          isTrue01(entry?.aq)
+            ? `
+              <div class="meta-cell">
+                <div class="meta-label">Single Qty</div>
+                <div class="meta-value">Yes</div>
+              </div>
+            `
             : ``
         }
       </div>
 
-      <div class="entries">
-        ${(Array.isArray(entry?.i) ? entry.i : []).map(itemId => `
-          <div class="entry-row">
-            <div class="entry-main">
-              <div class="entry-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
-              <div class="info-mono copy-on-click" data-copy="${escapeAttr(itemBlueprintById(itemId))}">
-                ${escapeHtml(itemBlueprintById(itemId) || `Item ${itemId}`)}
-              </div>
-            </div>
-          </div>
-        `).join("")}
+      <div class="item-entries">
+        ${
+          itemIds.length
+            ? itemIds.map((itemId, i) => {
+                const iw = itemWeights[i];
+                return `
+                  <div class="item-row">
+                    <div class="item-main">
+                      <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
+                      ${
+                        iw != null
+                          ? `<div class="entry-meta"><div class="entry-meta-line">Item Weight: ${escapeHtml(fmt(iw) || "--")}</div></div>`
+                          : ``
+                      }
+                    </div>
+                  </div>
+                `;
+              }).join("")
+            : `<div class="entry-meta"><div class="entry-meta-line">No items listed.</div></div>`
+        }
       </div>
     </div>
   `;
@@ -1125,21 +1816,31 @@ function renderCratePanel(crateName){
   }
 
   const panel = ensureInfoPanel();
-  const activeTab = CRATE_PANEL_TABS.some(t => t.id === infoPanelState.crateTab)
+  const itemCount =
+    c.kind === "mission"
+      ? missionLootItemIds(c.missionClass).length
+      : crateItemSummary(c.class).length;
+
+  const crateTabs = [
+    { id: "sets", label: `Loot Sets (${(c.sets || []).length})` },
+    { id: "info", label: `All Items (${itemCount})` }
+  ];
+
+  const activeTab = crateTabs.some(t => t.id === infoPanelState.crateTab)
     ? infoPanelState.crateTab
     : "sets";
 
-  setInfoPanelTitle(crateName);
+  setInfoPanelTitle(c.name);;
 
   const html = `
     ${renderCrateHero(c)}
     ${renderTabs({
-      tabs: CRATE_PANEL_TABS,
+      tabs: crateTabs,
       activeId: activeTab,
       dataAttr: 'data-crate-tab'
     })}
     ${renderPages({
-      tabs: CRATE_PANEL_TABS,
+      tabs: crateTabs,
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "sets") return renderCrateTabSets(c);
@@ -1153,7 +1854,7 @@ function renderCratePanel(crateName){
 
   const body = panel.querySelector(".fp-body");
   wireTabs(body, {
-    tabs: CRATE_PANEL_TABS,
+    tabs: crateTabs,
     activeId: activeTab,
     dataAttr: "data-crate-tab",
     onChange: (id) => {
@@ -1161,16 +1862,6 @@ function renderCratePanel(crateName){
       renderCratePanel(crateName);
     }
   });
-
-  mountPanelSwipe(
-    body.querySelector(".fp-pages"),
-    CRATE_PANEL_TABS,
-    () => infoPanelState.crateTab,
-    (id) => {
-      infoPanelState.crateTab = id;
-      renderCratePanel(crateName);
-    }
-  );
 
   refreshInfoPanelPageHeight();
   syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
@@ -1218,21 +1909,36 @@ function renderItemTabInfo(it){
 }
 
 function renderItemTabCrates(it){
-  const crateIds = [...new Set(
-    it.ids
-      .flatMap(id => crateIdsForItemId(id))
-      .filter(crateId => State.mapCrateIds.has(crateId))
-  )];
+  const crateRefs = [];
+  const missionRefs = [];
 
-  if (!crateIds.length){
-    return `<div style="color:var(--muted)">No crates found for this item.</div>`;
+  for (const itemId of it.ids){
+    for (const ref of lootSourcesForItemId(itemId)){
+      if (ref.kind === "crate" && State.mapCrateIds.has(ref.crateId)){
+        crateRefs.push(ref.crateId);
+      }
+
+      if (ref.kind === "mission"){
+        const missionClasses = missionClassesUsedOnCurrentMap();
+        if (missionClasses.has(ref.missionClass)){
+          missionRefs.push(ref.missionClass);
+        }
+      }
+    }
+  }
+
+  const crateIds = [...new Set(crateRefs)];
+  const missionClasses = [...new Set(missionRefs)];
+
+  if (!crateIds.length && !missionClasses.length){
+    return `<div style="color:var(--muted)">No loot sources found for this item.</div>`;
   }
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Crates (${crateIds.length})</div>
+      <div class="info-subtitle">Sources (${crateIds.length + missionClasses.length})</div>
       <div class="entries">
-        ${crateIds.map((crateId, idx) => {
+        ${crateIds.map(crateId => {
           const meta = crateMetaById(crateId);
           const name = crateDisplayNameById(crateId);
           const key = itemCrateVisibilityKey(it.name, crateId);
@@ -1255,6 +1961,20 @@ function renderItemTabCrates(it){
                 </div>
               </div>
             </label>
+          `;
+        }).join("")}
+
+        ${missionClasses.map(missionClass => {
+          const mission = missionMetaByClass(missionClass);
+          return `
+            <div class="entry-row">
+              <div class="entry-main">
+                <div class="entry-name">${escapeHtml(missionLootDisplayName(missionClass))}</div>
+                <div class="entry-meta">
+                  <div class="entry-meta-line">Mission Type: ${escapeHtml(String(mission?.t || "--"))}</div>
+                </div>
+              </div>
+            </div>
           `;
         }).join("")}
       </div>
@@ -1314,16 +2034,6 @@ function renderItemPanel(itemName){
     };
   });
 
-  mountPanelSwipe(
-    body.querySelector(".fp-pages"),
-    ITEM_PANEL_TABS,
-    () => infoPanelState.itemTab,
-    (id) => {
-      infoPanelState.itemTab = id;
-      renderItemPanel(itemName);
-    }
-  );
-
   refreshInfoPanelPageHeight();
   syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
 }
@@ -1362,7 +2072,10 @@ function supplyCratePointsForCurrentMap(){
 
 function crateClassFromLegendRow(row){
   const bp = row?.bp || "";
-  const short = row?.n || shortBpName(bp);
+  const cls = crateClassFromBp(bp);
+  if (cls) return cls;
+
+  const short = shortBpName(bp);
   if (!short) return "";
   return short.endsWith("_C") ? short : `${short}_C`;
 }
@@ -1410,10 +2123,13 @@ function hordeCrateClassesUsedOnCurrentMap(){
   return out;
 }
 
-function missionCrateClassesUsedOnCurrentMap(){
+function missionClassesUsedOnCurrentMap(){
+  if (State.mapId !== "Lost Colony") return new Set();
+
   const geom = currentGeom();
   const legend = Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
   const points = Array.isArray(geom?.pois?.missions) ? geom.pois.missions : [];
+
   const out = new Set();
 
   for (const p of points){
@@ -1424,9 +2140,12 @@ function missionCrateClassesUsedOnCurrentMap(){
       if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
 
       const meta = legend[idx];
-      const bp = meta?.bp || "";
-      const cls = crateClassFromBp(bp);
-      if (cls) out.add(cls);
+      const bp = normalizeBp(meta?.bp);
+      const cls = bpClass(bp);
+
+      if (cls && lootData().m?.[cls]){
+        out.add(cls);
+      }
     }
   }
 
@@ -1441,10 +2160,6 @@ function crateClassesUsedOnCurrentMap(){
   }
 
   for (const cls of hordeCrateClassesUsedOnCurrentMap()){
-    out.add(cls);
-  }
-
-  for (const cls of missionCrateClassesUsedOnCurrentMap()){
     out.add(cls);
   }
 
@@ -2103,6 +2818,7 @@ function setInfoPanelHTML(html){
   if (!body) return;
   body.innerHTML = html || `<div style="color:var(--muted)">No data.</div>`;
   panel.style.display = "";
+  syncInfoPanelState();
 }
 
 function renderInfoPanelBodyEmpty(){
@@ -2476,6 +3192,11 @@ function renderPoiPanel(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
   const pois = geom?.pois || {};
+  console.log("raw supply crate points:", (pois.supplyCrates || []).length);
+  console.log("resolved legend current map:", resolvedSupplyLegendForCurrentMap());
+  console.log("supply count:", countSupplyPois(pois.supplyCrates || []));
+  console.log("artifact count:", countArtifactPois(pois.supplyCrates || []));
+  
 
   const rows = [
     { key: "tributeTerminals", label: "Obelisks & Terminals", count: (pois.tributeTerminals || []).length },
@@ -3329,15 +4050,7 @@ function renderDinoPanel(name){
       drawDino(name);
     };
   });
-  mountPanelSwipe(
-    body.querySelector(".fp-pages"),
-    DINO_PANEL_TABS,
-    () => infoPanelState.dinoTab,
-    (id) => {
-      infoPanelState.dinoTab = id;
-      renderDinoPanel(name);
-    }
-  );
+  
   refreshInfoPanelPageHeight();
   const pagesEl = body.querySelector(".fp-pages");
   syncActivePageHeight(pagesEl, activeTab);
@@ -3480,15 +4193,7 @@ function renderEntryPanel(entryName){
       renderEntryPanel(entryName);
     }
   });
-  mountPanelSwipe(
-    body.querySelector(".fp-pages"),
-    ENTRY_PANEL_TABS,
-    () => infoPanelState.entryTab,
-    (id) => {
-      infoPanelState.entryTab = id;
-      renderEntryPanel(entryName);
-    }
-  );
+  
   refreshInfoPanelPageHeight();
   const pagesEl = body.querySelector(".fp-pages");
   syncActivePageHeight(pagesEl, activeTab);
@@ -3499,6 +4204,8 @@ function renderEntryPanel(entryName){
 ============================================================ */
 
 function renderInfoPanel(){
+  syncInfoPanelState();
+
   if (!State.selection){
     renderInfoPanelBodyEmpty();
     return;
@@ -4939,6 +5646,7 @@ function setupUI(){
     const order = ["dino", "entry", "crate", "item"];
     const i = order.indexOf(State.mode);
     State.mode = order[(i + 1) % order.length];
+    syncModeClass();
     syncModeButton();
     rebuildSelectionSelect();
     render();
@@ -4972,21 +5680,21 @@ function initRarityLegend(){
 }
 
 function rebuildSelectionSelect(){
-  let list = [];
   let placeholder = "(Select)";
+  let options = [];
 
   if (State.mode === "dino"){
-    list = State.names;
     placeholder = "(Select a Dino)";
+    options = State.names.map(v => ({ value: v, label: v }));
   } else if (State.mode === "entry"){
-    list = State.entryList;
     placeholder = "(Select a Spawn Entry)";
+    options = State.entryList.map(v => ({ value: v, label: v }));
   } else if (State.mode === "crate"){
-    list = State.crateNames;
     placeholder = "(Select a Loot Crate)";
+    options = State.crateOptions.map(v => ({ value: v.value, label: v.label }));
   } else if (State.mode === "item"){
-    list = State.itemNames;
     placeholder = "(Select an Item)";
+    options = State.itemNames.map(v => ({ value: v, label: v }));
   }
 
   UI.dinoSelect.innerHTML = "";
@@ -4996,14 +5704,14 @@ function rebuildSelectionSelect(){
   emptyOpt.textContent = placeholder;
   UI.dinoSelect.appendChild(emptyOpt);
 
-  for (const v of list){
+  for (const opt of options){
     const o = document.createElement("option");
-    o.value = v;
-    o.textContent = v;
+    o.value = opt.value;
+    o.textContent = opt.label;
     UI.dinoSelect.appendChild(o);
   }
 
-  if (!list.includes(State.selection)) {
+  if (!options.some(opt => opt.value === State.selection)) {
     State.selection = "";
   }
 
@@ -5020,7 +5728,6 @@ function rebuildSelectionSelect(){
     placeholder.replace(/[()]/g, "")
   );
 }
-
 /* ============================================================
    ~RENDER
 ============================================================ */
@@ -5122,6 +5829,7 @@ async function boot(){
   setLegendOpen(false);
 
   setupUI();
+  syncModeClass();
   
   initRarityLegend();
 

@@ -25,7 +25,7 @@
 
   --topbar-pad-y: 1px;
   --topbar-pad-x: 16px;
-i
+
   --panel-radius: 6px;
   --panel-w: 420px;
   --panel-w-mobile: 210px;
@@ -37,7 +37,7 @@ i
   --leaflet-toolbar-h: 50px;
 
   /* Mobile panel widths */
-  --dino-w-mobile: 275px;
+  --dino-w-mobile: 300px;
   --dino-w-mobile-compact: 225px;
   --mod-w-mobile: 150px;
   --mod-w-mobile-collapsed: 100px;
@@ -106,6 +106,349 @@ body{
   pointer-events:none;
 }
 
+/*=======================
+   Crate Collapsing 
+==================*/
+
+.mode-menu-like-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:8px;
+}
+
+.dino-spawn-menu-wrap{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 52px;
+  gap:10px;
+  align-items:stretch;
+}
+
+.dino-spawn-row{
+  min-height:88px;
+  padding:14px 16px;
+  border-radius:18px;
+  align-items:flex-start;
+}
+
+.dino-spawn-row--all{
+  min-height:56px;
+  align-items:center;
+}
+
+.dino-spawn-label{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
+  min-width:0;
+}
+
+.dino-spawn-title{
+  display:block;
+  font-size:15px;
+  line-height:1.2;
+  font-weight:500;
+  color:var(--text);
+  white-space:normal;
+  word-break:break-word;
+  text-align:left;
+}
+
+.dino-spawn-meta{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+
+.dino-spawn-meta-line{
+  display:block;
+  font-size:12px;
+  line-height:1.25;
+  color:rgba(255,255,255,.68);
+  text-align:left;
+  white-space:normal;
+  word-break:break-word;
+}
+
+.dino-spawn-jump-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:52px;
+  min-width:52px;
+  border:0;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.dino-spawn-jump-btn:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.dino-spawn-jump-btn svg{
+  opacity:.9;
+}
+
+#dinoInfoPanel .mode-menu-item.dino-spawn-row{
+  justify-content:space-between;
+}
+
+#dinoInfoPanel .mode-menu-item.dino-spawn-row .mode-menu-check{
+  align-self:center;
+  flex:0 0 auto;
+  min-width:20px;
+  text-align:right;
+  font-size:18px;
+}
+  
+.mode-menu-like-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.dino-spawn-menu-wrap{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:8px;
+  align-items:stretch;
+}
+
+.dino-spawn-row{
+  min-width:0;
+  width:100%;
+  align-items:flex-start;
+  padding:14px 16px;
+}
+
+.dino-spawn-row .mode-menu-label{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  min-width:0;
+}
+
+.dino-spawn-title{
+  display:block;
+  font-size:14px;
+  line-height:1.2;
+  color:rgba(255,255,255,.92);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dino-spawn-meta{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+
+.dino-spawn-meta-line{
+  display:block;
+  font-size:12px;
+  line-height:1.25;
+  color:rgba(255,255,255,.62);
+}
+
+.dino-spawn-jump-btn{
+  width:44px;
+  min-width:44px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.dino-spawn-jump-btn:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.dino-spawn-row--all{
+  justify-content:space-between;
+  align-items:center;
+}
+
+.col-exp-row{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.loot-set-toggle-all{
+  width:auto;
+  padding:5px 2px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font:inherit;
+  text-align:right;
+  cursor:pointer;
+  align-items:end;
+}
+
+.loot-set-toggle-all:hover{
+  background:rgba(255,255,255,.07);
+}
+
+.loot-set-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:0;
+  margin:0 0 6px 0;
+  border:0;
+  background:transparent;
+  color:inherit;
+  cursor:pointer;
+  text-align:left;
+}
+
+.loot-set-toggle-main{
+  min-width:0;
+  flex:1;
+}
+
+.loot-set-toggle-right{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.loot-set-toggle-chevron{
+  font-size:18px;
+  line-height:1;
+  color:var(--muted);
+  opacity:.85;
+}
+
+.loot-set-section.is-closed .loot-set-toggle{
+  margin-bottom:0;
+}
+
+.loot-set-body{
+  margin-top:2px;
+}
+
+/*=======================
+   New Buttons
+==================*/
+
+.poi-menu{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:2px;
+}
+
+.poi-menu-item{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  padding:10px 12px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:var(--text);
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+
+.poi-menu-item:hover{
+  background:rgba(255,255,255,.06);
+}
+
+.poi-menu-item.is-on{
+  background:rgba(255,255,255,.10);
+}
+
+.poi-menu-label{
+  min-width:0;
+  flex:1;
+  font-size:13px;
+  line-height:1.1;
+  color:var(--text);
+}
+
+.poi-menu-check{
+  flex:0 0 auto;
+  width:15px;
+  text-align:center;
+  font-size:15px;
+  line-height:1;
+  font-weight:700;
+  color:rgba(255,255,255,.9);
+  opacity:.9;
+}
+
+.mode-menu{
+  min-width: 180px;
+  max-width: 220px;
+  padding: 6px;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background: rgba(26,29,33,.96);
+  box-shadow: 0 10px 28px rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+  position: fixed !important;
+  z-index: 999999 !important;
+}
+
+.mode-menu-item{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mode-menu-item:hover{
+  background: rgba(255,255,255,.06);
+}
+
+.mode-menu-item.is-on{
+  background: rgba(255,255,255,.10);
+}
+
+.mode-menu-label{
+  min-width: 0;
+  flex: 1;
+}
+
+.mode-menu-check{
+  opacity: .9;
+  font-weight: 700;
+}
+
+.mode-toggle-caret{
+  margin-left: 8px;
+  opacity: .8;
+}
+ 
 
 /* ============================================================
    Stat Test
@@ -606,13 +949,13 @@ body{
   left:0;
   right:0;
   top:calc(100% + 6px);
-  z-index:99999;
+  z-index:3000;
 
-  background:rgba(26,29,33,.72);
+  background:rgba(26,29,33,.78);
   border:1px solid rgba(255,255,255,.12);
   border-radius:10px;
   box-shadow:var(--shadow);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
   overflow:hidden;
 }
 
@@ -623,7 +966,7 @@ body{
   outline:none;
   font-size:16px;
 
-  background:rgba(0,0,0,.30);
+  background:rgba(0,0,0,.45);
   color:var(--text);
   border-bottom:1px solid rgba(255,255,255,.08);
 
@@ -1023,7 +1366,7 @@ body{
 }
 
 #mapEntriesPanel .entry-meta-line{
-  font-size:8px;
+  font-size:12px;
   text-wrap-mode:wrap;
 }
 
@@ -1054,6 +1397,316 @@ body{
     rgba(255,255,255,.08) 45%,
     rgba(255,255,255,0) 100% /* fades out at top */
   );
+}
+
+.crate-submeta{
+  font-size:12px;
+  padding-left:2mm;
+  font-weight:500;
+  white-space:nowrap; /* use white-space, not text-wrap */
+  color:var(--muted);
+  line-height:1.3;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .info-submeta {
+  margin-top:0;
+  margin-bottom:2px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .entry-row {
+  padding:0px;
+  padding-left:2mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .mission-subtitle {
+  padding-top:3mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-subtitle-sub {
+  font-size:12px;
+  font-weight:450;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries {
+  margin-top:3px;
+  margin-left:5mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .entry-meta-lines {
+  font-size:9px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-name {
+  font-size:12px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-row {
+  padding:0px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-submeta {
+  margin-top:0;
+  margin-bottom:2px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .fp-page {
+  padding:0px 8px 8px 8px;
+}
+
+
+.meta-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:4px 12px;
+  margin-top:4px;
+  margin-bottom:4px;
+}
+
+.meta-grid.meta-grid-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.meta-cell{
+  min-width:0;
+}
+
+.meta-label{
+  font-size:9px;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  color:rgba(255,255,255,.55);
+  margin-bottom:2px;
+}
+
+.meta-value{
+  font-size:12px;
+  line-height:1.15;
+  font-weight:500;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries {
+  margin-top:6px;
+  margin-left:2mm;
+  margin-right:2mm;
+  padding-left:2mm;
+  padding-right:2mm;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-bottom:10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap:2px;
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,30,50,.15);
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .set-meta {
+  margin-top:6px;
+  margin-left:4mm;
+  margin-bottom:10px;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-name {
+  margin-top:1px;
+  padding-left:3mm;
+  margin-bottom:1px;
+  font-size:11px;
+  color:var(--muted);
+  text-align:left;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-row {
+  align-self:center;
+  justify-self:space-around;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub {
+  border-radius:8px;
+  margin:5px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,40,70,.10);
+  padding:5px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section {
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(15,45,90,.10);
+  padding:5px;
+  margin-bottom:5px;
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(15,45,90,.10);
+  padding:5px;
+  margin-bottom:5px;
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+.meta-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:center;
+}
+
+.meta-stack {
+  display: inline-flex;
+  flex-direction: column;
+  width: max-content;
+  gap:2px;
+}
+
+.meta-value {
+  text-align: center;
+}
+
+#drawStylePanel .fp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding:5px;
+}
+
+#drawStylePanel .fp-row {
+  padding: 2px 2px;
+  margin:1px;
+}
+
+#drawStylePanel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+#drawStylePanel input[type="color"] {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#drawStylePanel input[type="range"] {
+  width: 100%;
+}
+
+#drawStylePanel .fp-col {
+  padding-top: 2px;
+}
+
+#drawStylePanel .fp-header {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding:3px;
+}
+
+#drawStylePanel .fp-body {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.015), rgba(255,255,255,0));
+}
+
+
+#mapEntriesPanel .fp-tabs,
+#mapEntriesPanel .fp-row {
+  gap: 8px;
+}
+
+#mapEntriesPanel .fp-tab {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+#mapEntriesPanel .fp-tab.is-on {
+  background: rgba(255,255,255,0.12);
+}
+
+#mapEntriesPanel .dd-search,
+#mapEntriesSearch {
+  height: 42px;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 15px;
+}
+
+.mapEntriesList .dd-item {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+
+.mapEntriesList .dd-item + .dd-item {
+  margin-top: 8px;
+}
+
+.mapEntriesList .dd-item-name {
+  font-size: 16px;
+  line-height: 1.2;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 4px;
+}
+
+.mapEntriesList .dd-item-meta,
+.mapEntriesList .entry-meta-line {
+  font-size: 13px;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.62);
+}
+
+#mapEntriesPanel .fp-header {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding:3px;
+}
+
+#mapEntriesPanel .fp-body {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.015), rgba(255,255,255,0));
+  padding:5px;
+}
+
+#poiPanel .fp-header {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding:3px;
+}
+
+#poiPanel .fp-body {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.015), rgba(255,255,255,0));
+}
+
+#poiPanel .fp-row {
+  padding: 4px 2px;
+  margin:1px;
+  border-radius: 8px;
+}
+
+#poiPanel .fp-row:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+#poiPanel .fp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding:5px;
 }
 /* ============================================================
    8) LEAFLET CONTROLS (dock/zoom/attrib)
@@ -1311,6 +1964,37 @@ body{
    9) MOBILE (<= 955px) -- consolidated
    ============================================================ */
 @media (max-width:699px){
+
+  .dino-spawn-menu-wrap{
+    grid-template-columns:minmax(0, 1fr) 46px;
+    gap:8px;
+  }
+
+  .dino-spawn-row{
+    min-height:76px;
+    padding:12px 14px;
+    border-radius:16px;
+  }
+
+  .dino-spawn-row--all{
+    min-height:50px;
+  }
+
+  .dino-spawn-title{
+    font-size:13px;
+  }
+
+  .dino-spawn-meta-line{
+    font-size:11px;
+  }
+
+  .dino-spawn-jump-btn{
+    width:46px;
+    min-width:46px;
+    border-radius:16px;
+  }
+
+
   #controlsToggle{ display:inline-flex; }
 
   #topbar{
@@ -1425,7 +2109,7 @@ body{
 
   /* Density tweaks */
   .entry-name{
-    font-size:10px;
+    font-size:11px;
     font-weight:420;
   }
   .entry-meta-line{
@@ -1477,8 +2161,13 @@ body{
 [data-_exportHide="1"]{ display:none !important; }
 
 /* ============================================================
-   15) ~~POI ICONS
+   15) POI ICONS
    ============================================================ */
+   
+.poi-artifact-icon svg{
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.6));
+}
+
 .poi-icon .poi-fill { fill: currentColor; }
 .poi-icon { color: #ff00ff; } /* fallback */
 
@@ -1488,168 +2177,107 @@ body{
 .poi-icon.poi-tekcave      { color: #b84cff; }
 
 .poi-icon svg{
-  filter:
-    drop-shadow(0 0 2px rgba(0,0,0,.9))
-    drop-shadow(0 0 6px rgba(0,0,0,.35))
-    drop-shadow(0 0 4px currentColor);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.6));
 }
 
-@keyframes poiPulse{
-  0% { transform: scale(1); }
-  50% { transform: scale(1.25); }
-  100% { transform: scale(1); }
-}
 
-.poi-basic{
-  filter:
-    drop-shadow(0 0 2px rgba(0,0,0,.9))
-    drop-shadow(0 0 6px rgba(0,0,0,.35))
-    drop-shadow(0 0 4px currentColor);
-  filter: hue-rotate(90deg);
-}
+/* ============================================================
+   TOOLTIP BASE
+   ============================================================ */
 
-.poi-supply{
-  mix-blend-mode: hard-light;
-  filter:
-    drop-shadow(0 0 2px rgba(0,0,0,.9));
-}
-
-.leaflet-tooltip,
 .leaflet-tooltip.basic-tooltip,
-.leaflet-tooltip.pstart-tooltip {
+.leaflet-tooltip.pstart-tooltip,
+.leaflet-tooltip.horde-tooltip,
+.leaflet-tooltip.mission-tooltip,
+.leaflet-tooltip.supply-tooltip {
   max-width: 280px;
-  width: auto;
   min-width: 100px;
+  width: auto;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: anywhere;
   box-sizing: border-box;
-  background:rgba(26,29,33,.92);
-  color:var(--text);
-  border:1px solid var(--panel-border);
-  border-radius:var(--panel-radius);
-  box-shadow:0 10px 28px rgba(0,0,0,.45);
+  background: rgba(26,29,33,.92);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  box-shadow: 0 10px 28px rgba(0,0,0,.45);
   backdrop-filter: blur(8px);
 }
 
-
 .leaflet-tooltip.horde-tooltip,
-.leaflet-tooltip.mission-tooltip {
-  max-width: 280px;
+.leaflet-tooltip.mission-tooltip,
+.leaflet-tooltip.supply-tooltip {
   width: 200px;
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  box-sizing: border-box;
-  background:rgba(26,29,33,.92);
-  color:var(--text);
-  border:1px solid var(--panel-border);
-  border-radius:var(--panel-radius);
-  box-shadow:0 10px 28px rgba(0,0,0,.45);
-  backdrop-filter: blur(8px);
 }
 
-.leaflet-tooltip,
-.leaflet-tooltip.basic-tooltip,
-.leaflet-tooltip.pstart-tooltip,
-.leaflet-tooltip.horde-tooltip,
-.leaflet-tooltip.mission-tooltip .poi-tip-block{
+
+/* ============================================================
+   TOOLTIP CONTENT
+   ============================================================ */
+
+.leaflet-tooltip .poi-tip-block {
   margin-bottom: 2px;
 }
 
-.leaflet-tooltip,
-.leaflet-tooltip.basic-tooltip,
-.leaflet-tooltip.pstart-tooltip,
-.leaflet-tooltip.horde-tooltip .poi-tip-title{
+.leaflet-tooltip .poi-tip-title {
   font-size: 11px;
-  line-height: 1;
-  font-weight: 500;
-}
-.leaflet-tooltip.mission-tooltip .poi-tip-title{
-  font-weight: 700;
-  margin-bottom: 2px;
-  text-transform:uppercase;
+  line-height: 1.1;
+  font-weight: 600;
 }
 
-.leaflet-tooltip,
-.leaflet-tooltip.basic-tooltip,
-.leaflet-tooltip.pstart-tooltip,
-.leaflet-tooltip.horde-tooltip,
-.leaflet-tooltip.mission-tooltip .poi-tip-line{
+.leaflet-tooltip .poi-tip-line {
   font-size: 11px;
-  line-height: 1;
+  line-height: 1.1;
   font-weight: 500;
 }
 
-.leaflet-tooltip,
-.leaflet-tooltip.basic-tooltip,
-.leaflet-tooltip.pstart-tooltip,
-.leaflet-tooltip.horde-tooltip .poi-tip-bp {
-  margin-top: 0px;
-  font-size: 11px;
-  line-height: 1;
+.leaflet-tooltip .poi-tip-bp {
+  margin-top: 1px;
+  font-size: 10px;
+  line-height: 1.1;
   word-break: break-word;
   overflow-wrap: anywhere;
   opacity: 0.75;
 }
 
-.leaflet-tooltip.mission-tooltip .poi-tip-bp {
-  margin-top: 0px;
-  font-size: 4px;
-  line-height: 1;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  opacity: 0.75;
-}
 
-.leaflet-tooltip.supply-tooltip{
-  max-width: 280px;
-  width: 280px;
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  box-sizing: border-box;
-  background:rgba(26,29,33,.92);
-  color:var(--text);
-  border:1px solid var(--panel-border);
-  border-radius:var(--panel-radius);
-  box-shadow:0 10px 28px rgba(0,0,0,.45);
-  backdrop-filter: blur(8px);
-}
+/* ============================================================
+   TYPE-SPECIFIC TWEAKS
+   ============================================================ */
 
-.leaflet-tooltip.supply-tooltip .poi-tip-block{
-  margin-bottom: 2px;
-}
-
-.leaflet-tooltip.supply-tooltip .poi-tip-title{
+.leaflet-tooltip.mission-tooltip .poi-tip-title,
+.leaflet-tooltip.supply-tooltip .poi-tip-title {
   font-weight: 700;
   margin-bottom: 2px;
-  font-size:8px;
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 
-.leaflet-tooltip.supply-tooltip .poi-tip-subtitle{
-  font-weight: 400;
+.leaflet-tooltip.supply-tooltip .poi-tip-title {
+  font-size: 9px;
+}
+
+.leaflet-tooltip.supply-tooltip .poi-tip-subtitle {
+  font-weight: 500;
   margin-bottom: 2px;
-  font-size:4px;
-  text-transform:uppercase;
+  font-size: 8px;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
 
-.leaflet-tooltip.supply-tooltip .poi-tip-line{
+.leaflet-tooltip.supply-tooltip .poi-tip-line {
   font-size: 11px;
   line-height: 1.05;
   font-weight: 600;
 }
 
-.leaflet-tooltip.supply-tooltip .poi-tip-bp{
-  margin-top: 1px;
-  font-size: 10px;
-  line-height: 1;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  opacity: 0.75;
-  padding-left:3mm;
-  color:red;
+.leaflet-tooltip.supply-tooltip .poi-tip-bp {
+  padding-left: 10px;
+  color: #ff6b6b;
+}
+
+.leaflet-tooltip.mission-tooltip .poi-tip-bp {
+  font-size: 9px;
 }
 
 /* ============================================================
@@ -1745,4 +2373,280 @@ body{
     width:42px;
     height:42px;
   }
+}
+
+/* ============================================================
+   DINO SPAWN ROWS -- STRONG OVERRIDES
+   put near bottom of css
+   ============================================================ */
+
+
+/*============
+========*/ 
+
+.dino-spawn-card-wrap{
+  position: relative;
+  margin-top: 10px;
+}
+
+.dino-spawn-card{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+
+  text-align: left;
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(140,180,255,0.16);
+  border-radius: 20px;
+
+  padding: 16px 64px 16px 18px;
+  cursor: pointer;
+}
+
+.dino-spawn-card:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(140,180,255,0.24);
+}
+
+.dino-spawn-card.is-on{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(140,180,255,0.30);
+  box-shadow: inset 0 0 0 1px rgba(120,170,255,0.10);
+}
+
+.dino-spawn-card--all{
+  min-height: 72px;
+  align-items: center;
+}
+
+.dino-spawn-card-main{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dino-spawn-title{
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: rgba(255,255,255,0.94);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.dino-spawn-meta{
+  display: block;
+  margin-top: 10px;
+}
+
+.dino-spawn-meta-line{
+  display: block;
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.70);
+}
+
+.dino-spawn-check{
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,255,255,0.92);
+  pointer-events: none;
+}
+
+.dino-spawn-corner-jump{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.86);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dino-spawn-corner-jump:hover{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.dino-spawn-corner-jump svg{
+  display: block;
+}
+
+/* optional: a little extra room so arrow never overlaps long titles */
+.dino-spawn-card-wrap .dino-spawn-card{
+  padding-right: 72px;
+}
+
+.dino-spawn-tggl-wrap{
+  position: relative;
+  margin-top: 0px;
+}
+
+
+.dino-spawn-tggl:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(140,180,255,0.24);
+}
+
+.dino-spawn-tggl.is-on{
+  background:transparent;
+  border:0;
+}
+
+.dino-spawn-tggl--all{
+  display:flex;
+  min-height:0;
+  height:0;
+  width:100%;
+  align-items: center;
+  border:0;
+  justify-content:flex-end;
+  background:transparent;
+  gap:5px;
+  padding-bottom:2px;
+}
+
+.dino-spawn-tggl-main{
+}
+
+.dino-spawn-tggl-title{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: rgba(255,255,255,0.94);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+
+.dino-spawn-tggl-check{
+  position: relative;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,255,255,0.92);
+  pointer-events: none;
+}
+
+.mode-menu-like-list{
+  gap:0;
+}
+
+.dino-spawn-corner-jump{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.86);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dino-spawn-card{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  color: var(--text);
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,25,40,.05);
+  border-radius: 8px;
+
+  padding: 6px 4px 6px 8px;
+  cursor: pointer;
+}
+
+.dino-spawn-card:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(140,180,255,0.24);
+}
+
+.dino-spawn-card.is-on{
+  border:1px solid rgba(205,235,255,.08);
+  background:rgba(10,30,50,.20);
+  box-shadow: inset 0 0 0 1px rgba(120,170,255,0.0);
+}
+
+.dino-spawn-card--all{
+  min-height: 72px;
+  align-items: center;
+}
+
+.dino-spawn-card-main{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dino-spawn-title{
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: rgba(255,255,255,0.94);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.dino-spawn-meta{
+  display: block;
+  margin-top: 5px;
+  margin-left:6px;
+}
+
+.dino-spawn-meta-line{
+  display: block;
+  font-size: 10px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.70);
+}
+
+.dino-spawn-card-wrap .dino-spawn-card {
+  padding-right: 20px;
+}
+
+
+.dino-spawn-check{
+  position: absolute;
+  right: 10px;
+  top: 75%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,255,255,0.92);
+  pointer-events: none;
 }
