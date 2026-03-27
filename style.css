@@ -58,13 +58,6 @@
 /* ============================================================
    1) GLOBAL DEFAULTS
    ============================================================ */
-   
-body.discord-activity #topbar {
-  margin-top: 90px !important;
-}
-   
-   
-    
 *{ box-sizing:border-box; }
 
 html, body{
@@ -2658,11 +2651,6 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
   pointer-events: none;
 }
 
-body.discord-activity {
-  background: #200 !important;
-}
-
 body.discord-activity #topbar {
-  outline: 4px solid red !important;
-  margin-top: 120px !important;
+  margin-top: calc(env(safe-area-inset-top) + 56px);
 }
