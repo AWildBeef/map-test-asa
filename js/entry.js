@@ -1,9 +1,6 @@
 (function () {
   const isEmbedded = window.self !== window.top;
   const params = new URLSearchParams(window.location.search);
-
-  // Optional manual override for testing:
-  // ?discord=1
   const isDiscordLike = isEmbedded || params.get("discord") === "1";
 
   window.ASA_RUNTIME = {
@@ -16,12 +13,18 @@
     }
   };
 
+  document.title = isDiscordLike ? "ASA Spawn Activity" : "ASA Spawn Maps";
+
   if (isDiscordLike) {
     document.body.classList.add("discord-activity");
-    document.title = "ASA Spawn Activity";
   }
 
+  console.log("ENTRY LOADED");
+  console.log("isEmbedded:", isEmbedded);
+  console.log("isDiscordLike:", isDiscordLike);
+  console.log("body classes:", document.body.className);
+
   const script = document.createElement("script");
-  script.src = "js/app.js";
+  script.src = "js/app.js?v=entrytest1";
   document.head.appendChild(script);
 })();

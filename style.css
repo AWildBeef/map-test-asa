@@ -2658,6 +2658,11 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
   pointer-events: none;
 }
 
+body.discord-activity {
+  background: #200 !important;
+}
+
 body.discord-activity #topbar {
-  outline: 3px solid red !important;
+  outline: 4px solid red !important;
+  margin-top: 120px !important;
 }
