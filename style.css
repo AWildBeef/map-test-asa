@@ -2652,5 +2652,5 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
 }
 
 body.discord-activity #topbar {
-  margin-top: calc(env(safe-area-inset-top) + 56px);
+  margin-top: calc(env(safe-area-inset-top) + 16px);
 }
