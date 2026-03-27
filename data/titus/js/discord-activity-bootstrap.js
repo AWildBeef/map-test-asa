@@ -1,4 +1,3 @@
-// js/discord-activity-bootstrap.js
 import { DiscordSDK } from "@discord/embedded-app-sdk";
 
 const DISCORD_CLIENT_ID = "YOUR_APP_CLIENT_ID";
@@ -8,7 +7,7 @@ const discordSdk = new DiscordSDK(DISCORD_CLIENT_ID);
 async function start() {
   await discordSdk.ready();
 
-  // optional runtime info shared with the legacy app
+  // runtime info
   window.ASA_RUNTIME = {
     isDiscordActivity: true,
     discordSdk,
@@ -20,6 +19,10 @@ async function start() {
     }
   };
 
+  // ✅ add class AFTER DOM + Discord ready
+  document.body.classList.add("discord-activity");
+
+  // load your main app
   const script = document.createElement("script");
   script.src = "js/app.js";
   document.head.appendChild(script);
