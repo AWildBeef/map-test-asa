@@ -488,9 +488,19 @@ function exportSpawnBrowserJSON(){
     rows
   };
 
+  const jsonText = JSON.stringify(payload, null, 2);
+
+  if (window.ASA_RUNTIME?.isDiscordActivity) {
+    copyText(jsonText).then(() => {
+      const panel = document.getElementById("mapEntriesPanel");
+      if (panel) showCopiedBubble(panel);
+    });
+    return;
+  }
+
   const fileBase = [
-    "spawn-browser",
-    payload.sourceId || "source",
+    "spawn",
+    safeFilePart(sourceOpt?.textContent || "source"),
     spawnBrowserState.tab,
     spawnBrowserState.scope,
     spawnBrowserState.scope === "current" ? spawnBrowserState.filter : null
