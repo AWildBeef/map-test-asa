@@ -2663,3 +2663,7 @@ body.discord-activity {
 body.discord-activity .leaflet-bottom.leaflet-left {
   left: 20px;
 }
+
+body.discord-activity #mapEntriesPanel [data-action="export"] {
+  display: none !important;
+}
