@@ -49,24 +49,9 @@ function buildMapEntryBrowserRows(){
 }
 
 
-function getFilteredMapEntryRows(){
-  const q = normSearch(entryBrowserState.search);
+function getEntryRowsCurrentMap(){
   let rows = buildMapEntryBrowserRows();
-
-  if (entryBrowserState.filter === "unique"){
-    rows = rows.filter(r => r.uniqueHere);
-  } else if (entryBrowserState.filter === "shared"){
-    rows = rows.filter(r => r.shared);
-  }
-
-  if (q){
-    rows = rows.filter(r =>
-      normSearch(r.entryName).includes(q) ||
-      r.mapNames.some(m => normSearch(m).includes(q))
-    );
-  }
-
-  return rows;
+  return filterSpawnRows(rows);
 }
 
 

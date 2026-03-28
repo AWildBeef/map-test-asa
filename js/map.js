@@ -397,7 +397,7 @@ function ensureMapEntriesPanel(){
 
   panel.innerHTML = `
     <div class="fp-header">
-      <div class="fp-title">Map Entries</div>
+      <div class="fp-title">Spawn Browser</div>
       <div class="fp-actions">
         <button type="button" class="fp-btn fp-btn-chevron" data-action="min" title="Collapse">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
@@ -414,6 +414,20 @@ function ensureMapEntriesPanel(){
     </div>
     <div class="fp-body"></div>
   `;
+
+  const actions = panel.querySelector(".fp-actions");
+
+  const exportBtn = createIconButton(`
+    <path d="M12 3v10M8 9l4 4 4-4M5 19h14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  `);
+  exportBtn.dataset.action = "export";
+  exportBtn.title = "Export";
+  actions.prepend(exportBtn);
 
   const mapWrap = document.getElementById("mapWrap") || document.body;
   mapWrap.appendChild(panel);
@@ -439,7 +453,66 @@ function ensureMapEntriesPanel(){
     updateDockToggles();
   };
 
+  panel.querySelector('[data-action="export"]').onclick = () => {
+    exportSpawnBrowserJSON();
+  };
+
   return panel;
+}
+
+function getSpawnBrowserRows() {
+  if (spawnBrowserState.tab === "entries") {
+    if (spawnBrowserState.scope === "current") return getEntryRowsCurrentMap();
+    return getEntryRowsAllMaps();
+  }
+
+  if (spawnBrowserState.scope === "current") return getDinoRowsCurrentMap();
+  return getDinoRowsAllMaps();
+}
+
+function exportSpawnBrowserJSON(){
+  const rows = getSpawnBrowserRows();
+
+  const sourceOpt = UI?.sourceSelect?.selectedOptions?.[0];
+  const payload = {
+    type: "spawn_browser_export",
+    tab: spawnBrowserState.tab,
+    scope: spawnBrowserState.scope,
+    filter: spawnBrowserState.filter,
+    search: spawnBrowserState.search || "",
+    sourceId: UI?.sourceSelect?.value || "",
+    sourceLabel: sourceOpt?.textContent || "",
+    mapId: State.mapId || "",
+    exportedAt: new Date().toISOString(),
+    rowCount: rows.length,
+    rows
+  };
+
+  const fileBase = [
+    "spawn-browser",
+    payload.sourceId || "source",
+    spawnBrowserState.tab,
+    spawnBrowserState.scope
+  ].filter(Boolean).join("_");
+
+  downloadJSON(`${fileBase}.json`, payload);
+}
+
+function downloadJSON(filename, data){
+  const blob = new Blob(
+    [JSON.stringify(data, null, 2)],
+    { type: "application/json;charset=utf-8" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 
@@ -449,30 +522,62 @@ function renderMapEntriesList(){
   const list = body.querySelector(".mapEntriesList");
   if (!list) return;
 
-  const rows = getFilteredMapEntryRows();
+  const rows = getSpawnBrowserRows();
 
   list.innerHTML = rows.length
-    ? rows.map(r => `
-        <div class="dd-item" data-entry-jump="${escapeAttr(r.entryName)}">
-          <div class="dd-item-left" style="display:block; min-width:0;">
-            <div class="dd-item-name">${escapeHtml(r.entryName)}</div>
-            <div class="dd-item-meta">
-              ${
-                r.uniqueHere
-                  ? `<div class="entry-meta-line">Unique to this map</div>`
-                  : `<div class="entry-meta-line">Used on ${r.mapCount} maps</div>`
-              }
-              <div class="entry-meta-line">${escapeHtml(r.mapNames.join(", "))}</div>
+    ? rows.map(r => {
+        if (r.kind === "dino") {
+          return `
+            <div class="dd-item" data-dino-jump="${escapeAttr(r.name)}">
+              <div class="dd-item-left" style="display:block; min-width:0;">
+                <div class="dd-item-name">${escapeHtml(r.name)}</div>
+                <div class="dd-item-meta">
+                  ${
+                    spawnBrowserState.scope === "current" && r.uniqueHere
+                      ? `<div class="entry-meta-line">Unique to this map</div>`
+                      : `<div class="entry-meta-line">Used on ${r.mapCount} maps</div>`
+                  }
+                  <div class="entry-meta-line">${escapeHtml((r.mapNames || []).join(", "))}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="dd-item" data-entry-jump="${escapeAttr(r.entryName)}">
+            <div class="dd-item-left" style="display:block; min-width:0;">
+              <div class="dd-item-name">${escapeHtml(r.entryName)}</div>
+              <div class="dd-item-meta">
+                ${
+                  spawnBrowserState.scope === "current" && r.uniqueHere
+                    ? `<div class="entry-meta-line">Unique to this map</div>`
+                    : `<div class="entry-meta-line">Used on ${r.mapCount} maps</div>`
+                }
+                <div class="entry-meta-line">${escapeHtml((r.mapNames || []).join(", "))}</div>
+                ${
+                  spawnBrowserState.scope === "all" && (r.dinoNames?.length)
+                    ? `<div class="entry-meta-line">${escapeHtml(r.dinoNames.slice(0, 6).join(", "))}${r.dinoNames.length > 6 ? "..." : ""}</div>`
+                    : ""
+                }
+              </div>
             </div>
           </div>
-        </div>
-      `).join("")
-    : `<div style="color:var(--muted)">No matching spawn entries.</div>`;
+        `;
+      }).join("")
+    : `<div style="color:var(--muted)">No matching results.</div>`;
 
   list.querySelectorAll("[data-entry-jump]").forEach(row => {
     row.onclick = () => {
       const entryName = row.dataset.entryJump;
       openEntryView(entryName);
+    };
+  });
+
+  list.querySelectorAll("[data-dino-jump]").forEach(row => {
+    row.onclick = () => {
+      const name = row.dataset.dinoJump;
+      openDinoView(name);
     };
   });
 }
@@ -483,33 +588,76 @@ function renderMapEntriesPanel(){
   const body = panel.querySelector(".fp-body");
   if (!body) return;
 
+  const showMapFilter = spawnBrowserState.scope === "current";
+
   body.innerHTML = `
-    <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
-      <button type="button" class="fp-tab ${entryBrowserState.filter === "all" ? "is-on" : ""}" data-entry-filter="all">All</button>
-      <button type="button" class="fp-tab ${entryBrowserState.filter === "unique" ? "is-on" : ""}" data-entry-filter="unique">Unique</button>
-      <button type="button" class="fp-tab ${entryBrowserState.filter === "shared" ? "is-on" : ""}" data-entry-filter="shared">Shared</button>
-    </div>
+    ${renderTabs({
+      tabs: [
+        { id: "entries", label: "Entries" },
+        { id: "dinos", label: "Dinos" }
+      ],
+      activeId: spawnBrowserState.tab,
+      dataAttr: "data-spawn-tab"
+    })}
+
+    ${renderTabs({
+      tabs: [
+        { id: "current", label: "Current Map" },
+        { id: "all", label: "All Maps" }
+      ],
+      activeId: spawnBrowserState.scope,
+      dataAttr: "data-spawn-scope"
+    })}
+
+    ${showMapFilter ? `
+      <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
+        <button type="button" class="fp-tab ${spawnBrowserState.filter === "all" ? "is-on" : ""}" data-entry-filter="all">All</button>
+        <button type="button" class="fp-tab ${spawnBrowserState.filter === "unique" ? "is-on" : ""}" data-entry-filter="unique">Unique</button>
+        <button type="button" class="fp-tab ${spawnBrowserState.filter === "shared" ? "is-on" : ""}" data-entry-filter="shared">Shared</button>
+      </div>
+    ` : ""}
 
     <input
       id="mapEntriesSearch"
       class="dd-search"
       type="text"
-      placeholder="Search spawn entries..."
-      value="${escapeAttr(entryBrowserState.search)}"
+      placeholder="${spawnBrowserState.tab === "entries" ? "Search spawn entries..." : "Search dinos..."}"
+      value="${escapeAttr(spawnBrowserState.search)}"
       style="margin-bottom:8px;"
     >
 
     <div class="dd-list mapEntriesList"></div>
   `;
 
+  wireTabs(body, {
+    tabs: [
+      { id: "entries", label: "Entries" },
+      { id: "dinos", label: "Dinos" }
+    ],
+    activeId: spawnBrowserState.tab,
+    dataAttr: "data-spawn-tab",
+    onChange: (id) => {
+      spawnBrowserState.tab = id;
+      renderMapEntriesPanel();
+    }
+  });
+
+  wireTabs(body, {
+    tabs: [
+      { id: "current", label: "Current Map" },
+      { id: "all", label: "All Maps" }
+    ],
+    activeId: spawnBrowserState.scope,
+    dataAttr: "data-spawn-scope",
+    onChange: (id) => {
+      spawnBrowserState.scope = id;
+      renderMapEntriesPanel();
+    }
+  });
+
   body.querySelectorAll("[data-entry-filter]").forEach(btn => {
     btn.onclick = () => {
-      entryBrowserState.filter = btn.dataset.entryFilter;
-
-      body.querySelectorAll("[data-entry-filter]").forEach(b => {
-        b.classList.toggle("is-on", b.dataset.entryFilter === entryBrowserState.filter);
-      });
-
+      spawnBrowserState.filter = btn.dataset.entryFilter;
       renderMapEntriesList();
     };
   });
@@ -517,13 +665,15 @@ function renderMapEntriesPanel(){
   const search = body.querySelector("#mapEntriesSearch");
   if (search){
     search.oninput = () => {
-      entryBrowserState.search = search.value || "";
+      spawnBrowserState.search = search.value || "";
       renderMapEntriesList();
     };
   }
 
   renderMapEntriesList();
 }
+
+
 
 
 function toggleMapEntriesPanel(){
@@ -551,15 +701,223 @@ function clearDraw(){
 
 let mapObj = null;
 
-
-
-
-
-
-
-
-
-const entryBrowserState = {
-  filter: "all",   // "all" | "unique" | "shared"
+const spawnBrowserState = {
+  tab: "entries",     // "entries" | "dinos"
+  scope: "current",   // "current" | "all"
+  filter: "all",      // "all" | "unique" | "shared"
   search: ""
 };
+
+function mapNameFromCode(code){
+  return Global.spawn?.mapLegend?.[code] || code || "";
+}
+
+function dinoLabelFromBp(bp){
+  const d = getDinoObjByBp(bp);
+  if (!d) return bpClass(bp) || bp || "(Unknown)";
+  const labels = labelsForDinoObj(d);
+  return labels?.[0] || bpClass(bp) || bp || "(Unknown)";
+}
+
+function getEntryRowsAllMaps(){
+  const rows = [];
+
+  for (const [entryName, maps] of Object.entries(Global.spawn?.entryMaps || {})){
+    const codes = Array.isArray(maps) ? maps : [];
+    const mapNames = codes.map(mapNameFromCode);
+
+    const bps = State.entryToDinos.get(entryName) || [];
+    const dinoNames = bps.map(dinoLabelFromBp);
+
+    rows.push({
+      kind: "entry",
+      entryName,
+      codes,
+      mapNames,
+      mapCount: codes.length,
+      uniqueHere: false,
+      dinoNames
+    });
+  }
+
+  rows.sort((a, b) => a.entryName.localeCompare(b.entryName));
+  return filterSpawnRows(rows);
+}
+
+function getDinoRowsAllMaps(){
+  const rows = [];
+  const byName = new Map();
+  const allEntries = Global.spawn?.entries || {};
+
+  const restrictToMod = !activeSourceIsOfficial();
+  const allowedModBps = restrictToMod ? modBlueprintSet() : null;
+
+  for (const [entryName, entryData] of Object.entries(allEntries)) {
+    const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
+      ? Global.spawn.entryMaps[entryName]
+      : [];
+
+    const rowsInEntry = entryData?.d || [];
+
+    for (const r of rowsInEntry) {
+      const rawBp = normalizeBp(r?.[0]);
+      if (!rawBp) continue;
+
+      const outs = worldOutputsForBp(rawBp);
+
+      for (const out of outs) {
+        const finalBp = normalizeBp(out?.[0]);
+        const prob = Number(out?.[1] || 0);
+        if (!finalBp || prob <= 0) continue;
+
+        // IMPORTANT: when a mod/group source is active, only include mod dinos
+        if (restrictToMod && !allowedModBps.has(finalBp)) continue;
+
+        const d = getDinoObjByBp(finalBp);
+        if (!d) continue;
+
+        const labels = labelsForDinoObj(d);
+        const name = labels?.[0] || bpClass(finalBp) || finalBp;
+        if (!name) continue;
+
+        if (!byName.has(name)) {
+          byName.set(name, {
+            kind: "dino",
+            name,
+            bps: new Set(),
+            entryNames: new Set(),
+            mapNames: new Set(),
+            uniqueHere: false
+          });
+        }
+
+        const rec = byName.get(name);
+        rec.bps.add(finalBp);
+        rec.entryNames.add(entryName);
+
+        for (const code of codes) {
+          const mapName = Global.spawn?.mapLegend?.[code] || code;
+          if (mapName) rec.mapNames.add(mapName);
+        }
+      }
+    }
+  }
+
+  for (const rec of byName.values()) {
+    const mapNames = [...rec.mapNames].sort();
+
+    rows.push({
+      kind: "dino",
+      name: rec.name,
+      bps: [...rec.bps].sort(),
+      entryNames: [...rec.entryNames].sort(),
+      mapNames,
+      mapCount: mapNames.length,
+      uniqueHere: false
+    });
+  }
+
+  rows.sort((a, b) => a.name.localeCompare(b.name));
+  return filterSpawnRows(rows);
+}
+
+
+function getDinoRowsCurrentMap() {
+  const rows = [];
+  const allEntries = Global.spawn?.entries || {};
+
+  for (const name of State.names) {
+    const bps = State.nameToBps.get(name) || [];
+    const currentMapEntrySet = new Set();
+    const globalEntrySet = new Set();
+    const mapNameSet = new Set();
+
+    // current-map entries (so we know this dino exists on this map)
+    for (const bp of bps) {
+      const currentEntries = State.dinoToEntries.get(bp) || [];
+      for (const entryName of currentEntries) {
+        currentMapEntrySet.add(entryName);
+      }
+    }
+
+    // now scan ALL entries globally to find all maps this dino appears on
+    for (const [entryName, entryData] of Object.entries(allEntries)) {
+      const rowsInEntry = entryData?.d || [];
+      let foundInThisEntry = false;
+
+      for (const r of rowsInEntry) {
+        const rawBp = normalizeBp(r?.[0]);
+        if (!rawBp) continue;
+
+        const outs = worldOutputsForBp(rawBp);
+
+        for (const out of outs) {
+          const finalBp = normalizeBp(out?.[0]);
+          const prob = Number(out?.[1] || 0);
+          if (!finalBp || prob <= 0) continue;
+
+          if (bps.includes(finalBp)) {
+            foundInThisEntry = true;
+            break;
+          }
+        }
+
+        if (foundInThisEntry) break;
+      }
+
+      if (!foundInThisEntry) continue;
+
+      globalEntrySet.add(entryName);
+
+      const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
+        ? Global.spawn.entryMaps[entryName]
+        : [];
+
+      for (const code of codes) {
+        const mapName = Global.spawn?.mapLegend?.[code] || code;
+        if (mapName) mapNameSet.add(mapName);
+      }
+    }
+
+    const mapNames = [...mapNameSet].sort();
+    const mapCount = mapNames.length;
+    const uniqueHere = mapCount <= 1;
+
+    rows.push({
+      kind: "dino",
+      name,
+      bps,
+      entryNames: [...globalEntrySet].sort(),
+      currentMapEntryNames: [...currentMapEntrySet].sort(),
+      mapNames,
+      mapCount,
+      uniqueHere
+    });
+  }
+
+  rows.sort((a, b) => a.name.localeCompare(b.name));
+  return filterSpawnRows(rows);
+}
+
+function filterSpawnRows(rows){
+  const q = normSearch(spawnBrowserState.search || "");
+
+  return rows.filter(r => {
+    if (spawnBrowserState.scope === "current") {
+      if (spawnBrowserState.filter === "unique" && !r.uniqueHere) return false;
+      if (spawnBrowserState.filter === "shared" && r.uniqueHere) return false;
+    }
+
+    if (!q) return true;
+
+    const hay = normSearch([
+      r.entryName,
+      r.name,
+      ...(r.mapNames || []),
+      ...(r.dinoNames || []),
+      ...(r.entryNames || [])
+    ].filter(Boolean).join(" "));
+
+    return hay.includes(q);
+  });
+}

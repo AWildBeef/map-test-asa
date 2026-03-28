@@ -163,4 +163,18 @@ function openEntryView(entryName){
   render();
 }
 
+function openDinoView(name){
+  if (!name) return;
+
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "dino";
+  State.selection = name;
+  State.selections.dino = name;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  render();
+}
+
 
