@@ -77,6 +77,9 @@ async function loadSelectedSource() {
   applyEmbedRestrictions();
   renderDock();
   render();
+  if (isPanelVisible("mapEntriesPanel")) {
+    renderMapEntriesPanel();
+  }
 }
 
 
