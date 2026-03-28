@@ -492,7 +492,8 @@ function exportSpawnBrowserJSON(){
     "spawn-browser",
     payload.sourceId || "source",
     spawnBrowserState.tab,
-    spawnBrowserState.scope
+    spawnBrowserState.scope,
+    spawnBrowserState.scope === "current" ? spawnBrowserState.filter : null
   ].filter(Boolean).join("_");
 
   downloadJSON(`${fileBase}.json`, payload);
