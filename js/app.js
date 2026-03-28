@@ -1,9 +1,7 @@
 window.ASA_APP_MODULES = [
   "js/config-utils.js",
-  "js/data.js",
-  "js/poi.js",
   "js/map-panel.js",
-  "js/ui.js",
+  "js/data-ui.js",
   "js/views/dino-view.js",
   "js/views/spawn-view.js",
   "js/views/crate-view.js",
