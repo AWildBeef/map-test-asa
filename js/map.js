@@ -417,17 +417,19 @@ function ensureMapEntriesPanel(){
 
   const actions = panel.querySelector(".fp-actions");
 
-  const exportBtn = createIconButton(`
-    <path d="M12 3v10M8 9l4 4 4-4M5 19h14"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"/>
-  `);
-  exportBtn.dataset.action = "export";
-  exportBtn.title = "Export";
-  actions.prepend(exportBtn);
+  if (!window.ASA_RUNTIME?.isDiscordActivity) {
+    const exportBtn = createIconButton(`
+      <path d="M12 3v10M8 9l4 4 4-4M5 19h14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+    `);
+    exportBtn.dataset.action = "export";
+    exportBtn.title = "Export";
+    actions.prepend(exportBtn);
+  }
 
   const mapWrap = document.getElementById("mapWrap") || document.body;
   mapWrap.appendChild(panel);
@@ -453,9 +455,12 @@ function ensureMapEntriesPanel(){
     updateDockToggles();
   };
 
-  panel.querySelector('[data-action="export"]').onclick = () => {
-    exportSpawnBrowserJSON();
-  };
+  const exportEl = panel.querySelector('[data-action="export"]');
+  if (exportEl){
+    exportEl.onclick = () => {
+      exportSpawnBrowserJSON();
+    };
+  }
 
   return panel;
 }
