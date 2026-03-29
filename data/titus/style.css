@@ -2675,3 +2675,680 @@ body.discord-activity #mapEntriesPanel [data-action="export"] {
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
+
+.floating-panel{
+  -webkit-backdrop-filter: blur(10px) saturate(50%);
+  background:rgba(0, 13, 21, .87);
+  color:var(--muted);
+  border:0.5px solid rgba(125, 243, 249, .1)
+}
+
+.dino-spawn-card{
+  color: var(--muted);
+  border:1px solid rgba(0, 129, 208, .1);
+  background:rgba(102, 140, 161, .1);
+  border-radius: 8px;
+  padding: 3px 4px 3px 4px;
+}
+
+.dino-spawn-card.is-on{
+  border:1.5px solid rgba(103, 237, 255, .08);
+  background:rgba(51, 149, 193, .15);
+  box-shadow: inset 0 0 0 1px rgba(120,170,255,0.0);
+}
+
+.dino-spawn-card:hover{
+  background: rgba(51, 196, 255, .2);
+  border-color: rgba(140,180,255,0.24);
+}
+
+#dinoInfoPanel .fp-tabs,
+#dinoInfoPanel .dino-hero{
+  background: rgba(61, 103, 128, .1);
+  filter: saturate(.010%);
+  filter: brightness(1);
+}
+
+#dinoInfoPanel:not(.collapsed) .fp-header{
+  border-bottom:none;
+  background: rgba(61, 103, 128, .1);
+  filter: saturate(.010%);
+}
+
+
+
+
+/* ============================================================
+   ATLAS FULL V3 PATCH
+   Paste at very bottom of stylesheet
+   ============================================================ */
+
+:root{
+  /* Core blue system */
+  --bg:#08131b;
+  --bg-2:#0d1b26;
+  --bg-3:#102231;
+
+  --panel:#102231;
+  --panel-2:#163046;
+  --panel-3:#1b3d57;
+
+  --panel-border:#244761;
+  --panel-border-soft:rgba(120,210,255,.12);
+  --panel-border-mid:rgba(120,210,255,.18);
+  --panel-border-strong:rgba(120,210,255,.28);
+
+  --text:#eaf7ff;
+  --muted:#9fb8c8;
+  --muted-2:#7f98a8;
+
+  --control-bg:#142838;
+  --control-bg-hover:#1a3246;
+  --control-border:#2f5874;
+
+  --accent:#39c8ff;
+  --accent-soft:#20addc;
+  --accent-bright:#86e6ff;
+  --accent-glow:rgba(57,200,255,.22);
+
+  --hover-fill:rgba(57,200,255,.08);
+  --active-fill:rgba(57,200,255,.14);
+  --selected-fill:rgba(120,210,255,.18);
+
+  --focus:#7fdcff;
+
+  --accent-rare:#ffbf5f;
+  --accent-cave:#b98cff;
+  --accent-success:#67e58a;
+
+  --shadow:0 18px 46px rgba(0,0,0,.50);
+}
+
+/* ============================================================
+   GLOBAL BACKGROUND
+   ============================================================ */
+
+html,
+body{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(45,120,180,.14), transparent 34%),
+    radial-gradient(circle at 15% 20%, rgba(57,200,255,.06), transparent 28%),
+    linear-gradient(to bottom, var(--bg-2), var(--bg));
+  color:var(--text);
+}
+
+#mapWrap .leaflet-container{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(45,120,180,.12), transparent 40%),
+    linear-gradient(to bottom, var(--bg-2), var(--bg));
+}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+
+#topbar{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(16,34,49,.96),
+      rgba(8,19,27,.94)
+    );
+  border-bottom:1px solid var(--panel-border-soft);
+  box-shadow:
+    inset 0 -1px 0 rgba(57,200,255,.08),
+    0 8px 24px rgba(0,0,0,.22);
+}
+
+#topbar .title{
+  color:#f4fbff;
+  text-shadow:0 0 14px rgba(90,220,255,.10);
+}
+
+#topbar .controls{
+  gap:10px;
+}
+
+/* ============================================================
+   BUTTONS / ICON BUTTONS
+   ============================================================ */
+
+.mode-toggle,
+.icon-btn,
+#controlsToggle{
+  border:1px solid var(--panel-border-soft);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(27,55,76,.92),
+      rgba(18,38,54,.92)
+    );
+  color:var(--text);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 8px 18px rgba(0,0,0,.20);
+}
+
+.mode-toggle:hover,
+.icon-btn:hover,
+#controlsToggle:hover{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(31,63,88,.96),
+      rgba(20,43,60,.96)
+    );
+  border-color:var(--panel-border-mid);
+}
+
+.mode-toggle.is-entry{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(40,110,145,.42),
+      rgba(24,71,102,.55)
+    );
+  border-color:var(--panel-border-strong);
+  box-shadow:
+    inset 0 0 0 1px rgba(130,230,255,.10),
+    0 0 0 1px rgba(57,200,255,.08),
+    0 10px 24px rgba(0,0,0,.22);
+}
+
+/* ============================================================
+   DROPDOWNS
+   ============================================================ */
+
+.dd-btn,
+#topbar select{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(27,55,76,.92),
+      rgba(18,38,54,.92)
+    );
+  border:1px solid var(--panel-border-soft);
+  color:var(--text);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 8px 18px rgba(0,0,0,.18);
+}
+
+.dd-btn:hover,
+#topbar select:hover{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(31,63,88,.96),
+      rgba(20,43,60,.96)
+    );
+  border-color:var(--panel-border-mid);
+}
+
+.dd-label{
+  color:var(--text);
+}
+
+.dd-caret{
+  color:var(--accent-bright);
+  opacity:.92;
+}
+
+.dd-panel{
+  background:
+    radial-gradient(circle at top left, rgba(57,200,255,.10), transparent 36%),
+    linear-gradient(
+      to bottom,
+      rgba(22,48,70,.88),
+      rgba(10,22,32,.94)
+    );
+  border:1px solid var(--panel-border-soft);
+  border-radius:14px;
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.03);
+  backdrop-filter: blur(16px) saturate(130%);
+}
+
+.dd-search{
+  background:rgba(6,16,24,.65);
+  color:var(--text);
+  border-bottom:1px solid rgba(120,210,255,.08);
+}
+
+.dd-item{
+  border-bottom:1px solid rgba(120,210,255,.06);
+}
+
+.dd-item:hover{
+  background:var(--hover-fill);
+}
+
+.dd-item-meta{
+  color:var(--muted-2);
+}
+
+.dd-star{
+  border:1px solid rgba(120,210,255,.12);
+  background:rgba(255,255,255,.03);
+}
+
+.dd-star:hover{
+  background:var(--hover-fill);
+  border-color:var(--panel-border-mid);
+}
+
+/* ============================================================
+   FLOATING PANELS / MENUS / TOOLTIPS
+   ============================================================ */
+
+.floating-panel,
+.mode-menu,
+.leaflet-tooltip.basic-tooltip,
+.leaflet-tooltip.pstart-tooltip,
+.leaflet-tooltip.horde-tooltip,
+.leaflet-tooltip.mission-tooltip,
+.leaflet-tooltip.supply-tooltip{
+  background:
+    radial-gradient(circle at top left, rgba(57,200,255,.10), transparent 38%),
+    linear-gradient(
+      to bottom,
+      rgba(19,39,56,.94),
+      rgba(10,22,32,.94)
+    );
+  border:1px solid var(--panel-border-soft);
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.03);
+  backdrop-filter: blur(14px) saturate(130%);
+  color:var(--text);
+}
+
+.floating-panel{
+  border-radius:14px;
+}
+
+.mode-menu{
+  border-radius:14px;
+}
+
+.floating-panel .fp-header,
+#mapEntriesPanel .fp-header,
+#poiPanel .fp-header,
+#drawStylePanel .fp-header{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,0)
+    );
+  border-bottom:1px solid rgba(120,210,255,.08);
+}
+
+.floating-panel .fp-title,
+#dinoInfoPanel .fp-title,
+#mapEntriesPanel .fp-title{
+  color:#e7f8ff;
+}
+
+.floating-panel .fp-body,
+#mapEntriesPanel .fp-body,
+#poiPanel .fp-body,
+#drawStylePanel .fp-body{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.018),
+      rgba(255,255,255,0)
+    );
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+
+#dinoInfoPanel .fp-tab,
+#mapEntriesPanel .fp-tab{
+  color:rgba(220,240,250,.72);
+  transition:color .14s ease, background .14s ease;
+}
+
+#dinoInfoPanel .fp-tab:hover,
+#mapEntriesPanel .fp-tab:hover{
+  color:#eefbff;
+}
+
+#dinoInfoPanel .fp-tab.is-on,
+#mapEntriesPanel .fp-tab.is-on{
+  color:#f3fcff;
+}
+
+#dinoInfoPanel .fp-tab.is-on::after,
+#mapEntriesPanel .fp-tab.is-on::after{
+  background:linear-gradient(
+    to top,
+    rgba(57,200,255,.22),
+    rgba(57,200,255,.08) 48%,
+    rgba(57,200,255,0) 100%
+  );
+}
+
+/* ============================================================
+   PANELS: HERO / INFO / MONO FIELDS
+   ============================================================ */
+
+.info-title{
+  color:#f0fbff;
+  text-shadow:0 0 14px rgba(100,220,255,.08);
+}
+
+.info-subtitle,
+.info-subtitle-sub,
+.info-row,
+.meta-label,
+.info-submeta,
+.dino-statkey{
+  color:var(--muted);
+}
+
+.meta-value,
+.dino-statval,
+.entry-name,
+.entry-meta-line,
+.crate-submeta{
+  color:#dbeef7;
+}
+
+.info-mono{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(6,16,24,.60),
+      rgba(8,19,27,.50)
+    );
+  border:1px solid rgba(120,210,255,.10);
+  color:#d8f3ff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+/* ============================================================
+   MODE MENU / POI MENU / GENERIC MENU ITEMS
+   ============================================================ */
+
+.mode-menu-item,
+.poi-menu-item{
+  border:1px solid transparent;
+  border-radius:12px;
+  transition:background .14s ease, border-color .14s ease, box-shadow .14s ease;
+}
+
+.mode-menu-item:hover,
+.poi-menu-item:hover{
+  background:var(--hover-fill);
+  border-color:rgba(120,210,255,.08);
+}
+
+.mode-menu-item.is-on,
+.poi-menu-item.is-on{
+  background:var(--active-fill);
+  border-color:rgba(120,210,255,.16);
+  box-shadow:inset 0 0 0 1px rgba(57,200,255,.08);
+}
+
+.poi-menu-check,
+.mode-menu-check{
+  color:var(--accent-bright);
+}
+
+/* ============================================================
+   DINO SPAWN CARDS / ENTRY ROWS / LIST CARDS
+   ============================================================ */
+
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row,
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub,
+.mapEntriesList .dd-item,
+.dino-spawn-row{
+  position:relative;
+  border:1px solid rgba(120,210,255,.08);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.015)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.02),
+    0 6px 18px rgba(0,0,0,.14);
+}
+
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row:hover,
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section:hover,
+.mapEntriesList .dd-item:hover,
+.dino-spawn-row:hover{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(57,200,255,.10),
+      rgba(57,200,255,.05)
+    );
+  border-color:rgba(120,210,255,.18);
+}
+
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row.is-on,
+.mapEntriesList .dd-item.is-on,
+.dino-spawn-row.is-on{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(57,200,255,.14),
+      rgba(57,200,255,.07)
+    );
+  border-color:rgba(120,210,255,.24);
+  box-shadow:
+    inset 0 0 0 1px rgba(57,200,255,.08),
+    0 8px 24px rgba(0,0,0,.20);
+}
+
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row.is-on::before,
+.mapEntriesList .dd-item.is-on::before,
+.dino-spawn-row.is-on::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius:999px;
+  background:linear-gradient(to bottom, #8deeff, #2ec7ff);
+}
+
+.dino-spawn-title{
+  color:#f1fbff;
+}
+
+.dino-spawn-meta-line,
+.entry-meta-line,
+.mapEntriesList .dd-item-meta{
+  color:var(--muted);
+}
+
+.dino-spawn-jump-btn{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.05),
+      rgba(255,255,255,.02)
+    );
+  border:1px solid rgba(120,210,255,.12);
+  color:var(--accent-bright);
+}
+
+.dino-spawn-jump-btn:hover{
+  background:var(--hover-fill);
+  border-color:rgba(120,210,255,.22);
+}
+
+/* ============================================================
+   STATS / ATTACK TABLES
+   ============================================================ */
+
+.statgrid-head,
+.atkgrid-head{
+  border-bottom:1px solid rgba(120,210,255,.12);
+}
+
+.statgrid-th,
+.atkgrid-th{
+  color:#dff5ff;
+}
+
+.statgrid-td.muted,
+.atkgrid-td.muted{
+  color:var(--muted-2);
+  opacity:.92;
+}
+
+.stat-pill,
+.atk-pill{
+  background:rgba(57,200,255,.10);
+  border:1px solid rgba(120,210,255,.12);
+  color:#e8faff;
+}
+
+/* ============================================================
+   DRAW / INPUTS / SLIDERS / CHECKBOXES
+   ============================================================ */
+
+#drawStylePanel input[type="checkbox"]{
+  accent-color:var(--accent);
+}
+
+#drawStylePanel input[type="range"]{
+  accent-color:var(--accent);
+}
+
+#drawStylePanel input[type="color"]{
+  box-shadow:
+    0 0 0 1px rgba(120,210,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+/* ============================================================
+   LEAFLET CONTROLS
+   ============================================================ */
+
+.leaflet-control.map-dock,
+.leaflet-control.bg-toggle,
+.leaflet-control-zoom.zoom-horizontal{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(16,34,49,.90),
+      rgba(8,19,27,.88)
+    );
+  border:1px solid rgba(120,210,255,.14);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.03);
+  backdrop-filter: blur(10px);
+  border-radius:12px;
+}
+
+.leaflet-control.map-dock .dock-btn,
+.leaflet-control.bg-toggle .bg-toggle-btn,
+.leaflet-control-zoom.zoom-horizontal a{
+  background:transparent;
+  color:var(--text);
+}
+
+.leaflet-control.map-dock .dock-btn:hover,
+.leaflet-control.bg-toggle .bg-toggle-btn:hover,
+.leaflet-control-zoom.zoom-horizontal a:hover{
+  background:rgba(57,200,255,.10);
+}
+
+.leaflet-control.map-dock .dock-btn.is-on{
+  background:rgba(57,200,255,.14);
+  box-shadow:inset 0 0 0 1px rgba(120,220,255,.18);
+}
+
+.leaflet-control-zoom.zoom-horizontal a + a{
+  border-left:1px solid rgba(120,210,255,.10);
+}
+
+/* ============================================================
+   TOOLTIPS
+   ============================================================ */
+
+.leaflet-tooltip .poi-tip-title{
+  color:#f0fbff;
+}
+
+.leaflet-tooltip .poi-tip-line{
+  color:#d7edf8;
+}
+
+.leaflet-tooltip .poi-tip-bp{
+  color:var(--muted);
+}
+
+.leaflet-tooltip.supply-tooltip .poi-tip-bp{
+  color:#ff9b9b;
+}
+
+/* ============================================================
+   BADGES / MISC
+   ============================================================ */
+
+.dino-badge{
+  border:1px solid rgba(120,210,255,.12);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.06),
+      rgba(255,255,255,.03)
+    );
+  color:#e8f8ff;
+}
+
+.meta-label{
+  color:rgba(190,225,240,.62);
+}
+
+.meta-value{
+  color:#eefaff;
+}
+
+/* ============================================================
+   OPTIONAL SPECIAL COLORS
+   Add these classes later if you want
+   ============================================================ */
+
+.is-rare{
+  border-color:rgba(255,191,95,.26) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,191,95,.08);
+}
+
+.is-rare::before{
+  background:linear-gradient(to bottom, #ffd88a, #ffb347) !important;
+}
+
+.is-cave{
+  border-color:rgba(185,140,255,.24) !important;
+  box-shadow:inset 0 0 0 1px rgba(185,140,255,.08);
+}
+
+.is-cave::before{
+  background:linear-gradient(to bottom, #d2b5ff, #9c6bff) !important;
+}
+
+.is-success{
+  border-color:rgba(103,229,138,.24) !important;
+  box-shadow:inset 0 0 0 1px rgba(103,229,138,.08);
+}
+
+.is-success::before{
+  background:linear-gradient(to bottom, #a5f3bc, #55d97d) !important;
+}
+
