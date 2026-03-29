@@ -1,0 +1,50 @@
+/* ============================================================
+   1) GLOBAL DEFAULTS
+   ============================================================ */
+*{ box-sizing:border-box; }
+
+html, body{
+  height:100%;
+  margin:0;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+
+/* Safe iOS behavior */
+:where(#topbar, #topbar button, #topbar select,
+       #topbar .dd-btn, #topbar .dd-item,
+       .floating-panel, .floating-panel button,
+       .leaflet-control.map-dock .dock-btn,
+       #controlsToggle, .mode-toggle, .icon-btn){
+  touch-action: manipulation;
+}
+:where(.dd-btn, .dd-item, #topbar select, button){
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Keyboard focus ring */
+:where(.dd-btn, #topbar select):focus{
+  outline:none !important;
+  box-shadow:none !important;
+}
+:where(.dd-btn, #topbar select):focus-visible{
+  border-color:var(--focus);
+  box-shadow:0 0 0 3px rgba(122,162,255,.18);
+}
+
+/* Build info */
+#buildInfo{
+  position:fixed;
+  bottom:10px;
+  right:6px;
+  font-size:10px;
+  opacity:.4;
+  pointer-events:none;
+}

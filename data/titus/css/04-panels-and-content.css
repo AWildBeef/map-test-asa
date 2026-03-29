@@ -1,0 +1,624 @@
+/* ============================================================
+   6) DRAGGABLE FLOATING PANELS
+   ============================================================ */
+.floating-panel{
+  z-index:900;
+
+  width:var(--panel-w);
+  max-width:min(var(--panel-max-w), calc(100vw - 24px));
+
+
+  background:rgba(26,29,33,.92);
+  color:var(--text);
+  border:1px solid var(--panel-border);
+  border-radius:var(--panel-radius);
+  box-shadow:0 10px 28px rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+
+  overflow:hidden;
+  transform:translateZ(0);
+}
+
+.leaflet-control .floating-panel{
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+}
+
+.floating-panel .fp-header{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+
+  align-items:center;
+  justify-content:space-between;
+
+  padding:2px 0px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  user-select:none;
+  touch-action:none;
+  margin-bottom:0;
+}
+
+.floating-panel .fp-titles{
+  grid-column: 1;
+  container-type: inline-size;
+  
+  width: 100%;
+  min-width: 0;
+
+  overflow:hidden;
+  white-space:nowrap;
+  gap:8px;
+}
+
+.floating-panel .fp-title{
+  font-weight:300;
+  letter-spacing:.2px;
+  min-width:0;
+  white-space:nowrap;
+  font-size: clamp(2px, 7.2cqi, 17px);
+}
+
+#dinoInfoPanel .fp-header{
+  padding: 5px 2px !important;
+  border-bottom: 1px solid rgba(255,255,255,.00);
+}
+
+#dinoInfoPanel .fp-title{
+  font-weight: 400;
+  color: var(--muted);
+  padding-left:1px;
+}
+
+.floating-panel .fp-actions{
+  grid-column: 2;
+  display:flex;
+  flex: 0 0 auto;
+  gap:8px; 
+}
+
+.floating-panel .fp-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  width:24px;
+  height:24px;
+}
+.floating-panel .fp-btn svg{
+  display:block;
+  pointer-events:none;
+  transition:transform .15s ease;
+}
+.floating-panel.collapsed .fp-btn-chevron svg{ transform: rotate(-90deg); }
+
+/* ✅ Floating panel body max height knob lives here */
+.floating-panel .fp-body{
+  padding:4px;
+  overflow:auto;
+  max-height: var(--fp-body-max-h);
+  opacity:1;
+  transition:max-height .22s ease, opacity .18s ease, padding .22s ease;
+  will-change:max-height, opacity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.floating-panel.collapsed .fp-body{
+  max-height:0;
+  opacity:0;
+  padding-top:0;
+  padding-bottom:0;
+  overflow:hidden;
+}
+
+/* Internals */
+
+.fp-col{ flex-direction:column; align-items:stretch; }
+
+/* Dino panel header vibe */
+#dinoInfoPanel:not(.collapsed) .fp-header{
+  border-bottom:none;
+  background-color:transparent;
+}
+
+
+/* Panel body becomes vertical layout */
+
+
+#modStylePanel.collapsed .fp-body{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  min-height:0;
+  padding:0px;
+}
+
+#modStylePanel .fp-body{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  min-height:0;
+  padding:4px;
+}
+
+.fp-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:10px 0;
+  color:var(--muted);
+  font-size:12px;
+}
+.fp-col{ flex-direction:column; align-items:stretch; }
+.fp-between{ width:100%; }
+
+#mapEntriesPanel .fp-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12px;
+  padding-bottom:0;
+  margin:0;
+}
+
+#mapEntriesPanel .fp-header{
+  padding: 5px 2px !important;
+  border-bottom: 1px solid rgba(255,255,255,.02);
+}
+
+#mapEntriesPanel .fp-title{
+  font-weight: 400;
+  color: var(--muted);
+  padding-left:1px;
+}
+
+/* ============================================================
+   7) DINO INFO CONTENT (kept minimal)
+   ============================================================ */
+.info-title{
+  font-weight:600;
+  font-size:22px;
+  color:var(--muted);
+  align-items:flex-start;
+  margin-top:0;
+}
+.info-submeta{
+  font-size:12px;
+  opacity:.65;
+  margin-top:-2px;
+  margin-bottom:0;
+}
+
+.is-entry .info-submeta{
+  overflow: hidden;
+  display:none !important;
+}
+
+.info-subtitle{ 
+  font-size:10px;
+  font-weight:450;
+  color:var(--muted);
+  margin:0;
+  padding:0;
+  letter-spacing:.3px;
+  text-transform:uppercase;
+}
+.info-section{
+  margin:0 0 0px;
+  padding-bottom:0px;
+  align-items:flex-start;
+}
+
+#dinoInfoPanel .info-section:first-child{
+  padding-top: 0 !important;
+  margin-top: -10 !important;
+}
+
+.info-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:5px;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:420;
+  text-transform:uppercase;
+}
+
+.info-mono{
+  margin-top:0px;
+  padding:4px 6px;
+  border-radius:6px;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.10);
+
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.176;
+  font-weight:100;
+
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+
+.is-entry .entry-meta{
+  margin-top:5px}
+}
+
+.is-entry .info-label{
+  font-weight:400;
+}
+
+.entry-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:6px 5px;
+  border-radius:6px;
+}
+.entry-row:hover{ background:rgba(255,255,255,.04); }
+.entry-main{ flex:1; min-width:0; }
+.entry-name{
+  font-size:14px;
+  font-weight:350;
+  color:var(--muted);
+}
+.entry-meta-line{
+  font-size:12px;
+  padding-left:2mm;
+  font-weight:600;
+  white-space:nowrap; /* use white-space, not text-wrap */
+  color:var(--muted);
+  line-height:1.3;
+}
+
+#mapEntriesPanel .entry-meta-line{
+  font-size:12px;
+  text-wrap-mode:wrap;
+}
+
+#mapEntriesPanel .fp-tab{
+  position: relative;
+  background: transparent !important;
+  border: 0 !important;
+  overflow: hidden;
+  flex: 1 1 0;
+  text-align: center;
+  justify-content: center;
+  padding: 8px 0 1px;
+  text-transform:uppercase;
+  font-size: 12px;
+  color: rgba(255,255,255,0.78);
+}
+
+#mapEntriesPanel .fp-tab.is-on::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:100%;
+  pointer-events:none;
+
+  background: linear-gradient(
+    to top,
+    rgba(255,255,255,.14),   /* strongest at bottom */
+    rgba(255,255,255,.08) 45%,
+    rgba(255,255,255,0) 100% /* fades out at top */
+  );
+}
+
+.crate-submeta{
+  font-size:12px;
+  padding-left:2mm;
+  font-weight:500;
+  white-space:nowrap; /* use white-space, not text-wrap */
+  color:var(--muted);
+  line-height:1.3;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .info-submeta {
+  margin-top:0;
+  margin-bottom:2px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .entry-row {
+  padding:0px;
+  padding-left:2mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .mission-subtitle {
+  padding-top:3mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-subtitle-sub {
+  font-size:12px;
+  font-weight:450;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries {
+  margin-top:3px;
+  margin-left:5mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .entry-meta-lines {
+  font-size:9px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-name {
+  font-size:12px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-row {
+  padding:0px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-submeta {
+  margin-top:0;
+  margin-bottom:2px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .fp-page {
+  padding:0px 8px 8px 8px;
+}
+
+
+.meta-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:4px 12px;
+  margin-top:4px;
+  margin-bottom:4px;
+}
+
+.meta-grid.meta-grid-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.meta-cell{
+  min-width:0;
+}
+
+.meta-label{
+  font-size:9px;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  color:rgba(255,255,255,.55);
+  margin-bottom:2px;
+}
+
+.meta-value{
+  font-size:12px;
+  line-height:1.15;
+  font-weight:500;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries {
+  margin-top:6px;
+  margin-left:2mm;
+  margin-right:2mm;
+  padding-left:2mm;
+  padding-right:2mm;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-bottom:10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap:2px;
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,30,50,.15);
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .set-meta {
+  margin-top:6px;
+  margin-left:4mm;
+  margin-bottom:10px;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-name {
+  margin-top:1px;
+  padding-left:3mm;
+  margin-bottom:1px;
+  font-size:11px;
+  color:var(--muted);
+  text-align:left;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-row {
+  align-self:center;
+  justify-self:space-around;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub {
+  border-radius:8px;
+  margin:5px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(10,40,70,.10);
+  padding:5px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section {
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(15,45,90,.10);
+  padding:5px;
+  margin-bottom:5px;
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
+  border-radius:8px;
+  border:1px solid rgba(205,235,255,.03);
+  background:rgba(15,45,90,.10);
+  padding:5px;
+  margin-bottom:5px;
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+.meta-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:center;
+}
+
+.meta-stack {
+  display: inline-flex;
+  flex-direction: column;
+  width: max-content;
+  gap:2px;
+}
+
+.meta-value {
+  text-align: center;
+}
+
+#drawStylePanel .fp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding:5px;
+}
+
+#drawStylePanel .fp-row {
+  padding: 2px 2px;
+  margin:1px;
+}
+
+#drawStylePanel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+#drawStylePanel input[type="color"] {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#drawStylePanel input[type="range"] {
+  width: 100%;
+}
+
+#drawStylePanel .fp-col {
+  padding-top: 2px;
+}
+
+#drawStylePanel .fp-header {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding:3px;
+}
+
+#drawStylePanel .fp-body {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.015), rgba(255,255,255,0));
+}
+
+
+#mapEntriesPanel .fp-tabs,
+#mapEntriesPanel .fp-row {
+  gap: 8px;
+}
+
+#mapEntriesPanel .fp-tab {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+#mapEntriesPanel .fp-tab.is-on {
+  background: rgba(255,255,255,0.12);
+}
+
+#mapEntriesPanel .dd-search,
+#mapEntriesSearch {
+  height: 42px;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 15px;
+}
+
+.mapEntriesList .dd-item {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+
+.mapEntriesList .dd-item + .dd-item {
+  margin-top: 8px;
+}
+
+.mapEntriesList .dd-item-name {
+  font-size: 16px;
+  line-height: 1.2;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 4px;
+}
+
+.mapEntriesList .dd-item-meta,
+.mapEntriesList .entry-meta-line {
+  font-size: 13px;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.62);
+}
+
+#mapEntriesPanel .fp-header {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding:3px;
+}
+
+#mapEntriesPanel .fp-body {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.015), rgba(255,255,255,0));
+  padding:5px;
+}
+
+#poiPanel .fp-header {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding:3px;
+}
+
+#poiPanel .fp-body {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.015), rgba(255,255,255,0));
+}
+
+#poiPanel .fp-row {
+  padding: 4px 2px;
+  margin:1px;
+  border-radius: 8px;
+}
+
+#poiPanel .fp-row:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+#poiPanel .fp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding:5px;
+}

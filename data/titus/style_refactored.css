@@ -1,0 +1,2908 @@
+/* ============================================================
+   ATLAS REFACTORED MERGED CSS
+   Generated from cleaned token/binding/component/layout files.
+   Order matters: tokens -> bindings -> components -> layout -> panels -> map ui -> overrides.
+   ============================================================ */
+
+/* ============================================================
+   ATLAS CORE TOKENS (MERGED / CLEAN)
+   Purpose:
+   - one place for all global tokens
+   - foundation/app knobs + semantic theme tokens
+   - default theme in :root
+   - optional theme overrides on body classes
+
+   Notes:
+   - This file should NOT contain component selectors.
+   - Other CSS should consume these vars only.
+   ============================================================ */
+
+:root{
+  color-scheme: dark;
+
+  /* ============================================================
+     1) FOUNDATION / APP KNOBS
+     These control sizing, spacing, radii, and layout behavior.
+     They are NOT theme-specific.
+     ============================================================ */
+
+  --topbar-pad-y: 1px;
+  --topbar-pad-x: 16px;
+
+  --panel-radius: 10px;
+  --panel-w: 420px;
+  --panel-w-mobile: 210px;
+  --panel-max-w: 420px;
+
+  /* Floating panel body max height */
+  --fp-body-max-h: 65vh;
+  --fp-body-max-h-mobile: 50vh;
+  --leaflet-toolbar-h: 50px;
+
+  /* Mobile panel widths */
+  --dino-w-mobile: 300px;
+  --dino-w-mobile-compact: 225px;
+  --mod-w-mobile: 150px;
+  --mod-w-mobile-collapsed: 100px;
+
+  /* Dropdown list max heights (desktop) */
+  --dd-map-max: min(33vh, 265px);
+  --dd-source-max: min(33vh, 250px);
+  --dd-dino-max: min(33vh, 300px);
+
+  /* Dropdown list max heights (mobile) */
+  --dd-map-max-m: min(38vh, 250px);
+  --dd-source-max-m: min(38vh, 245px);
+  --dd-dino-max-m: min(34vh, 225px);
+
+  /* Shared effect knobs */
+  --blur-panel: 14px;
+  --blur-panel-heavy: 20px;
+
+  --shadow-sm: 0 8px 18px rgba(0,0,0,.18);
+  --shadow-md: 0 10px 24px rgba(0,0,0,.28);
+  --shadow-lg: 0 18px 46px rgba(0,0,0,.50);
+
+  /* ============================================================
+     2) SEMANTIC THEME TOKENS
+     Default theme = Atlas Blue
+     These are the ONLY visual/theme tokens other files should use.
+     ============================================================ */
+
+  /* canvas / page backgrounds */
+  --bg-0: #08131b;
+  --bg-1: #0d1b26;
+  --bg-2: #102231;
+
+  /* surfaces */
+  --surface-1: rgba(10,22,32,.94);
+  --surface-2: rgba(19,39,56,.94);
+  --surface-3: rgba(27,55,76,.94);
+  --surface-control: rgba(20,40,56,.92);
+  --surface-control-hover: rgba(26,50,70,.96);
+
+  /* borders */
+  --border-soft: rgba(120,210,255,.10);
+  --border-mid: rgba(120,210,255,.16);
+  --border-strong: rgba(120,210,255,.26);
+
+  /* text */
+  --text-1: #f0fbff;
+  --text-2: #d9edf7;
+  --text-3: #9fb8c8;
+  --text-dim: #7f98a8;
+
+  /* accent */
+  --accent: #39c8ff;
+  --accent-bright: #86e6ff;
+  --accent-rgb: 57, 200, 255;
+
+  /* interaction */
+  --hover-fill: rgba(57,200,255,.08);
+  --active-fill: rgba(57,200,255,.14);
+  --selected-fill: rgba(57,200,255,.18);
+
+  /* effects */
+  --glow-soft: rgba(57,200,255,.10);
+  --glow-mid: rgba(57,200,255,.18);
+  --focus-ring: rgba(57,200,255,.22);
+
+  /* optional semantic status colors */
+  --tone-rare: #ffbf5f;
+  --tone-cave: #b98cff;
+  --tone-success: #67e58a;
+}
+
+/* ============================================================
+   3) OPTIONAL THEME OVERRIDES
+   Apply by toggling a class on <body>.
+   ============================================================ */
+
+/* Soft / calmer version */
+body.theme-soft{
+  --bg-0: #0d1419;
+  --bg-1: #162129;
+  --bg-2: #1d2c36;
+
+  --surface-1: rgba(15,24,31,.95);
+  --surface-2: rgba(22,35,44,.95);
+  --surface-3: rgba(31,49,61,.94);
+  --surface-control: rgba(27,43,53,.92);
+  --surface-control-hover: rgba(36,56,68,.96);
+
+  --border-soft: rgba(180,210,225,.12);
+  --border-mid: rgba(180,210,225,.20);
+  --border-strong: rgba(180,210,225,.30);
+
+  --text-1: #eef6fa;
+  --text-2: #dbe8ef;
+  --text-3: #aebec8;
+  --text-dim: #8597a2;
+
+  --accent: #8dc7da;
+  --accent-bright: #d3edf5;
+  --accent-rgb: 141, 199, 218;
+
+  --hover-fill: rgba(141,199,218,.08);
+  --active-fill: rgba(141,199,218,.14);
+  --selected-fill: rgba(141,199,218,.20);
+
+  --glow-soft: rgba(141,199,218,.08);
+  --glow-mid: rgba(141,199,218,.15);
+  --focus-ring: rgba(141,199,218,.22);
+}
+
+/* Stronger game-like / ASA-inspired version */
+body.theme-asa{
+  --bg-0: #041019;
+  --bg-1: #081824;
+  --bg-2: #0d2635;
+
+  --surface-1: rgba(6,18,28,.96);
+  --surface-2: rgba(10,28,42,.96);
+  --surface-3: rgba(15,43,66,.96);
+  --surface-control: rgba(14,41,61,.94);
+  --surface-control-hover: rgba(21,55,81,.98);
+
+  --border-soft: rgba(74,224,255,.14);
+  --border-mid: rgba(74,224,255,.24);
+  --border-strong: rgba(74,224,255,.34);
+
+  --text-1: #f4fcff;
+  --text-2: #dff5ff;
+  --text-3: #9fc8da;
+  --text-dim: #7296a8;
+
+  --accent: #2ed9ff;
+  --accent-bright: #b6f6ff;
+  --accent-rgb: 46, 217, 255;
+
+  --hover-fill: rgba(46,217,255,.10);
+  --active-fill: rgba(46,217,255,.18);
+  --selected-fill: rgba(46,217,255,.24);
+
+  --glow-soft: rgba(46,217,255,.10);
+  --glow-mid: rgba(46,217,255,.20);
+  --focus-ring: rgba(46,217,255,.24);
+}
+
+/* ============================================================
+   4) MIGRATION NOTES
+   Keep new work on semantic vars only.
+
+   Use:
+   - var(--bg-0..2)
+   - var(--surface-1..3)
+   - var(--surface-control)
+   - var(--border-soft/mid/strong)
+   - var(--text-1..3)
+   - var(--accent), var(--accent-bright), var(--accent-rgb)
+   - var(--hover-fill), var(--active-fill), var(--selected-fill)
+   - var(--glow-soft), var(--glow-mid)
+   - var(--focus-ring)
+
+   Avoid reintroducing:
+   - --bg
+   - --panel
+   - --panel-border
+   - --text
+   - --muted
+   - --control-bg
+   - --control-border
+   - --focus
+   - --shadow
+   ============================================================ */
+
+
+/* ============================================================
+   ATLAS THEME BINDINGS
+   Purpose:
+   - apply semantic theme tokens to shared UI pieces
+   - NO token definitions here
+   - components/layout files should keep structure; this file supplies
+     the visual language through semantic vars
+
+   Depends on:
+   - atlas_core_tokens.css
+   ============================================================ */
+
+/* ============================================================
+   1) GLOBAL CANVAS
+   ============================================================ */
+
+html,
+body{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(var(--accent-rgb), .12), transparent 34%),
+    radial-gradient(circle at 15% 20%, rgba(var(--accent-rgb), .05), transparent 28%),
+    linear-gradient(to bottom, var(--bg-1), var(--bg-0));
+  color: var(--text-1);
+}
+
+#mapWrap .leaflet-container{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(var(--accent-rgb), .10), transparent 40%),
+    linear-gradient(to bottom, var(--bg-1), var(--bg-0));
+}
+
+/* ============================================================
+   2) FOCUS / GLOBAL INPUT FEEDBACK
+   ============================================================ */
+
+:where(.dd-btn, #topbar select):focus-visible{
+  border-color: var(--border-mid) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring) !important;
+}
+
+/* ============================================================
+   3) TOPBAR
+   ============================================================ */
+
+#topbar{
+  background:
+    linear-gradient(to bottom, var(--surface-2), var(--surface-1));
+  border-bottom: 1px solid var(--border-soft);
+  box-shadow:
+    inset 0 -1px 0 var(--glow-soft),
+    0 8px 24px rgba(0,0,0,.22);
+}
+
+#topbar .title{
+  color: var(--text-1);
+  text-shadow: 0 0 14px rgba(var(--accent-rgb), .10);
+}
+
+/* ============================================================
+   4) CONTROLS / BUTTONS
+   ============================================================ */
+
+.mode-toggle,
+.icon-btn,
+#controlsToggle,
+.dd-btn,
+#topbar select{
+  background:
+    linear-gradient(to bottom, var(--surface-3), var(--surface-control));
+  border: 1px solid var(--border-soft);
+  color: var(--text-1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    var(--shadow-sm);
+}
+
+.mode-toggle:hover,
+.icon-btn:hover,
+#controlsToggle:hover,
+.dd-btn:hover,
+#topbar select:hover{
+  background:
+    linear-gradient(to bottom, var(--surface-3), var(--surface-control-hover));
+  border-color: var(--border-mid);
+}
+
+.mode-toggle.is-entry{
+  background: var(--active-fill);
+  border-color: var(--border-strong);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 0 0 1px rgba(var(--accent-rgb), .08),
+    var(--shadow-sm);
+}
+
+.dd-label{
+  color: var(--text-1);
+}
+
+.dd-caret{
+  color: var(--accent-bright);
+  opacity: .92;
+}
+
+/* ============================================================
+   5) DROPDOWN PANELS / ITEMS
+   ============================================================ */
+
+.dd-panel{
+  background:
+    radial-gradient(circle at top left, var(--glow-soft), transparent 36%),
+    linear-gradient(to bottom, var(--surface-2), var(--surface-1));
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(var(--blur-panel-heavy)) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--blur-panel-heavy)) saturate(130%);
+}
+
+.dd-search{
+  background: rgba(0,0,0,.22);
+  color: var(--text-1);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.dd-item{
+  color: var(--text-1);
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.dd-item:hover{
+  background: var(--hover-fill);
+}
+
+.dd-item-meta{
+  color: var(--text-dim);
+}
+
+.dd-star{
+  border: 1px solid var(--border-soft);
+  background: rgba(255,255,255,.03);
+  color: var(--text-1);
+}
+
+.dd-star:hover{
+  background: var(--hover-fill);
+  border-color: var(--border-mid);
+}
+
+/* ============================================================
+   6) PANELS / MENUS / TOOLTIPS
+   ============================================================ */
+
+.floating-panel,
+.mode-menu,
+.leaflet-tooltip.basic-tooltip,
+.leaflet-tooltip.pstart-tooltip,
+.leaflet-tooltip.horde-tooltip,
+.leaflet-tooltip.mission-tooltip,
+.leaflet-tooltip.supply-tooltip{
+  background:
+    radial-gradient(circle at top left, var(--glow-soft), transparent 38%),
+    linear-gradient(to bottom, var(--surface-2), var(--surface-1));
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-lg);
+  color: var(--text-1);
+  backdrop-filter: blur(var(--blur-panel)) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--blur-panel)) saturate(130%);
+}
+
+.floating-panel{
+  border-radius: var(--panel-radius);
+}
+
+.mode-menu{
+  border-radius: 14px;
+}
+
+.floating-panel .fp-header,
+#dinoInfoPanel .fp-header,
+#mapEntriesPanel .fp-header,
+#poiPanel .fp-header,
+#drawStylePanel .fp-header{
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.025), rgba(255,255,255,0));
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-1);
+}
+
+.floating-panel .fp-title,
+#dinoInfoPanel .fp-title,
+#mapEntriesPanel .fp-title{
+  color: var(--text-1);
+}
+
+.floating-panel .fp-body,
+#mapEntriesPanel .fp-body,
+#poiPanel .fp-body,
+#drawStylePanel .fp-body{
+  background: transparent;
+}
+
+.floating-panel.collapsed .fp-header,
+#dinoInfoPanel.collapsed .fp-header,
+#mapEntriesPanel.collapsed .fp-header{
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.025), rgba(255,255,255,0));
+  border-bottom: 1px solid var(--border-soft);
+}
+
+/* ============================================================
+   7) MENU-LIKE ITEMS
+   ============================================================ */
+
+.mode-menu-item,
+.poi-menu-item{
+  border: 1px solid transparent;
+  transition:
+    background .14s ease,
+    border-color .14s ease,
+    box-shadow .14s ease,
+    color .14s ease;
+}
+
+.mode-menu-item:hover,
+.poi-menu-item:hover{
+  background: var(--hover-fill);
+  border-color: rgba(var(--accent-rgb), .10);
+}
+
+.mode-menu-item.is-on,
+.poi-menu-item.is-on{
+  background: var(--active-fill);
+  border-color: var(--border-mid);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), .08);
+}
+
+.mode-menu-label,
+.poi-menu-label{
+  color: var(--text-1);
+}
+
+.mode-menu-check,
+.poi-menu-check{
+  color: var(--accent-bright);
+}
+
+/* ============================================================
+   8) TABS / PAGE NAV
+   ============================================================ */
+
+#dinoInfoPanel .fp-tabs,
+#mapEntriesPanel .fp-tabs{
+  border-bottom-color: var(--border-soft);
+}
+
+#dinoInfoPanel .fp-tab,
+#mapEntriesPanel .fp-tab{
+  color: var(--text-3);
+  transition: color .14s ease, background .14s ease;
+}
+
+#dinoInfoPanel .fp-tab:hover,
+#mapEntriesPanel .fp-tab:hover{
+  color: var(--text-1);
+}
+
+#dinoInfoPanel .fp-tab.is-on,
+#mapEntriesPanel .fp-tab.is-on{
+  color: var(--text-1);
+}
+
+#dinoInfoPanel .fp-tab.is-on::after,
+#mapEntriesPanel .fp-tab.is-on::after{
+  background:
+    linear-gradient(
+      to top,
+      rgba(var(--accent-rgb), .22),
+      rgba(var(--accent-rgb), .08) 48%,
+      transparent
+    );
+}
+
+.fp-dot{
+  background: rgba(255,255,255,.25);
+}
+
+.fp-dot.is-on{
+  background: var(--accent-bright);
+}
+
+/* ============================================================
+   9) CONTENT TYPOGRAPHY / META
+   ============================================================ */
+
+.info-title{
+  color: var(--text-1);
+  text-shadow: 0 0 14px rgba(var(--accent-rgb), .08);
+}
+
+.info-subtitle,
+.info-subtitle-sub,
+.info-row,
+.info-submeta,
+.meta-label,
+.dino-statkey,
+.crate-submeta{
+  color: var(--text-3);
+}
+
+.meta-value,
+.dino-statval,
+.entry-name,
+.entry-meta-line{
+  color: var(--text-2);
+}
+
+.info-mono{
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.20), rgba(0,0,0,.12));
+  border: 1px solid var(--border-soft);
+  color: var(--text-2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+/* ============================================================
+   10) CARDS / LIST ITEMS / ROW SURFACES
+   ============================================================ */
+
+.mapEntriesList .dd-item,
+.dino-spawn-row,
+.entry-row,
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub,
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries,
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
+  border: 1px solid var(--border-soft);
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.02),
+    0 6px 18px rgba(0,0,0,.14);
+}
+
+.mapEntriesList .dd-item:hover,
+.dino-spawn-row:hover,
+.entry-row:hover,
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section:hover,
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row:hover{
+  background: var(--hover-fill);
+}
+
+.mapEntriesList .dd-item.is-on,
+.dino-spawn-row.is-on{
+  background: var(--active-fill);
+  border-color: var(--border-mid);
+}
+
+.mapEntriesList .dd-item-name,
+.dino-spawn-title{
+  color: var(--text-1);
+}
+
+.mapEntriesList .dd-item-meta,
+.dino-spawn-meta-line{
+  color: var(--text-3);
+}
+
+.dino-spawn-jump-btn{
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border: 1px solid var(--border-soft);
+  color: var(--accent-bright);
+}
+
+.dino-spawn-jump-btn:hover{
+  background: var(--hover-fill);
+  border-color: var(--border-mid);
+}
+
+/* ============================================================
+   11) STATS / ATTACK TABLES
+   ============================================================ */
+
+.statgrid-head,
+.atkgrid-head{
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.statgrid-th,
+.atkgrid-th{
+  color: var(--text-2);
+}
+
+.statgrid-td.muted,
+.atkgrid-td.muted{
+  color: var(--text-dim);
+  opacity: .92;
+}
+
+.stat-pill,
+.atk-pill{
+  background: rgba(var(--accent-rgb), .10);
+  border: 1px solid var(--border-soft);
+  color: var(--text-1);
+}
+
+/* ============================================================
+   12) DRAW PANEL INPUTS
+   ============================================================ */
+
+#drawStylePanel input[type="checkbox"],
+#drawStylePanel input[type="range"]{
+  accent-color: var(--accent);
+}
+
+#drawStylePanel input[type="color"]{
+  box-shadow:
+    0 0 0 1px var(--border-soft),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+/* ============================================================
+   13) LEAFLET CONTROLS
+   ============================================================ */
+
+.leaflet-control.map-dock,
+.leaflet-control.bg-toggle,
+.leaflet-control-zoom.zoom-horizontal{
+  background:
+    radial-gradient(circle at top left, var(--glow-soft), transparent 45%),
+    linear-gradient(to bottom, var(--surface-2), var(--surface-1));
+  border: 1px solid var(--border-soft);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 rgba(255,255,255,.03);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+}
+
+.leaflet-control.map-dock .dock-btn,
+.leaflet-control.bg-toggle .bg-toggle-btn,
+.leaflet-control-zoom.zoom-horizontal a{
+  background: transparent;
+  color: var(--text-1);
+}
+
+.leaflet-control.map-dock .dock-btn:hover,
+.leaflet-control.bg-toggle .bg-toggle-btn:hover,
+.leaflet-control-zoom.zoom-horizontal a:hover{
+  background: var(--hover-fill);
+}
+
+.leaflet-control.map-dock .dock-btn.is-on{
+  background: var(--active-fill);
+  box-shadow: inset 0 0 0 1px var(--border-mid);
+}
+
+.leaflet-control-zoom.zoom-horizontal a + a{
+  border-left: 1px solid var(--border-soft);
+}
+
+/* ============================================================
+   14) TOOLTIPS
+   ============================================================ */
+
+.leaflet-tooltip .poi-tip-title{
+  color: var(--text-1);
+}
+
+.leaflet-tooltip .poi-tip-line{
+  color: var(--text-2);
+}
+
+.leaflet-tooltip .poi-tip-bp{
+  color: var(--text-3);
+}
+
+.leaflet-tooltip.supply-tooltip .poi-tip-bp{
+  color: #ff9b9b;
+}
+
+/* ============================================================
+   15) BADGES / STATUS HELPERS
+   ============================================================ */
+
+.dino-badge{
+  border: 1px solid var(--border-soft);
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  color: var(--text-1);
+}
+
+.is-rare{
+  border-color: color-mix(in srgb, var(--tone-rare) 35%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone-rare) 12%, transparent);
+}
+
+.is-cave{
+  border-color: color-mix(in srgb, var(--tone-cave) 35%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone-cave) 12%, transparent);
+}
+
+.is-success{
+  border-color: color-mix(in srgb, var(--tone-success) 35%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone-success) 12%, transparent);
+}
+
+
+/* ============================================================
+   02) COMPONENTS / MENUS / TABLES (CLEAN STRUCTURE)
+   Purpose:
+   - reusable component structure only
+   - no theme token definitions
+   - no hardcoded visual styling now handled by atlas_theme_bindings.css
+
+   Depends on:
+   - atlas_core_tokens.css
+   - atlas_theme_bindings.css
+   ============================================================ */
+
+/* ============================================================
+   1) MODE / SPAWN / COLLAPSING MENUS
+   ============================================================ */
+
+.mode-menu-like-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.dino-spawn-menu-wrap{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.dino-spawn-row{
+  min-width: 0;
+  width: 100%;
+  min-height: 88px;
+  padding: 14px 16px;
+  align-items: flex-start;
+}
+
+.dino-spawn-row--all{
+  min-height: 56px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dino-spawn-label,
+.dino-spawn-row .mode-menu-label{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dino-spawn-title{
+  display: block;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dino-spawn-meta{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dino-spawn-meta-line{
+  display: block;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.dino-spawn-jump-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.dino-spawn-jump-btn svg{
+  opacity: .9;
+}
+
+#dinoInfoPanel .mode-menu-item.dino-spawn-row{
+  justify-content: space-between;
+}
+
+#dinoInfoPanel .mode-menu-item.dino-spawn-row .mode-menu-check{
+  align-self: center;
+  flex: 0 0 auto;
+  min-width: 20px;
+  text-align: right;
+  font-size: 18px;
+}
+
+.col-exp-row{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.loot-set-toggle-all{
+  width: auto;
+  padding: 5px 2px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: right;
+  cursor: pointer;
+  align-items: end;
+}
+
+.loot-set-toggle{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0;
+  margin: 0 0 6px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.loot-set-toggle-main{
+  min-width: 0;
+  flex: 1;
+}
+
+.loot-set-toggle-right{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loot-set-toggle-chevron{
+  font-size: 18px;
+  line-height: 1;
+  opacity: .85;
+}
+
+.loot-set-section.is-closed .loot-set-toggle{
+  margin-bottom: 0;
+}
+
+.loot-set-body{
+  margin-top: 2px;
+}
+
+/* ============================================================
+   2) POI / MODE MENUS
+   ============================================================ */
+
+.poi-menu{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px;
+}
+
+.poi-menu-item{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.poi-menu-label{
+  min-width: 0;
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.1;
+}
+
+.poi-menu-check{
+  flex: 0 0 auto;
+  width: 15px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 700;
+  opacity: .9;
+}
+
+.mode-menu{
+  min-width: 180px;
+  max-width: 220px;
+  padding: 6px;
+  position: fixed !important;
+  z-index: 999999 !important;
+}
+
+.mode-menu-item{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mode-menu-label{
+  min-width: 0;
+  flex: 1;
+}
+
+.mode-menu-check{
+  opacity: .9;
+  font-weight: 700;
+}
+
+.mode-toggle-caret{
+  margin-left: 8px;
+  opacity: .8;
+}
+
+/* ============================================================
+   3) STATS TABLE
+   ============================================================ */
+
+.statgrid{
+  margin-top: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+.statgrid-head,
+.statgrid-row{
+  display: grid;
+  grid-template-columns: 1fr repeat(5, 1fr);
+  column-gap: 0;
+}
+
+.statgrid-th,
+.statgrid-td{
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.statgrid-th:last-child,
+.statgrid-td:last-child{
+  border-right: 0;
+}
+
+.statgrid-th{
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0;
+  padding-left: 2px;
+  opacity: .9;
+}
+
+.statgrid-td.num,
+.statgrid-th.num{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.statgrid-td.num{
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.statgrid-th.num{
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.statgrid-td.muted{
+  opacity: .55;
+}
+
+.statgrid-td.statname{
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px;
+  padding-left: 2px;
+}
+
+.stat-pill{
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  opacity: .85;
+}
+
+/* ============================================================
+   4) ATTACK TABLE
+   ============================================================ */
+
+.info-subtitle-sub{
+  font-size: 7px;
+  margin: 0;
+  padding: 0;
+}
+
+#attackTable{
+  margin-top: 15px;
+  padding-bottom: 0;
+  align-items: flex-start;
+}
+
+.atkgrid{
+  margin-top: 5px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+.atkgrid-head,
+.atkgrid-row{
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 1fr);
+  column-gap: 0;
+}
+
+.atkgrid-th,
+.atkgrid-td{
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.atkgrid-th:last-child,
+.atkgrid-td:last-child{
+  border-right: 0;
+}
+
+.atkgrid-th{
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0;
+  padding-left: 2px;
+  opacity: .9;
+}
+
+.atkgrid-td.num,
+.atkgrid-th.num{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.atkgrid-td.num{
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.atkgrid-th.num{
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.atkgrid-td.muted{
+  opacity: .55;
+}
+
+.atkgrid-td.atkname{
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px;
+  padding-left: 2px;
+}
+
+.atkgrid-td.wildonly{
+  display: flex;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px;
+  padding-left: 2px;
+}
+
+.atk-pill{
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  opacity: .85;
+}
+
+
+/* ============================================================
+   03) LAYOUT / TOPBAR / DROPDOWNS (CLEAN STRUCTURE)
+   Purpose:
+   - structural/layout rules only
+   - no theme token definitions
+   - no hardcoded visual styling that now belongs in atlas_theme_bindings.css
+
+   Depends on:
+   - atlas_core_tokens.css
+   - atlas_theme_bindings.css
+   ============================================================ */
+
+/* ============================================================
+   1) MAP WRAPPER
+   ============================================================ */
+
+#mapWrap{
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+#map{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#mapWrap .leaflet-container{
+  /* visual background supplied by theme bindings */
+}
+
+.dino-quick{
+  display: grid;
+  row-gap: 6px;
+}
+
+.dino-badges{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.dino-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 2px;
+  border-radius: 4px;
+
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: .2px;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.dino-statsline{
+  width: 58%;
+  max-width: 240px;
+  margin-top: 0;
+  padding: 0;
+}
+
+.dino-statrow{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  line-height: 1.25;
+}
+
+.dino-statkey{
+  opacity: .95;
+}
+
+.dino-statval{
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  margin-left: auto;
+  min-width: 3ch;
+}
+
+/* ============================================================
+   2) TOPBAR
+   ============================================================ */
+
+#topbar{
+  padding: var(--topbar-pad-y) var(--topbar-pad-x) 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 2000;
+}
+
+.title-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+  padding-bottom: 4px;
+}
+
+#topbar .title{
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  white-space: nowrap;
+}
+
+#topbar .title-actions{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 4px;
+}
+
+#topbar .controls{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: min(1100px, 100%);
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 0;
+  padding-bottom: 4px;
+}
+
+/* Native selects (if present) */
+#topbar select{
+  min-width: 200px;
+  max-width: 320px;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ============================================================
+   3) BUTTONS
+   ============================================================ */
+
+.mode-toggle{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.icon-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-btn:active{
+  transform: translateY(1px);
+}
+
+/* Mobile-only Filters button */
+#controlsToggle{
+  display: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   4) FANCY DROPDOWN (.dd)
+   ============================================================ */
+
+.dd{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  font-family: inherit;
+}
+
+.dd-btn{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.dd-btn-left,
+.dd-btn-text{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  width: 100%;
+}
+
+.dd-label{
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-btn-text .dd-sub{
+  overflow: hidden;
+  display: none !important;
+}
+
+.dd-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.25);
+}
+
+.dd-caret{
+  opacity: .85;
+  flex: 0 0 auto;
+}
+
+.dd.open .dd-panel{
+  display: block;
+}
+
+.dd-panel{
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 3000;
+  overflow: hidden;
+}
+
+.dd-search{
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  outline: none;
+  font-size: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.dd-crumb{
+  padding: 0;
+}
+
+.dd-back{
+  background: transparent;
+  border-color: transparent;
+  margin: 0;
+  padding: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Default list height (fallback) */
+.dd-list{
+  max-height: min(33vh, 265px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Items */
+.dd-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.dd-item:last-child{
+  border-bottom: none;
+}
+
+.dd-item-left{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.dd-item-main{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dd-item{
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-item-meta{
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-badges{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.dd-pill{
+  overflow: hidden;
+  display: none !important;
+}
+
+.dd-star{
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   4.1) TOPBAR: Fancy dropdown host sizing + per-dropdown heights
+   ============================================================ */
+
+#topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy){
+  flex: 1 1 0;
+  min-width: 120px;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Ensure internal .dd uses full host width */
+:where(#sourceSelectFancy, #mapSelectFancy, #dinoSelectFancy) .dd{
+  width: 100%;
+  max-width: none;
+}
+
+/* Hide badges for source/map */
+:where(#sourceSelectFancy, #mapSelectFancy) :where(.dd-badges, .dd-sub){
+  display: none !important;
+}
+
+/* Per-dropdown list max heights */
+#mapSelectFancy .dd-list{
+  max-height: var(--dd-map-max);
+}
+
+#sourceSelectFancy .dd-list{
+  max-height: var(--dd-source-max);
+}
+
+#dinoSelectFancy .dd-list{
+  max-height: var(--dd-dino-max);
+}
+
+
+/* ============================================================
+   04) PANELS AND CONTENT (CLEAN STRUCTURE)
+   Purpose:
+   - panel structure and content layout only
+   - no theme token definitions
+   - no hardcoded visual styling now handled by atlas_theme_bindings.css
+
+   Depends on:
+   - atlas_core_tokens.css
+   - atlas_theme_bindings.css
+   ============================================================ */
+
+/* ============================================================
+   1) DRAGGABLE FLOATING PANELS
+   ============================================================ */
+
+.floating-panel{
+  z-index: 900;
+  width: var(--panel-w);
+  max-width: min(var(--panel-max-w), calc(100vw - 24px));
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.leaflet-control .floating-panel{
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+}
+
+.floating-panel .fp-header{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0;
+  user-select: none;
+  touch-action: none;
+  margin-bottom: 0;
+}
+
+.floating-panel .fp-titles{
+  grid-column: 1;
+  container-type: inline-size;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  gap: 8px;
+}
+
+.floating-panel .fp-title{
+  font-weight: 300;
+  letter-spacing: .2px;
+  min-width: 0;
+  white-space: nowrap;
+  font-size: clamp(2px, 7.2cqi, 17px);
+}
+
+#dinoInfoPanel .fp-header{
+  padding: 5px 2px !important;
+}
+
+#dinoInfoPanel .fp-title{
+  font-weight: 400;
+  padding-left: 1px;
+}
+
+.floating-panel .fp-actions{
+  grid-column: 2;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.floating-panel .fp-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.floating-panel .fp-btn svg{
+  display: block;
+  pointer-events: none;
+  transition: transform .15s ease;
+}
+
+.floating-panel.collapsed .fp-btn-chevron svg{
+  transform: rotate(-90deg);
+}
+
+/* Floating panel body max-height knob lives here */
+.floating-panel .fp-body{
+  padding: 4px;
+  overflow: auto;
+  max-height: var(--fp-body-max-h);
+  opacity: 1;
+  transition: max-height .22s ease, opacity .18s ease, padding .22s ease;
+  will-change: max-height, opacity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.floating-panel.collapsed .fp-body{
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+/* Internals */
+.fp-col{
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.fp-between{
+  width: 100%;
+}
+
+/* Dino panel header special case */
+#dinoInfoPanel:not(.collapsed) .fp-header{
+  background-color: transparent;
+}
+
+/* Mod style panel body */
+#modStylePanel.collapsed .fp-body{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0;
+}
+
+#modStylePanel .fp-body{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  padding: 4px;
+}
+
+.fp-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 10px 0;
+  font-size: 12px;
+}
+
+#mapEntriesPanel .fp-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+#mapEntriesPanel .fp-header{
+  padding: 5px 2px !important;
+}
+
+#mapEntriesPanel .fp-title{
+  font-weight: 400;
+  padding-left: 1px;
+}
+
+/* ============================================================
+   2) DINO / ENTRY CONTENT
+   ============================================================ */
+
+.info-title{
+  font-weight: 600;
+  font-size: 22px;
+  align-items: flex-start;
+  margin-top: 0;
+}
+
+.info-submeta{
+  font-size: 12px;
+  opacity: .65;
+  margin-top: -2px;
+  margin-bottom: 0;
+}
+
+.is-entry .info-submeta{
+  overflow: hidden;
+  display: none !important;
+}
+
+.info-subtitle{
+  font-size: 10px;
+  font-weight: 450;
+  margin: 0;
+  padding: 0;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+.info-section{
+  margin: 0 0 0;
+  padding-bottom: 0;
+  align-items: flex-start;
+}
+
+#dinoInfoPanel .info-section:first-child{
+  padding-top: 0 !important;
+  margin-top: -10px !important;
+}
+
+.info-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 420;
+  text-transform: uppercase;
+}
+
+.info-mono{
+  margin-top: 0;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.176;
+  font-weight: 100;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.is-entry .entry-meta{
+  margin-top: 5px;
+}
+
+.is-entry .info-label{
+  font-weight: 400;
+}
+
+.entry-row{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 5px;
+  border-radius: 6px;
+}
+
+.entry-main{
+  flex: 1;
+  min-width: 0;
+}
+
+.entry-name{
+  font-size: 14px;
+  font-weight: 350;
+}
+
+.entry-meta-line{
+  font-size: 12px;
+  padding-left: 2mm;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+#mapEntriesPanel .entry-meta-line{
+  font-size: 12px;
+  text-wrap-mode: wrap;
+}
+
+.crate-submeta{
+  font-size: 12px;
+  padding-left: 2mm;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+/* ============================================================
+   3) CRATE-SPECIFIC CONTENT
+   ============================================================ */
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .info-submeta{
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .entry-row{
+  padding: 0;
+  padding-left: 2mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="info"] .mission-subtitle{
+  padding-top: 3mm;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-subtitle-sub{
+  font-size: 12px;
+  font-weight: 450;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries{
+  margin-top: 6px;
+  margin-left: 2mm;
+  margin-right: 2mm;
+  padding-left: 2mm;
+  padding-right: 2mm;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px;
+  border-radius: 8px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .entry-meta-lines{
+  font-size: 9px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-name{
+  margin-top: 1px;
+  padding-left: 3mm;
+  margin-bottom: 1px;
+  font-size: 11px;
+  text-align: left;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-row{
+  padding: 0;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-submeta{
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .fp-page{
+  padding: 0 8px 8px 8px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .set-meta{
+  margin-top: 6px;
+  margin-left: 4mm;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-row{
+  align-self: center;
+  justify-self: space-around;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub{
+  border-radius: 8px;
+  margin: 5px;
+  padding: 5px;
+}
+
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section{
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+/* ============================================================
+   4) META GRID
+   ============================================================ */
+
+.meta-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 12px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.meta-grid.meta-grid-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.meta-cell{
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.meta-label{
+  font-size: 9px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  margin-bottom: 2px;
+}
+
+.meta-stack{
+  display: inline-flex;
+  flex-direction: column;
+  width: max-content;
+  gap: 2px;
+}
+
+.meta-value{
+  font-size: 12px;
+  line-height: 1.15;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+/* ============================================================
+   5) DRAW STYLE PANEL
+   ============================================================ */
+
+#drawStylePanel .fp-body{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px;
+}
+
+#drawStylePanel .fp-row{
+  padding: 2px 2px;
+  margin: 1px;
+}
+
+#drawStylePanel input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+#drawStylePanel input[type="color"]{
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#drawStylePanel input[type="range"]{
+  width: 100%;
+}
+
+#drawStylePanel .fp-col{
+  padding-top: 2px;
+}
+
+#drawStylePanel .fp-header{
+  padding: 3px;
+}
+
+/* ============================================================
+   6) MAP ENTRIES PANEL DETAILS
+   ============================================================ */
+
+#mapEntriesPanel .fp-tabs,
+#mapEntriesPanel .fp-row{
+  gap: 8px;
+}
+
+#mapEntriesPanel .fp-tab{
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+#mapEntriesPanel .dd-search,
+#mapEntriesSearch{
+  height: 42px;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 15px;
+}
+
+.mapEntriesList .dd-item{
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.mapEntriesList .dd-item + .dd-item{
+  margin-top: 8px;
+}
+
+.mapEntriesList .dd-item-name{
+  font-size: 16px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.mapEntriesList .dd-item-meta,
+.mapEntriesList .entry-meta-line{
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+#mapEntriesPanel .fp-header{
+  padding: 3px;
+}
+
+#mapEntriesPanel .fp-body{
+  padding: 5px;
+}
+
+/* ============================================================
+   7) POI PANEL DETAILS
+   ============================================================ */
+
+#poiPanel .fp-header{
+  padding: 3px;
+}
+
+#poiPanel .fp-row{
+  padding: 4px 2px;
+  margin: 1px;
+  border-radius: 8px;
+}
+
+#poiPanel .fp-body{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px;
+}
+
+/* ============================================================
+   8) DINO PANEL TABS / PAGES
+   ============================================================ */
+
+#dinoInfoPanel .fp-body{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+#dinoInfoPanel .dino-hero,
+#dinoInfoPanel .entry-hero{
+  flex: 0 0 auto;
+  padding-left: 6px;
+  padding-top: 0;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+#dinoInfoPanel .dino-hero::after,
+#dinoInfoPanel .entry-hero::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 22px;
+  pointer-events: none;
+}
+
+#dinoInfoPanel .dino-hero-title,
+#dinoInfoPanel .entry-hero-title{
+  overflow: hidden;
+  display: none !important;
+}
+
+#dinoInfoPanel .fp-tabs{
+  flex: 0 0 auto;
+  padding-top: 8px;
+  display: flex;
+  gap: 6px;
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+#dinoInfoPanel .fp-tab{
+  position: relative;
+  background: transparent !important;
+  border: 0 !important;
+  overflow: hidden;
+  flex: 1 1 0;
+  text-align: center;
+  justify-content: center;
+  padding: 8px 0 1px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+#dinoInfoPanel .fp-pages{
+  flex: 0 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  margin-top: 2px;
+  position: relative;
+  z-index: 1;
+  transition: height .18s ease;
+}
+
+#dinoInfoPanel .fp-track{
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  transition: transform .18s ease;
+}
+
+#dinoInfoPanel .fp-page{
+  flex: 0 0 100%;
+  padding: 8px;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.fp-dots{
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 0 10px;
+  opacity: .75;
+}
+
+.fp-dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+}
+
+
+/* ============================================================
+   05) MAP UI / TOOLTIPS / RESPONSIVE (CLEAN STRUCTURE)
+   Purpose:
+   - map UI structure, responsive rules, icons, legend, copy bubble
+   - no theme token definitions
+   - no hardcoded visual styling now handled by atlas_theme_bindings.css
+
+   Depends on:
+   - atlas_core_tokens.css
+   - atlas_theme_bindings.css
+   ============================================================ */
+
+/* ============================================================
+   1) LEAFLET CONTROL LAYOUT
+   ============================================================ */
+
+.leaflet-control.map-dock{
+  overflow: hidden;
+  display: flex;
+}
+
+.leaflet-control.map-dock .dock-btn,
+:where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn){
+  width: 34px;
+  height: 34px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+:where(.leaflet-control.map-dock, .leaflet-control.bg-toggle){
+  overflow: hidden;
+  display: flex;
+}
+
+.leaflet-control-zoom.zoom-horizontal{
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom.zoom-horizontal a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  border-bottom: 0 !important;
+}
+
+.leaflet-bottom.leaflet-left{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.leaflet-bottom.leaflet-left .leaflet-control{
+  margin: 0 !important;
+}
+
+.leaflet-control-attribution{
+  padding: 1px;
+  line-height: 1.2;
+  font-size: 8px;
+  opacity: .40;
+  border-radius: 6px;
+}
+
+.leaflet-right .leaflet-control{
+  margin-right: 20px;
+}
+
+.leaflet-top .leaflet-control{
+  margin-right: 4px;
+}
+
+/* ============================================================
+   2) MOBILE / RESPONSIVE
+   ============================================================ */
+
+@media (max-width:699px){
+
+  .dino-spawn-menu-wrap{
+    grid-template-columns: minmax(0, 1fr) 46px;
+    gap: 8px;
+  }
+
+  .dino-spawn-row{
+    min-height: 76px;
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+
+  .dino-spawn-row--all{
+    min-height: 50px;
+  }
+
+  .dino-spawn-title{
+    font-size: 13px;
+  }
+
+  .dino-spawn-meta-line{
+    font-size: 11px;
+  }
+
+  .dino-spawn-jump-btn{
+    width: 46px;
+    min-width: 46px;
+    border-radius: 16px;
+  }
+
+  #controlsToggle{
+    display: inline-flex;
+  }
+
+  #topbar{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title actions"
+      "controls controls";
+    align-items: center;
+    padding: 0;
+  }
+
+  #topbar .title{
+    grid-area: title;
+    justify-self: start;
+    font-size: 16px;
+    font-weight: 800;
+    font-stretch: condensed;
+    margin-left: 10px;
+  }
+
+  #topbar .title-actions{
+    grid-area: actions;
+    justify-self: end;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  #topbar .controls{
+    grid-area: controls;
+    width: 100%;
+    justify-self: stretch;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  #topbar.show-controls .controls{
+    display: flex;
+  }
+
+  #topbar .controls > :where(#sourceSelectFancy, #mapSelectFancy){
+    min-width: 130px;
+    max-width: none;
+    width: auto;
+  }
+
+  #topbar .controls > #sourceSelectFancy{
+    flex: 3 1 0;
+  }
+
+  #topbar .controls > #mapSelectFancy{
+    flex: 2 1 0;
+  }
+
+  #topbar .controls > #dinoSelectFancy{
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+  }
+
+  /* Per-dropdown heights (mobile) */
+  #mapSelectFancy .dd-list{
+    max-height: var(--dd-map-max-m);
+  }
+
+  #sourceSelectFancy .dd-list{
+    max-height: var(--dd-source-max-m);
+  }
+
+  #dinoSelectFancy .dd-list{
+    max-height: var(--dd-dino-max-m);
+  }
+
+  :where(#sourceSelectFancy .dd-btn, #mapSelectFancy .dd-btn, #dinoSelectFancy .dd-btn){
+    padding: 7px;
+    border-radius: 4px;
+    min-height: 34px;
+  }
+
+  /* Panels: base sizing */
+  .floating-panel{
+    width: var(--panel-w-mobile);
+    font-size: 11px;
+  }
+
+  .floating-panel .fp-body{
+    padding: 0;
+    max-height: var(--fp-body-max-h-mobile);
+    opacity: 1;
+  }
+
+  #dinoInfoPanel,
+  #modStylePanel{
+    transition: width .12s ease;
+  }
+
+  #dinoInfoPanel{
+    width: var(--dino-w-mobile);
+    left: 6px !important;
+    margin: 0 !important;
+    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 12px);
+  }
+
+  #modStylePanel{
+    width: var(--mod-w-mobile-collapsed);
+    right: 6px !important;
+    left: auto !important;
+    margin: 0 !important;
+  }
+
+  #mapEntriesPanel{
+    width: var(--dino-w-mobile);
+    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 12px);
+  }
+
+  body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{
+    width: var(--dino-w-mobile-compact);
+  }
+
+  body:has(#modStylePanel:not(.collapsed)) #modStylePanel{
+    width: var(--mod-w-mobile);
+  }
+
+  body:has(#modStylePanel.collapsed) #modStylePanel{
+    width: var(--mod-w-mobile-collapsed);
+  }
+
+  body:has(#modStylePanel.collapsed) #dinoInfoPanel{
+    width: var(--dino-w-mobile);
+  }
+
+  /* Header height lock */
+  #modStylePanel .fp-header,
+  #dinoInfoPanel .fp-header{
+    padding: 1px 4px !important;
+    line-height: 1 !important;
+  }
+
+  /* Density tweaks */
+  .entry-name{
+    font-size: 11px;
+    font-weight: 420;
+  }
+
+  .entry-meta-line{
+    font-size: 9px;
+    font-weight: 400 !important;
+  }
+
+  .atkgrid-th,
+  .statgrid-th{
+    font-size: 8px;
+    font-weight: 400;
+  }
+
+  .atkgrid-td.num,
+  .statgrid-td.num{
+    font-size: 8px;
+    font-weight: 300;
+  }
+
+  .atkgrid-th.num,
+  .statgrid-th.num{
+    font-size: 8px;
+    font-weight: 400;
+  }
+
+  .atkgrid-td.muted,
+  .statgrid-td.muted{
+    opacity: .55;
+  }
+
+  .atkgrid-td.atkname,
+  .statgrid-td.statname{
+    font-size: 8px;
+    font-weight: 400;
+  }
+
+  .atkgrid-td.wildonly{
+    font-size: 6px;
+    font-weight: 300;
+  }
+
+  #dinoInfoPanel .fp-tabs{
+    padding-top: 8px;
+  }
+
+  #dinoInfoPanel .fp-tab{
+    font-size: 10px;
+  }
+}
+
+/* ============================================================
+   3) UTILITY
+   ============================================================ */
+
+[data-_exportHide="1"]{
+  display: none !important;
+}
+
+/* ============================================================
+   4) POI ICONS
+   ============================================================ */
+
+.poi-artifact-icon svg,
+.poi-icon svg{
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.6));
+}
+
+.poi-icon .poi-fill{
+  fill: currentColor;
+}
+
+.poi-icon{
+  color: #ff00ff; /* fallback */
+}
+
+.poi-icon.poi-blueobelisk{
+  color: #00a5ff;
+}
+
+.poi-icon.poi-greenobelisk{
+  color: #14e800;
+}
+
+.poi-icon.poi-redobelisk{
+  color: #f70102;
+}
+
+.poi-icon.poi-tekcave{
+  color: #b84cff;
+}
+
+/* ============================================================
+   5) TOOLTIP CONTENT
+   Visual shell handled by theme bindings.
+   ============================================================ */
+
+.leaflet-tooltip.basic-tooltip,
+.leaflet-tooltip.pstart-tooltip,
+.leaflet-tooltip.horde-tooltip,
+.leaflet-tooltip.mission-tooltip,
+.leaflet-tooltip.supply-tooltip{
+  max-width: 280px;
+  min-width: 100px;
+  width: auto;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+.leaflet-tooltip.horde-tooltip,
+.leaflet-tooltip.mission-tooltip,
+.leaflet-tooltip.supply-tooltip{
+  width: 200px;
+}
+
+.leaflet-tooltip .poi-tip-block{
+  margin-bottom: 2px;
+}
+
+.leaflet-tooltip .poi-tip-title{
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.leaflet-tooltip .poi-tip-line{
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.leaflet-tooltip .poi-tip-bp{
+  margin-top: 1px;
+  font-size: 10px;
+  line-height: 1.1;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  opacity: .75;
+}
+
+/* Type-specific tweaks */
+.leaflet-tooltip.mission-tooltip .poi-tip-title,
+.leaflet-tooltip.supply-tooltip .poi-tip-title{
+  font-weight: 700;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.leaflet-tooltip.supply-tooltip .poi-tip-title{
+  font-size: 9px;
+}
+
+.leaflet-tooltip.supply-tooltip .poi-tip-subtitle{
+  font-weight: 500;
+  margin-bottom: 2px;
+  font-size: 8px;
+  text-transform: uppercase;
+  opacity: .8;
+}
+
+.leaflet-tooltip.supply-tooltip .poi-tip-line{
+  font-size: 11px;
+  line-height: 1.05;
+  font-weight: 600;
+}
+
+.leaflet-tooltip.supply-tooltip .poi-tip-bp{
+  padding-left: 10px;
+}
+
+.leaflet-tooltip.mission-tooltip .poi-tip-bp{
+  font-size: 9px;
+}
+
+/* ============================================================
+   6) RARITY LEGEND
+   ============================================================ */
+
+.rarity-legend{
+  position: absolute;
+  margin-left: 8px;
+  bottom: 50px;
+  z-index: 950;
+
+  display: flex;
+  gap: 0;
+
+  padding: 2px;
+  pointer-events: auto;
+}
+
+.rarity-legend .rl-end{
+  font-size: 9px;
+  white-space: nowrap;
+  user-select: none;
+  font-variant: all-small-caps;
+  font-stretch: condensed;
+  padding: 1px;
+}
+
+.rarity-legend .rl-bar{
+  display: flex;
+  gap: 1px;
+}
+
+.rarity-legend .rl-sq{
+  width: 13px;
+  height: 13px;
+}
+
+/* ============================================================
+   7) COPY BUBBLE
+   ============================================================ */
+
+.copy-on-click{
+  cursor: pointer;
+}
+
+.copy-bubble{
+  position: fixed;
+  z-index: 99999;
+
+  font-weight: 600;
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 6px;
+
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.copy-bubble.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   8) DESKTOP TOPBAR GRID
+   ============================================================ */
+
+@media (min-width:700px){
+  #topbar{
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    align-items: center;
+    column-gap: 14px;
+  }
+
+  #topbar .controls{
+    justify-self: center;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  .leaflet-control.map-dock .dock-btn,
+  :where(.leaflet-control.map-dock .dock-btn, .leaflet-control.bg-toggle .bg-toggle-btn),
+  .leaflet-control-zoom.zoom-horizontal a{
+    width: 42px;
+    height: 42px;
+  }
+}
+
+
+/* ============================================================
+   06) OVERRIDES / DISCORD / SPAWN-CARD PATTERN (CLEAN STRUCTURE)
+   Purpose:
+   - late-stage structural overrides that still matter
+   - discord-activity layout tweaks
+   - spawn-card pattern structure only
+   - no hardcoded visual styling now handled by atlas_theme_bindings.css
+
+   Depends on:
+   - atlas_core_tokens.css
+   - atlas_theme_bindings.css
+   ============================================================ */
+
+/* ============================================================
+   1) DINO SPAWN CARD PATTERN
+   This is the newer/alternate spawn card structure.
+   Keep only structural rules here.
+   ============================================================ */
+
+.dino-spawn-card-wrap{
+  position: relative;
+  margin-top: 10px;
+}
+
+/* final compact structure */
+.dino-spawn-card{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  border-radius: 8px;
+  padding: 3px 4px 3px 4px;
+  cursor: pointer;
+}
+
+.dino-spawn-card--all{
+  min-height: 72px;
+  align-items: center;
+}
+
+.dino-spawn-card-main{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dino-spawn-card-wrap .dino-spawn-card{
+  padding-right: 20px;
+}
+
+.dino-spawn-card .dino-spawn-title{
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.15;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.dino-spawn-card .dino-spawn-meta{
+  display: block;
+  margin-top: 5px;
+  margin-left: 6px;
+}
+
+.dino-spawn-card .dino-spawn-meta-line{
+  display: block;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.dino-spawn-check{
+  position: absolute;
+  right: 10px;
+  top: 75%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.dino-spawn-corner-jump{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dino-spawn-corner-jump svg{
+  display: block;
+}
+
+/* ============================================================
+   2) OPTIONAL TOGGLE ROW VARIANT
+   ============================================================ */
+
+.dino-spawn-tggl-wrap{
+  position: relative;
+  margin-top: 0;
+}
+
+.dino-spawn-tggl--all{
+  display: flex;
+  min-height: 0;
+  height: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  background: transparent;
+  gap: 5px;
+  padding-bottom: 2px;
+  border: 0;
+}
+
+.dino-spawn-tggl.is-on{
+  background: transparent;
+  border: 0;
+}
+
+.dino-spawn-tggl-title{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.dino-spawn-tggl-check{
+  position: relative;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* tighter stacked list for this pattern
+   NOTE: still global until markup gets a dedicated modifier class. */
+.mode-menu-like-list{
+  gap: 0;
+}
+
+/* ============================================================
+   3) DISCORD ACTIVITY LAYOUT TWEAKS
+   ============================================================ */
+
+body.discord-activity{
+  padding-bottom: 10px;
+}
+
+body.discord-activity #topbar{
+  margin-top: calc(env(safe-area-inset-top) + 46px);
+}
+
+/* Option B */
+body.discord-activity .leaflet-bottom.leaflet-left{
+  left: 20px;
+}
+
+body.discord-activity #mapEntriesPanel [data-action="export"]{
+  display: none !important;
+}
