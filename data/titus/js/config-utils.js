@@ -47,6 +47,16 @@ const jsonCache = {};
 
 let SOURCES = [];
 
+
+function setTheme(name){
+  document.body.classList.remove("theme-soft", "theme-asa");
+  if(name) document.body.classList.add(name);
+}
+
+setTheme("theme-soft");
+setTheme("theme-asa");
+setTheme(null); // default (your current blue)
+
 /* Split from app_embed.js lines 99-251 */
 
 /* ============================================================
