@@ -1,19 +1,12 @@
 window.ASA_APP_MODULES = [
-  "js/00-config.js",
-  "js/01-state.js",
-  "js/03-utils.js",
-  "js/data.js",
-  "js/poi.js",
-  "js/map.js",
-  "js/panel.js",
-  "js/ui.js",
+  "js/config-utils.js",
+  "js/map-panel.js",
+  "js/data-ui.js",
   "js/views/dino-view.js",
   "js/views/spawn-view.js",
   "js/views/crate-view.js",
   "js/views/item-view.js",
-  "js/41-rarity-engine.js",
-  "js/50-render.js",
-  "js/52-boot.js",
+  "js/render-boot.js",
 ];
 
 (function loadSequentially(i = 0) {

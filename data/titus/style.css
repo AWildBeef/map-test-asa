@@ -2650,3 +2650,28 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row {
   color: rgba(255,255,255,0.92);
   pointer-events: none;
 }
+
+body.discord-activity #topbar {
+  margin-top: calc(env(safe-area-inset-top) + 46px);
+}
+
+body.discord-activity {
+  padding-bottom: 10px;
+}
+
+/* Option B */
+body.discord-activity .leaflet-bottom.leaflet-left {
+  left: 20px;
+}
+
+body.discord-activity #mapEntriesPanel [data-action="export"] {
+  display: none !important;
+}
+
+
+#dinoInfoPanel .dino-hero{
+  padding-left:6px;
+  padding-top:0px;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}

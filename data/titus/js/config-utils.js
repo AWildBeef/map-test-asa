@@ -1,3 +1,52 @@
+/* Split from app_embed.js lines 1-98 */
+
+/* ============================================================
+   ASA Spawn Maps
+   Atlas V5 – clean full architecture
+============================================================ */
+
+/* ============================================================
+   CONFIG
+============================================================ */
+
+const RUNTIME = window.ASA_RUNTIME || {};
+
+const ASSET_VER = RUNTIME.assetVersion || "dev-2026-03-05-V6";
+
+const PATHS = {
+  spawnGlobal: "data/spawn_global.json",
+  dinoGlobal: "data/dinos_global.json",
+  itemGlobal: "data/items_global.json",
+  lootGlobal: "data/loot_global.json",
+  geomDir: "data/MapGeometry",
+  mapsDir: "maps"
+};
+
+const MAPS = [
+  { id:"The Island", geomShort:"TheIsland", mapCode:"TheIsland", image:"theisland.webp" },
+  { id:"Scorched Earth", geomShort:"ScorchedEarth", mapCode:"SE", image:"scorchedearth.webp" },
+  { id:"The Center", geomShort:"TheCenter", mapCode:"center", image:"thecenter.webp" },
+  { id:"Ragnarok", geomShort:"Ragnarok", mapCode:"Rag", image:"ragnarok.webp" },
+  { id:"Valguero", geomShort:"Valguero", mapCode:"Val", image:"valguero.webp" },
+  { id:"Aberration", geomShort:"Aberration", mapCode:"AB", image:"aberration.webp" },
+  { id:"Extinction", geomShort:"Extinction", mapCode:"EXT", image:"extinction.webp" },
+  { id:"Lost Colony", geomShort:"LostColony", mapCode:"LC", image:"lostcolony.webp" },
+  {
+    id:"Astraeos",
+    geomShort:"Astraeos",
+    mapCode:"AST",
+    image:"astraeos.webp",
+    backgrounds: [
+      { id:"hand", label:"In Game", url:"maps/Astraeos_IngameMap.webp" },
+      { id:"sat",  label:"Satellite", url:"maps/astraeos.webp" }
+    ],
+    defaultBg:"sat"
+  }
+];
+const jsonCache = {};
+
+let SOURCES = [];
+
 /* Split from app_embed.js lines 99-251 */
 
 /* ============================================================
@@ -163,4 +212,93 @@ function openEntryView(entryName){
   render();
 }
 
+function openDinoView(name){
+  if (!name) return;
 
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "dino";
+  State.selection = name;
+  State.selections.dino = name;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  render();
+}
+
+
+/* Split from app_embed.js lines 252-721 */
+
+/* ============================================================
+   UI
+============================================================ */
+
+const UI = {
+
+  sourceSelect: document.getElementById("sourceSelect"),
+  sourceFancy: document.getElementById("sourceSelectFancy"),
+  
+  mapSelect:document.getElementById("mapSelect"),
+  mapFancy:document.getElementById("mapSelectFancy"),
+
+  dinoSelect:document.getElementById("dinoSelect"),
+  dinoFancy:document.getElementById("dinoSelectFancy"),
+
+  modeToggle:document.getElementById("modeToggle"),
+  controlsToggle:document.getElementById("controlsToggle"),
+  topbar:document.getElementById("topbar")
+};
+
+
+
+function syncModeButton() {
+  if (!UI.modeToggle) return;
+
+  const labels = {
+    dino: "Dino View",
+    entry: "Spawn View",
+    crate: "Crate View",
+    item: "Item View"
+  };
+
+  UI.modeToggle.innerHTML = `
+    <span>${labels[State.mode] || "View"}</span>
+    <span class="mode-toggle-caret" aria-hidden="true">▾</span>
+  `;
+}
+
+
+
+
+/* ============================================================
+   UTILS
+============================================================ */
+
+
+
+
+
+
+
+
+
+
+
+function activeSourceIsOfficial(){
+  return !Global.modMeta;
+}
+
+function modBlueprintSet(){
+  if (!Global.modMeta?.dinos) return new Set();
+  return new Set(Object.keys(Global.modMeta.dinos));
+}
+
+function normSearch(s){
+  return String(s||"").toLowerCase().replace(/[\s_-]/g,"");
+}
+
+
+
+function bpClass(bp){
+  return String(bp||"").split(".").pop();
+}

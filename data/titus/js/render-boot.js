@@ -1,3 +1,35 @@
+/* Split from app_embed.js lines 4441-4464 */
+
+/* ============================================================
+   RENDER
+============================================================ */
+
+function render() {
+  if (!State.selection) {
+    clearDraw();
+    drawPois();
+    renderInfoPanelBodyEmpty();
+    return;
+  }
+  
+  if (State.mode === "dino") {
+    drawDino(State.selection);
+    drawPois();
+  } else if (State.mode === "entry") {
+    clearDraw();
+    const score = entryRarityForEntry(State.selection);
+    drawEntry(State.selection, score);
+    drawPois();
+  } else if (State.mode === "crate") {
+    drawCrate(State.selection);
+  } else if (State.mode === "item") {
+    drawItem(State.selection);
+  }
+  
+  renderInfoPanel();
+}
+
+
 /* Split from app_embed.js lines 4504-4546 */
 
 /* ============================================================
@@ -13,10 +45,6 @@ async function boot() {
   
   Global.baseSpawn = await loadJSON(official.spawn);
   Global.baseDinos = await loadJSON(official.dinos);
-  Global.items = await loadJSON(PATHS.itemGlobal);
-  Global.loot = await loadJSON(PATHS.lootGlobal);
-  
-  buildLootIndexes();
   
   Global.spawn = Global.baseSpawn;
   Global.dinos = Global.baseDinos;
@@ -38,10 +66,19 @@ async function boot() {
   
   initRarityLegend();
   
+  setTimeout(() => {
+    ensureLootAndItemsLoaded().catch(err => {
+      console.warn("Deferred loot/item load failed", err);
+    });
+  }, 300);
+  
+  buildLootIndexes();
+  
   await onMapChanged();
+
   setTimeout(() => {
     preloadAllMapImages();
-  }, 300);
+  }, 1200);
 }
 
 boot().catch(e=>{
