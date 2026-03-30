@@ -1733,11 +1733,28 @@ function positionModeMenu(){
   if (!menu || !btn) return;
 
   const r = btn.getBoundingClientRect();
+  const pad = 8;
 
   menu.style.position = "fixed";
-  menu.style.left = `${Math.max(8, r.left)}px`;
   menu.style.top = `${r.bottom + 6}px`;
   menu.style.zIndex = "1200";
+
+  const menuWidth = menu.offsetWidth || 220;
+
+  let left;
+
+  if (window.innerWidth <= 699) {
+    // keep old mobile behavior
+    left = Math.max(pad, r.left);
+  } else {
+    // align right edge to button on desktop
+    left = r.right - menuWidth;
+
+    // keep fully onscreen
+    left = Math.max(pad, Math.min(left, window.innerWidth - menuWidth - pad));
+  }
+
+  menu.style.left = `${left}px`;
 }
 
 function renderModeMenu(){
