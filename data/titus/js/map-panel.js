@@ -712,7 +712,7 @@ function renderMapEntriesPanel(){
     })}
 
     ${showMapFilter ? `
-      <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
+      <div class="fp-row">
         <button type="button" class="fp-tab ${spawnBrowserState.filter === "all" ? "is-on" : ""}" data-entry-filter="all">All</button>
         <button type="button" class="fp-tab ${spawnBrowserState.filter === "unique" ? "is-on" : ""}" data-entry-filter="unique">Unique</button>
         <button type="button" class="fp-tab ${spawnBrowserState.filter === "shared" ? "is-on" : ""}" data-entry-filter="shared">Shared</button>
@@ -760,6 +760,13 @@ function renderMapEntriesPanel(){
   body.querySelectorAll("[data-entry-filter]").forEach(btn => {
     btn.onclick = () => {
       spawnBrowserState.filter = btn.dataset.entryFilter;
+
+      body.querySelectorAll("[data-entry-filter]").forEach(b => {
+        const isOn = b.dataset.entryFilter === spawnBrowserState.filter;
+        b.classList.toggle("is-on", isOn);
+        b.setAttribute("aria-pressed", isOn ? "true" : "false");
+      });
+
       renderMapEntriesList();
     };
   });
