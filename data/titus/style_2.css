@@ -57,7 +57,7 @@
   --shadow-md: 0 10px 24px rgba(0,0,0,.28);
   --shadow-lg: 0 18px 46px rgba(0,0,0,.50);
 
-  /* ============================================================
+/* ============================================================
      2) SEMANTIC THEME TOKENS
      Default theme = Atlas Blue
      These are the ONLY visual/theme tokens other files should use.
@@ -220,6 +220,253 @@ body.theme-asa{
   --glass-top: rgba(255,255,255,.03);
   --glass-bottom: rgba(255,255,255,.015);
 }
+
+/* Scorched Earth - setTheme("theme-scorched"); */
+body.theme-scorched{
+  --bg-0: #14100c;
+  --bg-1: #1e1812;
+  --bg-2: #2a221a;
+
+  --surface-1: rgba(34,26,18,.96);
+  --surface-2: rgba(48,36,24,.95);
+  --surface-3: rgba(68,50,32,.94);
+  --surface-control: rgba(78,58,36,.92);
+  --surface-control-hover: rgba(96,70,44,.96);
+
+  --border-soft: rgba(220,190,140,.10);
+  --border-mid: rgba(220,190,140,.18);
+  --border-strong: rgba(220,190,140,.26);
+
+  --text-1: #f6ead6;
+  --text-2: #e4d3b5;
+  --text-3: #bfa98a;
+  --text-dim: #8f7a60;
+
+  --accent: #dcb07a;
+  --accent-bright: #f3d7ab;
+  --accent-rgb: 220, 176, 122;
+
+  --hover-fill: rgba(217,168,108,.08);
+  --active-fill: rgba(217,168,108,.14);
+  --selected-fill: rgba(217,168,108,.18);
+
+  --glow-soft: rgba(217,168,108,.08);
+  --glow-mid: rgba(217,168,108,.14);
+  --focus-ring: rgba(217,168,108,.20);
+
+  --tone-rare: #e8b46f;
+  --tone-cave: #c49a6c;
+  --tone-success: #cfc07a;
+
+  --fill-soft: rgba(var(--accent-rgb), .04);
+  --fill-mid: rgba(var(--accent-rgb), .08);
+  --fill-strong: rgba(var(--accent-rgb), .14);
+  --fill-stronger: rgba(var(--accent-rgb), .18);
+
+  --outline-soft: rgba(var(--accent-rgb), .10);
+  --outline-mid: rgba(var(--accent-rgb), .14);
+
+  --glass-top: rgba(255,240,210,.02);
+  --glass-bottom: rgba(255,220,180,.01);
+}
+
+body.theme-ab{
+  --bg-0: #05070f;
+  --bg-1: #0b0f1d;
+  --bg-2: #141a33;
+
+  --surface-1: rgba(12,14,30,.97);
+  --surface-2: rgba(20,26,52,.96);
+  --surface-3: rgba(36,40,78,.95);
+  --surface-control: rgba(32,52,96,.93);
+  --surface-control-hover: rgba(48,70,130,.97);
+
+  --border-soft: rgba(170,120,255,.14);
+  --border-mid: rgba(170,120,255,.24);
+  --border-strong: rgba(170,120,255,.36);
+
+  --text-1: #f2f6ff;
+  --text-2: #dbe6ff;
+  --text-3: #a9b6d8;
+  --text-dim: #7d89a8;
+
+  --accent: #c86cff;
+  --accent-bright: #e0a7ff;
+  --accent-rgb: 200, 108, 255;
+
+  --hover-fill: rgba(200,108,255,.08);
+  --active-fill: rgba(200,108,255,.14);
+  --selected-fill: rgba(200,108,255,.20);
+
+  --glow-soft: rgba(200,108,255,.10);
+  --glow-mid: rgba(200,108,255,.20);
+  --focus-ring: rgba(200,108,255,.24);
+
+  --tone-rare: #ff79ff;
+  --tone-cave: #9a7cff;
+  --tone-success: #78ffb0;
+
+  --fill-soft: rgba(var(--accent-rgb), .04);
+  --fill-mid: rgba(var(--accent-rgb), .08);
+  --fill-strong: rgba(var(--accent-rgb), .14);
+  --fill-stronger: rgba(var(--accent-rgb), .20);
+
+  --outline-soft: rgba(var(--accent-rgb), .10);
+  --outline-mid: rgba(var(--accent-rgb), .16);
+
+  --glass-top: rgba(255,255,255,.04);
+  --glass-bottom: rgba(140,100,255,.02);
+}
+
+body.theme-island{
+  --bg-0: #0a120c;
+  --bg-1: #111c14;
+  --bg-2: #18261c;
+
+  /* darker, more earthy surfaces */
+  --surface-1: rgba(18,28,20,.96);
+  --surface-2: rgba(26,40,28,.95);
+  --surface-3: rgba(36,54,38,.94);
+
+  /* 👇 more contrast for cards */
+  --surface-control: rgba(32,60,40,.92);
+  --surface-control-hover: rgba(42,78,52,.96);
+
+  --border-soft: rgba(140,200,150,.08);
+  --border-mid: rgba(140,200,150,.16);
+  --border-strong: rgba(140,200,150,.26);
+
+  --text-1: #ecf7ef;
+  --text-2: #d3e8db;
+  --text-3: #9fbca9;
+  --text-dim: #6f8f7c;
+
+  /* 👇 less neon, more earthy */
+  --accent: #5fa77a;
+  --accent-bright: #a6d8b8;
+  --accent-rgb: 95, 167, 122;
+
+  /* 👇 stronger state separation */
+  --hover-fill: rgba(95,167,122,.10);
+  --active-fill: rgba(95,167,122,.16);
+  --selected-fill: rgba(95,167,122,.24);
+
+  --glow-soft: rgba(95,167,122,.08);
+  --glow-mid: rgba(95,167,122,.18);
+  --focus-ring: rgba(95,167,122,.22);
+
+  /* 👇 helps cards stand out more */
+  --fill-soft: rgba(var(--accent-rgb), .05);
+  --fill-mid: rgba(var(--accent-rgb), .10);
+  --fill-strong: rgba(var(--accent-rgb), .16);
+  --fill-stronger: rgba(var(--accent-rgb), .24);
+
+  --outline-soft: rgba(var(--accent-rgb), .12);
+  --outline-mid: rgba(var(--accent-rgb), .18);
+
+  --glass-top: rgba(220,255,230,.02);
+  --glass-bottom: rgba(140,200,150,.015);
+}
+
+body.theme-lost{
+  --bg-0: #0e0404;
+  --bg-1: #160808;
+  --bg-2: #220c0c;
+
+  /* 👇 darker base = better red contrast */
+  --surface-1: rgba(30,10,10,.97);
+  --surface-2: rgba(44,14,14,.96);
+  --surface-3: rgba(60,18,18,.95);
+
+  /* 👇 stronger card separation */
+  --surface-control: rgba(70,20,20,.94);
+  --surface-control-hover: rgba(95,28,28,.98);
+
+  --border-soft: rgba(255,110,110,.10);
+  --border-mid: rgba(255,110,110,.18);
+  --border-strong: rgba(255,110,110,.30);
+
+  --text-1: #fff1f1;
+  --text-2: #ffd6d6;
+  --text-3: #d19a9a;
+  --text-dim: #9a6a6a;
+
+  /* 👇 slightly hotter red */
+  --accent: #ff4a4a;
+  --accent-bright: #ff8a8a;
+  --accent-rgb: 255, 74, 74;
+
+  /* 👇 stronger visual states */
+  --hover-fill: rgba(255,74,74,.12);
+  --active-fill: rgba(255,74,74,.20);
+  --selected-fill: rgba(255,74,74,.28);
+
+  --glow-soft: rgba(255,74,74,.12);
+  --glow-mid: rgba(255,74,74,.24);
+  --focus-ring: rgba(255,74,74,.30);
+
+  /* 👇 makes selected cards POP */
+  --fill-soft: rgba(var(--accent-rgb), .05);
+  --fill-mid: rgba(var(--accent-rgb), .10);
+  --fill-strong: rgba(var(--accent-rgb), .18);
+  --fill-stronger: rgba(var(--accent-rgb), .26);
+
+  --outline-soft: rgba(var(--accent-rgb), .14);
+  --outline-mid: rgba(var(--accent-rgb), .20);
+
+  --glass-top: rgba(255,180,180,.02);
+  --glass-bottom: rgba(255,90,90,.02);
+}
+
+/* Aberration - setTheme("theme-ab"); */
+body.theme-ab-old{
+  --bg-0: #050811;
+  --bg-1: #0a1020;
+  --bg-2: #121933;
+
+  --surface-1: rgba(10,14,28,.97);
+  --surface-2: rgba(15,24,46,.96);
+  --surface-3: rgba(26,40,74,.95);
+  --surface-control: rgba(22,46,78,.93);
+  --surface-control-hover: rgba(32,61,102,.97);
+
+  --border-soft: rgba(101,224,255,.12);
+  --border-mid: rgba(101,224,255,.22);
+  --border-strong: rgba(101,224,255,.34);
+
+  --text-1: #eefcff;
+  --text-2: #d2efff;
+  --text-3: #9fb9d8;
+  --text-dim: #7285a8;
+
+  --accent: #58dcff;
+  --accent-bright: #b4f7ff;
+  --accent-rgb: 88, 220, 255;
+
+  --hover-fill: rgba(88,220,255,.09);
+  --active-fill: rgba(88,220,255,.16);
+  --selected-fill: rgba(88,220,255,.22);
+
+  --glow-soft: rgba(88,220,255,.10);
+  --glow-mid: rgba(88,220,255,.20);
+  --focus-ring: rgba(88,220,255,.24);
+
+  --tone-rare: #ff78d8;
+  --tone-cave: #9f7cff;
+  --tone-success: #78ff9d;
+
+  --fill-soft: rgba(var(--accent-rgb), .04);
+  --fill-mid: rgba(var(--accent-rgb), .08);
+  --fill-strong: rgba(var(--accent-rgb), .14);
+  --fill-stronger: rgba(var(--accent-rgb), .18);
+
+  --outline-soft: rgba(var(--accent-rgb), .10);
+  --outline-mid: rgba(var(--accent-rgb), .16);
+
+  --glass-top: rgba(255,255,255,.035);
+  --glass-bottom: rgba(120,180,255,.012);
+}
+
 
 /* ============================================================
    4) MIGRATION NOTES
@@ -3236,5 +3483,58 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
   width: 8px;
 }
 
+.dino-spawn-card{
+  border: 1px solid var(--spawn-card-off-border);
+  background:
+    linear-gradient(
+      to bottom,
+      var(--spawn-card-off-top),
+      var(--spawn-card-off-bot)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 6px 18px rgba(0,0,0,.18);
+}
 
+.dino-spawn-card:hover{
+  border-color: var(--spawn-card-hover-border);
+  background:
+    linear-gradient(
+      to bottom,
+      var(--spawn-card-hover-top),
+      var(--spawn-card-hover-bot)
+    );
+}
+
+.dino-spawn-card.is-on{
+  border-color: var(--spawn-card-on-border);
+  background:
+    linear-gradient(
+      to bottom,
+      var(--spawn-card-on-top),
+      var(--spawn-card-on-bot)
+    );
+  box-shadow:
+    inset 0 0 0 1px var(--spawn-card-on-glow),
+    0 10px 24px rgba(0,0,0,.25);
+}
+
+.dino-spawn-card.is-on::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius:999px;
+  background: var(--spawn-card-strip);
+}
+
+.dino-spawn-check{
+  color: var(--spawn-card-check);
+}
+
+.dino-spawn-corner-jump{
+  color: var(--spawn-card-jump);
+}
 
