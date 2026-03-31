@@ -404,9 +404,9 @@ body.theme-island{
   --surface-control: rgba(32,60,40,.92);
   --surface-control-hover: rgba(42,78,52,.96);
 
-  --border-soft: rgba(140,200,150,.08);
-  --border-mid: rgba(140,200,150,.16);
-  --border-strong: rgba(140,200,150,.26);
+  --border-soft: rgba(214,190,140,.10);
+  --border-mid: rgba(214,190,140,.18);
+  --border-strong: rgba(214,190,140,.28);
 
   --text-1: #ecf7ef;
   --text-2: #d3e8db;
@@ -423,9 +423,9 @@ body.theme-island{
   --active-fill: rgba(95,167,122,.16);
   --selected-fill: rgba(95,167,122,.24);
 
-  --glow-soft: rgba(95,167,122,.08);
-  --glow-mid: rgba(95,167,122,.18);
-  --focus-ring: rgba(95,167,122,.22);
+  --glow-soft: rgba(159,207,146,.08);
+  --glow-mid: rgba(159,207,146,.14);
+  --focus-ring: rgba(159,207,146,.20);
   
   --spawn-card-off-top: rgba(110,145,90,.07);
   --spawn-card-off-bot: rgba(70,95,55,.025);
@@ -433,8 +433,8 @@ body.theme-island{
   --spawn-card-hover-top: rgba(125,165,100,.11);
   --spawn-card-hover-bot: rgba(80,110,60,.05);
 
-  --spawn-card-on-top: rgba(150,190,125,.17);
-  --spawn-card-on-bot: rgba(95,130,75,.07);
+  --spawn-card-on-top: rgba(110,135,88,.34);
+  --spawn-card-on-bot: rgba(68,92,52,.24);
 
   --spawn-card-on-glow: rgba(160,200,135,.10);
   --spawn-card-strip: linear-gradient(
@@ -458,7 +458,8 @@ body.theme-island{
   --outline-mid: rgba(var(--accent-rgb), .18);
 
   --glass-top: rgba(220,255,230,.02);
-  --glass-bottom: rgba(140,200,150,.015);
+  --glass-bottom: rgba(210,185,140,.01);
+
 }
 
 body.theme-lost{
