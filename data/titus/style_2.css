@@ -106,6 +106,25 @@
   --tone-cave: #b98cff;
   --tone-success: #67e58a;
   
+  --spawn-card-off-top: rgba(var(--accent-rgb), .08);
+  --spawn-card-off-bot: rgba(var(--accent-rgb), .03);
+
+  --spawn-card-hover-top: rgba(var(--accent-rgb), .12);
+  --spawn-card-hover-bot: rgba(var(--accent-rgb), .05);
+
+  --spawn-card-on-top: rgba(var(--accent-rgb), .20);
+  --spawn-card-on-bot: rgba(var(--accent-rgb), .09);
+
+  --spawn-card-on-glow: rgba(var(--accent-rgb), .12);
+  --spawn-card-strip: linear-gradient(
+    to bottom,
+    var(--transparent), 
+    var(--accent-bright) 33%,
+    var(--accent-bright) 67%,
+    var(--transparent) 100%
+  );
+  
+  
   /* derived interactive fills */
   --fill-soft: rgba(var(--accent-rgb), .04);
   --fill-mid: rgba(var(--accent-rgb), .08);
@@ -242,9 +261,9 @@ body.theme-scorched{
   --text-3: #bfa98a;
   --text-dim: #8f7a60;
 
-  --accent: #dcb07a;
-  --accent-bright: #f3d7ab;
-  --accent-rgb: 220, 176, 122;
+  --accent: #d8b178;
+  --accent-bright: #f2d79e;
+  --accent-rgb: 216, 177, 120;
 
   --hover-fill: rgba(217,168,108,.08);
   --active-fill: rgba(217,168,108,.14);
@@ -257,6 +276,28 @@ body.theme-scorched{
   --tone-rare: #e8b46f;
   --tone-cave: #c49a6c;
   --tone-success: #cfc07a;
+  
+  
+  --spawn-card-off-top: rgba(210,170,110,.07);
+  --spawn-card-off-bot: rgba(210,170,110,.02);
+
+  --spawn-card-hover-top: rgba(225,190,125,.11);
+  --spawn-card-hover-bot: rgba(225,190,125,.045);
+
+  --spawn-card-on-top: rgba(238,205,145,.18);
+  --spawn-card-on-bot: rgba(238,205,145,.07);
+
+  --spawn-card-on-glow: rgba(238,205,145,.10);
+  --spawn-card-check: #f2d79e;
+  --spawn-card-jump: #f2d79e;
+  --spawn-card-strip: linear-gradient(
+    to bottom,
+    var(--transparent), 
+    var(--accent-bright) 33%,
+    var(--accent-bright) 67%,
+    var(--transparent) 100%
+  );
+  
 
   --fill-soft: rgba(var(--accent-rgb), .04);
   --fill-mid: rgba(var(--accent-rgb), .08);
@@ -305,6 +346,28 @@ body.theme-ab{
   --tone-rare: #ff79ff;
   --tone-cave: #9a7cff;
   --tone-success: #78ffb0;
+  
+  
+  --spawn-card-off-top: rgba(150,110,255,.07);
+  --spawn-card-off-bot: rgba(150,110,255,.02);
+
+  --spawn-card-hover-top: rgba(170,120,255,.11);
+  --spawn-card-hover-bot: rgba(170,120,255,.045);
+
+  --spawn-card-on-top: rgba(190,120,255,.20);
+  --spawn-card-on-bot: rgba(110,70,200,.08);
+
+  --spawn-card-on-glow: rgba(190,120,255,.12);
+  --spawn-card-strip: linear-gradient(
+    to bottom,
+    var(--transparent), 
+    var(--accent-bright) 33%,
+    var(--accent-bright) 67%,
+    var(--transparent) 100%
+  );
+  --spawn-card-check: #d49cff;
+  --spawn-card-jump: #d49cff;
+  
 
   --fill-soft: rgba(var(--accent-rgb), .04);
   --fill-mid: rgba(var(--accent-rgb), .08);
@@ -342,9 +405,9 @@ body.theme-island{
   --text-dim: #6f8f7c;
 
   /* 👇 less neon, more earthy */
-  --accent: #5fa77a;
-  --accent-bright: #a6d8b8;
-  --accent-rgb: 95, 167, 122;
+  --accent: #6f9f5f;
+  --accent-bright: #b9e2a5;
+  --accent-rgb: 111, 159, 95;
 
   /* 👇 stronger state separation */
   --hover-fill: rgba(95,167,122,.10);
@@ -354,6 +417,27 @@ body.theme-island{
   --glow-soft: rgba(95,167,122,.08);
   --glow-mid: rgba(95,167,122,.18);
   --focus-ring: rgba(95,167,122,.22);
+  
+  --spawn-card-off-top: rgba(110,145,90,.07);
+  --spawn-card-off-bot: rgba(70,95,55,.025);
+
+  --spawn-card-hover-top: rgba(125,165,100,.11);
+  --spawn-card-hover-bot: rgba(80,110,60,.05);
+
+  --spawn-card-on-top: rgba(150,190,125,.17);
+  --spawn-card-on-bot: rgba(95,130,75,.07);
+
+  --spawn-card-on-glow: rgba(160,200,135,.10);
+  --spawn-card-strip: linear-gradient(
+    to bottom,
+    var(--transparent), 
+    var(--accent-bright) 33%,
+    var(--accent-bright) 67%,
+    var(--transparent) 100%
+  );
+  --spawn-card-check: #b9e2a5;
+  --spawn-card-jump: #b9e2a5;
+  
 
   /* 👇 helps cards stand out more */
   --fill-soft: rgba(var(--accent-rgb), .05);
@@ -404,6 +488,28 @@ body.theme-lost{
   --glow-soft: rgba(255,74,74,.12);
   --glow-mid: rgba(255,74,74,.24);
   --focus-ring: rgba(255,74,74,.30);
+  
+  
+  --spawn-card-off-top: rgba(180,55,55,.06);
+  --spawn-card-off-bot: rgba(180,55,55,.02);
+
+  --spawn-card-hover-top: rgba(220,80,80,.10);
+  --spawn-card-hover-bot: rgba(220,80,80,.045);
+
+  --spawn-card-on-top: rgba(255,95,95,.18);
+  --spawn-card-on-bot: rgba(180,40,40,.07);
+
+  --spawn-card-on-glow: rgba(255,95,95,.11);
+  --spawn-card-strip: linear-gradient(
+    to bottom,
+    var(--transparent), 
+    var(--accent-bright) 33%,
+    var(--accent-bright) 67%,
+    var(--transparent) 100%
+  );
+  --spawn-card-check: #ff9a9a;
+  --spawn-card-jump: #ff9a9a;
+  
 
   /* 👇 makes selected cards POP */
   --fill-soft: rgba(var(--accent-rgb), .05);
@@ -3521,12 +3627,6 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 
 .dino-spawn-card.is-on::before{
   content:"";
-  position:absolute;
-  left:0;
-  top:10px;
-  bottom:10px;
-  width:3px;
-  border-radius:999px;
   background: var(--spawn-card-strip);
 }
 
