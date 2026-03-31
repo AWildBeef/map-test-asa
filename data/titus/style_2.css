@@ -1138,8 +1138,8 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
 }
 
 .mode-menu{
-  min-width: 180px;
-  max-width: 220px;
+  min-width: 140px;
+  max-width: 140px;
   padding: 6px;
   position: fixed !important;
   z-index: 999999 !important;
@@ -3191,4 +3191,6 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
   padding: 0 14px;
 }
 
-
+#modeMenu{
+  max-width: 50px;
+}
