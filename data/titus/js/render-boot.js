@@ -55,6 +55,7 @@ async function boot() {
   ensurePoiPanel();
   ensureMapEntriesPanel();
   ensureDrawStylePanel();
+  ensureSettingsPanel();
   renderInfoPanelBodyEmpty();
   setLegendOpen(false);
   

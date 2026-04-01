@@ -53,10 +53,10 @@ const THEME_OPTIONS = [
   { id: "soft",      label: "Soft" },
   { id: "asa",       label: "ASA" },
   { id: "island",    label: "Island" },
-  { id: "scorched",  label: "Scorched Earth" },
+  { id: "se",  label: "Scorched Earth" },
   { id: "ab",        label: "Aberration" },
   { id: "ext",       label: "Extinction" },
-  { id: "lostcolony", label: "Lost Colony" },
+  { id: "lost", label: "Lost Colony" },
   { id: "midnight",        label: "Midnight" },
   { id: "bbgum",        label: "Bubblegum Princess" }
 ];

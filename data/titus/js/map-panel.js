@@ -473,6 +473,99 @@ function styleForEntry(meta, color){
 }
 
 
+function ensureSettingsPanel(){
+  let panel = document.getElementById("settingsPanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "settingsPanel";
+  panel.className = "floating-panel floating-panel--small";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">Settings</div>
+      <div class="fp-actions"></div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const actions = panel.querySelector(".fp-actions");
+
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  actions.appendChild(hideBtn);
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  panel.style.position = "absolute";
+  panel.style.right = "2px";
+  panel.style.bottom = "90px";
+  panel.style.zIndex = "800";
+  panel.style.display = "none";
+  panel.dataset.hidden = "1";
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+    updateDockToggles();
+  };
+
+  return panel;
+}
+
+function renderSettingsPanel(){
+  const panel = ensureSettingsPanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+
+  const currentTheme = getTheme();
+
+  body.innerHTML = `
+    <div class="fp-row fp-col">
+      <label class="settings-label" for="themeSelect">Theme</label>
+      <select id="themeSelect" class="settings-select">
+        ${THEME_OPTIONS.map(opt => `
+          <option value="${escapeAttr(opt.id)}" ${opt.id === currentTheme ? "selected" : ""}>
+            ${escapeHtml(opt.label)}
+          </option>
+        `).join("")}
+      </select>
+    </div>
+  `;
+
+  const themeSelect = body.querySelector("#themeSelect");
+  if (themeSelect){
+    themeSelect.onchange = () => {
+      const nextTheme = themeSelect.value || "";
+      setTheme(nextTheme);
+
+      const settings = loadSettings();
+      settings.theme = nextTheme;
+      saveSettings(settings);
+    };
+  }
+}
+
+function toggleSettingsPanel(){
+  const panel = ensureSettingsPanel();
+  const show = panel.style.display === "none";
+
+  if (show){
+    renderSettingsPanel();
+    panel.style.display = "";
+    panel.dataset.hidden = "0";
+  } else {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  }
+
+  updateDockToggles();
+}
+
+
+
 function ensureMapEntriesPanel(){
   let panel = document.getElementById("mapEntriesPanel");
   if (panel) return panel;
