@@ -58,6 +58,7 @@ async function boot() {
   ensureSettingsPanel();
   renderInfoPanelBodyEmpty();
   setLegendOpen(false);
+  applySavedTheme();
   
   setupUI();
   syncModeClass();

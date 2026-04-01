@@ -538,12 +538,7 @@ function renderSettingsPanel(){
   const themeSelect = body.querySelector("#themeSelect");
   if (themeSelect){
     themeSelect.onchange = () => {
-      const nextTheme = themeSelect.value || "";
-      setTheme(nextTheme);
-
-      const settings = loadSettings();
-      settings.theme = nextTheme;
-      saveSettings(settings);
+      updateThemeSetting(themeSelect.value || "");
     };
   }
 }

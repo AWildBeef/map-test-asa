@@ -49,16 +49,16 @@ let SOURCES = [];
 
 
 const THEME_OPTIONS = [
-  { id: "",          label: "Default" },
-  { id: "soft",      label: "Soft" },
-  { id: "asa",       label: "ASA" },
-  { id: "island",    label: "Island" },
-  { id: "se",  label: "Scorched Earth" },
-  { id: "ab",        label: "Aberration" },
-  { id: "ext",       label: "Extinction" },
+  { id: "", label: "Default" },
+  { id: "soft", label: "Soft" },
+  { id: "asa", label: "ASA" },
+  { id: "island", label: "Island" },
+  { id: "se", label: "Scorched Earth" },
+  { id: "ab", label: "Aberration" },
+  { id: "ext", label: "Extinction" },
   { id: "lost", label: "Lost Colony" },
-  { id: "midnight",        label: "Midnight" },
-  { id: "bbgum",        label: "Bubblegum Princess" }
+  { id: "midnight", label: "Midnight" },
+  { id: "bbgum", label: "Bubblegum Princess" }
 ];
 
 function setTheme(name){
@@ -95,6 +95,14 @@ function saveSettings(next){
 function applySavedTheme(){
   const settings = loadSettings();
   setTheme(settings.theme || "");
+}
+
+function updateThemeSetting(theme){
+  setTheme(theme);
+
+  const settings = loadSettings();
+  settings.theme = theme || "";
+  saveSettings(settings);
 }
 
 /* Split from app_embed.js lines 99-251 */
