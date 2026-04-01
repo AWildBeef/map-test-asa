@@ -48,6 +48,19 @@ const jsonCache = {};
 let SOURCES = [];
 
 
+const THEME_OPTIONS = [
+  { id: "",          label: "Default" },
+  { id: "soft",      label: "Soft" },
+  { id: "asa",       label: "ASA" },
+  { id: "island",    label: "Island" },
+  { id: "scorched",  label: "Scorched Earth" },
+  { id: "ab",        label: "Aberration" },
+  { id: "ext",       label: "Extinction" },
+  { id: "lostcolony", label: "Lost Colony" },
+  { id: "midnight",        label: "Midnight" },
+  { id: "bbgum",        label: "Bubblegum Princess" }
+];
+
 function setTheme(name){
   if (!name) {
     delete document.body.dataset.theme;
@@ -56,7 +69,33 @@ function setTheme(name){
   document.body.dataset.theme = name;
 }
 
+function getTheme(){
+  return document.body.dataset.theme || "";
+}
 
+const SETTINGS_STORAGE_KEY = "asaSpawnMaps.settings";
+
+function loadSettings(){
+  try{
+    const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch{
+    return {};
+  }
+}
+
+function saveSettings(next){
+  try{
+    localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(next));
+  }catch{
+    // ignore storage failures
+  }
+}
+
+function applySavedTheme(){
+  const settings = loadSettings();
+  setTheme(settings.theme || "");
+}
 
 /* Split from app_embed.js lines 99-251 */
 
@@ -256,6 +295,8 @@ const UI = {
   dinoFancy:document.getElementById("dinoSelectFancy"),
 
   modeToggle:document.getElementById("modeToggle"),
+  settingsToggle: document.getElementById("settingsToggle"),
+
   controlsToggle:document.getElementById("controlsToggle"),
   topbar:document.getElementById("topbar")
 };
