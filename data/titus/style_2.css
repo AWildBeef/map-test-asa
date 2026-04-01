@@ -145,11 +145,103 @@
    3) OPTIONAL THEME OVERRIDES
    Apply by toggling a class on <body>.
    ============================================================ */
-   
-   
+    
+/* Bubblegum Princess 💕 */
+body.bbgum{
+  /* background -- soft pink gradient */
+  --bg-0: #2a0f1c;
+  --bg-1: #4a1c33;
+  --bg-2: #7a2f54;
+
+  /* surfaces -- glossy candy panels */
+  --surface-1: rgba(60,18,40,.95);
+  --surface-2: rgba(86,28,58,.94);
+  --surface-3: rgba(120,40,78,.92);
+
+  --surface-control: rgba(160,60,100,.28);
+  --surface-control-hover: rgba(190,80,120,.36);
+
+  /* borders */
+  --border-soft: rgba(255,170,200,.12);
+  --border-mid: rgba(255,150,190,.22);
+  --border-strong: rgba(255,110,170,.34);
+
+  /* text -- keep it soft but readable */
+  --text-1: #fff0f6;
+  --text-2: #ffd9e8;
+  --text-3: #f2a9c4;
+  --text-dim: #c987a6;
+
+  /* accent -- bubblegum pink */
+  --accent: #ff6fb3;
+  --accent-bright: #ffc1dc;
+  --accent-rgb: 255, 111, 179;
+
+  /* interaction */
+  --hover-fill: rgba(255,111,179,.10);
+  --active-fill: rgba(255,111,179,.18);
+  --selected-fill: rgba(255,111,179,.24);
+
+  /* glow */
+  --glow-soft: rgba(255,111,179,.10);
+  --glow-mid: rgba(255,111,179,.18);
+  --focus-ring: rgba(255,111,179,.24);
+
+  /* tones */
+  --tone-rare: #ff8ac6;
+  --tone-cave: #ff5fa0;
+  --tone-success: #ff9bbf;
+
+  /* derived */
+  --fill-soft: rgba(var(--accent-rgb), .04);
+  --fill-mid: rgba(var(--accent-rgb), .08);
+  --fill-strong: rgba(var(--accent-rgb), .14);
+  --fill-stronger: rgba(var(--accent-rgb), .20);
+
+  --outline-soft: rgba(var(--accent-rgb), .10);
+  --outline-mid: rgba(var(--accent-rgb), .16);
+
+  /* glossy feel */
+  --glass-top: rgba(255,255,255,.06);
+  --glass-bottom: rgba(255,180,210,.02);
+
+  /* spawn cards */
+  --spawn-card-off-top: rgba(255,120,180,.10);
+  --spawn-card-off-bot: rgba(255,80,140,.06);
+
+  --spawn-card-hover-top: rgba(255,140,190,.16);
+  --spawn-card-hover-bot: rgba(255,90,150,.10);
+
+  --spawn-card-on-top: rgba(255,170,210,.24);
+  --spawn-card-on-bot: rgba(255,110,170,.16);
+
+  --spawn-card-on-glow: rgba(255,120,180,.18);
+
+  --spawn-card-strip: linear-gradient(
+    to bottom,
+    transparent,
+    #ff9ed0 33%,
+    #ff9ed0 67%,
+    transparent 100%
+  );
+
+  --spawn-card-check: #ffd1ea;
+  --spawn-card-jump: #ffd1ea;
+}
+
+body.bbgum #mapWrap .leaflet-container{
+  background:
+    radial-gradient(circle at 50% 110%, rgba(255,120,180,.18), transparent 40%),
+    linear-gradient(
+      to bottom,
+      #7a2f54 0%,
+      #4a1c33 40%,
+      #2a0f1c 100%
+    );
+}
 
 /* Soft calmer version - setTheme("theme-soft"); */
-body.theme-soft{
+body.soft{
   --bg-0: #0d1419;
   --bg-1: #162129;
   --bg-2: #1d2c36;
@@ -195,7 +287,7 @@ body.theme-soft{
 }
 
 /* Stronger game-like / ASA-inspired version */
-body.theme-asa{
+body.asa{
   --bg-0: #041019;
   --bg-1: #081824;
   --bg-2: #0d2635;
@@ -242,7 +334,7 @@ body.theme-asa{
 
 /* Scorched version - setTheme("theme-scorched"); */
 
-body.theme-scorched{
+body.se{
   /* lighter dusty background */
   --bg-0: #5c4528;
   --bg-1: #836338;
@@ -320,8 +412,8 @@ body.theme-scorched{
 
 
 
-body.theme-ab{
-  --bg-0: #05070f;
+body.ab{
+  --bg-0: #4f2aa3;
   --bg-1: #0b0f1d;
   --bg-2: #141a33;
 
@@ -390,7 +482,21 @@ body.theme-ab{
   --glass-bottom: rgba(140,100,255,.02);
 }
 
-body.theme-island{
+body.ab #mapWrap .leaflet-container{
+  background:
+    linear-gradient(
+      to bottom,
+      #060914 5%,
+      #0d1430 18%,
+      #141f45 37%,
+      #161e4d 59%,
+      #1b1d52 75%,
+      #2a1c63 88%,
+      #4a2898 100%
+    );
+}
+
+body.island{
   --bg-0: #0a120c;
   --bg-1: #111c14;
   --bg-2: #18261c;
@@ -462,7 +568,7 @@ body.theme-island{
 
 }
 
-body.theme-lost{
+body.lost{
   --bg-0: #0e0404;
   --bg-1: #160808;
   --bg-2: #220c0c;
@@ -534,8 +640,80 @@ body.theme-lost{
   --glass-bottom: rgba(255,90,90,.02);
 }
 
+body.ext{
+  --bg-0: #241d2c;
+  --bg-1: #3c3f46;
+  --bg-2: #8a8d93;
+
+  --surface-1: rgba(46,48,54,.94);
+  --surface-2: rgba(64,67,74,.92);
+  --surface-3: rgba(86,90,98,.90);
+
+  --surface-control: rgba(108,102,90,.28);
+  --surface-control-hover: rgba(132,120,96,.36);
+
+  --border-soft: rgba(220,210,190,.12);
+  --border-mid: rgba(230,214,180,.20);
+  --border-strong: rgba(255,214,140,.30);
+
+  --text-1: #f4f1ea;
+  --text-2: #ddd7cd;
+  --text-3: #b6aea2;
+  --text-dim: #8f877c;
+
+  --accent: #d9ae63;
+  --accent-bright: #ffd98e;
+  --accent-rgb: 217, 174, 99;
+
+  --hover-fill: rgba(217,174,99,.08);
+  --active-fill: rgba(217,174,99,.14);
+  --selected-fill: rgba(217,174,99,.20);
+
+  --glow-soft: rgba(217,174,99,.08);
+  --glow-mid: rgba(217,174,99,.14);
+  --focus-ring: rgba(217,174,99,.20);
+
+  --tone-rare: #ffb356;
+  --tone-cave: #b784ff;
+  --tone-success: #86d98b;
+
+  --fill-soft: rgba(var(--accent-rgb), .04);
+  --fill-mid: rgba(var(--accent-rgb), .08);
+  --fill-strong: rgba(var(--accent-rgb), .14);
+  --fill-stronger: rgba(var(--accent-rgb), .20);
+
+  --outline-soft: rgba(var(--accent-rgb), .10);
+  --outline-mid: rgba(var(--accent-rgb), .16);
+
+  --glass-top: rgba(255,255,255,.05);
+  --glass-bottom: rgba(255,220,170,.015);
+
+  /* cards */
+  --spawn-card-off-top: rgba(96,100,108,.22);
+  --spawn-card-off-bot: rgba(56,60,68,.18);
+
+  --spawn-card-hover-top: rgba(118,108,88,.22);
+  --spawn-card-hover-bot: rgba(74,68,58,.18);
+
+  --spawn-card-on-top: rgba(110,102,88,.20);
+  --spawn-card-on-bot: rgba(70,64,58,.18);
+
+  --spawn-card-on-glow: rgba(217,174,99,.05);
+  --spawn-card-strip: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent-bright) 33%,
+    var(--accent-bright) 67%,
+    transparent 100%
+  );
+
+  --spawn-card-check: var(--accent);
+  --spawn-card-jump: var(--accent);
+}
+
+
 /* Aberration - setTheme("theme-ab"); */
-body.theme-ab-old{
+body.old-ab-old{
   --bg-0: #050811;
   --bg-1: #0a1020;
   --bg-2: #121933;
@@ -3646,5 +3824,19 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 
 .dino-spawn-corner-jump{
   color: var(--spawn-card-jump);
+}
+
+body.ab{
+  background:
+    linear-gradient(
+      to bottom,
+      #7d7f86 0%,
+      #58647c 12%,
+      #2f3f63 30%,
+      #1a2a52 52%,
+      #14214a 68%,
+      #2a1d5a 84%,
+      #4f2aa3 100%
+    ) !important;
 }
 
