@@ -147,7 +147,7 @@
    ============================================================ */
     
 /* Bubblegum Princess 💕 */
-body.bbgum{
+body[data-theme="bbgum"] {
   /* background -- soft pink gradient */
   --bg-0: #2a0f1c;
   --bg-1: #4a1c33;
@@ -229,7 +229,7 @@ body.bbgum{
   --spawn-card-jump: #ffd1ea;
 }
 
-body.bbgum #mapWrap .leaflet-container{
+body[data-theme="bbgum"] #mapWrap .leaflet-container{
   background:
     radial-gradient(circle at 50% 110%, rgba(255,120,180,.18), transparent 40%),
     linear-gradient(
@@ -241,7 +241,7 @@ body.bbgum #mapWrap .leaflet-container{
 }
 
 /* Soft calmer version - setTheme("theme-soft"); */
-body.soft{
+body[data-theme="soft"] {
   --bg-0: #0d1419;
   --bg-1: #162129;
   --bg-2: #1d2c36;
@@ -287,7 +287,7 @@ body.soft{
 }
 
 /* Stronger game-like / ASA-inspired version */
-body.asa{
+body[data-theme="asa"] {
   --bg-0: #041019;
   --bg-1: #081824;
   --bg-2: #0d2635;
@@ -334,7 +334,7 @@ body.asa{
 
 /* Scorched version - setTheme("theme-scorched"); */
 
-body.se{
+body[data-theme="se"] {
   /* lighter dusty background */
   --bg-0: #5c4528;
   --bg-1: #836338;
@@ -412,7 +412,7 @@ body.se{
 
 
 
-body.ab{
+body[data-theme="ab"] {
   --bg-0: #4f2aa3;
   --bg-1: #0b0f1d;
   --bg-2: #141a33;
@@ -482,7 +482,7 @@ body.ab{
   --glass-bottom: rgba(140,100,255,.02);
 }
 
-body.ab #mapWrap .leaflet-container{
+body[data-theme="ab"] #mapWrap .leaflet-container{
   background:
     linear-gradient(
       to bottom,
@@ -496,7 +496,7 @@ body.ab #mapWrap .leaflet-container{
     );
 }
 
-body.island{
+body[data-theme="island"] {
   --bg-0: #0a120c;
   --bg-1: #111c14;
   --bg-2: #18261c;
@@ -568,7 +568,7 @@ body.island{
 
 }
 
-body.lost{
+body[data-theme="lost"] {
   --bg-0: #0e0404;
   --bg-1: #160808;
   --bg-2: #220c0c;
@@ -640,7 +640,7 @@ body.lost{
   --glass-bottom: rgba(255,90,90,.02);
 }
 
-body.ext{
+body[data-theme="ext"] {
   --bg-0: #241d2c;
   --bg-1: #3c3f46;
   --bg-2: #8a8d93;
@@ -713,7 +713,7 @@ body.ext{
 
 
 /* Aberration - setTheme("theme-ab"); */
-body.old-ab-old{
+body[data-theme="midnight"] {
   --bg-0: #050811;
   --bg-1: #0a1020;
   --bg-2: #121933;

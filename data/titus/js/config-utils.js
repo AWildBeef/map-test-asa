@@ -49,13 +49,14 @@ let SOURCES = [];
 
 
 function setTheme(name){
-  document.body.classList.remove("theme-soft", "theme-asa");
-  if(name) document.body.classList.add(name);
+  if (!name) {
+    delete document.body.dataset.theme;
+    return;
+  }
+  document.body.dataset.theme = name;
 }
 
-setTheme("theme-soft");
-setTheme("theme-asa");
-setTheme(null); // default (your current blue)
+
 
 /* Split from app_embed.js lines 99-251 */
 
