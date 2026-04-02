@@ -1,0 +1,316 @@
+[
+  {
+    "Type": "ArtifactCrate_1_C",
+    "Name": "Default__ArtifactCrate_1_C",
+    "Class": "BlueprintGeneratedClass'/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.ArtifactCrate_1_C'",
+    "Template": {
+      "ObjectName": "ArtifactCrate_Instantaneous_Alt_C'Default__ArtifactCrate_Instantaneous_Alt_C'",
+      "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_Instantaneous_Alt.0"
+    },
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "ItemSets": [
+        {
+          "SetName": "Artifact",
+          "ItemEntries": [
+            {
+              "ItemEntryName": "Artifact",
+              "EntryWeight": 1.0,
+              "Items": [
+                {
+                  "AssetPathName": "/Game/PrimalEarth/CoreBlueprints/Items/Artifacts/PrimalItemArtifact_01.PrimalItemArtifact_01_C",
+                  "SubPathString": ""
+                }
+              ],
+              "ItemClassStrings": [],
+              "ItemsWeights": [
+                1.0
+              ],
+              "ItemQuantityOverrides": [],
+              "MinQuantity": 1.0,
+              "MaxQuantity": 1.0,
+              "bApplyQuantityToSingleItem": false,
+              "QuantityPower": 1.0,
+              "MinRandomQuality": 0.0,
+              "MinQuality": 0.0,
+              "MaxQuality": 0.0,
+              "QualityPower": 1.0,
+              "bForceBlueprint": false,
+              "bForcePreventGrinding": false,
+              "ChanceToBeBlueprintOverride": 0.0,
+              "ItemStatClampsMultiplier": 0.0,
+              "ChanceToActuallyGiveItem": 1.0,
+              "RequiresMinQuality": 0.0,
+              "bIgnoreQuantityMultipliers": false
+            }
+          ],
+          "MinNumItems": 1.0,
+          "MaxNumItems": 1.0,
+          "NumItemsPower": 1.0,
+          "SetWeight": 1.0,
+          "bItemsRandomWithoutReplacement": false,
+          "ItemSetOverride": null
+        }
+      ],
+      "MyStaticMesh": {
+        "ObjectName": "StaticMeshComponent'Default__ArtifactCrate_1_C:StructureMesh'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.9"
+      },
+      "MyRootTransform": {
+        "ObjectName": "SceneComponent'Default__ArtifactCrate_1_C:SceneRoot'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.5"
+      },
+      "RootComponent": {
+        "ObjectName": "SceneComponent'Default__ArtifactCrate_1_C:SceneRoot'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.5"
+      }
+    },
+    "SerializedSparseClassDataStruct": "UScriptClass'PrimalStructureSparseClassData'",
+    "SerializedSparseClassData": {
+      "DestructionActorTemplate": {
+        "AssetPathName": "/Game/PrimalEarth/General/SupplyCrateDestruction/ArtifactCrate_Explosion_01.ArtifactCrate_Explosion_01_C",
+        "SubPathString": ""
+      }
+    }
+  },
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "ArtifactCrate_1_C",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Super": {
+      "ObjectName": "BlueprintGeneratedClass'ArtifactCrate_Instantaneous_Alt_C'",
+      "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_Instantaneous_Alt.1"
+    },
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "bHasCookedComponentInstancingData": true,
+      "SimpleConstructionScript": {
+        "ObjectName": "SimpleConstructionScript'ArtifactCrate_1_C:SimpleConstructionScript_0'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.8"
+      },
+      "InheritableComponentHandler": {
+        "ObjectName": "InheritableComponentHandler'ArtifactCrate_1_C:InheritableComponentHandler'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.2"
+      }
+    },
+    "ChildProperties": [
+      {
+        "Type": "ObjectProperty",
+        "Name": "NS_TrophyHead_Hunter",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'NiagaraComponent'",
+          "ObjectPath": "/Script/Niagara"
+        }
+      }
+    ],
+    "ClassFlags": "CLASS_Config | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "ArtifactCrate_1_C'Default__ArtifactCrate_1_C'",
+      "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.0"
+    },
+    "EditorTags": {
+      "BlueprintType": "BPTYPE_Normal"
+    }
+  },
+  {
+    "Type": "InheritableComponentHandler",
+    "Name": "InheritableComponentHandler",
+    "Outer": "ArtifactCrate_1_C",
+    "Class": "UScriptClass'InheritableComponentHandler'",
+    "Flags": "RF_WasLoaded | RF_LoadCompleted"
+  },
+  {
+    "Type": "NiagaraComponent",
+    "Name": "NS_TrophyHead_Hunter_GEN_VARIABLE",
+    "Outer": "ArtifactCrate_1_C",
+    "Class": "UScriptClass'NiagaraComponent'",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Asset": {
+        "ObjectName": "NiagaraSystem'NS_TrophyHead_Hunter'",
+        "ObjectPath": "/Game/PrimalEarth/Effects/Particles/Props/Trophy/NS_TrophyHead_Hunter.0"
+      },
+      "OverrideParameters": {},
+      "RelativeLocation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": -15.0
+      },
+      "RelativeScale3D": {
+        "X": 3.0,
+        "Y": 3.0,
+        "Z": 3.0
+      }
+    }
+  },
+  {
+    "Type": "SceneComponent",
+    "Name": "SceneComponent_8",
+    "Outer": "ArtifactCrate_1_C",
+    "Class": "UScriptClass'SceneComponent'",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted"
+  },
+  {
+    "Type": "SceneComponent",
+    "Name": "SceneRoot",
+    "Outer": "Default__ArtifactCrate_1_C",
+    "Class": "UScriptClass'SceneComponent'",
+    "Template": {
+      "ObjectName": "SceneComponent'Default__ArtifactCrate_Instantaneous_Alt_C:SceneRoot'",
+      "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_Instantaneous_Alt.8"
+    },
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted"
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_1",
+    "Outer": "SimpleConstructionScript_0",
+    "Class": "UScriptClass'SCS_Node'",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'SceneComponent'",
+        "ObjectPath": "/Script/Engine"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "SceneComponent'ArtifactCrate_1_C:SceneComponent_8'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.4"
+      },
+      "VariableGuid": "56BC9799-C494E6E6-321D4295-7D5EB316",
+      "InternalVariableName": "DefaultSceneRoot"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_2",
+    "Outer": "SimpleConstructionScript_0",
+    "Class": "UScriptClass'SCS_Node'",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'NiagaraComponent'",
+        "ObjectPath": "/Script/Niagara"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "NiagaraComponent'ArtifactCrate_1_C:NS_TrophyHead_Hunter_GEN_VARIABLE'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.3"
+      },
+      "CookedComponentInstancingData": {
+        "ChangedPropertyList": [
+          {
+            "PropertyName": "Asset",
+            "ArrayIndex": 0,
+            "PropertyScope": {
+              "ObjectName": "Class'NiagaraComponent'",
+              "ObjectPath": "/Script/Niagara"
+            }
+          },
+          {
+            "PropertyName": "RelativeLocation",
+            "ArrayIndex": 0,
+            "PropertyScope": {
+              "ObjectName": "Class'NiagaraComponent'",
+              "ObjectPath": "/Script/Niagara"
+            }
+          },
+          {
+            "PropertyName": "Z",
+            "ArrayIndex": 0,
+            "PropertyScope": {
+              "ObjectName": "Class'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            }
+          },
+          {
+            "PropertyName": "RelativeScale3D",
+            "ArrayIndex": 0,
+            "PropertyScope": {
+              "ObjectName": "Class'NiagaraComponent'",
+              "ObjectPath": "/Script/Niagara"
+            }
+          },
+          {
+            "PropertyName": "X",
+            "ArrayIndex": 0,
+            "PropertyScope": {
+              "ObjectName": "Class'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            }
+          },
+          {
+            "PropertyName": "Y",
+            "ArrayIndex": 0,
+            "PropertyScope": {
+              "ObjectName": "Class'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            }
+          },
+          {
+            "PropertyName": "Z",
+            "ArrayIndex": 0,
+            "PropertyScope": {
+              "ObjectName": "Class'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            }
+          }
+        ],
+        "bHasValidCookedData": true
+      },
+      "ParentComponentOrVariableName": "SceneRoot",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "ED4EA478-4CC9E147-BFF2D3BC-59307695",
+      "InternalVariableName": "NS_TrophyHead_Hunter"
+    }
+  },
+  {
+    "Type": "SimpleConstructionScript",
+    "Name": "SimpleConstructionScript_0",
+    "Outer": "ArtifactCrate_1_C",
+    "Class": "UScriptClass'SimpleConstructionScript'",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "RootNodes": [
+        {
+          "ObjectName": "SCS_Node'ArtifactCrate_1_C:SimpleConstructionScript_0.SCS_Node_2'",
+          "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.7"
+        }
+      ],
+      "AllNodes": [
+        {
+          "ObjectName": "SCS_Node'ArtifactCrate_1_C:SimpleConstructionScript_0.SCS_Node_2'",
+          "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.7"
+        }
+      ],
+      "DefaultSceneRootNode": {
+        "ObjectName": "SCS_Node'ArtifactCrate_1_C:SimpleConstructionScript_0.SCS_Node_1'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.6"
+      }
+    }
+  },
+  {
+    "Type": "StaticMeshComponent",
+    "Name": "StructureMesh",
+    "Outer": "Default__ArtifactCrate_1_C",
+    "Class": "UScriptClass'StaticMeshComponent'",
+    "Template": {
+      "ObjectName": "StaticMeshComponent'Default__ArtifactCrate_Instantaneous_Alt_C:StructureMesh'",
+      "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_Instantaneous_Alt.16"
+    },
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "AttachParent": {
+        "ObjectName": "SceneComponent'Default__ArtifactCrate_1_C:SceneRoot'",
+        "ObjectPath": "/Game/PrimalEarth/Structures/ArtifactCrates/ArtifactCrate_1.5"
+      }
+    }
+  }
+]
