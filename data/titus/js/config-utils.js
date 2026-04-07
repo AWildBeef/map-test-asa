@@ -410,7 +410,7 @@ function buildDinoReport(){
       if (exportPanelState.includeNametag) {
         const firstBp = (r.bps || [])[0] || "";
         const d = firstBp ? getDinoObjByBp(firstBp) : null;
-        out.nametag = d?.nametag || "";
+        out.nametag = d?.nameTag || "";
       }
 
       if (exportPanelState.includeMaps) {
