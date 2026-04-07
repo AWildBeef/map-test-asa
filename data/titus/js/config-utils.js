@@ -290,7 +290,8 @@ const exportPanelState = {
   includeMaps: true,
   includeEntries: true,
   includeBlueprints: false,
-  includeEntryMaps: false
+  includeEntryMaps: false,
+  includeNametag: false
 };
 /* Split from app_embed.js lines 252-721 */
 
@@ -405,6 +406,12 @@ function buildDinoReport(){
       const out = {
         name: r.name
       };
+      
+      if (exportPanelState.includeNametag) {
+        const firstBp = (r.bps || [])[0] || "";
+        const d = firstBp ? getDinoObjByBp(firstBp) : null;
+        out.nametag = d?.nametag || "";
+      }
 
       if (exportPanelState.includeMaps) {
         out.mapCount = r.mapCount || 0;
