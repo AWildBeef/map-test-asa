@@ -293,7 +293,13 @@ const exportPanelState = {
   includeEntryMaps: false,
   includeNametag: false,
   includeDinos: true,
-  includeMapEntries: true
+  includeMapEntries: true,
+
+  mapDinoIncludeEntries: false,
+  mapDinoIncludeBlueprints: false,
+  mapDinoIncludeNametag: false,
+
+  mapEntryIncludeDinos: false
 };
 /* Split from app_embed.js lines 252-721 */
 
@@ -511,76 +517,77 @@ function buildMapReport(){
   const includeDinos = exportPanelState.includeDinos;
   const includeEntries = exportPanelState.includeMapEntries;
 
-  // CURRENT MAP MODE (unchanged behavior)
-  if (exportPanelState.scope !== "current_source") {
-    const dinoRows = getDinoRowsCurrentMap();
-    const entryRows = getEntryRowsCurrentMap();
+  const includeDinoEntries = exportPanelState.mapDinoIncludeEntries;
+  const includeDinoBlueprints = exportPanelState.mapDinoIncludeBlueprints;
+  const includeDinoNametag = exportPanelState.mapDinoIncludeNametag;
 
-    return {
-      type: "map_report",
-      sourceId: src.id,
-      sourceLabel: src.label,
-      scope: exportPanelState.scope,
-      mapId: State.mapId || "",
-      exportedAt: new Date().toISOString(),
-      rows: [
-        {
-          mapName: State.mapId || "",
-          dinos: includeDinos ? dinoRows.map(r => ({
-            name: r.name,
-            entryNames: r.currentMapEntryNames || r.entryNames || [],
-            blueprints: r.bps || []
-          })) : undefined,
+  const includeEntryDinos = exportPanelState.mapEntryIncludeDinos;
 
-          entries: includeEntries ? entryRows.map(r => ({
-            entryName: r.entryName,
-            dinoNames: r.dinoNames || []
-          })) : undefined
-        }
-      ]
-    };
-  }
-
-  // 🔥 SOURCE MODE (multi-map)
-  const originalMap = State.mapId;
-  const mapCodes = getAllMapsForSource();
-
-  const rows = [];
-
-  for (const code of mapCodes){
-    const mapName = Global.spawn?.mapLegend?.[code] || code;
-
-    // temporarily switch map
+  function buildMapRow(mapName){
+    const originalMap = State.mapId;
     State.mapId = mapName;
     rebuildMapIndices();
 
-    const row = {
-      mapName
-    };
+    const row = { mapName };
 
     if (includeDinos){
       const dinoRows = getDinoRowsCurrentMap();
-      row.dinos = dinoRows.map(r => ({
-        name: r.name,
-        entryNames: r.currentMapEntryNames || r.entryNames || [],
-        blueprints: r.bps || []
-      }));
+      row.dinos = dinoRows.map(r => {
+        const out = {
+          name: r.name
+        };
+
+        if (includeDinoEntries) {
+          out.entryNames = r.currentMapEntryNames || r.entryNames || [];
+        }
+
+        if (includeDinoBlueprints) {
+          out.blueprints = r.bps || [];
+        }
+
+        if (includeDinoNametag) {
+          const firstBp = (r.bps || [])[0] || "";
+          const d = firstBp ? getDinoObjByBp(firstBp) : null;
+          out.nametag = d?.t || "";
+        }
+
+        return out;
+      });
     }
 
     if (includeEntries){
       const entryRows = getEntryRowsCurrentMap();
-      row.entries = entryRows.map(r => ({
-        entryName: r.entryName,
-        dinoNames: r.dinoNames || []
-      }));
+      row.entries = entryRows.map(r => {
+        const out = {
+          entryName: r.entryName
+        };
+
+        if (includeEntryDinos) {
+          out.dinoNames = dinoNamesForEntryGlobal(r.entryName);
+        }
+
+        return out;
+      });
     }
 
-    rows.push(row);
+    State.mapId = originalMap;
+    rebuildMapIndices();
+
+    return row;
   }
 
-  // restore state
-  State.mapId = originalMap;
-  rebuildMapIndices();
+  let rows = [];
+
+  if (exportPanelState.scope === "current_source") {
+    const mapCodes = getAllMapsForSource();
+
+    rows = mapCodes.map(code => {
+      const mapName = Global.spawn?.mapLegend?.[code] || code;
+      return buildMapRow(mapName);
+    });
+  } else {
+    rows = [buildMapRow(State.mapId || "")];
+  }
 
   return {
     type: "map_report",

@@ -142,13 +142,17 @@ function renderExportPanel(){
   const body = panel.querySelector(".fp-body");
   if (!body) return;
 
+  const isDino = exportPanelState.reportType === "dino";
+  const isEntry = exportPanelState.reportType === "entry";
+  const isMap = exportPanelState.reportType === "map";
+
   body.innerHTML = `
     <div class="fp-row fp-col">
       <div class="info-subtitle">Report Type</div>
       <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
-        <button type="button" class="fp-tab ${exportPanelState.reportType === "dino" ? "is-on" : ""}" data-export-type="dino">Dino</button>
-        <button type="button" class="fp-tab ${exportPanelState.reportType === "entry" ? "is-on" : ""}" data-export-type="entry">Entry</button>
-        <button type="button" class="fp-tab ${exportPanelState.reportType === "map" ? "is-on" : ""}" data-export-type="map">Map</button>
+        <button type="button" class="fp-tab ${isDino ? "is-on" : ""}" data-export-type="dino">Dino</button>
+        <button type="button" class="fp-tab ${isEntry ? "is-on" : ""}" data-export-type="entry">Entry</button>
+        <button type="button" class="fp-tab ${isMap ? "is-on" : ""}" data-export-type="map">Map</button>
       </div>
     </div>
 
@@ -164,55 +168,98 @@ function renderExportPanel(){
     <div class="fp-row fp-col">
       <div class="info-subtitle">Include</div>
 
-      <label class="fp-row">
-        <input type="checkbox" data-export-opt="maps" ${exportPanelState.includeMaps ? "checked" : ""}>
-        <span>Maps</span>
-      </label>
-
-      <label class="fp-row">
-        <input type="checkbox" data-export-opt="entries" ${exportPanelState.includeEntries ? "checked" : ""}>
-        <span>Entries / linked names</span>
-      </label>
       ${
-        exportPanelState.reportType === "map"
-          ? `
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="mapDinos" ${exportPanelState.includeDinos ? "checked" : ""}>
-              <span>Dinos</span>
-            </label>
+        isDino ? `
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="maps" ${exportPanelState.includeMaps ? "checked" : ""}>
+            <span>Maps</span>
+          </label>
 
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="mapEntries" ${exportPanelState.includeMapEntries ? "checked" : ""}>
-              <span>Entries</span>
-            </label>
-          `
-          : ""
-      }
-      ${
-        exportPanelState.reportType === "dino" && exportPanelState.includeEntries
-          ? `
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="entryMaps" ${exportPanelState.includeEntryMaps ? "checked" : ""}>
-              <span>Include Maps per Entry</span>
-            </label>
-          `
-          : ""
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entries" ${exportPanelState.includeEntries ? "checked" : ""}>
+            <span>Entries</span>
+          </label>
+
+          ${
+            exportPanelState.includeEntries ? `
+              <label class="fp-row" style="padding-left:18px;">
+                <input type="checkbox" data-export-opt="entryMaps" ${exportPanelState.includeEntryMaps ? "checked" : ""}>
+                <span>Maps per entry</span>
+              </label>
+            ` : ""
+          }
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="blueprints" ${exportPanelState.includeBlueprints ? "checked" : ""}>
+            <span>Blueprints</span>
+          </label>
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="nametag" ${exportPanelState.includeNametag ? "checked" : ""}>
+            <span>Nametag</span>
+          </label>
+        ` : ""
       }
 
-
-      <label class="fp-row">
-        <input type="checkbox" data-export-opt="blueprints" ${exportPanelState.includeBlueprints ? "checked" : ""}>
-        <span>Blueprints</span>
-      </label>
       ${
-        exportPanelState.reportType === "dino"
-          ? `
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="nametag" ${exportPanelState.includeNametag ? "checked" : ""}>
-              <span>Nametag</span>
-            </label>
-          `
-          : ""
+        isEntry ? `
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="maps" ${exportPanelState.includeMaps ? "checked" : ""}>
+            <span>Maps</span>
+          </label>
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entries" ${exportPanelState.includeEntries ? "checked" : ""}>
+            <span>Dinos</span>
+          </label>
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="blueprints" ${exportPanelState.includeBlueprints ? "checked" : ""}>
+            <span>Blueprint</span>
+          </label>
+        ` : ""
+      }
+
+      ${
+        isMap ? `
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="mapDinos" ${exportPanelState.includeDinos ? "checked" : ""}>
+            <span>Dinos</span>
+          </label>
+
+          ${
+            exportPanelState.includeDinos ? `
+              <label class="fp-row" style="padding-left:18px;">
+                <input type="checkbox" data-export-opt="mapDinoEntries" ${exportPanelState.mapDinoIncludeEntries ? "checked" : ""}>
+                <span>Dino entries</span>
+              </label>
+
+              <label class="fp-row" style="padding-left:18px;">
+                <input type="checkbox" data-export-opt="mapDinoBlueprints" ${exportPanelState.mapDinoIncludeBlueprints ? "checked" : ""}>
+                <span>Dino blueprints</span>
+              </label>
+
+              <label class="fp-row" style="padding-left:18px;">
+                <input type="checkbox" data-export-opt="mapDinoNametag" ${exportPanelState.mapDinoIncludeNametag ? "checked" : ""}>
+                <span>Dino nametag</span>
+              </label>
+            ` : ""
+          }
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="mapEntries" ${exportPanelState.includeMapEntries ? "checked" : ""}>
+            <span>Entries</span>
+          </label>
+
+          ${
+            exportPanelState.includeMapEntries ? `
+              <label class="fp-row" style="padding-left:18px;">
+                <input type="checkbox" data-export-opt="mapEntryDinos" ${exportPanelState.mapEntryIncludeDinos ? "checked" : ""}>
+                <span>Entry dinos</span>
+              </label>
+            ` : ""
+          }
+        ` : ""
       }
     </div>
 
@@ -238,13 +285,21 @@ function renderExportPanel(){
   body.querySelectorAll("[data-export-opt]").forEach(el => {
     el.onchange = () => {
       const key = el.dataset.exportOpt;
+
       if (key === "maps") exportPanelState.includeMaps = el.checked;
       if (key === "entries") exportPanelState.includeEntries = el.checked;
       if (key === "entryMaps") exportPanelState.includeEntryMaps = el.checked;
-      if (key === "mapDinos") exportPanelState.includeDinos = el.checked;
-      if (key === "mapEntries") exportPanelState.includeMapEntries = el.checked;
       if (key === "blueprints") exportPanelState.includeBlueprints = el.checked;
       if (key === "nametag") exportPanelState.includeNametag = el.checked;
+
+      if (key === "mapDinos") exportPanelState.includeDinos = el.checked;
+      if (key === "mapEntries") exportPanelState.includeMapEntries = el.checked;
+      if (key === "mapDinoEntries") exportPanelState.mapDinoIncludeEntries = el.checked;
+      if (key === "mapDinoBlueprints") exportPanelState.mapDinoIncludeBlueprints = el.checked;
+      if (key === "mapDinoNametag") exportPanelState.mapDinoIncludeNametag = el.checked;
+      if (key === "mapEntryDinos") exportPanelState.mapEntryIncludeDinos = el.checked;
+
+      renderExportPanel();
     };
   });
 
