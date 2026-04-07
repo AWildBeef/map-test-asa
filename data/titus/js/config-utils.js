@@ -493,17 +493,27 @@ function buildEntryReport(){
 
 function buildMapReport(){
   const src = currentSourceMeta();
-  const mapName = selectedMapName();
 
-  const dinoRows = getDinoRowsCurrentMap();
-  const entryRows = getEntryRowsCurrentMap();
+  let dinoRows = [];
+  let entryRows = [];
+  let mapName = State.mapId || "";
+
+  if (exportPanelState.scope === "current_source") {
+    dinoRows = getDinoRowsAllMaps();
+    entryRows = getEntryRowsAllMaps();
+    mapName = "All Maps";
+  } else {
+    dinoRows = getDinoRowsCurrentMap();
+    entryRows = getEntryRowsCurrentMap();
+    mapName = State.mapId || "";
+  }
 
   return {
     type: "map_report",
     sourceId: src.id,
     sourceLabel: src.label,
     scope: exportPanelState.scope,
-    mapId: mapName,
+    mapId: State.mapId || "",
     exportedAt: new Date().toISOString(),
     options: {
       includeMaps: exportPanelState.includeMaps,
@@ -514,7 +524,14 @@ function buildMapReport(){
       {
         mapName,
         dinos: dinoRows.map(r => {
-          const out = { name: r.name };
+          const out = {
+            name: r.name
+          };
+
+          if (exportPanelState.includeMaps) {
+            out.mapCount = r.mapCount || 0;
+            out.mapNames = r.mapNames || [];
+          }
 
           if (exportPanelState.includeEntries) {
             out.entryNames = r.currentMapEntryNames || r.entryNames || [];
@@ -527,7 +544,14 @@ function buildMapReport(){
           return out;
         }),
         entries: entryRows.map(r => {
-          const out = { entryName: r.entryName };
+          const out = {
+            entryName: r.entryName
+          };
+
+          if (exportPanelState.includeMaps) {
+            out.mapCount = r.mapCount || 0;
+            out.mapNames = r.mapNames || [];
+          }
 
           if (exportPanelState.includeEntries) {
             out.dinoNames = r.dinoNames || [];
