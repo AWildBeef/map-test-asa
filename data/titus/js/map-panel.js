@@ -174,6 +174,21 @@ function renderExportPanel(){
         <span>Entries / linked names</span>
       </label>
       ${
+        exportPanelState.reportType === "map"
+          ? `
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="mapDinos" ${exportPanelState.includeDinos ? "checked" : ""}>
+              <span>Dinos</span>
+            </label>
+
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="mapEntries" ${exportPanelState.includeMapEntries ? "checked" : ""}>
+              <span>Entries</span>
+            </label>
+          `
+          : ""
+      }
+      ${
         exportPanelState.reportType === "dino" && exportPanelState.includeEntries
           ? `
             <label class="fp-row">
@@ -226,6 +241,8 @@ function renderExportPanel(){
       if (key === "maps") exportPanelState.includeMaps = el.checked;
       if (key === "entries") exportPanelState.includeEntries = el.checked;
       if (key === "entryMaps") exportPanelState.includeEntryMaps = el.checked;
+      if (key === "mapDinos") exportPanelState.includeDinos = el.checked;
+      if (key === "mapEntries") exportPanelState.includeMapEntries = el.checked;
       if (key === "blueprints") exportPanelState.includeBlueprints = el.checked;
       if (key === "nametag") exportPanelState.includeNametag = el.checked;
     };
