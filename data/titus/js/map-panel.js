@@ -86,6 +86,144 @@ function downgradeRarity(label,steps){
 
 /*=========MAP=============*/
 
+
+function ensureExportPanel(){
+  let panel = document.getElementById("exportPanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "exportPanel";
+  panel.className = "floating-panel floating-panel--small";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">Export</div>
+      <div class="fp-actions"></div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const actions = panel.querySelector(".fp-actions");
+
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  actions.appendChild(hideBtn);
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  panel.style.position = "absolute";
+  panel.style.right = "2px";
+  panel.style.bottom = "90px";
+  panel.style.zIndex = "800";
+  panel.style.display = "none";
+  panel.dataset.hidden = "1";
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+    updateDockToggles();
+  };
+
+  return panel;
+}
+
+function renderExportPanel(){
+  const panel = ensureExportPanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+
+  body.innerHTML = `
+    <div class="fp-row fp-col">
+      <div class="info-subtitle">Report Type</div>
+      <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
+        <button type="button" class="fp-tab ${exportPanelState.reportType === "dino" ? "is-on" : ""}" data-export-type="dino">Dino</button>
+        <button type="button" class="fp-tab ${exportPanelState.reportType === "entry" ? "is-on" : ""}" data-export-type="entry">Entry</button>
+        <button type="button" class="fp-tab ${exportPanelState.reportType === "map" ? "is-on" : ""}" data-export-type="map">Map</button>
+      </div>
+    </div>
+
+    <div class="fp-row fp-col">
+      <div class="info-subtitle">Scope</div>
+      <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
+        <button type="button" class="fp-tab ${exportPanelState.scope === "current_selection" ? "is-on" : ""}" data-export-scope="current_selection">Current Selection</button>
+        <button type="button" class="fp-tab ${exportPanelState.scope === "current_map" ? "is-on" : ""}" data-export-scope="current_map">Current Map</button>
+        <button type="button" class="fp-tab ${exportPanelState.scope === "current_source" ? "is-on" : ""}" data-export-scope="current_source">Current Source</button>
+      </div>
+    </div>
+
+    <div class="fp-row fp-col">
+      <div class="info-subtitle">Include</div>
+
+      <label class="fp-row">
+        <input type="checkbox" data-export-opt="maps" ${exportPanelState.includeMaps ? "checked" : ""}>
+        <span>Maps</span>
+      </label>
+
+      <label class="fp-row">
+        <input type="checkbox" data-export-opt="entries" ${exportPanelState.includeEntries ? "checked" : ""}>
+        <span>Entries / linked names</span>
+      </label>
+
+      <label class="fp-row">
+        <input type="checkbox" data-export-opt="blueprints" ${exportPanelState.includeBlueprints ? "checked" : ""}>
+        <span>Blueprints</span>
+      </label>
+    </div>
+
+    <div class="fp-row fp-col" style="margin-top:10px;">
+      <button type="button" class="fp-tab is-on" data-export-run="json">Download JSON</button>
+    </div>
+  `;
+
+  body.querySelectorAll("[data-export-type]").forEach(btn => {
+    btn.onclick = () => {
+      exportPanelState.reportType = btn.dataset.exportType;
+      renderExportPanel();
+    };
+  });
+
+  body.querySelectorAll("[data-export-scope]").forEach(btn => {
+    btn.onclick = () => {
+      exportPanelState.scope = btn.dataset.exportScope;
+      renderExportPanel();
+    };
+  });
+
+  body.querySelectorAll("[data-export-opt]").forEach(el => {
+    el.onchange = () => {
+      const key = el.dataset.exportOpt;
+      if (key === "maps") exportPanelState.includeMaps = el.checked;
+      if (key === "entries") exportPanelState.includeEntries = el.checked;
+      if (key === "blueprints") exportPanelState.includeBlueprints = el.checked;
+    };
+  });
+
+  const runBtn = body.querySelector("[data-export-run='json']");
+  if (runBtn){
+    runBtn.onclick = () => {
+      exportCurrentReportJSON();
+    };
+  }
+}
+
+function toggleExportPanel(){
+  const panel = ensureExportPanel();
+  const show = panel.style.display === "none";
+
+  if (show){
+    renderExportPanel();
+    panel.style.display = "";
+    panel.dataset.hidden = "0";
+  } else {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  }
+
+  updateDockToggles();
+}
+
 function setMapBackgroundFromDock(btn){
   const mapMeta = dockState.mapMeta;
   if (!mapMeta?.backgrounds?.length || !mapObj?.overlay) return;

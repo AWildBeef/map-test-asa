@@ -284,7 +284,13 @@ function openDinoView(name){
   render();
 }
 
-
+const exportPanelState = {
+  reportType: "dino",       // "dino" | "entry" | "map"
+  scope: "current_source",  // "current_selection" | "current_map" | "current_source"
+  includeMaps: true,
+  includeEntries: true,
+  includeBlueprints: false
+};
 /* Split from app_embed.js lines 252-721 */
 
 /* ============================================================
@@ -337,8 +343,210 @@ function syncModeButton() {
 
 
 
+function safeFilePart(s){
+  return String(s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+}
+
+function currentSourceMeta(){
+  const opt = UI?.sourceSelect?.selectedOptions?.[0];
+  return {
+    id: UI?.sourceSelect?.value || "",
+    label: opt?.textContent || ""
+  };
+}
+
+function selectedEntryName(){
+  return State.mode === "entry" ? State.selection || "" : "";
+}
+
+function selectedDinoName(){
+  return State.mode === "dino" ? State.selection || "" : "";
+}
+
+function selectedMapName(){
+  return State.mapId || "";
+}
 
 
+function buildDinoReport(){
+  const src = currentSourceMeta();
+
+  let rows = [];
+
+  if (exportPanelState.scope === "current_selection") {
+    const name = selectedDinoName();
+    if (name) {
+      rows = getDinoRowsAllMaps().filter(r => r.name === name);
+    }
+  } else if (exportPanelState.scope === "current_map") {
+    rows = getDinoRowsCurrentMap();
+  } else {
+    rows = getDinoRowsAllMaps();
+  }
+
+  return {
+    type: "dino_report",
+    sourceId: src.id,
+    sourceLabel: src.label,
+    scope: exportPanelState.scope,
+    mapId: State.mapId || "",
+    exportedAt: new Date().toISOString(),
+    options: {
+      includeMaps: exportPanelState.includeMaps,
+      includeEntries: exportPanelState.includeEntries,
+      includeBlueprints: exportPanelState.includeBlueprints
+    },
+    rows: rows.map(r => {
+      const out = {
+        name: r.name
+      };
+
+      if (exportPanelState.includeMaps) {
+        out.mapCount = r.mapCount || 0;
+        out.mapNames = r.mapNames || [];
+      }
+
+      if (exportPanelState.includeEntries) {
+        out.entryNames = r.entryNames || r.currentMapEntryNames || [];
+      }
+
+      if (exportPanelState.includeBlueprints) {
+        out.blueprints = r.bps || [];
+      }
+
+      return out;
+    })
+  };
+}
+
+function buildEntryReport(){
+  const src = currentSourceMeta();
+
+  let rows = [];
+
+  if (exportPanelState.scope === "current_selection") {
+    const entryName = selectedEntryName();
+    if (entryName) {
+      rows = getEntryRowsAllMaps().filter(r => r.entryName === entryName);
+    }
+  } else if (exportPanelState.scope === "current_map") {
+    rows = getEntryRowsCurrentMap();
+  } else {
+    rows = getEntryRowsAllMaps();
+  }
+
+  return {
+    type: "entry_report",
+    sourceId: src.id,
+    sourceLabel: src.label,
+    scope: exportPanelState.scope,
+    mapId: State.mapId || "",
+    exportedAt: new Date().toISOString(),
+    options: {
+      includeMaps: exportPanelState.includeMaps,
+      includeEntries: exportPanelState.includeEntries,
+      includeBlueprints: exportPanelState.includeBlueprints
+    },
+    rows: rows.map(r => {
+      const out = {
+        entryName: r.entryName
+      };
+
+      if (exportPanelState.includeMaps) {
+        out.mapCount = r.mapCount || 0;
+        out.mapNames = r.mapNames || [];
+      }
+
+      if (exportPanelState.includeEntries) {
+        out.dinoNames = r.dinoNames || [];
+      }
+
+      if (exportPanelState.includeBlueprints) {
+        out.entryBlueprint = Global.spawn?.entries?.[r.entryName]?.bp || "";
+      }
+
+      return out;
+    })
+  };
+}
+
+function buildMapReport(){
+  const src = currentSourceMeta();
+  const mapName = selectedMapName();
+
+  const dinoRows = getDinoRowsCurrentMap();
+  const entryRows = getEntryRowsCurrentMap();
+
+  return {
+    type: "map_report",
+    sourceId: src.id,
+    sourceLabel: src.label,
+    scope: exportPanelState.scope,
+    mapId: mapName,
+    exportedAt: new Date().toISOString(),
+    options: {
+      includeMaps: exportPanelState.includeMaps,
+      includeEntries: exportPanelState.includeEntries,
+      includeBlueprints: exportPanelState.includeBlueprints
+    },
+    rows: [
+      {
+        mapName,
+        dinos: dinoRows.map(r => {
+          const out = { name: r.name };
+
+          if (exportPanelState.includeEntries) {
+            out.entryNames = r.currentMapEntryNames || r.entryNames || [];
+          }
+
+          if (exportPanelState.includeBlueprints) {
+            out.blueprints = r.bps || [];
+          }
+
+          return out;
+        }),
+        entries: entryRows.map(r => {
+          const out = { entryName: r.entryName };
+
+          if (exportPanelState.includeEntries) {
+            out.dinoNames = r.dinoNames || [];
+          }
+
+          if (exportPanelState.includeBlueprints) {
+            out.entryBlueprint = Global.spawn?.entries?.[r.entryName]?.bp || "";
+          }
+
+          return out;
+        })
+      }
+    ]
+  };
+}
+
+function buildExportReport(){
+  if (exportPanelState.reportType === "dino") return buildDinoReport();
+  if (exportPanelState.reportType === "entry") return buildEntryReport();
+  return buildMapReport();
+}
+
+function exportCurrentReportJSON(){
+  const report = buildExportReport();
+  const src = currentSourceMeta();
+
+  const fileBase = [
+    "report",
+    exportPanelState.reportType,
+    exportPanelState.scope,
+    safeFilePart(src.label || src.id || "source"),
+    safeFilePart(State.mapId || "")
+  ].filter(Boolean).join("_");
+
+  downloadJSON(`${fileBase}.json`, report);
+}
 
 
 
