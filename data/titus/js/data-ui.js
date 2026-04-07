@@ -411,6 +411,38 @@ async function buildSources(){
   ];
 }
 
+function dinoNamesForEntryGlobal(entryName){
+  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  const names = new Set();
+
+  const restrictToMod = !activeSourceIsOfficial();
+  const allowedModBps = restrictToMod ? modBlueprintSet() : null;
+
+  for (const r of rows){
+    const rawBp = normalizeBp(r?.[0]);
+    if (!rawBp) continue;
+
+    const outs = worldOutputsForBp(rawBp);
+
+    for (const out of outs){
+      const finalBp = normalizeBp(out?.[0]);
+      const prob = Number(out?.[1] || 0);
+
+      if (!finalBp || prob <= 0) continue;
+      if (restrictToMod && !allowedModBps.has(finalBp)) continue;
+
+      const d = getDinoObjByBp(finalBp);
+      if (!d) continue;
+
+      const labels = labelsForDinoObj(d);
+      const name = labels?.[0] || bpClass(finalBp) || finalBp;
+      if (name) names.add(name);
+    }
+  }
+
+  return [...names].sort((a, b) => a.localeCompare(b));
+}
+
 
 function getDinoObjByBp(bp){
   const dinos = Global.dinos?.dinos || {};

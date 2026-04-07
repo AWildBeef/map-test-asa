@@ -1091,9 +1091,7 @@ function getEntryRowsAllMaps(){
   for (const [entryName, maps] of Object.entries(Global.spawn?.entryMaps || {})){
     const codes = Array.isArray(maps) ? maps : [];
     const mapNames = codes.map(mapNameFromCode);
-
-    const bps = State.entryToDinos.get(entryName) || [];
-    const dinoNames = bps.map(dinoLabelFromBp);
+    const dinoNames = dinoNamesForEntryGlobal(entryName);
 
     rows.push({
       kind: "entry",
