@@ -86,6 +86,14 @@ function downgradeRarity(label,steps){
 
 /*=========MAP=============*/
 
+function mapNamesForEntry(entryName){
+  const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
+    ? Global.spawn.entryMaps[entryName]
+    : [];
+
+  return codes.map(code => Global.spawn?.mapLegend?.[code] || code);
+}
+
 
 function ensureExportPanel(){
   let panel = document.getElementById("exportPanel");
@@ -165,6 +173,10 @@ function renderExportPanel(){
         <input type="checkbox" data-export-opt="entries" ${exportPanelState.includeEntries ? "checked" : ""}>
         <span>Entries / linked names</span>
       </label>
+      <label class="fp-row">
+        <input type="checkbox" data-export-opt="entryMaps" ${exportPanelState.includeEntryMaps ? "checked" : ""}>
+        <span>Entry maps</span>
+      </label>
 
       <label class="fp-row">
         <input type="checkbox" data-export-opt="blueprints" ${exportPanelState.includeBlueprints ? "checked" : ""}>
@@ -196,6 +208,7 @@ function renderExportPanel(){
       const key = el.dataset.exportOpt;
       if (key === "maps") exportPanelState.includeMaps = el.checked;
       if (key === "entries") exportPanelState.includeEntries = el.checked;
+      if (key === "entryMaps") exportPanelState.includeEntryMaps = el.checked;
       if (key === "blueprints") exportPanelState.includeBlueprints = el.checked;
     };
   });

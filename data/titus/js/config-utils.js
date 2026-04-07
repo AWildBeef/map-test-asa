@@ -289,7 +289,8 @@ const exportPanelState = {
   scope: "current_source",  // "current_selection" | "current_map" | "current_source"
   includeMaps: true,
   includeEntries: true,
-  includeBlueprints: false
+  includeBlueprints: false,
+  includeEntryMaps: false
 };
 /* Split from app_embed.js lines 252-721 */
 
@@ -411,7 +412,16 @@ function buildDinoReport(){
       }
 
       if (exportPanelState.includeEntries) {
-        out.entryNames = r.entryNames || r.currentMapEntryNames || [];
+        const entryNames = r.entryNames || r.currentMapEntryNames || [];
+
+        if (exportPanelState.includeEntryMaps) {
+          out.entries = entryNames.map(entryName => ({
+            entryName,
+            mapNames: mapNamesForEntry(entryName)
+          }));
+        } else {
+          out.entryNames = entryNames;
+        }
       }
 
       if (exportPanelState.includeBlueprints) {
