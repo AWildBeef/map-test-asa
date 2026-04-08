@@ -56,7 +56,9 @@
   --shadow-sm: 0 8px 18px rgba(0,0,0,.18);
   --shadow-md: 0 10px 24px rgba(0,0,0,.28);
   --shadow-lg: 0 18px 46px rgba(0,0,0,.50);
-
+  --spawn-card-off-border: rgba(var(--accent-rgb), .10);
+  --spawn-card-hover-border: rgba(var(--accent-rgb), .16);
+  --spawn-card-on-border: rgba(var(--accent-rgb), .24);
 /* ============================================================
      2) SEMANTIC THEME TOKENS
      Default theme = Atlas Blue
@@ -1104,6 +1106,265 @@ body{
     );
   border-color: var(--border-mid);
   color: var(--text-1);
+}
+
+/* ============================================================
+   EXPORT PANEL
+============================================================ */
+
+#exportPanel{
+  width: min(440px, calc(100vw - 20px));
+  max-width: 440px;
+}
+
+#exportPanel .fp-body{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* section labels */
+#exportPanel .info-subtitle{
+  margin: 0 0 8px 0;
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* generic rows */
+#exportPanel .fp-row{
+  gap: 8px;
+}
+
+#exportPanel .fp-row.fp-col{
+  gap: 0;
+}
+
+#exportPanel .fp-row[style*="flex-wrap:wrap"]{
+  row-gap: 8px;
+}
+
+/* ============================================================
+   BUTTON GROUPS / TABS
+============================================================ */
+
+#exportPanel .fp-tab{
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0.94;
+  color: var(--text-2);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.02),
+      rgba(255,255,255,0)
+    ) !important;
+
+  border: 1px solid rgba(var(--accent-rgb), .14) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.02),
+    0 0 0 1px rgba(0,0,0,.12);
+
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    border-color 120ms ease,
+    background 120ms ease,
+    color 120ms ease;
+}
+
+#exportPanel .fp-tab:hover{
+  opacity: 1;
+  color: var(--text-1);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(var(--accent-rgb), .14),
+      rgba(var(--accent-rgb), .06)
+    ) !important;
+
+  border-color: rgba(var(--accent-rgb), .24) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 0 0 1px rgba(var(--accent-rgb), .10),
+    0 0 18px rgba(var(--accent-rgb), .08);
+}
+
+#exportPanel .fp-tab.is-on{
+  opacity: 1;
+  color: var(--text-1);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(var(--accent-rgb), .22),
+      rgba(var(--accent-rgb), .10)
+    ) !important;
+
+  border-color: rgba(var(--accent-rgb), .34) !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--accent-rgb), .20),
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 0 0 1px rgba(var(--accent-rgb), .10),
+    0 0 20px rgba(var(--accent-rgb), .10);
+}
+
+#exportPanel .fp-row button.fp-tab{
+  color: inherit;
+}
+
+/* ============================================================
+   INCLUDE SECTION GROUPING
+============================================================ */
+
+#exportPanel .export-group{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.02),
+      rgba(255,255,255,0)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+#exportPanel .export-group + .export-group{
+  margin-top: 8px;
+}
+
+#exportPanel .export-group-title{
+  margin: 0 0 4px 0;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  opacity: 0.95;
+}
+
+/* ============================================================
+   CHECKBOX ROWS
+============================================================ */
+
+#exportPanel label.fp-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+  margin: 0;
+  line-height: 1.25;
+}
+
+#exportPanel input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+  flex: 0 0 auto;
+}
+
+#exportPanel label.fp-row span{
+  min-width: 0;
+  flex: 1;
+  color: var(--text-2);
+}
+
+/* nested options */
+#exportPanel label.fp-row[style*="padding-left:18px"]{
+  padding-left: 22px !important;
+  opacity: 0.96;
+}
+
+#exportPanel label.fp-row[style*="padding-left:36px"]{
+  padding-left: 40px !important;
+  opacity: 0.9;
+}
+
+/* subtle guide feel for nested rows */
+#exportPanel label.fp-row[style*="padding-left:18px"],
+#exportPanel label.fp-row[style*="padding-left:36px"]{
+  position: relative;
+}
+
+#exportPanel label.fp-row[style*="padding-left:18px"]::before,
+#exportPanel label.fp-row[style*="padding-left:36px"]::before{
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: rgba(var(--accent-rgb), .18);
+  opacity: 0.8;
+}
+
+/* ============================================================
+   DOWNLOAD BUTTON
+============================================================ */
+
+#exportPanel [data-export-run="json"]{
+  width: 100%;
+  justify-content: center;
+  min-height: 42px;
+  font-weight: 600;
+  border-radius: 14px;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   SMALL SCREENS
+============================================================ */
+
+@media (max-width: 640px){
+  #exportPanel{
+    width: min(380px, calc(100vw - 14px));
+    max-width: none;
+  }
+
+  #exportPanel .fp-body{
+    gap: 10px;
+  }
+
+  #exportPanel .fp-tab{
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  #exportPanel .info-subtitle{
+    font-size: 10px;
+  }
+
+  #exportPanel .export-group{
+    padding: 9px 10px;
+    border-radius: 12px;
+  }
+
+  #exportPanel [data-export-type]{
+    min-width: 84px;
+  }
+
+  #exportPanel [data-export-scope]{
+    flex: 1 1 100%;
+  }
 }
 
 /* ============================================================

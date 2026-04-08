@@ -168,104 +168,135 @@ function renderExportPanel(){
         <button type="button" class="fp-tab ${exportPanelState.scope === "current_source" ? "is-on" : ""}" data-export-scope="current_source">Current Source</button>
       </div>
     </div>
-
     <div class="fp-row fp-col">
       <div class="info-subtitle">Include</div>
 
       ${isDino ? `
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="dino.includeMaps" ${dinoOpts.includeMaps ? "checked" : ""}>
-          <span>Maps</span>
-        </label>
+        <div class="export-group">
+          <div class="export-group-title">Dino Report</div>
 
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="dino.includeEntries" ${dinoOpts.includeEntries ? "checked" : ""}>
-          <span>Entries</span>
-        </label>
-
-        ${dinoOpts.includeEntries ? `
-          <label class="fp-row" style="padding-left:18px;">
-            <input type="checkbox" data-export-opt="dino.includeEntryMaps" ${dinoOpts.includeEntryMaps ? "checked" : ""}>
-            <span>Maps per entry</span>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeMaps" ${dinoOpts.includeMaps ? "checked" : ""}>
+            <span>Maps</span>
           </label>
-        ` : ""}
 
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="dino.includeBlueprints" ${dinoOpts.includeBlueprints ? "checked" : ""}>
-          <span>Blueprints</span>
-        </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeEntries" ${dinoOpts.includeEntries ? "checked" : ""}>
+            <span>Entries</span>
+          </label>
 
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="dino.includeNametag" ${dinoOpts.includeNametag ? "checked" : ""}>
-          <span>Nametag</span>
-        </label>
+          ${dinoOpts.includeEntries ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="dino.includeEntryMaps" ${dinoOpts.includeEntryMaps ? "checked" : ""}>
+              <span>Maps per entry</span>
+            </label>
+          ` : ""}
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeBlueprints" ${dinoOpts.includeBlueprints ? "checked" : ""}>
+            <span>Blueprints</span>
+          </label>
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeNametag" ${dinoOpts.includeNametag ? "checked" : ""}>
+            <span>Nametag</span>
+          </label>
+        </div>
       ` : ""}
 
       ${isEntry ? `
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="entry.includeMaps" ${entryOpts.includeMaps ? "checked" : ""}>
-          <span>Maps</span>
-        </label>
+        <div class="export-group">
+          <div class="export-group-title">Entry Report</div>
 
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="entry.includeDinos" ${entryOpts.includeDinos ? "checked" : ""}>
-          <span>Dinos</span>
-        </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entry.includeMaps" ${entryOpts.includeMaps ? "checked" : ""}>
+            <span>Maps</span>
+          </label>
 
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="entry.includeBlueprint" ${entryOpts.includeBlueprint ? "checked" : ""}>
-          <span>Blueprint</span>
-        </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entry.includeDinos" ${entryOpts.includeDinos ? "checked" : ""}>
+            <span>Dinos</span>
+          </label>
+
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entry.includeBlueprint" ${entryOpts.includeBlueprint ? "checked" : ""}>
+            <span>Blueprint</span>
+          </label>
+        </div>
       ` : ""}
 
       ${isMap ? `
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="map.includeDinos" ${mapOpts.includeDinos ? "checked" : ""}>
-          <span>Dinos</span>
-        </label>
-
         ${mapOpts.includeDinos ? `
-          <label class="fp-row" style="padding-left:18px;">
-            <input type="checkbox" data-export-opt="map.dino.includeEntries" ${mapOpts.dino.includeEntries ? "checked" : ""}>
-            <span>Dino entries</span>
-          </label>
+          <div class="export-group">
+            <div class="export-group-title">Dinos</div>
 
-          ${mapOpts.dino.includeEntries ? `
-            <label class="fp-row" style="padding-left:36px;">
-              <input type="checkbox" data-export-opt="map.dino.includeEntryMaps" ${mapOpts.dino.includeEntryMaps ? "checked" : ""}>
-              <span>Maps per entry</span>
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="map.includeDinos" ${mapOpts.includeDinos ? "checked" : ""}>
+              <span>Include dinos</span>
             </label>
-          ` : ""}
 
-          <label class="fp-row" style="padding-left:18px;">
-            <input type="checkbox" data-export-opt="map.dino.includeBlueprints" ${mapOpts.dino.includeBlueprints ? "checked" : ""}>
-            <span>Dino blueprints</span>
-          </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.dino.includeEntries" ${mapOpts.dino.includeEntries ? "checked" : ""}>
+              <span>Dino entries</span>
+            </label>
 
-          <label class="fp-row" style="padding-left:18px;">
-            <input type="checkbox" data-export-opt="map.dino.includeNametag" ${mapOpts.dino.includeNametag ? "checked" : ""}>
-            <span>Dino nametag</span>
-          </label>
-        ` : ""}
+            ${mapOpts.dino.includeEntries ? `
+              <label class="fp-row" style="padding-left:36px;">
+                <input type="checkbox" data-export-opt="map.dino.includeEntryMaps" ${mapOpts.dino.includeEntryMaps ? "checked" : ""}>
+                <span>Maps per entry</span>
+              </label>
+            ` : ""}
 
-        <label class="fp-row">
-          <input type="checkbox" data-export-opt="map.includeEntries" ${mapOpts.includeEntries ? "checked" : ""}>
-          <span>Entries</span>
-        </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.dino.includeBlueprints" ${mapOpts.dino.includeBlueprints ? "checked" : ""}>
+              <span>Dino blueprints</span>
+            </label>
+
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.dino.includeNametag" ${mapOpts.dino.includeNametag ? "checked" : ""}>
+              <span>Dino nametag</span>
+            </label>
+          </div>
+        ` : `
+          <div class="export-group">
+            <div class="export-group-title">Dinos</div>
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="map.includeDinos">
+              <span>Include dinos</span>
+            </label>
+          </div>
+        `}
 
         ${mapOpts.includeEntries ? `
-          <label class="fp-row" style="padding-left:18px;">
-            <input type="checkbox" data-export-opt="map.entry.includeDinos" ${mapOpts.entry.includeDinos ? "checked" : ""}>
-            <span>Entry dinos</span>
-          </label>
+          <div class="export-group">
+            <div class="export-group-title">Entries</div>
 
-          ${mapOpts.entry.includeDinos ? `
-            <label class="fp-row" style="padding-left:36px;">
-              <input type="checkbox" data-export-opt="map.entry.includeMaps" ${mapOpts.entry.includeMaps ? "checked" : ""}>
-              <span>Maps per entry</span>
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="map.includeEntries" ${mapOpts.includeEntries ? "checked" : ""}>
+              <span>Include entries</span>
             </label>
-          ` : ""}
-        ` : ""}
+
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.entry.includeDinos" ${mapOpts.entry.includeDinos ? "checked" : ""}>
+              <span>Entry dinos</span>
+            </label>
+
+            ${mapOpts.entry.includeDinos ? `
+              <label class="fp-row" style="padding-left:36px;">
+                <input type="checkbox" data-export-opt="map.entry.includeMaps" ${mapOpts.entry.includeMaps ? "checked" : ""}>
+                <span>Maps per entry</span>
+              </label>
+            ` : ""}
+          </div>
+        ` : `
+          <div class="export-group">
+            <div class="export-group-title">Entries</div>
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="map.includeEntries">
+              <span>Include entries</span>
+            </label>
+          </div>
+        `}
       ` : ""}
     </div>
 
