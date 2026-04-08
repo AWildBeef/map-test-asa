@@ -287,19 +287,37 @@ function openDinoView(name){
 const exportPanelState = {
   reportType: "dino",
   scope: "current_source",
-  includeMaps: true,
-  includeEntries: true,
-  includeBlueprints: false,
-  includeEntryMaps: false,
-  includeNametag: false,
-  includeDinos: true,
-  includeMapEntries: true,
 
-  mapDinoIncludeEntries: false,
-  mapDinoIncludeBlueprints: false,
-  mapDinoIncludeNametag: false,
+  dino: {
+    includeMaps: true,
+    includeEntries: true,
+    includeEntryMaps: false,
+    includeBlueprints: false,
+    includeNametag: false
+  },
 
-  mapEntryIncludeDinos: false
+  entry: {
+    includeMaps: true,
+    includeDinos: true,
+    includeBlueprint: false
+  },
+
+  map: {
+    includeDinos: true,
+    includeEntries: true,
+
+    dino: {
+      includeEntries: false,
+      includeEntryMaps: false,
+      includeBlueprints: false,
+      includeNametag: false
+    },
+
+    entry: {
+      includeDinos: false,
+      includeMaps: false
+    }
+  }
 };
 /* Split from app_embed.js lines 252-721 */
 
@@ -350,7 +368,113 @@ function syncModeButton() {
    UTILS
 ============================================================ */
 
+function getExportOpts(){
+  return exportPanelState[exportPanelState.reportType] || {};
+}
 
+function isSimpleDinoExport(opts = {}){
+  return !opts.includeMaps &&
+         !opts.includeEntries &&
+         !opts.includeBlueprints &&
+         !opts.includeNametag;
+}
+
+function isSimpleEntryExport(opts = {}){
+  return !opts.includeMaps &&
+         !opts.includeDinos &&
+         !opts.includeBlueprint;
+}
+
+function buildEntryExportItem(entryName, opts = {}){
+  const {
+    simple = false,
+    includeMaps = false,
+    includeDinos = false,
+    includeBlueprint = false
+  } = opts;
+
+  if (simple && !includeMaps && !includeDinos && !includeBlueprint) {
+    return entryName;
+  }
+
+  const out = { entryName };
+
+  if (includeMaps) {
+    const mapNames = mapNamesForEntry(entryName);
+    out.mapCount = mapNames.length;
+    out.mapNames = mapNames;
+  }
+
+  if (includeDinos) {
+    out.dinoNames = dinoNamesForEntryGlobal(entryName);
+  }
+
+  if (includeBlueprint) {
+    out.entryBlueprint = Global.spawn?.entries?.[entryName]?.bp || "";
+  }
+
+  return out;
+}
+
+function buildDinoExportItem(name, opts = {}){
+  const {
+    simple = false,
+    includeMaps = false,
+    includeEntries = false,
+    includeEntryMaps = false,
+    includeBlueprints = false,
+    includeNametag = false,
+    row = null
+  } = opts;
+
+  const resolvedRow =
+    row ||
+    getDinoRowsAllMaps().find(r => r.name === name) ||
+    getDinoRowsCurrentMap().find(r => r.name === name) ||
+    null;
+
+  const bps = resolvedRow?.bps || [];
+
+  if (simple && !includeMaps && !includeEntries && !includeBlueprints && !includeNametag) {
+    return name;
+  }
+
+  const out = { name };
+
+  if (includeNametag) {
+    const firstBp = bps[0] || "";
+    const d = firstBp ? getDinoObjByBp(firstBp) : null;
+    out.nametag = d?.t || "";
+  }
+
+  if (includeMaps) {
+    out.mapCount = resolvedRow?.mapCount || 0;
+    out.mapNames = resolvedRow?.mapNames || [];
+  }
+
+  if (includeEntries) {
+    const entryNames = resolvedRow?.currentMapEntryNames || resolvedRow?.entryNames || [];
+
+    if (includeEntryMaps) {
+      out.entries = entryNames.map(entryName =>
+        buildEntryExportItem(entryName, {
+          simple: false,
+          includeMaps: true,
+          includeDinos: false,
+          includeBlueprint: false
+        })
+      );
+    } else {
+      out.entryNames = entryNames;
+    }
+  }
+
+  if (includeBlueprints) {
+    out.blueprints = bps;
+  }
+
+  return out;
+}
 
 
 function safeFilePart(s){
@@ -384,14 +508,13 @@ function selectedMapName(){
 
 function buildDinoReport(){
   const src = currentSourceMeta();
+  const opts = exportPanelState.dino;
 
   let rows = [];
 
   if (exportPanelState.scope === "current_selection") {
     const name = selectedDinoName();
-    if (name) {
-      rows = getDinoRowsAllMaps().filter(r => r.name === name);
-    }
+    if (name) rows = getDinoRowsAllMaps().filter(r => r.name === name);
   } else if (exportPanelState.scope === "current_map") {
     rows = getDinoRowsCurrentMap();
   } else {
@@ -405,59 +528,28 @@ function buildDinoReport(){
     scope: exportPanelState.scope,
     mapId: State.mapId || "",
     exportedAt: new Date().toISOString(),
-    options: {
-      includeMaps: exportPanelState.includeMaps,
-      includeEntries: exportPanelState.includeEntries,
-      includeBlueprints: exportPanelState.includeBlueprints
-    },
-    rows: rows.map(r => {
-      const out = {
-        name: r.name
-      };
-      
-      if (exportPanelState.includeNametag) {
-        const firstBp = (r.bps || [])[0] || "";
-        const d = firstBp ? getDinoObjByBp(firstBp) : null;
-        out.nametag = d?.t || "";
-      }
-
-      if (exportPanelState.includeMaps) {
-        out.mapCount = r.mapCount || 0;
-        out.mapNames = r.mapNames || [];
-      }
-
-      if (exportPanelState.includeEntries) {
-        const entryNames = r.entryNames || r.currentMapEntryNames || [];
-
-        if (exportPanelState.includeEntryMaps) {
-          out.entries = entryNames.map(entryName => ({
-            entryName,
-            mapNames: mapNamesForEntry(entryName)
-          }));
-        } else {
-          out.entryNames = entryNames;
-        }
-      }
-
-      if (exportPanelState.includeBlueprints) {
-        out.blueprints = r.bps || [];
-      }
-
-      return out;
-    })
+    options: opts,
+    rows: rows.map(r => buildDinoExportItem(r.name, {
+      simple: isSimpleDinoExport(opts),
+      includeMaps: opts.includeMaps,
+      includeEntries: opts.includeEntries,
+      includeEntryMaps: opts.includeEntryMaps,
+      includeBlueprints: opts.includeBlueprints,
+      includeNametag: opts.includeNametag,
+      row: r
+    }))
   };
 }
 
 function buildEntryReport(){
   const src = currentSourceMeta();
+  const opts = exportPanelState.entry;
 
   let rows = [];
 
   if (exportPanelState.scope === "current_selection") {
     const entryName = selectedEntryName();
-    if (entryName) {
-      rows = getEntryRowsAllMaps().filter(r => r.entryName === entryName);
-    }
+    if (entryName) rows = getEntryRowsAllMaps().filter(r => r.entryName === entryName);
   } else if (exportPanelState.scope === "current_map") {
     rows = getEntryRowsCurrentMap();
   } else {
@@ -471,31 +563,13 @@ function buildEntryReport(){
     scope: exportPanelState.scope,
     mapId: State.mapId || "",
     exportedAt: new Date().toISOString(),
-    options: {
-      includeMaps: exportPanelState.includeMaps,
-      includeEntries: exportPanelState.includeEntries,
-      includeBlueprints: exportPanelState.includeBlueprints
-    },
-    rows: rows.map(r => {
-      const out = {
-        entryName: r.entryName
-      };
-
-      if (exportPanelState.includeMaps) {
-        out.mapCount = r.mapCount || 0;
-        out.mapNames = r.mapNames || [];
-      }
-
-      if (exportPanelState.includeEntries) {
-        out.dinoNames = r.dinoNames || [];
-      }
-
-      if (exportPanelState.includeBlueprints) {
-        out.entryBlueprint = Global.spawn?.entries?.[r.entryName]?.bp || "";
-      }
-
-      return out;
-    })
+    options: opts,
+    rows: rows.map(r => buildEntryExportItem(r.entryName, {
+      simple: isSimpleEntryExport(opts),
+      includeMaps: opts.includeMaps,
+      includeDinos: opts.includeDinos,
+      includeBlueprint: opts.includeBlueprint
+    }))
   };
 }
 
@@ -513,65 +587,46 @@ function getAllMapsForSource(){
 
 function buildMapReport(){
   const src = currentSourceMeta();
-
-  const includeDinos = exportPanelState.includeDinos;
-  const includeEntries = exportPanelState.includeMapEntries;
-
-  const includeDinoEntries = exportPanelState.mapDinoIncludeEntries;
-  const includeDinoBlueprints = exportPanelState.mapDinoIncludeBlueprints;
-  const includeDinoNametag = exportPanelState.mapDinoIncludeNametag;
-
-  const includeEntryDinos = exportPanelState.mapEntryIncludeDinos;
+  const opts = exportPanelState.map;
+  const originalMap = State.mapId;
 
   function buildMapRow(mapName){
-    const originalMap = State.mapId;
     State.mapId = mapName;
     rebuildMapIndices();
 
     const row = { mapName };
 
-    if (includeDinos){
+    if (opts.includeDinos) {
       const dinoRows = getDinoRowsCurrentMap();
-      row.dinos = dinoRows.map(r => {
-        const out = {
-          name: r.name
-        };
-
-        if (includeDinoEntries) {
-          out.entryNames = r.currentMapEntryNames || r.entryNames || [];
-        }
-
-        if (includeDinoBlueprints) {
-          out.blueprints = r.bps || [];
-        }
-
-        if (includeDinoNametag) {
-          const firstBp = (r.bps || [])[0] || "";
-          const d = firstBp ? getDinoObjByBp(firstBp) : null;
-          out.nametag = d?.t || "";
-        }
-
-        return out;
-      });
+      row.dinos = dinoRows.map(r => buildDinoExportItem(r.name, {
+        simple: isSimpleDinoExport({
+          includeMaps: false,
+          includeEntries: opts.dino.includeEntries,
+          includeBlueprints: opts.dino.includeBlueprints,
+          includeNametag: opts.dino.includeNametag
+        }),
+        includeMaps: false,
+        includeEntries: opts.dino.includeEntries,
+        includeEntryMaps: opts.dino.includeEntryMaps,
+        includeBlueprints: opts.dino.includeBlueprints,
+        includeNametag: opts.dino.includeNametag,
+        row: r
+      }));
     }
 
-    if (includeEntries){
+    if (opts.includeEntries) {
       const entryRows = getEntryRowsCurrentMap();
-      row.entries = entryRows.map(r => {
-        const out = {
-          entryName: r.entryName
-        };
-
-        if (includeEntryDinos) {
-          out.dinoNames = dinoNamesForEntryGlobal(r.entryName);
-        }
-
-        return out;
-      });
+      row.entries = entryRows.map(r => buildEntryExportItem(r.entryName, {
+        simple: isSimpleEntryExport({
+          includeMaps: opts.entry.includeMaps,
+          includeDinos: opts.entry.includeDinos,
+          includeBlueprint: false
+        }),
+        includeMaps: opts.entry.includeMaps,
+        includeDinos: opts.entry.includeDinos,
+        includeBlueprint: false
+      }));
     }
-
-    State.mapId = originalMap;
-    rebuildMapIndices();
 
     return row;
   }
@@ -579,9 +634,7 @@ function buildMapReport(){
   let rows = [];
 
   if (exportPanelState.scope === "current_source") {
-    const mapCodes = getAllMapsForSource();
-
-    rows = mapCodes.map(code => {
+    rows = getAllMapsForSource().map(code => {
       const mapName = Global.spawn?.mapLegend?.[code] || code;
       return buildMapRow(mapName);
     });
@@ -589,12 +642,16 @@ function buildMapReport(){
     rows = [buildMapRow(State.mapId || "")];
   }
 
+  State.mapId = originalMap;
+  rebuildMapIndices();
+
   return {
     type: "map_report",
     sourceId: src.id,
     sourceLabel: src.label,
     scope: exportPanelState.scope,
     exportedAt: new Date().toISOString(),
+    options: opts,
     rows
   };
 }
