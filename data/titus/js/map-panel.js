@@ -635,7 +635,15 @@ async function onMapChanged(){
     mapObj = initMap(img, geom.size || [2048,2048]);
     ensureDockControl(mapObj.map);
   } else {
+    const paddedBounds = L.latLngBounds(bounds).pad(0.1);
+    mapObj.overlay.setBounds(bounds);
     mapObj.overlay.setUrl(img);
+    mapObj.map.setMaxBounds(paddedBounds);
+    mapObj.map.fitBounds(bounds, {
+      paddingTopLeft: [6, 6],
+      paddingBottomRight: [6, 20]
+    });
+    mapObj.bounds = bounds;
   }
 
   dockState.mapMeta = mapMeta;

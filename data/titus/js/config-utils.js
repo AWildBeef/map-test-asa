@@ -207,12 +207,6 @@ const viewOptions = {
   includeOfficialInItemPanels: false
 };
 
-function isItemCrateVisible(itemName, crateId) {
-  const key = itemCrateVisibilityKey(itemName, crateId);
-  return entryVisibility[key] ?? true;
-}
-
-
 if (EMBED_MODE) {
   document.body.classList.add("embed-mode");
 }
@@ -631,29 +625,31 @@ function buildMapReport(){
     return row;
   }
 
-  let rows = [];
+  try {
+    let rows = [];
 
-  if (exportPanelState.scope === "current_source") {
-    rows = getAllMapsForSource().map(code => {
-      const mapName = Global.spawn?.mapLegend?.[code] || code;
-      return buildMapRow(mapName);
-    });
-  } else {
-    rows = [buildMapRow(State.mapId || "")];
+    if (exportPanelState.scope === "current_source") {
+      rows = getAllMapsForSource().map(code => {
+        const mapName = Global.spawn?.mapLegend?.[code] || code;
+        return buildMapRow(mapName);
+      });
+    } else {
+      rows = [buildMapRow(State.mapId || "")];
+    }
+
+    return {
+      type: "map_report",
+      sourceId: src.id,
+      sourceLabel: src.label,
+      scope: exportPanelState.scope,
+      exportedAt: new Date().toISOString(),
+      options: opts,
+      rows
+    };
+  } finally {
+    State.mapId = originalMap;
+    rebuildMapIndices();
   }
-
-  State.mapId = originalMap;
-  rebuildMapIndices();
-
-  return {
-    type: "map_report",
-    sourceId: src.id,
-    sourceLabel: src.label,
-    scope: exportPanelState.scope,
-    exportedAt: new Date().toISOString(),
-    options: opts,
-    rows
-  };
 }
 
 function buildExportReport(){

@@ -516,7 +516,7 @@ function worldOutputsForBp(bp){
     if (!curBp) return [];
 
     if (seen.has(curBp)) {
-      return [[curBp, 1]];
+      return [];
     }
 
     const nextSeen = new Set(seen);
@@ -1062,102 +1062,6 @@ function buildLootIndexes(){
   setIndex.forEach((cls, idx) => {
     Global.setClassToId.set(String(cls), idx);
   });
-}
-
-
-function buildResolvedSupplyLegend(geom){
-  const legend = Array.isArray(geom?.supplyLegend) ? geom.supplyLegend : [];
-  const out = [];
-
-  for (const row of legend){
-    const bp = row?.bp || "";
-    const n = row?.n || "";
-    const cls = crateClassFromBp(bp);
-
-    const crateId = Global.crateClassToId.has(cls)
-      ? Global.crateClassToId.get(cls)
-      : null;
-
-    const crateData = Number.isInteger(crateId)
-      ? Global.loot?.c?.[crateId] || null
-      : null;
-
-    const isArtifact = cls.toLowerCase().includes("artifactcrate");
-    const isSupply = cls.toLowerCase().includes("supplycrate");
-
-    out.push({
-      bp,
-      n,
-      cls,
-      crateId,
-      crateData,
-      isArtifact,
-      isSupply
-    });
-  }
-
-  return out;
-}
-
-
-function resolvedSupplyLegendForCurrentMap(){
-  const mapMeta = MAPS.find(m => m.id === State.mapId);
-  if (!mapMeta) return [];
-  return Global.resolvedSupplyLegend.get(mapMeta.geomShort) || [];
-}
-
-
-function resolvedCratesForPoi(poi){
-  const legend = resolvedSupplyLegendForCurrentMap();
-  const rows = Array.isArray(poi?.c) ? poi.c : [];
-  const out = [];
-
-  for (const row of rows){
-    if (!Array.isArray(row) || !row.length) continue;
-
-    const legendIdx = Number(row[0]);
-    const weight = row[1];
-
-    if (!Number.isInteger(legendIdx) || legendIdx < 0 || legendIdx >= legend.length){
-      continue;
-    }
-
-    const meta = legend[legendIdx];
-    if (!meta) continue;
-
-    out.push({
-      legendIdx,
-      weight,
-      crateId: meta.crateId,
-      cls: meta.cls,
-      bp: meta.bp,
-      n: meta.n,
-      isArtifact: !!meta.isArtifact,
-      isSupply: !!meta.isSupply
-    });
-  }
-
-  return out;
-}
-
-
-function poiHasArtifactCrate(poi){
-  return resolvedCratesForPoi(poi).some(r => r.isArtifact);
-}
-
-
-function poiHasSupplyCrate(poi){
-  return resolvedCratesForPoi(poi).some(r => r.isSupply);
-}
-
-
-function countArtifactPois(points){
-  return (Array.isArray(points) ? points : []).filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p)).length;
-}
-
-
-function countSupplyPois(points){
-  return (Array.isArray(points) ? points : []).filter(p => poiHasSupplyCrate(p)).length;
 }
 
 
@@ -1834,7 +1738,12 @@ function setupUI(){
   UI.sourceSelect.value = UI.sourceSelect.options[0]?.value || "";
 
   UI.sourceSelect.onchange = async () => {
-    await loadSelectedSource();
+    try {
+      await loadSelectedSource();
+    } catch (e) {
+      console.error("Source load failed:", e);
+      showBootSplash("Failed to load source");
+    }
   };
 
   mountSourceDrillDropdown(
@@ -1857,9 +1766,14 @@ function setupUI(){
 
   UI.mapSelect.value=State.mapId;
 
-  UI.mapSelect.onchange=async()=>{
-    State.mapId=UI.mapSelect.value;
-    await onMapChanged();
+  UI.mapSelect.onchange = async () => {
+    State.mapId = UI.mapSelect.value;
+    try {
+      await onMapChanged();
+    } catch (e) {
+      console.error("Map load failed:", e);
+      showBootSplash("Failed to load map");
+    }
   };
 
   mountFancyDropdown(UI.mapSelect,UI.mapFancy,"Search maps...");
@@ -2135,6 +2049,10 @@ async function buildMergedGroupSource(src){
 
 
 function mountSourceDrillDropdown(native, host){
+  host._ddAbort?.abort();
+  host._ddAbort = new AbortController();
+  const { signal } = host._ddAbort;
+
   native.style.display = "none";
   host.innerHTML = "";
 
@@ -2255,7 +2173,7 @@ function mountSourceDrillDropdown(native, host){
 
   document.addEventListener("pointerdown", e => {
     if (!wrap.contains(e.target)) close();
-  });
+  }, { signal });
 
   native.addEventListener("change", syncLabel);
   syncLabel();
@@ -2263,6 +2181,10 @@ function mountSourceDrillDropdown(native, host){
 
 
 function mountFancyDropdown(native,host,placeholder){
+
+  host._ddAbort?.abort();
+  host._ddAbort = new AbortController();
+  const { signal } = host._ddAbort;
 
   native.style.display="none";
   host.innerHTML="";
@@ -2345,7 +2267,7 @@ function mountFancyDropdown(native,host,placeholder){
 
   document.addEventListener("pointerdown",e=>{
     if(!wrap.contains(e.target)) close();
-  });
+  }, { signal });
 
   native.addEventListener("change",sync);
 

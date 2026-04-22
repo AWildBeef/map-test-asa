@@ -123,12 +123,6 @@ async function boot() {
 
 boot().catch(e => {
   console.error(e);
-
   showBootSplash("Failed to load");
   alert(e.message || e);
-});
-
-boot().catch(e=>{
-  console.error(e);
-  alert(e.message||e);
 });
