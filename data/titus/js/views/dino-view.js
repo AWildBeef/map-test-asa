@@ -479,41 +479,69 @@ function renderAttacksTable(attacks){
 }
 
 
-function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino){
-  const displayName = dinoObj?.n || "(Unknown)";
+function entryDinoOpenKey(entryName, dinoBp){
+  return `${entryName}::${dinoBp}`;
+}
+
+function isEntryDinoOpen(entryName, dinoBp){
+  return entryDinoOpenState[entryDinoOpenKey(entryName, dinoBp)] ?? true;
+}
+
+function setEntryDinoOpen(entryName, dinoBp, open){
+  entryDinoOpenState[entryDinoOpenKey(entryName, dinoBp)] = !!open;
+}
+
+function areAllEntryDinosOpen(entryName, dinoKeys){
+  return dinoKeys.every(bp => isEntryDinoOpen(entryName, bp));
+}
+
+function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino, entryName){
+  const displayName = dinoObj?.n || bpClass(dinoBp) || "(Unknown)";
   const bp = dinoBp || "";
   const nameTag = dinoObj?.t || "";
+  const isOpen = isEntryDinoOpen(entryName, dinoBp);
 
-  const entryLinesHtml = rowsForThisDino.map((r) => {
+  const metaHtml = rowsForThisDino.map((r) => {
     const e = r.entry;
     const metaLines = buildEntryMetaLines(e);
-
+    if (!metaLines.length) return "";
     return `
-      <div class="entry-meta">
+      <div class="entry-meta" style="margin-top:4px;">
         ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
       </div>
     `;
   }).join("");
 
   return `
-    <div class="info-section">
-      <div class="info-row">
-        <span class="info-label">${escapeHtml(displayName)}</span>
+    <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"}" style="margin-bottom:6px;">
+      <button
+        type="button"
+        class="loot-set-toggle"
+        data-entry-dino-toggle="${escapeAttr(dinoBp)}"
+      >
+        <div class="loot-set-toggle-main">
+          <div class="info-row">
+            <span class="info-label">${escapeHtml(displayName)}</span>
+          </div>
+        </div>
+        <div class="loot-set-toggle-right">
+          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
+        </div>
+      </button>
+
+      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+        ${bp ? `
+          <div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}" style="margin-top:4px;">
+            ${escapeHtml(bp)}
+          </div>
+        ` : ""}
+        ${nameTag ? `
+          <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}" style="margin-top:4px;">
+            ${escapeHtml(nameTag)}
+          </div>
+        ` : ""}
+        ${metaHtml}
       </div>
-
-      ${bp ? `
-        <div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}">
-          ${escapeHtml(bp)}
-        </div>
-      ` : ""}
-
-      ${nameTag ? `
-        <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}">
-          ${escapeHtml(nameTag)}
-        </div>
-      ` : ""}
-
-      ${entryLinesHtml}
     </div>
   `;
 }
@@ -606,10 +634,12 @@ function renderEntryTabDinos(entryName){
     return an.localeCompare(bn);
   });
 
+  const allOpen = areAllEntryDinosOpen(entryName, dinoKeys);
+
   return `
     <div class="info-section">
       <div class="info-subtitle">Dinos (${dinoKeys.length})</div>
-      
+
       ${
         activeSourceIsOfficial()
           ? ""
@@ -625,8 +655,14 @@ function renderEntryTabDinos(entryName){
           `
       }
 
-      <div class="entries">
-        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(dinoKey, getDinoObjByBp(dinoKey), byDino.get(dinoKey))).join("")}
+      <div class="col-exp-row" style="margin-bottom:4px;">
+        <button type="button" class="loot-set-toggle-all" data-entry-dino-toggle-all="1">
+          ${allOpen ? "Collapse All" : "Expand All"}
+        </button>
+      </div>
+
+      <div class="entries" data-entry-dino-list="${escapeAttr(entryName)}">
+        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(dinoKey, getDinoObjByBp(dinoKey), byDino.get(dinoKey), entryName)).join("")}
       </div>
     </div>
   `;

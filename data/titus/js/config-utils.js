@@ -251,6 +251,7 @@ function openCrateView(crateValue){
 }
 
 const crateSetOpenState = {};
+const entryDinoOpenState = {}; // key: "entryName::dinoBp" -> bool
 
 function openEntryView(entryName){
   if (!entryName) return;

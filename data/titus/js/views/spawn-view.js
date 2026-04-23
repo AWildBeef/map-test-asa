@@ -237,13 +237,34 @@ function renderEntryPanel(entryName){
       renderEntryPanel(entryName);
     }
   });
-  const officialToggle =  body.querySelector("#entryIncludeOfficialToggle");
+  const officialToggle = body.querySelector("#entryIncludeOfficialToggle");
   if (officialToggle){
     officialToggle.onchange = () => {
       viewOptions.includeOfficialInEntryPanels = officialToggle.checked;
       renderEntryPanel(entryName);
     };
   }
+
+  // Wire individual dino collapse toggles
+  body.querySelectorAll("[data-entry-dino-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const dinoBp = btn.dataset.entryDinoToggle;
+      setEntryDinoOpen(entryName, dinoBp, !isEntryDinoOpen(entryName, dinoBp));
+      renderEntryPanel(entryName);
+    };
+  });
+
+  // Wire collapse all
+  body.querySelectorAll("[data-entry-dino-toggle-all]").forEach(btn => {
+    btn.onclick = () => {
+      const list = body.querySelector("[data-entry-dino-list]");
+      const dinoKeys = [...(list?.querySelectorAll("[data-entry-dino-toggle]") || [])]
+        .map(b => b.dataset.entryDinoToggle);
+      const allOpen = areAllEntryDinosOpen(entryName, dinoKeys);
+      dinoKeys.forEach(bp => setEntryDinoOpen(entryName, bp, !allOpen));
+      renderEntryPanel(entryName);
+    };
+  });
   mountPanelSwipe(
     body.querySelector(".fp-pages"),
     ENTRY_PANEL_TABS,

@@ -136,6 +136,54 @@ function itemCrateVisibilityKey(itemName, crateRef){
   return `${State.mapId}::item::${itemName}::crate::${crateRef}`;
 }
 
+// Returns the loot set name and entry details for a specific item within a crate
+function itemLootDetail(itemId, crateId){
+  const crateClass = crateIdToClass(crateId);
+  if (!crateClass) return [];
+
+  const crate = lootData().c?.[crateClass];
+  if (!crate) return [];
+
+  const out = [];
+
+  // Use reverse-lookup rows to find exactly which set+entry this item is in
+  const rRows = lootData().r?.[String(itemId)] || [];
+  for (const r of rRows){
+    if (!Array.isArray(r) || typeof r[0] !== "number") continue;
+    if (r[0] !== crateId) continue;
+
+    const setIdx   = r[1] ?? 0;
+    const entryIdx = r[2] ?? 0;
+    const set      = (crate.s || [])[setIdx];
+    if (!set) continue;
+
+    const { allEntries } = lootSetEntriesFromRow(set);
+    const entry = allEntries[entryIdx];
+    if (!entry) continue;
+
+    out.push({
+      setName:   lootSetNameFromRow(set, `Set ${setIdx + 1}`),
+      setWeight: set.w ?? null,
+      w:   entry.w   ?? null,
+      mn:  entry.mn  ?? null,
+      mx:  entry.mx  ?? null,
+      q1:  entry.q1  ?? null,
+      q2:  entry.q2  ?? null,
+      b:   entry.b   ?? null,
+      fb:  entry.fb  ?? null,
+    });
+  }
+
+  // Deduplicate by set+entry combination
+  const seen = new Set();
+  return out.filter(d => {
+    const key = `${d.setName}::${d.w}::${d.mn}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 function renderItemTabCrates(it){
   const itemIds = Array.isArray(it?.ids) ? it.ids : (it?.id != null ? [it.id] : []);
   const crateMap = new Map();
@@ -151,8 +199,15 @@ function renderItemTabCrates(it){
           crateId,
           crateValue: `crate:${crateId}`,
           name: crateDisplayNameById(crateId),
-          level: meta.l ?? null
+          level: meta.l ?? null,
+          details: []
         });
+      }
+
+      // Gather loot detail for this item in this crate
+      const detail = itemLootDetail(itemId, crateId);
+      if (detail.length) {
+        crateMap.get(crateId).details.push(...detail);
       }
     }
 
@@ -173,7 +228,8 @@ function renderItemTabCrates(it){
             missionClass,
             structClass,
             name: missionDisplayName(missionClass),
-            level: null
+            level: null,
+            details: []
           });
         }
       }
@@ -211,6 +267,38 @@ function renderItemTabCrates(it){
                 const key = itemCrateVisibilityKey(it.name, row.crateValue);
                 const checked = entryVisibility[key] ?? true;
 
+                const detailHtml = row.details?.length ? `
+                  <div class="item-loot-details">
+                    ${row.details.map(d => `
+                      <div class="item-loot-detail">
+                        <div class="item-loot-set-name">${escapeHtml(d.setName)}</div>
+                        <div class="meta-grid" style="margin-top:4px;">
+                          ${d.w != null ? `
+                            <div class="meta-cell">
+                              <div class="meta-label">Entry Weight</div>
+                              <div class="meta-value">${escapeHtml(fmt(d.w) || "--")}</div>
+                            </div>` : ""}
+                          ${d.mn != null || d.mx != null ? `
+                            <div class="meta-cell">
+                              <div class="meta-label">Quantity</div>
+                              <div class="meta-value">${escapeHtml(fmtRange(d.mn, d.mx))}</div>
+                            </div>` : ""}
+                          ${d.q1 != null || d.q2 != null ? `
+                            <div class="meta-cell">
+                              <div class="meta-label">Quality</div>
+                              <div class="meta-value">${escapeHtml(fmtRange(d.q1, d.q2))}</div>
+                            </div>` : ""}
+                          ${d.b != null ? `
+                            <div class="meta-cell">
+                              <div class="meta-label">${isTrue01(d.fb) ? "Force BP" : "BP Chance"}</div>
+                              <div class="meta-value">${isTrue01(d.fb) ? "Yes" : escapeHtml(pct(d.b) || "0%")}</div>
+                            </div>` : ""}
+                        </div>
+                      </div>
+                    `).join("")}
+                  </div>
+                ` : "";
+
                 return `
                   <div class="entry-row">
                     <label class="entry-main" style="display:flex; align-items:flex-start; gap:10px; min-width:0;">
@@ -232,6 +320,7 @@ function renderItemTabCrates(it){
                             }
                           </div>
                         </div>
+                        ${detailHtml}
                       </div>
                     </label>
 
