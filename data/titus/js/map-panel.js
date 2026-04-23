@@ -868,20 +868,6 @@ function ensureMapEntriesPanel(){
 
   const actions = panel.querySelector(".fp-actions");
 
-  if (!window.ASA_RUNTIME?.isDiscordActivity) {
-    const exportBtn = createIconButton(`
-      <path d="M12 3v10M8 9l4 4 4-4M5 19h14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"/>
-    `);
-    exportBtn.dataset.action = "export";
-    exportBtn.title = "Export";
-    actions.prepend(exportBtn);
-  }
-
   const mapWrap = document.getElementById("mapWrap") || document.body;
   mapWrap.appendChild(panel);
 
@@ -905,13 +891,6 @@ function ensureMapEntriesPanel(){
     panel.dataset.hidden = "1";
     updateDockToggles();
   };
-
-  const exportEl = panel.querySelector('[data-action="export"]');
-  if (exportEl){
-    exportEl.onclick = () => {
-      exportSpawnBrowserJSON();
-    };
-  }
 
   return panel;
 }
@@ -1193,6 +1172,20 @@ function dinoLabelFromBp(bp){
   return labels?.[0] || bpClass(bp) || bp || "(Unknown)";
 }
 
+// Returns ALL blueprint paths from Global.dinos that resolve to the given
+// display name. Used by the spawn browser so that world-replaced variants
+// (e.g. cave Tuso replacing normal Tuso on The Island) don't cause the
+// display name to appear falsely unique to that map.
+function globalBpsForName(name){
+  const dinos = Global.dinos?.dinos || {};
+  const out = new Set();
+  for (const [bp, d] of Object.entries(dinos)){
+    const labels = labelsForDinoObj(d);
+    if (labels.includes(name)) out.add(normalizeBp(bp));
+  }
+  return out;
+}
+
 function getEntryRowsAllMaps(){
   const rows = [];
 
@@ -1312,6 +1305,12 @@ function getDinoRowsCurrentMap() {
       }
     }
 
+    // Use ALL globally-known BPs for this display name when computing map
+    // spread. This prevents world-replaced variants (e.g. cave Tuso standing
+    // in for normal Tuso on The Island) from making the name look unique here
+    // when the underlying species actually appears on many maps.
+    const allBpsForName = globalBpsForName(name);
+
     // now scan ALL entries globally to find all maps this dino appears on
     for (const [entryName, entryData] of Object.entries(allEntries)) {
       const rowsInEntry = entryData?.d || [];
@@ -1328,7 +1327,8 @@ function getDinoRowsCurrentMap() {
           const prob = Number(out?.[1] || 0);
           if (!finalBp || prob <= 0) continue;
 
-          if (bps.includes(finalBp)) {
+          // Match against the full global set, not just current-map BPs
+          if (allBpsForName.has(finalBp) || bps.includes(finalBp)) {
             foundInThisEntry = true;
             break;
           }
@@ -2242,7 +2242,9 @@ let infoPanelState = {
   dinoTab: "spawns",
   entryTab: "dinos",
   crateTab: "sets",
-  itemTab: "crates"
+  itemTab: "crates",
+  showOfficialSets: false,   // when mod active, also show official sets in panel
+  showAllCrates: false       // when mod active, show all crates not just mod ones
 };
 
 

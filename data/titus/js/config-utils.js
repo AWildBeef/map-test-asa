@@ -118,6 +118,8 @@ const Global = {
   loot: null,
   baseSpawn: null,
   baseDinos: null,
+  baseLoot: null,
+  baseItems: null,
   modMeta: null,
   mapGeom: new Map(),
   resolvedSupplyLegend: new Map(), // mapShort -> resolved legend rows

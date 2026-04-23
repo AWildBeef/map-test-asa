@@ -1,9 +1,144 @@
 
 
+/* ============================================================
+   MOD LOOT MERGE
+   Merges mod.loot (items + crates) into Global.loot/Global.items.
+   Mod item IDs are local (1, 2, 3…) — we remap them to new global
+   IDs beyond the current maximum, then wire up reverse-lookup (r)
+   entries so the existing crate/item view machinery works unchanged.
+============================================================ */
+
+function resetLootToBase(){
+  if (!Global.baseLoot || !Global.baseItems) return;
+
+  // Deep-clone the base data so mods can mutate freely without corrupting it
+  Global.loot = JSON.parse(JSON.stringify(Global.baseLoot));
+  Global.items = JSON.parse(JSON.stringify(Global.baseItems));
+
+  // Rebuild indexes from the clean base
+  buildLootIndexes();
+}
+
+function mergeLootFromMod(mod){
+  if (!mod?.loot) return;
+  if (!Global.loot || !Global.items) return;
+
+  const modItems  = mod.loot.items  || {};
+  const modCrates = mod.loot.crates || {};
+
+  const modItemDefs   = modItems.i || {};   // localId -> {p, c, n}
+  const modPathDefs   = modItems.p || {};   // localId -> pathPrefix
+  const modCrateDefs  = modCrates.c || {};  // crateClass -> crate meta
+  const modItemRefs   = modCrates.r || {};  // localId -> [[crateClass, setIdx, entryIdx]]
+
+  if (!Object.keys(modItemDefs).length && !Object.keys(modCrateDefs).length) return;
+
+  // --- 1. Assign new global item IDs ---
+  const existingIds = Object.keys(Global.items.i || {}).map(Number);
+  let nextId = existingIds.length ? Math.max(...existingIds) + 1 : 1;
+
+  // Map: local path prefix id -> global path prefix string
+  const existingPaths = new Map(
+    Object.entries(Global.items.p || {}).map(([id, path]) => [path, Number(id)])
+  );
+  const pathIdMap = {};       // modLocalPathId -> globalPathId
+  let nextPathId = Object.keys(Global.items.p || {}).length
+    ? Math.max(...Object.keys(Global.items.p).map(Number)) + 1
+    : 1;
+
+  for (const [localPathId, pathStr] of Object.entries(modPathDefs)){
+    if (existingPaths.has(pathStr)){
+      pathIdMap[localPathId] = existingPaths.get(pathStr);
+    } else {
+      pathIdMap[localPathId] = nextPathId;
+      Global.items.p[String(nextPathId)] = pathStr;
+      existingPaths.set(pathStr, nextPathId);
+      nextPathId++;
+    }
+  }
+
+  // Map: localItemId -> globalItemId
+  const localToGlobalId = {};
+
+  for (const [localId, itemDef] of Object.entries(modItemDefs)){
+    const globalId = nextId++;
+    localToGlobalId[localId] = globalId;
+
+    Global.items.i[String(globalId)] = {
+      ...itemDef,
+      p: pathIdMap[String(itemDef.p)] ?? itemDef.p,
+      _mod: true   // flag so we can identify mod items
+    };
+  }
+
+  // --- 2. Merge crate definitions ---
+  // For each crate class in the mod: if it already exists in global,
+  // append the mod's loot sets (tagged with _mod:true).
+  // If it's new, add it to c{} and ci[].
+
+  const ci = Global.loot.ci;
+
+  for (const [crateClass, modCrateMeta] of Object.entries(modCrateDefs)){
+    // Remap item IDs inside the crate's loot sets from local -> global
+    const remappedSets = (modCrateMeta.s || []).map(set => ({
+      ...set,
+      _mod: true,
+      e: (set.e || []).map(entry => ({
+        ...entry,
+        i: (entry.i || []).map(localId => localToGlobalId[String(localId)] ?? localId)
+      }))
+    }));
+
+    if (Global.loot.c[crateClass]){
+      // Crate exists — append mod sets
+      Global.loot.c[crateClass] = {
+        ...Global.loot.c[crateClass],
+        s: [...(Global.loot.c[crateClass].s || []), ...remappedSets]
+      };
+    } else {
+      // New crate — add to c{} and ci[]
+      Global.loot.c[crateClass] = { ...modCrateMeta, s: remappedSets };
+      ci.push(crateClass);
+      // Update the class->id map
+      Global.crateClassToId.set(crateClass, ci.length - 1);
+    }
+  }
+
+  // --- 3. Build reverse-lookup (r) entries for mod items ---
+  // Global r format: itemId -> [[crateId, setIdx, entryIdx], ...]
+  // where crateId is the index in ci[]
+
+  const crateClassToIdx = new Map(ci.map((cls, i) => [cls, i]));
+
+  for (const [localId, refs] of Object.entries(modItemRefs)){
+    const globalId = localToGlobalId[localId];
+    if (globalId == null) continue;
+
+    const rEntries = [];
+    for (const ref of (Array.isArray(refs) ? refs : [])){
+      if (!Array.isArray(ref) || !ref.length) continue;
+      const crateClass = ref[0];
+      const setIdx     = ref[1] ?? 0;
+      const entryIdx   = ref[2] ?? 0;
+      const crateIdx   = crateClassToIdx.get(crateClass);
+      if (crateIdx == null) continue;
+      rEntries.push([crateIdx, setIdx, entryIdx]);
+    }
+
+    if (rEntries.length){
+      const key = String(globalId);
+      Global.loot.r[key] = [...(Global.loot.r[key] || []), ...rEntries];
+    }
+  }
+}
+
 async function loadSelectedSource() {
   const srcId = UI.sourceSelect.value;
   const src = SOURCES.find(s => s.id === srcId);
   if (!src) return;
+
+  // Always reset loot to base before applying any mod loot
+  resetLootToBase();
 
   if (src.kind === "official") {
 
@@ -26,6 +161,14 @@ async function loadSelectedSource() {
 
     Global.spawn = merged.spawn;
     Global.dinos = merged.dinos;
+
+    // Merge loot from each mod in the group
+    for (const modId of src.members || []) {
+      const modSrc = SOURCES.find(s => s.id === modId);
+      if (!modSrc?.file) continue;
+      const mod = await loadJSON(modSrc.file);
+      mergeLootFromMod(mod);
+    }
 
   }
   else {
@@ -67,6 +210,8 @@ async function loadSelectedSource() {
         ...(mod.dinos || {})
       }
     };
+
+    mergeLootFromMod(mod);
 
   }
 
@@ -365,6 +510,7 @@ async function buildSources(){
     label: m.name,
     file: `data/mods/${m.id}.json`,
     group: m.group || "",
+    author: m.author || "",
     order: Number.isFinite(m.order) ? m.order : 9999,
     groupOrder: Number.isFinite(m.groupOrder) ? m.groupOrder : 9999,
     kind: "mod"
@@ -511,12 +657,16 @@ function worldOutputsForBp(bp){
 
   const { exact, ancestor } = worldRuleIndexForCurrentMap();
 
-  function resolveOne(curBp, seen = new Set()){
+  function resolveOne(curBp, seen = new Set(), callerBp = null){
     curBp = normalizeBp(curBp);
     if (!curBp) return [];
 
     if (seen.has(curBp)) {
-      return [];
+      // Self-reference: the rule explicitly lists the input BP as one of its
+      // outputs (e.g. "83% chance stays as Tuso"). Treat it as a passthrough
+      // for that branch. Anything deeper in the chain that cycles is a true
+      // re-entrant loop and should be dropped.
+      return curBp === callerBp ? [[curBp, 1]] : [];
     }
 
     const nextSeen = new Set(seen);
@@ -534,13 +684,13 @@ function worldOutputsForBp(bp){
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
 
-        const resolved = resolveOne(nextBp, nextSeen);
+        const resolved = resolveOne(nextBp, nextSeen, curBp);
         for (const [rbp, rprob] of resolved) {
           finalOuts.push([rbp, nextProb * rprob]);
         }
       }
 
-      return combineOutputWeights(finalOuts);
+      return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
     }
 
     let bestRule = null;
@@ -570,13 +720,13 @@ function worldOutputsForBp(bp){
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
 
-        const resolved = resolveOne(nextBp, nextSeen);
+        const resolved = resolveOne(nextBp, nextSeen, curBp);
         for (const [rbp, rprob] of resolved) {
           finalOuts.push([rbp, nextProb * rprob]);
         }
       }
 
-      return combineOutputWeights(finalOuts);
+      return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
     }
 
     return [[curBp, 1]];
@@ -1245,12 +1395,22 @@ function rebuildLootIndices(){
 
   const mapCrateClasses = crateClassesUsedOnCurrentMap();
 
+  const modActive = !activeSourceIsOfficial();
+
   // --- normal crates on this map ---
   for (const crateClass of mapCrateClasses){
     const crateId = crateClassToId(crateClass);
     if (!Number.isInteger(crateId) || crateId < 0) continue;
 
     State.mapCrateIds.add(crateId);
+
+    // When a mod is active and showAllCrates is off, only list crates
+    // that have at least one mod loot set
+    if (modActive && !infoPanelState.showAllCrates) {
+      const crateMeta = loot.c?.[crateClass];
+      const hasModSet = Array.isArray(crateMeta?.s) && crateMeta.s.some(s => s._mod);
+      if (!hasModSet) continue;
+    }
 
     const value = `crate:${crateId}`;
     const label = crateDisplayNameByClass(crateClass);
@@ -1291,9 +1451,18 @@ function rebuildLootIndices(){
   State.crateNames = State.crateOptions.map(x => x.value);
 
   // --- items on this map ---
+  // When a mod source is active, only show mod items in the dropdown.
+  // Official items are still visible within individual crate panels.
+
   for (const [itemIdStr, refs] of Object.entries(loot.r || {})){
     const itemId = Number(itemIdStr);
     if (!Number.isInteger(itemId)) continue;
+
+    const itemRow = items.i?.[String(itemId)];
+    if (!itemRow) continue;
+
+    // Skip official items in the item dropdown when a mod is active
+    if (modActive && !itemRow._mod) continue;
 
     const rows = Array.isArray(refs) ? refs : [];
     const missionClassesOnMap = missionClassesUsedOnCurrentMap();
@@ -1320,10 +1489,7 @@ function rebuildLootIndices(){
 
     State.mapItemIds.add(itemId);
 
-    const row = items.i?.[String(itemId)];
-    if (!row) continue;
-
-    const name = row.n || `Item ${itemId}`;
+    const name = itemRow.n || `Item ${itemId}`;
 
     if (!State.itemNameToIds.has(name)){
       State.itemNameToIds.set(name, []);
@@ -1339,13 +1505,16 @@ function rebuildLootIndices(){
 }
 
 
-function crateItemSummary(crateClass){
+function crateItemSummary(crateClass, { modOnly = false } = {}){
   const crate = lootData().c?.[crateClass];
   if (!crate) return [];
 
   const seen = new Map();
 
   for (const row of (crate.s || [])){
+    // When modOnly is true, skip official sets (same filter as the Sets tab)
+    if (modOnly && !row._mod) continue;
+
     const { allEntries } = lootSetEntriesFromRow(row);
 
     for (const entry of allEntries){
@@ -1588,6 +1757,8 @@ async function ensureLootAndItemsLoaded() {
 
       Global.items = items;
       Global.loot = loot;
+      Global.baseItems = items;
+      Global.baseLoot = loot;
 
       buildLootIndexes();
 
@@ -1889,89 +2060,106 @@ function fitOptionsForUI(){
 }
 
 
-function buildSourceDrillTree() {
+// Persists the user's chosen view mode and sort direction across dropdown open/close
+let sourceDropdownViewMode = "group"; // "group" | "flat" | "author"
+let sourceDropdownSortDir = "asc";    // "asc" | "desc"
+
+function sourceSortedLeaves(leaves) {
+  const sorted = [...leaves];
+  sorted.sort((a, b) => a.label.localeCompare(b.label));
+  if (sourceDropdownSortDir === "desc") sorted.reverse();
+  return sorted;
+}
+
+function buildSourceTreeByGroup() {
   const root = { label: "Sources", children: [] };
 
   const official = SOURCES.find(s => s.id === "official");
-  if (official) {
-    root.children.push({ label: official.name, value: official.id });
-  }
+  if (official) root.children.push({ label: official.name, value: official.id });
 
-  const modsFolder = { label: "Mods", children: [] };
   const modSources = SOURCES.filter(s => s.id !== "official");
-
   const groups = new Map();
   const loose = [];
 
   for (const s of modSources) {
     if (s.kind === "group") {
       const gname = String(s.group || "");
-
       if (!groups.has(gname)) {
-        groups.set(gname, {
-          label: gname,
-          children: [],
-          _groupOrder: Number.isFinite(s.groupOrder) ? s.groupOrder : 9999
-        });
+        groups.set(gname, { label: gname, children: [], _groupOrder: Number.isFinite(s.groupOrder) ? s.groupOrder : 9999 });
       }
-
-      groups.get(gname).children.push({
-        label: s.name,
-        value: s.id,
-        _order: -1
-      });
-
+      groups.get(gname).children.push({ label: s.name, value: s.id, _order: -1 });
       continue;
     }
-
-    const leaf = {
-      label: s.name,
-      value: s.id,
-      _order: Number.isFinite(s.order) ? s.order : 9999
-    };
-
+    const leaf = { label: s.name, value: s.id, _order: Number.isFinite(s.order) ? s.order : 9999 };
     if (s.group) {
       const gname = String(s.group);
-
       if (!groups.has(gname)) {
-        groups.set(gname, {
-          label: gname,
-          children: [],
-          _groupOrder: Number.isFinite(s.groupOrder) ? s.groupOrder : 9999
-        });
+        groups.set(gname, { label: gname, children: [], _groupOrder: Number.isFinite(s.groupOrder) ? s.groupOrder : 9999 });
       }
-
       groups.get(gname).children.push(leaf);
     } else {
       loose.push(leaf);
     }
   }
-  
+
   for (const g of groups.values()) {
-    g.children.sort((a, b) =>
-      (a._order - b._order) || a.label.localeCompare(b.label)
-    );
+    g.children = sourceSortedLeaves(g.children.map(({ _order, ...x }) => x));
   }
 
-  loose.sort((a, b) =>
-    (a._order - b._order) || a.label.localeCompare(b.label)
+  let groupFolders = Array.from(groups.values())
+    .sort((a, b) => (a._groupOrder - b._groupOrder) || a.label.localeCompare(b.label))
+    .map(g => ({ label: g.label, children: g.children }));
+
+  if (sourceDropdownSortDir === "desc") groupFolders.reverse();
+
+  const modsFolder = { label: "Mods", children: [...groupFolders, ...sourceSortedLeaves(loose.map(({ _order, ...x }) => x))] };
+  root.children.push(modsFolder);
+  return root;
+}
+
+function buildSourceTreeFlat() {
+  const root = { label: "Sources", children: [] };
+
+  const official = SOURCES.find(s => s.id === "official");
+  if (official) root.children.push({ label: official.name, value: official.id });
+
+  const mods = sourceSortedLeaves(
+    SOURCES
+      .filter(s => s.kind === "mod")
+      .map(s => ({ label: s.name, value: s.id }))
   );
 
-  const groupFolders = Array.from(groups.values())
-    .sort((a, b) =>
-      (a._groupOrder - b._groupOrder) || a.label.localeCompare(b.label)
-    )
-    .map(g => ({
-      label: g.label,
-      children: g.children.map(({ _order, ...x }) => x)
-    }));
-
-  const looseClean = loose.map(({ _order, ...x }) => x);
-
-  modsFolder.children.push(...groupFolders, ...looseClean);
-  root.children.push(modsFolder);
-
+  root.children.push(...mods);
   return root;
+}
+
+function buildSourceTreeByAuthor() {
+  const root = { label: "Sources", children: [] };
+
+  const official = SOURCES.find(s => s.id === "official");
+  if (official) root.children.push({ label: official.name, value: official.id });
+
+  const byAuthor = new Map();
+  for (const s of SOURCES.filter(s => s.kind === "mod")) {
+    const author = s.author || "Unknown";
+    if (!byAuthor.has(author)) byAuthor.set(author, []);
+    byAuthor.get(author).push({ label: s.name, value: s.id });
+  }
+
+  let authorFolders = Array.from(byAuthor.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([author, children]) => ({ label: author, children: sourceSortedLeaves(children) }));
+
+  if (sourceDropdownSortDir === "desc") authorFolders.reverse();
+
+  root.children.push(...authorFolders);
+  return root;
+}
+
+function buildSourceDrillTree() {
+  if (sourceDropdownViewMode === "flat") return buildSourceTreeFlat();
+  if (sourceDropdownViewMode === "author") return buildSourceTreeByAuthor();
+  return buildSourceTreeByGroup();
 }
 
 
@@ -2062,59 +2250,160 @@ function mountSourceDrillDropdown(native, host){
   const btn = document.createElement("button");
   btn.className = "dd-btn";
 
-  const label = document.createElement("div");
-  label.className = "dd-label";
+  const labelEl = document.createElement("div");
+  labelEl.className = "dd-label";
 
   const caret = document.createElement("div");
   caret.className = "dd-caret";
   caret.textContent = "▾";
 
-  btn.append(label, caret);
+  btn.append(labelEl, caret);
 
   const panel = document.createElement("div");
   panel.className = "dd-panel";
 
+  // --- View mode toolbar ---
+  const toolbar = document.createElement("div");
+  toolbar.className = "dd-source-toolbar";
+
+  const VIEW_MODES = [
+    { id: "group",  label: "Group" },
+    { id: "flat",   label: "List" },
+    { id: "author", label: "Author" }
+  ];
+
+  function renderToolbar() {
+    toolbar.innerHTML = "";
+    for (const mode of VIEW_MODES) {
+      const tb = document.createElement("button");
+      tb.type = "button";
+      tb.className = "dd-source-mode-btn" + (sourceDropdownViewMode === mode.id ? " is-on" : "");
+      tb.textContent = mode.label;
+      tb.onclick = () => {
+        sourceDropdownViewMode = mode.id;
+        renderToolbar();
+        resetToRoot();
+        applySearch(searchInput.value);
+      };
+      toolbar.appendChild(tb);
+    }
+
+    // Sort direction toggle
+    const sortBtn = document.createElement("button");
+    sortBtn.type = "button";
+    sortBtn.className = "dd-source-mode-btn dd-source-sort-btn";
+    sortBtn.title = sourceDropdownSortDir === "asc" ? "A → Z (click to reverse)" : "Z → A (click to reverse)";
+    sortBtn.textContent = sourceDropdownSortDir === "asc" ? "A↑" : "Z↓";
+    sortBtn.onclick = () => {
+      sourceDropdownSortDir = sourceDropdownSortDir === "asc" ? "desc" : "asc";
+      // Rebuild tree with new sort but stay at current folder depth
+      root = buildSourceDrillTree();
+      rebuildStackFromPath();
+      renderToolbar();
+      applySearch(searchInput.value);
+    };
+    toolbar.appendChild(sortBtn);
+  }
+
+  // --- Search input ---
+  const searchInput = document.createElement("input");
+  searchInput.className = "dd-search";
+  searchInput.placeholder = "Search sources...";
+  searchInput.autocomplete = "off";
+
+  // --- Breadcrumb / Back ---
   const crumb = document.createElement("div");
   crumb.className = "dd-crumb";
 
+  // --- List ---
   const list = document.createElement("div");
   list.className = "dd-list";
 
-  panel.append(crumb, list);
+  panel.append(toolbar, searchInput, crumb, list);
   wrap.append(btn, panel);
   host.appendChild(wrap);
 
-  const root = buildSourceDrillTree();
+  // --- Tree navigation state ---
+  let root = buildSourceDrillTree();
   const stack = [root];
-  let lastPath = []; // folder labels only, like ["Mods", "My Group"]
+  let lastPath = [];
 
-  function currentNode(){
-    return stack[stack.length - 1];
+  function currentNode() { return stack[stack.length - 1]; }
+
+  function syncLabel() {
+    labelEl.textContent = native.selectedOptions?.[0]?.textContent || "(Select)";
   }
 
-  function syncLabel(){
-    label.textContent = native.selectedOptions?.[0]?.textContent || "(Select)";
-  }
-  
-  function rebuildStackFromPath(){
+  function rebuildStackFromPath() {
     stack.length = 0;
     stack.push(root);
-
     let node = root;
-
-    for (const label of lastPath){
-      const next = (node.children || []).find(child =>
-        Array.isArray(child.children) && child.label === label
-      );
-
+    for (const seg of lastPath) {
+      const next = (node.children || []).find(c => Array.isArray(c.children) && c.label === seg);
       if (!next) break;
-
       stack.push(next);
       node = next;
     }
   }
 
-  function renderLevel(){
+  function resetToRoot() {
+    root = buildSourceDrillTree();
+    stack.length = 0;
+    stack.push(root);
+    lastPath = [];
+  }
+
+  // Render a flat search result across the whole tree
+  function allLeaves(node) {
+    const out = [];
+    for (const child of node.children || []) {
+      if (Array.isArray(child.children)) {
+        out.push(...allLeaves(child));
+      } else {
+        out.push(child);
+      }
+    }
+    return out;
+  }
+
+  function applySearch(q) {
+    q = normSearch(q);
+
+    if (q) {
+      // Show flat filtered list, hide crumb/back
+      crumb.innerHTML = "";
+      list.innerHTML = "";
+
+      const matches = sourceSortedLeaves(
+        allLeaves(root).filter(leaf => normSearch(leaf.label).includes(q))
+      );
+
+      if (!matches.length) {
+        const empty = document.createElement("div");
+        empty.className = "dd-item";
+        empty.style.color = "var(--text-dim)";
+        empty.textContent = "No results";
+        list.appendChild(empty);
+        return;
+      }
+
+      for (const item of matches) {
+        const row = document.createElement("div");
+        row.className = "dd-item";
+        row.textContent = item.label;
+        row.onclick = () => {
+          native.value = item.value;
+          native.dispatchEvent(new Event("change"));
+          close();
+        };
+        list.appendChild(row);
+      }
+    } else {
+      renderLevel();
+    }
+  }
+
+  function renderLevel() {
     const node = currentNode();
     list.innerHTML = "";
     crumb.innerHTML = "";
@@ -2135,11 +2424,8 @@ function mountSourceDrillDropdown(native, host){
     for (const item of node.children || []) {
       const row = document.createElement("div");
       row.className = "dd-item";
-
       const isFolder = Array.isArray(item.children);
-
       row.textContent = isFolder ? `▸ ${item.label}` : item.label;
-
       row.onclick = () => {
         if (isFolder) {
           stack.push(item);
@@ -2147,28 +2433,33 @@ function mountSourceDrillDropdown(native, host){
           renderLevel();
           return;
         }
-
         native.value = item.value;
         native.dispatchEvent(new Event("change"));
         close();
       };
-
       list.appendChild(row);
     }
   }
 
-  function open(){
+  function open() {
     rebuildStackFromPath();
+    renderToolbar();
+    searchInput.value = "";
     renderLevel();
     wrap.classList.add("open");
+    searchInput.focus();
   }
 
-  function close(){
+  function close() {
     wrap.classList.remove("open");
   }
 
   btn.onclick = () => {
     wrap.classList.contains("open") ? close() : open();
+  };
+
+  searchInput.oninput = () => {
+    applySearch(searchInput.value);
   };
 
   document.addEventListener("pointerdown", e => {
@@ -2180,7 +2471,7 @@ function mountSourceDrillDropdown(native, host){
 }
 
 
-function mountFancyDropdown(native,host,placeholder){
+function mountFancyDropdown(native, host, placeholder, { buildToolbar } = {}){
 
   host._ddAbort?.abort();
   host._ddAbort = new AbortController();
@@ -2214,7 +2505,13 @@ function mountFancyDropdown(native,host,placeholder){
   const list=document.createElement("div");
   list.className="dd-list";
 
-  panel.append(search,list);
+  // Optional toolbar above the search
+  if (buildToolbar) {
+    const toolbar = buildToolbar({ rebuild, close });
+    if (toolbar) panel.appendChild(toolbar);
+  }
+
+  panel.append(search, list);
   wrap.append(btn,panel);
   host.appendChild(wrap);
 
@@ -2697,9 +2994,39 @@ function rebuildSelectionSelect() {
     render();
   };
 
+  // In crate mode with a mod active, add a toolbar toggle above the search
+  // so users can flip between mod-only crates and all crates without going
+  // into the floating panel.
+  const crateDropdownToolbar = (State.mode === "crate" && !activeSourceIsOfficial())
+    ? ({ rebuild }) => {
+        const bar = document.createElement("div");
+        bar.className = "dd-source-toolbar";
+
+        const pill = document.createElement("button");
+        pill.type = "button";
+        pill.className = "dd-source-mode-btn" + (infoPanelState.showAllCrates ? " is-on" : "");
+        pill.textContent = infoPanelState.showAllCrates ? "All crates" : "Mod crates";
+        pill.title = infoPanelState.showAllCrates
+          ? "Showing all crates — click to show mod crates only"
+          : "Showing mod crates only — click to show all";
+        pill.onclick = () => {
+          infoPanelState.showAllCrates = !infoPanelState.showAllCrates;
+          rebuildLootIndices();
+          rebuildSelectionSelect();
+          // Re-open the dropdown so the user sees the updated list
+          UI.dinoFancy?.querySelector(".dd-btn")?.click();
+          // Re-render panel if a crate is selected
+          if (State.selection) render();
+        };
+        bar.appendChild(pill);
+        return bar;
+      }
+    : null;
+
   mountFancyDropdown(
     UI.dinoSelect,
     UI.dinoFancy,
-    placeholder.replace(/[()]/g, "")
+    placeholder.replace(/[()]/g, ""),
+    { buildToolbar: crateDropdownToolbar }
   );
 }

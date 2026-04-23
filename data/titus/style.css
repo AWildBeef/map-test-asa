@@ -1977,10 +1977,16 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   padding: 5px 2px;
   border: 0;
   background: transparent;
+  color: var(--accent-bright);
   font: inherit;
+  font-size: 12px;
   text-align: right;
   cursor: pointer;
   align-items: end;
+}
+
+.loot-set-toggle-all:hover{
+  color: var(--text-1);
 }
 
 .loot-set-toggle{
@@ -1993,6 +1999,7 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   margin: 0 0 6px 0;
   border: 0;
   background: transparent;
+  color: var(--text-1);
   cursor: pointer;
   text-align: left;
 }
@@ -2012,6 +2019,7 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
 .loot-set-toggle-chevron{
   font-size: 18px;
   line-height: 1;
+  color: var(--accent-bright);
   opacity: .85;
 }
 
@@ -2021,6 +2029,64 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
 
 .loot-set-body{
   margin-top: 2px;
+}
+
+/* Mod loot set indicator */
+.mod-set-badge{
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  background: rgba(var(--accent-rgb), .18);
+  border: 1px solid rgba(var(--accent-rgb), .30);
+  color: var(--accent-bright);
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+.loot-set-section.is-mod-set{
+  border-color: rgba(var(--accent-rgb), .20);
+}
+
+/* Mod filter toggle pills shown below the tab bar */
+.mod-filter-row{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 0;
+  flex-wrap: wrap;
+}
+
+.mod-filter-pill{
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: transparent;
+  color: var(--text-3);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .12s, background .12s, border-color .12s;
+}
+
+.mod-filter-pill:hover{
+  color: var(--text-1);
+  border-color: var(--border-mid);
+  background: var(--hover-fill);
+}
+
+.mod-filter-pill.is-on{
+  color: var(--accent-bright);
+  border-color: rgba(var(--accent-rgb), .35);
+  background: rgba(var(--accent-rgb), .12);
 }
 
 /* ============================================================
@@ -2547,7 +2613,7 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   right: 0;
   top: calc(100% + 6px);
   z-index: 3000;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .dd-search{
@@ -2573,6 +2639,52 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+/* Source dropdown view-mode toolbar */
+.dd-source-toolbar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 5px 8px 4px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.dd-source-mode-btn{
+  flex: 1;
+  min-width: 0;
+  padding: 3px 2px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-3);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color .12s, background .12s, border-color .12s;
+}
+
+.dd-source-mode-btn:hover{
+  color: var(--text-1);
+  background: var(--hover-fill);
+}
+
+.dd-source-mode-btn.is-on{
+  color: var(--text-1);
+  background: var(--active-fill);
+  border-color: var(--border-mid);
+}
+
+.dd-source-sort-btn{
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
 }
 
 /* Default list height (fallback) */
