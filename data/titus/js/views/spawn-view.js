@@ -204,17 +204,36 @@ function renderEntryPanel(entryName){
     ? infoPanelState.entryTab
     : "dinos";
 
+  // Count dinos for the tab label
+  const entryIndex = buildEntryIndexForCurrentMap();
+  const entryRows = entryIndex?.[entryName] || [];
+  const byDino = new Map();
+  for (const r of entryRows) {
+    if (!byDino.has(r.dinoKey)) byDino.set(r.dinoKey, []);
+    byDino.get(r.dinoKey).push(r);
+  }
+  const dinoCount = [...byDino.keys()].filter(bp => {
+    if (activeSourceIsOfficial()) return true;
+    if (viewOptions.includeOfficialInEntryPanels) return true;
+    return isBlueprintFromActiveMod(bp);
+  }).length;
+
+  const entryPanelTabs = [
+    { id: "dinos", label: `Dinos (${dinoCount})` },
+    { id: "info",  label: "Info" }
+  ];
+
   setInfoPanelTitle(entryName);
 
   const html = `
     ${renderEntryHero(entryName)}
     ${renderTabs({
-      tabs: ENTRY_PANEL_TABS,
+      tabs: entryPanelTabs,
       activeId: activeTab,
       dataAttr: 'data-entry-tab'
     })}
     ${renderPages({
-      tabs: ENTRY_PANEL_TABS,
+      tabs: entryPanelTabs,
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "dinos") return renderEntryTabDinos(entryName);
@@ -229,7 +248,7 @@ function renderEntryPanel(entryName){
 
   const body = panel.querySelector(".fp-body");
   wireTabs(body, {
-    tabs: ENTRY_PANEL_TABS,
+    tabs: entryPanelTabs,
     activeId: activeTab,
     dataAttr: "data-entry-tab",
     onChange: (id) => {

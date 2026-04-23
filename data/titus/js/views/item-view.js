@@ -146,7 +146,6 @@ function itemLootDetail(itemId, crateId){
 
   const out = [];
 
-  // Use reverse-lookup rows to find exactly which set+entry this item is in
   const rRows = lootData().r?.[String(itemId)] || [];
   for (const r of rRows){
     if (!Array.isArray(r) || typeof r[0] !== "number") continue;
@@ -174,7 +173,6 @@ function itemLootDetail(itemId, crateId){
     });
   }
 
-  // Deduplicate by set+entry combination
   const seen = new Set();
   return out.filter(d => {
     const key = `${d.setName}::${d.w}::${d.mn}`;
@@ -182,6 +180,14 @@ function itemLootDetail(itemId, crateId){
     seen.add(key);
     return true;
   });
+}
+
+function itemCrateIsOpen(itemName, crateValue){
+  return itemCrateOpenState[`${itemName}::${crateValue}`] ?? true;
+}
+
+function itemCrateSetOpen(itemName, crateValue, open){
+  itemCrateOpenState[`${itemName}::${crateValue}`] = !!open;
 }
 
 function renderItemTabCrates(it){
@@ -204,11 +210,8 @@ function renderItemTabCrates(it){
         });
       }
 
-      // Gather loot detail for this item in this crate
       const detail = itemLootDetail(itemId, crateId);
-      if (detail.length) {
-        crateMap.get(crateId).details.push(...detail);
-      }
+      if (detail.length) crateMap.get(crateId).details.push(...detail);
     }
 
     for (const missionClass of itemMissionRefsForItemId(itemId)){
@@ -241,115 +244,110 @@ function renderItemTabCrates(it){
     ...[...missionMap.values()].sort((a, b) => a.name.localeCompare(b.name))
   ];
 
-  const allChecked = rows.length
-    ? rows.every(row => {
-        const key = itemCrateVisibilityKey(it.name, row.crateValue);
-        return entryVisibility[key] ?? true;
-      })
-    : true;
+  if (!rows.length){
+    return `<div style="color:var(--muted); padding:8px 4px;">No crate or mission sources found on this map.</div>`;
+  }
+
+  const allOn = rows.every(row => {
+    const key = itemCrateVisibilityKey(it.name, row.crateValue);
+    return entryVisibility[key] ?? true;
+  });
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Sources (${rows.length})</div>
+      <div class="mode-menu-like-list">
+        ${rows.map(row => {
+          const visKey = itemCrateVisibilityKey(it.name, row.crateValue);
+          const isOn = entryVisibility[visKey] ?? true;
+          const isOpen = itemCrateIsOpen(it.name, row.crateValue);
 
-      ${
-        !rows.length
-          ? `<div style="color:var(--muted)">No crate or mission sources found on this map.</div>`
-          : `
-            <div class="entries">
-              ${renderToggleAllRow({
-                label: "Toggle All",
-                checked: allChecked,
-                dataAttr: "data-item-toggle-all"
-              })}
-
-              ${rows.map(row => {
-                const key = itemCrateVisibilityKey(it.name, row.crateValue);
-                const checked = entryVisibility[key] ?? true;
-
-                const detailHtml = row.details?.length ? `
-                  <div class="item-loot-details">
-                    ${row.details.map(d => `
-                      <div class="item-loot-detail">
-                        <div class="item-loot-set-name">${escapeHtml(d.setName)}</div>
-                        <div class="meta-grid" style="margin-top:4px;">
-                          ${d.w != null ? `
-                            <div class="meta-cell">
-                              <div class="meta-label">Entry Weight</div>
-                              <div class="meta-value">${escapeHtml(fmt(d.w) || "--")}</div>
-                            </div>` : ""}
-                          ${d.mn != null || d.mx != null ? `
-                            <div class="meta-cell">
-                              <div class="meta-label">Quantity</div>
-                              <div class="meta-value">${escapeHtml(fmtRange(d.mn, d.mx))}</div>
-                            </div>` : ""}
-                          ${d.q1 != null || d.q2 != null ? `
-                            <div class="meta-cell">
-                              <div class="meta-label">Quality</div>
-                              <div class="meta-value">${escapeHtml(fmtRange(d.q1, d.q2))}</div>
-                            </div>` : ""}
-                          ${d.b != null ? `
-                            <div class="meta-cell">
-                              <div class="meta-label">${isTrue01(d.fb) ? "Force BP" : "BP Chance"}</div>
-                              <div class="meta-value">${isTrue01(d.fb) ? "Yes" : escapeHtml(pct(d.b) || "0%")}</div>
-                            </div>` : ""}
-                        </div>
-                      </div>
-                    `).join("")}
+          const detailHtml = row.details?.length ? `
+            <div class="item-loot-details">
+              ${row.details.map(d => `
+                <div class="item-loot-detail">
+                  <div class="item-loot-set-name">${escapeHtml(d.setName)}</div>
+                  <div class="meta-grid" style="margin-top:4px;">
+                    ${d.w != null ? `
+                      <div class="meta-cell">
+                        <div class="meta-label">Entry Weight</div>
+                        <div class="meta-value">${escapeHtml(fmt(d.w) || "--")}</div>
+                      </div>` : ""}
+                    ${d.mn != null || d.mx != null ? `
+                      <div class="meta-cell">
+                        <div class="meta-label">Quantity</div>
+                        <div class="meta-value">${escapeHtml(fmtRange(d.mn, d.mx))}</div>
+                      </div>` : ""}
+                    ${d.q1 != null || d.q2 != null ? `
+                      <div class="meta-cell">
+                        <div class="meta-label">Quality</div>
+                        <div class="meta-value">${escapeHtml(fmtRange(d.q1, d.q2))}</div>
+                      </div>` : ""}
+                    ${d.b != null ? `
+                      <div class="meta-cell">
+                        <div class="meta-label">${isTrue01(d.fb) ? "Force BP" : "BP Chance"}</div>
+                        <div class="meta-value">${isTrue01(d.fb) ? "Yes" : escapeHtml(pct(d.b) || "0%")}</div>
+                      </div>` : ""}
                   </div>
-                ` : "";
-
-                return `
-                  <div class="entry-row">
-                    <label class="entry-main" style="display:flex; align-items:flex-start; gap:10px; min-width:0;">
-                      <input
-                        type="checkbox"
-                        data-item-crate-toggle="1"
-                        data-key="${escapeAttr(key)}"
-                        ${checked ? "checked" : ""}
-                        style="margin-top:4px;"
-                      >
-                      <div style="min-width:0; flex:1;">
-                        <div class="entry-name">${escapeHtml(row.name)}</div>
-                        <div class="entry-meta">
-                          <div class="entry-meta-line">
-                            ${
-                              row.level != null
-                                ? `Required Level: ${escapeHtml(String(row.level))}`
-                                : `Mission Source`
-                            }
-                          </div>
-                        </div>
-                        ${detailHtml}
-                      </div>
-                    </label>
-
-                    <button
-                      type="button"
-                      class="fp-btn"
-                      data-open-crate="${escapeAttr(row.crateValue)}"
-                      title="Open in crate view"
-                      aria-label="Open in crate view"
-                      style="margin-left:8px; flex:0 0 auto;"
-                    >
-                      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                        <path d="M9 6l6 6-6 6"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                `;
-              }).join("")}
+                </div>
+              `).join("")}
             </div>
-          `
-      }
+          ` : "";
+
+          return `
+            <div class="item-crate-card ${isOn ? "is-on" : ""} ${isOpen ? "is-open" : "is-closed"}">
+
+              <div class="item-crate-card-header">
+                <button
+                  type="button"
+                  class="item-crate-toggle-btn"
+                  data-item-crate-toggle="1"
+                  data-key="${escapeAttr(visKey)}"
+                  data-crate-value="${escapeAttr(row.crateValue)}"
+                  title="Toggle map visibility"
+                >
+                  <span class="dino-spawn-title">${escapeHtml(row.name)}</span>
+                  <span class="dino-spawn-meta-line" style="margin-top:2px;">
+                    ${row.level != null ? `Required Level: ${escapeHtml(String(row.level))}` : "Mission Source"}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  class="dino-spawn-corner-jump"
+                  data-item-crate-expand="${escapeAttr(row.crateValue)}"
+                  title="${isOpen ? "Collapse" : "Expand"} details"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path d="${isOpen ? "M6 9l6 6 6-6" : "M6 15l6-6 6 6"}"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+
+              ${isOpen ? `
+                <div class="item-crate-card-body">
+                  ${detailHtml}
+                  <button
+                    type="button"
+                    class="fp-btn"
+                    data-open-crate="${escapeAttr(row.crateValue)}"
+                    title="Open in crate view"
+                    style="margin-top:6px; width:100%; justify-content:center;"
+                  >Open in Crate View ›</button>
+                </div>
+              ` : ""}
+            </div>
+          `;
+        }).join("")}
+      </div>
     </div>
   `;
 }
+
 
 function renderItemPanel(itemName){
   const it = getSelectedItem(itemName);
@@ -363,17 +361,52 @@ function renderItemPanel(itemName){
     ? infoPanelState.itemTab
     : "crates";
 
+  // Count sources for tab label
+  const itemIds = Array.isArray(it?.ids) ? it.ids : (it?.id != null ? [it.id] : []);
+  const crateCount = new Set(
+    itemIds.flatMap(id => crateIdsForItemId(id).filter(cid => State.mapCrateIds.has(cid)))
+  ).size;
+  const missionCount = new Set(
+    itemIds.flatMap(id => itemMissionRefsForItemId(id).filter(mc => missionClassesUsedOnCurrentMap().has(mc)))
+  ).size;
+  const sourceCount = crateCount + missionCount;
+
+  const itemPanelTabs = [
+    { id: "crates", label: `Crates (${sourceCount})` },
+    { id: "info",   label: "Info" }
+  ];
+
   setInfoPanelTitle(itemName);
+
+  const collapseAllBtn = (activeTab === "crates") ? `
+    <button type="button" class="loot-set-toggle-all" data-item-collapse-all="1" style="margin-left:auto;">
+      Collapse All
+    </button>
+  ` : "";
+
+  const toggleAllBtn = (activeTab === "crates") ? `
+    <button
+      type="button"
+      class="mod-filter-pill"
+      data-item-toggle-all="1"
+    >Toggle All</button>
+  ` : "";
 
   const html = `
     ${renderItemHero(it)}
     ${renderTabs({
-      tabs: ITEM_PANEL_TABS,
+      tabs: itemPanelTabs,
       activeId: activeTab,
       dataAttr: "data-item-tab"
     })}
+    ${(toggleAllBtn || collapseAllBtn) ? `
+      <div class="mod-filter-row" style="align-items:center;">
+        ${toggleAllBtn}
+        ${collapseAllBtn}
+      </div>
+    ` : ""}
     ${renderPages({
-      tabs: ITEM_PANEL_TABS,
+      tabs: itemPanelTabs,
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "crates") return renderItemTabCrates(it);
@@ -388,7 +421,7 @@ function renderItemPanel(itemName){
   const body = panel.querySelector(".fp-body");
 
   wireTabs(body, {
-    tabs: ITEM_PANEL_TABS,
+    tabs: itemPanelTabs,
     activeId: activeTab,
     dataAttr: "data-item-tab",
     onChange: (id) => {
@@ -397,27 +430,63 @@ function renderItemPanel(itemName){
     }
   });
 
-  body.querySelectorAll('input[data-item-crate-toggle="1"]').forEach(chk => {
-    chk.onchange = () => {
-      const key = chk.dataset.key;
-      if (!key) return;
-      entryVisibility[key] = chk.checked;
-      drawItem(itemName);
+  // Sync toggle-all button glow state
+  const syncToggleAll = () => {
+    const toggleAllBtn2 = body.querySelector("[data-item-toggle-all]");
+    if (!toggleAllBtn2) return;
+    const allKeys = [...body.querySelectorAll("[data-item-crate-toggle]")]
+      .map(b => b.dataset.key).filter(Boolean);
+    const allOn = allKeys.every(k => entryVisibility[k] ?? true);
+    toggleAllBtn2.classList.toggle("is-on", allOn);
+  };
+  syncToggleAll();
 
-      const master = body.querySelector('input[data-item-toggle-all]');
-      if (master){
-        const allChecked = [...body.querySelectorAll('input[data-item-crate-toggle="1"]')]
-          .every(el => el.checked);
-        master.checked = allChecked;
-      }
+  // Toggle visibility (glow) per crate row
+  body.querySelectorAll("[data-item-crate-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const key = btn.dataset.key;
+      if (!key) return;
+      entryVisibility[key] = !(entryVisibility[key] ?? true);
+      btn.closest(".item-crate-card")?.classList.toggle("is-on", entryVisibility[key]);
+      drawItem(itemName);
+      syncToggleAll();
     };
   });
 
-  wireToggleAll(body, {
-    masterSelector: 'input[data-item-toggle-all]',
-    itemSelector: 'input[data-item-crate-toggle="1"]',
-    getItemKey: (el) => el.dataset.key,
-    onAfterChange: () => drawItem(itemName)
+  // Toggle all
+  body.querySelectorAll("[data-item-toggle-all]").forEach(btn => {
+    btn.onclick = () => {
+      const allKeys = [...body.querySelectorAll("[data-item-crate-toggle]")]
+        .map(b => b.dataset.key).filter(Boolean);
+      const allOn = allKeys.every(k => entryVisibility[k] ?? true);
+      allKeys.forEach(k => { entryVisibility[k] = !allOn; });
+      body.querySelectorAll(".item-crate-card").forEach(card => {
+        card.classList.toggle("is-on", !allOn);
+      });
+      drawItem(itemName);
+      syncToggleAll();
+    };
+  });
+
+  // Collapse all / expand all
+  body.querySelectorAll("[data-item-collapse-all]").forEach(btn => {
+    btn.onclick = () => {
+      const crateValues = [...body.querySelectorAll("[data-item-crate-expand]")]
+        .map(b => b.dataset.itemCrateExpand).filter(Boolean);
+      const allOpen = crateValues.every(cv => itemCrateIsOpen(itemName, cv));
+      crateValues.forEach(cv => itemCrateSetOpen(itemName, cv, !allOpen));
+      btn.textContent = allOpen ? "Expand All" : "Collapse All";
+      renderItemPanel(itemName);
+    };
+  });
+
+  // Expand/collapse individual crate detail
+  body.querySelectorAll("[data-item-crate-expand]").forEach(btn => {
+    btn.onclick = () => {
+      const cv = btn.dataset.itemCrateExpand;
+      itemCrateSetOpen(itemName, cv, !itemCrateIsOpen(itemName, cv));
+      renderItemPanel(itemName);
+    };
   });
 
   body.querySelectorAll("[data-open-crate]").forEach(btn => {

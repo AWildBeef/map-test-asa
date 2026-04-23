@@ -98,8 +98,6 @@ function renderDinoTabSpawns(d, selectedName){
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Spawn Entries (${entries.length})</div>
-
       <div class="entries mode-menu-like-list">
         ${
           entries.length
@@ -113,8 +111,6 @@ function renderDinoTabSpawns(d, selectedName){
                   <span class="dino-spawn-tggl-main">
                     <span class="dino-spawn-tggl-title">Toggle All</span>
                   </span>
-
-                  <span class="dino-spawn-tggl-check">${allChecked ? "✓" : ""}</span>
                 </button>
               </div>
             `
@@ -158,17 +154,23 @@ function renderDinoPanel(name){
     ? infoPanelState.dinoTab
     : "spawns";
 
+  const spawnCount = d.entries?.length ?? 0;
+  const dinoPanelTabs = [
+    { id: "spawns", label: `Spawns (${spawnCount})` },
+    { id: "stats",  label: "Stats" }
+  ];
+
   setInfoPanelTitle(name);
 
   const html = `
     ${renderDinoHero(d, name)}
     ${renderTabs({
-      tabs: DINO_PANEL_TABS,
+      tabs: dinoPanelTabs,
       activeId: activeTab,
       dataAttr: "data-dino-tab"
     })}
     ${renderPages({
-      tabs: DINO_PANEL_TABS,
+      tabs: dinoPanelTabs,
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "spawns") return renderDinoTabSpawns(d, name);
@@ -180,10 +182,10 @@ function renderDinoPanel(name){
 
   setInfoPanelHTML(html);
 
-    const body = panel.querySelector(".fp-body");
+  const body = panel.querySelector(".fp-body");
 
   wireTabs(body, {
-    tabs: DINO_PANEL_TABS,
+    tabs: dinoPanelTabs,
     activeId: activeTab,
     dataAttr: "data-dino-tab",
     onChange: (id) => {
@@ -581,8 +583,6 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
             `).join("")}
           </span>
         </span>
-
-        <span class="dino-spawn-check">${checked ? "✓" : ""}</span>
       </button>
 
       <button
@@ -638,8 +638,6 @@ function renderEntryTabDinos(entryName){
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Dinos (${dinoKeys.length})</div>
-
       ${
         activeSourceIsOfficial()
           ? ""

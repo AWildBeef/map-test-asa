@@ -1657,8 +1657,11 @@ body{
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries,
-body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row,
+body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
   border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 6px 8px;
 
   background:
     linear-gradient(
@@ -2031,7 +2034,66 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   margin-top: 2px;
 }
 
-/* Item view loot detail block */
+/* Item view crate source card */
+.item-crate-card{
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  overflow: hidden;
+  background:
+    linear-gradient(to bottom, var(--fill-strong), var(--fill-soft));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 6px 18px rgba(0,0,0,.18);
+  transition: border-color .12s;
+}
+
+.item-crate-card.is-on{
+  border-color: var(--spawn-card-on-border);
+  background:
+    linear-gradient(to bottom, var(--spawn-card-on-top), var(--spawn-card-on-bot));
+  box-shadow:
+    inset 0 0 0 1px var(--spawn-card-on-glow),
+    0 10px 24px rgba(0,0,0,.25);
+}
+
+.item-crate-card-header{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  position: relative;
+}
+
+/* Override the global absolute positioning when inside a flex header */
+.item-crate-card-header .dino-spawn-corner-jump{
+  position: static;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  margin-right: 4px;
+}
+
+.item-crate-toggle-btn{
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--text-1);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.item-crate-card-body{
+  padding: 0 10px 10px;
+}
+
+/* Item loot detail block */
 .item-loot-details{
   margin-top: 6px;
   display: flex;
