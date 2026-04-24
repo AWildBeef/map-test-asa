@@ -157,14 +157,30 @@ function renderExportPanel(){
   const crateOpts = exportPanelState.crate;
   const itemOpts  = exportPanelState.item;
 
-  // Crate and Item are always map-scoped — no meaningful "source" roll-up
+  // Scope options vary by report type
   const scopeOptions = (isCrate || isItem)
-    ? [{ id: "current_map", label: "Current Map" }]
-    : [
-        { id: "current_selection", label: isDino ? "Selected Dino" : isEntry ? "Selected Entry" : "Current Map" },
+    ? [
+        { id: "current_selection", label: isCrate ? "Selected Crate" : "Selected Item" },
         { id: "current_map",       label: "Current Map" },
         { id: "current_source",    label: "All Maps (Source)" }
-      ];
+      ]
+    : isDino
+    ? [
+        { id: "current_selection", label: "Selected Dino" },
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+      ]
+    : isEntry
+    ? [
+        { id: "current_selection", label: "Selected Entry" },
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+      ]
+    : /* map */
+    [
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+    ];
 
   // Auto-fix scope if not valid for current type
   const validScope = scopeOptions.some(o => o.id === scope);
@@ -271,6 +287,22 @@ function renderExportPanel(){
             </label>
           ` : ""}
         </div>
+
+        <div class="export-group">
+          <div class="export-group-title">Crates</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeCrates" ${mapOpts.includeCrates ? "checked" : ""}>
+            <span>Include crate names</span>
+          </label>
+        </div>
+
+        <div class="export-group">
+          <div class="export-group-title">Items</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeItems" ${mapOpts.includeItems ? "checked" : ""}>
+            <span>Include item names</span>
+          </label>
+        </div>
       ` : ""}
 
       ${isCrate ? `
@@ -295,11 +327,21 @@ function renderExportPanel(){
             <input type="checkbox" data-export-opt="crate.includeBpChance" ${crateOpts.includeBpChance ? "checked" : ""}>
             <span>Blueprint chance</span>
           </label>
+          ${activeScope !== "current_selection" ? `
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="crate.includeMaps" ${crateOpts.includeMaps ? "checked" : ""}>
+              <span>Which maps each crate appears on</span>
+            </label>
+          ` : ""}
         </div>
       ` : ""}
 
       ${isItem ? `
         <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="item.includeMaps" ${itemOpts.includeMaps ? "checked" : ""}>
+            <span>Which maps it can be found on</span>
+          </label>
           <label class="fp-row">
             <input type="checkbox" data-export-opt="item.includeCrates" ${itemOpts.includeCrates ? "checked" : ""}>
             <span>Which crates contain it</span>
@@ -324,6 +366,10 @@ function renderExportPanel(){
             <label class="fp-row" style="padding-left:18px;">
               <input type="checkbox" data-export-opt="item.includeBpChance" ${itemOpts.includeBpChance ? "checked" : ""}>
               <span>Blueprint chance</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeCrateMaps" ${itemOpts.includeCrateMaps ? "checked" : ""}>
+              <span>Which maps those crates appear on</span>
             </label>
           ` : ""}
         </div>

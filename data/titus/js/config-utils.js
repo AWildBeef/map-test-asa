@@ -304,6 +304,8 @@ const exportPanelState = {
   map: {
     includeDinos: true,
     includeEntries: true,
+    includeCrates: false,
+    includeItems: false,
 
     dino: {
       includeEntries: false,
@@ -323,7 +325,8 @@ const exportPanelState = {
     includeItems: true,
     includeWeights: true,
     includeQuality: true,
-    includeBpChance: true
+    includeBpChance: true,
+    includeMaps: false
   },
 
   item: {
@@ -332,7 +335,9 @@ const exportPanelState = {
     includeWeights: true,
     includeQuality: true,
     includeBpChance: true,
-    includeQuantity: true
+    includeQuantity: true,
+    includeMaps: false,
+    includeCrateMaps: false
   }
 };
 /* Split from app_embed.js lines 252-721 */
@@ -415,18 +420,16 @@ function buildEntryExportItem(entryName, opts = {}){
 
   const out = { entryName };
 
+  if (includeBlueprint) {
+    out.entryBlueprint = Global.spawn?.entries?.[entryName]?.bp || "";
+  }
+
   if (includeMaps) {
-    const mapNames = mapNamesForEntry(entryName);
-    out.mapCount = mapNames.length;
-    out.mapNames = mapNames;
+    out.maps = mapNamesForEntry(entryName);
   }
 
   if (includeDinos) {
     out.dinoNames = dinoNamesForEntryGlobal(entryName);
-  }
-
-  if (includeBlueprint) {
-    out.entryBlueprint = Global.spawn?.entries?.[entryName]?.bp || "";
   }
 
   return out;
@@ -457,6 +460,10 @@ function buildDinoExportItem(name, opts = {}){
 
   const out = { name };
 
+  if (includeBlueprints) {
+    out.blueprints = bps;
+  }
+
   if (includeNametag) {
     const firstBp = bps[0] || "";
     const d = firstBp ? getDinoObjByBp(firstBp) : null;
@@ -464,8 +471,7 @@ function buildDinoExportItem(name, opts = {}){
   }
 
   if (includeMaps) {
-    out.mapCount = resolvedRow?.mapCount || 0;
-    out.mapNames = resolvedRow?.mapNames || [];
+    out.maps = [...(resolvedRow?.mapNames || [])];
   }
 
   if (includeEntries) {
@@ -483,10 +489,6 @@ function buildDinoExportItem(name, opts = {}){
     } else {
       out.entryNames = entryNames;
     }
-  }
-
-  if (includeBlueprints) {
-    out.blueprints = bps;
   }
 
   return out;
@@ -642,6 +644,22 @@ function buildMapReport(){
       }));
     }
 
+    if (opts.includeCrates) {
+      const crateClasses = [...crateClassesUsedOnCurrentMap()].sort();
+      row.crates = crateClasses
+        .map(cls => {
+          const crate = lootData().c?.[cls];
+          if (!crate) return null;
+          return buildCrateExportItem(cls, crate, { includeSets: false, includeItems: false, includeWeights: false, includeQuality: false, includeBpChance: false });
+        })
+        .filter(Boolean)
+        .map(c => c.name);
+    }
+
+    if (opts.includeItems) {
+      row.items = [...State.itemNameToIds.keys()].sort();
+    }
+
     return row;
   }
 
@@ -671,69 +689,124 @@ function buildMapReport(){
   }
 }
 
+function mapNamesForCrateClass(crateClass){
+  const maps = [];
+  const originalMap = State.mapId;
+
+  try {
+    for (const code of getAllMapsForSource()) {
+      const mapName = Global.spawn?.mapLegend?.[code] || code;
+      State.mapId = mapName;
+      rebuildMapIndices();
+      if (crateClassesUsedOnCurrentMap().has(crateClass)) {
+        maps.push(mapName);
+      }
+    }
+  } finally {
+    State.mapId = originalMap;
+    rebuildMapIndices();
+  }
+
+  return maps;
+}
+
+
+function buildCrateExportItem(crateClass, crate, opts){
+  const displayName = crateDisplayNameByClass(crateClass);
+
+  const entry = {
+    name: displayName,
+    class: crateClass,
+    requiredLevel: crate.l ?? null
+  };
+
+  if (opts.includeSets) {
+    entry.lootSets = (crate.s || []).map((set, si) => {
+      const setName = lootSetNameFromRow(set, `Set ${si + 1}`);
+      const setOut = { name: setName };
+
+      if (opts.includeWeights) setOut.weight = set.w ?? null;
+
+      const { allEntries } = lootSetEntriesFromRow(set);
+
+      if (opts.includeItems) {
+        setOut.entries = allEntries.map(e => {
+          const entryOut = { name: e.n || "" };
+          if (opts.includeWeights)   entryOut.entryWeight = e.w ?? null;
+          if (opts.includeWeights)   entryOut.quantity    = e.mn != null ? `${fmt(e.mn)} - ${fmt(e.mx)}` : null;
+          if (opts.includeQuality)   entryOut.quality     = e.q1 != null ? `${fmt(e.q1)} - ${fmt(e.q2)}` : null;
+          if (opts.includeBpChance)  entryOut.bpChance    = isTrue01(e.fb) ? "Force BP" : (e.b != null ? `${fmt(e.b * 100)}%` : null);
+
+          if (opts.includeItems) {
+            entryOut.items = (e.i || []).map(itemId => {
+              const row = itemData().i?.[String(itemId)];
+              return row?.n || `item_${itemId}`;
+            });
+          }
+          return entryOut;
+        });
+      }
+
+      return setOut;
+    });
+  }
+
+  return entry;
+}
+
+
 function buildCrateReport(){
   const src = currentSourceMeta();
   const opts = exportPanelState.crate;
-
-  // Determine which crate classes to include
-  const mapCrateClasses = crateClassesUsedOnCurrentMap();
+  const scope = exportPanelState.scope;
   const allLoot = lootData();
 
-  const crateItems = [];
+  let crateClasses = [];
 
-  for (const crateClass of [...mapCrateClasses].sort()) {
-    const crate = allLoot.c?.[crateClass];
-    if (!crate) continue;
-
-    const crateId = crateClassToId(crateClass);
-    const displayName = crateDisplayNameByClass(crateClass);
-
-    const entry = {
-      name: displayName,
-      class: crateClass,
-      requiredLevel: crate.l ?? null,
-      minLootSets: crate.mn ?? null,
-      maxLootSets: crate.mx ?? null
-    };
-
-    if (opts.includeSets) {
-      entry.lootSets = (crate.s || []).map((set, si) => {
-        const setName = lootSetNameFromRow(set, `Set ${si + 1}`);
-        const setOut = { name: setName };
-
-        if (opts.includeWeights) setOut.weight = set.w ?? null;
-
-        const { allEntries } = lootSetEntriesFromRow(set);
-
-        if (opts.includeItems) {
-          setOut.entries = allEntries.map(e => {
-            const entryOut = { name: e.n || "" };
-            if (opts.includeWeights) entryOut.weight = e.w ?? null;
-            if (opts.includeWeights) entryOut.quantity = e.mn != null ? `${fmt(e.mn)} - ${fmt(e.mx)}` : null;
-            if (opts.includeQuality) entryOut.quality = e.q1 != null ? `${fmt(e.q1)} - ${fmt(e.q2)}` : null;
-            if (opts.includeBpChance) entryOut.bpChance = isTrue01(e.fb) ? "Force BP" : (e.b != null ? `${fmt(e.b * 100)}%` : null);
-
-            if (opts.includeItems) {
-              entryOut.items = (e.i || []).map(itemId => {
-                const row = itemData().i?.[String(itemId)];
-                return row?.n || `item_${itemId}`;
-              });
-            }
-            return entryOut;
-          });
-        }
-
-        return setOut;
-      });
+  if (scope === "current_selection") {
+    // Selected crate: parse crateValue like "crate:42"
+    const crateVal = State.selections?.crate || "";
+    const crateId = parseInt(crateVal.replace("crate:", ""), 10);
+    const cls = isNaN(crateId) ? null : crateIdToClass(crateId);
+    if (cls) crateClasses = [cls];
+  } else if (scope === "current_source") {
+    // All crates across all maps — collect unique classes
+    const originalMap = State.mapId;
+    const seen = new Set();
+    try {
+      for (const code of getAllMapsForSource()) {
+        const mapName = Global.spawn?.mapLegend?.[code] || code;
+        State.mapId = mapName;
+        rebuildMapIndices();
+        for (const cls of crateClassesUsedOnCurrentMap()) seen.add(cls);
+      }
+    } finally {
+      State.mapId = originalMap;
+      rebuildMapIndices();
     }
-
-    crateItems.push(entry);
+    crateClasses = [...seen].sort();
+  } else {
+    // current_map
+    crateClasses = [...crateClassesUsedOnCurrentMap()].sort();
   }
+
+  const crateItems = crateClasses
+    .map(cls => {
+      const crate = allLoot.c?.[cls];
+      if (!crate) return null;
+      const item = buildCrateExportItem(cls, crate, opts);
+      if (opts.includeMaps && scope !== "current_selection") {
+        item.maps = mapNamesForCrateClass(cls);
+      }
+      return item;
+    })
+    .filter(Boolean);
 
   return {
     type: "crate_report",
     source: src.label || src.id,
-    map: State.mapId || "",
+    scope,
+    map: scope === "current_source" ? "all" : (State.mapId || ""),
     exportedAt: new Date().toISOString(),
     crateCount: crateItems.length,
     crates: crateItems
@@ -744,14 +817,68 @@ function buildCrateReport(){
 function buildItemReport(){
   const src = currentSourceMeta();
   const opts = exportPanelState.item;
+  const scope = exportPanelState.scope;
 
-  const allItems = [...State.itemNameToIds.entries()]
-    .sort(([a], [b]) => a.localeCompare(b));
+  let itemEntries = [];
 
-  const itemRows = [];
+  if (scope === "current_selection") {
+    const itemName = State.selections?.item || "";
+    if (itemName) itemEntries = [[itemName, State.itemNameToIds.get(itemName) || []]];
+  } else if (scope === "current_source") {
+    // All items across all maps
+    const originalMap = State.mapId;
+    const allItemNames = new Map();
+    try {
+      for (const code of getAllMapsForSource()) {
+        const mapName = Global.spawn?.mapLegend?.[code] || code;
+        State.mapId = mapName;
+        rebuildMapIndices();
+        for (const [name, ids] of State.itemNameToIds.entries()) {
+          if (!allItemNames.has(name)) allItemNames.set(name, new Set());
+          for (const id of ids) allItemNames.get(name).add(id);
+        }
+      }
+    } finally {
+      State.mapId = originalMap;
+      rebuildMapIndices();
+    }
+    itemEntries = [...allItemNames.entries()]
+      .map(([name, ids]) => [name, [...ids]])
+      .sort(([a], [b]) => a.localeCompare(b));
+  } else {
+    itemEntries = [...State.itemNameToIds.entries()]
+      .sort(([a], [b]) => a.localeCompare(b));
+  }
 
-  for (const [itemName, itemIds] of allItems) {
+  const itemRows = itemEntries.map(([itemName, itemIds]) => {
     const entry = { name: itemName };
+
+    // Get blueprint from first item id
+    const firstId = itemIds[0];
+    const itemRow = firstId != null ? itemData().i?.[String(firstId)] : null;
+    if (itemRow?.p != null) {
+      const pathPrefix = itemData().p?.[String(itemRow.p)] || "";
+      entry.blueprint = `${pathPrefix}${itemRow.c || ""}`;
+    }
+
+    if (opts.includeMaps) {
+      // Which maps this item appears on
+      const originalMap = State.mapId;
+      const mapsWithItem = new Set();
+      try {
+        for (const code of getAllMapsForSource()) {
+          const mapName = Global.spawn?.mapLegend?.[code] || code;
+          State.mapId = mapName;
+          rebuildMapIndices();
+          const hasItem = itemIds.some(id => State.mapItemIds.has(id));
+          if (hasItem) mapsWithItem.add(mapName);
+        }
+      } finally {
+        State.mapId = originalMap;
+        rebuildMapIndices();
+      }
+      entry.maps = [...mapsWithItem].sort();
+    }
 
     if (opts.includeCrates) {
       const crateEntries = [];
@@ -761,7 +888,7 @@ function buildItemReport(){
 
         for (const r of rRows) {
           if (!Array.isArray(r) || typeof r[0] !== "number") continue;
-          if (!State.mapCrateIds.has(r[0])) continue;
+          if (scope !== "current_source" && !State.mapCrateIds.has(r[0])) continue;
 
           const crateClass = lootData().ci?.[r[0]];
           if (!crateClass) continue;
@@ -769,7 +896,7 @@ function buildItemReport(){
           const crate = lootData().c?.[crateClass];
           if (!crate) continue;
 
-          const setIdx = r[1] ?? 0;
+          const setIdx   = r[1] ?? 0;
           const entryIdx = r[2] ?? 0;
           const set = (crate.s || [])[setIdx];
           if (!set) continue;
@@ -783,11 +910,15 @@ function buildItemReport(){
             crateClass
           };
 
-          if (opts.includeSetName) crateEntry.lootSet = lootSetNameFromRow(set, `Set ${setIdx + 1}`);
-          if (opts.includeWeights) crateEntry.entryWeight = e.w ?? null;
-          if (opts.includeQuantity) crateEntry.quantity = e.mn != null ? `${fmt(e.mn)} - ${fmt(e.mx)}` : null;
-          if (opts.includeQuality) crateEntry.quality = e.q1 != null ? `${fmt(e.q1)} - ${fmt(e.q2)}` : null;
-          if (opts.includeBpChance) crateEntry.bpChance = isTrue01(e.fb) ? "Force BP" : (e.b != null ? `${fmt(e.b * 100)}%` : null);
+          if (opts.includeSetName)  crateEntry.lootSet     = lootSetNameFromRow(set, `Set ${setIdx + 1}`);
+          if (opts.includeWeights)  crateEntry.entryWeight = e.w ?? null;
+          if (opts.includeQuantity) crateEntry.quantity    = e.mn != null ? `${fmt(e.mn)} - ${fmt(e.mx)}` : null;
+          if (opts.includeQuality)  crateEntry.quality     = e.q1 != null ? `${fmt(e.q1)} - ${fmt(e.q2)}` : null;
+          if (opts.includeBpChance) crateEntry.bpChance    = isTrue01(e.fb) ? "Force BP" : (e.b != null ? `${fmt(e.b * 100)}%` : null);
+
+          if (opts.includeCrateMaps) {
+            crateEntry.maps = mapNamesForCrateClass(crateClass);
+          }
 
           crateEntries.push(crateEntry);
         }
@@ -796,13 +927,14 @@ function buildItemReport(){
       entry.sources = crateEntries;
     }
 
-    itemRows.push(entry);
-  }
+    return entry;
+  });
 
   return {
     type: "item_report",
     source: src.label || src.id,
-    map: State.mapId || "",
+    scope,
+    map: scope === "current_source" ? "all" : (State.mapId || ""),
     exportedAt: new Date().toISOString(),
     itemCount: itemRows.length,
     items: itemRows
