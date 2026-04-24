@@ -645,8 +645,12 @@ function buildMapReport(){
     }
 
     if (opts.includeCrates) {
-      const crateClasses = [...crateClassesUsedOnCurrentMap()].sort();
-      row.crates = crateClasses
+      const cm = lootData().cm || {};
+      const mapCrateClasses = Object.entries(cm)
+        .filter(([, maps]) => maps.includes(mapName))
+        .map(([cls]) => cls)
+        .sort();
+      row.crates = mapCrateClasses
         .map(cls => {
           const crate = lootData().c?.[cls];
           if (!crate) return null;
