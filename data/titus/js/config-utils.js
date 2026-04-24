@@ -306,6 +306,8 @@ const exportPanelState = {
     includeEntries: true,
     includeCrates: false,
     includeItems: false,
+    includeMissions: false,
+    crateUseDisplayName: false,
 
     dino: {
       includeEntries: false,
@@ -326,7 +328,8 @@ const exportPanelState = {
     includeWeights: true,
     includeQuality: true,
     includeBpChance: true,
-    includeMaps: false
+    includeMaps: false,
+    includeMissions: true
   },
 
   item: {
@@ -337,7 +340,8 @@ const exportPanelState = {
     includeBpChance: true,
     includeQuantity: true,
     includeMaps: false,
-    includeCrateMaps: false
+    includeCrateMaps: false,
+    includeMissions: true
   }
 };
 /* Split from app_embed.js lines 252-721 */
@@ -650,18 +654,27 @@ function buildMapReport(){
         .filter(([, maps]) => maps.includes(mapName))
         .map(([cls]) => cls)
         .sort();
-      row.crates = mapCrateClasses
-        .map(cls => {
+      row.crates = mapCrateClasses.map(cls => {
+        if (opts.crateUseDisplayName) {
           const crate = lootData().c?.[cls];
-          if (!crate) return null;
-          return buildCrateExportItem(cls, crate, { includeSets: false, includeItems: false, includeWeights: false, includeQuality: false, includeBpChance: false });
-        })
-        .filter(Boolean)
-        .map(c => c.name);
+          const displayName = crate ? crateDisplayNameByClass(cls) : cls;
+          return { class: cls, name: displayName };
+        }
+        return cls;
+      });
     }
 
     if (opts.includeItems) {
       row.items = [...State.itemNameToIds.keys()].sort();
+    }
+
+    if (opts.includeMissions) {
+      row.missions = [...missionClassesUsedOnCurrentMap()]
+        .sort()
+        .map(cls => opts.crateUseDisplayName
+          ? { class: cls, name: missionLootDisplayName(cls) }
+          : cls
+        );
     }
 
     return row;
@@ -743,6 +756,67 @@ function buildCrateExportItem(crateClass, crate, opts){
 }
 
 
+function buildMissionExportItem(missionClass, opts = {}){
+  const m = lootData().m?.[missionClass];
+  if (!m) return null;
+
+  const entry = {
+    name: missionClass,
+    displayName: missionLootDisplayName(missionClass),
+    type: m.t || null,
+    difficulty: missionDiffLabelFromClass(missionClass)
+  };
+
+  if (opts.includeSets) {
+    const allSets = [];
+
+    // Direct reward items (ri)
+    if (Array.isArray(m.ri) && m.ri.length) {
+      allSets.push({
+        name: "Reward Items",
+        items: m.ri.map(iid => {
+          const row = itemData().i?.[String(iid)];
+          return row?.n || `item_${iid}`;
+        })
+      });
+    }
+
+    // Loot structure sets (ls)
+    for (const structClass of (m.ls || [])) {
+      const ls = lootData().ls?.[structClass];
+      if (!ls) continue;
+
+      for (const setRow of (ls.s || [])) {
+        const setOut = { name: setRow.n || structClass };
+        if (opts.includeWeights) setOut.weight = setRow.w ?? null;
+
+        if (opts.includeItems) {
+          setOut.entries = (setRow.e || []).map(e => {
+            const entryOut = { name: e.n || "" };
+            if (opts.includeWeights)  entryOut.entryWeight = e.w ?? null;
+            if (opts.includeWeights)  entryOut.quantity    = e.mn != null ? `${fmt(e.mn)} - ${fmt(e.mx)}` : null;
+            if (opts.includeQuality)  entryOut.quality     = e.q1 != null ? `${fmt(e.q1)} - ${fmt(e.q2)}` : null;
+            if (opts.includeBpChance) entryOut.bpChance    = isTrue01(e.fb) ? "Force BP" : (e.b != null ? `${fmt(e.b * 100)}%` : null);
+            entryOut.items = (e.i || []).map(iid => {
+              const row = itemData().i?.[String(iid)];
+              return row?.n || `item_${iid}`;
+            });
+            return entryOut;
+          });
+        }
+
+        allSets.push(setOut);
+      }
+    }
+
+    entry.lootSets = allSets;
+  }
+
+  return entry;
+}
+
+
+
 function buildCrateReport(){
   const src = currentSourceMeta();
   const opts = exportPanelState.crate;
@@ -774,6 +848,19 @@ function buildCrateReport(){
     })
     .filter(Boolean);
 
+  // Missions
+  const missionItems = [];
+  if (opts.includeMissions && scope !== "current_selection") {
+    const missionClasses = scope === "current_source"
+      ? Object.keys(allLoot.m || {}).sort()
+      : [...missionClassesUsedOnCurrentMap()].sort();
+
+    for (const cls of missionClasses) {
+      const item = buildMissionExportItem(cls, opts);
+      if (item) missionItems.push(item);
+    }
+  }
+
   return {
     type: "crate_report",
     source: src.label || src.id,
@@ -781,7 +868,8 @@ function buildCrateReport(){
     map: scope === "current_source" ? "all" : (State.mapId || ""),
     exportedAt: new Date().toISOString(),
     crateCount: crateItems.length,
-    crates: crateItems
+    crates: crateItems,
+    ...(missionItems.length ? { missionCount: missionItems.length, missions: missionItems } : {})
   };
 }
 
@@ -834,14 +922,38 @@ function buildItemReport(){
       entry.maps = [...mapsWithItem].sort();
     }
 
-    if (opts.includeCrates) {
+    if (opts.includeCrates || opts.includeMissions) {
       const crateEntries = [];
+      const missionEntries = [];
 
       for (const itemId of itemIds) {
         const rRows = lootData().r?.[String(itemId)] || [];
 
         for (const r of rRows) {
-          if (!Array.isArray(r) || typeof r[0] !== "number") continue;
+          if (!Array.isArray(r) || !r.length) continue;
+
+          // Mission entry: r = ["m", missionId, context, 0]
+          if (r[0] === "m" && opts.includeMissions) {
+            const missionClass = typeof r[1] === "number"
+              ? lootData().mi?.[r[1]]
+              : r[1];
+            if (!missionClass) continue;
+
+            // Avoid duplicates
+            if (missionEntries.some(e => e.mission === missionClass)) continue;
+
+            missionEntries.push({
+              mission: missionClass,
+              displayName: missionLootDisplayName(missionClass),
+              type: lootData().m?.[missionClass]?.t || null,
+              difficulty: missionDiffLabelFromClass(missionClass)
+            });
+            continue;
+          }
+
+          // Supply/horde crate entry
+          if (!opts.includeCrates) continue;
+          if (typeof r[0] !== "number") continue;
           if (scope !== "current_source" && !State.mapCrateIds.has(r[0])) continue;
 
           const crateClass = lootData().ci?.[r[0]];
@@ -878,7 +990,8 @@ function buildItemReport(){
         }
       }
 
-      entry.sources = crateEntries;
+      if (opts.includeCrates && crateEntries.length)  entry.sources   = crateEntries;
+      if (opts.includeMissions && missionEntries.length) entry.missions = missionEntries;
     }
 
     return entry;

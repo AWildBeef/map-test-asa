@@ -292,8 +292,14 @@ function renderExportPanel(){
           <div class="export-group-title">Crates</div>
           <label class="fp-row">
             <input type="checkbox" data-export-opt="map.includeCrates" ${mapOpts.includeCrates ? "checked" : ""}>
-            <span>Include crate names</span>
+            <span>Include crate class names</span>
           </label>
+          ${mapOpts.includeCrates ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.crateUseDisplayName" ${mapOpts.crateUseDisplayName ? "checked" : ""}>
+              <span>Also include descriptive name</span>
+            </label>
+          ` : ""}
         </div>
 
         <div class="export-group">
@@ -302,6 +308,20 @@ function renderExportPanel(){
             <input type="checkbox" data-export-opt="map.includeItems" ${mapOpts.includeItems ? "checked" : ""}>
             <span>Include item names</span>
           </label>
+        </div>
+
+        <div class="export-group">
+          <div class="export-group-title">Missions</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeMissions" ${mapOpts.includeMissions ? "checked" : ""}>
+            <span>Include mission class names</span>
+          </label>
+          ${mapOpts.includeMissions ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.crateUseDisplayName" ${mapOpts.crateUseDisplayName ? "checked" : ""}>
+              <span>Also include descriptive name</span>
+            </label>
+          ` : ""}
         </div>
       ` : ""}
 
@@ -333,6 +353,10 @@ function renderExportPanel(){
               <span>Which maps each crate appears on</span>
             </label>
           ` : ""}
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeMissions" ${crateOpts.includeMissions ? "checked" : ""}>
+            <span>Include missions</span>
+          </label>
         </div>
       ` : ""}
 
@@ -372,6 +396,10 @@ function renderExportPanel(){
               <span>Which maps those crates appear on</span>
             </label>
           ` : ""}
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="item.includeMissions" ${itemOpts.includeMissions ? "checked" : ""}>
+            <span>Include missions as sources</span>
+          </label>
         </div>
       ` : ""}
     </div>
