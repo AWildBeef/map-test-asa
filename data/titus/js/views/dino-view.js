@@ -203,12 +203,16 @@ function renderDinoPanel(name){
 
       const next = !(entryVisibility[key] ?? true);
       entryVisibility[key] = next;
-      btn.classList.toggle("is-on", next);
+
+      // Toggle is-on on the visible card container (parent loot-set-section),
+      // not on the inner button itself
+      const card = btn.closest(".dino-spawn-section");
+      card?.classList.toggle("is-on", next);
 
       const master = body.querySelector("[data-dino-toggle-all]");
       if (master){
         const allOn = [...body.querySelectorAll("[data-dino-entry-toggle]")]
-          .every(el => el.classList.contains("is-on"));
+          .every(el => el.closest(".dino-spawn-section")?.classList.contains("is-on"));
         master.classList.toggle("is-on", allOn);
       }
 
@@ -220,14 +224,14 @@ function renderDinoPanel(name){
   if (master){
     master.onclick = () => {
       const rows = [...body.querySelectorAll("[data-dino-entry-toggle]")];
-      const allOn = rows.every(el => el.classList.contains("is-on"));
+      const allOn = rows.every(el => el.closest(".dino-spawn-section")?.classList.contains("is-on"));
       const next = !allOn;
 
       rows.forEach(el => {
         const key = el.dataset.key;
         if (!key) return;
         entryVisibility[key] = next;
-        el.classList.toggle("is-on", next);
+        el.closest(".dino-spawn-section")?.classList.toggle("is-on", next);
       });
 
       master.classList.toggle("is-on", next);
@@ -566,16 +570,15 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
   const isOpen = dinoSpawnCardOpenState[key] ?? true;
 
   return `
-    <div class="dino-spawn-card-wrap">
-      <button
-        type="button"
-        class="dino-spawn-card ${checked ? "is-on" : ""}"
-        data-dino-entry-toggle="1"
-        data-key="${escapeAttr(key)}"
-      >
-        <span class="dino-spawn-card-main">
-          <span class="dino-spawn-title">${escapeHtml(entry.entryClass)}</span>
-
+    <div class="loot-set-section dino-spawn-section ${checked ? "is-on" : ""} ${isOpen ? "is-open" : "is-closed"}" style="margin-bottom:6px;">
+      <div class="loot-set-toggle dino-spawn-section-header">
+        <button
+          type="button"
+          class="dino-spawn-section-main"
+          data-dino-entry-toggle="1"
+          data-key="${escapeAttr(key)}"
+        >
+          <span class="info-label">${escapeHtml(entry.entryClass)}</span>
           ${isOpen ? `
             <span class="dino-spawn-meta">
               ${metaLines.map(line => `
@@ -583,32 +586,25 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
               `).join("")}
             </span>
           ` : ""}
-        </span>
-      </button>
+        </button>
 
-      <button
-        type="button"
-        class="dino-spawn-corner-jump"
-        data-dino-spawn-card-toggle="${escapeAttr(key)}"
-        title="${isOpen ? "Collapse" : "Expand"}"
-      >
-        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-          <path d="${isOpen ? "M6 9l6 6 6-6" : "M6 15l6-6 6 6"}"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-        </svg>
-      </button>
+        <button
+          type="button"
+          class="loot-set-toggle-right dino-spawn-chevron-btn"
+          data-dino-spawn-card-toggle="${escapeAttr(key)}"
+          title="${isOpen ? "Collapse" : "Expand"}"
+        >
+          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
+        </button>
+      </div>
 
       ${isOpen ? `
-        <div class="dino-spawn-card-body">
+        <div class="loot-set-body">
           <button
             type="button"
             class="fp-btn"
             data-open-entry="${escapeAttr(entry.entryClass)}"
-            style="width:100%; justify-content:center;"
+            style="width:100%; justify-content:center; margin-top:6px;"
           >Open in Spawn View ›</button>
         </div>
       ` : ""}

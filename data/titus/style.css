@@ -1689,6 +1689,7 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 
 .mapEntriesList .dd-item.is-on,
 .dino-spawn-card.is-on,
+.dino-spawn-section.is-on,
 .entry-row.is-on{
   background:
     linear-gradient(
@@ -1703,6 +1704,7 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 }
 
 .dino-spawn-card.is-on::before,
+.dino-spawn-section.is-on::before,
 .entry-row.is-on::before{
   content:"";
   position:absolute;
@@ -2032,6 +2034,52 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 
 .loot-set-body{
   margin-top: 2px;
+}
+
+/* Dino panel spawn rows — uses loot-set-section pattern but with
+   two buttons inside the header (visibility toggle + collapse chevron) */
+.dino-spawn-section{
+  position: relative;
+  border-radius: 12px;
+  padding: 6px 8px;
+}
+
+.dino-spawn-section-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+}
+
+.dino-spawn-section-main{
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--text-1);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dino-spawn-chevron-btn{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 36px;
+  padding: 4px 6px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--accent-bright);
 }
 
 /* Item view crate source card */
@@ -4357,8 +4405,9 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
   );
 }
 
-.dino-spawn-card{
-  border: 1px solid var(--accent-rgb);
+.dino-spawn-card,
+.dino-spawn-section{
+  border: 1px solid rgba(var(--accent-rgb), .12);
   background:
     linear-gradient(
       to bottom,
@@ -4370,8 +4419,9 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
     0 6px 18px rgba(0,0,0,.18);
 }
 
-.dino-spawn-card:hover{
-  border-color: var(--accent-rgb);
+.dino-spawn-card:hover,
+.dino-spawn-section:hover{
+  border-color: rgba(var(--accent-rgb), .22);
   background:
     linear-gradient(
       to bottom,
@@ -4380,8 +4430,9 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
     );
 }
 
-.dino-spawn-card.is-on{
-  border-color: var(--accent-rgb);
+.dino-spawn-card.is-on,
+.dino-spawn-section.is-on{
+  border-color: rgba(var(--accent-rgb), .35);
   background:
     linear-gradient(
       to bottom,
@@ -4393,7 +4444,8 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
     0 10px 24px rgba(0,0,0,.25);
 }
 
-.dino-spawn-card.is-on::before{
+.dino-spawn-card.is-on::before,
+.dino-spawn-section.is-on::before{
   content:"";
   background: var(--spawn-card-strip);
 }
