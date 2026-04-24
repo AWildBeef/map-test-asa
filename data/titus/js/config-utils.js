@@ -316,6 +316,23 @@ const exportPanelState = {
       includeDinos: false,
       includeMaps: false
     }
+  },
+
+  crate: {
+    includeSets: true,
+    includeItems: true,
+    includeWeights: true,
+    includeQuality: true,
+    includeBpChance: true
+  },
+
+  item: {
+    includeCrates: true,
+    includeSetName: true,
+    includeWeights: true,
+    includeQuality: true,
+    includeBpChance: true,
+    includeQuantity: true
   }
 };
 /* Split from app_embed.js lines 252-721 */
@@ -522,13 +539,12 @@ function buildDinoReport(){
 
   return {
     type: "dino_report",
-    sourceId: src.id,
-    sourceLabel: src.label,
+    source: src.label || src.id,
     scope: exportPanelState.scope,
-    mapId: State.mapId || "",
+    map: State.mapId || "",
     exportedAt: new Date().toISOString(),
-    options: opts,
-    rows: rows.map(r => buildDinoExportItem(r.name, {
+    dinoCount: rows.length,
+    dinos: rows.map(r => buildDinoExportItem(r.name, {
       simple: isSimpleDinoExport(opts),
       includeMaps: opts.includeMaps,
       includeEntries: opts.includeEntries,
@@ -557,13 +573,12 @@ function buildEntryReport(){
 
   return {
     type: "entry_report",
-    sourceId: src.id,
-    sourceLabel: src.label,
+    source: src.label || src.id,
     scope: exportPanelState.scope,
-    mapId: State.mapId || "",
+    map: State.mapId || "",
     exportedAt: new Date().toISOString(),
-    options: opts,
-    rows: rows.map(r => buildEntryExportItem(r.entryName, {
+    entryCount: rows.length,
+    entries: rows.map(r => buildEntryExportItem(r.entryName, {
       simple: isSimpleEntryExport(opts),
       includeMaps: opts.includeMaps,
       includeDinos: opts.includeDinos,
@@ -644,12 +659,11 @@ function buildMapReport(){
 
     return {
       type: "map_report",
-      sourceId: src.id,
-      sourceLabel: src.label,
+      source: src.label || src.id,
       scope: exportPanelState.scope,
       exportedAt: new Date().toISOString(),
-      options: opts,
-      rows
+      mapCount: rows.length,
+      maps: rows
     };
   } finally {
     State.mapId = originalMap;
@@ -657,9 +671,150 @@ function buildMapReport(){
   }
 }
 
+function buildCrateReport(){
+  const src = currentSourceMeta();
+  const opts = exportPanelState.crate;
+
+  // Determine which crate classes to include
+  const mapCrateClasses = crateClassesUsedOnCurrentMap();
+  const allLoot = lootData();
+
+  const crateItems = [];
+
+  for (const crateClass of [...mapCrateClasses].sort()) {
+    const crate = allLoot.c?.[crateClass];
+    if (!crate) continue;
+
+    const crateId = crateClassToId(crateClass);
+    const displayName = crateDisplayNameByClass(crateClass);
+
+    const entry = {
+      name: displayName,
+      class: crateClass,
+      requiredLevel: crate.l ?? null,
+      minLootSets: crate.mn ?? null,
+      maxLootSets: crate.mx ?? null
+    };
+
+    if (opts.includeSets) {
+      entry.lootSets = (crate.s || []).map((set, si) => {
+        const setName = lootSetNameFromRow(set, `Set ${si + 1}`);
+        const setOut = { name: setName };
+
+        if (opts.includeWeights) setOut.weight = set.w ?? null;
+
+        const { allEntries } = lootSetEntriesFromRow(set);
+
+        if (opts.includeItems) {
+          setOut.entries = allEntries.map(e => {
+            const entryOut = { name: e.n || "" };
+            if (opts.includeWeights) entryOut.weight = e.w ?? null;
+            if (opts.includeWeights) entryOut.quantity = e.mn != null ? `${fmt(e.mn)} - ${fmt(e.mx)}` : null;
+            if (opts.includeQuality) entryOut.quality = e.q1 != null ? `${fmt(e.q1)} - ${fmt(e.q2)}` : null;
+            if (opts.includeBpChance) entryOut.bpChance = isTrue01(e.fb) ? "Force BP" : (e.b != null ? `${fmt(e.b * 100)}%` : null);
+
+            if (opts.includeItems) {
+              entryOut.items = (e.i || []).map(itemId => {
+                const row = itemData().i?.[String(itemId)];
+                return row?.n || `item_${itemId}`;
+              });
+            }
+            return entryOut;
+          });
+        }
+
+        return setOut;
+      });
+    }
+
+    crateItems.push(entry);
+  }
+
+  return {
+    type: "crate_report",
+    source: src.label || src.id,
+    map: State.mapId || "",
+    exportedAt: new Date().toISOString(),
+    crateCount: crateItems.length,
+    crates: crateItems
+  };
+}
+
+
+function buildItemReport(){
+  const src = currentSourceMeta();
+  const opts = exportPanelState.item;
+
+  const allItems = [...State.itemNameToIds.entries()]
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  const itemRows = [];
+
+  for (const [itemName, itemIds] of allItems) {
+    const entry = { name: itemName };
+
+    if (opts.includeCrates) {
+      const crateEntries = [];
+
+      for (const itemId of itemIds) {
+        const rRows = lootData().r?.[String(itemId)] || [];
+
+        for (const r of rRows) {
+          if (!Array.isArray(r) || typeof r[0] !== "number") continue;
+          if (!State.mapCrateIds.has(r[0])) continue;
+
+          const crateClass = lootData().ci?.[r[0]];
+          if (!crateClass) continue;
+
+          const crate = lootData().c?.[crateClass];
+          if (!crate) continue;
+
+          const setIdx = r[1] ?? 0;
+          const entryIdx = r[2] ?? 0;
+          const set = (crate.s || [])[setIdx];
+          if (!set) continue;
+
+          const { allEntries } = lootSetEntriesFromRow(set);
+          const e = allEntries[entryIdx];
+          if (!e) continue;
+
+          const crateEntry = {
+            crate: crateDisplayNameByClass(crateClass),
+            crateClass
+          };
+
+          if (opts.includeSetName) crateEntry.lootSet = lootSetNameFromRow(set, `Set ${setIdx + 1}`);
+          if (opts.includeWeights) crateEntry.entryWeight = e.w ?? null;
+          if (opts.includeQuantity) crateEntry.quantity = e.mn != null ? `${fmt(e.mn)} - ${fmt(e.mx)}` : null;
+          if (opts.includeQuality) crateEntry.quality = e.q1 != null ? `${fmt(e.q1)} - ${fmt(e.q2)}` : null;
+          if (opts.includeBpChance) crateEntry.bpChance = isTrue01(e.fb) ? "Force BP" : (e.b != null ? `${fmt(e.b * 100)}%` : null);
+
+          crateEntries.push(crateEntry);
+        }
+      }
+
+      entry.sources = crateEntries;
+    }
+
+    itemRows.push(entry);
+  }
+
+  return {
+    type: "item_report",
+    source: src.label || src.id,
+    map: State.mapId || "",
+    exportedAt: new Date().toISOString(),
+    itemCount: itemRows.length,
+    items: itemRows
+  };
+}
+
+
 function buildExportReport(){
   if (exportPanelState.reportType === "dino") return buildDinoReport();
   if (exportPanelState.reportType === "entry") return buildEntryReport();
+  if (exportPanelState.reportType === "crate") return buildCrateReport();
+  if (exportPanelState.reportType === "item") return buildItemReport();
   return buildMapReport();
 }
 
@@ -667,12 +822,14 @@ function exportCurrentReportJSON(){
   const report = buildExportReport();
   const src = currentSourceMeta();
 
+  const type = exportPanelState.reportType;
+  const mapPart = (type === "crate" || type === "item") ? safeFilePart(State.mapId || "") : safeFilePart(State.mapId || "");
+
   const fileBase = [
-    "report",
-    exportPanelState.reportType,
-    exportPanelState.scope,
+    "export",
+    type,
     safeFilePart(src.label || src.id || "source"),
-    safeFilePart(State.mapId || "")
+    mapPart
   ].filter(Boolean).join("_");
 
   downloadJSON(`${fileBase}.json`, report);

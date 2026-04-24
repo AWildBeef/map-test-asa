@@ -142,61 +142,79 @@ function renderExportPanel(){
   const body = panel.querySelector(".fp-body");
   if (!body) return;
 
-  const isDino = exportPanelState.reportType === "dino";
-  const isEntry = exportPanelState.reportType === "entry";
-  const isMap = exportPanelState.reportType === "map";
+  const type = exportPanelState.reportType;
+  const scope = exportPanelState.scope;
 
-  const dinoOpts = exportPanelState.dino;
+  const isDino  = type === "dino";
+  const isEntry = type === "entry";
+  const isMap   = type === "map";
+  const isCrate = type === "crate";
+  const isItem  = type === "item";
+
+  const dinoOpts  = exportPanelState.dino;
   const entryOpts = exportPanelState.entry;
-  const mapOpts = exportPanelState.map;
+  const mapOpts   = exportPanelState.map;
+  const crateOpts = exportPanelState.crate;
+  const itemOpts  = exportPanelState.item;
+
+  // Crate and Item are always map-scoped — no meaningful "source" roll-up
+  const scopeOptions = (isCrate || isItem)
+    ? [{ id: "current_map", label: "Current Map" }]
+    : [
+        { id: "current_selection", label: isDino ? "Selected Dino" : isEntry ? "Selected Entry" : "Current Map" },
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+      ];
+
+  // Auto-fix scope if not valid for current type
+  const validScope = scopeOptions.some(o => o.id === scope);
+  if (!validScope) exportPanelState.scope = scopeOptions[0].id;
+  const activeScope = exportPanelState.scope;
 
   body.innerHTML = `
     <div class="fp-row fp-col">
       <div class="info-subtitle">Report Type</div>
       <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
-        <button type="button" class="fp-tab ${isDino ? "is-on" : ""}" data-export-type="dino">Dino</button>
-        <button type="button" class="fp-tab ${isEntry ? "is-on" : ""}" data-export-type="entry">Entry</button>
-        <button type="button" class="fp-tab ${isMap ? "is-on" : ""}" data-export-type="map">Map</button>
+        <button type="button" class="fp-tab ${isDino  ? "is-on" : ""}" data-export-type="dino">Dinos</button>
+        <button type="button" class="fp-tab ${isEntry ? "is-on" : ""}" data-export-type="entry">Entries</button>
+        <button type="button" class="fp-tab ${isMap   ? "is-on" : ""}" data-export-type="map">Map</button>
+        <button type="button" class="fp-tab ${isCrate ? "is-on" : ""}" data-export-type="crate">Crates</button>
+        <button type="button" class="fp-tab ${isItem  ? "is-on" : ""}" data-export-type="item">Items</button>
       </div>
     </div>
 
     <div class="fp-row fp-col">
       <div class="info-subtitle">Scope</div>
       <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
-        <button type="button" class="fp-tab ${exportPanelState.scope === "current_selection" ? "is-on" : ""}" data-export-scope="current_selection">Current Selection</button>
-        <button type="button" class="fp-tab ${exportPanelState.scope === "current_map" ? "is-on" : ""}" data-export-scope="current_map">Current Map</button>
-        <button type="button" class="fp-tab ${exportPanelState.scope === "current_source" ? "is-on" : ""}" data-export-scope="current_source">Current Source</button>
+        ${scopeOptions.map(o => `
+          <button type="button" class="fp-tab ${activeScope === o.id ? "is-on" : ""}" data-export-scope="${o.id}">${o.label}</button>
+        `).join("")}
       </div>
     </div>
+
     <div class="fp-row fp-col">
       <div class="info-subtitle">Include</div>
 
       ${isDino ? `
         <div class="export-group">
-          <div class="export-group-title">Dino Report</div>
-
           <label class="fp-row">
             <input type="checkbox" data-export-opt="dino.includeMaps" ${dinoOpts.includeMaps ? "checked" : ""}>
-            <span>Maps</span>
+            <span>Which maps it spawns on</span>
           </label>
-
           <label class="fp-row">
             <input type="checkbox" data-export-opt="dino.includeEntries" ${dinoOpts.includeEntries ? "checked" : ""}>
-            <span>Entries</span>
+            <span>Spawn entry names</span>
           </label>
-
           ${dinoOpts.includeEntries ? `
             <label class="fp-row" style="padding-left:18px;">
               <input type="checkbox" data-export-opt="dino.includeEntryMaps" ${dinoOpts.includeEntryMaps ? "checked" : ""}>
-              <span>Maps per entry</span>
+              <span>Which maps per entry</span>
             </label>
           ` : ""}
-
           <label class="fp-row">
             <input type="checkbox" data-export-opt="dino.includeBlueprints" ${dinoOpts.includeBlueprints ? "checked" : ""}>
-            <span>Blueprints</span>
+            <span>Blueprint path</span>
           </label>
-
           <label class="fp-row">
             <input type="checkbox" data-export-opt="dino.includeNametag" ${dinoOpts.includeNametag ? "checked" : ""}>
             <span>Nametag</span>
@@ -206,97 +224,109 @@ function renderExportPanel(){
 
       ${isEntry ? `
         <div class="export-group">
-          <div class="export-group-title">Entry Report</div>
-
           <label class="fp-row">
             <input type="checkbox" data-export-opt="entry.includeMaps" ${entryOpts.includeMaps ? "checked" : ""}>
-            <span>Maps</span>
+            <span>Which maps it appears on</span>
           </label>
-
           <label class="fp-row">
             <input type="checkbox" data-export-opt="entry.includeDinos" ${entryOpts.includeDinos ? "checked" : ""}>
-            <span>Dinos</span>
+            <span>Dinos in the entry</span>
           </label>
-
           <label class="fp-row">
             <input type="checkbox" data-export-opt="entry.includeBlueprint" ${entryOpts.includeBlueprint ? "checked" : ""}>
-            <span>Blueprint</span>
+            <span>Entry blueprint path</span>
           </label>
         </div>
       ` : ""}
 
       ${isMap ? `
-        ${mapOpts.includeDinos ? `
-          <div class="export-group">
-            <div class="export-group-title">Dinos</div>
-
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="map.includeDinos" ${mapOpts.includeDinos ? "checked" : ""}>
-              <span>Include dinos</span>
-            </label>
-
+        <div class="export-group">
+          <div class="export-group-title">Dinos</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeDinos" ${mapOpts.includeDinos ? "checked" : ""}>
+            <span>Include dinos</span>
+          </label>
+          ${mapOpts.includeDinos ? `
             <label class="fp-row" style="padding-left:18px;">
               <input type="checkbox" data-export-opt="map.dino.includeEntries" ${mapOpts.dino.includeEntries ? "checked" : ""}>
-              <span>Dino entries</span>
+              <span>Spawn entries</span>
             </label>
-
-            ${mapOpts.dino.includeEntries ? `
-              <label class="fp-row" style="padding-left:36px;">
-                <input type="checkbox" data-export-opt="map.dino.includeEntryMaps" ${mapOpts.dino.includeEntryMaps ? "checked" : ""}>
-                <span>Maps per entry</span>
-              </label>
-            ` : ""}
-
             <label class="fp-row" style="padding-left:18px;">
               <input type="checkbox" data-export-opt="map.dino.includeBlueprints" ${mapOpts.dino.includeBlueprints ? "checked" : ""}>
-              <span>Dino blueprints</span>
+              <span>Blueprint paths</span>
             </label>
+          ` : ""}
+        </div>
 
-            <label class="fp-row" style="padding-left:18px;">
-              <input type="checkbox" data-export-opt="map.dino.includeNametag" ${mapOpts.dino.includeNametag ? "checked" : ""}>
-              <span>Dino nametag</span>
-            </label>
-          </div>
-        ` : `
-          <div class="export-group">
-            <div class="export-group-title">Dinos</div>
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="map.includeDinos">
-              <span>Include dinos</span>
-            </label>
-          </div>
-        `}
-
-        ${mapOpts.includeEntries ? `
-          <div class="export-group">
-            <div class="export-group-title">Entries</div>
-
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="map.includeEntries" ${mapOpts.includeEntries ? "checked" : ""}>
-              <span>Include entries</span>
-            </label>
-
+        <div class="export-group">
+          <div class="export-group-title">Spawn Entries</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeEntries" ${mapOpts.includeEntries ? "checked" : ""}>
+            <span>Include spawn entries</span>
+          </label>
+          ${mapOpts.includeEntries ? `
             <label class="fp-row" style="padding-left:18px;">
               <input type="checkbox" data-export-opt="map.entry.includeDinos" ${mapOpts.entry.includeDinos ? "checked" : ""}>
-              <span>Entry dinos</span>
+              <span>Dinos per entry</span>
             </label>
+          ` : ""}
+        </div>
+      ` : ""}
 
-            ${mapOpts.entry.includeDinos ? `
-              <label class="fp-row" style="padding-left:36px;">
-                <input type="checkbox" data-export-opt="map.entry.includeMaps" ${mapOpts.entry.includeMaps ? "checked" : ""}>
-                <span>Maps per entry</span>
-              </label>
-            ` : ""}
-          </div>
-        ` : `
-          <div class="export-group">
-            <div class="export-group-title">Entries</div>
-            <label class="fp-row">
-              <input type="checkbox" data-export-opt="map.includeEntries">
-              <span>Include entries</span>
+      ${isCrate ? `
+        <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeSets" ${crateOpts.includeSets ? "checked" : ""}>
+            <span>Loot sets</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeItems" ${crateOpts.includeItems ? "checked" : ""}>
+            <span>Items per entry</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeWeights" ${crateOpts.includeWeights ? "checked" : ""}>
+            <span>Weights &amp; quantity</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeQuality" ${crateOpts.includeQuality ? "checked" : ""}>
+            <span>Quality range</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeBpChance" ${crateOpts.includeBpChance ? "checked" : ""}>
+            <span>Blueprint chance</span>
+          </label>
+        </div>
+      ` : ""}
+
+      ${isItem ? `
+        <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="item.includeCrates" ${itemOpts.includeCrates ? "checked" : ""}>
+            <span>Which crates contain it</span>
+          </label>
+          ${itemOpts.includeCrates ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeSetName" ${itemOpts.includeSetName ? "checked" : ""}>
+              <span>Loot set name</span>
             </label>
-          </div>
-        `}
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeWeights" ${itemOpts.includeWeights ? "checked" : ""}>
+              <span>Entry weight</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeQuantity" ${itemOpts.includeQuantity ? "checked" : ""}>
+              <span>Quantity range</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeQuality" ${itemOpts.includeQuality ? "checked" : ""}>
+              <span>Quality range</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeBpChance" ${itemOpts.includeBpChance ? "checked" : ""}>
+              <span>Blueprint chance</span>
+            </label>
+          ` : ""}
+        </div>
       ` : ""}
     </div>
 
