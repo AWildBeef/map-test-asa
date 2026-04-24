@@ -275,8 +275,10 @@ function renderEntryPanel(entryName){
   body.querySelectorAll("[data-entry-dino-toggle]").forEach(btn => {
     btn.onclick = () => {
       const dinoBp = btn.dataset.entryDinoToggle;
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.entryTab);
       setEntryDinoOpen(entryName, dinoBp, !isEntryDinoOpen(entryName, dinoBp));
       renderEntryPanel(entryName);
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.entryTab);
     };
   });
 

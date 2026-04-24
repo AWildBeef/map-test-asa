@@ -30,16 +30,15 @@ function setCrateSetOpen(crateObj, idx, open){
   crateSetOpenState[key] = !!open;
 }
 
-function getActiveInfoPanelScroll(){
+function getActiveInfoPanelScroll(activeTabId){
   const panel = document.getElementById("dinoInfoPanel");
   if (!panel) return 0;
 
   const body = panel.querySelector(".fp-body");
-  const activePage = body?.querySelector('.fp-page[style*="overflow"], .fp-page[style*="overflow-y"], .fp-page[data-page]');
   const pagesEl = body?.querySelector(".fp-pages");
 
-  // prefer actual scrolling page if one is scrollable
-  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(infoPanelState.crateTab || "")}"]`);
+  const tabId = activeTabId ?? infoPanelState.crateTab ?? "";
+  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(tabId)}"]`);
   if (page && page.scrollHeight > page.clientHeight) {
     return page.scrollTop || 0;
   }
@@ -47,13 +46,14 @@ function getActiveInfoPanelScroll(){
   return pagesEl?.scrollTop || 0;
 }
 
-function restoreActiveInfoPanelScroll(scrollTop){
+function restoreActiveInfoPanelScroll(scrollTop, activeTabId){
   const panel = document.getElementById("dinoInfoPanel");
   if (!panel) return;
 
   const body = panel.querySelector(".fp-body");
   const pagesEl = body?.querySelector(".fp-pages");
-  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(infoPanelState.crateTab || "")}"]`);
+  const tabId = activeTabId ?? infoPanelState.crateTab ?? "";
+  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(tabId)}"]`);
 
   requestAnimationFrame(() => {
     if (page && page.scrollHeight > page.clientHeight) {

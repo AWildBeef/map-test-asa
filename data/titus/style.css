@@ -2035,6 +2035,10 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 }
 
 /* Item view crate source card */
+.dino-spawn-card-body{
+  padding: 0 10px 10px;
+}
+
 .item-crate-card{
   border: 1px solid var(--border-soft);
   border-radius: 12px;
@@ -2103,9 +2107,12 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 
 .item-loot-detail{
   padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(0,0,0,.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(to bottom, var(--fill-strong), var(--fill-soft));
   border: 1px solid var(--border-soft);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03);
 }
 
 .item-loot-set-name{
@@ -3203,7 +3210,7 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-submeta{
 }
 
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .fp-page{
-  padding: 8px 8px 8px 8px;
+  padding: 14px 8px 8px 8px;
 }
 
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .set-meta{
@@ -4371,3 +4378,33 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
   color: var(--spawn-card-jump);
 }
 
+
+/* ============================================================
+   TOUCH DEVICES — disable persistent hover styles
+   ============================================================ */
+@media (hover: none) {
+  .dino-spawn-card:hover,
+  .entry-row:hover,
+  .item-crate-card:hover,
+  .dino-spawn-corner-jump:hover,
+  .mod-filter-pill:hover,
+  .loot-set-toggle-all:hover,
+  .fp-btn:hover,
+  .fp-tab:hover,
+  .dd-item:hover,
+  .dd-btn:hover,
+  .item-crate-toggle-btn:hover,
+  .loot-set-toggle:hover {
+    background: inherit;
+    border-color: inherit;
+    color: inherit;
+  }
+
+  /* Restore the explicit "is-on" styles which use the same rule chain */
+  .dino-spawn-card.is-on,
+  .entry-row.is-on,
+  .item-crate-card.is-on,
+  .mod-filter-pill.is-on {
+    /* the .is-on rules elsewhere in this file already define these */
+  }
+}

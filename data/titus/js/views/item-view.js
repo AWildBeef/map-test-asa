@@ -492,8 +492,10 @@ function renderItemPanel(itemName){
   body.querySelectorAll("[data-item-crate-expand]").forEach(btn => {
     btn.onclick = () => {
       const cv = btn.dataset.itemCrateExpand;
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.itemTab);
       itemCrateSetOpen(itemName, cv, !itemCrateIsOpen(itemName, cv));
       renderItemPanel(itemName);
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.itemTab);
     };
   });
 

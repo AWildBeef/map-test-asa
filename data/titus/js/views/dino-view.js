@@ -102,7 +102,7 @@ function renderDinoTabSpawns(d, selectedName){
         ${
           entries.length
             ? `
-              <div class="mod-filter-row" style="align-items:center; margin-bottom:4px;">
+              <div class="mod-filter-row" style="align-items:center; padding:0 0 4px;">
                 <button
                   type="button"
                   class="mod-filter-pill ${allChecked ? "is-on" : ""}"
@@ -240,8 +240,10 @@ function renderDinoPanel(name){
     btn.onclick = (e) => {
       e.stopPropagation();
       const key = btn.dataset.dinoSpawnCardToggle;
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.dinoTab);
       dinoSpawnCardOpenState[key] = !dinoSpawnCardOpenState[key];
       renderDinoPanel(name);
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.dinoTab);
     };
   });
 
@@ -250,9 +252,8 @@ function renderDinoPanel(name){
     btn.onclick = () => {
       const keys = [...body.querySelectorAll("[data-dino-spawn-card-toggle]")]
         .map(b => b.dataset.dinoSpawnCardToggle).filter(Boolean);
-      const allOpen = keys.every(k => dinoSpawnCardOpenState[k]);
+      const allOpen = keys.every(k => dinoSpawnCardOpenState[k] ?? true);
       keys.forEach(k => { dinoSpawnCardOpenState[k] = !allOpen; });
-      btn.textContent = allOpen ? "Expand All" : "Collapse All";
       renderDinoPanel(name);
     };
   });
@@ -562,7 +563,7 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
     metaLines.push(`Max % To Allow: ${fmt(entry.spawnLimit * 100)}%`);
   }
 
-  const isOpen = dinoSpawnCardOpenState[key] ?? false;
+  const isOpen = dinoSpawnCardOpenState[key] ?? true;
 
   return `
     <div class="dino-spawn-card-wrap">
@@ -575,11 +576,13 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
         <span class="dino-spawn-card-main">
           <span class="dino-spawn-title">${escapeHtml(entry.entryClass)}</span>
 
-          <span class="dino-spawn-meta">
-            ${metaLines.map(line => `
-              <span class="dino-spawn-meta-line">${escapeHtml(line)}</span>
-            `).join("")}
-          </span>
+          ${isOpen ? `
+            <span class="dino-spawn-meta">
+              ${metaLines.map(line => `
+                <span class="dino-spawn-meta-line">${escapeHtml(line)}</span>
+              `).join("")}
+            </span>
+          ` : ""}
         </span>
       </button>
 
@@ -600,12 +603,12 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
       </button>
 
       ${isOpen ? `
-        <div class="dino-spawn-card-body" style="padding:0 8px 8px;">
+        <div class="dino-spawn-card-body">
           <button
             type="button"
             class="fp-btn"
             data-open-entry="${escapeAttr(entry.entryClass)}"
-            style="width:100%; justify-content:center; margin-top:4px;"
+            style="width:100%; justify-content:center;"
           >Open in Spawn View ›</button>
         </div>
       ` : ""}
