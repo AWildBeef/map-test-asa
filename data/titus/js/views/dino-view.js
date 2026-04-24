@@ -102,16 +102,18 @@ function renderDinoTabSpawns(d, selectedName){
         ${
           entries.length
             ? `
-              <div class="dino-spawn-tggl-wrap">
+              <div class="mod-filter-row" style="align-items:center; margin-bottom:4px;">
                 <button
                   type="button"
-                  class="dino-spawn-tggl dino-spawn-tggl--all ${allChecked ? "is-on" : ""}"
+                  class="mod-filter-pill ${allChecked ? "is-on" : ""}"
                   data-dino-toggle-all="1"
-                >
-                  <span class="dino-spawn-tggl-main">
-                    <span class="dino-spawn-tggl-title">Toggle All</span>
-                  </span>
-                </button>
+                >Toggle All</button>
+                <button
+                  type="button"
+                  class="loot-set-toggle-all"
+                  data-dino-collapse-all="1"
+                  style="margin-left:auto;"
+                >Collapse All</button>
               </div>
             `
             : ``
@@ -201,21 +203,13 @@ function renderDinoPanel(name){
 
       const next = !(entryVisibility[key] ?? true);
       entryVisibility[key] = next;
-
       btn.classList.toggle("is-on", next);
-
-      const check = btn.querySelector(".dino-spawn-check");
-      if (check) check.textContent = next ? "✓" : "";
 
       const master = body.querySelector("[data-dino-toggle-all]");
       if (master){
         const allOn = [...body.querySelectorAll("[data-dino-entry-toggle]")]
           .every(el => el.classList.contains("is-on"));
-
         master.classList.toggle("is-on", allOn);
-
-        const masterCheck = master.querySelector(".dino-spawn-check");
-        if (masterCheck) masterCheck.textContent = allOn ? "✓" : "";
       }
 
       drawDino(name);
@@ -232,31 +226,37 @@ function renderDinoPanel(name){
       rows.forEach(el => {
         const key = el.dataset.key;
         if (!key) return;
-
         entryVisibility[key] = next;
         el.classList.toggle("is-on", next);
-
-        const check = el.querySelector(".dino-spawn-check");
-        if (check) check.textContent = next ? "✓" : "";
       });
 
       master.classList.toggle("is-on", next);
-
-      const masterCheck = master.querySelector(".dino-spawn-check");
-      if (masterCheck) masterCheck.textContent = next ? "✓" : "";
-
       drawDino(name);
     };
   }
 
-  body.querySelectorAll("[data-open-entry]").forEach(btn => {
+  // Expand/collapse individual spawn cards
+  body.querySelectorAll("[data-dino-spawn-card-toggle]").forEach(btn => {
     btn.onclick = (e) => {
-      e.preventDefault();
       e.stopPropagation();
-      const entryName = btn.dataset.openEntry;
-      openEntryView(entryName);
+      const key = btn.dataset.dinoSpawnCardToggle;
+      dinoSpawnCardOpenState[key] = !dinoSpawnCardOpenState[key];
+      renderDinoPanel(name);
     };
   });
+
+  // Collapse all spawn cards
+  body.querySelectorAll("[data-dino-collapse-all]").forEach(btn => {
+    btn.onclick = () => {
+      const keys = [...body.querySelectorAll("[data-dino-spawn-card-toggle]")]
+        .map(b => b.dataset.dinoSpawnCardToggle).filter(Boolean);
+      const allOpen = keys.every(k => dinoSpawnCardOpenState[k]);
+      keys.forEach(k => { dinoSpawnCardOpenState[k] = !allOpen; });
+      btn.textContent = allOpen ? "Expand All" : "Collapse All";
+      renderDinoPanel(name);
+    };
+  });
+
   body.querySelectorAll("[data-open-entry]").forEach(btn => {
     btn.onclick = (e) => {
       e.stopPropagation();
@@ -532,17 +532,13 @@ function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino, entryName){
       </button>
 
       <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
-        ${bp ? `
-          <div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}" style="margin-top:4px;">
-            ${escapeHtml(bp)}
-          </div>
-        ` : ""}
-        ${nameTag ? `
-          <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}" style="margin-top:4px;">
-            ${escapeHtml(nameTag)}
-          </div>
-        ` : ""}
         ${metaHtml}
+        <button
+          type="button"
+          class="fp-btn"
+          data-open-dino="${escapeAttr(displayName)}"
+          style="width:100%; justify-content:center; margin-top:6px;"
+        >Open in Dino View ›</button>
       </div>
     </div>
   `;
@@ -566,6 +562,8 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
     metaLines.push(`Max % To Allow: ${fmt(entry.spawnLimit * 100)}%`);
   }
 
+  const isOpen = dinoSpawnCardOpenState[key] ?? false;
+
   return `
     <div class="dino-spawn-card-wrap">
       <button
@@ -588,12 +586,11 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
       <button
         type="button"
         class="dino-spawn-corner-jump"
-        data-open-entry="${escapeAttr(entry.entryClass)}"
-        title="Open in spawn view"
-        aria-label="Open in spawn view"
+        data-dino-spawn-card-toggle="${escapeAttr(key)}"
+        title="${isOpen ? "Collapse" : "Expand"}"
       >
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-          <path d="M9 6l6 6-6 6"
+          <path d="${isOpen ? "M6 9l6 6 6-6" : "M6 15l6-6 6 6"}"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -601,6 +598,17 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
                 stroke-linejoin="round"/>
         </svg>
       </button>
+
+      ${isOpen ? `
+        <div class="dino-spawn-card-body" style="padding:0 8px 8px;">
+          <button
+            type="button"
+            class="fp-btn"
+            data-open-entry="${escapeAttr(entry.entryClass)}"
+            style="width:100%; justify-content:center; margin-top:4px;"
+          >Open in Spawn View ›</button>
+        </div>
+      ` : ""}
     </div>
   `;
 }

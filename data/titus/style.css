@@ -2093,7 +2093,7 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
   padding: 0 10px 10px;
 }
 
-/* Item loot detail block */
+/* Item loot detail block — inner bubble inside each crate card */
 .item-loot-details{
   margin-top: 6px;
   display: flex;
@@ -2102,19 +2102,19 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 }
 
 .item-loot-detail{
-  padding: 6px 8px;
-  border-radius: 8px;
-  background: var(--fill-soft);
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.18);
   border: 1px solid var(--border-soft);
 }
 
 .item-loot-set-name{
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: .06em;
   color: var(--text-3);
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 .mod-set-badge{
   display: inline-block;
@@ -3203,7 +3203,7 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-submeta{
 }
 
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .fp-page{
-  padding: 0 8px 8px 8px;
+  padding: 8px 8px 8px 8px;
 }
 
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .set-meta{

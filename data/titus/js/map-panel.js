@@ -1621,8 +1621,8 @@ function mountPanelSwipe(container, tabs, getActive, setActive){
   let isHorizontal = false;
 
   const EDGE_GUARD_PX = 22;
-  const SWIPE_MIN_PX = 40;
-  const SWIPE_MAX_Y = 60;
+  const SWIPE_MIN_PX = 80;   // was 40 — higher threshold means deliberate swipes only
+  const SWIPE_MAX_Y = 40;    // was 60 — tighter vertical tolerance
 
   container.addEventListener("touchstart", (e) => {
     if (!e.touches || e.touches.length !== 1) return;

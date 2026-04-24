@@ -264,6 +264,13 @@ function renderEntryPanel(entryName){
     };
   }
 
+  body.querySelectorAll("[data-open-dino]").forEach(btn => {
+    btn.onclick = () => {
+      const bp = btn.dataset.openDino;
+      if (bp) openDinoView(bp);
+    };
+  });
+
   // Wire individual dino collapse toggles
   body.querySelectorAll("[data-entry-dino-toggle]").forEach(btn => {
     btn.onclick = () => {

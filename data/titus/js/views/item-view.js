@@ -378,9 +378,18 @@ function renderItemPanel(itemName){
 
   setInfoPanelTitle(itemName);
 
+  // Compute whether all are currently open for the label
+  const allItemsOpen = (() => {
+    const itemIds2 = Array.isArray(it?.ids) ? it.ids : (it?.id != null ? [it.id] : []);
+    const crateIds2 = [...new Set(itemIds2.flatMap(id =>
+      crateIdsForItemId(id).filter(cid => State.mapCrateIds.has(cid))
+    ))];
+    return crateIds2.every(cid => itemCrateIsOpen(itemName, `crate:${cid}`));
+  })();
+
   const collapseAllBtn = (activeTab === "crates") ? `
     <button type="button" class="loot-set-toggle-all" data-item-collapse-all="1" style="margin-left:auto;">
-      Collapse All
+      ${allItemsOpen ? "Collapse All" : "Expand All"}
     </button>
   ` : "";
 
@@ -475,7 +484,6 @@ function renderItemPanel(itemName){
         .map(b => b.dataset.itemCrateExpand).filter(Boolean);
       const allOpen = crateValues.every(cv => itemCrateIsOpen(itemName, cv));
       crateValues.forEach(cv => itemCrateSetOpen(itemName, cv, !allOpen));
-      btn.textContent = allOpen ? "Expand All" : "Collapse All";
       renderItemPanel(itemName);
     };
   });
