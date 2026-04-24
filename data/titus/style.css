@@ -2036,7 +2036,35 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 
 /* Item view crate source card */
 .dino-spawn-card-body{
-  padding: 0 10px 10px;
+  margin-top: -1px;
+  border: 1px solid var(--spawn-card-off-border);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--spawn-card-off-bot),
+      var(--spawn-card-off-bot)
+    );
+  padding: 6px 8px 8px;
+}
+
+/* When the card above is "on", continue the on-state styling */
+.dino-spawn-card.is-on + .dino-spawn-corner-jump + .dino-spawn-card-body,
+.dino-spawn-card.is-on ~ .dino-spawn-card-body{
+  border-color: var(--spawn-card-on-border);
+  background:
+    linear-gradient(
+      to bottom,
+      var(--spawn-card-on-bot),
+      var(--spawn-card-on-bot)
+    );
+}
+
+/* When body is present, square off the bottom of the card above */
+.dino-spawn-card-wrap:has(.dino-spawn-card-body) .dino-spawn-card{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .item-crate-card{
@@ -4381,8 +4409,16 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 
 /* ============================================================
    TOUCH DEVICES — disable persistent hover styles
+   On touch devices, :hover is "sticky" — it persists after a tap
+   until another element is tapped. Rather than letting :hover styles
+   apply at all on touch devices, we use the @media (hover: none) query
+   to gate them off. The :active styles still work for tap feedback.
    ============================================================ */
 @media (hover: none) {
+  /* Neutralize :hover on common interactive elements so taps don't
+     leave them in a stuck "hover" state. We use revert-layer for
+     each property to fall back to the non-hover rule rather than
+     the parent inherited value (which caused dark/transparent bugs). */
   .dino-spawn-card:hover,
   .entry-row:hover,
   .item-crate-card:hover,
@@ -4395,16 +4431,21 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
   .dd-btn:hover,
   .item-crate-toggle-btn:hover,
   .loot-set-toggle:hover {
-    background: inherit;
-    border-color: inherit;
-    color: inherit;
+    background: revert-layer;
+    border-color: revert-layer;
+    color: revert-layer;
+    box-shadow: revert-layer;
   }
 
-  /* Restore the explicit "is-on" styles which use the same rule chain */
-  .dino-spawn-card.is-on,
-  .entry-row.is-on,
-  .item-crate-card.is-on,
-  .mod-filter-pill.is-on {
-    /* the .is-on rules elsewhere in this file already define these */
+  /* Kill iOS Safari tap focus ring on every interactive element */
+  button:focus,
+  button:focus-visible,
+  .dd-item:focus,
+  .dd-item:focus-visible,
+  .dino-spawn-card:focus,
+  .item-crate-card:focus,
+  .fp-tab:focus {
+    outline: none !important;
+    box-shadow: inherit !important;
   }
 }
