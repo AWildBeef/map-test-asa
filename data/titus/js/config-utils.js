@@ -689,25 +689,9 @@ function buildMapReport(){
   }
 }
 
+
 function mapNamesForCrateClass(crateClass){
-  const maps = [];
-  const originalMap = State.mapId;
-
-  try {
-    for (const code of getAllMapsForSource()) {
-      const mapName = Global.spawn?.mapLegend?.[code] || code;
-      State.mapId = mapName;
-      rebuildMapIndices();
-      if (crateClassesUsedOnCurrentMap().has(crateClass)) {
-        maps.push(mapName);
-      }
-    }
-  } finally {
-    State.mapId = originalMap;
-    rebuildMapIndices();
-  }
-
-  return maps;
+  return Global.loot?.cm?.[crateClass] || [];
 }
 
 
@@ -764,29 +748,13 @@ function buildCrateReport(){
   let crateClasses = [];
 
   if (scope === "current_selection") {
-    // Selected crate: parse crateValue like "crate:42"
     const crateVal = State.selections?.crate || "";
     const crateId = parseInt(crateVal.replace("crate:", ""), 10);
     const cls = isNaN(crateId) ? null : crateIdToClass(crateId);
     if (cls) crateClasses = [cls];
   } else if (scope === "current_source") {
-    // All crates across all maps — collect unique classes
-    const originalMap = State.mapId;
-    const seen = new Set();
-    try {
-      for (const code of getAllMapsForSource()) {
-        const mapName = Global.spawn?.mapLegend?.[code] || code;
-        State.mapId = mapName;
-        rebuildMapIndices();
-        for (const cls of crateClassesUsedOnCurrentMap()) seen.add(cls);
-      }
-    } finally {
-      State.mapId = originalMap;
-      rebuildMapIndices();
-    }
-    crateClasses = [...seen].sort();
+    crateClasses = Object.keys(allLoot.cm || {}).sort();
   } else {
-    // current_map
     crateClasses = [...crateClassesUsedOnCurrentMap()].sort();
   }
 
@@ -825,35 +793,20 @@ function buildItemReport(){
     const itemName = State.selections?.item || "";
     if (itemName) itemEntries = [[itemName, State.itemNameToIds.get(itemName) || []]];
   } else if (scope === "current_source") {
-    // All items across all maps
-    const originalMap = State.mapId;
+    // All items that appear in any crate in the loot data
     const allItemNames = new Map();
-    try {
-      for (const code of getAllMapsForSource()) {
-        const mapName = Global.spawn?.mapLegend?.[code] || code;
-        State.mapId = mapName;
-        rebuildMapIndices();
-        for (const [name, ids] of State.itemNameToIds.entries()) {
-          if (!allItemNames.has(name)) allItemNames.set(name, new Set());
-          for (const id of ids) allItemNames.get(name).add(id);
-        }
-      }
-    } finally {
-      State.mapId = originalMap;
-      rebuildMapIndices();
+    for (const [name, ids] of State.itemNameToIds.entries()) {
+      const inLoot = ids.filter(id => lootData().r?.[String(id)]);
+      if (inLoot.length) allItemNames.set(name, inLoot);
     }
-    itemEntries = [...allItemNames.entries()]
-      .map(([name, ids]) => [name, [...ids]])
-      .sort(([a], [b]) => a.localeCompare(b));
+    itemEntries = [...allItemNames.entries()].sort(([a], [b]) => a.localeCompare(b));
   } else {
-    itemEntries = [...State.itemNameToIds.entries()]
-      .sort(([a], [b]) => a.localeCompare(b));
+    itemEntries = [...State.itemNameToIds.entries()].sort(([a], [b]) => a.localeCompare(b));
   }
 
   const itemRows = itemEntries.map(([itemName, itemIds]) => {
     const entry = { name: itemName };
 
-    // Get blueprint from first item id
     const firstId = itemIds[0];
     const itemRow = firstId != null ? itemData().i?.[String(firstId)] : null;
     if (itemRow?.p != null) {
@@ -862,20 +815,17 @@ function buildItemReport(){
     }
 
     if (opts.includeMaps) {
-      // Which maps this item appears on
-      const originalMap = State.mapId;
       const mapsWithItem = new Set();
-      try {
-        for (const code of getAllMapsForSource()) {
-          const mapName = Global.spawn?.mapLegend?.[code] || code;
-          State.mapId = mapName;
-          rebuildMapIndices();
-          const hasItem = itemIds.some(id => State.mapItemIds.has(id));
-          if (hasItem) mapsWithItem.add(mapName);
+      for (const itemId of itemIds) {
+        const rRows = lootData().r?.[String(itemId)] || [];
+        for (const r of rRows) {
+          if (!Array.isArray(r) || typeof r[0] !== "number") continue;
+          const crateClass = lootData().ci?.[r[0]];
+          if (!crateClass) continue;
+          for (const mapName of mapNamesForCrateClass(crateClass)) {
+            mapsWithItem.add(mapName);
+          }
         }
-      } finally {
-        State.mapId = originalMap;
-        rebuildMapIndices();
       }
       entry.maps = [...mapsWithItem].sort();
     }
@@ -955,18 +905,16 @@ function exportCurrentReportJSON(){
   const src = currentSourceMeta();
 
   const type = exportPanelState.reportType;
-  const mapPart = (type === "crate" || type === "item") ? safeFilePart(State.mapId || "") : safeFilePart(State.mapId || "");
 
   const fileBase = [
     "export",
     type,
     safeFilePart(src.label || src.id || "source"),
-    mapPart
+    safeFilePart(State.mapId || "")
   ].filter(Boolean).join("_");
 
   downloadJSON(`${fileBase}.json`, report);
 }
-
 
 
 
