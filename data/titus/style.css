@@ -56,9 +56,9 @@
   --shadow-sm: 0 8px 18px rgba(0,0,0,.18);
   --shadow-md: 0 10px 24px rgba(0,0,0,.28);
   --shadow-lg: 0 18px 46px rgba(0,0,0,.50);
-  --spawn-card-off-border: rgba(var(--accent-rgb), .10);
-  --spawn-card-hover-border: rgba(var(--accent-rgb), .16);
-  --spawn-card-on-border: rgba(var(--accent-rgb), .24);
+  --spawn-card-off-border: var(--border-soft);
+  --spawn-card-hover-border: var(--border-mid);
+  --spawn-card-on-border: var(--border-strong);
 
 /* ============================================================
      2) SEMANTIC THEME TOKENS
@@ -2037,7 +2037,7 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 /* Item view crate source card */
 .dino-spawn-card-body{
   margin-top: -1px;
-  border: 1px solid var(--spawn-card-off-border);
+  border: 1px solid var(--accent-rgb);
   border-top: 0;
   border-radius: 0 0 8px 8px;
   background:
@@ -2052,7 +2052,7 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 /* When the card above is "on", continue the on-state styling */
 .dino-spawn-card.is-on + .dino-spawn-corner-jump + .dino-spawn-card-body,
 .dino-spawn-card.is-on ~ .dino-spawn-card-body{
-  border-color: var(--spawn-card-on-border);
+  border-color: var(--accent-rgb);
   background:
     linear-gradient(
       to bottom,
@@ -2068,7 +2068,7 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 }
 
 .item-crate-card{
-  border: 1px solid var(--border-soft);
+  border: 1px solid var(--accent-rgb);
   border-radius: 12px;
   overflow: hidden;
   background:
@@ -2080,7 +2080,7 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
 }
 
 .item-crate-card.is-on{
-  border-color: var(--spawn-card-on-border);
+  border-color: var(--accent-rgb);
   background:
     linear-gradient(to bottom, var(--spawn-card-on-top), var(--spawn-card-on-bot));
   box-shadow:
@@ -4358,7 +4358,7 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 }
 
 .dino-spawn-card{
-  border: 1px solid var(--spawn-card-off-border);
+  border: 1px solid var(--accent-rgb);
   background:
     linear-gradient(
       to bottom,
@@ -4371,7 +4371,7 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 }
 
 .dino-spawn-card:hover{
-  border-color: var(--spawn-card-hover-border);
+  border-color: var(--accent-rgb);
   background:
     linear-gradient(
       to bottom,
@@ -4381,7 +4381,7 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 }
 
 .dino-spawn-card.is-on{
-  border-color: var(--spawn-card-on-border);
+  border-color: var(--accent-rgb);
   background:
     linear-gradient(
       to bottom,
@@ -4408,36 +4408,13 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 
 
 /* ============================================================
-   TOUCH DEVICES — disable persistent hover styles
-   On touch devices, :hover is "sticky" — it persists after a tap
-   until another element is tapped. Rather than letting :hover styles
-   apply at all on touch devices, we use the @media (hover: none) query
-   to gate them off. The :active styles still work for tap feedback.
+   TOUCH DEVICES — kill iOS Safari tap focus rings only.
+   Note: don't try to neutralize :hover globally — it breaks the
+   normal cascade in unpredictable ways. The native -webkit-tap-
+   highlight-color: transparent (set elsewhere) handles most of
+   the persistent tap state on iOS already.
    ============================================================ */
 @media (hover: none) {
-  /* Neutralize :hover on common interactive elements so taps don't
-     leave them in a stuck "hover" state. We use revert-layer for
-     each property to fall back to the non-hover rule rather than
-     the parent inherited value (which caused dark/transparent bugs). */
-  .dino-spawn-card:hover,
-  .entry-row:hover,
-  .item-crate-card:hover,
-  .dino-spawn-corner-jump:hover,
-  .mod-filter-pill:hover,
-  .loot-set-toggle-all:hover,
-  .fp-btn:hover,
-  .fp-tab:hover,
-  .dd-item:hover,
-  .dd-btn:hover,
-  .item-crate-toggle-btn:hover,
-  .loot-set-toggle:hover {
-    background: revert-layer;
-    border-color: revert-layer;
-    color: revert-layer;
-    box-shadow: revert-layer;
-  }
-
-  /* Kill iOS Safari tap focus ring on every interactive element */
   button:focus,
   button:focus-visible,
   .dd-item:focus,
@@ -4445,7 +4422,7 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
   .dino-spawn-card:focus,
   .item-crate-card:focus,
   .fp-tab:focus {
-    outline: none !important;
-    box-shadow: inherit !important;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
 }
