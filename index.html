@@ -8,11 +8,23 @@
 
   <link rel="stylesheet" href="leaflet/leaflet.css?v=4">
   <script src="leaflet/leaflet.js?v=4"></script>
+  <script>
+    eruda.init();
+  </script>
 
   <link rel="stylesheet" href="style.css?v=5.9">
 </head>
 
 <body>
+  <div id="bootSplash" aria-live="polite">
+    <div class="boot-card">
+      <div class="boot-title">ASA SPAWN MAPS</div>
+      <div class="boot-sub">Loading data...</div>
+      <div class="boot-dots" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
   <div id="topbar">
     <div class="title">ASA Spawn Maps</div>
 
@@ -56,8 +68,8 @@
     </div>
   </div>
 
-  <div id="buildInfo">v1.46</div>
 
   <script src="js/entry.js?v=7"></script>
+  
 </body>
 </html>
