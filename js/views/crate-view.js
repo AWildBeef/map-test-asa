@@ -30,16 +30,15 @@ function setCrateSetOpen(crateObj, idx, open){
   crateSetOpenState[key] = !!open;
 }
 
-function getActiveInfoPanelScroll(){
+function getActiveInfoPanelScroll(activeTabId){
   const panel = document.getElementById("dinoInfoPanel");
   if (!panel) return 0;
 
   const body = panel.querySelector(".fp-body");
-  const activePage = body?.querySelector('.fp-page[style*="overflow"], .fp-page[style*="overflow-y"], .fp-page[data-page]');
   const pagesEl = body?.querySelector(".fp-pages");
 
-  // prefer actual scrolling page if one is scrollable
-  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(infoPanelState.crateTab || "")}"]`);
+  const tabId = activeTabId ?? infoPanelState.crateTab ?? "";
+  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(tabId)}"]`);
   if (page && page.scrollHeight > page.clientHeight) {
     return page.scrollTop || 0;
   }
@@ -47,13 +46,14 @@ function getActiveInfoPanelScroll(){
   return pagesEl?.scrollTop || 0;
 }
 
-function restoreActiveInfoPanelScroll(scrollTop){
+function restoreActiveInfoPanelScroll(scrollTop, activeTabId){
   const panel = document.getElementById("dinoInfoPanel");
   if (!panel) return;
 
   const body = panel.querySelector(".fp-body");
   const pagesEl = body?.querySelector(".fp-pages");
-  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(infoPanelState.crateTab || "")}"]`);
+  const tabId = activeTabId ?? infoPanelState.crateTab ?? "";
+  const page = body?.querySelector(`.fp-page[data-page="${CSS.escape(tabId)}"]`);
 
   requestAnimationFrame(() => {
     if (page && page.scrollHeight > page.clientHeight) {
@@ -361,7 +361,12 @@ function renderCrateTabInfo(c){
     `;
   }
 
-  const items = crateItemSummary(c.class);
+  const modActive = !activeSourceIsOfficial();
+  const allSets = c.sets || [];
+  const hasModSets = modActive && allSets.some(s => s._mod);
+  const modOnly = modActive && hasModSets && !infoPanelState.showOfficialSets;
+
+  const items = crateItemSummary(c.class, { modOnly });
 
   return `
     <div class="info-section">
@@ -387,40 +392,46 @@ function renderCrateTabInfo(c){
 
 
 function renderCrateTabSets(c){
-  const rows = c.sets || [];
+  const allRows = c.sets || [];
+  const modActive = !activeSourceIsOfficial();
+
+  // When a mod is active, split sets into mod and official
+  // and filter based on the toggle state
+  let rows = allRows;
+  const hasModSets = modActive && allRows.some(s => s._mod);
+  const hasOfficialSets = modActive && allRows.some(s => !s._mod);
+
+  if (modActive && hasModSets) {
+    rows = infoPanelState.showOfficialSets
+      ? allRows
+      : allRows.filter(s => s._mod);
+  }
 
   if (!rows.length){
-    return `<div style="color:var(--muted)">No loot sets found.</div>`;
+    return `<div style="color:var(--muted); padding:8px 4px;">No loot sets found.</div>`;
   }
 
   return `
     <div class="info-section">
       <div class="entries">
-        <div class="col-exp-row">
-          <button
-            type="button"
-            class="loot-set-toggle-all"
-            data-crate-set-toggle-all="1"
-          >
-            ${areAllCrateSetsOpen(c) ? "Collapse All" : "Expand All"}
-          </button>
-        </div>
         ${rows.map((row, idx) => {
+          const origIdx = allRows.indexOf(row);
           const { allEntries, setMeta } = lootSetEntriesFromRow(row);
-          const setName = lootSetNameFromRow(row, `Set ${idx + 1}`);
+          const setName = lootSetNameFromRow(row, `Set ${origIdx + 1}`);
           const weight = row?.w;
-          const isOpen = isCrateSetOpen(c, idx);
+          const isOpen = isCrateSetOpen(c, origIdx);
 
           return `
-            <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"}">
+            <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"} ${row._mod ? "is-mod-set" : ""}">
               <button
                 type="button"
                 class="loot-set-toggle"
-                data-crate-set-toggle="${escapeAttr(String(idx))}"
+                data-crate-set-toggle="${escapeAttr(String(origIdx))}"
               >
                 <div class="loot-set-toggle-main">
                   <div class="info-row">
                     <span class="info-label">${escapeHtml(setName)}</span>
+                    ${row._mod ? `<span class="mod-set-badge">MOD</span>` : ""}
                   </div>
                 </div>
 
@@ -573,13 +584,24 @@ function renderCratePanel(crateName){
   }
 
   const panel = ensureInfoPanel();
+  const modActive = !activeSourceIsOfficial();
+  const allSets = c.sets || [];
+  const hasModSets = modActive && allSets.some(s => s._mod);
+  const hasOfficialSets = modActive && allSets.some(s => !s._mod);
+  const modOnly = modActive && hasModSets && !infoPanelState.showOfficialSets;
+
   const itemCount =
     c.kind === "mission"
       ? missionLootItemIds(c.missionClass).length
-      : crateItemSummary(c.class).length;
+      : crateItemSummary(c.class, { modOnly }).length;
+
+  const modSetCount = hasModSets ? allSets.filter(s => s._mod).length : 0;
+  const shownSetCount = (modActive && hasModSets && !infoPanelState.showOfficialSets)
+    ? modSetCount
+    : allSets.length;
 
   const crateTabs = [
-    { id: "sets", label: `Loot Sets (${(c.sets || []).length})` },
+    { id: "sets", label: `Loot Sets (${shownSetCount})` },
     { id: "info", label: `All Items (${itemCount})` }
   ];
 
@@ -589,6 +611,20 @@ function renderCratePanel(crateName){
 
   setInfoPanelTitle(c.name);
 
+  // Collapse All always shown when on the sets tab; sets pill only when relevant
+  const collapseAllBtn = (activeTab === "sets") ? `
+    <button
+      type="button"
+      class="loot-set-toggle-all"
+      data-crate-set-toggle-all="1"
+      style="margin-left:auto;"
+    >${areAllCrateSetsOpen(c) ? "Collapse All" : "Expand All"}</button>
+  ` : "";
+
+  const showSetsTogglePill = (modActive && hasModSets && hasOfficialSets)
+    ? `<button type="button" class="mod-filter-pill ${infoPanelState.showOfficialSets ? "is-on" : ""}" data-crate-official-toggle="1" title="${infoPanelState.showOfficialSets ? "Showing all sets" : "Showing mod sets only"}">${infoPanelState.showOfficialSets ? "Mod + official sets" : "Mod sets only"}</button>`
+    : "";
+
   const html = `
     ${renderCrateHero(c)}
     ${renderTabs({
@@ -596,6 +632,12 @@ function renderCratePanel(crateName){
       activeId: activeTab,
       dataAttr: 'data-crate-tab'
     })}
+    ${(showSetsTogglePill || collapseAllBtn) ? `
+      <div class="mod-filter-row">
+        ${showSetsTogglePill}
+        ${collapseAllBtn}
+      </div>
+    ` : ""}
     ${renderPages({
       tabs: crateTabs,
       activeId: activeTab,
@@ -643,6 +685,13 @@ function renderCratePanel(crateName){
       renderCratePanel(crateName);
 
       restoreActiveInfoPanelScroll(prevScroll);
+    };
+  });
+
+  body.querySelectorAll("[data-crate-official-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      infoPanelState.showOfficialSets = !infoPanelState.showOfficialSets;
+      renderCratePanel(crateName);
     };
   });
 

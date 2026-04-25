@@ -204,17 +204,36 @@ function renderEntryPanel(entryName){
     ? infoPanelState.entryTab
     : "dinos";
 
+  // Count dinos for the tab label
+  const entryIndex = buildEntryIndexForCurrentMap();
+  const entryRows = entryIndex?.[entryName] || [];
+  const byDino = new Map();
+  for (const r of entryRows) {
+    if (!byDino.has(r.dinoKey)) byDino.set(r.dinoKey, []);
+    byDino.get(r.dinoKey).push(r);
+  }
+  const dinoCount = [...byDino.keys()].filter(bp => {
+    if (activeSourceIsOfficial()) return true;
+    if (viewOptions.includeOfficialInEntryPanels) return true;
+    return isBlueprintFromActiveMod(bp);
+  }).length;
+
+  const entryPanelTabs = [
+    { id: "dinos", label: `Dinos (${dinoCount})` },
+    { id: "info",  label: "Info" }
+  ];
+
   setInfoPanelTitle(entryName);
 
   const html = `
     ${renderEntryHero(entryName)}
     ${renderTabs({
-      tabs: ENTRY_PANEL_TABS,
+      tabs: entryPanelTabs,
       activeId: activeTab,
       dataAttr: 'data-entry-tab'
     })}
     ${renderPages({
-      tabs: ENTRY_PANEL_TABS,
+      tabs: entryPanelTabs,
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "dinos") return renderEntryTabDinos(entryName);
@@ -229,7 +248,7 @@ function renderEntryPanel(entryName){
 
   const body = panel.querySelector(".fp-body");
   wireTabs(body, {
-    tabs: ENTRY_PANEL_TABS,
+    tabs: entryPanelTabs,
     activeId: activeTab,
     dataAttr: "data-entry-tab",
     onChange: (id) => {
@@ -237,13 +256,43 @@ function renderEntryPanel(entryName){
       renderEntryPanel(entryName);
     }
   });
-  const officialToggle =  body.querySelector("#entryIncludeOfficialToggle");
+  const officialToggle = body.querySelector("#entryIncludeOfficialToggle");
   if (officialToggle){
     officialToggle.onchange = () => {
       viewOptions.includeOfficialInEntryPanels = officialToggle.checked;
       renderEntryPanel(entryName);
     };
   }
+
+  body.querySelectorAll("[data-open-dino]").forEach(btn => {
+    btn.onclick = () => {
+      const bp = btn.dataset.openDino;
+      if (bp) openDinoView(bp);
+    };
+  });
+
+  // Wire individual dino collapse toggles
+  body.querySelectorAll("[data-entry-dino-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const dinoBp = btn.dataset.entryDinoToggle;
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.entryTab);
+      setEntryDinoOpen(entryName, dinoBp, !isEntryDinoOpen(entryName, dinoBp));
+      renderEntryPanel(entryName);
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.entryTab);
+    };
+  });
+
+  // Wire collapse all
+  body.querySelectorAll("[data-entry-dino-toggle-all]").forEach(btn => {
+    btn.onclick = () => {
+      const list = body.querySelector("[data-entry-dino-list]");
+      const dinoKeys = [...(list?.querySelectorAll("[data-entry-dino-toggle]") || [])]
+        .map(b => b.dataset.entryDinoToggle);
+      const allOpen = areAllEntryDinosOpen(entryName, dinoKeys);
+      dinoKeys.forEach(bp => setEntryDinoOpen(entryName, bp, !allOpen));
+      renderEntryPanel(entryName);
+    };
+  });
   mountPanelSwipe(
     body.querySelector(".fp-pages"),
     ENTRY_PANEL_TABS,

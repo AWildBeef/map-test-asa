@@ -86,6 +86,379 @@ function downgradeRarity(label,steps){
 
 /*=========MAP=============*/
 
+function mapNamesForEntry(entryName){
+  const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
+    ? Global.spawn.entryMaps[entryName]
+    : [];
+
+  return codes.map(code => Global.spawn?.mapLegend?.[code] || code);
+}
+
+
+function ensureExportPanel(){
+  let panel = document.getElementById("exportPanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "exportPanel";
+  panel.className = "floating-panel floating-panel--small";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">Export</div>
+      <div class="fp-actions"></div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const actions = panel.querySelector(".fp-actions");
+
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  actions.appendChild(hideBtn);
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  panel.style.position = "absolute";
+  panel.style.right = "2px";
+  panel.style.bottom = "90px";
+  panel.style.zIndex = "800";
+  panel.style.display = "none";
+  panel.dataset.hidden = "1";
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+    updateDockToggles();
+  };
+
+  return panel;
+}
+
+function renderExportPanel(){
+  const panel = ensureExportPanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+
+  const type = exportPanelState.reportType;
+  const scope = exportPanelState.scope;
+
+  const isDino  = type === "dino";
+  const isEntry = type === "entry";
+  const isMap   = type === "map";
+  const isCrate = type === "crate";
+  const isItem  = type === "item";
+
+  const dinoOpts  = exportPanelState.dino;
+  const entryOpts = exportPanelState.entry;
+  const mapOpts   = exportPanelState.map;
+  const crateOpts = exportPanelState.crate;
+  const itemOpts  = exportPanelState.item;
+
+  // Scope options vary by report type
+  const scopeOptions = (isCrate || isItem)
+    ? [
+        { id: "current_selection", label: isCrate ? "Selected Crate" : "Selected Item" },
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+      ]
+    : isDino
+    ? [
+        { id: "current_selection", label: "Selected Dino" },
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+      ]
+    : isEntry
+    ? [
+        { id: "current_selection", label: "Selected Entry" },
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+      ]
+    : /* map */
+    [
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps (Source)" }
+    ];
+
+  // Auto-fix scope if not valid for current type
+  const validScope = scopeOptions.some(o => o.id === scope);
+  if (!validScope) exportPanelState.scope = scopeOptions[0].id;
+  const activeScope = exportPanelState.scope;
+
+  body.innerHTML = `
+    <div class="fp-row fp-col">
+      <div class="info-subtitle">Report Type</div>
+      <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
+        <button type="button" class="fp-tab ${isDino  ? "is-on" : ""}" data-export-type="dino">Dinos</button>
+        <button type="button" class="fp-tab ${isEntry ? "is-on" : ""}" data-export-type="entry">Entries</button>
+        <button type="button" class="fp-tab ${isMap   ? "is-on" : ""}" data-export-type="map">Map</button>
+        <button type="button" class="fp-tab ${isCrate ? "is-on" : ""}" data-export-type="crate">Crates</button>
+        <button type="button" class="fp-tab ${isItem  ? "is-on" : ""}" data-export-type="item">Items</button>
+      </div>
+    </div>
+
+    <div class="fp-row fp-col">
+      <div class="info-subtitle">Scope</div>
+      <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
+        ${scopeOptions.map(o => `
+          <button type="button" class="fp-tab ${activeScope === o.id ? "is-on" : ""}" data-export-scope="${o.id}">${o.label}</button>
+        `).join("")}
+      </div>
+    </div>
+
+    <div class="fp-row fp-col">
+      <div class="info-subtitle">Include</div>
+
+      ${isDino ? `
+        <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeMaps" ${dinoOpts.includeMaps ? "checked" : ""}>
+            <span>Which maps it spawns on</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeEntries" ${dinoOpts.includeEntries ? "checked" : ""}>
+            <span>Spawn entry names</span>
+          </label>
+          ${dinoOpts.includeEntries ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="dino.includeEntryMaps" ${dinoOpts.includeEntryMaps ? "checked" : ""}>
+              <span>Which maps per entry</span>
+            </label>
+          ` : ""}
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeBlueprints" ${dinoOpts.includeBlueprints ? "checked" : ""}>
+            <span>Blueprint path</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="dino.includeNametag" ${dinoOpts.includeNametag ? "checked" : ""}>
+            <span>Nametag</span>
+          </label>
+        </div>
+      ` : ""}
+
+      ${isEntry ? `
+        <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entry.includeMaps" ${entryOpts.includeMaps ? "checked" : ""}>
+            <span>Which maps it appears on</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entry.includeDinos" ${entryOpts.includeDinos ? "checked" : ""}>
+            <span>Dinos in the entry</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="entry.includeBlueprint" ${entryOpts.includeBlueprint ? "checked" : ""}>
+            <span>Entry blueprint path</span>
+          </label>
+        </div>
+      ` : ""}
+
+      ${isMap ? `
+        <div class="export-group">
+          <div class="export-group-title">Dinos</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeDinos" ${mapOpts.includeDinos ? "checked" : ""}>
+            <span>Include dinos</span>
+          </label>
+          ${mapOpts.includeDinos ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.dino.includeEntries" ${mapOpts.dino.includeEntries ? "checked" : ""}>
+              <span>Spawn entries</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.dino.includeBlueprints" ${mapOpts.dino.includeBlueprints ? "checked" : ""}>
+              <span>Blueprint paths</span>
+            </label>
+          ` : ""}
+        </div>
+
+        <div class="export-group">
+          <div class="export-group-title">Spawn Entries</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeEntries" ${mapOpts.includeEntries ? "checked" : ""}>
+            <span>Include spawn entries</span>
+          </label>
+          ${mapOpts.includeEntries ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.entry.includeDinos" ${mapOpts.entry.includeDinos ? "checked" : ""}>
+              <span>Dinos per entry</span>
+            </label>
+          ` : ""}
+        </div>
+
+        <div class="export-group">
+          <div class="export-group-title">Crates</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeCrates" ${mapOpts.includeCrates ? "checked" : ""}>
+            <span>Include crate class names</span>
+          </label>
+          ${mapOpts.includeCrates ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.crateUseDisplayName" ${mapOpts.crateUseDisplayName ? "checked" : ""}>
+              <span>Also include descriptive name</span>
+            </label>
+          ` : ""}
+        </div>
+
+        <div class="export-group">
+          <div class="export-group-title">Items</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeItems" ${mapOpts.includeItems ? "checked" : ""}>
+            <span>Include item names</span>
+          </label>
+        </div>
+
+        <div class="export-group">
+          <div class="export-group-title">Missions</div>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="map.includeMissions" ${mapOpts.includeMissions ? "checked" : ""}>
+            <span>Include mission class names</span>
+          </label>
+          ${mapOpts.includeMissions ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="map.crateUseDisplayName" ${mapOpts.crateUseDisplayName ? "checked" : ""}>
+              <span>Also include descriptive name</span>
+            </label>
+          ` : ""}
+        </div>
+      ` : ""}
+
+      ${isCrate ? `
+        <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeSets" ${crateOpts.includeSets ? "checked" : ""}>
+            <span>Loot sets</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeItems" ${crateOpts.includeItems ? "checked" : ""}>
+            <span>Items per entry</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeWeights" ${crateOpts.includeWeights ? "checked" : ""}>
+            <span>Weights &amp; quantity</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeQuality" ${crateOpts.includeQuality ? "checked" : ""}>
+            <span>Quality range</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeBpChance" ${crateOpts.includeBpChance ? "checked" : ""}>
+            <span>Blueprint chance</span>
+          </label>
+          ${activeScope !== "current_selection" ? `
+            <label class="fp-row">
+              <input type="checkbox" data-export-opt="crate.includeMaps" ${crateOpts.includeMaps ? "checked" : ""}>
+              <span>Which maps each crate appears on</span>
+            </label>
+          ` : ""}
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="crate.includeMissions" ${crateOpts.includeMissions ? "checked" : ""}>
+            <span>Include missions</span>
+          </label>
+        </div>
+      ` : ""}
+
+      ${isItem ? `
+        <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="item.includeMaps" ${itemOpts.includeMaps ? "checked" : ""}>
+            <span>Which maps it can be found on</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="item.includeCrates" ${itemOpts.includeCrates ? "checked" : ""}>
+            <span>Which crates contain it</span>
+          </label>
+          ${itemOpts.includeCrates ? `
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeSetName" ${itemOpts.includeSetName ? "checked" : ""}>
+              <span>Loot set name</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeWeights" ${itemOpts.includeWeights ? "checked" : ""}>
+              <span>Entry weight</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeQuantity" ${itemOpts.includeQuantity ? "checked" : ""}>
+              <span>Quantity range</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeQuality" ${itemOpts.includeQuality ? "checked" : ""}>
+              <span>Quality range</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeBpChance" ${itemOpts.includeBpChance ? "checked" : ""}>
+              <span>Blueprint chance</span>
+            </label>
+            <label class="fp-row" style="padding-left:18px;">
+              <input type="checkbox" data-export-opt="item.includeCrateMaps" ${itemOpts.includeCrateMaps ? "checked" : ""}>
+              <span>Which maps those crates appear on</span>
+            </label>
+          ` : ""}
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="item.includeMissions" ${itemOpts.includeMissions ? "checked" : ""}>
+            <span>Include missions as sources</span>
+          </label>
+        </div>
+      ` : ""}
+    </div>
+
+    <div class="fp-row fp-col" style="margin-top:10px;">
+      <button type="button" class="fp-tab is-on" data-export-run="json">Download JSON</button>
+    </div>
+  `;
+
+  body.querySelectorAll("[data-export-type]").forEach(btn => {
+    btn.onclick = () => {
+      exportPanelState.reportType = btn.dataset.exportType;
+      renderExportPanel();
+    };
+  });
+
+  body.querySelectorAll("[data-export-scope]").forEach(btn => {
+    btn.onclick = () => {
+      exportPanelState.scope = btn.dataset.exportScope;
+      renderExportPanel();
+    };
+  });
+
+  body.querySelectorAll("[data-export-opt]").forEach(el => {
+    el.onchange = () => {
+      const path = el.dataset.exportOpt.split(".");
+      let target = exportPanelState;
+
+      for (let i = 0; i < path.length - 1; i++) {
+        target = target[path[i]];
+      }
+
+      target[path[path.length - 1]] = el.checked;
+      renderExportPanel();
+    };
+  });
+
+  const runBtn = body.querySelector("[data-export-run='json']");
+  if (runBtn){
+    runBtn.onclick = () => exportCurrentReportJSON();
+  }
+}
+
+function toggleExportPanel(){
+  const panel = ensureExportPanel();
+  const show = panel.style.display === "none";
+
+  if (show){
+    renderExportPanel();
+    panel.style.display = "";
+    panel.dataset.hidden = "0";
+  } else {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  }
+
+  updateDockToggles();
+}
+
 function setMapBackgroundFromDock(btn){
   const mapMeta = dockState.mapMeta;
   if (!mapMeta?.backgrounds?.length || !mapObj?.overlay) return;
@@ -366,7 +739,15 @@ async function onMapChanged(){
     mapObj = initMap(img, geom.size || [2048,2048]);
     ensureDockControl(mapObj.map);
   } else {
+    const paddedBounds = L.latLngBounds(bounds).pad(0.1);
+    mapObj.overlay.setBounds(bounds);
     mapObj.overlay.setUrl(img);
+    mapObj.map.setMaxBounds(paddedBounds);
+    mapObj.map.fitBounds(bounds, {
+      paddingTopLeft: [6, 6],
+      paddingBottomRight: [6, 20]
+    });
+    mapObj.bounds = bounds;
   }
 
   dockState.mapMeta = mapMeta;
@@ -473,6 +854,94 @@ function styleForEntry(meta, color){
 }
 
 
+function ensureSettingsPanel(){
+  let panel = document.getElementById("settingsPanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "settingsPanel";
+  panel.className = "floating-panel floating-panel--small";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">Settings</div>
+      <div class="fp-actions"></div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const actions = panel.querySelector(".fp-actions");
+
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  actions.appendChild(hideBtn);
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  panel.style.position = "absolute";
+  panel.style.right = "2px";
+  panel.style.bottom = "90px";
+  panel.style.zIndex = "800";
+  panel.style.display = "none";
+  panel.dataset.hidden = "1";
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+    updateDockToggles();
+  };
+
+  return panel;
+}
+
+function renderSettingsPanel(){
+  const panel = ensureSettingsPanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+
+  const currentTheme = getTheme();
+
+  body.innerHTML = `
+    <div class="fp-row fp-col">
+      <label class="settings-label" for="themeSelect">Theme</label>
+      <select id="themeSelect" class="settings-select">
+        ${THEME_OPTIONS.map(opt => `
+          <option value="${escapeAttr(opt.id)}" ${opt.id === currentTheme ? "selected" : ""}>
+            ${escapeHtml(opt.label)}
+          </option>
+        `).join("")}
+      </select>
+    </div>
+  `;
+
+  const themeSelect = body.querySelector("#themeSelect");
+  if (themeSelect){
+    themeSelect.onchange = () => {
+      updateThemeSetting(themeSelect.value || "");
+    };
+  }
+}
+
+function toggleSettingsPanel(){
+  const panel = ensureSettingsPanel();
+  const show = panel.style.display === "none";
+
+  if (show){
+    renderSettingsPanel();
+    panel.style.display = "";
+    panel.dataset.hidden = "0";
+  } else {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  }
+
+  updateDockToggles();
+}
+
+
+
 function ensureMapEntriesPanel(){
   let panel = document.getElementById("mapEntriesPanel");
   if (panel) return panel;
@@ -503,20 +972,6 @@ function ensureMapEntriesPanel(){
 
   const actions = panel.querySelector(".fp-actions");
 
-  if (!window.ASA_RUNTIME?.isDiscordActivity) {
-    const exportBtn = createIconButton(`
-      <path d="M12 3v10M8 9l4 4 4-4M5 19h14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"/>
-    `);
-    exportBtn.dataset.action = "export";
-    exportBtn.title = "Export";
-    actions.prepend(exportBtn);
-  }
-
   const mapWrap = document.getElementById("mapWrap") || document.body;
   mapWrap.appendChild(panel);
 
@@ -540,13 +995,6 @@ function ensureMapEntriesPanel(){
     panel.dataset.hidden = "1";
     updateDockToggles();
   };
-
-  const exportEl = panel.querySelector('[data-action="export"]');
-  if (exportEl){
-    exportEl.onclick = () => {
-      exportSpawnBrowserJSON();
-    };
-  }
 
   return panel;
 }
@@ -712,7 +1160,7 @@ function renderMapEntriesPanel(){
     })}
 
     ${showMapFilter ? `
-      <div class="fp-row" style="gap:6px; flex-wrap:wrap;">
+      <div class="fp-row">
         <button type="button" class="fp-tab ${spawnBrowserState.filter === "all" ? "is-on" : ""}" data-entry-filter="all">All</button>
         <button type="button" class="fp-tab ${spawnBrowserState.filter === "unique" ? "is-on" : ""}" data-entry-filter="unique">Unique</button>
         <button type="button" class="fp-tab ${spawnBrowserState.filter === "shared" ? "is-on" : ""}" data-entry-filter="shared">Shared</button>
@@ -760,6 +1208,13 @@ function renderMapEntriesPanel(){
   body.querySelectorAll("[data-entry-filter]").forEach(btn => {
     btn.onclick = () => {
       spawnBrowserState.filter = btn.dataset.entryFilter;
+
+      body.querySelectorAll("[data-entry-filter]").forEach(b => {
+        const isOn = b.dataset.entryFilter === spawnBrowserState.filter;
+        b.classList.toggle("is-on", isOn);
+        b.setAttribute("aria-pressed", isOn ? "true" : "false");
+      });
+
       renderMapEntriesList();
     };
   });
@@ -821,15 +1276,27 @@ function dinoLabelFromBp(bp){
   return labels?.[0] || bpClass(bp) || bp || "(Unknown)";
 }
 
+// Returns ALL blueprint paths from Global.dinos that resolve to the given
+// display name. Used by the spawn browser so that world-replaced variants
+// (e.g. cave Tuso replacing normal Tuso on The Island) don't cause the
+// display name to appear falsely unique to that map.
+function globalBpsForName(name){
+  const dinos = Global.dinos?.dinos || {};
+  const out = new Set();
+  for (const [bp, d] of Object.entries(dinos)){
+    const labels = labelsForDinoObj(d);
+    if (labels.includes(name)) out.add(normalizeBp(bp));
+  }
+  return out;
+}
+
 function getEntryRowsAllMaps(){
   const rows = [];
 
   for (const [entryName, maps] of Object.entries(Global.spawn?.entryMaps || {})){
     const codes = Array.isArray(maps) ? maps : [];
     const mapNames = codes.map(mapNameFromCode);
-
-    const bps = State.entryToDinos.get(entryName) || [];
-    const dinoNames = bps.map(dinoLabelFromBp);
+    const dinoNames = dinoNamesForEntryGlobal(entryName);
 
     rows.push({
       kind: "entry",
@@ -942,6 +1409,12 @@ function getDinoRowsCurrentMap() {
       }
     }
 
+    // Use ALL globally-known BPs for this display name when computing map
+    // spread. This prevents world-replaced variants (e.g. cave Tuso standing
+    // in for normal Tuso on The Island) from making the name look unique here
+    // when the underlying species actually appears on many maps.
+    const allBpsForName = globalBpsForName(name);
+
     // now scan ALL entries globally to find all maps this dino appears on
     for (const [entryName, entryData] of Object.entries(allEntries)) {
       const rowsInEntry = entryData?.d || [];
@@ -958,7 +1431,8 @@ function getDinoRowsCurrentMap() {
           const prob = Number(out?.[1] || 0);
           if (!finalBp || prob <= 0) continue;
 
-          if (bps.includes(finalBp)) {
+          // Match against the full global set, not just current-map BPs
+          if (allBpsForName.has(finalBp) || bps.includes(finalBp)) {
             foundInThisEntry = true;
             break;
           }
@@ -1251,8 +1725,8 @@ function mountPanelSwipe(container, tabs, getActive, setActive){
   let isHorizontal = false;
 
   const EDGE_GUARD_PX = 22;
-  const SWIPE_MIN_PX = 40;
-  const SWIPE_MAX_Y = 60;
+  const SWIPE_MIN_PX = 80;   // was 40 — higher threshold means deliberate swipes only
+  const SWIPE_MAX_Y = 40;    // was 60 — tighter vertical tolerance
 
   container.addEventListener("touchstart", (e) => {
     if (!e.touches || e.touches.length !== 1) return;
@@ -1872,7 +2346,9 @@ let infoPanelState = {
   dinoTab: "spawns",
   entryTab: "dinos",
   crateTab: "sets",
-  itemTab: "crates"
+  itemTab: "crates",
+  showOfficialSets: false,   // when mod active, also show official sets in panel
+  showAllCrates: false       // when mod active, show all crates not just mod ones
 };
 
 

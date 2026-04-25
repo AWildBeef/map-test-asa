@@ -98,24 +98,22 @@ function renderDinoTabSpawns(d, selectedName){
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Spawn Entries (${entries.length})</div>
-
       <div class="entries mode-menu-like-list">
         ${
           entries.length
             ? `
-              <div class="dino-spawn-tggl-wrap">
+              <div class="mod-filter-row" style="align-items:center; padding:0 0 4px;">
                 <button
                   type="button"
-                  class="dino-spawn-tggl dino-spawn-tggl--all ${allChecked ? "is-on" : ""}"
+                  class="mod-filter-pill ${allChecked ? "is-on" : ""}"
                   data-dino-toggle-all="1"
-                >
-                  <span class="dino-spawn-tggl-main">
-                    <span class="dino-spawn-tggl-title">Toggle All</span>
-                  </span>
-
-                  <span class="dino-spawn-tggl-check">${allChecked ? "✓" : ""}</span>
-                </button>
+                >Toggle All</button>
+                <button
+                  type="button"
+                  class="loot-set-toggle-all"
+                  data-dino-collapse-all="1"
+                  style="margin-left:auto;"
+                >Collapse All</button>
               </div>
             `
             : ``
@@ -158,17 +156,23 @@ function renderDinoPanel(name){
     ? infoPanelState.dinoTab
     : "spawns";
 
+  const spawnCount = d.entries?.length ?? 0;
+  const dinoPanelTabs = [
+    { id: "spawns", label: `Spawns (${spawnCount})` },
+    { id: "stats",  label: "Stats" }
+  ];
+
   setInfoPanelTitle(name);
 
   const html = `
     ${renderDinoHero(d, name)}
     ${renderTabs({
-      tabs: DINO_PANEL_TABS,
+      tabs: dinoPanelTabs,
       activeId: activeTab,
       dataAttr: "data-dino-tab"
     })}
     ${renderPages({
-      tabs: DINO_PANEL_TABS,
+      tabs: dinoPanelTabs,
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "spawns") return renderDinoTabSpawns(d, name);
@@ -180,10 +184,10 @@ function renderDinoPanel(name){
 
   setInfoPanelHTML(html);
 
-    const body = panel.querySelector(".fp-body");
+  const body = panel.querySelector(".fp-body");
 
   wireTabs(body, {
-    tabs: DINO_PANEL_TABS,
+    tabs: dinoPanelTabs,
     activeId: activeTab,
     dataAttr: "data-dino-tab",
     onChange: (id) => {
@@ -200,20 +204,16 @@ function renderDinoPanel(name){
       const next = !(entryVisibility[key] ?? true);
       entryVisibility[key] = next;
 
-      btn.classList.toggle("is-on", next);
-
-      const check = btn.querySelector(".dino-spawn-check");
-      if (check) check.textContent = next ? "✓" : "";
+      // Toggle is-on on the visible card container (parent loot-set-section),
+      // not on the inner button itself
+      const card = btn.closest(".dino-spawn-section");
+      card?.classList.toggle("is-on", next);
 
       const master = body.querySelector("[data-dino-toggle-all]");
       if (master){
         const allOn = [...body.querySelectorAll("[data-dino-entry-toggle]")]
-          .every(el => el.classList.contains("is-on"));
-
+          .every(el => el.closest(".dino-spawn-section")?.classList.contains("is-on"));
         master.classList.toggle("is-on", allOn);
-
-        const masterCheck = master.querySelector(".dino-spawn-check");
-        if (masterCheck) masterCheck.textContent = allOn ? "✓" : "";
       }
 
       drawDino(name);
@@ -224,37 +224,44 @@ function renderDinoPanel(name){
   if (master){
     master.onclick = () => {
       const rows = [...body.querySelectorAll("[data-dino-entry-toggle]")];
-      const allOn = rows.every(el => el.classList.contains("is-on"));
+      const allOn = rows.every(el => el.closest(".dino-spawn-section")?.classList.contains("is-on"));
       const next = !allOn;
 
       rows.forEach(el => {
         const key = el.dataset.key;
         if (!key) return;
-
         entryVisibility[key] = next;
-        el.classList.toggle("is-on", next);
-
-        const check = el.querySelector(".dino-spawn-check");
-        if (check) check.textContent = next ? "✓" : "";
+        el.closest(".dino-spawn-section")?.classList.toggle("is-on", next);
       });
 
       master.classList.toggle("is-on", next);
-
-      const masterCheck = master.querySelector(".dino-spawn-check");
-      if (masterCheck) masterCheck.textContent = next ? "✓" : "";
-
       drawDino(name);
     };
   }
 
-  body.querySelectorAll("[data-open-entry]").forEach(btn => {
+  // Expand/collapse individual spawn cards
+  body.querySelectorAll("[data-dino-spawn-card-toggle]").forEach(btn => {
     btn.onclick = (e) => {
-      e.preventDefault();
       e.stopPropagation();
-      const entryName = btn.dataset.openEntry;
-      openEntryView(entryName);
+      const key = btn.dataset.dinoSpawnCardToggle;
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.dinoTab);
+      dinoSpawnCardOpenState[key] = !dinoSpawnCardOpenState[key];
+      renderDinoPanel(name);
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.dinoTab);
     };
   });
+
+  // Collapse all spawn cards
+  body.querySelectorAll("[data-dino-collapse-all]").forEach(btn => {
+    btn.onclick = () => {
+      const keys = [...body.querySelectorAll("[data-dino-spawn-card-toggle]")]
+        .map(b => b.dataset.dinoSpawnCardToggle).filter(Boolean);
+      const allOpen = keys.every(k => dinoSpawnCardOpenState[k] ?? true);
+      keys.forEach(k => { dinoSpawnCardOpenState[k] = !allOpen; });
+      renderDinoPanel(name);
+    };
+  });
+
   body.querySelectorAll("[data-open-entry]").forEach(btn => {
     btn.onclick = (e) => {
       e.stopPropagation();
@@ -479,41 +486,65 @@ function renderAttacksTable(attacks){
 }
 
 
-function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino){
-  const displayName = dinoObj?.n || "(Unknown)";
+function entryDinoOpenKey(entryName, dinoBp){
+  return `${entryName}::${dinoBp}`;
+}
+
+function isEntryDinoOpen(entryName, dinoBp){
+  return entryDinoOpenState[entryDinoOpenKey(entryName, dinoBp)] ?? true;
+}
+
+function setEntryDinoOpen(entryName, dinoBp, open){
+  entryDinoOpenState[entryDinoOpenKey(entryName, dinoBp)] = !!open;
+}
+
+function areAllEntryDinosOpen(entryName, dinoKeys){
+  return dinoKeys.every(bp => isEntryDinoOpen(entryName, bp));
+}
+
+function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino, entryName){
+  const displayName = dinoObj?.n || bpClass(dinoBp) || "(Unknown)";
   const bp = dinoBp || "";
   const nameTag = dinoObj?.t || "";
+  const isOpen = isEntryDinoOpen(entryName, dinoBp);
 
-  const entryLinesHtml = rowsForThisDino.map((r) => {
+  const metaHtml = rowsForThisDino.map((r) => {
     const e = r.entry;
     const metaLines = buildEntryMetaLines(e);
-
+    if (!metaLines.length) return "";
     return `
-      <div class="entry-meta">
+      <div class="entry-meta" style="margin-top:4px;">
         ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
       </div>
     `;
   }).join("");
 
   return `
-    <div class="info-section">
-      <div class="info-row">
-        <span class="info-label">${escapeHtml(displayName)}</span>
+    <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"}" style="margin-bottom:6px;">
+      <button
+        type="button"
+        class="loot-set-toggle"
+        data-entry-dino-toggle="${escapeAttr(dinoBp)}"
+      >
+        <div class="loot-set-toggle-main">
+          <div class="info-row">
+            <span class="info-label">${escapeHtml(displayName)}</span>
+          </div>
+        </div>
+        <div class="loot-set-toggle-right">
+          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
+        </div>
+      </button>
+
+      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+        ${metaHtml}
+        <button
+          type="button"
+          class="fp-btn"
+          data-open-dino="${escapeAttr(displayName)}"
+          style="width:100%; justify-content:center; margin-top:6px;"
+        >Open in Dino View ›</button>
       </div>
-
-      ${bp ? `
-        <div class="info-mono copy-on-click" data-copy="${escapeAttr(bp)}">
-          ${escapeHtml(bp)}
-        </div>
-      ` : ""}
-
-      ${nameTag ? `
-        <div class="info-mono copy-on-click" data-copy="${escapeAttr(nameTag)}">
-          ${escapeHtml(nameTag)}
-        </div>
-      ` : ""}
-
-      ${entryLinesHtml}
     </div>
   `;
 }
@@ -536,43 +567,47 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
     metaLines.push(`Max % To Allow: ${fmt(entry.spawnLimit * 100)}%`);
   }
 
+  const isOpen = dinoSpawnCardOpenState[key] ?? true;
+
   return `
-    <div class="dino-spawn-card-wrap">
-      <button
-        type="button"
-        class="dino-spawn-card ${checked ? "is-on" : ""}"
-        data-dino-entry-toggle="1"
-        data-key="${escapeAttr(key)}"
-      >
-        <span class="dino-spawn-card-main">
-          <span class="dino-spawn-title">${escapeHtml(entry.entryClass)}</span>
+    <div class="loot-set-section dino-spawn-section ${checked ? "is-on" : ""} ${isOpen ? "is-open" : "is-closed"}" style="margin-bottom:6px;">
+      <div class="loot-set-toggle dino-spawn-section-header">
+        <button
+          type="button"
+          class="dino-spawn-section-main"
+          data-dino-entry-toggle="1"
+          data-key="${escapeAttr(key)}"
+        >
+          <span class="info-label">${escapeHtml(entry.entryClass)}</span>
+          ${isOpen ? `
+            <span class="dino-spawn-meta">
+              ${metaLines.map(line => `
+                <span class="dino-spawn-meta-line">${escapeHtml(line)}</span>
+              `).join("")}
+            </span>
+          ` : ""}
+        </button>
 
-          <span class="dino-spawn-meta">
-            ${metaLines.map(line => `
-              <span class="dino-spawn-meta-line">${escapeHtml(line)}</span>
-            `).join("")}
-          </span>
-        </span>
+        <button
+          type="button"
+          class="loot-set-toggle-right dino-spawn-chevron-btn"
+          data-dino-spawn-card-toggle="${escapeAttr(key)}"
+          title="${isOpen ? "Collapse" : "Expand"}"
+        >
+          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
+        </button>
+      </div>
 
-        <span class="dino-spawn-check">${checked ? "✓" : ""}</span>
-      </button>
-
-      <button
-        type="button"
-        class="dino-spawn-corner-jump"
-        data-open-entry="${escapeAttr(entry.entryClass)}"
-        title="Open in spawn view"
-        aria-label="Open in spawn view"
-      >
-        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-          <path d="M9 6l6 6-6 6"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-        </svg>
-      </button>
+      ${isOpen ? `
+        <div class="loot-set-body">
+          <button
+            type="button"
+            class="fp-btn"
+            data-open-entry="${escapeAttr(entry.entryClass)}"
+            style="width:100%; justify-content:center; margin-top:6px;"
+          >Open in Spawn View ›</button>
+        </div>
+      ` : ""}
     </div>
   `;
 }
@@ -606,10 +641,10 @@ function renderEntryTabDinos(entryName){
     return an.localeCompare(bn);
   });
 
+  const allOpen = areAllEntryDinosOpen(entryName, dinoKeys);
+
   return `
     <div class="info-section">
-      <div class="info-subtitle">Dinos (${dinoKeys.length})</div>
-      
       ${
         activeSourceIsOfficial()
           ? ""
@@ -625,8 +660,14 @@ function renderEntryTabDinos(entryName){
           `
       }
 
-      <div class="entries">
-        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(dinoKey, getDinoObjByBp(dinoKey), byDino.get(dinoKey))).join("")}
+      <div class="col-exp-row" style="margin-bottom:4px;">
+        <button type="button" class="loot-set-toggle-all" data-entry-dino-toggle-all="1">
+          ${allOpen ? "Collapse All" : "Expand All"}
+        </button>
+      </div>
+
+      <div class="entries" data-entry-dino-list="${escapeAttr(entryName)}">
+        ${dinoKeys.map(dinoKey => renderEntryDinoBlock(dinoKey, getDinoObjByBp(dinoKey), byDino.get(dinoKey), entryName)).join("")}
       </div>
     </div>
   `;
