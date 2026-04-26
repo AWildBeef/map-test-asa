@@ -256,10 +256,10 @@ function renderEntryPanel(entryName){
       renderEntryPanel(entryName);
     }
   });
-  const officialToggle = body.querySelector("#entryIncludeOfficialToggle");
+  const officialToggle = body.querySelector("[data-entry-official-toggle]");
   if (officialToggle){
-    officialToggle.onchange = () => {
-      viewOptions.includeOfficialInEntryPanels = officialToggle.checked;
+    officialToggle.onclick = () => {
+      viewOptions.includeOfficialInEntryPanels = !viewOptions.includeOfficialInEntryPanels;
       renderEntryPanel(entryName);
     };
   }

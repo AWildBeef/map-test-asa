@@ -236,6 +236,12 @@ function buildWorldRuleIndex(rules){
     const fromBp = normalizeBp(r?.from);
     if (!fromBp) continue;
 
+    // Skip event-specific rules (FearEvolved, WinterWonderland, etc.)
+    // They would overwrite the base non-event rule in the exact map,
+    // causing wrong outputs during normal (non-event) gameplay display.
+    const event = r?.event;
+    if (event && event !== "None" && event !== "none") continue;
+
     if (r?.exact){
       exact.set(fromBp, r);
     } else {
@@ -651,22 +657,22 @@ function combineOutputWeights(rows){
 }
 
 
-function worldOutputsForBp(bp){
+function worldOutputsForBp(bp, _debug = false){
   bp = normalizeBp(bp);
   if (!bp) return [[bp, 1]];
 
   const { exact, ancestor } = worldRuleIndexForCurrentMap();
 
-  function resolveOne(curBp, seen = new Set(), callerBp = null){
+  function resolveOne(curBp, seen = new Set(), callerBp = null, fromExact = false, depth = 0){
     curBp = normalizeBp(curBp);
     if (!curBp) return [];
 
+    const tag = curBp.split("/").pop();
+
     if (seen.has(curBp)) {
-      // Self-reference: the rule explicitly lists the input BP as one of its
-      // outputs (e.g. "83% chance stays as Tuso"). Treat it as a passthrough
-      // for that branch. Anything deeper in the chain that cycles is a true
-      // re-entrant loop and should be dropped.
-      return curBp === callerBp ? [[curBp, 1]] : [];
+      const r = curBp === callerBp ? [[curBp, 1]] : [];
+      if (_debug) console.log("  ".repeat(depth) + `SEEN ${tag} callerBp=${callerBp?.split("/").pop()} -> ${r.length ? "passthrough" : "DROP"}`);
+      return r;
     }
 
     const nextSeen = new Set(seen);
@@ -674,6 +680,7 @@ function worldOutputsForBp(bp){
 
     const exactRule = exact.get(curBp);
     if (exactRule) {
+      if (_debug) console.log("  ".repeat(depth) + `EXACT ${tag}`);
       const outs = Array.isArray(exactRule.outs) && exactRule.outs.length
         ? exactRule.outs
         : [[curBp, 1]];
@@ -683,14 +690,19 @@ function worldOutputsForBp(bp){
         const nextBp = normalizeBp(o?.[0]);
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
-
-        const resolved = resolveOne(nextBp, nextSeen, curBp);
+        if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} (${nextProb.toFixed(3)}) fromExact=true`);
+        const resolved = resolveOne(nextBp, nextSeen, curBp, true, depth + 1);
         for (const [rbp, rprob] of resolved) {
           finalOuts.push([rbp, nextProb * rprob]);
         }
       }
 
       return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
+    }
+
+    if (fromExact) {
+      if (_debug) console.log("  ".repeat(depth) + `fromExact passthrough ${tag}`);
+      return [[curBp, 1]];
     }
 
     let bestRule = null;
@@ -710,6 +722,7 @@ function worldOutputsForBp(bp){
     }
 
     if (bestRule) {
+      if (_debug) console.log("  ".repeat(depth) + `ANCESTOR ${tag} via ${bestRule.from.split("/").pop()} dist=${bestDist}`);
       const outs = Array.isArray(bestRule.outs) && bestRule.outs.length
         ? bestRule.outs
         : [[curBp, 1]];
@@ -720,7 +733,7 @@ function worldOutputsForBp(bp){
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
 
-        const resolved = resolveOne(nextBp, nextSeen, curBp);
+        const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
         for (const [rbp, rprob] of resolved) {
           finalOuts.push([rbp, nextProb * rprob]);
         }
@@ -729,6 +742,7 @@ function worldOutputsForBp(bp){
       return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
     }
 
+    if (_debug) console.log("  ".repeat(depth) + `NO RULE ${tag} -> passthrough`);
     return [[curBp, 1]];
   }
 
@@ -2782,15 +2796,16 @@ function renderDock(){
   // Astraeos background swap
   if (isAstraeos) {
     const bgs = mapMeta.backgrounds;
-    const def = bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
-    const idx = Math.max(0, bgs.indexOf(def));
+    const savedBgId = getAstraeosBgPref();
+    const preferred = bgs.find(x => x.id === savedBgId) || bgs.find(x => x.id === mapMeta.defaultBg) || bgs[0];
+    const idx = Math.max(0, bgs.indexOf(preferred));
 
     if (mapObj?.overlay) {
       mapObj.overlay.setUrl(bgs[idx].url);
     }
 
     const bgBtn = mkBtn({
-      title: `Background: ${def.label || def.id || (idx + 1)} (tap to cycle)`,
+      title: `Background: ${preferred.label || preferred.id || (idx + 1)} (tap to cycle)`,
       icon: `
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
           <path d="M12 3 2 8l10 5 10-5-10-5Zm0 7L2 15l10 5 10-5-10-5Z"
@@ -2809,91 +2824,103 @@ function renderDock(){
   }
 
   // Dino info panel toggle
-  mkBtn({
-    title: "Toggle Dino Info",
-    icon: `
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="2"/>
-      </svg>
-    `,
-    togglePanelId: "dinoInfoPanel",
-    onClick: () => togglePanel("dinoInfoPanel")
-  });
-  mkBtn({
-    title: "Toggle Draw Style",
-    icon: `
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
-              fill="currentColor" opacity=".9"/>
-        <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
-              fill="currentColor"/>
-      </svg>
-    `,
-    togglePanelId: "drawStylePanel",
-    onClick: () => toggleDrawStylePanel()
-  });
+  if (isDockBtnVisible("dinoInfoPanel")) {
+    mkBtn({
+      title: "Toggle Dino Info",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      `,
+      togglePanelId: "dinoInfoPanel",
+      onClick: () => togglePanel("dinoInfoPanel")
+    });
+  }
+  if (isDockBtnVisible("drawStylePanel")) {
+    mkBtn({
+      title: "Toggle Draw Style",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M7 21c2.5 0 4-1.5 4-4 0-1.1-.9-2-2-2H7.5C6.1 15 5 16.1 5 17.5V18c0 1.7.3 3 2 3Z"
+                fill="currentColor" opacity=".9"/>
+          <path d="M20.7 4.3a1 1 0 0 0-1.4 0l-9.7 9.7c.8.3 1.4 1 1.7 1.8l9.4-9.5a1 1 0 0 0 0-1.4Z"
+                fill="currentColor"/>
+        </svg>
+      `,
+      togglePanelId: "drawStylePanel",
+      onClick: () => toggleDrawStylePanel()
+    });
+  }
 
   // POI toggle
-  mkBtn({
-    title: "Toggle markers menu",
-    icon: `
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"
-              fill="none" stroke="currentColor" stroke-width="2"/>
-        <circle cx="12" cy="10" r="2.5" fill="currentColor"/>
-      </svg>
-    `,
-    togglePanelId: "poiPanel",
-    onClick: () => togglePoiPanel()
-  });
+  if (isDockBtnVisible("poiPanel")) {
+    mkBtn({
+      title: "Toggle markers menu",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"
+                fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="10" r="2.5" fill="currentColor"/>
+        </svg>
+      `,
+      togglePanelId: "poiPanel",
+      onClick: () => togglePoiPanel()
+    });
+  }
 
   // Rarity legend toggle
-  mkBtn({
-    title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
-    icon: `
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="12" cy="7.5" r="1.2" fill="currentColor"/>
-      </svg>
-    `,
-    onClick: (btn) => {
-      setLegendOpen(!showRarityLegend);
-      btn.title = showRarityLegend ? "Hide rarity legend" : "Show rarity legend";
-      btn.classList.toggle("is-on", showRarityLegend);
-    },
-    extraClass: showRarityLegend ? "is-on" : ""
-  });
-  mkBtn({
-    title: "Toggle map entries browser",
-    icon: `
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M5 6h14M5 12h14M5 18h14"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"/>
-      </svg>
-    `,
-    togglePanelId: "mapEntriesPanel",
-    onClick: () => toggleMapEntriesPanel()
-  });
-  mkBtn({
-    title: "Toggle export panel",
-    icon: `
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M12 3v10M8 9l4 4 4-4M5 19h14"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"/>
-      </svg>
-    `,
-    togglePanelId: "exportPanel",
-    onClick: () => toggleExportPanel()
-  });
+  if (isDockBtnVisible("rarityLegend")) {
+    mkBtn({
+      title: showRarityLegend ? "Hide rarity legend" : "Show rarity legend",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="7.5" r="1.2" fill="currentColor"/>
+        </svg>
+      `,
+      onClick: (btn) => {
+        setLegendOpen(!showRarityLegend);
+        btn.title = showRarityLegend ? "Hide rarity legend" : "Show rarity legend";
+        btn.classList.toggle("is-on", showRarityLegend);
+      },
+      extraClass: showRarityLegend ? "is-on" : ""
+    });
+  }
+  if (isDockBtnVisible("mapEntriesPanel")) {
+    mkBtn({
+      title: "Toggle map entries browser",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M5 6h14M5 12h14M5 18h14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"/>
+        </svg>
+      `,
+      togglePanelId: "mapEntriesPanel",
+      onClick: () => toggleMapEntriesPanel()
+    });
+  }
+  if (isDockBtnVisible("exportPanel")) {
+    mkBtn({
+      title: "Toggle export panel",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 3v10M8 9l4 4 4-4M5 19h14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+      `,
+      togglePanelId: "exportPanel",
+      onClick: () => toggleExportPanel()
+    });
+  }
 
   updateDockToggles();
 }
@@ -2958,7 +2985,16 @@ function rebuildSelectionSelect() {
     options = State.names.map(v => ({ value: v, label: v }));
   } else if (State.mode === "entry") {
     placeholder = "(Select a Spawn Entry)";
-    options = State.entryList.map(v => ({ value: v, label: v }));
+    const entryOpts = State.entryList.map(v => ({ value: v, label: v }));
+    if (!activeSourceIsOfficial()) {
+      options = entryOpts.filter(({ value }) => {
+        if (infoPanelState.showAllEntries) return true;
+        const bps = State.entryToDinos.get(value) || [];
+        return bps.some(bp => isBlueprintFromActiveMod(bp));
+      });
+    } else {
+      options = entryOpts;
+    }
   } else if (State.mode === "crate") {
     placeholder = "(Select a Loot Crate)";
     options = State.crateOptions.map(v => ({ value: v.value, label: v.label }));
@@ -2994,9 +3030,29 @@ function rebuildSelectionSelect() {
     render();
   };
 
-  // In crate mode with a mod active, add a toolbar toggle above the search
-  // so users can flip between mod-only crates and all crates without going
-  // into the floating panel.
+  const entryDropdownToolbar = (State.mode === "entry" && !activeSourceIsOfficial())
+    ? ({ rebuild }) => {
+        const bar = document.createElement("div");
+        bar.className = "dd-source-toolbar";
+
+        const pill = document.createElement("button");
+        pill.type = "button";
+        pill.className = "dd-source-mode-btn" + (infoPanelState.showAllEntries ? " is-on" : "");
+        pill.textContent = infoPanelState.showAllEntries ? "All entries" : "Mod entries";
+        pill.title = infoPanelState.showAllEntries
+          ? "Showing all entries — click to show mod entries only"
+          : "Showing mod entries only — click to show all";
+        pill.onclick = () => {
+          infoPanelState.showAllEntries = !infoPanelState.showAllEntries;
+          rebuildSelectionSelect();
+          UI.dinoFancy?.querySelector(".dd-btn")?.click();
+          if (State.selection) render();
+        };
+        bar.appendChild(pill);
+        return bar;
+      }
+    : null;
+
   const crateDropdownToolbar = (State.mode === "crate" && !activeSourceIsOfficial())
     ? ({ rebuild }) => {
         const bar = document.createElement("div");
@@ -3027,6 +3083,13 @@ function rebuildSelectionSelect() {
     UI.dinoSelect,
     UI.dinoFancy,
     placeholder.replace(/[()]/g, ""),
-    { buildToolbar: crateDropdownToolbar }
+    { buildToolbar: entryDropdownToolbar || crateDropdownToolbar }
   );
 }
+
+// Debug helper: call window.debugWR("VanillaLeedBP") in console
+window.debugWR = (bp) => {
+  const result = worldOutputsForBp(bp, true);
+  console.log("RESULT:", result.map(([b,p]) => `${b.split("/").pop()} (${(p*100).toFixed(1)}%)`).join(", "));
+  return result;
+};

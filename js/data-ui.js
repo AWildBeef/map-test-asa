@@ -236,6 +236,12 @@ function buildWorldRuleIndex(rules){
     const fromBp = normalizeBp(r?.from);
     if (!fromBp) continue;
 
+    // Skip event-specific rules (FearEvolved, WinterWonderland, etc.)
+    // They would overwrite the base non-event rule in the exact map,
+    // causing wrong outputs during normal (non-event) gameplay display.
+    const event = r?.event;
+    if (event && event !== "None" && event !== "none") continue;
+
     if (r?.exact){
       exact.set(fromBp, r);
     } else {
@@ -651,22 +657,22 @@ function combineOutputWeights(rows){
 }
 
 
-function worldOutputsForBp(bp){
+function worldOutputsForBp(bp, _debug = false){
   bp = normalizeBp(bp);
   if (!bp) return [[bp, 1]];
 
   const { exact, ancestor } = worldRuleIndexForCurrentMap();
 
-  function resolveOne(curBp, seen = new Set(), callerBp = null){
+  function resolveOne(curBp, seen = new Set(), callerBp = null, fromExact = false, depth = 0){
     curBp = normalizeBp(curBp);
     if (!curBp) return [];
 
+    const tag = curBp.split("/").pop();
+
     if (seen.has(curBp)) {
-      // Self-reference: the rule explicitly lists the input BP as one of its
-      // outputs (e.g. "83% chance stays as Tuso"). Treat it as a passthrough
-      // for that branch. Anything deeper in the chain that cycles is a true
-      // re-entrant loop and should be dropped.
-      return curBp === callerBp ? [[curBp, 1]] : [];
+      const r = curBp === callerBp ? [[curBp, 1]] : [];
+      if (_debug) console.log("  ".repeat(depth) + `SEEN ${tag} callerBp=${callerBp?.split("/").pop()} -> ${r.length ? "passthrough" : "DROP"}`);
+      return r;
     }
 
     const nextSeen = new Set(seen);
@@ -674,6 +680,7 @@ function worldOutputsForBp(bp){
 
     const exactRule = exact.get(curBp);
     if (exactRule) {
+      if (_debug) console.log("  ".repeat(depth) + `EXACT ${tag}`);
       const outs = Array.isArray(exactRule.outs) && exactRule.outs.length
         ? exactRule.outs
         : [[curBp, 1]];
@@ -683,14 +690,19 @@ function worldOutputsForBp(bp){
         const nextBp = normalizeBp(o?.[0]);
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
-
-        const resolved = resolveOne(nextBp, nextSeen, curBp);
+        if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} (${nextProb.toFixed(3)}) fromExact=true`);
+        const resolved = resolveOne(nextBp, nextSeen, curBp, true, depth + 1);
         for (const [rbp, rprob] of resolved) {
           finalOuts.push([rbp, nextProb * rprob]);
         }
       }
 
       return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
+    }
+
+    if (fromExact) {
+      if (_debug) console.log("  ".repeat(depth) + `fromExact passthrough ${tag}`);
+      return [[curBp, 1]];
     }
 
     let bestRule = null;
@@ -710,6 +722,7 @@ function worldOutputsForBp(bp){
     }
 
     if (bestRule) {
+      if (_debug) console.log("  ".repeat(depth) + `ANCESTOR ${tag} via ${bestRule.from.split("/").pop()} dist=${bestDist}`);
       const outs = Array.isArray(bestRule.outs) && bestRule.outs.length
         ? bestRule.outs
         : [[curBp, 1]];
@@ -720,7 +733,7 @@ function worldOutputsForBp(bp){
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
 
-        const resolved = resolveOne(nextBp, nextSeen, curBp);
+        const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
         for (const [rbp, rprob] of resolved) {
           finalOuts.push([rbp, nextProb * rprob]);
         }
@@ -729,6 +742,7 @@ function worldOutputsForBp(bp){
       return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
     }
 
+    if (_debug) console.log("  ".repeat(depth) + `NO RULE ${tag} -> passthrough`);
     return [[curBp, 1]];
   }
 
@@ -3072,3 +3086,10 @@ function rebuildSelectionSelect() {
     { buildToolbar: entryDropdownToolbar || crateDropdownToolbar }
   );
 }
+
+// Debug helper: call window.debugWR("VanillaLeedBP") in console
+window.debugWR = (bp) => {
+  const result = worldOutputsForBp(bp, true);
+  console.log("RESULT:", result.map(([b,p]) => `${b.split("/").pop()} (${(p*100).toFixed(1)}%)`).join(", "));
+  return result;
+};

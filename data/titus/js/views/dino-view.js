@@ -642,28 +642,27 @@ function renderEntryTabDinos(entryName){
   });
 
   const allOpen = areAllEntryDinosOpen(entryName, dinoKeys);
+  const showOfficial = viewOptions.includeOfficialInEntryPanels;
+
+  const officialPill = activeSourceIsOfficial() ? "" : `
+    <button type="button"
+      class="mod-filter-pill ${showOfficial ? "is-on" : ""}"
+      data-entry-official-toggle="1"
+      title="${showOfficial ? "Showing all dinos" : "Showing mod dinos only"}"
+    >${showOfficial ? "Mod + official dinos" : "Mod dinos only"}</button>
+  `;
+
+  const collapseBtn = `
+    <button type="button" class="loot-set-toggle-all" data-entry-dino-toggle-all="1" style="margin-left:auto;">
+      ${allOpen ? "Collapse All" : "Expand All"}
+    </button>
+  `;
 
   return `
     <div class="info-section">
-      ${
-        activeSourceIsOfficial()
-          ? ""
-          : `
-            <label class="fp-row" style="margin-bottom:8px;">
-              <input
-                type="checkbox"
-                id="entryIncludeOfficialToggle"
-                ${viewOptions.includeOfficialInEntryPanels ? "checked" : ""}
-              >
-              <span>Show official dinos</span>
-            </label>
-          `
-      }
-
-      <div class="col-exp-row" style="margin-bottom:4px;">
-        <button type="button" class="loot-set-toggle-all" data-entry-dino-toggle-all="1">
-          ${allOpen ? "Collapse All" : "Expand All"}
-        </button>
+      <div class="mod-filter-row" style="margin-bottom:8px;">
+        ${officialPill}
+        ${collapseBtn}
       </div>
 
       <div class="entries" data-entry-dino-list="${escapeAttr(entryName)}">

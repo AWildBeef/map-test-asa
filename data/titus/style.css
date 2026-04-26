@@ -1554,6 +1554,31 @@ body{
   font:inherit;
 }
 
+.settings-check-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0;
+}
+
+.settings-check-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.settings-check-row input[type="checkbox"]{
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  accent-color: var(--accent-bright);
+  cursor: pointer;
+}
+
 /* ============================================================
    8) TABS / PAGE NAV
    ============================================================ */
