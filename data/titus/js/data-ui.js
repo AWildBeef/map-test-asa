@@ -496,11 +496,34 @@ function mergeWorldReplacementTables(baseWR, modWR){
     ...Object.keys(modWR || {})
   ]);
 
+  // Collect ALL mod signatures across every bucket. Mod rules — wherever they
+  // appear — claim authority over their (from, exact, event) signature, so any
+  // matching base rule in any bucket is dropped.
+  const modSignatures = new Set();
+  for (const k of keys) {
+    const modRules = Array.isArray(modWR?.[k]) ? modWR[k] : [];
+    for (const r of modRules) {
+      const from = normalizeBp(r?.from);
+      if (!from) continue;
+      const exactFlag = r?.exact ? "1" : "0";
+      const event = r?.event || "None";
+      modSignatures.add(`${from}|${exactFlag}|${event}`);
+    }
+  }
+
   for (const k of keys){
-    out[k] = [
-      ...(Array.isArray(baseWR?.[k]) ? baseWR[k] : []),
-      ...(Array.isArray(modWR?.[k]) ? modWR[k] : [])
-    ];
+    const baseRules = Array.isArray(baseWR?.[k]) ? baseWR[k] : [];
+    const modRules  = Array.isArray(modWR?.[k])  ? modWR[k]  : [];
+
+    const filteredBase = baseRules.filter(r => {
+      const from = normalizeBp(r?.from);
+      if (!from) return true;
+      const exactFlag = r?.exact ? "1" : "0";
+      const event = r?.event || "None";
+      return !modSignatures.has(`${from}|${exactFlag}|${event}`);
+    });
+
+    out[k] = [...filteredBase, ...modRules];
   }
 
   return out;
@@ -690,8 +713,8 @@ function worldOutputsForBp(bp, _debug = false){
         const nextBp = normalizeBp(o?.[0]);
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
-        if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} (${nextProb.toFixed(3)}) fromExact=true`);
-        const resolved = resolveOne(nextBp, nextSeen, curBp, true, depth + 1);
+        if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} (${nextProb.toFixed(3)})`);
+        const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
         for (const [rbp, rprob] of resolved) {
           finalOuts.push([rbp, nextProb * rprob]);
         }
@@ -733,9 +756,24 @@ function worldOutputsForBp(bp, _debug = false){
         const nextProb = Number(o?.[1] || 0);
         if (!nextBp || nextProb <= 0) continue;
 
-        const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
-        for (const [rbp, rprob] of resolved) {
-          finalOuts.push([rbp, nextProb * rprob]);
+        // Ancestor outputs: only follow exact rules, never more ancestor rules.
+        // This prevents sibling/child dinos (who share the ancestor's parent chain)
+        // from being incorrectly caught by the same or other ancestor rules.
+        if (nextSeen.has(nextBp)) {
+          if (nextBp === curBp) finalOuts.push([nextBp, nextProb]);
+          if (_debug) console.log("  ".repeat(depth) + `  SEEN output ${nextBp.split("/").pop()} ${nextBp === curBp ? "passthrough" : "DROP"}`);
+          continue;
+        }
+        const exactForOutput = exact.get(nextBp);
+        if (exactForOutput) {
+          if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} has exact rule, recursing`);
+          const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
+          for (const [rbp, rprob] of resolved) {
+            finalOuts.push([rbp, nextProb * rprob]);
+          }
+        } else {
+          if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} passthrough (no exact rule)`);
+          finalOuts.push([nextBp, nextProb]);
         }
       }
 
@@ -2368,13 +2406,13 @@ function mountSourceDrillDropdown(native, host){
   }
 
   // Render a flat search result across the whole tree
-  function allLeaves(node) {
+  function allLeaves(node, _parentPath = []) {
     const out = [];
     for (const child of node.children || []) {
       if (Array.isArray(child.children)) {
-        out.push(...allLeaves(child));
+        out.push(...allLeaves(child, [..._parentPath, child.label]));
       } else {
-        out.push(child);
+        out.push({ ...child, _path: _parentPath });
       }
     }
     return out;
@@ -2406,6 +2444,19 @@ function mountSourceDrillDropdown(native, host){
         row.className = "dd-item";
         row.textContent = item.label;
         row.onclick = () => {
+          // Navigate stack to item's parent path so next open shows correct folder
+          if (item._path && item._path.length) {
+            stack.length = 0;
+            stack.push(root);
+            let node = root;
+            for (const seg of item._path) {
+              const next = (node.children || []).find(c => Array.isArray(c.children) && c.label === seg);
+              if (!next) break;
+              stack.push(next);
+              node = next;
+            }
+            lastPath = item._path.slice();
+          }
           native.value = item.value;
           native.dispatchEvent(new Event("change"));
           close();
@@ -3092,4 +3143,50 @@ window.debugWR = (bp) => {
   const result = worldOutputsForBp(bp, true);
   console.log("RESULT:", result.map(([b,p]) => `${b.split("/").pop()} (${(p*100).toFixed(1)}%)`).join(", "));
   return result;
+};
+
+// Dump all WR rules whose 'from' or 'outs' contain the given substring
+window.debugWRRules = (substr) => {
+  const all = Global.spawn?.worldReplacements || {};
+  const lower = String(substr).toLowerCase();
+  for (const [mapKey, rules] of Object.entries(all)) {
+    if (!Array.isArray(rules)) continue;
+    const matches = rules.filter(r => {
+      const fromMatch = String(r?.from || "").toLowerCase().includes(lower);
+      const outMatch = (r?.outs || []).some(o => String(o?.[0] || "").toLowerCase().includes(lower));
+      return fromMatch || outMatch;
+    });
+    if (matches.length) {
+      console.log(`\n=== map="${mapKey}" — ${matches.length} matching rule(s) ===`);
+      for (const r of matches) {
+        const tag = r.exact ? "EXACT" : "anc  ";
+        const event = r.event || "-";
+        console.log(`${tag} event=${event}`);
+        console.log(`  from: ${r.from}`);
+        for (const o of (r.outs || [])) {
+          console.log(`  out:  ${o[0]} (${o[1]})`);
+        }
+      }
+    }
+  }
+};
+
+// Dump the built rule index for the current map
+window.debugWRIndex = (substr) => {
+  const { exact, ancestor } = worldRuleIndexForCurrentMap();
+  const lower = String(substr || "").toLowerCase();
+  console.log(`\n=== EXACT rules in current-map index (mapId="${State.mapId}") ===`);
+  for (const [from, r] of exact.entries()) {
+    if (!lower || from.toLowerCase().includes(lower)) {
+      console.log(`from: ${from}`);
+      for (const o of (r.outs || [])) console.log(`  -> ${o[0]} (${o[1]})`);
+    }
+  }
+  console.log(`\n=== ANCESTOR rules in current-map index ===`);
+  for (const r of ancestor) {
+    if (!lower || String(r.from).toLowerCase().includes(lower)) {
+      console.log(`from: ${r.from}`);
+      for (const o of (r.outs || [])) console.log(`  -> ${o[0]} (${o[1]})`);
+    }
+  }
 };
