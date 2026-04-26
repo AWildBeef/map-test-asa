@@ -669,17 +669,13 @@ function buildMapReport(){
     }
 
     if (opts.includeMissions) {
-      const mm = lootData().mm || {};
-      row.missions = Object.entries(mm)
-        .filter(([, maps]) => maps.includes(mapName))
-        .map(([cls]) => cls)
+      row.missions = [...missionClassesUsedOnCurrentMap()]
         .sort()
         .map(cls => opts.crateUseDisplayName
           ? { class: cls, name: missionLootDisplayName(cls) }
           : cls
         );
     }
-
 
     return row;
   }

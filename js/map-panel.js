@@ -896,16 +896,53 @@ function ensureSettingsPanel(){
   return panel;
 }
 
+function getDockPrefs(){
+  try {
+    return JSON.parse(localStorage.getItem("dockPrefs") || "{}");
+  } catch { return {}; }
+}
+
+function setDockPref(key, val){
+  const prefs = getDockPrefs();
+  prefs[key] = val;
+  localStorage.setItem("dockPrefs", JSON.stringify(prefs));
+}
+
+function isDockBtnVisible(key){
+  const prefs = getDockPrefs();
+  return prefs[key] !== false; // default visible
+}
+
+function getAstraeosBgPref(){
+  return localStorage.getItem("astraeosBg") || null;
+}
+
+function setAstraeosBgPref(id){
+  localStorage.setItem("astraeosBg", id);
+}
+
+
 function renderSettingsPanel(){
   const panel = ensureSettingsPanel();
   const body = panel.querySelector(".fp-body");
   if (!body) return;
 
   const currentTheme = getTheme();
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const isAstraeos = !!(mapMeta?.backgrounds?.length);
+
+  const DOCK_BTNS = [
+    { key: "dinoInfoPanel",   label: "Info panel" },
+    { key: "drawStylePanel",  label: "Draw style" },
+    { key: "poiPanel",        label: "Markers" },
+    { key: "rarityLegend",    label: "Rarity legend" },
+    { key: "mapEntriesPanel", label: "Entries browser" },
+    { key: "exportPanel",     label: "Export panel" }
+  ];
 
   body.innerHTML = `
     <div class="fp-row fp-col">
-      <label class="settings-label" for="themeSelect">Theme</label>
+      <div class="info-subtitle">Theme</div>
       <select id="themeSelect" class="settings-select">
         ${THEME_OPTIONS.map(opt => `
           <option value="${escapeAttr(opt.id)}" ${opt.id === currentTheme ? "selected" : ""}>
@@ -914,12 +951,51 @@ function renderSettingsPanel(){
         `).join("")}
       </select>
     </div>
+
+    <div class="fp-row fp-col" style="margin-top:14px;">
+      <div class="info-subtitle">Dock buttons</div>
+      <div class="settings-check-group">
+        ${DOCK_BTNS.map(b => `
+          <label class="settings-check-row">
+            <input type="checkbox" data-dock-pref="${escapeAttr(b.key)}" ${isDockBtnVisible(b.key) ? "checked" : ""}>
+            <span>${escapeHtml(b.label)}</span>
+          </label>
+        `).join("")}
+      </div>
+    </div>
+
+    ${isAstraeos ? `
+      <div class="fp-row fp-col" style="margin-top:14px;">
+        <div class="info-subtitle">Astraeos default background</div>
+        <select id="astraeosBgSelect" class="settings-select">
+          ${(mapMeta.backgrounds || []).map(bg => `
+            <option value="${escapeAttr(bg.id)}" ${(getAstraeosBgPref() || mapMeta.defaultBg) === bg.id ? "selected" : ""}>
+              ${escapeHtml(bg.label || bg.id)}
+            </option>
+          `).join("")}
+        </select>
+      </div>
+    ` : ""}
   `;
 
   const themeSelect = body.querySelector("#themeSelect");
   if (themeSelect){
-    themeSelect.onchange = () => {
-      updateThemeSetting(themeSelect.value || "");
+    themeSelect.onchange = () => updateThemeSetting(themeSelect.value || "");
+  }
+
+  body.querySelectorAll("[data-dock-pref]").forEach(el => {
+    el.onchange = () => {
+      setDockPref(el.dataset.dockPref, el.checked);
+      renderDock();
+    };
+  });
+
+  const bgSelect = body.querySelector("#astraeosBgSelect");
+  if (bgSelect){
+    bgSelect.onchange = () => {
+      setAstraeosBgPref(bgSelect.value);
+      const bg = mapMeta.backgrounds.find(b => b.id === bgSelect.value);
+      if (bg && mapObj?.overlay) mapObj.overlay.setUrl(bg.url);
     };
   }
 }
@@ -2348,7 +2424,8 @@ let infoPanelState = {
   crateTab: "sets",
   itemTab: "crates",
   showOfficialSets: false,   // when mod active, also show official sets in panel
-  showAllCrates: false       // when mod active, show all crates not just mod ones
+  showAllCrates: false,      // when mod active, show all crates not just mod ones
+  showAllEntries: false      // when mod active, show all entries not just mod ones
 };
 
 
