@@ -496,34 +496,11 @@ function mergeWorldReplacementTables(baseWR, modWR){
     ...Object.keys(modWR || {})
   ]);
 
-  // Collect ALL mod signatures across every bucket. Mod rules — wherever they
-  // appear — claim authority over their (from, exact, event) signature, so any
-  // matching base rule in any bucket is dropped.
-  const modSignatures = new Set();
-  for (const k of keys) {
-    const modRules = Array.isArray(modWR?.[k]) ? modWR[k] : [];
-    for (const r of modRules) {
-      const from = normalizeBp(r?.from);
-      if (!from) continue;
-      const exactFlag = r?.exact ? "1" : "0";
-      const event = r?.event || "None";
-      modSignatures.add(`${from}|${exactFlag}|${event}`);
-    }
-  }
-
   for (const k of keys){
-    const baseRules = Array.isArray(baseWR?.[k]) ? baseWR[k] : [];
-    const modRules  = Array.isArray(modWR?.[k])  ? modWR[k]  : [];
-
-    const filteredBase = baseRules.filter(r => {
-      const from = normalizeBp(r?.from);
-      if (!from) return true;
-      const exactFlag = r?.exact ? "1" : "0";
-      const event = r?.event || "None";
-      return !modSignatures.has(`${from}|${exactFlag}|${event}`);
-    });
-
-    out[k] = [...filteredBase, ...modRules];
+    out[k] = [
+      ...(Array.isArray(baseWR?.[k]) ? baseWR[k] : []),
+      ...(Array.isArray(modWR?.[k]) ? modWR[k] : [])
+    ];
   }
 
   return out;
@@ -3187,6 +3164,65 @@ window.debugWRIndex = (substr) => {
     if (!lower || String(r.from).toLowerCase().includes(lower)) {
       console.log(`from: ${r.from}`);
       for (const o of (r.outs || [])) console.log(`  -> ${o[0]} (${o[1]})`);
+    }
+  }
+};
+
+// Debug: check if a specific BP made it into the current map's index
+window.debugDinoOnMap = (bpSubstr) => {
+  const lower = String(bpSubstr).toLowerCase();
+  console.log(`\n=== Searching for "${bpSubstr}" on map "${State.mapId}" ===`);
+
+  // 1. Is the dino in Global.dinos?
+  console.log("\n--- Global.dinos lookup ---");
+  let found = false;
+  for (const [bp, d] of Object.entries(Global.dinos?.dinos || {})){
+    if (bp.toLowerCase().includes(lower)){
+      found = true;
+      console.log(`  FOUND in Global.dinos: ${bp.split('/').pop()}`);
+      console.log(`    name: ${d?.n}, parent: ${d?.p?.split('/').pop()}`);
+    }
+  }
+  if (!found) console.log("  NOT in Global.dinos");
+
+  // 2. Is the dino in modBlueprintSet?
+  if (!activeSourceIsOfficial()){
+    const allowed = modBlueprintSet();
+    let inMod = false;
+    for (const bp of allowed){
+      if (bp.toLowerCase().includes(lower)){
+        inMod = true;
+        console.log(`  IN modBlueprintSet: ${bp.split('/').pop()}`);
+      }
+    }
+    if (!inMod) console.log("  NOT in modBlueprintSet (would be filtered out!)");
+  }
+
+  // 3. Is the dino in State.dinoToEntries (current map)?
+  console.log("\n--- State.dinoToEntries (current map) ---");
+  let inIdx = false;
+  for (const [bp, entries] of State.dinoToEntries.entries()){
+    if (bp.toLowerCase().includes(lower)){
+      inIdx = true;
+      console.log(`  FOUND: ${bp.split('/').pop()}`);
+      console.log(`    in entries: ${entries.join(", ")}`);
+    }
+  }
+  if (!inIdx) console.log("  NOT in State.dinoToEntries for this map");
+
+  // 4. What entries on this map mention this BP in their raw data?
+  console.log("\n--- Raw entry data search ---");
+  for (const entryName of State.mapEntries){
+    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+    for (const r of rows){
+      const rawBp = String(r?.[0] || "");
+      if (rawBp.toLowerCase().includes(lower)){
+        console.log(`  in entry ${entryName}: rawBp=${rawBp.split('/').pop()}`);
+        const outs = worldOutputsForBp(rawBp);
+        for (const [obp, prob] of outs){
+          console.log(`    -> ${obp.split('/').pop()} (${(prob*100).toFixed(1)}%)`);
+        }
+      }
     }
   }
 };

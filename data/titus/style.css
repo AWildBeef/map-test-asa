@@ -1579,6 +1579,24 @@ body{
   cursor: pointer;
 }
 
+.coord-display {
+  position: absolute;
+  bottom: 44px;
+  right: 8px;
+  z-index: 800;
+  background: rgba(10, 16, 28, 0.82);
+  color: var(--text-1);
+  font-size: 12px;
+  font-family: var(--font-mono, monospace);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-soft);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(4px);
+}
+
 /* ============================================================
    8) TABS / PAGE NAV
    ============================================================ */

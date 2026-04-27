@@ -716,6 +716,39 @@ function initMap(img,size=[2048,2048]){
     paddingBottomRight: [6, 20]
   });
 
+  // Coordinate display
+  const coordDisplay = document.createElement("div");
+  coordDisplay.id = "coordDisplay";
+  coordDisplay.className = "coord-display";
+  coordDisplay.textContent = "—";
+  document.getElementById("mapWrap")?.appendChild(coordDisplay);
+
+  function pixelToArkCoords(latlng) {
+    // In CRS.Simple, leaflet lat = pixel Y, lng = pixel X
+    // bounds = [[0,0],[imageHeight, imageWidth]]
+    const b = mapObj?.bounds || [[0,0],[2048,2048]];
+    const H = b[1][0]; // imageHeight
+    const W = b[1][1]; // imageWidth
+    const lat = (latlng.lat / H) * 100;
+    const lon = (latlng.lng / W) * 100;
+    return { lat, lon };
+  }
+
+  map.on("mousemove", (e) => {
+    const { lat, lon } = pixelToArkCoords(e.latlng);
+    if (lat < -5 || lat > 105 || lon < -5 || lon > 105) {
+      coordDisplay.textContent = "—";
+    } else {
+      const clampedLat = Math.max(0, Math.min(100, lat));
+      const clampedLon = Math.max(0, Math.min(100, lon));
+      coordDisplay.textContent = `${clampedLat.toFixed(2)}, ${clampedLon.toFixed(2)}`;
+    }
+  });
+
+  map.on("mouseout", () => {
+    coordDisplay.textContent = "—";
+  });
+
   return { map, overlay, layer, poiLayer, bounds };
 }
 
