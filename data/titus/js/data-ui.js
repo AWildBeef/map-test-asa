@@ -239,8 +239,9 @@ function buildWorldRuleIndex(rules){
     // Skip event-specific rules (FearEvolved, WinterWonderland, etc.)
     // They would overwrite the base non-event rule in the exact map,
     // causing wrong outputs during normal (non-event) gameplay display.
+    // A missing event, "None", "none", or "-" all mean non-event.
     const event = r?.event;
-    if (event && event !== "None" && event !== "none") continue;
+    if (event && event !== "None" && event !== "none" && event !== "-") continue;
 
     if (r?.exact){
       exact.set(fromBp, r);
@@ -489,18 +490,60 @@ function entryRarityForEntry(entryName){
 
 
 function mergeWorldReplacementTables(baseWR, modWR){
-  const out = {};
+  // Build a global mod exact index to detect when mod handles a split internally.
+  // A mod's 1-to-1 Remap_NPC rule + a multi-output exact rule on the target
+  // means the base ancestor rule is redundant (mod already encodes the distribution).
+  const modExactIdx = new Map();
+  for (const rules of Object.values(modWR || {})) {
+    for (const r of (Array.isArray(rules) ? rules : [])) {
+      const ev = r?.event;
+      if (ev && ev !== "None" && ev !== "none" && ev !== "-" && ev !== "") continue;
+      if (!r?.exact) continue;
+      const from = normalizeBp(r?.from);
+      if (!from) continue;
+      const existing = modExactIdx.get(from);
+      if (!existing || (r.outs?.length || 0) > (existing.outs?.length || 0)) {
+        modExactIdx.set(from, r);
+      }
+    }
+  }
+
+  // Find 1-to-1 exact remaps (Remap_NPC style) where the target has its own
+  // multi-output non-event exact rule — these base ancestor rules are dropped.
+  const dropFromBase = new Set();
+  for (const rules of Object.values(modWR || {})) {
+    for (const r of (Array.isArray(rules) ? rules : [])) {
+      const ev = r?.event;
+      if (ev && ev !== "None" && ev !== "none" && ev !== "-" && ev !== "") continue;
+      if (!r?.exact || (r.outs?.length || 0) !== 1) continue;
+      const from = normalizeBp(r?.from);
+      const to = normalizeBp(r?.outs?.[0]?.[0]);
+      if (!from || !to) continue;
+      const targetRule = modExactIdx.get(to);
+      if (targetRule && (targetRule.outs?.length || 0) > 1) {
+        dropFromBase.add(from);
+      }
+    }
+  }
 
   const keys = new Set([
     ...Object.keys(baseWR || {}),
     ...Object.keys(modWR || {})
   ]);
 
+  const out = {};
   for (const k of keys){
-    out[k] = [
-      ...(Array.isArray(baseWR?.[k]) ? baseWR[k] : []),
-      ...(Array.isArray(modWR?.[k]) ? modWR[k] : [])
-    ];
+    const baseRules = Array.isArray(baseWR?.[k]) ? baseWR[k] : [];
+    const modRules  = Array.isArray(modWR?.[k])  ? modWR[k]  : [];
+
+    // Drop base ancestor rules that the mod supersedes
+    const filteredBase = baseRules.filter(r => {
+      if (r?.exact) return true; // keep base exact rules always
+      const from = normalizeBp(r?.from);
+      return !from || !dropFromBase.has(from);
+    });
+
+    out[k] = [...filteredBase, ...modRules];
   }
 
   return out;
@@ -663,107 +706,92 @@ function worldOutputsForBp(bp, _debug = false){
 
   const { exact, ancestor } = worldRuleIndexForCurrentMap();
 
-  function resolveOne(curBp, seen = new Set(), callerBp = null, fromExact = false, depth = 0){
+  // Resolve a BP through the world replacement chain.
+  // Order mirrors Ark's execution:
+  //   1. Ancestor (base WorldReplacements) fires first if present
+  //   2. Remap_NPC (1-to-1 exact) applies to each ancestor output inline
+  //   3. If no ancestor, exact rule fires (LeedsReplacements, WormReplacements, etc.)
+  // from_exact=true: this BP came from an exact rule output — skip ancestor matching.
+  function resolveOne(curBp, seen, callerBp, fromExact, depth){
     curBp = normalizeBp(curBp);
     if (!curBp) return [];
+    const tag = _debug ? curBp.split("/").pop() : "";
 
-    const tag = curBp.split("/").pop();
-
-    if (seen.has(curBp)) {
+    if (seen.has(curBp)){
       const r = curBp === callerBp ? [[curBp, 1]] : [];
-      if (_debug) console.log("  ".repeat(depth) + `SEEN ${tag} callerBp=${callerBp?.split("/").pop()} -> ${r.length ? "passthrough" : "DROP"}`);
+      if (_debug) console.log("  ".repeat(depth) + `SEEN ${tag} -> ${r.length ? "pass" : "DROP"}`);
       return r;
     }
-
     const nextSeen = new Set(seen);
     nextSeen.add(curBp);
 
-    const exactRule = exact.get(curBp);
-    if (exactRule) {
-      if (_debug) console.log("  ".repeat(depth) + `EXACT ${tag}`);
-      const outs = Array.isArray(exactRule.outs) && exactRule.outs.length
-        ? exactRule.outs
-        : [[curBp, 1]];
-
-      let finalOuts = [];
-      for (const o of outs) {
-        const nextBp = normalizeBp(o?.[0]);
-        const nextProb = Number(o?.[1] || 0);
-        if (!nextBp || nextProb <= 0) continue;
-        if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} (${nextProb.toFixed(3)})`);
-        const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
-        for (const [rbp, rprob] of resolved) {
-          finalOuts.push([rbp, nextProb * rprob]);
-        }
+    // Step 1: ancestor rules fire first
+    let bestRule = null, bestDist = null;
+    if (!fromExact){
+      for (const r of ancestor){
+        const fromBp = normalizeBp(r?.from);
+        if (!fromBp) continue;
+        const dist = ancestorDistance(curBp, fromBp);
+        if (dist == null) continue;
+        if (bestRule === null || dist < bestDist){ bestRule = r; bestDist = dist; }
       }
-
-      return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
     }
 
-    if (fromExact) {
+    if (bestRule){
+      if (_debug) console.log("  ".repeat(depth) + `ANC ${tag} via ${bestRule.from.split("/").pop()} dist=${bestDist}`);
+      const outs = Array.isArray(bestRule.outs) && bestRule.outs.length ? bestRule.outs : [[curBp, 1]];
+      let final = [];
+      for (const o of outs){
+        const nb = normalizeBp(o?.[0]), np = Number(o?.[1] || 0);
+        if (!nb || np <= 0) continue;
+
+        // Step 2: apply 1-to-1 Remap_NPC inline if one exists for this output
+        const ex = exact.get(nb);
+        if (ex && ex.outs?.length === 1){
+          const remapped = normalizeBp(ex.outs[0]?.[0]);
+          if (_debug) console.log("  ".repeat(depth) + `  remap ${nb.split("/").pop()} -> ${remapped.split("/").pop()}`);
+          // Recurse on remapped BP; allow exact rule (like LeedsReplacements) to fire
+          for (const [rbp, rprob] of resolveOne(remapped, nextSeen, remapped, true, depth + 1)){
+            final.push([rbp, np * rprob]);
+          }
+        } else {
+          // Multi-output or no exact remap — recurse with from_exact=true (no more ancestor)
+          for (const [rbp, rprob] of resolveOne(nb, nextSeen, curBp, true, depth + 1)){
+            final.push([rbp, np * rprob]);
+          }
+        }
+      }
+      return final.length ? combineOutputWeights(final) : [[curBp, 1]];
+    }
+
+    // Step 3: no ancestor — try exact rule (LeedsReplacements, WormReplacements, Remap_NPC)
+    const exactRule = exact.get(curBp);
+    if (exactRule){
+      if (_debug) console.log("  ".repeat(depth) + `EXACT ${tag}`);
+      const outs = Array.isArray(exactRule.outs) && exactRule.outs.length ? exactRule.outs : [[curBp, 1]];
+      let final = [];
+      for (const o of outs){
+        const nb = normalizeBp(o?.[0]), np = Number(o?.[1] || 0);
+        if (!nb || np <= 0) continue;
+        if (_debug) console.log("  ".repeat(depth) + `  -> ${nb.split("/").pop()} (${np.toFixed(3)})`);
+        for (const [rbp, rprob] of resolveOne(nb, nextSeen, curBp, true, depth + 1)){
+          final.push([rbp, np * rprob]);
+        }
+      }
+      return final.length ? combineOutputWeights(final) : [[curBp, 1]];
+    }
+
+    if (fromExact){
       if (_debug) console.log("  ".repeat(depth) + `fromExact passthrough ${tag}`);
       return [[curBp, 1]];
     }
 
-    let bestRule = null;
-    let bestDist = null;
-
-    for (const r of ancestor) {
-      const fromBp = normalizeBp(r?.from);
-      if (!fromBp) continue;
-
-      const dist = ancestorDistance(curBp, fromBp);
-      if (dist == null) continue;
-
-      if (bestRule === null || dist < bestDist) {
-        bestRule = r;
-        bestDist = dist;
-      }
-    }
-
-    if (bestRule) {
-      if (_debug) console.log("  ".repeat(depth) + `ANCESTOR ${tag} via ${bestRule.from.split("/").pop()} dist=${bestDist}`);
-      const outs = Array.isArray(bestRule.outs) && bestRule.outs.length
-        ? bestRule.outs
-        : [[curBp, 1]];
-
-      let finalOuts = [];
-      for (const o of outs) {
-        const nextBp = normalizeBp(o?.[0]);
-        const nextProb = Number(o?.[1] || 0);
-        if (!nextBp || nextProb <= 0) continue;
-
-        // Ancestor outputs: only follow exact rules, never more ancestor rules.
-        // This prevents sibling/child dinos (who share the ancestor's parent chain)
-        // from being incorrectly caught by the same or other ancestor rules.
-        if (nextSeen.has(nextBp)) {
-          if (nextBp === curBp) finalOuts.push([nextBp, nextProb]);
-          if (_debug) console.log("  ".repeat(depth) + `  SEEN output ${nextBp.split("/").pop()} ${nextBp === curBp ? "passthrough" : "DROP"}`);
-          continue;
-        }
-        const exactForOutput = exact.get(nextBp);
-        if (exactForOutput) {
-          if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} has exact rule, recursing`);
-          const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
-          for (const [rbp, rprob] of resolved) {
-            finalOuts.push([rbp, nextProb * rprob]);
-          }
-        } else {
-          if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} passthrough (no exact rule)`);
-          finalOuts.push([nextBp, nextProb]);
-        }
-      }
-
-      return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
-    }
-
-    if (_debug) console.log("  ".repeat(depth) + `NO RULE ${tag} -> passthrough`);
+    if (_debug) console.log("  ".repeat(depth) + `NO RULE ${tag}`);
     return [[curBp, 1]];
   }
 
-  return resolveOne(bp);
+  return resolveOne(bp, new Set(), null, false, 0);
 }
-
 
 function finalRarityForManager(entryName,meta,score){
 
