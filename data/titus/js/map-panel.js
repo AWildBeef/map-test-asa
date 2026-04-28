@@ -726,10 +726,12 @@ function initMap(img,size=[2048,2048]){
   function pixelToArkCoords(latlng) {
     // In CRS.Simple, leaflet lat = pixel Y, lng = pixel X
     // bounds = [[0,0],[imageHeight, imageWidth]]
+    // Leaflet Y increases upward, but Ark lat increases downward (0=top, 100=bottom)
+    // so we subtract from 100 to flip the axis.
     const b = mapObj?.bounds || [[0,0],[2048,2048]];
     const H = b[1][0]; // imageHeight
     const W = b[1][1]; // imageWidth
-    const lat = (latlng.lat / H) * 100;
+    const lat = 100 - (latlng.lat / H) * 100;
     const lon = (latlng.lng / W) * 100;
     return { lat, lon };
   }
