@@ -1272,6 +1272,66 @@ function buildLootIndexes(){
 }
 
 
+// ── Dino drop / harvest loot helpers ─────────────────────────────────────
+
+function dropCompForDino(bp){
+  const d = getDinoObjByBp(bp);
+  if (!d?.dd) return null;
+  return Global.loot?.dd?.[d.dd] || null;
+}
+
+function harvestCompForDino(bp){
+  const d = getDinoObjByBp(bp);
+  if (!d?.dh) return null;
+  return Global.loot?.dh?.[d.dh] || null;
+}
+
+function dropCompClassForDino(bp){
+  return getDinoObjByBp(bp)?.dd || null;
+}
+
+function harvestCompClassForDino(bp){
+  return getDinoObjByBp(bp)?.dh || null;
+}
+
+function dinoBpsThatUseDropComp(compClass){
+  // Returns all dino BPs whose dd field matches compClass (vanilla + active mod)
+  const out = [];
+  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
+    if (obj.dd === compClass) out.push(bp);
+  }
+  return out;
+}
+
+function dinoBpsThatUseHarvestComp(compClass){
+  const out = [];
+  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
+    if (obj.dh === compClass) out.push(bp);
+  }
+  return out;
+}
+
+function dinoBpsThatDropItem(itemId){
+  const loot = Global.loot;
+  if (!loot?.rd || !loot?.di) return [];
+  const compIndices = loot.rd[String(itemId)] || [];
+  return compIndices.flatMap(idx => {
+    const cls = loot.di[idx];
+    return cls ? dinoBpsThatUseDropComp(cls) : [];
+  });
+}
+
+function dinoBpsThatHarvestItem(itemId){
+  const loot = Global.loot;
+  if (!loot?.rh || !loot?.hi) return [];
+  const compIndices = loot.rh[String(itemId)] || [];
+  return compIndices.flatMap(idx => {
+    const cls = loot.hi[idx];
+    return cls ? dinoBpsThatUseHarvestComp(cls) : [];
+  });
+}
+
+
 function currentGeom(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   return Global.mapGeom.get(mapMeta?.geomShort);
@@ -1558,6 +1618,56 @@ function rebuildLootIndices(){
     State.itemNameToIds.set(name, [...new Set(ids)].sort((a,b)=>a-b));
   }
 
+  State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
+
+  // --- dino drop / harvest items on this map ---
+  // Add items that come from dino drops/harvests for dinos on the current map.
+  const mapDinoBps = new Set([...State.entryToDinos.values()].flat());
+  const dinoDropItemIds = new Set();
+  const dinoHarvestItemIds = new Set();
+
+  for (const bp of mapDinoBps){
+    const dinoObj = getDinoObjByBp(bp);
+    if (!dinoObj) continue;
+
+    if (dinoObj.dd){
+      const comp = loot.dd?.[dinoObj.dd];
+      if (comp){
+        for (const setRow of (comp.s || [])){
+          for (const entry of (setRow.e || [])){
+            for (const iid of (entry.i || [])){
+              dinoDropItemIds.add(iid);
+            }
+          }
+        }
+      }
+    }
+
+    if (dinoObj.dh){
+      const comp = loot.dh?.[dinoObj.dh];
+      if (comp){
+        for (const iid of (comp.i || [])){
+          dinoHarvestItemIds.add(iid);
+        }
+      }
+    }
+  }
+
+  for (const itemId of [...dinoDropItemIds, ...dinoHarvestItemIds]){
+    State.mapItemIds.add(itemId);
+    const itemRow = items.i?.[String(itemId)];
+    if (!itemRow) continue;
+    if (modActive && !itemRow._mod) continue;
+    const name = itemRow.n || `Item ${itemId}`;
+    if (!State.itemNameToIds.has(name)){
+      State.itemNameToIds.set(name, []);
+    }
+    if (!State.itemNameToIds.get(name).includes(itemId)){
+      State.itemNameToIds.get(name).push(itemId);
+    }
+  }
+
+  // Rebuild itemNames to include dino loot items
   State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 }
 

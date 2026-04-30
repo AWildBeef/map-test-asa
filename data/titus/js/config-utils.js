@@ -649,11 +649,14 @@ function buildMapReport(){
     }
 
     if (opts.includeCrates) {
-      const cm = lootData().cm || {};
-      const mapCrateClasses = Object.entries(cm)
-        .filter(([, maps]) => maps.includes(mapName))
-        .map(([cls]) => cls)
-        .sort();
+      // cm is now {mapIdx: [crateIdx,...]} with mp[] for names and ci[] for classes
+      const loot = lootData();
+      const cm = loot.cm || {};
+      const mp = loot.mp || [];
+      const ci = loot.ci || [];
+      const mapIdx = mp.indexOf(mapName);
+      const mapCrateClasses = mapIdx === -1 ? [] :
+        (cm[String(mapIdx)] || []).map(idx => ci[idx]).filter(Boolean).sort();
       row.crates = mapCrateClasses.map(cls => {
         if (opts.crateUseDisplayName) {
           const crate = lootData().c?.[cls];
@@ -708,7 +711,18 @@ function buildMapReport(){
 
 
 function mapNamesForCrateClass(crateClass){
-  return Global.loot?.cm?.[crateClass] || [];
+  const loot = Global.loot;
+  if (!loot?.cm || !loot?.ci || !loot?.mp) return [];
+  const crateIdx = loot.ci.indexOf(crateClass);
+  if (crateIdx === -1) return [];
+  const out = [];
+  for (const [mapIdxStr, crateIndices] of Object.entries(loot.cm)){
+    if (crateIndices.includes(crateIdx)){
+      const mapName = loot.mp[Number(mapIdxStr)];
+      if (mapName) out.push(mapName);
+    }
+  }
+  return out;
 }
 
 
@@ -831,7 +845,7 @@ function buildCrateReport(){
     const cls = isNaN(crateId) ? null : crateIdToClass(crateId);
     if (cls) crateClasses = [cls];
   } else if (scope === "current_source") {
-    crateClasses = Object.keys(allLoot.cm || {}).sort();
+    crateClasses = Object.values(allLoot.cm || {}).flat().map(idx => (allLoot.ci || [])[idx]).filter(Boolean).sort();
   } else {
     crateClasses = [...crateClassesUsedOnCurrentMap()].sort();
   }

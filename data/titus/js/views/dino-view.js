@@ -144,6 +144,79 @@ function renderDinoTabStats(d){
 }
 
 
+function renderDinoTabLoot(d){
+  const bp = d?.bpPath;
+  if (!bp) return `<div class="info-section"><div class="info-empty">No loot data</div></div>`;
+
+  const dropComp = dropCompForDino(bp);
+  const harvestComp = harvestCompForDino(bp);
+
+  if (!dropComp && !harvestComp){
+    return `<div class="info-section"><div class="info-empty">No loot data for this dino</div></div>`;
+  }
+
+  let html = "";
+
+  // ── Drop component (death inventory) ─────────────────────────────────
+  if (dropComp){
+    const sets = Array.isArray(dropComp.s) ? dropComp.s : [];
+    const mn = dropComp.mn ?? 1;
+    const mx = dropComp.mx ?? 1;
+    const setsHtml = sets.map(setRow => {
+      const entries = Array.isArray(setRow?.e) ? setRow.e : [];
+      const setName = setRow?.n || "";
+
+      if (!entries.length) return "";
+
+      const entriesHtml = entries.map(e => {
+        const itemNames = (Array.isArray(e?.i) ? e.i : []).map(id => {
+          const name = itemDisplayNameById(id);
+          return `<span class="loot-item-tag" data-item-id="${id}">${escapeHtml(name)}</span>`;
+        }).join("");
+        if (!itemNames) return "";
+        const chance = (e?.chance != null && e.chance !== 1)
+          ? ` <span class="loot-chance">${Math.round(e.chance * 100)}%</span>` : "";
+        const qty = (e?.mn != null && e?.mx != null && !(e.mn === 1 && e.mx === 1))
+          ? ` <span class="loot-qty">${fmtRange(e.mn, e.mx)}</span>` : "";
+        return `<div class="loot-entry">${itemNames}${qty}${chance}</div>`;
+      }).join("");
+
+      if (!entriesHtml) return "";
+
+      return `
+        <div class="loot-set">
+          ${setName ? `<div class="loot-set-name">${escapeHtml(setName)}</div>` : ""}
+          ${entriesHtml}
+        </div>`;
+    }).join("");
+
+    html += `
+      <div class="info-section">
+        <div class="info-subtitle">Drops on Death</div>
+        ${mn != null && mx != null ? `<div class="loot-set-count">Loot sets: ${fmtRange(mn, mx)}</div>` : ""}
+        ${setsHtml || `<div class="info-empty">No drop data</div>`}
+      </div>`;
+  }
+
+  // ── Harvest component (tool harvesting) ──────────────────────────────
+  if (harvestComp){
+    const itemIds = Array.isArray(harvestComp.i) ? harvestComp.i : [];
+    const itemsHtml = itemIds.map(id => {
+      const name = itemDisplayNameById(id);
+      return `<span class="loot-item-tag" data-item-id="${id}">${escapeHtml(name)}</span>`;
+    }).join("");
+
+    html += `
+      <div class="info-section">
+        <div class="info-subtitle">Harvested From Corpse</div>
+        <div class="loot-harvest-list">${itemsHtml || `<div class="info-empty">No harvest data</div>`}</div>
+      </div>`;
+  }
+
+  return html;
+}
+
+
 function renderDinoPanel(name){
   const d = getSelectedDinoGroup(name);
   if (!d){
@@ -157,9 +230,11 @@ function renderDinoPanel(name){
     : "spawns";
 
   const spawnCount = d.entries?.length ?? 0;
+  const hasLoot = !!(dropCompForDino(d?.bpPath) || harvestCompForDino(d?.bpPath));
   const dinoPanelTabs = [
     { id: "spawns", label: `Spawns (${spawnCount})` },
-    { id: "stats",  label: "Stats" }
+    { id: "stats",  label: "Stats" },
+    ...(hasLoot ? [{ id: "loot", label: "Loot" }] : [])
   ];
 
   setInfoPanelTitle(name);
@@ -177,6 +252,7 @@ function renderDinoPanel(name){
       renderPage: (id) => {
         if (id === "spawns") return renderDinoTabSpawns(d, name);
         if (id === "stats") return renderDinoTabStats(d);
+        if (id === "loot") return renderDinoTabLoot(d);
         return "";
       }
     })}
@@ -273,7 +349,7 @@ function renderDinoPanel(name){
 
   mountPanelSwipe(
     body.querySelector(".fp-pages"),
-    DINO_PANEL_TABS,
+    dinoPanelTabs,
     () => infoPanelState.dinoTab,
     (id) => {
       infoPanelState.dinoTab = id;

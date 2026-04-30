@@ -349,6 +349,43 @@ function renderItemTabCrates(it){
 }
 
 
+function renderItemTabDinos(it, dropDinos, harvestDinos){
+  function dinoRow(bp){
+    const obj = getDinoObjByBp(bp);
+    const name = obj?.n || bp.split("/").pop();
+    return `
+      <div class="loot-dino-row">
+        <span class="loot-dino-name">${escapeHtml(name)}</span>
+        <button type="button" class="info-link-btn" data-open-dino="${escapeHtml(name)}">View</button>
+      </div>`;
+  }
+
+  let html = "";
+
+  if (dropDinos.length > 0){
+    html += `
+      <div class="info-section">
+        <div class="info-subtitle">Dropped On Death</div>
+        ${dropDinos.map(dinoRow).join("")}
+      </div>`;
+  }
+
+  if (harvestDinos.length > 0){
+    html += `
+      <div class="info-section">
+        <div class="info-subtitle">Harvested From Corpse</div>
+        ${harvestDinos.map(dinoRow).join("")}
+      </div>`;
+  }
+
+  if (!html){
+    html = `<div class="info-section"><div class="info-empty">No dino sources found</div></div>`;
+  }
+
+  return html;
+}
+
+
 function renderItemPanel(itemName){
   const it = getSelectedItem(itemName);
   if (!it){
@@ -371,9 +408,20 @@ function renderItemPanel(itemName){
   ).size;
   const sourceCount = crateCount + missionCount;
 
+  // Dino drop/harvest counts — filter to dinos on current map
+  const mapDinoBps = new Set(
+    [...State.entryToDinos.values()].flat()
+  );
+  const filterToBps = (bps) => bps.filter(bp => mapDinoBps.size === 0 || mapDinoBps.has(bp));
+
+  const dropDinos = filterToBps([...new Set(itemIds.flatMap(id => dinoBpsThatDropItem(id)))]);
+  const harvestDinos = filterToBps([...new Set(itemIds.flatMap(id => dinoBpsThatHarvestItem(id)))]);
+  const hasDinoLoot = dropDinos.length > 0 || harvestDinos.length > 0;
+
   const itemPanelTabs = [
     { id: "crates", label: `Crates (${sourceCount})` },
-    { id: "info",   label: "Info" }
+    { id: "info",   label: "Info" },
+    ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : [])
   ];
 
   setInfoPanelTitle(itemName);
@@ -420,6 +468,7 @@ function renderItemPanel(itemName){
       renderPage: (id) => {
         if (id === "crates") return renderItemTabCrates(it);
         if (id === "info") return renderItemTabInfo(it);
+        if (id === "dinos") return renderItemTabDinos(it, dropDinos, harvestDinos);
         return "";
       }
     })}
@@ -506,11 +555,19 @@ function renderItemPanel(itemName){
     };
   });
 
+  body.querySelectorAll("[data-open-dino]").forEach(btn => {
+    btn.onclick = () => {
+      const dinoName = btn.dataset.openDino;
+      if (dinoName) openDinoView(dinoName);
+    };
+  });
+
   refreshInfoPanelPageHeight();
   syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
 }
 
 const ITEM_PANEL_TABS = [
   { id: "crates", label: "Crates" },
-  { id: "info", label: "Info" }
+  { id: "info", label: "Info" },
+  { id: "dinos", label: "Dinos" }
 ];
