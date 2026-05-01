@@ -144,6 +144,97 @@ function renderDinoTabStats(d){
 }
 
 
+function dinoLootSetStateKey(dinoBp, idx){
+  return `${State.mapId}::${dinoBp}::dinoLootSet::${idx}`;
+}
+
+function isDinoLootSetOpen(dinoBp, idx){
+  return dinoLootSetOpenState[dinoLootSetStateKey(dinoBp, idx)] ?? true;
+}
+
+function setDinoLootSetOpen(dinoBp, idx, open){
+  dinoLootSetOpenState[dinoLootSetStateKey(dinoBp, idx)] = !!open;
+}
+
+function areAllDinoLootSetsOpen(dinoBp, sets){
+  return sets.every((_, i) => isDinoLootSetOpen(dinoBp, i));
+}
+
+function setAllDinoLootSetsOpen(dinoBp, sets, open){
+  sets.forEach((_, i) => setDinoLootSetOpen(dinoBp, i, open));
+}
+
+
+function lootSetById(id){
+  return Global.loot?.si?.[id] || null;
+}
+
+function renderLootEntryItems(e){
+  const itemNames = (Array.isArray(e?.i) ? e.i : []).map(id => {
+    const name = itemDisplayNameById(id);
+    return `<span class="loot-item-tag" data-item-id="${id}">${escapeHtml(name)}</span>`;
+  }).join("");
+
+  if (!itemNames) return "";
+
+  const chance = (e?.chance != null && e.chance !== 1)
+    ? ` <span class="loot-chance">${Math.round(e.chance * 100)}%</span>` : "";
+
+  const qty = (e?.mn != null && e?.mx != null && !(e.mn === 1 && e.mx === 1))
+    ? ` <span class="loot-qty">${fmtRange(e.mn, e.mx)}</span>` : "";
+
+  return `<div class="loot-entry">${itemNames}${qty}${chance}</div>`;
+}
+
+function renderDinoLootSetCard(setRow, idx, dinoBp){
+  const { allEntries, setMeta } = lootSetEntriesFromRow(setRow);
+  const setName = lootSetNameFromRow(setRow, `Set ${idx + 1}`);
+  const isOpen = isDinoLootSetOpen(dinoBp, idx);
+
+  if (!allEntries.length) return "";
+
+  return `
+    <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"} dino-loot-set">
+      <button
+        type="button"
+        class="loot-set-toggle"
+        data-dino-loot-set-toggle="${escapeAttr(String(idx))}"
+      >
+        <div class="loot-set-toggle-main">
+          <div class="info-row">
+            <span class="info-label">${escapeHtml(setName)}</span>
+          </div>
+        </div>
+        <div class="loot-set-toggle-right">
+          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
+        </div>
+      </button>
+      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+        <div class="meta-grid">
+          <div class="meta-cell">
+            <div class="meta-label">Set Weight</div>
+            <div class="meta-value">${escapeHtml(fmt(setRow?.w) || "--")}</div>
+          </div>
+
+          ${
+            setMeta?.smn != null || setMeta?.smx != null
+              ? `
+                <div class="meta-cell">
+                  <div class="meta-label">Items Chosen</div>
+                  <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
+                </div>
+              `
+              : ``
+          }
+        </div>
+
+        ${allEntries.map(renderLootEntryBlock).join("")}
+      </div>
+    </div>
+  `;
+}
+
+
 function renderDinoTabLoot(d){
   const bp = d?.bpPath;
   if (!bp) return `<div class="info-section"><div class="info-empty">No loot data</div></div>`;
@@ -156,49 +247,7 @@ function renderDinoTabLoot(d){
   }
 
   let html = "";
-
-  // ── Drop component (death inventory) ─────────────────────────────────
-  if (dropComp){
-    const sets = Array.isArray(dropComp.s) ? dropComp.s : [];
-    const mn = dropComp.mn ?? 1;
-    const mx = dropComp.mx ?? 1;
-    const setsHtml = sets.map(setRow => {
-      const entries = Array.isArray(setRow?.e) ? setRow.e : [];
-      const setName = setRow?.n || "";
-
-      if (!entries.length) return "";
-
-      const entriesHtml = entries.map(e => {
-        const itemNames = (Array.isArray(e?.i) ? e.i : []).map(id => {
-          const name = itemDisplayNameById(id);
-          return `<span class="loot-item-tag" data-item-id="${id}">${escapeHtml(name)}</span>`;
-        }).join("");
-        if (!itemNames) return "";
-        const chance = (e?.chance != null && e.chance !== 1)
-          ? ` <span class="loot-chance">${Math.round(e.chance * 100)}%</span>` : "";
-        const qty = (e?.mn != null && e?.mx != null && !(e.mn === 1 && e.mx === 1))
-          ? ` <span class="loot-qty">${fmtRange(e.mn, e.mx)}</span>` : "";
-        return `<div class="loot-entry">${itemNames}${qty}${chance}</div>`;
-      }).join("");
-
-      if (!entriesHtml) return "";
-
-      return `
-        <div class="loot-set">
-          ${setName ? `<div class="loot-set-name">${escapeHtml(setName)}</div>` : ""}
-          ${entriesHtml}
-        </div>`;
-    }).join("");
-
-    html += `
-      <div class="info-section">
-        <div class="info-subtitle">Drops on Death</div>
-        ${mn != null && mx != null ? `<div class="loot-set-count">Loot sets: ${fmtRange(mn, mx)}</div>` : ""}
-        ${setsHtml || `<div class="info-empty">No drop data</div>`}
-      </div>`;
-  }
-
-  // ── Harvest component (tool harvesting) ──────────────────────────────
+  
   if (harvestComp){
     const itemIds = Array.isArray(harvestComp.i) ? harvestComp.i : [];
     const itemsHtml = itemIds.map(id => {
@@ -213,6 +262,37 @@ function renderDinoTabLoot(d){
       </div>`;
   }
 
+    if (dropComp){
+    const sets = Array.isArray(dropComp.s) ? dropComp.s : [];
+    const mn = dropComp.mn ?? 1;
+    const mx = dropComp.mx ?? 1;
+    const allOpen = areAllDinoLootSetsOpen(bp, sets);
+    const setsHtml = sets
+      .map((setRow, idx) => renderDinoLootSetCard(setRow, idx, bp))
+      .filter(Boolean)
+      .join("");
+    html += `
+      <div class="info-section">
+        <div class="dino-loot-section-head">
+          <div>
+            <div class="info-subtitle">Drops on Death</div>
+            ${mn != null && mx != null ? `<div class="loot-set-count">Loot sets: ${fmtRange(mn, mx)}</div>` : ""}
+          </div>
+
+          ${sets.length ? `
+            <button
+              type="button"
+              class="loot-set-toggle-all"
+              data-dino-loot-set-toggle-all="1"
+            >${allOpen ? "Collapse All" : "Expand All"}</button>
+          ` : ""}
+        </div>
+        <div class="entries mode-menu-like-list">
+          ${setsHtml || `<div class="info-empty">No drop data</div>`}
+        </div>
+      </div>`;
+  }
+
   return html;
 }
 
@@ -224,11 +304,6 @@ function renderDinoPanel(name){
     return;
   }
 
-  const panel = ensureInfoPanel();
-  const activeTab = DINO_PANEL_TABS.some(t => t.id === infoPanelState.dinoTab)
-    ? infoPanelState.dinoTab
-    : "spawns";
-
   const spawnCount = d.entries?.length ?? 0;
   const hasLoot = !!(dropCompForDino(d?.bpPath) || harvestCompForDino(d?.bpPath));
   const dinoPanelTabs = [
@@ -236,6 +311,12 @@ function renderDinoPanel(name){
     { id: "stats",  label: "Stats" },
     ...(hasLoot ? [{ id: "loot", label: "Loot" }] : [])
   ];
+
+  const activeTab = dinoPanelTabs.some(t => t.id === infoPanelState.dinoTab)
+    ? infoPanelState.dinoTab
+    : "spawns";
+
+  const panel = ensureInfoPanel();
 
   setInfoPanelTitle(name);
 
@@ -344,6 +425,34 @@ function renderDinoPanel(name){
       e.preventDefault();
       const entryName = btn.dataset.openEntry;
       openEntryView(entryName);
+    };
+  });
+  body.querySelectorAll("[data-dino-loot-set-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const idx = Number(btn.dataset.dinoLootSetToggle);
+      if (!Number.isInteger(idx)) return;
+
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.dinoTab);
+
+      setDinoLootSetOpen(d.bpPath, idx, !isDinoLootSetOpen(d.bpPath, idx));
+      renderDinoPanel(name);
+
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.dinoTab);
+    };
+  });
+
+  body.querySelectorAll("[data-dino-loot-set-toggle-all]").forEach(btn => {
+    btn.onclick = () => {
+      const dropComp = dropCompForDino(d.bpPath);
+      const sets = Array.isArray(dropComp?.s) ? dropComp.s : [];
+      const nextOpen = !areAllDinoLootSetsOpen(d.bpPath, sets);
+
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.dinoTab);
+
+      setAllDinoLootSetsOpen(d.bpPath, sets, nextOpen);
+      renderDinoPanel(name);
+
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.dinoTab);
     };
   });
 

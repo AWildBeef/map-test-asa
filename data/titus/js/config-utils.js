@@ -255,6 +255,8 @@ const entryDinoOpenState = {}; // key: "entryName::dinoBp" -> bool
 const itemCrateOpenState = {}; // key: "itemName::crateValue" -> bool
 const dinoSpawnCardOpenState = {}; // key: entryVisibilityKey -> bool
 
+const dinoLootSetOpenState = {};
+
 function openEntryView(entryName){
   if (!entryName) return;
 

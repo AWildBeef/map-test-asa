@@ -394,9 +394,7 @@ function renderItemPanel(itemName){
   }
 
   const panel = ensureInfoPanel();
-  const activeTab = ITEM_PANEL_TABS.some(t => t.id === infoPanelState.itemTab)
-    ? infoPanelState.itemTab
-    : "crates";
+  
 
   // Count sources for tab label
   const itemIds = Array.isArray(it?.ids) ? it.ids : (it?.id != null ? [it.id] : []);
@@ -419,10 +417,16 @@ function renderItemPanel(itemName){
   const hasDinoLoot = dropDinos.length > 0 || harvestDinos.length > 0;
 
   const itemPanelTabs = [
-    { id: "crates", label: `Crates (${sourceCount})` },
-    { id: "info",   label: "Info" },
-    ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : [])
-  ];
+     ...(sourceCount > 0 ? [{ id: "crates", label: `Crates (${sourceCount})` }] : []),
+      ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : []),
+      { id: "info", label: "Info" }
+    ];
+
+    const activeTab = itemPanelTabs.some(t => t.id === infoPanelState.itemTab)
+      ? infoPanelState.itemTab
+      : itemPanelTabs[0].id;
+      
+    infoPanelState.itemTab = activeTab;
 
   setInfoPanelTitle(itemName);
 
