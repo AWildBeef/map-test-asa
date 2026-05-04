@@ -239,8 +239,9 @@ function buildWorldRuleIndex(rules){
     // Skip event-specific rules (FearEvolved, WinterWonderland, etc.)
     // They would overwrite the base non-event rule in the exact map,
     // causing wrong outputs during normal (non-event) gameplay display.
+    // A missing event, "None", "none", or "-" all mean non-event.
     const event = r?.event;
-    if (event && event !== "None" && event !== "none") continue;
+    if (event && event !== "None" && event !== "none" && event !== "-") continue;
 
     if (r?.exact){
       exact.set(fromBp, r);
@@ -489,18 +490,60 @@ function entryRarityForEntry(entryName){
 
 
 function mergeWorldReplacementTables(baseWR, modWR){
-  const out = {};
+  // Build a global mod exact index to detect when mod handles a split internally.
+  // A mod's 1-to-1 Remap_NPC rule + a multi-output exact rule on the target
+  // means the base ancestor rule is redundant (mod already encodes the distribution).
+  const modExactIdx = new Map();
+  for (const rules of Object.values(modWR || {})) {
+    for (const r of (Array.isArray(rules) ? rules : [])) {
+      const ev = r?.event;
+      if (ev && ev !== "None" && ev !== "none" && ev !== "-" && ev !== "") continue;
+      if (!r?.exact) continue;
+      const from = normalizeBp(r?.from);
+      if (!from) continue;
+      const existing = modExactIdx.get(from);
+      if (!existing || (r.outs?.length || 0) > (existing.outs?.length || 0)) {
+        modExactIdx.set(from, r);
+      }
+    }
+  }
+
+  // Find 1-to-1 exact remaps (Remap_NPC style) where the target has its own
+  // multi-output non-event exact rule — these base ancestor rules are dropped.
+  const dropFromBase = new Set();
+  for (const rules of Object.values(modWR || {})) {
+    for (const r of (Array.isArray(rules) ? rules : [])) {
+      const ev = r?.event;
+      if (ev && ev !== "None" && ev !== "none" && ev !== "-" && ev !== "") continue;
+      if (!r?.exact || (r.outs?.length || 0) !== 1) continue;
+      const from = normalizeBp(r?.from);
+      const to = normalizeBp(r?.outs?.[0]?.[0]);
+      if (!from || !to) continue;
+      const targetRule = modExactIdx.get(to);
+      if (targetRule && (targetRule.outs?.length || 0) > 1) {
+        dropFromBase.add(from);
+      }
+    }
+  }
 
   const keys = new Set([
     ...Object.keys(baseWR || {}),
     ...Object.keys(modWR || {})
   ]);
 
+  const out = {};
   for (const k of keys){
-    out[k] = [
-      ...(Array.isArray(baseWR?.[k]) ? baseWR[k] : []),
-      ...(Array.isArray(modWR?.[k]) ? modWR[k] : [])
-    ];
+    const baseRules = Array.isArray(baseWR?.[k]) ? baseWR[k] : [];
+    const modRules  = Array.isArray(modWR?.[k])  ? modWR[k]  : [];
+
+    // Drop base ancestor rules that the mod supersedes
+    const filteredBase = baseRules.filter(r => {
+      if (r?.exact) return true; // keep base exact rules always
+      const from = normalizeBp(r?.from);
+      return !from || !dropFromBase.has(from);
+    });
+
+    out[k] = [...filteredBase, ...modRules];
   }
 
   return out;
@@ -663,92 +706,92 @@ function worldOutputsForBp(bp, _debug = false){
 
   const { exact, ancestor } = worldRuleIndexForCurrentMap();
 
-  function resolveOne(curBp, seen = new Set(), callerBp = null, fromExact = false, depth = 0){
+  // Resolve a BP through the world replacement chain.
+  // Order mirrors Ark's execution:
+  //   1. Ancestor (base WorldReplacements) fires first if present
+  //   2. Remap_NPC (1-to-1 exact) applies to each ancestor output inline
+  //   3. If no ancestor, exact rule fires (LeedsReplacements, WormReplacements, etc.)
+  // from_exact=true: this BP came from an exact rule output — skip ancestor matching.
+  function resolveOne(curBp, seen, callerBp, fromExact, depth){
     curBp = normalizeBp(curBp);
     if (!curBp) return [];
+    const tag = _debug ? curBp.split("/").pop() : "";
 
-    const tag = curBp.split("/").pop();
-
-    if (seen.has(curBp)) {
+    if (seen.has(curBp)){
       const r = curBp === callerBp ? [[curBp, 1]] : [];
-      if (_debug) console.log("  ".repeat(depth) + `SEEN ${tag} callerBp=${callerBp?.split("/").pop()} -> ${r.length ? "passthrough" : "DROP"}`);
+      if (_debug) console.log("  ".repeat(depth) + `SEEN ${tag} -> ${r.length ? "pass" : "DROP"}`);
       return r;
     }
-
     const nextSeen = new Set(seen);
     nextSeen.add(curBp);
 
-    const exactRule = exact.get(curBp);
-    if (exactRule) {
-      if (_debug) console.log("  ".repeat(depth) + `EXACT ${tag}`);
-      const outs = Array.isArray(exactRule.outs) && exactRule.outs.length
-        ? exactRule.outs
-        : [[curBp, 1]];
-
-      let finalOuts = [];
-      for (const o of outs) {
-        const nextBp = normalizeBp(o?.[0]);
-        const nextProb = Number(o?.[1] || 0);
-        if (!nextBp || nextProb <= 0) continue;
-        if (_debug) console.log("  ".repeat(depth) + `  -> ${nextBp.split("/").pop()} (${nextProb.toFixed(3)}) fromExact=true`);
-        const resolved = resolveOne(nextBp, nextSeen, curBp, true, depth + 1);
-        for (const [rbp, rprob] of resolved) {
-          finalOuts.push([rbp, nextProb * rprob]);
-        }
+    // Step 1: ancestor rules fire first
+    let bestRule = null, bestDist = null;
+    if (!fromExact){
+      for (const r of ancestor){
+        const fromBp = normalizeBp(r?.from);
+        if (!fromBp) continue;
+        const dist = ancestorDistance(curBp, fromBp);
+        if (dist == null) continue;
+        if (bestRule === null || dist < bestDist){ bestRule = r; bestDist = dist; }
       }
-
-      return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
     }
 
-    if (fromExact) {
+    if (bestRule){
+      if (_debug) console.log("  ".repeat(depth) + `ANC ${tag} via ${bestRule.from.split("/").pop()} dist=${bestDist}`);
+      const outs = Array.isArray(bestRule.outs) && bestRule.outs.length ? bestRule.outs : [[curBp, 1]];
+      let final = [];
+      for (const o of outs){
+        const nb = normalizeBp(o?.[0]), np = Number(o?.[1] || 0);
+        if (!nb || np <= 0) continue;
+
+        // Step 2: apply 1-to-1 Remap_NPC inline if one exists for this output
+        const ex = exact.get(nb);
+        if (ex && ex.outs?.length === 1){
+          const remapped = normalizeBp(ex.outs[0]?.[0]);
+          if (_debug) console.log("  ".repeat(depth) + `  remap ${nb.split("/").pop()} -> ${remapped.split("/").pop()}`);
+          // Recurse on remapped BP; allow exact rule (like LeedsReplacements) to fire
+          for (const [rbp, rprob] of resolveOne(remapped, nextSeen, remapped, true, depth + 1)){
+            final.push([rbp, np * rprob]);
+          }
+        } else {
+          // Multi-output or no exact remap — recurse with from_exact=true (no more ancestor)
+          for (const [rbp, rprob] of resolveOne(nb, nextSeen, curBp, true, depth + 1)){
+            final.push([rbp, np * rprob]);
+          }
+        }
+      }
+      return final.length ? combineOutputWeights(final) : [[curBp, 1]];
+    }
+
+    // Step 3: no ancestor — try exact rule (LeedsReplacements, WormReplacements, Remap_NPC)
+    const exactRule = exact.get(curBp);
+    if (exactRule){
+      if (_debug) console.log("  ".repeat(depth) + `EXACT ${tag}`);
+      const outs = Array.isArray(exactRule.outs) && exactRule.outs.length ? exactRule.outs : [[curBp, 1]];
+      let final = [];
+      for (const o of outs){
+        const nb = normalizeBp(o?.[0]), np = Number(o?.[1] || 0);
+        if (!nb || np <= 0) continue;
+        if (_debug) console.log("  ".repeat(depth) + `  -> ${nb.split("/").pop()} (${np.toFixed(3)})`);
+        for (const [rbp, rprob] of resolveOne(nb, nextSeen, curBp, true, depth + 1)){
+          final.push([rbp, np * rprob]);
+        }
+      }
+      return final.length ? combineOutputWeights(final) : [[curBp, 1]];
+    }
+
+    if (fromExact){
       if (_debug) console.log("  ".repeat(depth) + `fromExact passthrough ${tag}`);
       return [[curBp, 1]];
     }
 
-    let bestRule = null;
-    let bestDist = null;
-
-    for (const r of ancestor) {
-      const fromBp = normalizeBp(r?.from);
-      if (!fromBp) continue;
-
-      const dist = ancestorDistance(curBp, fromBp);
-      if (dist == null) continue;
-
-      if (bestRule === null || dist < bestDist) {
-        bestRule = r;
-        bestDist = dist;
-      }
-    }
-
-    if (bestRule) {
-      if (_debug) console.log("  ".repeat(depth) + `ANCESTOR ${tag} via ${bestRule.from.split("/").pop()} dist=${bestDist}`);
-      const outs = Array.isArray(bestRule.outs) && bestRule.outs.length
-        ? bestRule.outs
-        : [[curBp, 1]];
-
-      let finalOuts = [];
-      for (const o of outs) {
-        const nextBp = normalizeBp(o?.[0]);
-        const nextProb = Number(o?.[1] || 0);
-        if (!nextBp || nextProb <= 0) continue;
-
-        const resolved = resolveOne(nextBp, nextSeen, curBp, false, depth + 1);
-        for (const [rbp, rprob] of resolved) {
-          finalOuts.push([rbp, nextProb * rprob]);
-        }
-      }
-
-      return finalOuts.length ? combineOutputWeights(finalOuts) : [[curBp, 1]];
-    }
-
-    if (_debug) console.log("  ".repeat(depth) + `NO RULE ${tag} -> passthrough`);
+    if (_debug) console.log("  ".repeat(depth) + `NO RULE ${tag}`);
     return [[curBp, 1]];
   }
 
-  return resolveOne(bp);
+  return resolveOne(bp, new Set(), null, false, 0);
 }
-
 
 function finalRarityForManager(entryName,meta,score){
 
@@ -1229,6 +1272,66 @@ function buildLootIndexes(){
 }
 
 
+// ── Dino drop / harvest loot helpers ─────────────────────────────────────
+
+function dropCompForDino(bp){
+  const d = getDinoObjByBp(bp);
+  if (!d?.dd) return null;
+  return Global.loot?.dd?.[d.dd] || null;
+}
+
+function harvestCompForDino(bp){
+  const d = getDinoObjByBp(bp);
+  if (!d?.dh) return null;
+  return Global.loot?.dh?.[d.dh] || null;
+}
+
+function dropCompClassForDino(bp){
+  return getDinoObjByBp(bp)?.dd || null;
+}
+
+function harvestCompClassForDino(bp){
+  return getDinoObjByBp(bp)?.dh || null;
+}
+
+function dinoBpsThatUseDropComp(compClass){
+  // Returns all dino BPs whose dd field matches compClass (vanilla + active mod)
+  const out = [];
+  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
+    if (obj.dd === compClass) out.push(bp);
+  }
+  return out;
+}
+
+function dinoBpsThatUseHarvestComp(compClass){
+  const out = [];
+  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
+    if (obj.dh === compClass) out.push(bp);
+  }
+  return out;
+}
+
+function dinoBpsThatDropItem(itemId){
+  const loot = Global.loot;
+  if (!loot?.rd || !loot?.di) return [];
+  const compIndices = loot.rd[String(itemId)] || [];
+  return compIndices.flatMap(idx => {
+    const cls = loot.di[idx];
+    return cls ? dinoBpsThatUseDropComp(cls) : [];
+  });
+}
+
+function dinoBpsThatHarvestItem(itemId){
+  const loot = Global.loot;
+  if (!loot?.rh || !loot?.hi) return [];
+  const compIndices = loot.rh[String(itemId)] || [];
+  return compIndices.flatMap(idx => {
+    const cls = loot.hi[idx];
+    return cls ? dinoBpsThatUseHarvestComp(cls) : [];
+  });
+}
+
+
 function currentGeom(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   return Global.mapGeom.get(mapMeta?.geomShort);
@@ -1515,6 +1618,56 @@ function rebuildLootIndices(){
     State.itemNameToIds.set(name, [...new Set(ids)].sort((a,b)=>a-b));
   }
 
+  State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
+
+  // --- dino drop / harvest items on this map ---
+  // Add items that come from dino drops/harvests for dinos on the current map.
+  const mapDinoBps = new Set([...State.entryToDinos.values()].flat());
+  const dinoDropItemIds = new Set();
+  const dinoHarvestItemIds = new Set();
+
+  for (const bp of mapDinoBps){
+    const dinoObj = getDinoObjByBp(bp);
+    if (!dinoObj) continue;
+
+    if (dinoObj.dd){
+      const comp = loot.dd?.[dinoObj.dd];
+      if (comp){
+        for (const setRow of (comp.s || [])){
+          for (const entry of (setRow.e || [])){
+            for (const iid of (entry.i || [])){
+              dinoDropItemIds.add(iid);
+            }
+          }
+        }
+      }
+    }
+
+    if (dinoObj.dh){
+      const comp = loot.dh?.[dinoObj.dh];
+      if (comp){
+        for (const iid of (comp.i || [])){
+          dinoHarvestItemIds.add(iid);
+        }
+      }
+    }
+  }
+
+  for (const itemId of [...dinoDropItemIds, ...dinoHarvestItemIds]){
+    State.mapItemIds.add(itemId);
+    const itemRow = items.i?.[String(itemId)];
+    if (!itemRow) continue;
+    if (modActive && !itemRow._mod) continue;
+    const name = itemRow.n || `Item ${itemId}`;
+    if (!State.itemNameToIds.has(name)){
+      State.itemNameToIds.set(name, []);
+    }
+    if (!State.itemNameToIds.get(name).includes(itemId)){
+      State.itemNameToIds.get(name).push(itemId);
+    }
+  }
+
+  // Rebuild itemNames to include dino loot items
   State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 }
 
@@ -2368,13 +2521,13 @@ function mountSourceDrillDropdown(native, host){
   }
 
   // Render a flat search result across the whole tree
-  function allLeaves(node) {
+  function allLeaves(node, _parentPath = []) {
     const out = [];
     for (const child of node.children || []) {
       if (Array.isArray(child.children)) {
-        out.push(...allLeaves(child));
+        out.push(...allLeaves(child, [..._parentPath, child.label]));
       } else {
-        out.push(child);
+        out.push({ ...child, _path: _parentPath });
       }
     }
     return out;
@@ -2406,6 +2559,19 @@ function mountSourceDrillDropdown(native, host){
         row.className = "dd-item";
         row.textContent = item.label;
         row.onclick = () => {
+          // Navigate stack to item's parent path so next open shows correct folder
+          if (item._path && item._path.length) {
+            stack.length = 0;
+            stack.push(root);
+            let node = root;
+            for (const seg of item._path) {
+              const next = (node.children || []).find(c => Array.isArray(c.children) && c.label === seg);
+              if (!next) break;
+              stack.push(next);
+              node = next;
+            }
+            lastPath = item._path.slice();
+          }
           native.value = item.value;
           native.dispatchEvent(new Event("change"));
           close();
@@ -3092,4 +3258,109 @@ window.debugWR = (bp) => {
   const result = worldOutputsForBp(bp, true);
   console.log("RESULT:", result.map(([b,p]) => `${b.split("/").pop()} (${(p*100).toFixed(1)}%)`).join(", "));
   return result;
+};
+
+// Dump all WR rules whose 'from' or 'outs' contain the given substring
+window.debugWRRules = (substr) => {
+  const all = Global.spawn?.worldReplacements || {};
+  const lower = String(substr).toLowerCase();
+  for (const [mapKey, rules] of Object.entries(all)) {
+    if (!Array.isArray(rules)) continue;
+    const matches = rules.filter(r => {
+      const fromMatch = String(r?.from || "").toLowerCase().includes(lower);
+      const outMatch = (r?.outs || []).some(o => String(o?.[0] || "").toLowerCase().includes(lower));
+      return fromMatch || outMatch;
+    });
+    if (matches.length) {
+      console.log(`\n=== map="${mapKey}" — ${matches.length} matching rule(s) ===`);
+      for (const r of matches) {
+        const tag = r.exact ? "EXACT" : "anc  ";
+        const event = r.event || "-";
+        console.log(`${tag} event=${event}`);
+        console.log(`  from: ${r.from}`);
+        for (const o of (r.outs || [])) {
+          console.log(`  out:  ${o[0]} (${o[1]})`);
+        }
+      }
+    }
+  }
+};
+
+// Dump the built rule index for the current map
+window.debugWRIndex = (substr) => {
+  const { exact, ancestor } = worldRuleIndexForCurrentMap();
+  const lower = String(substr || "").toLowerCase();
+  console.log(`\n=== EXACT rules in current-map index (mapId="${State.mapId}") ===`);
+  for (const [from, r] of exact.entries()) {
+    if (!lower || from.toLowerCase().includes(lower)) {
+      console.log(`from: ${from}`);
+      for (const o of (r.outs || [])) console.log(`  -> ${o[0]} (${o[1]})`);
+    }
+  }
+  console.log(`\n=== ANCESTOR rules in current-map index ===`);
+  for (const r of ancestor) {
+    if (!lower || String(r.from).toLowerCase().includes(lower)) {
+      console.log(`from: ${r.from}`);
+      for (const o of (r.outs || [])) console.log(`  -> ${o[0]} (${o[1]})`);
+    }
+  }
+};
+
+// Debug: check if a specific BP made it into the current map's index
+window.debugDinoOnMap = (bpSubstr) => {
+  const lower = String(bpSubstr).toLowerCase();
+  console.log(`\n=== Searching for "${bpSubstr}" on map "${State.mapId}" ===`);
+
+  // 1. Is the dino in Global.dinos?
+  console.log("\n--- Global.dinos lookup ---");
+  let found = false;
+  for (const [bp, d] of Object.entries(Global.dinos?.dinos || {})){
+    if (bp.toLowerCase().includes(lower)){
+      found = true;
+      console.log(`  FOUND in Global.dinos: ${bp.split('/').pop()}`);
+      console.log(`    name: ${d?.n}, parent: ${d?.p?.split('/').pop()}`);
+    }
+  }
+  if (!found) console.log("  NOT in Global.dinos");
+
+  // 2. Is the dino in modBlueprintSet?
+  if (!activeSourceIsOfficial()){
+    const allowed = modBlueprintSet();
+    let inMod = false;
+    for (const bp of allowed){
+      if (bp.toLowerCase().includes(lower)){
+        inMod = true;
+        console.log(`  IN modBlueprintSet: ${bp.split('/').pop()}`);
+      }
+    }
+    if (!inMod) console.log("  NOT in modBlueprintSet (would be filtered out!)");
+  }
+
+  // 3. Is the dino in State.dinoToEntries (current map)?
+  console.log("\n--- State.dinoToEntries (current map) ---");
+  let inIdx = false;
+  for (const [bp, entries] of State.dinoToEntries.entries()){
+    if (bp.toLowerCase().includes(lower)){
+      inIdx = true;
+      console.log(`  FOUND: ${bp.split('/').pop()}`);
+      console.log(`    in entries: ${entries.join(", ")}`);
+    }
+  }
+  if (!inIdx) console.log("  NOT in State.dinoToEntries for this map");
+
+  // 4. What entries on this map mention this BP in their raw data?
+  console.log("\n--- Raw entry data search ---");
+  for (const entryName of State.mapEntries){
+    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+    for (const r of rows){
+      const rawBp = String(r?.[0] || "");
+      if (rawBp.toLowerCase().includes(lower)){
+        console.log(`  in entry ${entryName}: rawBp=${rawBp.split('/').pop()}`);
+        const outs = worldOutputsForBp(rawBp);
+        for (const [obp, prob] of outs){
+          console.log(`    -> ${obp.split('/').pop()} (${(prob*100).toFixed(1)}%)`);
+        }
+      }
+    }
+  }
 };
