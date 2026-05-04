@@ -1911,8 +1911,16 @@ function renderInfoPanel() {
   }
   
   if (State.mode === "dino") {
-    renderDinoPanel(State.selection);
-    
+    try {
+      renderDinoPanel(State.selection);
+    } catch (err) {
+      console.error("renderDinoPanel threw:", err);
+      setInfoPanelTitle(State.selection);
+      setInfoPanelHTML(`<div style="color:var(--muted);padding:8px;font-size:12px;">
+        Panel error: ${err.message}<br>
+        <pre style="font-size:10px;white-space:pre-wrap;opacity:.7">${err.stack || ""}</pre>
+      </div>`);
+    }
   } else if (State.mode === "entry") {
     renderEntryPanel(State.selection);
     

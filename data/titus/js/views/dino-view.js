@@ -41,21 +41,83 @@ function rebuildDinoSelect(){
 }
 
 
-function renderDinoHero(d, selectedName){
-  const bp = d.bpPath || "";
-  const extraBps = Array.isArray(d.additionalBpPathsToDisplay)
-    ? d.additionalBpPathsToDisplay
-    : [];
+// --- SDF Spawn Command State ---
+// Per-dino preferences; falls back to shared defaults across selections.
+var sdfDefaults = { tamed: false, level: 150, skipBonusLevels: false };
+var sdfStateByDino = {};
 
-  const allBps = [bp, ...extraBps].filter(Boolean);
-  const nameTag = d.nameTag || "";
+function getSdfState(name) {
+  if (!sdfStateByDino[name]) sdfStateByDino[name] = { ...sdfDefaults };
+  return sdfStateByDino[name];
+}
+
+// Extract the shortest SDF-usable partial from a blueprint path.
+//
+// Strategy: take the class name segment (after last dot), strip the standard
+// ARK suffixes layer by layer, and return whatever is left.  If stripping
+// leaves an empty string we fall back to the full stripped-suffix form, and
+// if that is also empty we return the raw class name so there is always
+// something usable.
+//
+// Examples
+//   Rex_Character_BP_C            -> Rex
+//   MegaRex_Character_BP_C        -> MegaRex
+//   Dodo_Character_BP_Aberrant_C  -> Dodo_Character_BP_Aberrant  (unique part kept)
+//   SomeWeirdMod_C                -> SomeWeirdMod
+function extractSdfPartial(bp) {
+  if (!bp) return "";
+
+  // Grab the class identifier after the last dot (or last slash as fallback)
+  const raw = String(bp).split(".").pop().split("/").pop();
+
+  // Ordered list of suffix patterns to strip, most-specific first
+  const SUFFIXES = [
+    /_Character_BP_C$/,
+    /_BP_C$/,
+    /_Character_C$/,
+    /_C$/,
+    /_Character_BP$/,
+    /_Character$/,
+    /_BP$/,
+  ];
+
+  let cls = raw;
+  for (const re of SUFFIXES) {
+    const stripped = cls.replace(re, "");
+    if (stripped && stripped !== cls) { cls = stripped; break; }
+  }
+
+  return cls || raw;
+}
+
+function buildSdfCommand(partial, tamed, level, skipBonus) {
+  const wildTamed = tamed ? 1 : 0;
+  const lvl = Math.max(1, Math.round(Number(level) || 1));
+  const skip = skipBonus ? 1 : 0;
+  return `cheat SDF ${partial} ${wildTamed} ${lvl} 1 ${skip}`;
+}
+
+function buildSdfSummary(displayName, tamed, level, skipBonus) {
+  const kind = tamed ? "tamed" : "wild";
+  const lvl  = Math.max(1, Math.round(Number(level) || 1));
+  // When tamed without skip-bonus the game applies a 50% level bonus on spawn
+  const effectiveLvl = (tamed && !skipBonus) ? Math.round(lvl * 1.5) : lvl;
+  const lvlStr = `level ${effectiveLvl}`;
+  return `Spawns a ${kind} ${lvlStr} ${escapeHtml(displayName)}`;
+}
+
+function renderDinoHero(d, selectedName) {
+  const bp = d.bpPath || "";
   const displayName = d.displayName || "(Unknown)";
   const otherName = otherSexNameForSelected(d, selectedName);
   const modId = Global.modMeta?.modId || "";
-  /*const modName = Global.modMeta?.modName || "";*/
-  /*
-      ${modName ? `<div class="info-submeta">${escapeHtml(modName)}</div>` : ""}
-      */
+
+  const sdf = getSdfState(selectedName);
+  const partial = extractSdfPartial(bp);
+  const cmd = buildSdfCommand(partial, sdf.tamed, sdf.level, sdf.skipBonusLevels);
+
+  // Show the full class name as a compact copyable line beneath the command
+  const classDisplay = bp ? bp.split(".").pop() : "";
 
   return `
     <div class="dino-hero">
@@ -66,21 +128,49 @@ function renderDinoHero(d, selectedName){
       ${d.tameable === false || d.tameable === 0 ? `<span class="dino-badge tameable">Untameable</span>` : ""}
       ${d.breedable === false || d.breedable === 0 ? `<span class="dino-badge breedable">Unbreedable</span>` : ""}
 
-      <div class="info-subtitle">Blueprint</div>
-      ${allBps.length
-        ? allBps.map(v => `
-            <div class="info-mono copy-on-click" data-copy="${escapeAttr(v)}">
-              ${escapeHtml(v)}
-            </div>
-          `).join("")
-        : `
-            <div class="info-mono copy-on-click" data-copy="">
-              (none)
-            </div>
-          `
-      }
+      <div class="spawn-cmd-block">
+        <div class="info-subtitle" style="margin:0 0 4px;">Spawn Command</div>
 
-      ${renderCopyField("Nametag", nameTag || "")}
+        <div class="spawn-cmd-controls">
+          <button type="button"
+            class="spawn-cmd-toggle ${sdf.tamed ? 'is-tamed' : ''}"
+            data-sdf-tamed-flip="1"
+          >${sdf.tamed ? 'Tamed' : 'Wild'}</button>
+
+          <div class="spawn-cmd-level-wrap">
+            <span class="spawn-cmd-label">Level</span>
+            <input
+              type="number"
+              class="spawn-cmd-input spawn-cmd-level"
+              data-sdf-level="1"
+              value="${escapeAttr(String(sdf.level))}"
+              min="1" max="9999"
+            >
+          </div>
+
+          <button type="button"
+            class="spawn-cmd-toggle spawn-cmd-toggle--skip ${!sdf.tamed ? 'is-disabled' : ''} ${sdf.tamed && sdf.skipBonusLevels ? 'is-on' : ''}"
+            data-sdf-skip-flip="1"
+            ${!sdf.tamed ? 'disabled' : ''}
+          >Skip Bonus</button>
+        </div>
+
+        <div class="spawn-cmd-output copy-on-click"
+          data-copy="${escapeAttr(cmd)}"
+          title="Click to copy"
+        >${escapeHtml(cmd)}</div>
+
+        <div class="spawn-cmd-summary" data-sdf-summary="1">${buildSdfSummary(displayName, sdf.tamed, sdf.level, sdf.skipBonusLevels)}</div>
+      </div>
+
+      ${classDisplay ? `
+        <div class="spawn-cmd-class copy-on-click"
+          data-copy="${escapeAttr(classDisplay)}"
+          title="Click to copy class name">
+          <span class="spawn-cmd-class-label">Class name</span>
+          <span class="spawn-cmd-class-value">${escapeHtml(classDisplay)}</span>
+        </div>
+      ` : ""}
     </div>
   `;
 }
@@ -126,20 +216,47 @@ function renderDinoTabSpawns(d, selectedName){
 }
 
 function renderDinoTabStats(d){
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Stats</div>
+      ${renderStatsTable(d?.stats)}
+    </div>
+
+    ${renderAttacksTable(d?.attacks)}
+  `;
+}
+
+
+function renderDinoTabInfo(d) {
+  const bp = d.bpPath || "";
+  const extraBps = Array.isArray(d.additionalBpPathsToDisplay)
+    ? d.additionalBpPathsToDisplay
+    : [];
+  const allBps = [bp, ...extraBps].filter(Boolean);
+  const nameTag = d.nameTag || "";
   const drag = fmtNum(d?.dragWeight, 0);
   const xp = fmtNum(d?.killXpBase, 0);
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Stats</div>
+      <div class="info-subtitle">General</div>
       <div class="entry-meta">
-        ${drag !== null ? `<div class="entry-meta-line">Drag Weight: ${escapeHtml(drag)}</div>` : ``}
-        ${xp !== null ? `<div class="entry-meta-line">Kill XP: ${escapeHtml(String(Number(xp) * 4))}</div>` : ``}
+        ${drag !== null ? `<div class="entry-meta-line">Drag Weight: ${escapeHtml(drag)}</div>` : ""}
+        ${xp !== null ? `<div class="entry-meta-line">Kill XP: ${escapeHtml(String(Number(xp) * 4))}</div>` : ""}
       </div>
-      ${renderStatsTable(d?.stats)}
     </div>
-    
-    ${renderAttacksTable(d?.attacks)}
+
+    <div class="info-section">
+      ${allBps.map((v, i) =>
+        i === 0 ? renderCopyField("Blueprint", v) : renderCopyField("Blueprint (variant)", v)
+      ).join("") || renderCopyField("Blueprint", "")}
+    </div>
+
+    ${nameTag ? `
+      <div class="info-section">
+        ${renderCopyField("Nametag", nameTag)}
+      </div>
+    ` : ""}
   `;
 }
 
@@ -309,7 +426,8 @@ function renderDinoPanel(name){
   const dinoPanelTabs = [
     { id: "spawns", label: `Spawns (${spawnCount})` },
     { id: "stats",  label: "Stats" },
-    ...(hasLoot ? [{ id: "loot", label: "Loot" }] : [])
+    ...(hasLoot ? [{ id: "loot", label: "Loot" }] : []),
+    { id: "info",   label: "Info" }
   ];
 
   const activeTab = dinoPanelTabs.some(t => t.id === infoPanelState.dinoTab)
@@ -334,6 +452,7 @@ function renderDinoPanel(name){
         if (id === "spawns") return renderDinoTabSpawns(d, name);
         if (id === "stats") return renderDinoTabStats(d);
         if (id === "loot") return renderDinoTabLoot(d);
+        if (id === "info") return renderDinoTabInfo(d);
         return "";
       }
     })}
@@ -352,6 +471,63 @@ function renderDinoPanel(name){
       renderDinoPanel(name);
     }
   });
+
+  // --- SDF spawn command wiring ---
+  // Helper: update the command output and summary in-place without a full re-render
+  function refreshSdfOutput() {
+    const sdf = getSdfState(name);
+    const partial = extractSdfPartial(d?.bpPath || "");
+    const cmd = buildSdfCommand(partial, sdf.tamed, sdf.level, sdf.skipBonusLevels);
+    const output = body.querySelector(".spawn-cmd-output");
+    if (output) { output.textContent = cmd; output.dataset.copy = cmd; }
+    const summary = body.querySelector("[data-sdf-summary]");
+    if (summary) summary.innerHTML = buildSdfSummary(d?.displayName || name, sdf.tamed, sdf.level, sdf.skipBonusLevels);
+  }
+
+  // Wild / Tamed flip button
+  const tamedFlipBtn = body.querySelector("[data-sdf-tamed-flip]");
+  if (tamedFlipBtn) {
+    tamedFlipBtn.onclick = () => {
+      const sdf = getSdfState(name);
+      sdf.tamed = !sdf.tamed;
+      // Default skip-bonus to off whenever tamed is toggled
+      sdf.skipBonusLevels = false;
+
+      tamedFlipBtn.textContent = sdf.tamed ? "Tamed" : "Wild";
+      tamedFlipBtn.classList.toggle("is-tamed", sdf.tamed);
+
+      const skipBtn = body.querySelector("[data-sdf-skip-flip]");
+      if (skipBtn) {
+        skipBtn.disabled = !sdf.tamed;
+        skipBtn.classList.toggle("is-disabled", !sdf.tamed);
+        skipBtn.classList.remove("is-on");
+      }
+
+      refreshSdfOutput();
+    };
+  }
+
+  // Level — live update
+  const levelInput = body.querySelector("[data-sdf-level]");
+  if (levelInput) {
+    levelInput.oninput = () => {
+      const sdf = getSdfState(name);
+      sdf.level = Math.max(1, parseInt(levelInput.value, 10) || 1);
+      refreshSdfOutput();
+    };
+    levelInput.onclick = (e) => e.stopPropagation();
+  }
+
+  // Skip bonus flip button
+  const skipFlipBtn = body.querySelector("[data-sdf-skip-flip]");
+  if (skipFlipBtn) {
+    skipFlipBtn.onclick = () => {
+      const sdf = getSdfState(name);
+      sdf.skipBonusLevels = !sdf.skipBonusLevels;
+      skipFlipBtn.classList.toggle("is-on", sdf.skipBonusLevels);
+      refreshSdfOutput();
+    };
+  }
 
   body.querySelectorAll("[data-dino-entry-toggle]").forEach(btn => {
     btn.onclick = () => {

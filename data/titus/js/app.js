@@ -9,10 +9,12 @@ window.ASA_APP_MODULES = [
   "js/render-boot.js",
 ];
 
+const APP_VER = "5.10";
+
 (function loadSequentially(i = 0) {
   if (i >= window.ASA_APP_MODULES.length) return;
   const s = document.createElement('script');
-  s.src = window.ASA_APP_MODULES[i];
+  s.src = window.ASA_APP_MODULES[i] + "?v=" + APP_VER;
   s.async = false;
   s.onload = () => loadSequentially(i + 1);
   s.onerror = () => console.error('Failed to load', s.src);

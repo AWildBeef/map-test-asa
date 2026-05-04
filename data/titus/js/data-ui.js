@@ -1942,7 +1942,7 @@ async function ensureLootAndItemsLoaded() {
       rebuildLootIndices();
 
       // If we're currently in a loot-dependent mode, refresh the UI
-      if (State.mode === "crate" || State.mode === "item") {
+      if (State.mode === "crate" || State.mode === "item" || State.mode === "dino") {
         rebuildSelectionSelect();
         render();
       }

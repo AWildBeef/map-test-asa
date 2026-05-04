@@ -2999,6 +2999,11 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
   max-height: var(--dd-source-max);
 }
 
+/* ── No-mods mode: hide source dropdown, map takes full width ── */
+body[data-no-mods="1"] #sourceSelectFancy{
+  display: none;
+}
+
 #dinoSelectFancy .dd-list{
   max-height: var(--dd-dino-max);
 }
@@ -3994,6 +3999,16 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
 
   #sourceSelectFancy .dd-list{
     max-height: var(--dd-source-max-m);
+  }
+
+  /* No-mods: hide source, map spans full first row */
+  body[data-no-mods="1"] #sourceSelectFancy{
+    display: none;
+  }
+
+  body[data-no-mods="1"] #topbar .controls > #mapSelectFancy{
+    flex: 1 1 100%;
+    max-width: none;
   }
 
   #dinoSelectFancy .dd-list{

@@ -65,6 +65,10 @@ async function boot() {
   const allSources = await buildSources();
   SOURCES = filterSourcesForEmbed(allSources);
 
+  // Flag the UI when there are no mods (only Official in the list)
+  const hasMods = SOURCES.some(s => s.kind === "mod" || s.kind === "group");
+  document.body.dataset.noMods = hasMods ? "0" : "1";
+
   const official = allSources.find(s => s.id === "official");
 
   showBootSplash("Loading base data...");

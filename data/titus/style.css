@@ -2999,6 +2999,11 @@ body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
   max-height: var(--dd-source-max);
 }
 
+/* ── No-mods mode: hide source dropdown, map takes full width ── */
+body[data-no-mods="1"] #sourceSelectFancy{
+  display: none;
+}
+
 #dinoSelectFancy .dd-list{
   max-height: var(--dd-dino-max);
 }
@@ -3568,6 +3573,186 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   display: none !important;
 }
 
+/* ============================================================
+   SPAWN COMMAND WIDGET
+   ============================================================ */
+
+.spawn-cmd-block {
+  margin: 6px 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Single row: Wild/Tamed toggle | Level label+input | Skip Bonus toggle */
+.spawn-cmd-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+/* Shared style for both flip-toggle buttons */
+.spawn-cmd-toggle {
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-soft);
+  background: rgba(255,255,255,.05);
+  color: var(--text-2);
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  min-width: 58px;
+  text-align: center;
+  transition: background .12s, color .12s, border-color .12s, opacity .15s;
+  user-select: none;
+}
+
+.spawn-cmd-toggle:hover:not(:disabled) {
+  background: rgba(255,255,255,.09);
+  color: var(--text-1);
+}
+
+/* Tamed state — accent coloured */
+.spawn-cmd-toggle.is-tamed {
+  background: var(--accent, #00ff88);
+  border-color: transparent;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Skip Bonus: inactive — subtle ghost border, no fill */
+.spawn-cmd-toggle--skip {
+  border-color: var(--border-soft);
+  background: transparent;
+  color: var(--text-2);
+}
+
+/* Skip Bonus: active/on */
+.spawn-cmd-toggle--skip.is-on {
+  background: rgba(255,255,255,.12);
+  border-color: var(--border-soft);
+  color: var(--text-1);
+}
+
+/* Disabled (Skip Bonus when Wild) */
+.spawn-cmd-toggle.is-disabled,
+.spawn-cmd-toggle:disabled {
+  opacity: .28;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Level: label + input together */
+.spawn-cmd-level-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.spawn-cmd-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  opacity: .6;
+  color: var(--text-2);
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.spawn-cmd-input {
+  box-sizing: border-box;
+  background: rgba(0,0,0,.25);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  color: var(--text-1);
+  font-size: 12px;
+  padding: 3px 7px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color .12s;
+}
+
+.spawn-cmd-input:focus {
+  border-color: var(--accent, #00ff88);
+}
+
+.spawn-cmd-level {
+  width: 58px;
+  -moz-appearance: textfield;
+  text-align: center;
+}
+.spawn-cmd-level::-webkit-inner-spin-button,
+.spawn-cmd-level::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.spawn-cmd-output {
+  background: rgba(0,0,0,.30);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 11.5px;
+  font-family: monospace;
+  color: var(--text-1);
+  word-break: break-all;
+  cursor: pointer;
+  transition: border-color .12s, background .12s;
+  line-height: 1.4;
+}
+
+.spawn-cmd-output:hover {
+  border-color: var(--accent, #00ff88);
+  background: rgba(0,255,136,.06);
+}
+
+.spawn-cmd-output:active {
+  background: rgba(0,255,136,.12);
+}
+
+/* Summary line under the command */
+.spawn-cmd-summary {
+  font-size: 10.5px;
+  color: var(--text-2);
+  opacity: .65;
+  margin-top: -2px;
+  line-height: 1.4;
+}
+
+/* Compact class name row beneath the command block */
+.spawn-cmd-class {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px 0 3px;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: .55;
+  transition: opacity .12s;
+}
+
+.spawn-cmd-class:hover {
+  opacity: 1;
+}
+
+.spawn-cmd-class-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: var(--text-2);
+}
+
+.spawn-cmd-class-value {
+  font-family: monospace;
+  font-size: 10.5px;
+  color: var(--text-2);
+  word-break: break-all;
+  line-height: 1.4;
+}
+
 #dinoInfoPanel .fp-tabs{
   flex: 0 0 auto;
   padding-top: 8px;
@@ -3814,6 +3999,16 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
 
   #sourceSelectFancy .dd-list{
     max-height: var(--dd-source-max-m);
+  }
+
+  /* No-mods: hide source, map spans full first row */
+  body[data-no-mods="1"] #sourceSelectFancy{
+    display: none;
+  }
+
+  body[data-no-mods="1"] #topbar .controls > #mapSelectFancy{
+    flex: 1 1 100%;
+    max-width: none;
   }
 
   #dinoSelectFancy .dd-list{
