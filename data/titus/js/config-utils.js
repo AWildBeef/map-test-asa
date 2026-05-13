@@ -135,7 +135,8 @@ const State = {
     dino: "",
     entry: "",
     crate: "",
-    item: ""
+    item: "",
+    note: ""
   },
   
   mapEntries: new Set(),
@@ -165,13 +166,28 @@ let dockState = { mapMeta: null, cfg: null };
 const poiVisibility = {
   tributeTerminals: true,
   supplyCrates: false,
+  caveCrates: false,
   artifactCrates: false,
   playerStarts: false,
   explorerNotes: false,
+  dinoDossiers: false,
   missions: false,
   hordeEvents: false,
   cityTerminals: false,
-  beacons: false
+  beacons: false,
+  waterVeins: false,
+  oilVeins: false,
+  gasVeins: false,
+  chargeNodes: false,
+  plantZ: false,
+  plantR: false,
+  wyvernNests: false,
+  iceWyvernNests: false,
+  rockDrakeNests: false,
+  deinonychusNests: false,
+  beachChests: false,
+  memorial: false,
+  teleporters: false
 };
 
 let showRarityLegend = false;
@@ -217,12 +233,27 @@ const MODE_OPTIONS = [
   { id: "dino",  label: "Dino View" },
   { id: "entry", label: "Spawn View" },
   { id: "crate", label: "Crate View" },
-  { id: "item",  label: "Item View" }
+  { id: "item",  label: "Item View" },
+  { id: "note",  label: "Note View" }
 ];
+
+// Note view state
+const noteViewState = {
+  noteTab:    "notes",  // "notes" | "dossiers"
+  searchMode: "name",   // "name" | "index"
+  query:      "",
+  selected:   null      // selected note: [index, name, ue_x, ue_y, ue_z]
+};
 
 function setMode(mode){
   if (!MODE_OPTIONS.some(m => m.id === mode)) return;
   if (State.mode === mode) return;
+
+  // Close note panel when leaving note mode
+  if (State.mode === "note" && mode !== "note") {
+    const notePanel = document.getElementById("noteViewPanel");
+    if (notePanel) { notePanel.style.display = "none"; notePanel.dataset.hidden = "1"; }
+  }
 
   State.selections[State.mode] = State.selection || "";
   State.mode = mode;
@@ -376,10 +407,11 @@ function syncModeButton() {
   if (!UI.modeToggle) return;
 
   const labels = {
-    dino: "Dino View",
+    dino:  "Dino View",
     entry: "Spawn View",
     crate: "Crate View",
-    item: "Item View"
+    item:  "Item View",
+    note:  "Note View"
   };
 
   UI.modeToggle.innerHTML = `

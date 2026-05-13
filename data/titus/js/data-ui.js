@@ -810,10 +810,11 @@ function finalRarityForManager(entryName,meta,score){
 
 
 function selectionListForMode(mode) {
-  if (mode === "dino") return State.names;
+  if (mode === "dino")  return State.names;
   if (mode === "entry") return State.entryList;
   if (mode === "crate") return State.crateNames;
-  if (mode === "item") return State.itemNames;
+  if (mode === "item")  return State.itemNames;
+  if (mode === "note")  return []; // note view uses its own panel
   return [];
 }
 
@@ -1527,6 +1528,16 @@ function rebuildLootIndices(){
       const crateMeta = loot.c?.[crateClass];
       const hasModSet = Array.isArray(crateMeta?.s) && crateMeta.s.some(s => s._mod);
       if (!hasModSet) continue;
+    }
+
+    // Apply crate type filter
+    const typeFilter = infoPanelState.crateTypeFilter || "all";
+    if (typeFilter !== "all") {
+      const isCave     = isCaveCrate(crateClass);
+      const isArtifact = crateClass.toLowerCase().includes("artifact");
+      if (typeFilter === "cave"     && !isCave) continue;
+      if (typeFilter === "artifact" && !isArtifact) continue;
+      if (typeFilter === "normal"   && (isCave || isArtifact)) continue;
     }
 
     const value = `crate:${crateId}`;
@@ -2804,7 +2815,7 @@ function applyEmbedRestrictions(){
   }
 
   if (EMBED_MODE_LOCK) {
-    const validModes = new Set(["dino", "entry"]);
+    const validModes = new Set(["dino", "entry", "crate", "item", "note"]);
     if (validModes.has(EMBED_MODE_LOCK)) {
       State.mode = EMBED_MODE_LOCK;
       syncModeButton();
@@ -3088,6 +3099,20 @@ function renderDock(){
     });
   }
 
+  if (isDockBtnVisible("noteViewPanel")) {
+    mkBtn({
+      title: "Explorer Notes & Dossiers",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `,
+      togglePanelId: "noteViewPanel",
+      onClick: () => toggleNoteViewPanel()
+    });
+  }
+
   updateDockToggles();
 }
 
@@ -3167,7 +3192,24 @@ function rebuildSelectionSelect() {
   } else if (State.mode === "item") {
     placeholder = "(Select an Item)";
     options = State.itemNames.map(v => ({ value: v, label: v }));
+  } else if (State.mode === "note") {
+    // Note view uses its own floating panel — hide the main select
+    UI.dinoSelect.innerHTML = "";
+    UI.dinoSelect.style.display = "none";
+    if (UI.dinoFancy) UI.dinoFancy.style.display = "none";
+    const notePanel = ensureNoteViewPanel();
+    if (notePanel.style.display === "none") {
+      renderNoteViewPanel();
+      notePanel.style.display = "";
+      notePanel.dataset.hidden = "0";
+      updateDockToggles();
+    }
+    return;
   }
+
+  // Restore select visibility (may have been hidden in note mode)
+  UI.dinoSelect.style.display = "";
+  if (UI.dinoFancy) UI.dinoFancy.style.display = "";
 
   UI.dinoSelect.innerHTML = "";
 
@@ -3219,28 +3261,55 @@ function rebuildSelectionSelect() {
       }
     : null;
 
-  const crateDropdownToolbar = (State.mode === "crate" && !activeSourceIsOfficial())
+  const crateDropdownToolbar = State.mode === "crate"
     ? ({ rebuild }) => {
         const bar = document.createElement("div");
         bar.className = "dd-source-toolbar";
+        bar.style.cssText = "display:flex; flex-wrap:wrap; gap:4px;";
 
-        const pill = document.createElement("button");
-        pill.type = "button";
-        pill.className = "dd-source-mode-btn" + (infoPanelState.showAllCrates ? " is-on" : "");
-        pill.textContent = infoPanelState.showAllCrates ? "All crates" : "Mod crates";
-        pill.title = infoPanelState.showAllCrates
-          ? "Showing all crates — click to show mod crates only"
-          : "Showing mod crates only — click to show all";
-        pill.onclick = () => {
-          infoPanelState.showAllCrates = !infoPanelState.showAllCrates;
-          rebuildLootIndices();
-          rebuildSelectionSelect();
-          // Re-open the dropdown so the user sees the updated list
-          UI.dinoFancy?.querySelector(".dd-btn")?.click();
-          // Re-render panel if a crate is selected
-          if (State.selection) render();
-        };
-        bar.appendChild(pill);
+        // Mod filter pill — only when a mod source is active
+        if (!activeSourceIsOfficial()) {
+          const modPill = document.createElement("button");
+          modPill.type = "button";
+          modPill.className = "dd-source-mode-btn" + (infoPanelState.showAllCrates ? " is-on" : "");
+          modPill.textContent = infoPanelState.showAllCrates ? "All crates" : "Mod crates";
+          modPill.title = infoPanelState.showAllCrates
+            ? "Showing all crates — click to show mod only"
+            : "Showing mod crates only — click to show all";
+          modPill.onclick = () => {
+            infoPanelState.showAllCrates = !infoPanelState.showAllCrates;
+            rebuildLootIndices();
+            rebuildSelectionSelect();
+            UI.dinoFancy?.querySelector(".dd-btn")?.click();
+            if (State.selection) render();
+          };
+          bar.appendChild(modPill);
+        }
+
+        // Type filter pills: All | Normal | Cave | Artifact
+        const pillRow = document.createElement("div");
+        pillRow.style.cssText = "display:flex; gap:4px; flex-wrap:wrap; width:100%; margin-top:2px;";
+
+        [
+          { id: "all",      label: "All" },
+          { id: "normal",   label: "Normal" },
+          { id: "cave",     label: "Cave" },
+          { id: "artifact", label: "Artifacts" }
+        ].forEach(tf => {
+          const pill = document.createElement("button");
+          pill.type = "button";
+          pill.className = "dd-source-mode-btn" + ((infoPanelState.crateTypeFilter||"all") === tf.id ? " is-on" : "");
+          pill.textContent = tf.label;
+          pill.onclick = () => {
+            infoPanelState.crateTypeFilter = tf.id;
+            rebuildLootIndices();
+            rebuildSelectionSelect();
+            UI.dinoFancy?.querySelector(".dd-btn")?.click();
+            if (State.selection) render();
+          };
+          pillRow.appendChild(pill);
+        });
+        bar.appendChild(pillRow);
         return bar;
       }
     : null;

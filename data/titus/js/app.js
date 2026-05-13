@@ -6,10 +6,11 @@ window.ASA_APP_MODULES = [
   "js/views/spawn-view.js",
   "js/views/crate-view.js",
   "js/views/item-view.js",
+  "js/views/note-view.js",
   "js/render-boot.js",
 ];
 
-const APP_VER = "5.10";
+const APP_VER = "5.12";
 
 (function loadSequentially(i = 0) {
   if (i >= window.ASA_APP_MODULES.length) return;

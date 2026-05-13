@@ -4957,3 +4957,45 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .dino-loot-section-head .
   margin-left: auto;
   white-space: nowrap;
 }
+
+/* ============================================================
+   NOTE VIEW / EXPLORER NOTES (v5.12)
+============================================================ */
+
+#noteViewPanel {
+  min-width: 240px;
+  max-width: 300px;
+}
+
+.note-cmd-block {
+  margin-bottom: 6px;
+}
+
+.note-cmd-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-3);
+  margin-bottom: 2px;
+}
+
+.dd-item.is-active {
+  background: rgba(var(--accent-rgb), .12);
+  border-radius: 6px;
+}
+
+/* New POI marker icons */
+.poi-cave-icon svg,
+.poi-nest-icon svg,
+.poi-teleporter-icon svg,
+.poi-note-icon svg,
+.poi-dossier-icon svg,
+.poi-note-selected-icon svg {
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.55));
+}
+
+body[data-mode="note"] .mode-toggle {
+  background: rgba(var(--accent-rgb), .18);
+}

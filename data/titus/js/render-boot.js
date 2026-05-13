@@ -28,13 +28,13 @@ function hideBootSplash(){
 
 
 function render() {
-  if (!State.selection) {
+  if (!State.selection && State.mode !== "note") {
     clearDraw();
     drawPois();
     renderInfoPanelBodyEmpty();
     return;
   }
-  
+
   if (State.mode === "dino") {
     drawDino(State.selection);
     drawPois();
@@ -47,6 +47,8 @@ function render() {
     drawCrate(State.selection);
   } else if (State.mode === "item") {
     drawItem(State.selection);
+  } else if (State.mode === "note") {
+    drawNote(noteViewState.selected);
   }
   
   renderInfoPanel();
