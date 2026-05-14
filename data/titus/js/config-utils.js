@@ -167,6 +167,8 @@ const poiVisibility = {
   tributeTerminals: true,
   supplyCrates: false,
   caveCrates: false,
+  oceanCrates: false,
+  desertCrates: false,
   artifactCrates: false,
   playerStarts: false,
   explorerNotes: false,

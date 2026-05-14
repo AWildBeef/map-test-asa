@@ -4999,3 +4999,39 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .dino-loot-section-head .
 body[data-mode="note"] .mode-toggle {
   background: rgba(var(--accent-rgb), .18);
 }
+
+/* ── Dark tooltip (tribute terminals, player starts, obelisks) ─ */
+.leaflet-tooltip.dark-tooltip {
+  background: rgba(18, 22, 30, 0.92);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #e8eaf0;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.leaflet-tooltip.dark-tooltip::before {
+  border-top-color: rgba(18, 22, 30, 0.92);
+}
+
+/* ── Note tooltip dark background ─────────────────────────────── */
+.leaflet-tooltip.note-tooltip {
+  background: rgba(18, 22, 30, 0.92);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #e8eaf0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  max-width: 220px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.leaflet-tooltip.note-tooltip::before {
+  border-top-color: rgba(18, 22, 30, 0.92);
+}
+.note-tooltip .poi-tip-title {
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.note-tooltip .poi-tip-line {
+  font-size: 11px;
+  opacity: .8;
+}

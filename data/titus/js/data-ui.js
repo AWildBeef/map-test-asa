@@ -1534,10 +1534,15 @@ function rebuildLootIndices(){
     const typeFilter = infoPanelState.crateTypeFilter || "all";
     if (typeFilter !== "all") {
       const isCave     = isCaveCrate(crateClass);
+      const isOcean    = isOceanCrate(crateClass);
+      const isDesert   = isDesertCrate(crateClass);
       const isArtifact = crateClass.toLowerCase().includes("artifact");
+      const isSpecial  = isCave || isOcean || isDesert;
       if (typeFilter === "cave"     && !isCave) continue;
+      if (typeFilter === "ocean"    && !isOcean) continue;
+      if (typeFilter === "desert"   && !isDesert) continue;
       if (typeFilter === "artifact" && !isArtifact) continue;
-      if (typeFilter === "normal"   && (isCave || isArtifact)) continue;
+      if (typeFilter === "normal"   && (isSpecial || isArtifact)) continue;
     }
 
     const value = `crate:${crateId}`;
@@ -3099,20 +3104,6 @@ function renderDock(){
     });
   }
 
-  if (isDockBtnVisible("noteViewPanel")) {
-    mkBtn({
-      title: "Explorer Notes & Dossiers",
-      icon: `
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-          <path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      `,
-      togglePanelId: "noteViewPanel",
-      onClick: () => toggleNoteViewPanel()
-    });
-  }
-
   updateDockToggles();
 }
 
@@ -3193,23 +3184,14 @@ function rebuildSelectionSelect() {
     placeholder = "(Select an Item)";
     options = State.itemNames.map(v => ({ value: v, label: v }));
   } else if (State.mode === "note") {
-    // Note view uses its own floating panel — hide the main select
-    UI.dinoSelect.innerHTML = "";
-    UI.dinoSelect.style.display = "none";
-    if (UI.dinoFancy) UI.dinoFancy.style.display = "none";
-    const notePanel = ensureNoteViewPanel();
-    if (notePanel.style.display === "none") {
-      renderNoteViewPanel();
-      notePanel.style.display = "";
-      notePanel.dataset.hidden = "0";
-      updateDockToggles();
-    }
-    return;
+    placeholder = "(Select a Note or Dossier)";
+    const allNotes = getNoteOptionsForCurrentMap();
+    options = allNotes.map(n => ({
+      value: `note:${n[0]}`,
+      label: n[1],
+      meta: `#${n[0]}`
+    }));
   }
-
-  // Restore select visibility (may have been hidden in note mode)
-  UI.dinoSelect.style.display = "";
-  if (UI.dinoFancy) UI.dinoFancy.style.display = "";
 
   UI.dinoSelect.innerHTML = "";
 
@@ -3235,6 +3217,10 @@ function rebuildSelectionSelect() {
     const newValue = UI.dinoSelect.value || "";
     State.selection = newValue;
     State.selections[State.mode] = newValue;
+    // For note mode, sync noteViewState.selected from the selection value
+    if (State.mode === "note" && newValue.startsWith("note:")) {
+      noteViewState.selected = noteFromSelection(newValue);
+    }
     render();
   };
 
@@ -3294,6 +3280,8 @@ function rebuildSelectionSelect() {
           { id: "all",      label: "All" },
           { id: "normal",   label: "Normal" },
           { id: "cave",     label: "Cave" },
+          { id: "ocean",    label: "Ocean" },
+          { id: "desert",   label: "Desert" },
           { id: "artifact", label: "Artifacts" }
         ].forEach(tf => {
           const pill = document.createElement("button");
@@ -3314,11 +3302,15 @@ function rebuildSelectionSelect() {
       }
     : null;
 
+  const noteDropdownToolbar = State.mode === "note"
+    ? buildNoteDropdownToolbar
+    : null;
+
   mountFancyDropdown(
     UI.dinoSelect,
     UI.dinoFancy,
     placeholder.replace(/[()]/g, ""),
-    { buildToolbar: entryDropdownToolbar || crateDropdownToolbar }
+    { buildToolbar: entryDropdownToolbar || crateDropdownToolbar || noteDropdownToolbar }
   );
 }
 

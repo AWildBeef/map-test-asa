@@ -521,13 +521,13 @@ function drawPlayerStarts(groups){
         className:"poi-pstart"
       })
         .addTo(mapObj.poiLayer)
-        .bindTooltip(tip || "Player Start"), {
+        .bindTooltip(tip || "Player Start", {
           direction: "auto",
           sticky: true,
           opacity: 0.97,
-          className: "pstart-tooltip",
+          className: "dark-tooltip",
           autoPan: true
-        };
+        });
     }
   }
 }
@@ -976,8 +976,7 @@ function renderSettingsPanel(){
     { key: "poiPanel",        label: "Markers" },
     { key: "rarityLegend",    label: "Rarity legend" },
     { key: "mapEntriesPanel", label: "Entries browser" },
-    { key: "exportPanel",     label: "Export panel" },
-    { key: "noteViewPanel",   label: "Note viewer" }
+    { key: "exportPanel",     label: "Export panel" }
   ];
 
   body.innerHTML = `
@@ -1429,23 +1428,37 @@ function isCaveCrate(crateClass) {
   return cls.includes("cave") || cls.includes("underwater");
 }
 
-function poiHasCaveCrate(point) {
+function isOceanCrate(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("ocean") || cls.includes("seabed");
+}
+
+function isDesertCrate(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("desert") || cls.includes("dunes") || cls.includes("sand");
+}
+
+// A crate is "special" (not a normal surface drop) if it's cave, ocean, or desert
+function isSpecialCrate(crateClass) {
+  return isCaveCrate(crateClass) || isOceanCrate(crateClass) || isDesertCrate(crateClass);
+}
+
+function _poiMatchesCrateFn(point, fn) {
   const legend = resolvedSupplyLegendForCurrentMap();
   const rows = Array.isArray(point?.c) ? point.c : [];
   for (const row of rows) {
     if (!Array.isArray(row)) continue;
     const idx = Number(row[0]);
     if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
-    if (isCaveCrate(legend[idx]?.cls || "")) return true;
+    if (fn(legend[idx]?.cls || "")) return true;
   }
   return false;
 }
 
-function countCavePois(points) {
-  return (Array.isArray(points) ? points : []).filter(p => poiHasCaveCrate(p)).length;
-}
-
-
+function poiHasCaveCrate(point)   { return _poiMatchesCrateFn(point, isCaveCrate); }
+function poiHasOceanCrate(point)  { return _poiMatchesCrateFn(point, isOceanCrate); }
+function poiHasDesertCrate(point) { return _poiMatchesCrateFn(point, isDesertCrate); }
+function poiIsSpecialCrate(point) { return _poiMatchesCrateFn(point, isSpecialCrate); }
 
 
 
@@ -2206,7 +2219,7 @@ function buildResolvedSupplyLegend(geom){
       : null;
 
     const isArtifact = cls.toLowerCase().includes("artifactcrate");
-    const isSupply = cls.toLowerCase().includes("supplycrate");
+    const isSupply = /supplycr[ea]te/i.test(cls); // handles both SupplyCrate and SupplyCreate (desert crates)
 
     out.push({
       bp,
@@ -2271,14 +2284,26 @@ function poiHasSupplyCrate(poi){
 
 function countArtifactPois(points){
   return (Array.isArray(points) ? points : []).filter(p =>
-    poiHasArtifactCrate(p) && !poiHasSupplyCrate(p) && !poiHasCaveCrate(p)
+    poiHasArtifactCrate(p) && !poiHasSupplyCrate(p) && !poiIsSpecialCrate(p)
   ).length;
 }
 
 function countSupplyPois(points){
   return (Array.isArray(points) ? points : []).filter(p =>
-    poiHasSupplyCrate(p) && !poiHasCaveCrate(p)
+    poiHasSupplyCrate(p) && !poiIsSpecialCrate(p)
   ).length;
+}
+
+function countCavePois(points) {
+  return (Array.isArray(points) ? points : []).filter(p => poiHasCaveCrate(p)).length;
+}
+
+function countOceanPois(points) {
+  return (Array.isArray(points) ? points : []).filter(p => poiHasOceanCrate(p)).length;
+}
+
+function countDesertPois(points) {
+  return (Array.isArray(points) ? points : []).filter(p => poiHasDesertCrate(p)).length;
 }
 
 
@@ -2304,6 +2329,8 @@ function renderPoiPanel(){
     { key: "tributeTerminals",  label: "Tribute Terminals",  count: (pois.tributeTerminals || []).length },
     { key: "supplyCrates",      label: "Supply Drops",        count: countSupplyPois(supplyCrates) },
     { key: "caveCrates",        label: "Cave Drops",          count: countCavePois(supplyCrates) },
+    { key: "oceanCrates",       label: "Ocean Drops",         count: countOceanPois(supplyCrates) },
+    { key: "desertCrates",      label: "Desert Drops",        count: countDesertPois(supplyCrates) },
     { key: "artifactCrates",    label: "Artifacts",           count: countArtifactPois(supplyCrates) },
     { key: "playerStarts",      label: "Player Start Points", count: poiCount(pois.playerStarts) },
     { key: "explorerNotes",     label: "Explorer Notes",      count: noteCount },
@@ -2643,7 +2670,7 @@ function addArtifactMarkers(points, { layer = mapObj.poiLayer } = {}) {
     const y = Number(p?.y);
     if (![x, y].every(Number.isFinite)) continue;
 
-    L.marker([y, x], {
+    const marker = L.marker([y, x], {
       icon,
       pane: "poiPane"
     })
@@ -2656,6 +2683,20 @@ function addArtifactMarkers(points, { layer = mapObj.poiLayer } = {}) {
         className: "supply-tooltip",
         autoPan: true
       });
+
+    // Click → open the artifact in crate view
+    const crateRow = Array.isArray(p?.c) ? p.c[0] : null;
+    if (crateRow) {
+      const idx = Number(crateRow[0]);
+      const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length ? legend[idx] : null;
+      if (meta) {
+        const cls = meta.cls || crateClassFromLegendRow(meta);
+        const crateId = Global.crateClassToId?.get(cls);
+        if (Number.isInteger(crateId)) {
+          marker.on("click", () => openCrateView(`crate:${crateId}`));
+        }
+      }
+    }
   }
 }
 
@@ -2663,7 +2704,7 @@ function drawArtifactCratePois(points){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.artifactCrates) return;
 
-  const artifactRows = points.filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p) && !poiHasCaveCrate(p));
+  const artifactRows = points.filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p) && !poiIsSpecialCrate(p));
   addArtifactMarkers(artifactRows, { layer: mapObj.poiLayer });
 }
 
@@ -3006,7 +3047,7 @@ function drawSupplyCratePois(points) {
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.supplyCrates) return;
 
-  const supplyRows = points.filter(p => poiHasSupplyCrate(p) && !poiHasCaveCrate(p));
+  const supplyRows = points.filter(p => poiHasSupplyCrate(p) && !poiIsSpecialCrate(p));
   addSupplyCrateMarkers(supplyRows, { layer: mapObj.poiLayer });
 }
 
@@ -3030,27 +3071,20 @@ function caveCrateTooltipHtml(p, legend) {
 function drawCaveCratePois(points) {
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.caveCrates) return;
+  // Use the same pie-chart markers as regular supply drops
+  addSupplyCrateMarkers(points.filter(p => poiHasCaveCrate(p)), { layer: mapObj.poiLayer });
+}
 
-  const legend = supplyLegendForCurrentMap();
-  const size = 18;
-  const icon = L.divIcon({
-    className: "poi-cave-icon",
-    html: `<svg width="${size}" height="${size}" viewBox="-10 -10 20 20" aria-hidden="true">
-      <path d="M 0 -7 L 7 0 L 0 7 L -7 0 Z" fill="#c084fc" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/>
-    </svg>`,
-    iconSize: [size, size], iconAnchor: [size/2, size/2]
-  });
+function drawOceanCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.oceanCrates) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasOceanCrate(p)), { layer: mapObj.poiLayer });
+}
 
-  for (const p of points.filter(p => poiHasCaveCrate(p))) {
-    const x = Number(p?.x), y = Number(p?.y);
-    if (![x, y].every(Number.isFinite)) continue;
-    L.marker([y, x], { icon, pane: "poiPane" })
-      .addTo(mapObj.poiLayer)
-      .bindTooltip(caveCrateTooltipHtml(p, legend), {
-        direction: "auto", sticky: true, offset: [0, -12],
-        opacity: 0.97, className: "supply-tooltip", autoPan: true
-      });
-  }
+function drawDesertCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.desertCrates) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasDesertCrate(p)), { layer: mapObj.poiLayer });
 }
 
 
@@ -3220,7 +3254,10 @@ function drawPoiGroup(points, groupName){
       className:"poi-basic"
     })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(p.label || p.type || "POI");
+      .bindTooltip(p.label || p.type || "POI", {
+        direction: "auto", sticky: true, opacity: 0.97,
+        className: "dark-tooltip", autoPan: true
+      });
   }
 }
 
@@ -3333,7 +3370,8 @@ function drawExplorerNotePois(notes) {
       .bindTooltip(noteTooltipHtml(note), {
         direction: "auto", sticky: true, offset: [0,-10],
         opacity: 0.97, className: "note-tooltip", autoPan: true
-      });
+      })
+      .on("click", () => openNoteView(note));
   }
 }
 
@@ -3359,7 +3397,8 @@ function drawDossierPois(notes) {
       .bindTooltip(noteTooltipHtml(note), {
         direction: "auto", sticky: true, offset: [0,-10],
         opacity: 0.97, className: "note-tooltip", autoPan: true
-      });
+      })
+      .on("click", () => openNoteView(note));
   }
 }
 
@@ -3375,6 +3414,8 @@ function drawPois(){
   drawPoiGroup(pois.tributeTerminals, "tributeTerminals");
   drawSupplyCratePois(pois.supplyCrates || []);
   drawCaveCratePois(pois.supplyCrates || []);
+  drawOceanCratePois(pois.supplyCrates || []);
+  drawDesertCratePois(pois.supplyCrates || []);
   drawArtifactCratePois(pois.supplyCrates || []);
   drawPlayerStarts(pois.playerStarts);
   drawExplorerNotePois(pois.explorerNotes || []);
@@ -3385,9 +3426,9 @@ function drawPois(){
   drawSimpleDotPois(pois.beacons || pois.borderBeacons, "beacons", "#ff8a3d", "Border Beacon");
   drawSimpleDotPois(pois.waterVeins,       "waterVeins",       "#5ab4ff", "Water Vein");
   drawSimpleDotPois(pois.oilVeins,         "oilVeins",         "#555",    "Oil Vein");
-  drawSimpleDotPois(pois.gasVeins,         "gasVeins",         "#80ff80", "Gas Vein");
-  drawSimpleDotPois(pois.chargeNodes,      "chargeNodes",      "#a0f0ff", "Charge Node");
-  drawSimpleDotPois(pois.plantZ,           "plantZ",           "#cc44cc", "Wild Plant Z");
+  drawSimpleDotPois(pois.gasVeins,         "gasVeins",         "#ff4dff", "Gas Vein");
+  drawSimpleDotPois(pois.chargeNodes,      "chargeNodes",      "#00ff55", "Charge Node");
+  drawSimpleDotPois(pois.plantZ,           "plantZ",           "#00eeff", "Wild Plant Z");
   drawSimpleDotPois(pois.plantR,           "plantR",           "#ff6040", "Proto Plant R");
   drawNestPois(pois.wyvernNests,           "wyvernNests",      "#ff9933", "Wyvern Nest");
   drawNestPois(pois.iceWyvernNests,        "iceWyvernNests",   "#88eeff", "Ice Wyvern Nest");
