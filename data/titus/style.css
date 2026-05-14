@@ -5024,6 +5024,10 @@ body[data-mode="note"] .mode-toggle {
   max-width: 220px;
   box-shadow: 0 2px 8px rgba(0,0,0,.4);
 }
+.leaflet-tooltip.note-tooltip--interactive,
+.leaflet-tooltip.supply-tooltip--interactive {
+  pointer-events: auto !important;
+}
 .leaflet-tooltip.note-tooltip::before {
   border-top-color: rgba(18, 22, 30, 0.92);
 }
@@ -5034,4 +5038,18 @@ body[data-mode="note"] .mode-toggle {
 .note-tooltip .poi-tip-line {
   font-size: 11px;
   opacity: .8;
+}
+
+/* POI tooltip action button (e.g. "Open in Note View →", "Click to open in Crate View") */
+.poi-tip-action {
+  margin-top: 5px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: 11px;
+  color: var(--accent, #5ab4ff);
+  cursor: pointer;
+  font-weight: 500;
+}
+.poi-tip-action:hover {
+  text-decoration: underline;
 }

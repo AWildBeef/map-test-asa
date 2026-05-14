@@ -1515,6 +1515,9 @@ function rebuildLootIndices(){
 
   const modActive = !activeSourceIsOfficial();
 
+  // typeFilter is declared once and used for both the crate loop and mission loop
+  const typeFilter = infoPanelState.crateTypeFilter || "all";
+
   // --- normal crates on this map ---
   for (const crateClass of mapCrateClasses){
     const crateId = crateClassToId(crateClass);
@@ -1531,18 +1534,27 @@ function rebuildLootIndices(){
     }
 
     // Apply crate type filter
-    const typeFilter = infoPanelState.crateTypeFilter || "all";
     if (typeFilter !== "all") {
-      const isCave     = isCaveCrate(crateClass);
-      const isOcean    = isOceanCrate(crateClass);
-      const isDesert   = isDesertCrate(crateClass);
-      const isArtifact = crateClass.toLowerCase().includes("artifact");
-      const isSpecial  = isCave || isOcean || isDesert;
-      if (typeFilter === "cave"     && !isCave) continue;
-      if (typeFilter === "ocean"    && !isOcean) continue;
-      if (typeFilter === "desert"   && !isDesert) continue;
-      if (typeFilter === "artifact" && !isArtifact) continue;
-      if (typeFilter === "normal"   && (isSpecial || isArtifact)) continue;
+      const isArtifact  = crateClass.toLowerCase().includes("artifact");
+      const isCave      = isCaveCrate(crateClass);
+      const isOcean     = isOceanCrate(crateClass);
+      const isHorde     = isHordeCrate(crateClass);
+      const isAbNormal  = isAbNormalCrate(crateClass);
+      const isAbDungeon = isAbDungeonCrate(crateClass);
+      const isAbSurface = isAbSurfaceCrate(crateClass);
+      const isSpecial   = isSpecialCrate(crateClass);
+
+      // Filter "mission" means crates should be excluded entirely
+      if (typeFilter === "mission") continue;
+
+      if (typeFilter === "cave"      && !isCave) continue;
+      if (typeFilter === "ocean"     && !isOcean) continue;
+      if (typeFilter === "osd"       && !isHorde) continue;
+      if (typeFilter === "abnormal"  && !isAbNormal) continue;
+      if (typeFilter === "abdungeon" && !isAbDungeon) continue;
+      if (typeFilter === "absurface" && !isAbSurface) continue;
+      if (typeFilter === "artifact"  && !isArtifact) continue;
+      if (typeFilter === "normal"    && (isSpecial || isArtifact || isHorde)) continue;
     }
 
     const value = `crate:${crateId}`;
@@ -1559,24 +1571,29 @@ function rebuildLootIndices(){
   // --- mission loot sources on this map ---
   const missionClasses = missionClassesUsedOnCurrentMap();
 
-  for (const missionClass of missionClasses){
-    const m = loot.m?.[missionClass];
-    if (!m) continue;
+  // Missions only appear when filter is "all" or "mission"
+  const showMissions = typeFilter === "all" || typeFilter === "mission";
 
-    const structs = Array.isArray(m.ls) ? m.ls : [];
-    for (const structClass of structs){
-      if (!structClass || !loot.ls?.[structClass]) continue;
+  if (showMissions) {
+    for (const missionClass of missionClasses){
+      const m = loot.m?.[missionClass];
+      if (!m) continue;
 
-      const value = `mission:${missionClass}:${structClass}`;
-      const label = missionDisplayName(missionClass);
+      const structs = Array.isArray(m.ls) ? m.ls : [];
+      for (const structClass of structs){
+        if (!structClass || !loot.ls?.[structClass]) continue;
 
-      State.crateOptions.push({ value, label });
-      State.crateNameToRef.set(value, {
-        kind: "mission",
-        missionClass,
-        missionName: m.n || missionClass,
-        lootStructClass: structClass
-      });
+        const value = `mission:${missionClass}:${structClass}`;
+        const label = missionDisplayName(missionClass);
+
+        State.crateOptions.push({ value, label });
+        State.crateNameToRef.set(value, {
+          kind: "mission",
+          missionClass,
+          missionName: m.n || missionClass,
+          lootStructClass: structClass
+        });
+      }
     }
   }
 
@@ -3188,7 +3205,7 @@ function rebuildSelectionSelect() {
     const allNotes = getNoteOptionsForCurrentMap();
     options = allNotes.map(n => ({
       value: `note:${n[0]}`,
-      label: n[1],
+      label: `${n[1]}  #${n[0]}`,  // embed index in label so search naturally finds it
       meta: `#${n[0]}`
     }));
   }
@@ -3276,14 +3293,56 @@ function rebuildSelectionSelect() {
         const pillRow = document.createElement("div");
         pillRow.style.cssText = "display:flex; gap:4px; flex-wrap:wrap; width:100%; margin-top:2px;";
 
-        [
-          { id: "all",      label: "All" },
-          { id: "normal",   label: "Normal" },
-          { id: "cave",     label: "Cave" },
-          { id: "ocean",    label: "Ocean" },
-          { id: "desert",   label: "Desert" },
-          { id: "artifact", label: "Artifacts" }
-        ].forEach(tf => {
+        // Build filter pills based on what's actually present on this map.
+        // We scan the supply legend and mission legend to decide which pills to show.
+        const isAb = State.mapId === "Aberration";
+        const mapMeta_ = MAPS.find(m => m.id === State.mapId);
+        const geom_   = Global.mapGeom.get(mapMeta_?.geomShort);
+        const legend_ = geom_?.supplyLegend || [];
+
+        const classes_ = legend_.map(row => (row.bp||"").split(".").pop());
+        const hasNormal   = !isAb && classes_.some(c => {
+          const cl = c.toLowerCase();
+          return cl.includes("supplycr") && !cl.includes("cave") && !cl.includes("ocean") &&
+                 !cl.includes("high") && !cl.includes("underwater") && !cl.includes("horde") &&
+                 !cl.includes("artifact") && !cl.includes("dungeon") && !cl.includes("aberrant_surface");
+        });
+        const hasCave     = !isAb && classes_.some(c => isCaveCrate(c));
+        const hasOceanReg = classes_.some(c => { const cl = c.toLowerCase(); return cl.includes("ocean") && !cl.includes("high"); });
+        const hasDesert   = classes_.some(c => { const cl = c.toLowerCase(); return cl.includes("high"); });
+        const hasOcean    = hasOceanReg || hasDesert;
+        const oceanLabel  = hasOceanReg && hasDesert ? "Ocean / Desert"
+                          : hasDesert                ? "Desert"
+                          : "Ocean";
+        const hasArtifact = classes_.some(c => c.toLowerCase().includes("artifact"));
+        const hasMissions = (missionClassesUsedOnCurrentMap?.()?.size || 0) > 0;
+
+        // Horde crates come from the horde legend, not supply legend
+        const hordeLegend_ = geom_?.hordeLegend || [];
+        const hasHorde    = hordeLegend_.some(row => {
+          const cl = ((row.bp||"").split(".").pop()).toLowerCase();
+          return cl.includes("supplycrate") && cl.includes("horde");
+        });
+
+        // Aberration always has cave/dungeon/surface
+        const hasAbNormal  = isAb && classes_.some(c => isAbNormalCrate(c));
+        const hasAbDungeon = isAb && classes_.some(c => isAbDungeonCrate(c));
+        const hasAbSurface = isAb && classes_.some(c => isAbSurfaceCrate(c));
+
+        const typeFilterOptions = [
+          { id: "all", label: "All" }
+        ];
+        if (hasNormal)     typeFilterOptions.push({ id: "normal",    label: "Normal" });
+        if (hasCave)       typeFilterOptions.push({ id: "cave",      label: "Cave" });
+        if (hasOcean)      typeFilterOptions.push({ id: "ocean",     label: oceanLabel });
+        if (hasHorde)      typeFilterOptions.push({ id: "osd",       label: "OSD" });
+        if (hasAbNormal)   typeFilterOptions.push({ id: "abnormal",  label: "Cave" });
+        if (hasAbDungeon)  typeFilterOptions.push({ id: "abdungeon", label: "Dungeon" });
+        if (hasAbSurface)  typeFilterOptions.push({ id: "absurface", label: "Surface" });
+        if (hasArtifact)   typeFilterOptions.push({ id: "artifact",  label: "Artifacts" });
+        if (hasMissions)   typeFilterOptions.push({ id: "mission",   label: "Missions" });
+
+        typeFilterOptions.forEach(tf => {
           const pill = document.createElement("button");
           pill.type = "button";
           pill.className = "dd-source-mode-btn" + ((infoPanelState.crateTypeFilter||"all") === tf.id ? " is-on" : "");

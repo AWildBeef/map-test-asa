@@ -137,23 +137,6 @@ function buildNoteDropdownToolbar({ rebuild } = {}) {
   });
   bar.appendChild(pillRow);
 
-  // Search (name + index, unified)
-  const searchRow = document.createElement("div");
-  searchRow.style.cssText = "width:100%; margin-top:4px;";
-  const input = document.createElement("input");
-  input.type = "text";
-  input.className = "dd-search";
-  input.placeholder = "Search by name or index...";
-  input.value = noteViewState.query || "";
-  input.style.cssText = "width:100%; box-sizing:border-box;";
-  input.oninput = () => {
-    noteViewState.query = input.value || "";
-    rebuildSelectionSelect();
-    setTimeout(() => UI.dinoFancy?.querySelector(".dd-btn")?.click(), 0);
-  };
-  searchRow.appendChild(input);
-  bar.appendChild(searchRow);
-
   return bar;
 }
 
