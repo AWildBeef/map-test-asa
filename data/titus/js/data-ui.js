@@ -1275,16 +1275,34 @@ function buildLootIndexes(){
 
 // ── Dino drop / harvest loot helpers ─────────────────────────────────────
 
+// Resolve a dino dd/dh field (numeric index or class name) to the actual loot row.
+// Numeric indices map via loot.di[] (drops) or loot.hi[] (harvest) to a class name,
+// then loot.dd[cls] / loot.dh[cls] gives the row.
+function _resolveDinoLootComp(ref, lootTable, indexArr){
+  if (ref == null || !lootTable) return null;
+  // String → look up directly
+  if (typeof ref === "string") return lootTable[ref] || null;
+  // Numeric → resolve via index array first
+  const idx = Number(ref);
+  if (!Number.isFinite(idx)) return null;
+  if (Array.isArray(indexArr) && idx >= 0 && idx < indexArr.length) {
+    const cls = indexArr[idx];
+    if (cls && lootTable[cls]) return lootTable[cls];
+  }
+  // Fallback: maybe lootTable itself is array-indexed
+  if (Array.isArray(lootTable)) return lootTable[idx] || null;
+  // Fallback: maybe lootTable is keyed by stringified index
+  return lootTable[String(idx)] || null;
+}
+
 function dropCompForDino(bp){
   const d = getDinoObjByBp(bp);
-  if (!d?.dd) return null;
-  return Global.loot?.dd?.[d.dd] || null;
+  return _resolveDinoLootComp(d?.dd, Global.loot?.dd, Global.loot?.di);
 }
 
 function harvestCompForDino(bp){
   const d = getDinoObjByBp(bp);
-  if (!d?.dh) return null;
-  return Global.loot?.dh?.[d.dh] || null;
+  return _resolveDinoLootComp(d?.dh, Global.loot?.dh, Global.loot?.hi);
 }
 
 function dropCompClassForDino(bp){
@@ -1295,19 +1313,43 @@ function harvestCompClassForDino(bp){
   return getDinoObjByBp(bp)?.dh || null;
 }
 
-function dinoBpsThatUseDropComp(compClass){
-  // Returns all dino BPs whose dd field matches compClass (vanilla + active mod)
+function dinoBpsThatUseDropComp(compRef){
+  if (compRef == null) return [];
+  const refStr = String(compRef);
+  // Also resolve numeric → class name (and vice versa) so both representations match
+  let altRef = null;
+  if (typeof compRef === "number" || /^\d+$/.test(refStr)) {
+    const idx = Number(compRef);
+    altRef = Global.loot?.di?.[idx] || null;
+  } else if (typeof compRef === "string" && Array.isArray(Global.loot?.di)) {
+    const idx = Global.loot.di.indexOf(compRef);
+    altRef = idx >= 0 ? String(idx) : null;
+  }
   const out = [];
   for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
-    if (obj.dd === compClass) out.push(bp);
+    if (obj.dd == null) continue;
+    const ddStr = String(obj.dd);
+    if (ddStr === refStr || (altRef && ddStr === altRef)) out.push(bp);
   }
   return out;
 }
 
-function dinoBpsThatUseHarvestComp(compClass){
+function dinoBpsThatUseHarvestComp(compRef){
+  if (compRef == null) return [];
+  const refStr = String(compRef);
+  let altRef = null;
+  if (typeof compRef === "number" || /^\d+$/.test(refStr)) {
+    const idx = Number(compRef);
+    altRef = Global.loot?.hi?.[idx] || null;
+  } else if (typeof compRef === "string" && Array.isArray(Global.loot?.hi)) {
+    const idx = Global.loot.hi.indexOf(compRef);
+    altRef = idx >= 0 ? String(idx) : null;
+  }
   const out = [];
   for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
-    if (obj.dh === compClass) out.push(bp);
+    if (obj.dh == null) continue;
+    const dhStr = String(obj.dh);
+    if (dhStr === refStr || (altRef && dhStr === altRef)) out.push(bp);
   }
   return out;
 }
@@ -1317,6 +1359,9 @@ function dinoBpsThatDropItem(itemId){
   if (!loot?.rd || !loot?.di) return [];
   const compIndices = loot.rd[String(itemId)] || [];
   return compIndices.flatMap(idx => {
+    // Try matching dinos by index (new format) OR by class name (legacy)
+    const byIdx = dinoBpsThatUseDropComp(idx);
+    if (byIdx.length) return byIdx;
     const cls = loot.di[idx];
     return cls ? dinoBpsThatUseDropComp(cls) : [];
   });
@@ -1327,6 +1372,8 @@ function dinoBpsThatHarvestItem(itemId){
   if (!loot?.rh || !loot?.hi) return [];
   const compIndices = loot.rh[String(itemId)] || [];
   return compIndices.flatMap(idx => {
+    const byIdx = dinoBpsThatUseHarvestComp(idx);
+    if (byIdx.length) return byIdx;
     const cls = loot.hi[idx];
     return cls ? dinoBpsThatUseHarvestComp(cls) : [];
   });

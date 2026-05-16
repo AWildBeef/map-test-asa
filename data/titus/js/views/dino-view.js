@@ -221,8 +221,6 @@ function renderDinoTabStats(d){
       <div class="info-subtitle">Stats</div>
       ${renderStatsTable(d?.stats)}
     </div>
-
-    ${renderAttacksTable(d?.attacks)}
   `;
 }
 
@@ -257,6 +255,103 @@ function renderDinoTabInfo(d) {
         ${renderCopyField("Nametag", nameTag)}
       </div>
     ` : ""}
+
+    ${renderColorRegionsSection(d)}
+  `;
+}
+
+
+function colorSetsForDino(d){
+  // Returns { male: cs|null, female: cs|null }
+  // If dino has cs only (unified), both male/female point to the same set.
+  // If dino has mcs/fcs (separate male/female), each is its own.
+  const dinoObj = getDinoObjByBp(d?.bpPath);
+  if (!dinoObj) return { male: null, female: null };
+
+  const csLookup = Global.dinos?.cs || {};
+  const colorDefs = Global.dinos?.c  || {};
+
+  function lookupCs(id){
+    if (id == null) return null;
+    return csLookup[String(id)] || csLookup[id] || null;
+  }
+
+  if (dinoObj.mcs != null || dinoObj.fcs != null) {
+    return {
+      male:   lookupCs(dinoObj.mcs),
+      female: lookupCs(dinoObj.fcs),
+    };
+  }
+  if (dinoObj.cs != null) {
+    const cs = lookupCs(dinoObj.cs);
+    return { male: cs, female: cs };
+  }
+  return { male: null, female: null };
+}
+
+
+function colorSwatchHtml(colorIdx){
+  const defs = Global.dinos?.c || {};
+  const entry = defs[String(colorIdx)] || defs[colorIdx];
+  if (!Array.isArray(entry) || entry.length < 2) return "";
+  const name = entry[0];
+  const hex  = entry[1];
+  return `<span class="color-swatch" style="background:#${escapeAttr(hex)};"
+    data-color-name="${escapeAttr(name)}"
+    data-color-hex="${escapeAttr(hex)}"
+    data-color-idx="${escapeAttr(String(colorIdx))}"
+    role="button" tabindex="0"></span>`;
+}
+
+
+function renderColorRegionRow(label, colorIndices){
+  if (!Array.isArray(colorIndices) || !colorIndices.length) return "";
+  const swatches = colorIndices.map(colorSwatchHtml).join("");
+  return `
+    <div class="color-region-row">
+      <div class="color-region-label">${escapeHtml(label)}</div>
+      <div class="color-region-swatches">${swatches}</div>
+    </div>
+  `;
+}
+
+
+function renderColorRegionsSection(d){
+  const { male, female } = colorSetsForDino(d);
+
+  // No color data at all
+  if (!male && !female) return "";
+
+  // If both exist and are the same array reference (unified cs), show single section
+  const isSameSet = male === female;
+
+  function renderSet(cs, title){
+    if (!cs) return "";
+    // cs is an array of 6 region arrays. Skip empty/null regions.
+    const rows = [];
+    for (let i = 0; i < 6; i++){
+      const region = cs[i];
+      if (!Array.isArray(region) || !region.length) continue;
+      rows.push(renderColorRegionRow(`Region ${i}`, region));
+    }
+    if (!rows.length) return "";
+    return `
+      ${title ? `<div class="info-subtitle" style="margin-top:8px;">${escapeHtml(title)}</div>` : ""}
+      <div class="color-regions">
+        ${rows.join("")}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Color Regions</div>
+      ${
+        isSameSet
+          ? renderSet(male, "")
+          : `${renderSet(male, "Male")}${renderSet(female, "Female")}`
+      }
+    </div>
   `;
 }
 

@@ -2551,12 +2551,80 @@ function installCopyDelegation(){
 
   // Copy-on-click stays on click (no tooltip involved)
   document.addEventListener("click", async (e) => {
+    // Color swatch tap → show floating popover with name + hex
+    const swatch = e.target.closest(".color-swatch");
+    if (swatch) {
+      e.stopPropagation();
+      showColorSwatchPopover(swatch);
+      return;
+    }
+
+    // Item link → navigate to that item in Item View
+    // Matches both data-item-link-id (new explicit links) and data-item-id (loot tags)
+    const link = e.target.closest("[data-item-link-id], .loot-item-tag[data-item-id]");
+    if (link) {
+      const itemId = Number(link.dataset.itemLinkId || link.dataset.itemId);
+      if (Number.isFinite(itemId)) {
+        const name = itemDisplayNameById(itemId);
+        if (name && typeof openItemView === "function") {
+          openItemView(name);
+          return;
+        }
+      }
+    }
+
     const el = e.target.closest(".copy-on-click");
     if (!el) return;
     const text = el.dataset.copy ?? el.textContent ?? "";
     await copyText(String(text).trim());
     showCopiedBubble(el);
   });
+}
+
+
+// Floating popover for color swatch info
+let _swatchPopoverEl = null;
+function showColorSwatchPopover(swatch) {
+  // Remove existing popover if any
+  if (_swatchPopoverEl) { _swatchPopoverEl.remove(); _swatchPopoverEl = null; }
+
+  const name = swatch.dataset.colorName || "";
+  const hex  = swatch.dataset.colorHex  || "";
+  const idx  = swatch.dataset.colorIdx  || "";
+
+  const pop = document.createElement("div");
+  pop.className = "color-swatch-popover";
+  pop.innerHTML = `
+    <div class="color-swatch-popover-row">
+      <span class="color-swatch-popover-chip" style="background:#${escapeAttr(hex)};"></span>
+      <div class="color-swatch-popover-text">
+        <div class="color-swatch-popover-name">${escapeHtml(name)}</div>
+        <div class="color-swatch-popover-hex">#${escapeHtml(hex)} <span class="color-swatch-popover-idx">· id ${escapeHtml(idx)}</span></div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(pop);
+  _swatchPopoverEl = pop;
+
+  // Position above the swatch
+  const r = swatch.getBoundingClientRect();
+  const popR = pop.getBoundingClientRect();
+  let left = r.left + (r.width / 2) - (popR.width / 2);
+  let top  = r.top - popR.height - 8;
+  // Clamp to viewport
+  const margin = 4;
+  left = Math.max(margin, Math.min(left, window.innerWidth - popR.width - margin));
+  if (top < margin) top = r.bottom + 8; // flip below if not enough room above
+  pop.style.left = `${left}px`;
+  pop.style.top  = `${top}px`;
+
+  // Auto-dismiss on any next click outside, or after 3s
+  const dismiss = () => {
+    if (_swatchPopoverEl === pop) { pop.remove(); _swatchPopoverEl = null; }
+    document.removeEventListener("click", dismiss, true);
+  };
+  setTimeout(() => document.addEventListener("click", dismiss, true), 0);
+  setTimeout(dismiss, 3500);
 }
 
 
@@ -2730,6 +2798,9 @@ let infoPanelState = {
   entryTab: "dinos",
   crateTab: "sets",
   itemTab: "crates",
+  itemCmdQty: 1,
+  itemCmdQuality: 0,
+  itemCmdIsBp: 0,
   showOfficialSets: false,   // when mod active, also show official sets in panel
   showAllCrates: false,      // when mod active, show all crates not just mod ones
   showAllEntries: false,     // when mod active, show all entries not just mod ones

@@ -110,26 +110,315 @@ function visibleCrateClassesForItem(itemName){
 }
 
 
+
+/* ============================================================
+   ITEM METADATA HELPERS
+   Reads the new fields from items_global.json (v5.13+).
+============================================================ */
+
+// Get the raw item row from items_global
+function itemRowById(id){
+  if (id == null) return null;
+  return itemData().i?.[String(id)] || null;
+}
+
+// Item type name from type id
+function itemTypeName(typeId){
+  if (typeId == null) return "";
+  return itemData().it?.[String(typeId)] || "";
+}
+
+// Item stat name from stat id
+function itemStatName(statId){
+  if (statId == null) return "";
+  return itemData().is?.[String(statId)] || `Stat ${statId}`;
+}
+
+// Engram group name (e.g. "ARK_SCORCHEDEARTH")
+function engramGroupName(groupId){
+  if (groupId == null) return "";
+  return itemData().eg?.[String(groupId)] || "";
+}
+
+// Look up an engram row by id (engrams live under items_global.e)
+function engramRowById(id){
+  if (id == null) return null;
+  return itemData().e?.[String(id)] || null;
+}
+
+// Returns the engram(s) associated with an item. e may be a single id or an array.
+function engramRowsForItem(itemRow){
+  if (!itemRow?.e && itemRow?.e !== 0) return [];
+  const raw = itemRow.e;
+  const ids = Array.isArray(raw) ? raw : [raw];
+  return ids.map(id => ({ id, row: engramRowById(id) })).filter(x => x.row);
+}
+
+// Build a full blueprint path from an engram row
+function engramBlueprintPath(engramRow){
+  if (!engramRow) return "";
+  const path = itemData().p?.[String(engramRow.p)] || "";
+  const cls  = engramRow.c || "";
+  if (!path || !cls) return "";
+  return `${path}${cls}.${cls}_C`;
+}
+
+// Build full blueprint for an item by row (rather than by id)
+function itemBlueprintByRow(row){
+  if (!row) return "";
+  const path = itemData().p?.[String(row.p)] || "";
+  const cls  = row.c || "";
+  return path && cls ? `${path}${cls}.${cls}_C` : "";
+}
+
+// Look up a "station" (a crafting structure item) by item id → display name
+function craftingStationName(stationItemId){
+  const row = itemRowById(stationItemId);
+  return row?.n || `Item ${stationItemId}`;
+}
+
+// Current command parameters (from infoPanelState)
+function currentCmdParams(){
+  return {
+    qty:     Math.max(1, Number(infoPanelState.itemCmdQty || 1)),
+    quality: Math.max(0, Number(infoPanelState.itemCmdQuality || 0)),
+    isBp:    infoPanelState.itemCmdIsBp ? 1 : 0,
+  };
+}
+
+// Generates the cheat GFI command
+function gfiCommandForItem(itemRow){
+  if (!itemRow?.c) return "";
+  let cls = itemRow.c;
+  cls = cls.replace(/^PrimalItem(Ammo|Armor|Consumable|Resource|Structure|Weapon|Equip|Dye|Skin|Trophy)?_/, "");
+  const { qty, quality, isBp } = currentCmdParams();
+  return `cheat GFI ${cls} ${qty} ${quality} ${isBp}`;
+}
+
+// Generates the cheat giveitem command
+function giveItemCommandForItem(itemRow){
+  const bp = itemBlueprintByRow(itemRow);
+  if (!bp) return "";
+  const { qty, quality, isBp } = currentCmdParams();
+  return `cheat giveitem "Blueprint'${bp}'" ${qty} ${quality} ${isBp}`;
+}
+
+// Generates the cheat UnlockEngram command from an engram row
+function unlockEngramCommand(engramRow){
+  const bp = engramBlueprintPath(engramRow);
+  if (!bp) return "";
+  return `cheat UnlockEngram "Blueprint'${bp}'"`;
+}
+
 function renderItemHero(it){
+  const itemRow = itemRowById(it.id);
+  const gfiCmd   = gfiCommandForItem(itemRow);
+  const giveCmd  = giveItemCommandForItem(itemRow);
+  const typeName = itemRow?.t != null ? itemTypeName(itemRow.t) : "";
+
+  // Command parameter controls
+  const p = currentCmdParams();
+  const paramsHtml = (gfiCmd || giveCmd) ? `
+    <div class="cmd-params">
+      <label class="cmd-param">
+        <span class="cmd-param-label">Qty</span>
+        <input type="number" min="1" step="1" class="cmd-param-input"
+          data-cmd-param="qty" value="${p.qty}">
+      </label>
+      <label class="cmd-param">
+        <span class="cmd-param-label">Quality</span>
+        <input type="number" min="0" step="1" class="cmd-param-input"
+          data-cmd-param="quality" value="${p.quality}">
+      </label>
+      <label class="cmd-param cmd-param--toggle">
+        <input type="checkbox" class="cmd-param-toggle"
+          data-cmd-param="isBp" ${p.isBp ? "checked" : ""}>
+        <span class="cmd-param-label">Blueprint</span>
+      </label>
+    </div>
+  ` : "";
+
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(it.name)}</div>
-      <div class="info-submeta">Item</div>
-      ${renderCopyField("Item Class", it.class)}
-      ${renderCopyField("Item Blueprint", it.blueprint)}
+      <div class="info-submeta">${escapeHtml(typeName || "Item")}</div>
+
+      ${(gfiCmd || giveCmd) ? `
+        <div class="info-subtitle" style="margin-top:10px;">Commands</div>
+        ${paramsHtml}
+        ${gfiCmd ? `
+          <div class="note-cmd-block" style="margin-top:6px;">
+            <div class="note-cmd-label">GFI Command</div>
+            <div class="info-mono copy-on-click" data-copy="${escapeAttr(gfiCmd)}">${escapeHtml(gfiCmd)}</div>
+          </div>
+        ` : ""}
+        ${giveCmd ? `
+          <div class="note-cmd-block" style="margin-top:6px;">
+            <div class="note-cmd-label">GiveItem Command</div>
+            <div class="info-mono copy-on-click" data-copy="${escapeAttr(giveCmd)}">${escapeHtml(giveCmd)}</div>
+          </div>
+        ` : ""}
+      ` : ""}
+    </div>
+  `;
+}
+
+// Renders a single labeled meta cell (used by the metaGrid below)
+function _metaCell(label, value){
+  if (value == null || value === "") return "";
+  return `
+    <div class="meta-cell">
+      <div class="meta-stack">
+        <div class="meta-label">${escapeHtml(label)}</div>
+        <div class="meta-value">${value}</div>
+      </div>
     </div>
   `;
 }
 
 function renderItemTabInfo(it){
-  return `
+  const itemRow = itemRowById(it.id);
+
+  // ── Always show Class / Blueprint (was previously in hero) ──
+  const idsHtml = `
     <div class="info-section">
-      <div class="info-subtitle">Item Info</div>
-      <div class="entry-meta">
-        <div class="entry-meta-line">Matching Item IDs: ${escapeHtml(String(it.ids.length))}</div>
-      </div>
+      ${renderCopyField("Item Class", it.class)}
+      ${renderCopyField("Item Blueprint", it.blueprint)}
     </div>
   `;
+
+  if (!itemRow) {
+    return idsHtml;
+  }
+
+  const typeName = itemTypeName(itemRow.t);
+  const weight   = itemRow.w;
+  const stack    = itemRow.st;
+  const cxp      = itemRow.cxp;
+  const qty      = itemRow.q;
+  const itemIx   = itemRow.ix;  // master item index (game's internal index)
+
+  const stats = Array.isArray(itemRow.s) ? itemRow.s : [];
+  const reqs  = Array.isArray(itemRow.cr) ? itemRow.cr : [];
+  const stations = Array.isArray(itemRow.cs) ? itemRow.cs : [];
+
+  // ── General info: nice meta grid ──
+  const generalCells = [
+    _metaCell("Type",          typeName ? escapeHtml(typeName) : ""),
+    _metaCell("Item Index",    itemIx   != null ? escapeHtml(String(itemIx))    : ""),
+    _metaCell("Weight",        weight   != null ? escapeHtml(fmt(weight))       : ""),
+    _metaCell("Stack Size",    stack    != null ? escapeHtml(fmt(stack))        : ""),
+    _metaCell("Crafted Qty",   (qty != null && qty > 1) ? escapeHtml(fmt(qty))  : ""),
+    _metaCell("Crafting XP",   cxp      != null ? escapeHtml(fmt(cxp))          : ""),
+  ].filter(Boolean).join("");
+
+  const generalHtml = generalCells
+    ? `<div class="info-section">
+         <div class="info-subtitle">General</div>
+         <div class="meta-grid">${generalCells}</div>
+       </div>`
+    : "";
+
+  // ── Stats: meta grid with stat names ──
+  const statsHtml = stats.length
+    ? `<div class="info-section">
+         <div class="info-subtitle">Item Stats</div>
+         <div class="meta-grid">
+           ${stats.map(([statId, val]) =>
+             _metaCell(itemStatName(statId), escapeHtml(fmt(val)))
+           ).join("")}
+         </div>
+       </div>`
+    : "";
+
+  // ── Crafting card: ingredient list + station ──
+  const craftingHtml = reqs.length
+    ? `<div class="info-section">
+         <div class="info-subtitle">Crafting</div>
+         <div class="crafting-card">
+           <div class="crafting-ingredients">
+             ${reqs.map(([reqId, reqQty]) => `
+               <div class="crafting-ingredient">
+                 <span class="crafting-ingredient-name item-link" data-item-link-id="${escapeAttr(String(reqId))}">
+                   ${escapeHtml(itemDisplayNameById(reqId))}
+                 </span>
+                 <span class="crafting-ingredient-qty">× ${escapeHtml(String(reqQty))}</span>
+               </div>
+             `).join("")}
+           </div>
+           <div class="crafting-station">
+             <span class="crafting-station-label">Crafted In</span>
+             <span class="crafting-station-value">${
+               stations.length
+                 ? stations.map(id =>
+                     `<span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span>`
+                   ).join(", ")
+                 : `<em>Player Inventory</em>`
+             }</span>
+           </div>
+         </div>
+       </div>`
+    : "";
+
+  return `${idsHtml}${generalHtml}${statsHtml}${craftingHtml}`;
+}
+
+
+// ── New Engram tab ────────────────────────────────────────────
+function renderItemTabEngram(it){
+  const itemRow = itemRowById(it.id);
+  if (!itemRow) return `<div class="info-section"><div class="info-empty">No engram data</div></div>`;
+  const engramRows = engramRowsForItem(itemRow);
+  if (!engramRows.length) return `<div class="info-section"><div class="info-empty">No engram data</div></div>`;
+
+  return engramRows.map(({ id, row }) => {
+    const groupName = row.g != null ? engramGroupName(row.g) : "";
+    const engBp     = engramBlueprintPath(row);
+    const unlockCmd = unlockEngramCommand(row);
+
+    // Prereq names
+    let preNames = [];
+    if (Array.isArray(row.pre) && row.pre.length){
+      const preIds = row.pre.flat().filter(x => x != null);
+      preNames = preIds.map(pid => {
+        const pre = engramRowById(pid);
+        return pre?.c?.replace(/^EngramEntry_/, "").replace(/_C$/, "") || `Engram ${pid}`;
+      });
+    }
+
+    const cells = [
+      _metaCell("Unlock Level",    row.lvl != null ? escapeHtml(String(row.lvl)) : ""),
+      _metaCell("Engram Points",   row.pts != null ? escapeHtml(String(row.pts)) : ""),
+      _metaCell("Engram Index",    row.ix  != null ? escapeHtml(String(row.ix))  : ""),
+      _metaCell("Group",           groupName ? escapeHtml(groupName) : ""),
+    ].filter(Boolean).join("");
+
+    return `
+      <div class="info-section">
+        ${cells ? `<div class="meta-grid">${cells}</div>` : ""}
+
+        ${preNames.length ? `
+          <div style="margin-top:8px;">
+            <div class="meta-label">Prerequisites</div>
+            <div class="meta-value">${escapeHtml(preNames.join(", "))}</div>
+          </div>
+        ` : ""}
+
+        ${engBp ? `
+          <div style="margin-top:8px;">
+            ${renderCopyField("Engram Blueprint", engBp)}
+          </div>
+        ` : ""}
+
+        ${unlockCmd ? `
+          <div class="note-cmd-block" style="margin-top:8px;">
+            <div class="note-cmd-label">Unlock Engram Command</div>
+            <div class="info-mono copy-on-click" data-copy="${escapeAttr(unlockCmd)}">${escapeHtml(unlockCmd)}</div>
+          </div>
+        ` : ""}
+      </div>
+    `;
+  }).join("");
 }
 
 function itemCrateVisibilityKey(itemName, crateRef){
@@ -416,10 +705,15 @@ function renderItemPanel(itemName){
   const harvestDinos = filterToBps([...new Set(itemIds.flatMap(id => dinoBpsThatHarvestItem(id)))]);
   const hasDinoLoot = dropDinos.length > 0 || harvestDinos.length > 0;
 
+  // Detect if this item has an engram
+  const itemRowForTabs = itemRowById(it.id);
+  const hasEngram = itemRowForTabs ? engramRowsForItem(itemRowForTabs).length > 0 : false;
+
   const itemPanelTabs = [
      ...(sourceCount > 0 ? [{ id: "crates", label: `Crates (${sourceCount})` }] : []),
-      ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : []),
-      { id: "info", label: "Info" }
+     ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : []),
+     { id: "info", label: "Info" },
+     ...(hasEngram ? [{ id: "engram", label: "Engram" }] : []),
     ];
 
     const activeTab = itemPanelTabs.some(t => t.id === infoPanelState.itemTab)
@@ -471,8 +765,9 @@ function renderItemPanel(itemName){
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "crates") return renderItemTabCrates(it);
-        if (id === "info") return renderItemTabInfo(it);
-        if (id === "dinos") return renderItemTabDinos(it, dropDinos, harvestDinos);
+        if (id === "info")   return renderItemTabInfo(it);
+        if (id === "dinos")  return renderItemTabDinos(it, dropDinos, harvestDinos);
+        if (id === "engram") return renderItemTabEngram(it);
         return "";
       }
     })}
@@ -490,6 +785,40 @@ function renderItemPanel(itemName){
       infoPanelState.itemTab = id;
       renderItemPanel(itemName);
     }
+  });
+
+  // Command parameter inputs — update the commands live without re-rendering tabs
+  const updateCmdDisplays = () => {
+    const itemRow2 = itemRowById(it.id);
+    const gfi  = gfiCommandForItem(itemRow2);
+    const give = giveItemCommandForItem(itemRow2);
+    // Update both info-mono blocks; identify them by data-copy starting with the command prefix
+    body.querySelectorAll(".note-cmd-block .info-mono.copy-on-click").forEach(el => {
+      const txt = el.textContent || "";
+      if (txt.startsWith("cheat GFI") && gfi) {
+        el.textContent = gfi;
+        el.dataset.copy = gfi;
+      } else if (txt.startsWith("cheat giveitem") && give) {
+        el.textContent = give;
+        el.dataset.copy = give;
+      }
+    });
+  };
+
+  body.querySelectorAll("[data-cmd-param]").forEach(input => {
+    const key = input.dataset.cmdParam;
+    const handler = () => {
+      if (input.type === "checkbox") {
+        infoPanelState.itemCmdIsBp = input.checked ? 1 : 0;
+      } else {
+        const val = Math.max(input.min !== "" ? Number(input.min) : 0, Number(input.value) || 0);
+        if (key === "qty")     infoPanelState.itemCmdQty = val;
+        if (key === "quality") infoPanelState.itemCmdQuality = val;
+      }
+      updateCmdDisplays();
+    };
+    input.addEventListener("input", handler);
+    input.addEventListener("change", handler);
   });
 
   // Sync toggle-all button glow state

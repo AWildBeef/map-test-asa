@@ -287,6 +287,21 @@ function openCrateView(crateValue){
   render();
 }
 
+function openItemView(itemName){
+  if (!itemName) return;
+
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "item";
+  State.selection = itemName;
+  State.selections.item = itemName;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  applyEmbedRestrictions();
+  render();
+}
+
 const crateSetOpenState = {};
 const entryDinoOpenState = {}; // key: "entryName::dinoBp" -> bool
 const itemCrateOpenState = {}; // key: "itemName::crateValue" -> bool
