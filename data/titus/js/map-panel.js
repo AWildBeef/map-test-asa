@@ -2579,6 +2579,19 @@ function installCopyDelegation(){
     await copyText(String(text).trim());
     showCopiedBubble(el);
   });
+
+  // Reflow the panel scroll area on viewport changes (rotation, browser chrome
+  // collapsing on scroll, keyboard appearing, etc.)
+  let _resizeRaf = 0;
+  const onResize = () => {
+    if (_resizeRaf) cancelAnimationFrame(_resizeRaf);
+    _resizeRaf = requestAnimationFrame(() => {
+      _resizeRaf = 0;
+      refreshInfoPanelPageHeight();
+    });
+  };
+  window.addEventListener("resize", onResize);
+  window.addEventListener("orientationchange", onResize);
 }
 
 
@@ -2665,12 +2678,8 @@ function createIconButton(svgPath, viewBox = "0 0 24 24"){
 }
 
 
-function syncActivePageHeight(pagesEl, activeId, opts = {}) {
-  if (!pagesEl || !activeId) return;
-
-  const {
-    maxHeight = Math.floor(window.innerHeight * 0.42)
-  } = opts;
+function syncActivePageHeight(pagesEl, activeId, opts = {}){
+  if (!pagesEl) return;
 
   const activePage = pagesEl.querySelector(`.fp-page[data-page="${CSS.escape(activeId)}"]`);
   if (!activePage) return;
@@ -2684,10 +2693,53 @@ function syncActivePageHeight(pagesEl, activeId, opts = {}) {
   // temporarily let wrapper size naturally so measurement is real
   pagesEl.style.height = "auto";
 
+  // Compute the actual available height inside the panel:
+  // panel.clientHeight − (everything above .fp-pages inside .fp-body)
+  const panel = pagesEl.closest(".floating-panel");
+  const body  = pagesEl.closest(".fp-body");
+  let availableHeight = Infinity;
+
+  if (panel && body) {
+    const panelRect = panel.getBoundingClientRect();
+    const pagesRect = pagesEl.getBoundingClientRect();
+
+    // Find the bottom dock (Leaflet map controls) so we don't scroll under it.
+    // It lives in the leaflet-bottom container which holds dock buttons + zoom.
+    let dockTop = window.innerHeight;
+    const dockEl =
+      document.querySelector(".leaflet-bottom.leaflet-left") ||
+      document.querySelector(".leaflet-bottom.leaflet-right") ||
+      document.querySelector(".leaflet-control.map-dock") ||
+      document.querySelector(".leaflet-bottom");
+    if (dockEl) {
+      const r = dockEl.getBoundingClientRect();
+      if (r.top > 0 && r.top < window.innerHeight) dockTop = r.top;
+    }
+
+    // Read CSS vars for a safe fallback when the dock element isn't measurable yet
+    const cs = getComputedStyle(document.documentElement);
+    const toolbarH = parseFloat(cs.getPropertyValue("--leaflet-toolbar-h")) || 50;
+    const safeAreaFallback = window.innerHeight - toolbarH - 12;
+
+    // Skip layout-not-ready edge cases (zero rects during mount)
+    if (panelRect.bottom > 0 && pagesRect.top >= 0) {
+      // Cap to whichever is closer: bottom of panel, top of dock, or safe-area fallback
+      const usableBottom = Math.min(panelRect.bottom, dockTop - 8, safeAreaFallback);
+      const computed = usableBottom - pagesRect.top - 8;
+      availableHeight = computed > 80
+        ? computed
+        : Math.floor(window.innerHeight * 0.5);
+    } else {
+      availableHeight = Math.floor(window.innerHeight * 0.5);
+    }
+  }
+
+  // Caller can also pass a maxHeight to further cap
+  const explicitMax = Number.isFinite(opts.maxHeight) ? opts.maxHeight : Infinity;
+  const cap = Math.min(availableHeight, explicitMax);
+
   const naturalHeight = activePage.scrollHeight;
-  const finalHeight = Number.isFinite(maxHeight)
-    ? Math.min(naturalHeight, maxHeight)
-    : naturalHeight;
+  const finalHeight = Math.min(naturalHeight, cap);
 
   pagesEl.style.height = `${finalHeight}px`;
 

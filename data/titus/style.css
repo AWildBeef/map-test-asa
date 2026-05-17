@@ -3108,6 +3108,14 @@ body[data-no-mods="1"] #sourceSelectFancy{
   -webkit-overflow-scrolling: touch;
 }
 
+/* dinoInfoPanel uses its own internal flex layout so .fp-body grows
+   to fill remaining panel height (after the header), letting .fp-pages
+   compute the real available space. */
+#dinoInfoPanel {
+  display: flex;
+  flex-direction: column;
+}
+
 .floating-panel.collapsed .fp-body{
   max-height: 0;
   opacity: 0;
@@ -3545,6 +3553,10 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
+  /* Use whatever space the panel gives us (panel.max-height − header).
+     Override the generic .fp-body max-height so content can use the full panel. */
+  max-height: none;
+  flex: 1 1 auto;
 }
 
 #dinoInfoPanel .dino-hero,
@@ -4042,7 +4054,11 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
     width: var(--dino-w-mobile);
     left: 6px !important;
     margin: 0 !important;
-    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 12px);
+    /* Panel sits at top:2px. Subtract that + dock toolbar + safe area + margin so
+       the panel's bottom edge stays above the dock instead of sliding under it. */
+    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 24px);
+    display: flex;
+    flex-direction: column;
   }
 
   #modStylePanel{
@@ -4054,7 +4070,7 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
 
   #mapEntriesPanel{
     width: var(--dino-w-mobile);
-    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 12px);
+    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 24px);
   }
 
   body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{
