@@ -2785,7 +2785,9 @@ function mountFancyDropdown(native, host, placeholder, { buildToolbar } = {}){
 
       row.className="dd-item";
       row.textContent=o.textContent;
-      row.dataset.search=normSearch(o.textContent);
+      // Search key: visible label + any hidden searchExtra (e.g. note index)
+      const extra = o.dataset?.searchExtra ? " " + o.dataset.searchExtra : "";
+      row.dataset.search = normSearch(o.textContent + extra);
 
       row.onclick=()=>{
         native.value=o.value;
@@ -3252,8 +3254,8 @@ function rebuildSelectionSelect() {
     const allNotes = getNoteOptionsForCurrentMap();
     options = allNotes.map(n => ({
       value: `note:${n[0]}`,
-      label: `${n[1]}  #${n[0]}`,  // embed index in label so search naturally finds it
-      meta: `#${n[0]}`
+      label: n[1],                // clean label, no #N suffix
+      searchExtra: String(n[0]),  // index kept for hidden search matching
     }));
   }
 
@@ -3268,6 +3270,7 @@ function rebuildSelectionSelect() {
     const o = document.createElement("option");
     o.value = opt.value;
     o.textContent = opt.label;
+    if (opt.searchExtra) o.dataset.searchExtra = opt.searchExtra;
     UI.dinoSelect.appendChild(o);
   }
 

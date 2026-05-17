@@ -304,12 +304,30 @@ function colorSwatchHtml(colorIdx){
 }
 
 
-function renderColorRegionRow(label, colorIndices){
-  if (!Array.isArray(colorIndices) || !colorIndices.length) return "";
+function renderColorRegionRow(regionIdx, regionData){
+  // regionData can be either:
+  //   - new format: { n: "Dark All", c: [color indices] }
+  //   - old format: [color indices]  (legacy fallback)
+  //   - null  (region not used by this dino)
+  let name = "";
+  let colorIndices = null;
+
+  if (regionData && typeof regionData === "object" && !Array.isArray(regionData)) {
+    name = regionData.n || "";
+    colorIndices = Array.isArray(regionData.c) ? regionData.c : null;
+  } else if (Array.isArray(regionData)) {
+    colorIndices = regionData;
+  }
+
+  if (!colorIndices || !colorIndices.length) return "";
+
   const swatches = colorIndices.map(colorSwatchHtml).join("");
   return `
     <div class="color-region-row">
-      <div class="color-region-label">${escapeHtml(label)}</div>
+      <div class="color-region-label">
+        ${name ? `<span class="color-region-name">${escapeHtml(name)}</span>` : ""}
+        <span class="color-region-index">Region ${regionIdx}</span>
+      </div>
       <div class="color-region-swatches">${swatches}</div>
     </div>
   `;
@@ -327,12 +345,14 @@ function renderColorRegionsSection(d){
 
   function renderSet(cs, title){
     if (!cs) return "";
-    // cs is an array of 6 region arrays. Skip empty/null regions.
+    // cs is an array of 6 entries (objects or null). Skip empty/null regions.
     const rows = [];
     for (let i = 0; i < 6; i++){
       const region = cs[i];
-      if (!Array.isArray(region) || !region.length) continue;
-      rows.push(renderColorRegionRow(`Region ${i}`, region));
+      if (!region) continue;
+      // region is either {n,c} or legacy array; renderColorRegionRow handles both
+      const html = renderColorRegionRow(i, region);
+      if (html) rows.push(html);
     }
     if (!rows.length) return "";
     return `
