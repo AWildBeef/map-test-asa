@@ -5317,3 +5317,16 @@ body[data-mode="note"] .mode-toggle {
 .crafting-station-value {
   text-align: right;
 }
+
+
+/* ============================================================
+   TAME TYPE BADGE (e.g. "Knockout Tame", "Passive Tame")
+============================================================ */
+.dino-badge.tame-type {
+  border-color: color-mix(in srgb, var(--accent, #5ab4ff) 35%, transparent);
+  background:
+    linear-gradient(to bottom,
+      color-mix(in srgb, var(--accent, #5ab4ff) 14%, transparent),
+      color-mix(in srgb, var(--accent, #5ab4ff) 6%,  transparent));
+  color: color-mix(in srgb, var(--accent, #5ab4ff) 90%, white);
+}

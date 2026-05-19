@@ -106,6 +106,22 @@ function buildSdfSummary(displayName, tamed, level, skipBonus) {
   return `Spawns a ${kind} ${lvlStr} ${escapeHtml(displayName)}`;
 }
 
+// Tame type lookup: dinos have a numeric `tt` that indexes into Global.dinos.tt
+// Returns a friendly label (e.g. "Knockout", "Passive", "Egg Steal", etc.)
+// or "" when the dino is untameable or has no tame type.
+function tameTypeLabelFromCode(tt){
+  if (tt == null) return "";
+  const table = Global.dinos?.tt;
+  if (!Array.isArray(table)) return "";
+  const raw = table[Number(tt)];
+  if (!raw) return "";
+  // Normalize "egg_steal" → "Egg Steal", "knockout" → "Knockout", etc.
+  return String(raw)
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+
 function renderDinoHero(d, selectedName) {
   const bp = d.bpPath || "";
   const displayName = d.displayName || "(Unknown)";
@@ -126,6 +142,7 @@ function renderDinoHero(d, selectedName) {
       ${modId ? `<div class="info-submeta">Mod ID: ${escapeHtml(modId)}</div>` : ""}
 
       ${d.tameable === false || d.tameable === 0 ? `<span class="dino-badge tameable">Untameable</span>` : ""}
+      ${(d.tameable === true || d.tameable === 1) && d.tameType ? `<span class="dino-badge tame-type">${escapeHtml(d.tameType)} Tame</span>` : ""}
       ${d.breedable === false || d.breedable === 0 ? `<span class="dino-badge breedable">Unbreedable</span>` : ""}
 
       <div class="spawn-cmd-block">
@@ -838,6 +855,7 @@ function getSelectedDinoGroup(name){
     mName: first?.mn || "",
     tameable: first?.flags?.tameable,
     breedable: first?.flags?.breedable,
+    tameType:  tameTypeLabelFromCode(first?.tt),
     isAlpha: first?.flags?.isAlpha,
     isBoss: first?.flags?.isBoss,
     isBossMinion: first?.flags?.isBossMinion,
