@@ -280,29 +280,53 @@ function renderDinoTabInfo(d) {
 
 function colorSetsForDino(d){
   // Returns { male: cs|null, female: cs|null }
-  // If dino has cs only (unified), both male/female point to the same set.
-  // If dino has mcs/fcs (separate male/female), each is its own.
+  //
+  // A dino references color sets through one of two key families:
+  //   cs / mcs / fcs    -> a set in THIS dino's own file
+  //                        (vanilla file for vanilla dinos; mod file for mod dinos)
+  //   vcs / vmcs / vfcs -> a VANILLA set, even on a mod dino
+  // mcs/fcs (and vmcs/vfcs) split male vs female; cs/vcs is unified.
+  //
+  // Vanilla sets resolve against Global.dinos.cs. Mod sets resolve against the
+  // originating mod's table in Global.dinos.modCsByMod[_modId] — kept per-mod
+  // because each mod's set ids restart at 1.
   const dinoObj = getDinoObjByBp(d?.bpPath);
   if (!dinoObj) return { male: null, female: null };
 
-  const csLookup = Global.dinos?.cs || {};
-  const colorDefs = Global.dinos?.c  || {};
+  const vanillaCs = Global.dinos?.cs || {};
+  const modCsByMod = Global.dinos?.modCsByMod || {};
+  const modId = String(dinoObj._modId || "");
 
-  function lookupCs(id){
+  // `cs`/`mcs`/`fcs` mean "a set in this dino's OWN file". For a mod dino
+  // that's the mod's color set table; for a vanilla dino it's the vanilla
+  // `cs` table. `vcs`/`vmcs`/`vfcs` always mean the vanilla table.
+  const ownCs = modId ? (modCsByMod[modId] || {}) : vanillaCs;
+
+  function lookup(table, id){
     if (id == null) return null;
-    return csLookup[String(id)] || csLookup[id] || null;
+    return table[String(id)] || table[id] || null;
   }
 
-  if (dinoObj.mcs != null || dinoObj.fcs != null) {
-    return {
-      male:   lookupCs(dinoObj.mcs),
-      female: lookupCs(dinoObj.fcs),
-    };
+  // Unified set: cs (own-file set) or vcs (vanilla set).
+  if (dinoObj.cs != null){
+    const set = lookup(ownCs, dinoObj.cs);
+    return { male: set, female: set };
   }
-  if (dinoObj.cs != null) {
-    const cs = lookupCs(dinoObj.cs);
-    return { male: cs, female: cs };
+  if (dinoObj.vcs != null){
+    const set = lookup(vanillaCs, dinoObj.vcs);
+    return { male: set, female: set };
   }
+
+  // Split male/female. A dino may mix namespaces (e.g. mod male, vanilla
+  // female), so each side is resolved independently.
+  const male =
+    dinoObj.mcs  != null ? lookup(ownCs,     dinoObj.mcs)  :
+    dinoObj.vmcs != null ? lookup(vanillaCs, dinoObj.vmcs) : null;
+  const female =
+    dinoObj.fcs  != null ? lookup(ownCs,     dinoObj.fcs)  :
+    dinoObj.vfcs != null ? lookup(vanillaCs, dinoObj.vfcs) : null;
+
+  if (male || female) return { male, female };
   return { male: null, female: null };
 }
 
@@ -321,6 +345,17 @@ function colorSwatchHtml(colorIdx){
 }
 
 
+function isUsableRegionName(name){
+  // Guard against malformed source data where the color list was dumped into
+  // the RegionName field, and against names long enough to break layout.
+  if (!name || typeof name !== "string") return false;
+  const t = name.trim();
+  if (!t || t.length > 48) return false;
+  if (t.includes('("') || t.includes('","') || t.includes('")')) return false;
+  return true;
+}
+
+
 function renderColorRegionRow(regionIdx, regionData){
   // regionData can be either:
   //   - new format: { n: "Dark All", c: [color indices] }
@@ -330,13 +365,18 @@ function renderColorRegionRow(regionIdx, regionData){
   let colorIndices = null;
 
   if (regionData && typeof regionData === "object" && !Array.isArray(regionData)) {
-    name = regionData.n || "";
+    name = isUsableRegionName(regionData.n) ? regionData.n : "";
     colorIndices = Array.isArray(regionData.c) ? regionData.c : null;
   } else if (Array.isArray(regionData)) {
     colorIndices = regionData;
   }
 
   if (!colorIndices || !colorIndices.length) return "";
+
+  // Color indices must be numbers (ids). Drop anything else defensively —
+  // older/broken data sometimes carried raw name strings here.
+  colorIndices = colorIndices.filter(x => typeof x === "number");
+  if (!colorIndices.length) return "";
 
   const swatches = colorIndices.map(colorSwatchHtml).join("");
   return `
