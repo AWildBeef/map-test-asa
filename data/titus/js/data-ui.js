@@ -204,11 +204,28 @@ async function loadSelectedSource() {
       )
     };
 
+    const modId = String(mod.modId || "");
+    // Tag this mod's dinos with their origin mod id so color-set lookup can
+    // resolve cs/mcs/fcs against the correct per-mod color set table.
+    const taggedModDinos = {};
+    for (const [bp, dino] of Object.entries(mod.dinos || {})){
+      taggedModDinos[bp] = (dino && typeof dino === "object" && modId)
+        ? { ...dino, _modId: modId }
+        : dino;
+    }
+
     Global.dinos = {
       dinos: {
         ...(Global.baseDinos?.dinos || {}),
-        ...(mod.dinos || {})
-      }
+        ...taggedModDinos
+      },
+      // Color table `c` is global — always keep the base copy so mod dino
+      // swatches resolve. Mod files no longer ship their own `c`.
+      c: Global.baseDinos?.c || {},
+      // Vanilla color sets, referenced by a mod dino's vcs/vmcs/vfcs keys.
+      cs: Global.baseDinos?.cs || {},
+      // Per-mod color sets keyed by mod id, referenced by cs/mcs/fcs keys.
+      modCsByMod: (modId && mod.cs) ? { [modId]: mod.cs } : {}
     };
 
     mergeLootFromMod(mod);
@@ -2429,12 +2446,18 @@ async function buildMergedGroupSource(src){
   };
 
   let mergedDinos = {
-    dinos: { ...(Global.baseDinos?.dinos || {}) }
+    dinos: { ...(Global.baseDinos?.dinos || {}) },
+    c: Global.baseDinos?.c || {},
+    cs: Global.baseDinos?.cs || {},
+    // Per-mod color sets: { modId: { setId: [...regions] } }. Keyed by mod id
+    // because each mod's set ids restart at 1 and would otherwise collide.
+    modCsByMod: {}
   };
 
   let modOnlyDinos = {};
 
   for (const mod of mods){
+    const modId = String(mod.modId || "");
     mergedSpawn = {
       mapLegend: {
         ...(mergedSpawn.mapLegend || {}),
@@ -2462,16 +2485,31 @@ async function buildMergedGroupSource(src){
       )
     };
 
+    // Tag this mod's dinos with their origin mod id so color-set lookup can
+    // find the right per-mod `cs` table, then merge them in.
+    const taggedModDinos = {};
+    for (const [bp, dino] of Object.entries(mod.dinos || {})){
+      taggedModDinos[bp] = (dino && typeof dino === "object" && modId)
+        ? { ...dino, _modId: modId }
+        : dino;
+    }
+    if (modId && mod.cs){
+      mergedDinos.modCsByMod[modId] = mod.cs;
+    }
+
     mergedDinos = {
       dinos: {
         ...(mergedDinos.dinos || {}),
-        ...(mod.dinos || {})
-      }
+        ...taggedModDinos
+      },
+      c: mergedDinos.c,
+      cs: mergedDinos.cs,
+      modCsByMod: mergedDinos.modCsByMod
     };
 
     modOnlyDinos = {
       ...modOnlyDinos,
-      ...(mod.dinos || {})
+      ...taggedModDinos
     };
   }
 
