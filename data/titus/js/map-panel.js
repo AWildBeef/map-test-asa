@@ -1457,6 +1457,14 @@ function isOceanCrate(crateClass) {
 // isDesertCrate is an alias for isOceanCrate - kept for potential future separation
 function isDesertCrate(crateClass) { return isOceanCrate(crateClass); }
 
+// Beaver dams — giant beaver lodges that act as lootable supply containers.
+// Two known classes: DenLogs_Child2 and DamLogs_Child. Matched on the
+// distinctive "...Logs_..." segment so either variant is caught.
+function isBeaverDam(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("denlogs") || cls.includes("damlogs");
+}
+
 // ── Aberration special crate types ───────────────────────────────────────────
 // Ab "cave" = normal gameplay drops (inside the main cave map)
 // Ab "dungeon" = challenging cave areas
@@ -1491,11 +1499,12 @@ function isLcMap() { return State.mapId === "Lost Colony"; }
 
 function isSpecialCrate(crateClass) {
   if (isAbMap()) {
-    return isAbNormalCrate(crateClass) || isAbDungeonCrate(crateClass) || isAbSurfaceCrate(crateClass);
+    return isAbNormalCrate(crateClass) || isAbDungeonCrate(crateClass) || isAbSurfaceCrate(crateClass)
+        || isBeaverDam(crateClass);
   }
-  // For all other maps including LC and EX: special = cave or ocean
+  // For all other maps including LC and EX: special = cave or ocean or beaver dam
   // (LC cave drops have "cave" in their class name; EX cave drops do too)
-  return isCaveCrate(crateClass) || isOceanCrate(crateClass);
+  return isCaveCrate(crateClass) || isOceanCrate(crateClass) || isBeaverDam(crateClass);
 }
 
 function _poiMatchesCrateFn(point, fn) {
@@ -1518,6 +1527,7 @@ function poiHasAbNormalCrate(point)  { return _poiMatchesCrateFn(point, isAbNorm
 function poiHasAbDungeonCrate(point) { return _poiMatchesCrateFn(point, isAbDungeonCrate); }
 function poiHasAbSurfaceCrate(point) { return _poiMatchesCrateFn(point, isAbSurfaceCrate); }
 function poiIsSpecialCrate(point)    { return _poiMatchesCrateFn(point, isSpecialCrate); }
+function poiHasBeaverDam(point)      { return _poiMatchesCrateFn(point, isBeaverDam); }
 
 
 
@@ -2392,6 +2402,9 @@ function buildSpecialCrateRows(supplyCrates) {
   // Cave drops (skip if none)
   const caveCount = countCavePois(supplyCrates);
   if (caveCount > 0) rows.push({ key: "caveCrates", label: "Cave Drops", count: caveCount });
+  // Beaver dams (skip if none)
+  const beaverCount = countBeaverDamPois(supplyCrates);
+  if (beaverCount > 0) rows.push({ key: "beaverDams", label: "Beaver Dams", count: beaverCount });
   return rows;
 }
 
@@ -2401,6 +2414,7 @@ function isOceanHigh(crateClass) {
       || String(crateClass).toLowerCase().includes("oceaninstant_high");
 }
 function countOceanPois(points)     { return (Array.isArray(points) ? points : []).filter(p => poiHasOceanCrate(p)).length; }
+function countBeaverDamPois(points) { return (Array.isArray(points) ? points : []).filter(p => poiHasBeaverDam(p)).length; }
 function countAbNormalPois(points)  { return (Array.isArray(points) ? points : []).filter(p => poiHasAbNormalCrate(p)).length; }
 function countAbDungeonPois(points) { return (Array.isArray(points) ? points : []).filter(p => poiHasAbDungeonCrate(p)).length; }
 function countAbSurfacePois(points) { return (Array.isArray(points) ? points : []).filter(p => poiHasAbSurfaceCrate(p)).length; }
@@ -2440,6 +2454,7 @@ function renderPoiPanel(){
     { key: "oilVeins",          label: "Oil Veins",           count: (pois.oilVeins || []).length },
     { key: "gasVeins",          label: "Gas Veins",           count: (pois.gasVeins || []).length },
     { key: "chargeNodes",       label: "Charge Nodes",        count: (pois.chargeNodes || []).length },
+    { key: "hyperChargeNodes",  label: "Hyper Charge Nodes",  count: (pois.hyperChargeNodes || []).length },
     { key: "plantZ",            label: "Wild Plant Z",        count: (pois.plantZ || []).length },
     { key: "plantR",            label: "Proto Plant R",       count: (pois.plantR || []).length },
     { key: "wyvernNests",       label: "Wyvern Nests",        count: (pois.wyvernNests || []).length },
@@ -3359,6 +3374,12 @@ function drawOceanCratePois(points) {
   addSupplyCrateMarkers(points.filter(p => poiHasOceanCrate(p)), { layer: mapObj.poiLayer });
 }
 
+function drawBeaverDamPois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.beaverDams) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasBeaverDam(p)), { layer: mapObj.poiLayer });
+}
+
 // Lost Colony drop drawers
 function drawLcNormalCratePois(points) {
   if (!mapObj?.poiLayer || !Array.isArray(points) || !poiVisibility.lcNormalCrates) return;
@@ -3559,14 +3580,20 @@ function drawPoiGroup(points, groupName){
 
 
 /* ── Simple [x,y] array POI drawer ── */
-function drawSimpleDotPois(points, visKey, color, label) {
+function drawSimpleDotPois(points, visKey, color, label, outlineColor) {
   if (!mapObj?.poiLayer || !poiVisibility[visKey]) return;
+  // Default outline is the standard near-black ring. A caller can pass a
+  // custom outlineColor to distinguish a POI type while keeping the same dot
+  // fill (e.g. hyper charge nodes share the charge-node green fill but get a
+  // different ring). A custom ring is drawn slightly thicker so it reads.
+  const ring = outlineColor || "#111";
+  const ringWeight = outlineColor ? 2.5 : 1.5;
   for (const pt of (Array.isArray(points) ? points : [])) {
     const x = Number(pt?.[0] ?? pt?.x);
     const y = Number(pt?.[1] ?? pt?.y);
     if (![x, y].every(Number.isFinite)) continue;
     L.circleMarker([y, x], {
-      radius: 5, color: "#111", weight: 1.5,
+      radius: 5, color: ring, weight: ringWeight,
       fillColor: color, fillOpacity: 0.9, pane: "poiPane"
     }).addTo(mapObj.poiLayer).bindTooltip(escapeHtml(label), {
       direction: "auto", sticky: true, opacity: 0.97,
@@ -3717,6 +3744,7 @@ function drawPois(){
   } else {
     drawCaveCratePois(pois.supplyCrates || []);
     drawOceanCratePois(pois.supplyCrates || []);
+    drawBeaverDamPois(pois.supplyCrates || []);
   }
   drawArtifactCratePois(pois.supplyCrates || []);
   drawPlayerStarts(pois.playerStarts);
@@ -3730,6 +3758,7 @@ function drawPois(){
   drawSimpleDotPois(pois.oilVeins,         "oilVeins",         "#555",    "Oil Vein");
   drawSimpleDotPois(pois.gasVeins,         "gasVeins",         "#ff4dff", "Gas Vein");
   drawSimpleDotPois(pois.chargeNodes,      "chargeNodes",      "#00ff55", "Charge Node");
+  drawSimpleDotPois(pois.hyperChargeNodes, "hyperChargeNodes", "#00ff55", "Hyper Charge Node", "#aa55ff");
   drawSimpleDotPois(pois.plantZ,           "plantZ",           "#00eeff", "Wild Plant Z");
   drawSimpleDotPois(pois.plantR,           "plantR",           "#ff6040", "Proto Plant R");
   drawNestPois(pois.wyvernNests,           "wyvernNests",      "#ff9933", "Wyvern Nest");

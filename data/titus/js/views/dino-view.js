@@ -273,7 +273,31 @@ function renderDinoTabInfo(d) {
       </div>
     ` : ""}
 
+    ${renderDossierSection(d)}
+
     ${renderColorRegionsSection(d)}
+  `;
+}
+
+
+function renderDossierSection(d){
+  // The dino's Dossier Index (`di`). The dossier is an explorer note, so it
+  // unlocks with the same command notes use: cheat GiveExplorerNote <index>.
+  const idx = d?.dossierIndex;
+  if (idx == null) return "";
+
+  const unlockCmd = `cheat GiveExplorerNote ${idx}`;
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Dossier</div>
+      <div class="entry-meta">
+        <div class="entry-meta-line">Dossier Index: ${escapeHtml(String(idx))}</div>
+      </div>
+      <div class="note-cmd-block" style="margin-top:8px;">
+        <div class="note-cmd-label">Unlock Dossier</div>
+        <div class="info-mono copy-on-click" data-copy="${escapeAttr(unlockCmd)}">${escapeHtml(unlockCmd)}</div>
+      </div>
+    </div>
   `;
 }
 
@@ -901,6 +925,7 @@ function getSelectedDinoGroup(name){
     isBossMinion: first?.flags?.isBossMinion,
     dragWeight: first?.flags?.dragWeight || 35,
     killXpBase: first?.flags?.killXpBase || 2,
+    dossierIndex: (first && first.di != null) ? first.di : null,
     stats: first?.stats || null,
     attacks: first?.attacks || null,
     entries
