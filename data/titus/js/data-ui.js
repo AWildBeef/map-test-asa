@@ -1371,9 +1371,35 @@ function dinoBpsThatUseHarvestComp(compRef){
   return out;
 }
 
+// A dino's dd/dh references a loot component either by integer id (an index
+// into loot.di / loot.hi) or, in older data, by the class name directly.
+// These resolve either representation to the actual component object.
+function lookupDropComp(loot, ref){
+  if (ref == null || !loot?.dd) return null;
+  if (loot.dd[ref]) return loot.dd[ref];                 // direct (class name)
+  const idx = Number(ref);
+  if (Number.isInteger(idx) && Array.isArray(loot.di)){
+    const cls = loot.di[idx];
+    if (cls && loot.dd[cls]) return loot.dd[cls];        // id -> class -> comp
+  }
+  return null;
+}
+
+function lookupHarvestComp(loot, ref){
+  if (ref == null || !loot?.dh) return null;
+  if (loot.dh[ref]) return loot.dh[ref];
+  const idx = Number(ref);
+  if (Number.isInteger(idx) && Array.isArray(loot.hi)){
+    const cls = loot.hi[idx];
+    if (cls && loot.dh[cls]) return loot.dh[cls];
+  }
+  return null;
+}
+
 function dinoBpsThatDropItem(itemId){
   const loot = Global.loot;
   if (!loot?.rd || !loot?.di) return [];
+
   const compIndices = loot.rd[String(itemId)] || [];
   return compIndices.flatMap(idx => {
     // Try matching dinos by index (new format) OR by class name (legacy)
@@ -1727,25 +1753,24 @@ function rebuildLootIndices(){
     const dinoObj = getDinoObjByBp(bp);
     if (!dinoObj) continue;
 
-    if (dinoObj.dd){
-      const comp = loot.dd?.[dinoObj.dd];
-      if (comp){
-        for (const setRow of (comp.s || [])){
-          for (const entry of (setRow.e || [])){
-            for (const iid of (entry.i || [])){
-              dinoDropItemIds.add(iid);
-            }
+    // A dino's dd/dh is a component id (index into loot.di / loot.hi), though
+    // older data used the class name directly. Resolve to a class name first,
+    // then look up the component. lookupDropComp/lookupHarvestComp handles both.
+    const dropComp = lookupDropComp(loot, dinoObj.dd);
+    if (dropComp){
+      for (const setRow of (dropComp.s || [])){
+        for (const entry of (setRow.e || [])){
+          for (const iid of (entry.i || [])){
+            dinoDropItemIds.add(iid);
           }
         }
       }
     }
 
-    if (dinoObj.dh){
-      const comp = loot.dh?.[dinoObj.dh];
-      if (comp){
-        for (const iid of (comp.i || [])){
-          dinoHarvestItemIds.add(iid);
-        }
+    const harvestComp = lookupHarvestComp(loot, dinoObj.dh);
+    if (harvestComp){
+      for (const iid of (harvestComp.i || [])){
+        dinoHarvestItemIds.add(iid);
       }
     }
   }
