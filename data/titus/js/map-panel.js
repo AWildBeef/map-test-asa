@@ -553,7 +553,19 @@ function worldRulesForCurrentMap(){
   const mapRules = Array.isArray(all?.[State.mapId]) ? all[State.mapId] : [];
   const globalRules = Array.isArray(all?.__global__) ? all.__global__ : [];
 
-  return [...mapRules, ...globalRules];
+  // Rule `from` and `outs[][0]` are dino indices in current data (or bp
+  // strings in older data). Resolve to bp here so the world-replacement
+  // engine and ancestorDistance keep operating purely on bps.
+  const resolveRule = (r) => {
+    if (!r || typeof r !== "object") return r;
+    const out = { ...r, from: bpForDinoRef(r.from) };
+    if (Array.isArray(r.outs)){
+      out.outs = r.outs.map(o => Array.isArray(o) ? [bpForDinoRef(o[0]), o[1]] : o);
+    }
+    return out;
+  };
+
+  return [...mapRules, ...globalRules].map(resolveRule);
 }
 
 
@@ -583,7 +595,9 @@ function rebuildMapIndices(){
     const finalBpsForEntry = new Set();
 
     for (const r of rows){
-      const rawBp = normalizeBp(r?.[0]);
+      // r[0] is a dino reference: a numeric dino index in current data, or a
+      // bp string in older/mod data. Resolve to a bp up front.
+      const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
       if (!rawBp) continue;
 
       const outs = worldOutputsForBp(rawBp);
@@ -1604,7 +1618,7 @@ function getDinoRowsAllMaps(){
     const rowsInEntry = entryData?.d || [];
 
     for (const r of rowsInEntry) {
-      const rawBp = normalizeBp(r?.[0]);
+      const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
       if (!rawBp) continue;
 
       const outs = worldOutputsForBp(rawBp);
@@ -1696,7 +1710,7 @@ function getDinoRowsCurrentMap() {
       let foundInThisEntry = false;
 
       for (const r of rowsInEntry) {
-        const rawBp = normalizeBp(r?.[0]);
+        const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
         if (!rawBp) continue;
 
         const outs = worldOutputsForBp(rawBp);

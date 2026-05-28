@@ -876,7 +876,7 @@ function getSelectedDinoGroup(name){
     let spawnChances = "";
 
     for (const r of rows){
-      const rawBp = normalizeBp(r?.[0]);
+      const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
       if (!rawBp) continue;
 
       const outs = worldOutputsForBp(rawBp);

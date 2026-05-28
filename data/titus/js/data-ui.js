@@ -177,6 +177,13 @@ async function loadSelectedSource() {
 
     Global.modMeta = mod;
 
+    const modId = String(mod.modId || "");
+    const baseIndex = Global.baseDinos?.dinoIndex || [];
+    const decoded = decodeModSource(mod, baseIndex);
+    const taggedModDinos = decoded.dinos;
+    const modSpawnEntries = decoded.entries;
+    const modWorldRepl = decoded.worldReplacements;
+
     Global.spawn = {
       mapLegend: {
         ...(Global.baseSpawn?.mapLegend || {}),
@@ -188,7 +195,7 @@ async function loadSelectedSource() {
       },
       entries: mergeEntryTables(
         Global.baseSpawn?.entries || {},
-        mod.entries || {}
+        modSpawnEntries
       ),
       maps: {
         ...(Global.baseSpawn?.maps || {}),
@@ -200,37 +207,29 @@ async function loadSelectedSource() {
       },
       worldReplacements: mergeWorldReplacementTables(
         Global.baseSpawn?.worldReplacements || {},
-        mod.worldReplacements || {}
+        modWorldRepl
       )
     };
 
-    const modId = String(mod.modId || "");
-    // Tag this mod's dinos with their origin mod id so color-set lookup can
-    // resolve cs/mcs/fcs against the correct per-mod color set table.
-    const taggedModDinos = {};
-    for (const [bp, dino] of Object.entries(mod.dinos || {})){
-      taggedModDinos[bp] = (dino && typeof dino === "object" && modId)
-        ? { ...dino, _modId: modId }
-        : dino;
-    }
-
     Global.dinos = {
+      // Base dinos stay index-keyed; mod dinos are bp-keyed. The layer keys
+      // both by bp, so the differing key styles coexist without collision.
       dinos: {
         ...(Global.baseDinos?.dinos || {}),
         ...taggedModDinos
       },
-      // Color table `c` is global — always keep the base copy so mod dino
-      // swatches resolve. Mod files no longer ship their own `c`.
+      dinoIndex: baseIndex,
       c: Global.baseDinos?.c || {},
-      // Vanilla color sets, referenced by a mod dino's vcs/vmcs/vfcs keys.
       cs: Global.baseDinos?.cs || {},
-      // Per-mod color sets keyed by mod id, referenced by cs/mcs/fcs keys.
       modCsByMod: (modId && mod.cs) ? { [modId]: mod.cs } : {}
     };
 
     mergeLootFromMod(mod);
 
   }
+
+  // Rebuild the dino index compatibility maps for whatever source is now active.
+  rebuildDinoIndex();
 
   rebuildMapIndices();
   rebuildLootIndices();
@@ -393,7 +392,7 @@ function entryRarityForBps(entryName, bpSet){
   let matchedRarity = 0;
 
   for (const r of rows){
-    const rawBp = normalizeBp(r?.[0]);
+    const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
     if (!rawBp) continue;
 
     const gw = Number(r?.[1] || 0);
@@ -477,7 +476,7 @@ function entryRarityForEntry(entryName){
   let rarity = 0;
 
   for (const r of rows){
-    const rawBp = normalizeBp(r?.[0]);
+    const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
     if (!rawBp) continue;
 
     const gw = Number(r?.[1] || 0);
@@ -631,7 +630,7 @@ function dinoNamesForEntryGlobal(entryName){
   const allowedModBps = restrictToMod ? modBlueprintSet() : null;
 
   for (const r of rows){
-    const rawBp = normalizeBp(r?.[0]);
+    const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
     if (!rawBp) continue;
 
     const outs = worldOutputsForBp(rawBp);
@@ -656,15 +655,145 @@ function dinoNamesForEntryGlobal(entryName){
 }
 
 
-function getDinoObjByBp(bp){
-  const dinos = Global.dinos?.dinos || {};
-  if (dinos[bp]) return dinos[bp];
+// Decode an entire mod's dino/spawn/world data from its index space into the
+// shared bp space. Returns { dinos (bp-keyed), entries, worldReplacements }.
+function decodeModSource(mod, baseIndex){
+  const modId = String(mod.modId || "");
+  const modIndex = Array.isArray(mod.dinoIndex) ? mod.dinoIndex : [];
 
-  const cls = bpClass(bp);
-  for (const [k, v] of Object.entries(dinos)){
-    if (bpClass(k) === cls) return v;
+  const dinos = {};
+  for (const [key, dino] of Object.entries(mod.dinos || {})){
+    if (!dino || typeof dino !== "object") continue;
+    const bp = /^-?\d+$/.test(key)
+      ? decodeModDinoRef(Number(key), modIndex, baseIndex)
+      : key;
+    if (!bp) continue;
+    const resolved = { ...dino, _modId: modId };
+    if (dino.p != null){
+      resolved.p = decodeModDinoRef(dino.p, modIndex, baseIndex) || dino.p;
+    }
+    dinos[bp] = resolved;
   }
 
+  const entries = {};
+  for (const [ename, entry] of Object.entries(mod.entries || {})){
+    if (!entry || !Array.isArray(entry.d)){ entries[ename] = entry; continue; }
+    entries[ename] = {
+      ...entry,
+      d: entry.d.map(r => Array.isArray(r)
+        ? [decodeModDinoRef(r[0], modIndex, baseIndex) || r[0], ...r.slice(1)]
+        : r)
+    };
+  }
+
+  const worldReplacements = {};
+  for (const [scope, rules] of Object.entries(mod.worldReplacements || {})){
+    worldReplacements[scope] = Array.isArray(rules) ? rules.map(rule => {
+      if (!rule || typeof rule !== "object") return rule;
+      const out = { ...rule, from: decodeModDinoRef(rule.from, modIndex, baseIndex) || rule.from };
+      if (Array.isArray(rule.outs)){
+        out.outs = rule.outs.map(o => Array.isArray(o)
+          ? [decodeModDinoRef(o[0], modIndex, baseIndex) || o[0], o[1]] : o);
+      }
+      return out;
+    }) : rules;
+  }
+
+  return { dinos, entries, worldReplacements };
+}
+
+// Decode a dino reference using a specific mod's index plus the base index.
+// In mod files: ref >= 0 -> that mod's own dinoIndex[ref];
+//               ref < 0  -> a VANILLA dino at baseIndex[-ref - 1].
+// Returns a bp string ("" if unresolvable).
+function decodeModDinoRef(ref, modIndex, baseIndex){
+  if (ref == null) return "";
+  if (typeof ref === "string" && !/^-?\d+$/.test(ref)) return ref; // already a bp
+  const n = Number(ref);
+  if (!Number.isFinite(n)) return "";
+  if (n < 0){
+    const vi = -n - 1;
+    return (baseIndex && baseIndex[vi]) || "";
+  }
+  return (modIndex && modIndex[n]) || "";
+}
+
+// ---------------------------------------------------------------------------
+// Dino index compatibility layer
+//
+// The base dinos section is keyed by a numeric dino index, and `dinoIndex` is
+// an array mapping index -> bp. Parent (`p`) and spawn/boss references are
+// also given as indices. Mod dinos, however, are still keyed by bp. To let the
+// rest of the app keep working in terms of bp, we build lookup maps once per
+// source load:
+//   _dinoIdxToBp : index -> bp           (from Global.dinos.dinoIndex)
+//   _dinoBpToObj : bp    -> dino object  (covers both index- and bp-keyed)
+//   _dinoBpToIdx : bp    -> index
+// Anything that needs to resolve an index (boss.d, parent p, spawn refs) goes
+// through bpForDinoRef(); object lookup goes through getDinoObjByBp().
+// ---------------------------------------------------------------------------
+let _dinoIdxToBp = [];
+let _dinoBpToObj = new Map();
+let _dinoBpToIdx = new Map();
+
+function rebuildDinoIndex(){
+  _dinoIdxToBp = Array.isArray(Global.dinos?.dinoIndex) ? Global.dinos.dinoIndex : [];
+  _dinoBpToObj = new Map();
+  _dinoBpToIdx = new Map();
+
+  // Map index -> bp both ways.
+  _dinoIdxToBp.forEach((bp, i) => {
+    if (bp){
+      _dinoBpToIdx.set(bp, i);
+      _dinoBpToIdx.set(bpClass(bp), i);
+    }
+  });
+
+  const dinos = Global.dinos?.dinos || {};
+  for (const [key, obj] of Object.entries(dinos)){
+    // key is either a numeric index (base) or a bp string (mod).
+    let bp = null;
+    if (/^-?\d+$/.test(key)){
+      bp = _dinoIdxToBp[Number(key)] || null;
+    } else {
+      bp = key; // mod dino, already bp-keyed
+    }
+    if (!bp) continue;
+    _dinoBpToObj.set(bp, obj);
+    _dinoBpToObj.set(bpClass(bp), obj);
+  }
+}
+
+// Resolve a dino reference (bp string OR numeric index) to a bp string.
+function bpForDinoRef(ref){
+  if (ref == null) return "";
+  if (typeof ref === "number" || /^-?\d+$/.test(String(ref))){
+    return _dinoIdxToBp[Number(ref)] || "";
+  }
+  return String(ref);
+}
+
+function getDinoObjByBp(bp){
+  if (bp == null) return null;
+
+  // Numeric ref -> resolve through the index.
+  if (typeof bp === "number" || /^-?\d+$/.test(String(bp))){
+    const resolved = _dinoIdxToBp[Number(bp)];
+    if (resolved && _dinoBpToObj.has(resolved)) return _dinoBpToObj.get(resolved);
+  }
+
+  // Direct bp (or class) hit via the prebuilt map.
+  if (_dinoBpToObj.has(bp)) return _dinoBpToObj.get(bp);
+  const cls = bpClass(bp);
+  if (_dinoBpToObj.has(cls)) return _dinoBpToObj.get(cls);
+
+  // Fallback: linear scan of the raw section (covers anything missed).
+  const dinos = Global.dinos?.dinos || {};
+  if (dinos[bp]) return dinos[bp];
+  for (const [k, v] of Object.entries(dinos)){
+    const kbp = /^-?\d+$/.test(k) ? (_dinoIdxToBp[Number(k)] || "") : k;
+    if (kbp && bpClass(kbp) === cls) return v;
+  }
   return null;
 }
 
@@ -675,8 +804,9 @@ function normalizeBp(bp){
 
 
 function getParentBp(bp){
-  const d = Global.dinos?.dinos?.[bp];
-  return normalizeBp(d?.p);
+  const d = getDinoObjByBp(bp);
+  // Parent `p` is a dino index in base data, or a bp string in mod data.
+  return normalizeBp(bpForDinoRef(d?.p));
 }
 
 
@@ -1343,10 +1473,12 @@ function dinoBpsThatUseDropComp(compRef){
     altRef = idx >= 0 ? String(idx) : null;
   }
   const out = [];
-  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
+  for (const [key, obj] of Object.entries(Global.dinos?.dinos || {})){
     if (obj.dd == null) continue;
     const ddStr = String(obj.dd);
-    if (ddStr === refStr || (altRef && ddStr === altRef)) out.push(bp);
+    if (ddStr === refStr || (altRef && ddStr === altRef)){
+      out.push(/^-?\d+$/.test(key) ? (_dinoIdxToBp[Number(key)] || key) : key);
+    }
   }
   return out;
 }
@@ -1363,10 +1495,12 @@ function dinoBpsThatUseHarvestComp(compRef){
     altRef = idx >= 0 ? String(idx) : null;
   }
   const out = [];
-  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
+  for (const [key, obj] of Object.entries(Global.dinos?.dinos || {})){
     if (obj.dh == null) continue;
     const dhStr = String(obj.dh);
-    if (dhStr === refStr || (altRef && dhStr === altRef)) out.push(bp);
+    if (dhStr === refStr || (altRef && dhStr === altRef)){
+      out.push(/^-?\d+$/.test(key) ? (_dinoIdxToBp[Number(key)] || key) : key);
+    }
   }
   return out;
 }
@@ -2472,6 +2606,7 @@ async function buildMergedGroupSource(src){
 
   let mergedDinos = {
     dinos: { ...(Global.baseDinos?.dinos || {}) },
+    dinoIndex: Global.baseDinos?.dinoIndex || [],
     c: Global.baseDinos?.c || {},
     cs: Global.baseDinos?.cs || {},
     // Per-mod color sets: { modId: { setId: [...regions] } }. Keyed by mod id
@@ -2483,6 +2618,9 @@ async function buildMergedGroupSource(src){
 
   for (const mod of mods){
     const modId = String(mod.modId || "");
+    const baseIndex = Global.baseDinos?.dinoIndex || [];
+    const decoded = decodeModSource(mod, baseIndex);
+
     mergedSpawn = {
       mapLegend: {
         ...(mergedSpawn.mapLegend || {}),
@@ -2494,7 +2632,7 @@ async function buildMergedGroupSource(src){
       },
       entries: mergeEntryTables(
         mergedSpawn.entries || {},
-        mod.entries || {}
+        decoded.entries
       ),
       maps: {
         ...(mergedSpawn.maps || {}),
@@ -2506,18 +2644,12 @@ async function buildMergedGroupSource(src){
       },
       worldReplacements: mergeWorldReplacementTables(
         mergedSpawn.worldReplacements || {},
-        mod.worldReplacements || {}
+        decoded.worldReplacements
       )
     };
 
-    // Tag this mod's dinos with their origin mod id so color-set lookup can
-    // find the right per-mod `cs` table, then merge them in.
-    const taggedModDinos = {};
-    for (const [bp, dino] of Object.entries(mod.dinos || {})){
-      taggedModDinos[bp] = (dino && typeof dino === "object" && modId)
-        ? { ...dino, _modId: modId }
-        : dino;
-    }
+    // decoded.dinos is already bp-keyed and mod-tagged.
+    const taggedModDinos = decoded.dinos;
     if (modId && mod.cs){
       mergedDinos.modCsByMod[modId] = mod.cs;
     }
@@ -2527,6 +2659,7 @@ async function buildMergedGroupSource(src){
         ...(mergedDinos.dinos || {}),
         ...taggedModDinos
       },
+      dinoIndex: mergedDinos.dinoIndex,
       c: mergedDinos.c,
       cs: mergedDinos.cs,
       modCsByMod: mergedDinos.modCsByMod
