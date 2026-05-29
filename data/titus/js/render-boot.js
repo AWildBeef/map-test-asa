@@ -47,6 +47,8 @@ function render() {
     drawCrate(State.selection);
   } else if (State.mode === "item") {
     drawItem(State.selection);
+  } else if (State.mode === "boss") {
+    drawBoss(State.selection);
   } else if (State.mode === "note") {
     // Resolve selected note from State.selection if not already set
     if (!noteViewState.selected && State.selection) {

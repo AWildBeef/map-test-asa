@@ -150,6 +150,9 @@ const State = {
   
   itemNames: [],
   itemNameToIds: new Map(),
+
+  bossNames: [],
+  bossNameToIndex: new Map(),
   
   mapCrateIds: new Set(),
   mapItemIds: new Set(),
@@ -242,7 +245,8 @@ const MODE_OPTIONS = [
   { id: "entry", label: "Spawn View" },
   { id: "crate", label: "Crate View" },
   { id: "item",  label: "Item View" },
-  { id: "note",  label: "Note View" }
+  { id: "note",  label: "Note View" },
+  { id: "boss",  label: "Boss View" }
 ];
 
 // Note view state
@@ -434,7 +438,8 @@ function syncModeButton() {
     entry: "Spawn View",
     crate: "Crate View",
     item:  "Item View",
-    note:  "Note View"
+    note:  "Note View",
+    boss:  "Boss View"
   };
 
   UI.modeToggle.innerHTML = `

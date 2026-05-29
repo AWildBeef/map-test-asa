@@ -7,6 +7,7 @@ window.ASA_APP_MODULES = [
   "js/views/crate-view.js",
   "js/views/item-view.js",
   "js/views/note-view.js",
+  "js/views/boss-view.js",
   "js/render-boot.js",
 ];
 

@@ -660,6 +660,9 @@ function rebuildMapIndices(){
 
   State.names = [...State.nameToBps.keys()].sort((a,b)=>a.localeCompare(b));
   State.entryList = [...State.mapEntries].sort((a,b)=>a.localeCompare(b));
+
+  // Boss list for the current map (used by Boss View's dropdown).
+  if (typeof rebuildBossIndex === "function") rebuildBossIndex();
 }
 
 
@@ -2117,6 +2120,8 @@ function renderInfoPanel() {
     
   } else if (State.mode === "item") {
     renderItemPanel(State.selection);
+  } else if (State.mode === "boss") {
+    renderBossPanel(State.selection);
   }
 }
 
@@ -2884,6 +2889,7 @@ let infoPanelState = {
   entryTab: "dinos",
   crateTab: "sets",
   itemTab: "crates",
+  bossTab: "summon",
   itemCmdQty: 1,
   itemCmdQuality: 0,
   itemCmdIsBp: 0,

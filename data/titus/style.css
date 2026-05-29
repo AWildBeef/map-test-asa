@@ -5057,6 +5057,63 @@ body[data-mode="note"] .mode-toggle {
   font-weight: 600;
 }
 
+/* ── Boss View panel ─────────────────────────────────────────── */
+.boss-hero {
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, rgba(255,93,93,.10), rgba(255,210,74,.04));
+  border: 1px solid rgba(255,210,74,.18);
+}
+.boss-hero-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+}
+.boss-hero-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.boss-recipe {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.boss-recipe-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+}
+.boss-recipe-qty {
+  color: #ffd24a;
+  font-weight: 700;
+  min-width: 34px;
+  text-align: right;
+}
+.boss-recipe-name {
+  color: #e8eaf0;
+}
+.boss-unlocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.boss-unlock-chip {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(143,208,255,.10);
+  border: 1px solid rgba(143,208,255,.22);
+  color: #cfe8ff;
+}
+.boss-empty {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 4px 0;
+}
+
 /* ── Note tooltip dark background ─────────────────────────────── */
 .leaflet-tooltip.note-tooltip {
   background: rgba(18, 22, 30, 0.92);

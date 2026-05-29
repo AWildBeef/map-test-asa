@@ -995,6 +995,7 @@ function selectionListForMode(mode) {
   if (mode === "entry") return State.entryList;
   if (mode === "crate") return State.crateNames;
   if (mode === "item")  return State.itemNames;
+  if (mode === "boss")  return State.bossNames;
   if (mode === "note")  return []; // note view uses its own panel
   return [];
 }
@@ -1703,6 +1704,31 @@ function bossesForCurrentMap(){
 function invalidateBossCache(){
   _bossListCache = null;
   _bossListCacheKey = null;
+}
+
+// Resolve the Boss View dropdown selection (a boss name) to its boss object.
+function getBossByName(name){
+  if (!name) return null;
+  const idx = State.bossNameToIndex.get(name);
+  if (idx == null) return null;
+  const bosses = bossesForCurrentMap();
+  return bosses[idx] || null;
+}
+
+// Populate State.bossNames / bossNameToIndex from the current map's bosses,
+// for the Boss View dropdown. Boss names are unique per map (difficulty
+// suffixes keep them distinct), so the name maps 1:1 to a legend index.
+function rebuildBossIndex(){
+  const bosses = bossesForCurrentMap();
+  State.bossNames = [];
+  State.bossNameToIndex = new Map();
+  for (const b of bosses){
+    let name = b.name;
+    // Guard against the rare duplicate name by suffixing an index.
+    if (State.bossNameToIndex.has(name)) name = `${name} (${b.index})`;
+    State.bossNames.push(name);
+    State.bossNameToIndex.set(name, b.index);
+  }
 }
 
 
@@ -3588,6 +3614,9 @@ function rebuildSelectionSelect() {
   } else if (State.mode === "item") {
     placeholder = "(Select an Item)";
     options = State.itemNames.map(v => ({ value: v, label: v }));
+  } else if (State.mode === "boss") {
+    placeholder = "(Select a Boss)";
+    options = State.bossNames.map(v => ({ value: v, label: v }));
   } else if (State.mode === "note") {
     placeholder = "(Select a Note or Dossier)";
     const allNotes = getNoteOptionsForCurrentMap();
