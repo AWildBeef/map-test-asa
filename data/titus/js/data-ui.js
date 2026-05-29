@@ -175,11 +175,14 @@ async function loadSelectedSource() {
 
     const mod = await loadJSON(src.file);
 
-    Global.modMeta = mod;
-
     const modId = String(mod.modId || "");
     const baseIndex = Global.baseDinos?.dinoIndex || [];
     const decoded = decodeModSource(mod, baseIndex);
+
+    // modMeta carries mod metadata plus the mod's dinos keyed by BP (decoded),
+    // so modBlueprintSet() — which keys off Object.keys(modMeta.dinos) — yields
+    // bps that match the bp-keyed dino collection used everywhere else.
+    Global.modMeta = { ...mod, dinos: decoded.dinos };
     const taggedModDinos = decoded.dinos;
     const modSpawnEntries = decoded.entries;
     const modWorldRepl = decoded.worldReplacements;
@@ -270,9 +273,30 @@ function buildWorldRuleIndex(rules){
 }
 
 
+// Cached world-rule index. Keyed to the map it was built for, so a map change
+// auto-invalidates it even if invalidateWorldRuleCache() isn't called on that
+// path. Rebuilt at most once per map (then reused across all dino selections).
+let _worldRuleIndexCache = null;
+let _worldRuleIndexCacheKey = null;
+
+function invalidateWorldRuleCache(){
+  _worldRuleIndexCache = null;
+  _worldRuleIndexCacheKey = null;
+  _ancestorDistCache.clear();
+}
+
 function worldRuleIndexForCurrentMap(){
+  // Cache key combines map id and source identity. If either changed since the
+  // cache was built, rebuild. This makes stale-rule bugs impossible regardless
+  // of whether an explicit invalidation happened.
+  const key = String(State.mapId) + "\x00" + (Global.modMeta?.modId || "official");
+  if (_worldRuleIndexCache && _worldRuleIndexCacheKey === key){
+    return _worldRuleIndexCache;
+  }
   const rules = worldRulesForCurrentMap();
-  return buildWorldRuleIndex(rules);
+  _worldRuleIndexCache = buildWorldRuleIndex(rules);
+  _worldRuleIndexCacheKey = key;
+  return _worldRuleIndexCache;
 }
 
 
@@ -810,12 +834,17 @@ function getParentBp(bp){
 }
 
 
+const _ancestorDistCache = new Map();
+
 function ancestorDistance(childBp, ancestorBp){
   childBp = normalizeBp(childBp);
   ancestorBp = normalizeBp(ancestorBp);
 
   if (!childBp || !ancestorBp) return null;
   if (childBp === ancestorBp) return 0;
+
+  const cacheKey = childBp + "\x00" + ancestorBp;
+  if (_ancestorDistCache.has(cacheKey)) return _ancestorDistCache.get(cacheKey);
 
   let cur = childBp;
   let dist = 0;
@@ -825,9 +854,13 @@ function ancestorDistance(childBp, ancestorBp){
     seen.add(cur);
     cur = getParentBp(cur);
     dist += 1;
-    if (cur === ancestorBp) return dist;
+    if (cur === ancestorBp){
+      _ancestorDistCache.set(cacheKey, dist);
+      return dist;
+    }
   }
 
+  _ancestorDistCache.set(cacheKey, null);
   return null;
 }
 

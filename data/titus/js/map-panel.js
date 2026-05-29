@@ -553,9 +553,10 @@ function worldRulesForCurrentMap(){
   const mapRules = Array.isArray(all?.[State.mapId]) ? all[State.mapId] : [];
   const globalRules = Array.isArray(all?.__global__) ? all.__global__ : [];
 
-  // Rule `from` and `outs[][0]` are dino indices in current data (or bp
-  // strings in older data). Resolve to bp here so the world-replacement
-  // engine and ancestorDistance keep operating purely on bps.
+  // Rule `from` and `outs[][0]` are dino indices in current data. Resolve to
+  // bp here so the world-replacement engine operates purely on bps. This runs
+  // only once per map change now (result is cached in worldRuleIndexForCurrentMap),
+  // so the per-call resolution cost is negligible.
   const resolveRule = (r) => {
     if (!r || typeof r !== "object") return r;
     const out = { ...r, from: bpForDinoRef(r.from) };
@@ -572,6 +573,10 @@ function worldRulesForCurrentMap(){
 function rebuildMapIndices(){
 
   const spawn = Global.spawn || {};
+
+  // Invalidate the world-rule index cache — it's map-specific and must be
+  // rebuilt for the new map before worldOutputsForBp() is called.
+  invalidateWorldRuleCache();
 
   State.mapEntries.clear();
   State.entryToDinos.clear();
