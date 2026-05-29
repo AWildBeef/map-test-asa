@@ -283,6 +283,7 @@ function invalidateWorldRuleCache(){
   _worldRuleIndexCache = null;
   _worldRuleIndexCacheKey = null;
   _ancestorDistCache.clear();
+  if (typeof invalidateBossCache === "function") invalidateBossCache();
 }
 
 function worldRuleIndexForCurrentMap(){
@@ -1593,6 +1594,115 @@ function dinoBpsThatHarvestItem(itemId){
 function currentGeom(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   return Global.mapGeom.get(mapMeta?.geomShort);
+}
+
+
+// ---------------------------------------------------------------------------
+// Boss data layer (Boss View)
+//
+// A geom file's `bosses.legend` lists the bosses summonable/fightable on that
+// map. This resolves each raw boss entry into a fully-hydrated object:
+//   n   -> name (whitespace-normalized)
+//   i   -> summon item id; resolved to { id, name, recipe:[{id,name,qty}] }
+//   d   -> boss dino indices; resolved to dino objects (+ their `de` unlocks)
+//   t   -> tributeTerminal POI indices; resolved to { label, type, x, y }
+//   xy  -> direct [x,y] arena location (for non-terminal bosses)
+//   cl/tl/md/mp/mw -> craft level / teleport level / max dinos / max players /
+//                     max drag weight requirements (any may be null)
+// ---------------------------------------------------------------------------
+
+// Collapse the embedded newlines some summon item names carry.
+function cleanBossText(s){
+  return String(s == null ? "" : s).replace(/\s+/g, " ").trim();
+}
+
+// Resolve an item id to { id, name, recipe }, where recipe is the crafting
+// cost list (cr) expanded to ingredient names. Returns null for no item.
+function resolveBossSummonItem(itemId){
+  if (itemId == null) return null;
+  const row = itemData().i?.[String(itemId)];
+  if (!row) return { id: itemId, name: `Item ${itemId}`, recipe: [] };
+  const recipe = Array.isArray(row.cr) ? row.cr.map(([ing, qty]) => ({
+    id: ing,
+    name: cleanBossText(itemDisplayNameById(ing)),
+    qty: Number(qty) || 0
+  })) : [];
+  return { id: itemId, name: cleanBossText(row.n || `Item ${itemId}`), recipe };
+}
+
+// Resolve a boss dino ref (index) to { bp, name, de } where de is the list of
+// items/engrams unlocked on the boss's death.
+function resolveBossDino(ref){
+  const bp = bpForDinoRef(ref);
+  const obj = getDinoObjByBp(bp) || getDinoObjByBp(ref);
+  if (!obj) return { bp, name: cleanBossText(bp.split("/").pop()), de: [] };
+  const de = Array.isArray(obj.de) ? obj.de.map(id => ({
+    id,
+    name: cleanBossText(itemDisplayNameById(id))
+  })) : [];
+  return { bp, name: cleanBossText(obj.n || bp), de, obj };
+}
+
+// Resolve a boss's terminal references (t -> tributeTerminals indices) and/or
+// its direct xy location into a list of { label, type, x, y } markers.
+function resolveBossLocations(boss, geom){
+  const terminals = geom?.pois?.tributeTerminals || [];
+  const out = [];
+  if (Array.isArray(boss?.t)){
+    for (const ti of boss.t){
+      const t = terminals[ti];
+      if (!t) continue;
+      const x = Number(t.x), y = Number(t.y);
+      if (![x, y].every(Number.isFinite)) continue;
+      out.push({
+        label: cleanBossText(t.label || t.type || "Terminal"),
+        type: t.type || "terminal",
+        x, y,
+        terminalIndex: ti
+      });
+    }
+  }
+  if (Array.isArray(boss?.xy) && boss.xy.length === 2){
+    const x = Number(boss.xy[0]), y = Number(boss.xy[1]);
+    if ([x, y].every(Number.isFinite)){
+      out.push({ label: cleanBossText(boss.n) || "Boss", type: "arena", x, y, direct: true });
+    }
+  }
+  return out;
+}
+
+// Build the fully-resolved boss list for the current map. Cached per map+source.
+let _bossListCache = null;
+let _bossListCacheKey = null;
+
+function bossesForCurrentMap(){
+  const key = String(State.mapId) + "\x00" + (Global.modMeta?.modId || "official");
+  if (_bossListCache && _bossListCacheKey === key) return _bossListCache;
+
+  const geom = currentGeom();
+  const legend = geom?.bosses?.legend;
+  const list = Array.isArray(legend) ? legend.map((boss, idx) => ({
+    index: idx,
+    name: cleanBossText(boss.n) || `Boss ${idx}`,
+    summon: resolveBossSummonItem(boss.i),
+    dinos: (Array.isArray(boss.d) ? boss.d : []).map(resolveBossDino),
+    locations: resolveBossLocations(boss, geom),
+    craftLevel: boss.cl ?? null,
+    teleportLevel: boss.tl ?? null,
+    maxDinos: boss.md ?? null,
+    maxPlayers: boss.mp ?? null,
+    maxDragWeight: boss.mw ?? null,
+    raw: boss
+  })) : [];
+
+  _bossListCache = list;
+  _bossListCacheKey = key;
+  return list;
+}
+
+function invalidateBossCache(){
+  _bossListCache = null;
+  _bossListCacheKey = null;
 }
 
 

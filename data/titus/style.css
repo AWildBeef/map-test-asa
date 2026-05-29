@@ -5030,6 +5030,33 @@ body[data-mode="note"] .mode-toggle {
   border-top-color: rgba(18, 22, 30, 0.92);
 }
 
+/* ── Tribute terminal enriched tooltip ───────────────────────── */
+.leaflet-tooltip.term-tooltip {
+  width: 210px;
+  max-width: 210px;
+  min-width: 120px;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+.term-tip {
+  line-height: 1.35;
+}
+.term-tip-title {
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #fff;
+}
+.term-tip-section {
+  font-size: 11.5px;
+  margin-top: 2px;
+}
+.term-tip-head {
+  color: #8fd0ff;
+  font-weight: 600;
+}
+
 /* ── Note tooltip dark background ─────────────────────────────── */
 .leaflet-tooltip.note-tooltip {
   background: rgba(18, 22, 30, 0.92);

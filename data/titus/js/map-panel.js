@@ -3541,6 +3541,90 @@ function clearPois(){
 }
 
 
+// Strip a difficulty/tier marker from a boss or boss-dino name, whether it's a
+// trailing "(Gamma)" suffix ("Rockwell (Gamma)" -> "Rockwell") or a leading
+// word ("Gamma King Titan" -> "King Titan").
+function stripBossDifficulty(name){
+  return String(name == null ? "" : name)
+    .replace(/\s*\((?:Gamma|Beta|Alpha|Easy|Medium|Hard)\)\s*$/i, "")
+    .replace(/^(?:Gamma|Beta|Alpha)\s+/i, "")
+    .trim();
+}
+
+// Join a list of names naturally: ["A"] -> "A", ["A","B"] -> "A & B",
+// ["A","B","C"] -> "A, B & C".
+function joinNatural(arr){
+  const a = (arr || []).filter(Boolean);
+  if (a.length <= 1) return a[0] || "";
+  if (a.length === 2) return `${a[0]} & ${a[1]}`;
+  return `${a.slice(0, -1).join(", ")} & ${a[a.length - 1]}`;
+}
+
+// Build an enriched tooltip for a tribute terminal: its name, the bosses it can
+// summon (from the terminal's `b` -> boss legend indices), and a short summary
+// of craftable items (`i` -> item ids). Falls back to the plain label when the
+// terminal carries no boss/item data.
+function terminalTooltipHtml(p){
+  const label = escapeHtml(p?.label || p?.type || "Terminal");
+  const bosses = bossesForCurrentMap();
+
+  const bossIdxs = Array.isArray(p?.b) ? p.b : [];
+  const itemIds  = Array.isArray(p?.i) ? p.i : [];
+
+  if (!bossIdxs.length && !itemIds.length) return label;
+
+  let html = `<div class="term-tip"><div class="term-tip-title">${label}</div>`;
+
+  if (bossIdxs.length){
+    // Use the boss DINO names rather than the summon-item names — item names
+    // are inconsistent across maps (e.g. "Center", "Aberration"), but the dino
+    // is what the player actually fights. Strip difficulty suffixes and dedupe,
+    // so e.g. the Center obelisk reads "Broodmother Lysrix & Megapithecus" and
+    // the Aberration terminal reads "Rockwell".
+    const seen = new Set();
+    const dinoNames = [];
+    for (const bi of bossIdxs){
+      if (bi < 0 || bi >= bosses.length) continue;
+      for (const d of (bosses[bi].dinos || [])){
+        const baseName = stripBossDifficulty(d.name);
+        if (baseName && !seen.has(baseName)){
+          seen.add(baseName);
+          dinoNames.push(baseName);
+        }
+      }
+    }
+    if (dinoNames.length){
+      html += `<div class="term-tip-section"><span class="term-tip-head">Summons:</span> `
+            + escapeHtml(joinNatural(dinoNames))
+            + `</div>`;
+    }
+  }
+
+  if (itemIds.length){
+    // Separate boss summon portals (those referenced as a boss's summon item)
+    // from other craftables (tribute/element items) for a cleaner summary.
+    const summonItemIds = new Set(
+      bosses.map(b => b.summon?.id).filter(id => id != null).map(Number)
+    );
+    const craftNames = itemIds
+      .filter(id => !summonItemIds.has(Number(id)))
+      .map(id => cleanBossText(itemDisplayNameById(id)))
+      .filter(Boolean);
+    if (craftNames.length){
+      const shown = craftNames.slice(0, 6);
+      const extra = craftNames.length - shown.length;
+      html += `<div class="term-tip-section"><span class="term-tip-head">Crafts:</span> `
+            + shown.map(n => escapeHtml(n)).join(", ")
+            + (extra > 0 ? ` +${extra} more` : "")
+            + `</div>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+
 function drawPoiGroup(points, groupName){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility[groupName]) return;
@@ -3552,10 +3636,20 @@ function drawPoiGroup(points, groupName){
 
     const color = poiColor(p.type);
     const type = String(p.type || "").toLowerCase();
+    const isTerminalGroup = groupName === "tributeTerminals";
     const tooltipHtml =
       groupName === "supplyCrates"
         ? supplyCrateTooltipHtml(p)
-        : (p.label || p.type || "POI");
+        : isTerminalGroup
+          ? terminalTooltipHtml(p)
+          : (p.label || p.type || "POI");
+
+    // Match the supply-crate tooltip behaviour: direction:"auto" lets Leaflet
+    // open the tooltip toward whichever side has room (markers left of center
+    // open rightward, away from the edge), and sticky+autoPan keep it visible.
+    const tipOpts = isTerminalGroup
+      ? { direction: "auto", sticky: true, offset: [0, -14], opacity: 0.97, className: "dark-tooltip term-tooltip", autoPan: true }
+      : { direction: "auto", sticky: true, opacity: 0.97, className: "dark-tooltip", autoPan: true };
 
     // TEK terminals get the special icon
     if (type.includes("tek") || type.includes("titan")) {
@@ -3567,7 +3661,7 @@ function drawPoiGroup(points, groupName){
         pane: "poiPane"
       })
         .addTo(mapObj.poiLayer)
-        .bindTooltip(tooltipHtml, {
+        .bindTooltip(tooltipHtml, isTerminalGroup ? tipOpts : {
           direction: "auto",
           sticky: true,
           opacity: 0.97,
@@ -3590,10 +3684,7 @@ function drawPoiGroup(points, groupName){
       className:"poi-basic"
     })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(p.label || p.type || "POI", {
-        direction: "auto", sticky: true, opacity: 0.97,
-        className: "dark-tooltip", autoPan: true
-      });
+      .bindTooltip(tooltipHtml, tipOpts);
   }
 }
 
