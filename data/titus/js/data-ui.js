@@ -1716,19 +1716,58 @@ function getBossByName(name){
 }
 
 // Populate State.bossNames / bossNameToIndex from the current map's bosses,
-// for the Boss View dropdown. Boss names are unique per map (difficulty
-// suffixes keep them distinct), so the name maps 1:1 to a legend index.
+// for the Boss View dropdown. The display name is derived from the boss's
+// creature(s) plus its difficulty tier (e.g. "Broodmother (Beta)",
+// "Broodmother Lysrix & Megapithecus (Gamma)"), rather than the inconsistent
+// summon-item name. Names map 1:1 to a legend index.
 function rebuildBossIndex(){
   const bosses = bossesForCurrentMap();
   State.bossNames = [];
   State.bossNameToIndex = new Map();
   for (const b of bosses){
-    let name = b.name;
-    // Guard against the rare duplicate name by suffixing an index.
-    if (State.bossNameToIndex.has(name)) name = `${name} (${b.index})`;
+    let name = bossDisplayName(b);
+    // Guard against a rare duplicate name by suffixing the legend index.
+    if (State.bossNameToIndex.has(name)) name = `${name} (#${b.index})`;
     State.bossNames.push(name);
     State.bossNameToIndex.set(name, b.index);
   }
+}
+
+// A boss's display name: the unique base creature name(s) joined naturally,
+// with the difficulty tier (taken from the boss's own name) appended once.
+function bossDisplayName(boss){
+  const seen = new Set();
+  const creatures = [];
+  for (const d of (boss.dinos || [])){
+    const base = stripBossDifficultyName(d.name);
+    if (base && !seen.has(base)){ seen.add(base); creatures.push(base); }
+  }
+  const tier = bossTierLabel(boss.name);
+  const baseLabel = creatures.length ? joinNaturalNames(creatures) : stripBossDifficultyName(boss.name);
+  return tier ? `${baseLabel} (${tier})` : baseLabel;
+}
+
+// Extract a difficulty tier word from a boss/dino name, if present.
+function bossTierLabel(name){
+  const m = String(name || "").match(/\((Gamma|Beta|Alpha|Easy|Medium|Hard)\)\s*$/i)
+    || String(name || "").match(/^(Gamma|Beta|Alpha)\s+/i);
+  return m ? (m[1][0].toUpperCase() + m[1].slice(1).toLowerCase()) : "";
+}
+
+// Strip both suffix "(Gamma)" and prefix "Gamma " difficulty markers.
+function stripBossDifficultyName(name){
+  return String(name == null ? "" : name)
+    .replace(/\s*\((?:Gamma|Beta|Alpha|Easy|Medium|Hard)\)\s*$/i, "")
+    .replace(/^(?:Gamma|Beta|Alpha)\s+/i, "")
+    .trim();
+}
+
+// Natural join: ["A"]->"A", ["A","B"]->"A & B", ["A","B","C"]->"A, B & C".
+function joinNaturalNames(arr){
+  const a = (arr || []).filter(Boolean);
+  if (a.length <= 1) return a[0] || "";
+  if (a.length === 2) return `${a[0]} & ${a[1]}`;
+  return `${a.slice(0, -1).join(", ")} & ${a[a.length - 1]}`;
 }
 
 
@@ -2366,8 +2405,13 @@ async function ensureLootAndItemsLoaded() {
 
       rebuildLootIndices();
 
+      // Boss names, summon recipes, and unlock labels all depend on the item
+      // table, which loads lazily. Rebuild the boss index now that items exist.
+      if (typeof invalidateBossCache === "function") invalidateBossCache();
+      if (typeof rebuildBossIndex === "function") rebuildBossIndex();
+
       // If we're currently in a loot-dependent mode, refresh the UI
-      if (State.mode === "crate" || State.mode === "item" || State.mode === "dino") {
+      if (State.mode === "crate" || State.mode === "item" || State.mode === "dino" || State.mode === "boss") {
         rebuildSelectionSelect();
         render();
       }
@@ -3584,6 +3628,8 @@ function syncInfoPanelState() {
     panel.dataset.tab = infoPanelState.crateTab;
   } else if (State.mode === "item") {
     panel.dataset.tab = infoPanelState.itemTab;
+  } else if (State.mode === "boss") {
+    panel.dataset.tab = infoPanelState.bossTab;
   } else {
     panel.dataset.tab = "";
   }

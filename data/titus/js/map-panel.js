@@ -2803,6 +2803,7 @@ function refreshInfoPanelPageHeight() {
   else if (State.mode === "entry") activeId = infoPanelState.entryTab;
   else if (State.mode === "crate") activeId = infoPanelState.crateTab;
   else if (State.mode === "item") activeId = infoPanelState.itemTab;
+  else if (State.mode === "boss") activeId = infoPanelState.bossTab;
 
   requestAnimationFrame(() => {
     syncActivePageHeight(pagesEl, activeId);
