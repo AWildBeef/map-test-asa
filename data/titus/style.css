@@ -5058,27 +5058,20 @@ body[data-mode="note"] .mode-toggle {
 }
 
 /* ── Boss View panel ─────────────────────────────────────────── */
-.boss-hero {
-  padding: 8px 10px;
-  margin-bottom: 6px;
-  border-radius: 8px;
-  background: linear-gradient(to bottom, rgba(255,93,93,.10), rgba(255,210,74,.04));
-  border: 1px solid rgba(255,210,74,.18);
-}
-.boss-hero-name {
-  font-weight: 700;
-  font-size: 15px;
-  color: #fff;
-}
-.boss-hero-sub {
-  font-size: 11.5px;
-  color: var(--muted);
-  margin-top: 2px;
+.boss-loc-line {
+  font-size: 12.5px;
+  color: #e8eaf0;
 }
 .boss-recipe {
   display: flex;
   flex-direction: column;
   gap: 3px;
+}
+/* Two-column layout for longer summon recipes. */
+.boss-recipe--cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 10px;
 }
 .boss-recipe-row {
   display: flex;
@@ -5089,7 +5082,7 @@ body[data-mode="note"] .mode-toggle {
 .boss-recipe-qty {
   color: #ffd24a;
   font-weight: 700;
-  min-width: 34px;
+  min-width: 30px;
   text-align: right;
 }
 .boss-recipe-name {
