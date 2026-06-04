@@ -5088,23 +5088,43 @@ body[data-mode="note"] .mode-toggle {
 .boss-recipe-name {
   color: #e8eaf0;
 }
-.boss-unlocks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.boss-unlock-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: rgba(143,208,255,.10);
-  border: 1px solid rgba(143,208,255,.22);
-  color: #cfe8ff;
-}
 .boss-empty {
   font-size: 12px;
   color: var(--muted);
   padding: 4px 0;
+}
+/* Reward / unlock rows — same visual language as the summon recipe rows. */
+.boss-reward-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 14px;
+}
+.boss-reward-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+  min-width: 0;
+}
+.boss-reward-qty {
+  color: #ffd24a;
+  font-weight: 700;
+  min-width: 34px;
+  text-align: right;
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+.boss-reward-name {
+  color: #e8eaf0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.boss-reward-name.is-element {
+  color: #bfe6ff;
+  font-weight: 600;
+}
+.boss-reward-name.is-bonus {
+  color: #ffe6a3;
 }
 
 /* ── Note tooltip dark background ─────────────────────────────── */

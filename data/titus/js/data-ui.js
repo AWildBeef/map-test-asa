@@ -1672,6 +1672,76 @@ function resolveBossLocations(boss, geom){
   return out;
 }
 
+// Resolve a boss's loot rewards (distinct from engram unlocks). Three sources:
+//   1. The boss dino's `dd` drop component  -> items in the boss bag (Element, trophy)
+//   2. The boss dino's `dg` (DeathGiveItemClasses) -> items handed straight to the player
+//   3. The boss's arena loot crate `lc` (+ optional bonus item `li`) -> crate that
+//      spawns on defeat (used by the terminal-less Ragnarok world bosses)
+// Returns { drops:[{id,name}], given:[{id,name}], crates:[{name}], bonusItems:[{id,name}] }.
+function resolveBossRewards(boss){
+  const loot = Global.loot || {};
+  const dropMap = new Map();  // id -> {id, name, mn, mx}
+  const givenIds = new Set();
+
+  const addDrop = (iid, mn, mx) => {
+    const prev = dropMap.get(iid);
+    if (prev){
+      // Same item across multiple sets: widen the range / sum typical case.
+      prev.mn = Math.min(prev.mn, mn);
+      prev.mx = Math.max(prev.mx, mx);
+    } else {
+      dropMap.set(iid, { id: iid, name: cleanBossText(itemDisplayNameById(iid)), mn, mx });
+    }
+  };
+
+  for (const d of (boss.dinos || [])){
+    const obj = d.obj;
+    if (!obj) continue;
+
+    // dd -> drop component -> items (with quantities from each entry's mn/mx)
+    const comp = lookupDropComp(loot, obj.dd);
+    if (comp){
+      for (const setRow of (comp.s || [])){
+        for (const entry of (setRow.e || [])){
+          const mn = Number(entry.mn);
+          const mx = Number(entry.mx);
+          for (const iid of (entry.i || [])){
+            addDrop(iid, Number.isFinite(mn) ? mn : 1, Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
+          }
+        }
+      }
+    }
+
+    // dg -> items given directly to the player on death (always x1)
+    if (Array.isArray(obj.dg)){
+      for (const iid of obj.dg) givenIds.add(iid);
+    }
+  }
+
+  // Arena crates (lc) + optional bonus item (li) from the raw boss entry.
+  const crates = [];
+  const bonusItems = [];
+  const raw = boss.raw || {};
+  const lcList = Array.isArray(raw.lc) ? raw.lc : (raw.lc != null ? [raw.lc] : []);
+  for (const lc of lcList){
+    const cls = crateIdToClass(lc);
+    const crateData = cls ? (loot.c?.[cls]) : null;
+    const name = cleanBossText(crateData?.dn || cls || `Crate ${lc}`);
+    if (name) crates.push({ id: lc, name, crateClass: cls });
+  }
+  const liList = Array.isArray(raw.li) ? raw.li : (raw.li != null ? [raw.li] : []);
+  for (const li of liList){
+    bonusItems.push({ id: li, name: cleanBossText(itemDisplayNameById(li)), mn: 1, mx: 1 });
+  }
+
+  return {
+    drops: [...dropMap.values()],
+    given: [...givenIds].map(id => ({ id, name: cleanBossText(itemDisplayNameById(id)), mn: 1, mx: 1 })),
+    crates,
+    bonusItems
+  };
+}
+
 // Build the fully-resolved boss list for the current map. Cached per map+source.
 let _bossListCache = null;
 let _bossListCacheKey = null;
@@ -1682,19 +1752,23 @@ function bossesForCurrentMap(){
 
   const geom = currentGeom();
   const legend = geom?.bosses?.legend;
-  const list = Array.isArray(legend) ? legend.map((boss, idx) => ({
-    index: idx,
-    name: cleanBossText(boss.n) || `Boss ${idx}`,
-    summon: resolveBossSummonItem(boss.i),
-    dinos: (Array.isArray(boss.d) ? boss.d : []).map(resolveBossDino),
-    locations: resolveBossLocations(boss, geom),
-    craftLevel: boss.cl ?? null,
-    teleportLevel: boss.tl ?? null,
-    maxDinos: boss.md ?? null,
-    maxPlayers: boss.mp ?? null,
-    maxDragWeight: boss.mw ?? null,
-    raw: boss
-  })) : [];
+  const list = Array.isArray(legend) ? legend.map((boss, idx) => {
+    const resolved = {
+      index: idx,
+      name: cleanBossText(boss.n) || `Boss ${idx}`,
+      summon: resolveBossSummonItem(boss.i),
+      dinos: (Array.isArray(boss.d) ? boss.d : []).map(resolveBossDino),
+      locations: resolveBossLocations(boss, geom),
+      craftLevel: boss.cl ?? null,
+      teleportLevel: boss.tl ?? null,
+      maxDinos: boss.md ?? null,
+      maxPlayers: boss.mp ?? null,
+      maxDragWeight: boss.mw ?? null,
+      raw: boss
+    };
+    resolved.rewards = resolveBossRewards(resolved);
+    return resolved;
+  }) : [];
 
   _bossListCache = list;
   _bossListCacheKey = key;

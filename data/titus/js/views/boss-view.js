@@ -85,28 +85,42 @@ function renderBossPanel(bossName){
 
   const tabs = [
     { id: "summon",  label: "Summon" },
+    { id: "loot",    label: "Rewards" },
     { id: "rewards", label: `Unlocks (${bossUnlockCount(boss)})` }
   ];
   const activeTab = tabs.some(t => t.id === infoPanelState.bossTab)
     ? infoPanelState.bossTab
     : "summon";
 
-  const body = activeTab === "rewards"
-    ? renderBossRewardsTab(boss)
-    : renderBossSummonTab(boss);
-
+  // Wrap tab content in the panel's .fp-pages structure so the shared height
+  // logic (syncActivePageHeight) clamps it to the dock and adds scrolling —
+  // the same mechanism the dino/crate/item panels use.
   const html = `
     ${renderTabs({ tabs, activeId: activeTab, dataAttr: "data-boss-tab" })}
-    ${body}
+    ${renderPages({
+      tabs,
+      activeId: activeTab,
+      renderPage: (id) => {
+        if (id === "loot")    return renderBossLootTab(boss);
+        if (id === "rewards") return renderBossRewardsTab(boss);
+        return renderBossSummonTab(boss);
+      }
+    })}
   `;
 
   setInfoPanelHTML(html);
 
   const panel = ensureInfoPanel();
-  wireTabs(panel, {
+  const body = panel.querySelector(".fp-body");
+
+  wireTabs(body, {
     tabs, activeId: activeTab, dataAttr: "data-boss-tab",
     onChange: (id) => { infoPanelState.bossTab = id; renderBossPanel(bossName); }
   });
+
+  // Clamp the active page height to the available space above the dock.
+  refreshInfoPanelPageHeight();
+  syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
 }
 
 function bossUnlockCount(boss){
@@ -184,6 +198,82 @@ function renderBossSummonTab(boss){
 }
 
 // Rewards tab: engrams/items unlocked on death, grouped by boss creature.
+// Format a min/max count as a quantity label: "178" or "120–550".
+function bossQtyLabel(mn, mx){
+  const lo = Number(mn), hi = Number(mx);
+  if (!Number.isFinite(lo) && !Number.isFinite(hi)) return "";
+  if (Number.isFinite(lo) && Number.isFinite(hi) && lo !== hi) return `${fmt(lo)}–${fmt(hi)}`;
+  return fmt(Number.isFinite(hi) ? hi : lo);
+}
+
+// A single reward row: yellow quantity on the left, item name on the right —
+// the same visual language as the Summon recipe rows.
+function bossRewardRow(item, opts = {}){
+  const qty = bossQtyLabel(item.mn, item.mx);
+  const qtyHtml = qty ? `${escapeHtml(qty)}×` : "";
+  const nameClass = "boss-reward-name" + (opts.highlight ? " is-element" : "");
+  return `
+    <div class="boss-reward-row">
+      <span class="boss-reward-qty">${qtyHtml}</span>
+      <span class="${nameClass}">${escapeHtml(item.name)}</span>
+    </div>`;
+}
+
+// Rewards tab: loot you get from defeating the boss (distinct from engram
+// unlocks). Element and trophies come from the boss bag (dd) and direct
+// death-gives (dg); some world bosses also drop an arena loot crate (lc/li).
+function renderBossLootTab(boss){
+  const r = boss.rewards || { drops: [], given: [], crates: [], bonusItems: [] };
+  const sections = [];
+
+  // Bag drops (dd) — usually Element + trophy. The headline reward.
+  if (r.drops.length){
+    sections.push(`
+      <div class="info-section">
+        <div class="info-subtitle">Boss Bag</div>
+        <div class="boss-reward-list">
+          ${r.drops.map(it => bossRewardRow(it, { highlight: /element/i.test(it.name) })).join("")}
+        </div>
+      </div>`);
+  }
+
+  // Direct death-gives (dg) — flags, helmets, trophies added to inventory.
+  if (r.given.length){
+    sections.push(`
+      <div class="info-section">
+        <div class="info-subtitle">Awarded Directly</div>
+        <div class="boss-reward-list">
+          ${r.given.map(it => bossRewardRow(it)).join("")}
+        </div>
+      </div>`);
+  }
+
+  // Arena loot crates (lc) + bonus item (li).
+  if (r.crates.length || r.bonusItems.length){
+    const crateLines = r.crates.map(c => `
+      <div class="boss-reward-row">
+        <span class="boss-reward-qty"></span>
+        <span class="boss-reward-name">${escapeHtml(c.name)}</span>
+      </div>`).join("");
+    const bonusLines = r.bonusItems.map(it => `
+      <div class="boss-reward-row">
+        <span class="boss-reward-qty">+${bossQtyLabel(it.mn, it.mx)}×</span>
+        <span class="boss-reward-name is-bonus">${escapeHtml(it.name)}</span>
+      </div>`).join("");
+    sections.push(`
+      <div class="info-section">
+        <div class="info-subtitle">Arena Loot Crate${r.crates.length > 1 ? "s" : ""}</div>
+        <div class="boss-reward-list">${crateLines}${bonusLines}</div>
+      </div>`);
+  }
+
+  if (!sections.length){
+    return `<div class="info-section"><div class="boss-empty">No loot rewards recorded for this boss.</div></div>`;
+  }
+  return sections.join("");
+}
+
+// Unlocks tab: engrams/items unlocked on death, grouped by boss creature.
 function renderBossRewardsTab(boss){
   const blocks = [];
   for (const d of (boss.dinos || [])){
@@ -191,11 +281,14 @@ function renderBossRewardsTab(boss){
     blocks.push(`
       <div class="info-section">
         <div class="info-subtitle">${escapeHtml(d.name)} — unlocks (${d.de.length})</div>
-        <div class="boss-unlocks">
-          ${d.de.map(u => `<span class="boss-unlock-chip">${escapeHtml(u.name)}</span>`).join("")}
+        <div class="boss-reward-list">
+          ${d.de.map(u => `
+            <div class="boss-reward-row">
+              <span class="boss-reward-qty"></span>
+              <span class="boss-reward-name">${escapeHtml(u.name)}</span>
+            </div>`).join("")}
         </div>
-      </div>
-    `);
+      </div>`);
   }
   if (!blocks.length){
     return `<div class="info-section"><div class="boss-empty">No engram or item unlocks recorded for this boss.</div></div>`;
