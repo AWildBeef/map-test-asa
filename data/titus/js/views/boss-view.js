@@ -124,6 +124,9 @@ function renderBossPanel(bossName){
 }
 
 function bossUnlockCount(boss){
+  // If the boss has re (reward engrams), use that instead of per-dino de.
+  const re = boss.raw?.re;
+  if (Array.isArray(re) && re.length) return re.length;
   const ids = new Set();
   for (const d of (boss.dinos || [])){
     for (const u of (d.de || [])) ids.add(u.id);
@@ -286,6 +289,28 @@ function renderBossLootTab(boss){
 
 // Unlocks tab: engrams/items unlocked on death, grouped by boss creature.
 function renderBossRewardsTab(boss){
+  // If the boss has re (reward engrams from the mission/event), use that
+  // instead of per-dino de — same pattern as rd suppressing dg.
+  const re = boss.raw?.re;
+  if (Array.isArray(re) && re.length){
+    const items = re.map(id => ({
+      id,
+      name: cleanBossText(itemDisplayNameById(id))
+    }));
+    return `
+      <div class="info-section">
+        <div class="info-subtitle">Unlocks (${items.length})</div>
+        <div class="boss-reward-list">
+          ${items.map(u => `
+            <div class="boss-reward-row">
+              <span class="boss-reward-qty"></span>
+              <span class="boss-reward-name">${escapeHtml(u.name)}</span>
+            </div>`).join("")}
+        </div>
+      </div>`;
+  }
+
+  // Fallback: per-dino de (death engrams).
   const blocks = [];
   for (const d of (boss.dinos || [])){
     if (!d.de || !d.de.length) continue;
