@@ -1680,48 +1680,102 @@ function resolveBossLocations(boss, geom){
 // Returns { drops:[{id,name}], given:[{id,name}], crates:[{name}], bonusItems:[{id,name}] }.
 function resolveBossRewards(boss){
   const loot = Global.loot || {};
-  const dropMap = new Map();  // id -> {id, name, mn, mx}
-  const givenIds = new Set();
+  const raw = boss.raw || {};
 
-  const addDrop = (iid, mn, mx) => {
-    const prev = dropMap.get(iid);
-    if (prev){
-      // Same item across multiple sets: widen the range / sum typical case.
-      prev.mn = Math.min(prev.mn, mn);
-      prev.mx = Math.max(prev.mx, mx);
-    } else {
-      dropMap.set(iid, { id: iid, name: cleanBossText(itemDisplayNameById(iid)), mn, mx });
+  // Helper: add item qty to a per-source map (range within one source).
+  const addToSource = (map, iid, mn, mx) => {
+    const prev = map.get(iid);
+    if (prev){ prev.mn = Math.min(prev.mn, mn); prev.mx = Math.max(prev.mx, mx); }
+    else { map.set(iid, { id: iid, mn, mx }); }
+  };
+
+  // Helper: extract items from a drop component, resolving ItemSetOverride
+  // ("o" → loot.si[o] → loot.s[class].e) when present.
+  const extractDropComp = (comp, targetMap) => {
+    if (!comp) return;
+    for (const setRow of (comp.s || [])){
+      let entries = setRow.e || [];
+      if (setRow.o != null){
+        const si = loot.si || [];
+        const oIdx = Number(setRow.o);
+        if (Number.isInteger(oIdx) && oIdx >= 0 && oIdx < si.length){
+          const cls = si[oIdx];
+          const overrideSet = cls ? (loot.s?.[cls]) : null;
+          if (overrideSet?.e) entries = [...entries, ...overrideSet.e];
+        }
+      }
+      for (const entry of entries){
+        const mn = Number(entry.mn), mx = Number(entry.mx);
+        for (const iid of (entry.i || [])){
+          addToSource(targetMap, iid,
+            Number.isFinite(mn) ? mn : 1,
+            Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
+        }
+      }
     }
   };
+
+  // Collect drops per source, then SUM across sources so multi-dino bosses
+  // show combined totals (Center: 68+132=200 Element, Astraeos: 30+30=60).
+  const perSourceDrops = [];
+  const givenIds = new Set();
 
   for (const d of (boss.dinos || [])){
     const obj = d.obj;
     if (!obj) continue;
-
-    // dd -> drop component -> items (with quantities from each entry's mn/mx)
-    const comp = lookupDropComp(loot, obj.dd);
-    if (comp){
-      for (const setRow of (comp.s || [])){
-        for (const entry of (setRow.e || [])){
-          const mn = Number(entry.mn);
-          const mx = Number(entry.mx);
-          for (const iid of (entry.i || [])){
-            addDrop(iid, Number.isFinite(mn) ? mn : 1, Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
-          }
-        }
-      }
+    if (obj.dd != null){
+      const m = new Map();
+      extractDropComp(lookupDropComp(loot, obj.dd), m);
+      if (m.size) perSourceDrops.push(m);
     }
-
-    // dg -> items given directly to the player on death (always x1)
-    if (Array.isArray(obj.dg)){
+    // dg: skip for mission-style bosses (rd set) where death-give doesn't fire.
+    if (!raw.rd && Array.isArray(obj.dg)){
       for (const iid of obj.dg) givenIds.add(iid);
     }
   }
 
-  // Arena crates (lc) + optional bonus item (li) from the raw boss entry.
-  const crates = [];
-  const bonusItems = [];
-  const raw = boss.raw || {};
+  const rdList = Array.isArray(raw.rd) ? raw.rd : (raw.rd != null ? [raw.rd] : []);
+  for (const rdRef of rdList){
+    const m = new Map();
+    extractDropComp(lookupDropComp(loot, rdRef), m);
+    if (m.size) perSourceDrops.push(m);
+  }
+
+  // Sum across all sources.
+  const totalDrops = new Map();
+  for (const srcMap of perSourceDrops){
+    for (const [iid, item] of srcMap){
+      const prev = totalDrops.get(iid);
+      if (prev){ prev.mn += item.mn; prev.mx += item.mx; }
+      else { totalDrops.set(iid, { id: iid, mn: item.mn, mx: item.mx }); }
+    }
+  }
+  for (const v of totalDrops.values()) v.name = cleanBossText(itemDisplayNameById(v.id));
+
+  // rls (IndividualRewardItemLootSets)
+  const rewardSetItems = new Map();
+  if (raw.rls != null){
+    const si = loot.si || [];
+    const idx = Number(raw.rls);
+    if (Number.isInteger(idx) && idx >= 0 && idx < si.length){
+      const cls = si[idx];
+      const setData = cls ? (loot.s?.[cls]) : null;
+      if (setData){
+        for (const entry of (setData.e || [])){
+          const mn = Number(entry.mn), mx = Number(entry.mx);
+          for (const iid of (entry.i || [])){
+            addToSource(rewardSetItems, iid,
+              Number.isFinite(mn) ? mn : 1,
+              Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
+          }
+        }
+      }
+    }
+  }
+  for (const v of rewardSetItems.values()) v.name = cleanBossText(itemDisplayNameById(v.id));
+
+  // Arena crates + bonus items
+  const crates = [], bonusItems = [];
   const lcList = Array.isArray(raw.lc) ? raw.lc : (raw.lc != null ? [raw.lc] : []);
   for (const lc of lcList){
     const cls = crateIdToClass(lc);
@@ -1735,10 +1789,10 @@ function resolveBossRewards(boss){
   }
 
   return {
-    drops: [...dropMap.values()],
+    drops: [...totalDrops.values()],
     given: [...givenIds].map(id => ({ id, name: cleanBossText(itemDisplayNameById(id)), mn: 1, mx: 1 })),
-    crates,
-    bonusItems
+    rewardSet: [...rewardSetItems.values()],
+    crates, bonusItems
   };
 }
 
@@ -1799,49 +1853,11 @@ function rebuildBossIndex(){
   State.bossNames = [];
   State.bossNameToIndex = new Map();
   for (const b of bosses){
-    let name = bossDisplayName(b);
-    // Guard against a rare duplicate name by suffixing the legend index.
+    let name = b.name;
     if (State.bossNameToIndex.has(name)) name = `${name} (#${b.index})`;
     State.bossNames.push(name);
     State.bossNameToIndex.set(name, b.index);
   }
-}
-
-// A boss's display name: the unique base creature name(s) joined naturally,
-// with the difficulty tier (taken from the boss's own name) appended once.
-function bossDisplayName(boss){
-  const seen = new Set();
-  const creatures = [];
-  for (const d of (boss.dinos || [])){
-    const base = stripBossDifficultyName(d.name);
-    if (base && !seen.has(base)){ seen.add(base); creatures.push(base); }
-  }
-  const tier = bossTierLabel(boss.name);
-  const baseLabel = creatures.length ? joinNaturalNames(creatures) : stripBossDifficultyName(boss.name);
-  return tier ? `${baseLabel} (${tier})` : baseLabel;
-}
-
-// Extract a difficulty tier word from a boss/dino name, if present.
-function bossTierLabel(name){
-  const m = String(name || "").match(/\((Gamma|Beta|Alpha|Easy|Medium|Hard)\)\s*$/i)
-    || String(name || "").match(/^(Gamma|Beta|Alpha)\s+/i);
-  return m ? (m[1][0].toUpperCase() + m[1].slice(1).toLowerCase()) : "";
-}
-
-// Strip both suffix "(Gamma)" and prefix "Gamma " difficulty markers.
-function stripBossDifficultyName(name){
-  return String(name == null ? "" : name)
-    .replace(/\s*\((?:Gamma|Beta|Alpha|Easy|Medium|Hard)\)\s*$/i, "")
-    .replace(/^(?:Gamma|Beta|Alpha)\s+/i, "")
-    .trim();
-}
-
-// Natural join: ["A"]->"A", ["A","B"]->"A & B", ["A","B","C"]->"A, B & C".
-function joinNaturalNames(arr){
-  const a = (arr || []).filter(Boolean);
-  if (a.length <= 1) return a[0] || "";
-  if (a.length === 2) return `${a[0]} & ${a[1]}`;
-  return `${a.slice(0, -1).join(", ")} & ${a[a.length - 1]}`;
 }
 
 

@@ -223,14 +223,14 @@ function bossRewardRow(item, opts = {}){
 // unlocks). Element and trophies come from the boss bag (dd) and direct
 // death-gives (dg); some world bosses also drop an arena loot crate (lc/li).
 function renderBossLootTab(boss){
-  const r = boss.rewards || { drops: [], given: [], crates: [], bonusItems: [] };
+  const r = boss.rewards || { drops: [], given: [], rewardSet: [], crates: [], bonusItems: [] };
   const sections = [];
 
-  // Bag drops (dd) — usually Element + trophy. The headline reward.
+  // Boss loot (dd + rd) — Element, trophies, flags. The headline reward.
   if (r.drops.length){
     sections.push(`
       <div class="info-section">
-        <div class="info-subtitle">Boss Bag</div>
+        <div class="info-subtitle">Boss Loot</div>
         <div class="boss-reward-list">
           ${r.drops.map(it => bossRewardRow(it, { highlight: /element/i.test(it.name) })).join("")}
         </div>
@@ -244,6 +244,17 @@ function renderBossLootTab(boss){
         <div class="info-subtitle">Awarded Directly</div>
         <div class="boss-reward-list">
           ${r.given.map(it => bossRewardRow(it)).join("")}
+        </div>
+      </div>`);
+  }
+
+  // Individual reward loot set (rls) — given to every player.
+  if (r.rewardSet && r.rewardSet.length){
+    sections.push(`
+      <div class="info-section">
+        <div class="info-subtitle">Player Reward</div>
+        <div class="boss-reward-list">
+          ${r.rewardSet.map(it => bossRewardRow(it, { highlight: /element/i.test(it.name) })).join("")}
         </div>
       </div>`);
   }
