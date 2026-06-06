@@ -1701,7 +1701,10 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries,
 body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row,
-body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
+body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   border: 1px solid var(--border-soft);
   border-radius: 12px;
   padding: 6px 8px;
@@ -3364,7 +3367,8 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub{
   padding: 5px;
 }
 
-body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section{
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 5px;
@@ -4898,7 +4902,10 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 /* Dino Loot tab uses the same visual pattern as Crate Loot Sets */
 body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
 body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   border: 1px solid var(--border-soft);
   border-radius: 12px;
   padding: 6px 8px;
@@ -4913,7 +4920,8 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
     0 6px 18px rgba(0,0,0,.18);
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 5px;
@@ -4921,13 +4929,15 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
   margin-right: -5px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-section-sub{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-section-sub{
   border-radius: 8px;
   margin: 5px;
   padding: 5px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   margin-top: 6px;
   margin-left: 2mm;
   margin-right: 2mm;
@@ -4939,7 +4949,8 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   border-radius: 8px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-name{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-name,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-name{
   margin-top: 1px;
   padding-left: 3mm;
   margin-bottom: 1px;
@@ -4947,16 +4958,19 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-name{
   text-align: left;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-subtitle-sub{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-subtitle-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-subtitle-sub{
   font-size: 12px;
   font-weight: 450;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .fp-page{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .fp-page,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .fp-page{
   padding: 14px 8px 8px 8px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-row{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-row,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-row{
   padding: 0;
 }
 

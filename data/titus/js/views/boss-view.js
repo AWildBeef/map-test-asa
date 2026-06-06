@@ -118,6 +118,22 @@ function renderBossPanel(bossName){
     onChange: (id) => { infoPanelState.bossTab = id; renderBossPanel(bossName); }
   });
 
+  // Wire collapse/expand toggles for pool loot set sections.
+  for (const btn of body.querySelectorAll("[data-boss-set-toggle]")){
+    btn.addEventListener("click", () => {
+      const section = btn.closest(".loot-set-section");
+      if (!section) return;
+      const isOpen = section.classList.toggle("is-open");
+      section.classList.toggle("is-closed", !isOpen);
+      const bodyEl = section.querySelector(".loot-set-body");
+      if (bodyEl) bodyEl.style.display = isOpen ? "" : "none";
+      const chevron = section.querySelector(".loot-set-toggle-chevron");
+      if (chevron) chevron.textContent = isOpen ? "⌄" : "›";
+      // Recalculate panel height so expanded content scrolls properly.
+      refreshInfoPanelPageHeight();
+    });
+  }
+
   // Clamp the active page height to the available space above the dock.
   refreshInfoPanelPageHeight();
   syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
@@ -222,14 +238,80 @@ function bossRewardRow(item, opts = {}){
     </div>`;
 }
 
-// Rewards tab: loot you get from defeating the boss (distinct from engram
-// unlocks). Element and trophies come from the boss bag (dd) and direct
-// death-gives (dg); some world bosses also drop an arena loot crate (lc/li).
+// Render pool-style loot using the same loot-set-section structure as Crate
+// View and Dino View, so the styling matches: collapsible header with set
+// name + chevron, body with meta-grid and entry blocks.
+function renderBossLootSetSection(name, entries, opts = {}){
+  const weight = opts.weight;
+  const smn = opts.smn;
+  const smx = opts.smx;
+  const isOpen = opts.open !== false; // default open
+
+  const metaCells = [
+    weight != null ? `<div class="meta-cell"><div class="meta-label">Set Weight</div><div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div></div>` : "",
+    (smn != null || smx != null) ? `<div class="meta-cell"><div class="meta-label">Items Chosen</div><div class="meta-value">${escapeHtml(fmtRange(smn, smx))}</div></div>` : ""
+  ].filter(Boolean).join("");
+
+  return `
+    <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"}">
+      <button type="button" class="loot-set-toggle" data-boss-set-toggle>
+        <div class="loot-set-toggle-main">
+          <div class="info-row">
+            <span class="info-label">${escapeHtml(name)}</span>
+          </div>
+        </div>
+        <div class="loot-set-toggle-right">
+          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
+        </div>
+      </button>
+      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+        ${metaCells ? `<div class="meta-grid">${metaCells}</div>` : ""}
+        ${(entries || []).length
+          ? entries.map(renderLootEntryBlock).join("")
+          : `<div class="boss-empty">No entries.</div>`}
+      </div>
+    </div>`;
+}
+
+// Render pool item sets from drop component overrides ("o" field).
+function renderBossPoolSets(poolSets){
+  if (!poolSets || !poolSets.length) return "";
+  return `<div class="info-section"><div class="entries">${
+    poolSets.map((row, idx) => {
+      const { allEntries, setMeta } = lootSetEntriesFromRow(row);
+      const setName = lootSetNameFromRow(row, `Loot Pool ${idx + 1}`);
+      return renderBossLootSetSection(setName, allEntries, {
+        weight: row?.w,
+        smn: setMeta?.smn ?? row?.smn,
+        smx: setMeta?.smx ?? row?.smx,
+        open: false
+      });
+    }).join("")
+  }</div></div>`;
+}
+
+// Render rls (Individual Reward Loot Set) entries as loot-set-sections.
+function renderBossRlsSections(rlsData){
+  if (!rlsData || !rlsData.entries || !rlsData.entries.length) return "";
+  return `<div class="info-section">
+    <div class="info-subtitle">Player Reward</div>
+    <div class="entries">${
+      rlsData.entries.map((entry, idx) => {
+        const entryName = entry.n || `Group ${idx + 1}`;
+        return renderBossLootSetSection(entryName, [entry], {
+          open: false
+        });
+      }).join("")
+    }</div>
+  </div>`;
+}
+
+// Rewards tab: loot you get from defeating the boss.
 function renderBossLootTab(boss){
-  const r = boss.rewards || { drops: [], given: [], rewardSet: [], crates: [], bonusItems: [] };
+  const r = boss.rewards || { drops: [], given: [], poolSets: [], rlsData: null, crates: [], bonusItems: [] };
   const sections = [];
 
-  // Boss loot (dd + rd) — Element, trophies, flags. The headline reward.
+  // Exact boss loot (dd/rd sets without overrides) — Element, trophies, flags.
   if (r.drops.length){
     sections.push(`
       <div class="info-section">
@@ -240,7 +322,7 @@ function renderBossLootTab(boss){
       </div>`);
   }
 
-  // Direct death-gives (dg) — flags, helmets, trophies added to inventory.
+  // Direct death-gives (dg).
   if (r.given.length){
     sections.push(`
       <div class="info-section">
@@ -251,15 +333,14 @@ function renderBossLootTab(boss){
       </div>`);
   }
 
-  // Individual reward loot set (rls) — given to every player.
-  if (r.rewardSet && r.rewardSet.length){
-    sections.push(`
-      <div class="info-section">
-        <div class="info-subtitle">Player Reward</div>
-        <div class="boss-reward-list">
-          ${r.rewardSet.map(it => bossRewardRow(it, { highlight: /element/i.test(it.name) })).join("")}
-        </div>
-      </div>`);
+  // Pool loot from ItemSetOverride sets (e.g. Astraeos boar's miniboss loot).
+  if (r.poolSets && r.poolSets.length){
+    sections.push(renderBossPoolSets(r.poolSets));
+  }
+
+  // Individual reward loot set (rls) — crate-style pool.
+  if (r.rlsData){
+    sections.push(renderBossRlsSections(r.rlsData));
   }
 
   // Arena loot crates (lc) + bonus item (li).

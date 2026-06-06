@@ -1682,42 +1682,41 @@ function resolveBossRewards(boss){
   const loot = Global.loot || {};
   const raw = boss.raw || {};
 
-  // Helper: add item qty to a per-source map (range within one source).
   const addToSource = (map, iid, mn, mx) => {
     const prev = map.get(iid);
     if (prev){ prev.mn = Math.min(prev.mn, mn); prev.mx = Math.max(prev.mx, mx); }
     else { map.set(iid, { id: iid, mn, mx }); }
   };
 
-  // Helper: extract items from a drop component, resolving ItemSetOverride
-  // ("o" → loot.si[o] → loot.s[class].e) when present.
-  const extractDropComp = (comp, targetMap) => {
+  // Extract items from a drop component. Sets with an ItemSetOverride ("o")
+  // are pool-style and go into poolSets for crate-style rendering; sets
+  // without are exact and their items go into targetMap for row rendering.
+  const extractDropComp = (comp, targetMap, poolSets) => {
     if (!comp) return;
     for (const setRow of (comp.s || [])){
-      let entries = setRow.e || [];
       if (setRow.o != null){
-        const si = loot.si || [];
-        const oIdx = Number(setRow.o);
-        if (Number.isInteger(oIdx) && oIdx >= 0 && oIdx < si.length){
-          const cls = si[oIdx];
-          const overrideSet = cls ? (loot.s?.[cls]) : null;
-          if (overrideSet?.e) entries = [...entries, ...overrideSet.e];
+        // Pool set — store raw for crate-style rendering, deduped by o index.
+        if (!seenOverrides.has(setRow.o)){
+          seenOverrides.add(setRow.o);
+          poolSets.push(setRow);
         }
-      }
-      for (const entry of entries){
-        const mn = Number(entry.mn), mx = Number(entry.mx);
-        for (const iid of (entry.i || [])){
-          addToSource(targetMap, iid,
-            Number.isFinite(mn) ? mn : 1,
-            Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
+      } else {
+        // Exact set — extract items with quantities.
+        for (const entry of (setRow.e || [])){
+          const mn = Number(entry.mn), mx = Number(entry.mx);
+          for (const iid of (entry.i || [])){
+            addToSource(targetMap, iid,
+              Number.isFinite(mn) ? mn : 1,
+              Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
+          }
         }
       }
     }
   };
 
-  // Collect drops per source, then SUM across sources so multi-dino bosses
-  // show combined totals (Center: 68+132=200 Element, Astraeos: 30+30=60).
   const perSourceDrops = [];
+  const poolSets = [];  // raw set rows with o (ItemSetOverride), deduped
+  const seenOverrides = new Set();
   const givenIds = new Set();
 
   for (const d of (boss.dinos || [])){
@@ -1725,10 +1724,9 @@ function resolveBossRewards(boss){
     if (!obj) continue;
     if (obj.dd != null){
       const m = new Map();
-      extractDropComp(lookupDropComp(loot, obj.dd), m);
+      extractDropComp(lookupDropComp(loot, obj.dd), m, poolSets);
       if (m.size) perSourceDrops.push(m);
     }
-    // dg: skip for mission-style bosses (rd set) where death-give doesn't fire.
     if (!raw.rd && Array.isArray(obj.dg)){
       for (const iid of obj.dg) givenIds.add(iid);
     }
@@ -1737,11 +1735,11 @@ function resolveBossRewards(boss){
   const rdList = Array.isArray(raw.rd) ? raw.rd : (raw.rd != null ? [raw.rd] : []);
   for (const rdRef of rdList){
     const m = new Map();
-    extractDropComp(lookupDropComp(loot, rdRef), m);
+    extractDropComp(lookupDropComp(loot, rdRef), m, poolSets);
     if (m.size) perSourceDrops.push(m);
   }
 
-  // Sum across all sources.
+  // Sum exact items across all sources.
   const totalDrops = new Map();
   for (const srcMap of perSourceDrops){
     for (const [iid, item] of srcMap){
@@ -1752,27 +1750,17 @@ function resolveBossRewards(boss){
   }
   for (const v of totalDrops.values()) v.name = cleanBossText(itemDisplayNameById(v.id));
 
-  // rls (IndividualRewardItemLootSets)
-  const rewardSetItems = new Map();
+  // rls — store the raw loot set data for crate-style rendering.
+  let rlsData = null;
   if (raw.rls != null){
     const si = loot.si || [];
     const idx = Number(raw.rls);
     if (Number.isInteger(idx) && idx >= 0 && idx < si.length){
       const cls = si[idx];
       const setData = cls ? (loot.s?.[cls]) : null;
-      if (setData){
-        for (const entry of (setData.e || [])){
-          const mn = Number(entry.mn), mx = Number(entry.mx);
-          for (const iid of (entry.i || [])){
-            addToSource(rewardSetItems, iid,
-              Number.isFinite(mn) ? mn : 1,
-              Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
-          }
-        }
-      }
+      if (setData) rlsData = { name: setData.n || cls, entries: setData.e || [], smn: setData.smn, smx: setData.smx };
     }
   }
-  for (const v of rewardSetItems.values()) v.name = cleanBossText(itemDisplayNameById(v.id));
 
   // Arena crates + bonus items
   const crates = [], bonusItems = [];
@@ -1791,7 +1779,8 @@ function resolveBossRewards(boss){
   return {
     drops: [...totalDrops.values()],
     given: [...givenIds].map(id => ({ id, name: cleanBossText(itemDisplayNameById(id)), mn: 1, mx: 1 })),
-    rewardSet: [...rewardSetItems.values()],
+    poolSets,    // raw set rows with o (for crate-style display)
+    rlsData,     // raw loot set data (for crate-style display)
     crates, bonusItems
   };
 }
