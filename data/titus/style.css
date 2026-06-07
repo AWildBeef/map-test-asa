@@ -5107,6 +5107,12 @@ body[data-mode="note"] .mode-toggle {
   color: var(--muted);
   padding: 4px 0;
 }
+.boss-item-qty {
+  color: #ffd24a;
+  font-weight: 700;
+  margin-right: 6px;
+  font-variant-numeric: tabular-nums;
+}
 /* Reward / unlock rows — same visual language as the summon recipe rows. */
 .boss-reward-list {
   display: grid;

@@ -2537,12 +2537,12 @@ async function ensureLootAndItemsLoaded() {
         Global.resolvedSupplyLegend.set(geomShort, resolvedLegend);
       }
 
-      rebuildLootIndices();
-
       // Boss names, summon recipes, and unlock labels all depend on the item
       // table, which loads lazily. Rebuild the boss index now that items exist.
       if (typeof invalidateBossCache === "function") invalidateBossCache();
       if (typeof rebuildBossIndex === "function") rebuildBossIndex();
+
+      rebuildLootIndices();
 
       // If we're currently in a loot-dependent mode, refresh the UI
       if (State.mode === "crate" || State.mode === "item" || State.mode === "dino" || State.mode === "boss") {

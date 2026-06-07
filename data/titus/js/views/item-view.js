@@ -639,18 +639,52 @@ function renderItemTabCrates(it){
 
 
 // Bosses tab: which bosses on this map drop or reward this item.
-function renderItemTabBosses(bossNames){
+function renderItemTabBosses(bossNames, itemIds){
   if (!bossNames || !bossNames.length){
     return `<div class="info-section"><div class="boss-empty">No boss sources found.</div></div>`;
   }
+
+  // Look up quantity for an item in a boss's rewards.
+  function bossItemQty(bossName, ids){
+    const boss = typeof getBossByName === "function" ? getBossByName(bossName) : null;
+    if (!boss || !boss.rewards) return "";
+    const idSet = new Set(ids);
+
+    const fmtQty = (mn, mx) => {
+      const lo = Number(mn), hi = Number(mx);
+      if (!Number.isFinite(lo) && !Number.isFinite(hi)) return "";
+      if (Number.isFinite(lo) && Number.isFinite(hi) && lo !== hi) return `${fmt(lo)}–${fmt(hi)}`;
+      return fmt(Number.isFinite(hi) ? hi : lo);
+    };
+
+    // Check exact drops (dd/rd) — these have real quantities.
+    for (const d of (boss.rewards.drops || [])){
+      if (idSet.has(d.id)) return fmtQty(d.mn, d.mx);
+    }
+    // Check given (dg) — always ×1.
+    for (const d of (boss.rewards.given || [])){
+      if (idSet.has(d.id)) return "1";
+    }
+    // Check bonus items (li) — always ×1.
+    for (const d of (boss.rewards.bonusItems || [])){
+      if (idSet.has(d.id)) return "1";
+    }
+    // Pool sets and rls — no fixed quantity, skip.
+    return "";
+  }
+
   return `
     <div class="info-section">
       <div class="info-subtitle">Boss Rewards</div>
-      ${bossNames.map(name => `
-        <div class="loot-dino-row">
-          <span class="loot-dino-name">${escapeHtml(name)}</span>
-          <button type="button" class="info-link-btn" data-open-boss="${escapeHtml(name)}">View</button>
-        </div>`).join("")}
+      ${bossNames.map(name => {
+        const qty = bossItemQty(name, itemIds);
+        const qtyHtml = qty ? `<span class="boss-item-qty">${escapeHtml(qty)}×</span>` : "";
+        return `
+          <div class="loot-dino-row">
+            <span class="loot-dino-name">${qtyHtml}${escapeHtml(name)}</span>
+            <button type="button" class="info-link-btn" data-open-boss="${escapeHtml(name)}">View</button>
+          </div>`;
+      }).join("")}
     </div>`;
 }
 
@@ -790,7 +824,7 @@ function renderItemPanel(itemName){
         if (id === "crates") return renderItemTabCrates(it);
         if (id === "info")   return renderItemTabInfo(it);
         if (id === "dinos")  return renderItemTabDinos(it, dropDinos, harvestDinos);
-        if (id === "bosses") return renderItemTabBosses(bossSourceNames);
+        if (id === "bosses") return renderItemTabBosses(bossSourceNames, itemIds);
         if (id === "engram") return renderItemTabEngram(it);
         return "";
       }
