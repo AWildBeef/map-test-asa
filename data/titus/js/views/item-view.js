@@ -681,15 +681,20 @@ function renderItemTabBosses(entries, itemIds){
     const qty = getQty(boss, itemIds);
     const qtyHtml = qty ? `<span class="boss-item-qty">${escapeHtml(qty)}×</span>` : "";
 
-    // Info cells: craft level, teleport level
-    const cells = [];
-    if (boss?.craftLevel != null)
-      cells.push(`<span class="boss-info-meta">Craft Lvl: ${boss.craftLevel}</span>`);
-    if (boss?.teleportLevel != null)
-      cells.push(`<span class="boss-info-meta">TP Lvl: ${boss.teleportLevel}</span>`);
-    const metaLine = cells.length
-      ? `<div class="boss-info-meta-row">${cells.join("")}</div>`
-      : "";
+    // Info: show min level. When craft == teleport, combine into one label.
+    const cl = boss?.craftLevel;
+    const tl = boss?.teleportLevel;
+    let metaLine = "";
+    if (cl != null || tl != null){
+      if (cl != null && tl != null && cl === tl){
+        metaLine = `<div class="boss-info-meta-row"><span class="boss-info-meta">Min Level for Boss: ${cl}</span></div>`;
+      } else {
+        const parts = [];
+        if (cl != null) parts.push(`<span class="boss-info-meta">Min Level to Summon: ${cl}</span>`);
+        if (tl != null) parts.push(`<span class="boss-info-meta">Min Level to Teleport: ${tl}</span>`);
+        metaLine = `<div class="boss-info-meta-row">${parts.join("")}</div>`;
+      }
+    }
 
     return `
       <div class="loot-set-section is-closed">
@@ -705,7 +710,7 @@ function renderItemTabBosses(entries, itemIds){
         </button>
         <div class="loot-set-body" style="display:none;">
           ${metaLine}
-          <button type="button" class="info-link-btn boss-view-link" data-open-boss="${escapeHtml(entry.name)}">Open in Boss View ›</button>
+          <button type="button" class="fp-btn" data-open-boss="${escapeHtml(entry.name)}" style="margin-top:6px; width:100%; justify-content:center;">Open in Boss View ›</button>
         </div>
       </div>`;
   }
