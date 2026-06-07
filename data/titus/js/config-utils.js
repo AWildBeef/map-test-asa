@@ -136,7 +136,8 @@ const State = {
     entry: "",
     crate: "",
     item: "",
-    note: ""
+    note: "",
+    boss: ""
   },
   
   mapEntries: new Set(),
@@ -153,6 +154,7 @@ const State = {
 
   bossNames: [],
   bossNameToIndex: new Map(),
+  bossItemIndex: new Map(),  // itemId -> [bossName1, ...]
   
   mapCrateIds: new Set(),
   mapItemIds: new Set(),
@@ -336,6 +338,20 @@ function openDinoView(name){
   State.mode = "dino";
   State.selection = name;
   State.selections.dino = name;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  render();
+}
+
+function openBossView(name){
+  if (!name) return;
+
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "boss";
+  State.selection = name;
+  State.selections.boss = name;
 
   syncModeButton();
   syncModeClass();

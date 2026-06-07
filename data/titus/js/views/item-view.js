@@ -638,6 +638,22 @@ function renderItemTabCrates(it){
 }
 
 
+// Bosses tab: which bosses on this map drop or reward this item.
+function renderItemTabBosses(bossNames){
+  if (!bossNames || !bossNames.length){
+    return `<div class="info-section"><div class="boss-empty">No boss sources found.</div></div>`;
+  }
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Boss Rewards</div>
+      ${bossNames.map(name => `
+        <div class="loot-dino-row">
+          <span class="loot-dino-name">${escapeHtml(name)}</span>
+          <button type="button" class="info-link-btn" data-open-boss="${escapeHtml(name)}">View</button>
+        </div>`).join("")}
+    </div>`;
+}
+
 function renderItemTabDinos(it, dropDinos, harvestDinos){
   function dinoRow(bp){
     const obj = getDinoObjByBp(bp);
@@ -705,6 +721,12 @@ function renderItemPanel(itemName){
   const harvestDinos = filterToBps([...new Set(itemIds.flatMap(id => dinoBpsThatHarvestItem(id)))]);
   const hasDinoLoot = dropDinos.length > 0 || harvestDinos.length > 0;
 
+  // Boss sources — which bosses on this map drop this item?
+  const bossSourceNames = [...new Set(
+    itemIds.flatMap(id => State.bossItemIndex.get(id) || [])
+  )];
+  const hasBossSources = bossSourceNames.length > 0;
+
   // Detect if this item has an engram
   const itemRowForTabs = itemRowById(it.id);
   const hasEngram = itemRowForTabs ? engramRowsForItem(itemRowForTabs).length > 0 : false;
@@ -712,6 +734,7 @@ function renderItemPanel(itemName){
   const itemPanelTabs = [
      ...(sourceCount > 0 ? [{ id: "crates", label: `Crates (${sourceCount})` }] : []),
      ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : []),
+     ...(hasBossSources ? [{ id: "bosses", label: `Bosses (${bossSourceNames.length})` }] : []),
      { id: "info", label: "Info" },
      ...(hasEngram ? [{ id: "engram", label: "Engram" }] : []),
     ];
@@ -767,6 +790,7 @@ function renderItemPanel(itemName){
         if (id === "crates") return renderItemTabCrates(it);
         if (id === "info")   return renderItemTabInfo(it);
         if (id === "dinos")  return renderItemTabDinos(it, dropDinos, harvestDinos);
+        if (id === "bosses") return renderItemTabBosses(bossSourceNames);
         if (id === "engram") return renderItemTabEngram(it);
         return "";
       }
@@ -892,6 +916,13 @@ function renderItemPanel(itemName){
     btn.onclick = () => {
       const dinoName = btn.dataset.openDino;
       if (dinoName) openDinoView(dinoName);
+    };
+  });
+
+  body.querySelectorAll("[data-open-boss]").forEach(btn => {
+    btn.onclick = () => {
+      const bossName = btn.dataset.openBoss;
+      if (bossName) openBossView(bossName);
     };
   });
 

@@ -2212,6 +2212,61 @@ function rebuildLootIndices(){
 
   // Rebuild itemNames to include dino loot items
   State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
+
+  // --- boss reward items on this map ---
+  // Add items from boss drops (dd/rd), death gives (dg), rls, and li so they
+  // appear in the Item View dropdown and can link back to Boss View.
+  State.bossItemIndex = new Map();
+  if (typeof bossesForCurrentMap === "function"){
+    const bosses = bossesForCurrentMap();
+    for (let bi = 0; bi < bosses.length; bi++){
+      const boss = bosses[bi];
+      const bossName = State.bossNames[bi] || boss.name;
+      const rewards = boss.rewards;
+      if (!rewards) continue;
+
+      const bossItemIds = new Set();
+
+      // Exact drops (dd/rd)
+      for (const d of (rewards.drops || [])) if (d.id != null) bossItemIds.add(d.id);
+      // Death gives (dg)
+      for (const d of (rewards.given || [])) if (d.id != null) bossItemIds.add(d.id);
+      // Bonus items (li)
+      for (const d of (rewards.bonusItems || [])) if (d.id != null) bossItemIds.add(d.id);
+      // Pool sets (ItemSetOverride) — resolve entries to get item IDs
+      for (const setRow of (rewards.poolSets || [])){
+        const { allEntries } = lootSetEntriesFromRow(setRow);
+        for (const entry of allEntries){
+          for (const iid of (entry.i || [])) bossItemIds.add(iid);
+        }
+      }
+      // rls entries
+      if (rewards.rlsData){
+        for (const entry of (rewards.rlsData.entries || [])){
+          for (const iid of (entry.i || [])) bossItemIds.add(iid);
+        }
+      }
+
+      // Add to reverse index and mapItemIds
+      for (const itemId of bossItemIds){
+        if (!State.bossItemIndex.has(itemId)) State.bossItemIndex.set(itemId, []);
+        State.bossItemIndex.get(itemId).push(bossName);
+
+        State.mapItemIds.add(itemId);
+        const itemRow = items.i?.[String(itemId)];
+        if (!itemRow) continue;
+        if (modActive && !itemRow._mod) continue;
+        const name = itemRow.n || `Item ${itemId}`;
+        if (!State.itemNameToIds.has(name)) State.itemNameToIds.set(name, []);
+        if (!State.itemNameToIds.get(name).includes(itemId)){
+          State.itemNameToIds.get(name).push(itemId);
+        }
+      }
+    }
+  }
+
+  // Final rebuild of itemNames to include boss reward items
+  State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 }
 
 
