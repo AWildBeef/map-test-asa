@@ -638,54 +638,95 @@ function renderItemTabCrates(it){
 }
 
 
-// Bosses tab: which bosses on this map drop or reward this item.
-function renderItemTabBosses(bossNames, itemIds){
-  if (!bossNames || !bossNames.length){
+// Bosses tab: which bosses on this map drop or unlock this item,
+// rendered as collapsible sections matching the crate tab style.
+function renderItemTabBosses(entries, itemIds){
+  if (!entries || !entries.length){
     return `<div class="info-section"><div class="boss-empty">No boss sources found.</div></div>`;
   }
 
-  // Look up quantity for an item in a boss's rewards.
-  function bossItemQty(bossName, ids){
-    const boss = typeof getBossByName === "function" ? getBossByName(bossName) : null;
-    if (!boss || !boss.rewards) return "";
+  const fmtQty = (mn, mx) => {
+    const lo = Number(mn), hi = Number(mx);
+    if (!Number.isFinite(lo) && !Number.isFinite(hi)) return "";
+    if (Number.isFinite(lo) && Number.isFinite(hi) && lo !== hi) return `${fmt(lo)}–${fmt(hi)}`;
+    return fmt(Number.isFinite(hi) ? hi : lo);
+  };
+
+  // Group by boss name, merging types (a boss can be both "drop" and "unlock").
+  const byBoss = new Map();
+  for (const e of entries){
+    if (!byBoss.has(e.name)) byBoss.set(e.name, { name: e.name, boss: e.boss, types: new Set() });
+    byBoss.get(e.name).types.add(e.type);
+  }
+
+  // Look up the item's quantity in a boss's rewards.
+  function getQty(boss, ids){
+    if (!boss?.rewards) return "";
     const idSet = new Set(ids);
-
-    const fmtQty = (mn, mx) => {
-      const lo = Number(mn), hi = Number(mx);
-      if (!Number.isFinite(lo) && !Number.isFinite(hi)) return "";
-      if (Number.isFinite(lo) && Number.isFinite(hi) && lo !== hi) return `${fmt(lo)}–${fmt(hi)}`;
-      return fmt(Number.isFinite(hi) ? hi : lo);
-    };
-
-    // Check exact drops (dd/rd) — these have real quantities.
-    for (const d of (boss.rewards.drops || [])){
+    for (const d of (boss.rewards.drops || []))
       if (idSet.has(d.id)) return fmtQty(d.mn, d.mx);
-    }
-    // Check given (dg) — always ×1.
-    for (const d of (boss.rewards.given || [])){
+    for (const d of (boss.rewards.given || []))
       if (idSet.has(d.id)) return "1";
-    }
-    // Check bonus items (li) — always ×1.
-    for (const d of (boss.rewards.bonusItems || [])){
+    for (const d of (boss.rewards.bonusItems || []))
       if (idSet.has(d.id)) return "1";
-    }
-    // Pool sets and rls — no fixed quantity, skip.
     return "";
   }
 
-  return `
-    <div class="info-section">
+  // Separate drops and unlocks.
+  const dropEntries = [...byBoss.values()].filter(e => e.types.has("drop"));
+  const unlockEntries = [...byBoss.values()].filter(e => e.types.has("unlock") && !e.types.has("drop"));
+
+  function renderBossRow(entry){
+    const boss = entry.boss;
+    const qty = getQty(boss, itemIds);
+    const qtyHtml = qty ? `<span class="boss-item-qty">${escapeHtml(qty)}×</span>` : "";
+
+    // Info cells: craft level, teleport level
+    const cells = [];
+    if (boss?.craftLevel != null)
+      cells.push(`<span class="boss-info-meta">Craft Lvl: ${boss.craftLevel}</span>`);
+    if (boss?.teleportLevel != null)
+      cells.push(`<span class="boss-info-meta">TP Lvl: ${boss.teleportLevel}</span>`);
+    const metaLine = cells.length
+      ? `<div class="boss-info-meta-row">${cells.join("")}</div>`
+      : "";
+
+    return `
+      <div class="loot-set-section is-closed">
+        <button type="button" class="loot-set-toggle" data-boss-item-toggle>
+          <div class="loot-set-toggle-main">
+            <div class="info-row">
+              <span class="info-label">${qtyHtml}${escapeHtml(entry.name)}</span>
+            </div>
+          </div>
+          <div class="loot-set-toggle-right">
+            <span class="loot-set-toggle-chevron">›</span>
+          </div>
+        </button>
+        <div class="loot-set-body" style="display:none;">
+          ${metaLine}
+          <button type="button" class="info-link-btn boss-view-link" data-open-boss="${escapeHtml(entry.name)}">Open in Boss View ›</button>
+        </div>
+      </div>`;
+  }
+
+  let html = "";
+
+  if (dropEntries.length){
+    html += `<div class="info-section">
       <div class="info-subtitle">Boss Rewards</div>
-      ${bossNames.map(name => {
-        const qty = bossItemQty(name, itemIds);
-        const qtyHtml = qty ? `<span class="boss-item-qty">${escapeHtml(qty)}×</span>` : "";
-        return `
-          <div class="loot-dino-row">
-            <span class="loot-dino-name">${qtyHtml}${escapeHtml(name)}</span>
-            <button type="button" class="info-link-btn" data-open-boss="${escapeHtml(name)}">View</button>
-          </div>`;
-      }).join("")}
+      ${dropEntries.map(renderBossRow).join("")}
     </div>`;
+  }
+
+  if (unlockEntries.length){
+    html += `<div class="info-section">
+      <div class="info-subtitle">Tekgram Unlock</div>
+      ${unlockEntries.map(renderBossRow).join("")}
+    </div>`;
+  }
+
+  return html || `<div class="info-section"><div class="boss-empty">No boss sources found.</div></div>`;
 }
 
 function renderItemTabDinos(it, dropDinos, harvestDinos){
@@ -755,11 +796,18 @@ function renderItemPanel(itemName){
   const harvestDinos = filterToBps([...new Set(itemIds.flatMap(id => dinoBpsThatHarvestItem(id)))]);
   const hasDinoLoot = dropDinos.length > 0 || harvestDinos.length > 0;
 
-  // Boss sources — which bosses on this map drop this item?
-  const bossSourceNames = [...new Set(
-    itemIds.flatMap(id => State.bossItemIndex.get(id) || [])
-  )];
-  const hasBossSources = bossSourceNames.length > 0;
+  // Boss sources — which bosses on this map drop or unlock this item?
+  const bossSourceEntries = itemIds.flatMap(id => State.bossItemIndex.get(id) || []);
+  // Dedupe by name+type
+  const bossSourceMap = new Map();
+  for (const e of bossSourceEntries){
+    const key = `${e.name}\x00${e.type}`;
+    if (!bossSourceMap.has(key)) bossSourceMap.set(key, e);
+  }
+  const bossSourceList = [...bossSourceMap.values()];
+  // Unique boss names for tab count
+  const bossNameSet = new Set(bossSourceList.map(e => e.name));
+  const hasBossSources = bossNameSet.size > 0;
 
   // Detect if this item has an engram
   const itemRowForTabs = itemRowById(it.id);
@@ -768,7 +816,7 @@ function renderItemPanel(itemName){
   const itemPanelTabs = [
      ...(sourceCount > 0 ? [{ id: "crates", label: `Crates (${sourceCount})` }] : []),
      ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : []),
-     ...(hasBossSources ? [{ id: "bosses", label: `Bosses (${bossSourceNames.length})` }] : []),
+     ...(hasBossSources ? [{ id: "bosses", label: `Bosses (${bossNameSet.size})` }] : []),
      { id: "info", label: "Info" },
      ...(hasEngram ? [{ id: "engram", label: "Engram" }] : []),
     ];
@@ -824,7 +872,7 @@ function renderItemPanel(itemName){
         if (id === "crates") return renderItemTabCrates(it);
         if (id === "info")   return renderItemTabInfo(it);
         if (id === "dinos")  return renderItemTabDinos(it, dropDinos, harvestDinos);
-        if (id === "bosses") return renderItemTabBosses(bossSourceNames, itemIds);
+        if (id === "bosses") return renderItemTabBosses(bossSourceList, itemIds);
         if (id === "engram") return renderItemTabEngram(it);
         return "";
       }
@@ -958,6 +1006,21 @@ function renderItemPanel(itemName){
       const bossName = btn.dataset.openBoss;
       if (bossName) openBossView(bossName);
     };
+  });
+
+  // Wire collapse/expand toggles for boss item sections
+  body.querySelectorAll("[data-boss-item-toggle]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const section = btn.closest(".loot-set-section");
+      if (!section) return;
+      const isOpen = section.classList.toggle("is-open");
+      section.classList.toggle("is-closed", !isOpen);
+      const bodyEl = section.querySelector(".loot-set-body");
+      if (bodyEl) bodyEl.style.display = isOpen ? "" : "none";
+      const chevron = section.querySelector(".loot-set-toggle-chevron");
+      if (chevron) chevron.textContent = isOpen ? "⌄" : "›";
+      refreshInfoPanelPageHeight();
+    });
   });
 
   refreshInfoPanelPageHeight();

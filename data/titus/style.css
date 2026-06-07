@@ -5113,6 +5113,40 @@ body[data-mode="note"] .mode-toggle {
   margin-right: 6px;
   font-variant-numeric: tabular-nums;
 }
+.boss-info-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 6px;
+}
+.boss-info-meta {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.boss-view-link {
+  width: 100%;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Item View → Bosses tab: reuse loot-set-section styling */
+body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .loot-set-section{
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-left: -5px;
+  margin-right: -5px;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--fill-strong),
+      var(--fill-soft)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 6px 18px rgba(0,0,0,.18);
+}
 /* Reward / unlock rows — same visual language as the summon recipe rows. */
 .boss-reward-list {
   display: grid;

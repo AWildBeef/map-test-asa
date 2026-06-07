@@ -2213,55 +2213,58 @@ function rebuildLootIndices(){
   // Rebuild itemNames to include dino loot items
   State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 
-  // --- boss reward items on this map ---
-  // Add items from boss drops (dd/rd), death gives (dg), rls, and li so they
-  // appear in the Item View dropdown and can link back to Boss View.
+  // --- boss reward items + engram unlocks on this map ---
   State.bossItemIndex = new Map();
   if (typeof bossesForCurrentMap === "function"){
     const bosses = bossesForCurrentMap();
+    const addBossItem = (itemId, bossName, type, boss) => {
+      if (!State.bossItemIndex.has(itemId)) State.bossItemIndex.set(itemId, []);
+      const arr = State.bossItemIndex.get(itemId);
+      if (!arr.some(e => e.name === bossName && e.type === type)){
+        arr.push({ name: bossName, type, boss });
+      }
+      State.mapItemIds.add(itemId);
+      const itemRow = items.i?.[String(itemId)];
+      if (!itemRow) return;
+      if (modActive && !itemRow._mod) return;
+      const name = itemRow.n || `Item ${itemId}`;
+      if (!State.itemNameToIds.has(name)) State.itemNameToIds.set(name, []);
+      if (!State.itemNameToIds.get(name).includes(itemId))
+        State.itemNameToIds.get(name).push(itemId);
+    };
+
     for (let bi = 0; bi < bosses.length; bi++){
       const boss = bosses[bi];
       const bossName = State.bossNames[bi] || boss.name;
       const rewards = boss.rewards;
-      if (!rewards) continue;
 
-      const bossItemIds = new Set();
-
-      // Exact drops (dd/rd)
-      for (const d of (rewards.drops || [])) if (d.id != null) bossItemIds.add(d.id);
-      // Death gives (dg)
-      for (const d of (rewards.given || [])) if (d.id != null) bossItemIds.add(d.id);
-      // Bonus items (li)
-      for (const d of (rewards.bonusItems || [])) if (d.id != null) bossItemIds.add(d.id);
-      // Pool sets (ItemSetOverride) — resolve entries to get item IDs
-      for (const setRow of (rewards.poolSets || [])){
-        const { allEntries } = lootSetEntriesFromRow(setRow);
-        for (const entry of allEntries){
-          for (const iid of (entry.i || [])) bossItemIds.add(iid);
+      // Loot/reward items (type: "drop")
+      if (rewards){
+        const ids = new Set();
+        for (const d of (rewards.drops || [])) if (d.id != null) ids.add(d.id);
+        for (const d of (rewards.given || [])) if (d.id != null) ids.add(d.id);
+        for (const d of (rewards.bonusItems || [])) if (d.id != null) ids.add(d.id);
+        for (const setRow of (rewards.poolSets || [])){
+          const { allEntries } = lootSetEntriesFromRow(setRow);
+          for (const entry of allEntries)
+            for (const iid of (entry.i || [])) ids.add(iid);
         }
-      }
-      // rls entries
-      if (rewards.rlsData){
-        for (const entry of (rewards.rlsData.entries || [])){
-          for (const iid of (entry.i || [])) bossItemIds.add(iid);
-        }
+        if (rewards.rlsData)
+          for (const entry of (rewards.rlsData.entries || []))
+            for (const iid of (entry.i || [])) ids.add(iid);
+        for (const id of ids) addBossItem(id, bossName, "drop", boss);
       }
 
-      // Add to reverse index and mapItemIds
-      for (const itemId of bossItemIds){
-        if (!State.bossItemIndex.has(itemId)) State.bossItemIndex.set(itemId, []);
-        State.bossItemIndex.get(itemId).push(bossName);
-
-        State.mapItemIds.add(itemId);
-        const itemRow = items.i?.[String(itemId)];
-        if (!itemRow) continue;
-        if (modActive && !itemRow._mod) continue;
-        const name = itemRow.n || `Item ${itemId}`;
-        if (!State.itemNameToIds.has(name)) State.itemNameToIds.set(name, []);
-        if (!State.itemNameToIds.get(name).includes(itemId)){
-          State.itemNameToIds.get(name).push(itemId);
-        }
+      // Engram/tekgram unlocks (type: "unlock")
+      const raw = boss.raw || {};
+      const unlockIds = new Set();
+      if (Array.isArray(raw.re) && raw.re.length){
+        for (const iid of raw.re) unlockIds.add(iid);
+      } else {
+        for (const d of (boss.dinos || []))
+          for (const u of (d.de || [])) if (u.id != null) unlockIds.add(u.id);
       }
+      for (const id of unlockIds) addBossItem(id, bossName, "unlock", boss);
     }
   }
 
