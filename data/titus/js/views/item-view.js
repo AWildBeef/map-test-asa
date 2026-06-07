@@ -681,19 +681,18 @@ function renderItemTabBosses(entries, itemIds){
     const qty = getQty(boss, itemIds);
     const qtyHtml = qty ? `<span class="boss-item-qty">${escapeHtml(qty)}×</span>` : "";
 
-    // Info: show min level. When craft == teleport, combine into one label.
+    // Info: show min level. Use combined label unless craft and teleport
+    // are both present AND different.
     const cl = boss?.craftLevel;
     const tl = boss?.teleportLevel;
     let metaLine = "";
-    if (cl != null || tl != null){
-      if (cl != null && tl != null && cl === tl){
-        metaLine = `<div class="boss-info-meta-row"><span class="boss-info-meta">Min Level for Boss: ${cl}</span></div>`;
-      } else {
-        const parts = [];
-        if (cl != null) parts.push(`<span class="boss-info-meta">Min Level to Summon: ${cl}</span>`);
-        if (tl != null) parts.push(`<span class="boss-info-meta">Min Level to Teleport: ${tl}</span>`);
-        metaLine = `<div class="boss-info-meta-row">${parts.join("")}</div>`;
-      }
+    if (cl != null && tl != null && cl !== tl){
+      metaLine = `<div class="boss-info-meta-row">
+        <span class="boss-info-meta">Min Level to Summon: ${cl}</span>
+        <span class="boss-info-meta">Min Level to Teleport: ${tl}</span>
+      </div>`;
+    } else if (cl != null || tl != null){
+      metaLine = `<div class="boss-info-meta-row"><span class="boss-info-meta">Min Level for Boss: ${cl ?? tl}</span></div>`;
     }
 
     return `
@@ -843,9 +842,10 @@ function renderItemPanel(itemName){
     return crateIds2.every(cid => itemCrateIsOpen(itemName, `crate:${cid}`));
   })();
 
-  const collapseAllBtn = (activeTab === "crates") ? `
+  const showCollapseAll = (activeTab === "crates" || activeTab === "bosses");
+  const collapseAllBtn = showCollapseAll ? `
     <button type="button" class="loot-set-toggle-all" data-item-collapse-all="1" style="margin-left:auto;">
-      ${allItemsOpen ? "Collapse All" : "Expand All"}
+      ${(activeTab === "crates" && allItemsOpen) ? "Collapse All" : "Expand All"}
     </button>
   ` : "";
 
@@ -973,11 +973,28 @@ function renderItemPanel(itemName){
   // Collapse all / expand all
   body.querySelectorAll("[data-item-collapse-all]").forEach(btn => {
     btn.onclick = () => {
-      const crateValues = [...body.querySelectorAll("[data-item-crate-expand]")]
-        .map(b => b.dataset.itemCrateExpand).filter(Boolean);
-      const allOpen = crateValues.every(cv => itemCrateIsOpen(itemName, cv));
-      crateValues.forEach(cv => itemCrateSetOpen(itemName, cv, !allOpen));
-      renderItemPanel(itemName);
+      if (infoPanelState.itemTab === "bosses"){
+        // Boss sections: toggle all loot-set-sections directly
+        const sections = [...body.querySelectorAll(".loot-set-section")];
+        const allOpen = sections.every(s => s.classList.contains("is-open"));
+        sections.forEach(s => {
+          s.classList.toggle("is-open", !allOpen);
+          s.classList.toggle("is-closed", allOpen);
+          const b = s.querySelector(".loot-set-body");
+          if (b) b.style.display = allOpen ? "none" : "";
+          const ch = s.querySelector(".loot-set-toggle-chevron");
+          if (ch) ch.textContent = allOpen ? "›" : "⌄";
+        });
+        btn.textContent = allOpen ? "Expand All" : "Collapse All";
+        refreshInfoPanelPageHeight();
+      } else {
+        // Crate sections: use crate state management
+        const crateValues = [...body.querySelectorAll("[data-item-crate-expand]")]
+          .map(b => b.dataset.itemCrateExpand).filter(Boolean);
+        const allOpen = crateValues.every(cv => itemCrateIsOpen(itemName, cv));
+        crateValues.forEach(cv => itemCrateSetOpen(itemName, cv, !allOpen));
+        renderItemPanel(itemName);
+      }
     };
   });
 

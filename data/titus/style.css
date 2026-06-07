@@ -5120,8 +5120,9 @@ body[data-mode="note"] .mode-toggle {
   margin-bottom: 6px;
 }
 .boss-info-meta {
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--muted);
+  opacity: 0.8;
 }
 .boss-view-link {
   width: 100%;
@@ -5146,6 +5147,12 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .loot-set-section{
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.03),
     0 6px 18px rgba(0,0,0,.18);
+}
+body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .fp-page{
+  padding: 14px 8px 8px 8px;
+}
+body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
+  padding: 0;
 }
 /* Reward / unlock rows — same visual language as the summon recipe rows. */
 .boss-reward-list {
