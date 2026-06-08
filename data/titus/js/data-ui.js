@@ -2266,6 +2266,16 @@ function rebuildLootIndices(){
         if (rewards.rlsData)
           for (const entry of (rewards.rlsData.entries || []))
             for (const iid of (entry.i || [])) ids.add(iid);
+        // Arena crate items (lc → crateObj → sets → entries → items)
+        for (const crate of (rewards.crates || [])){
+          if (crate.crateObj?.s){
+            for (const setRow of crate.crateObj.s){
+              const { allEntries } = lootSetEntriesFromRow(setRow);
+              for (const entry of allEntries)
+                for (const iid of (entry.i || [])) ids.add(iid);
+            }
+          }
+        }
         for (const id of ids) addBossItem(id, bossName, "drop", boss);
       }
 
