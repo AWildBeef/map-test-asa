@@ -1681,6 +1681,7 @@ function resolveBossLocations(boss, geom){
 function resolveBossRewards(boss){
   const loot = Global.loot || {};
   const raw = boss.raw || {};
+  const hasArenaCrate = raw.lc != null;
 
   const addToSource = (map, iid, mn, mx) => {
     const prev = map.get(iid);
@@ -1688,20 +1689,15 @@ function resolveBossRewards(boss){
     else { map.set(iid, { id: iid, mn, mx }); }
   };
 
-  // Extract items from a drop component. Sets with an ItemSetOverride ("o")
-  // are pool-style and go into poolSets for crate-style rendering; sets
-  // without are exact and their items go into targetMap for row rendering.
   const extractDropComp = (comp, targetMap, poolSets) => {
     if (!comp) return;
     for (const setRow of (comp.s || [])){
       if (setRow.o != null){
-        // Pool set — store raw for crate-style rendering, deduped by o index.
         if (!seenOverrides.has(setRow.o)){
           seenOverrides.add(setRow.o);
           poolSets.push(setRow);
         }
       } else {
-        // Exact set — extract items with quantities.
         for (const entry of (setRow.e || [])){
           const mn = Number(entry.mn), mx = Number(entry.mx);
           for (const iid of (entry.i || [])){
@@ -1715,18 +1711,20 @@ function resolveBossRewards(boss){
   };
 
   const perSourceDrops = [];
-  const poolSets = [];  // raw set rows with o (ItemSetOverride), deduped
+  const poolSets = [];
   const seenOverrides = new Set();
   const givenIds = new Set();
 
   for (const d of (boss.dinos || [])){
     const obj = d.obj;
     if (!obj) continue;
-    if (obj.dd != null){
+    // lc suppresses dd: arena crate replaces the boss bag.
+    if (!hasArenaCrate && obj.dd != null){
       const m = new Map();
       extractDropComp(lookupDropComp(loot, obj.dd), m, poolSets);
       if (m.size) perSourceDrops.push(m);
     }
+    // rd suppresses dg
     if (!raw.rd && Array.isArray(obj.dg)){
       for (const iid of obj.dg) givenIds.add(iid);
     }
@@ -1739,7 +1737,6 @@ function resolveBossRewards(boss){
     if (m.size) perSourceDrops.push(m);
   }
 
-  // Sum exact items across all sources.
   const totalDrops = new Map();
   for (const srcMap of perSourceDrops){
     for (const [iid, item] of srcMap){
@@ -1750,7 +1747,7 @@ function resolveBossRewards(boss){
   }
   for (const v of totalDrops.values()) v.name = cleanBossText(itemDisplayNameById(v.id));
 
-  // rls — store the raw loot set data for crate-style rendering.
+  // rls — for ascension loot sets, filter entries by boss difficulty tier.
   let rlsData = null;
   if (raw.rls != null){
     const si = loot.si || [];
@@ -1758,18 +1755,27 @@ function resolveBossRewards(boss){
     if (Number.isInteger(idx) && idx >= 0 && idx < si.length){
       const cls = si[idx];
       const setData = cls ? (loot.s?.[cls]) : null;
-      if (setData) rlsData = { name: setData.n || cls, entries: setData.e || [], smn: setData.smn, smx: setData.smx };
+      if (setData){
+        let entries = setData.e || [];
+        if (/Ascension/i.test(cls)){
+          const tier = bossDifficultyTier(boss.name);
+          if (tier >= 0 && tier < entries.length) entries = entries.slice(0, tier + 1);
+        }
+        rlsData = { name: setData.n || cls, entries, smn: setData.smn, smx: setData.smx };
+      }
     }
   }
 
-  // Arena crates + bonus items
-  const crates = [], bonusItems = [];
+  // Arena crates — fully resolve for rendering, with quantity.
+  const arenaCrates = [];
+  const bonusItems = [];
   const lcList = Array.isArray(raw.lc) ? raw.lc : (raw.lc != null ? [raw.lc] : []);
+  const lcq = Number(raw.lcq) || 1;
   for (const lc of lcList){
     const cls = crateIdToClass(lc);
-    const crateData = cls ? (loot.c?.[cls]) : null;
-    const name = cleanBossText(crateData?.dn || cls || `Crate ${lc}`);
-    if (name) crates.push({ id: lc, name, crateClass: cls });
+    const crateObj = cls ? (loot.c?.[cls]) : null;
+    const name = cleanBossText(crateObj?.dn || cls || `Crate ${lc}`);
+    arenaCrates.push({ id: lc, name, crateClass: cls, qty: lcq, crateObj });
   }
   const liList = Array.isArray(raw.li) ? raw.li : (raw.li != null ? [raw.li] : []);
   for (const li of liList){
@@ -1779,10 +1785,18 @@ function resolveBossRewards(boss){
   return {
     drops: [...totalDrops.values()],
     given: [...givenIds].map(id => ({ id, name: cleanBossText(itemDisplayNameById(id)), mn: 1, mx: 1 })),
-    poolSets,    // raw set rows with o (for crate-style display)
-    rlsData,     // raw loot set data (for crate-style display)
-    crates, bonusItems
+    poolSets, rlsData,
+    crates: arenaCrates, bonusItems
   };
+}
+
+// Detect boss difficulty tier from name: 0=Gamma/Easy, 1=Beta/Medium, 2=Alpha/Hard.
+function bossDifficultyTier(name){
+  const n = String(name || "").toLowerCase();
+  if (/\(gamma\)|gamma |\(easy\)/i.test(n)) return 0;
+  if (/\(beta\)|beta |\(medium\)/i.test(n)) return 1;
+  if (/\(alpha\)|alpha |\(hard\)/i.test(n)) return 2;
+  return -1;
 }
 
 // Build the fully-resolved boss list for the current map. Cached per map+source.

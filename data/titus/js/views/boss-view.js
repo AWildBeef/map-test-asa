@@ -343,23 +343,40 @@ function renderBossLootTab(boss){
     sections.push(renderBossRlsSections(r.rlsData));
   }
 
-  // Arena loot crates (lc) + bonus item (li).
+  // Arena loot crates — full rendering with sets and entries.
   if (r.crates.length || r.bonusItems.length){
-    const crateLines = r.crates.map(c => `
-      <div class="boss-reward-row">
-        <span class="boss-reward-qty"></span>
-        <span class="boss-reward-name">${escapeHtml(c.name)}</span>
-      </div>`).join("");
-    const bonusLines = r.bonusItems.map(it => `
-      <div class="boss-reward-row">
-        <span class="boss-reward-qty">+${bossQtyLabel(it.mn, it.mx)}×</span>
-        <span class="boss-reward-name is-bonus">${escapeHtml(it.name)}</span>
-      </div>`).join("");
-    sections.push(`
-      <div class="info-section">
-        <div class="info-subtitle">Arena Loot Crate${r.crates.length > 1 ? "s" : ""}</div>
-        <div class="boss-reward-list">${crateLines}${bonusLines}</div>
-      </div>`);
+    for (const c of r.crates){
+      const qtyLabel = c.qty > 1 ? `${c.qty}× ` : "";
+      let crateHtml = `<div class="info-section">
+        <div class="info-subtitle">${escapeHtml(qtyLabel)}${escapeHtml(c.name)}</div>`;
+
+      // Render the crate's loot sets if we have the full crate data.
+      if (c.crateObj && c.crateObj.s){
+        crateHtml += c.crateObj.s.map((setRow, idx) => {
+          const { allEntries, setMeta } = lootSetEntriesFromRow(setRow);
+          const setName = lootSetNameFromRow(setRow, `Set ${idx + 1}`);
+          return renderBossLootSetSection(setName, allEntries, {
+            weight: setRow.w,
+            smn: setMeta?.smn ?? setRow?.smn,
+            smx: setMeta?.smx ?? setRow?.smx,
+            open: false
+          });
+        }).join("");
+      }
+      crateHtml += `</div>`;
+      sections.push(crateHtml);
+    }
+
+    // Bonus items (li) — added to the crate on defeat.
+    if (r.bonusItems.length){
+      sections.push(`
+        <div class="info-section">
+          <div class="info-subtitle">Bonus Item${r.bonusItems.length > 1 ? "s" : ""}</div>
+          <div class="boss-reward-list">
+            ${r.bonusItems.map(it => bossRewardRow(it, { highlight: false })).join("")}
+          </div>
+        </div>`);
+    }
   }
 
   if (!sections.length){
