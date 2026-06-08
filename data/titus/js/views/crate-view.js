@@ -145,6 +145,8 @@ function getSelectedCrate(selectionValue){
       level: meta.l,
       minSets: meta.mn,
       maxSets: meta.mx,
+      nsp: meta.nsp,
+      rwr: meta.rwr,
       qmin: meta.qm1,
       qmax: meta.qm2,
       sets: Array.isArray(meta.s) ? meta.s : []
@@ -236,14 +238,18 @@ function renderCrateHero(c) {
               </div>
               <div class="meta-cell">
                 <div class="meta-stack">
-                  <div class="meta-label">Min Loot Sets</div>
-                  <div class="meta-value">${escapeHtml(String(c.minSets ?? "--"))}</div>
-                </div>
-              </div>
-              <div class="meta-cell">
-                <div class="meta-stack">
-                  <div class="meta-label">Max Loot Sets</div>
-                  <div class="meta-value">${escapeHtml(String(c.maxSets ?? "--"))}</div>
+                  <div class="meta-label">Sets Rolled</div>
+                  <div class="meta-value">${
+                    c.minSets != null && c.maxSets != null
+                      ? c.minSets === c.maxSets
+                        ? escapeHtml(String(c.minSets))
+                        : escapeHtml(`${c.minSets} – ${c.maxSets}`)
+                      : escapeHtml(String(c.minSets ?? c.maxSets ?? "--"))
+                  }${
+                    c.rwr === true ? " · unique"
+                    : c.rwr === false ? " · repeatable"
+                    : ""
+                  }</div>
                 </div>
               </div>
               ${
@@ -421,6 +427,16 @@ function renderCrateTabSets(c){
           const weight = row?.w;
           const isOpen = isCrateSetOpen(c, origIdx);
 
+          const totalWeight = rows.reduce((s, r) => s + (r?.w || 0), 0) || 1;
+          const weightPct = weight != null ? Math.round((weight / totalWeight) * 100) : null;
+
+          const smn = row?.smn ?? setMeta?.smn;
+          const smx = row?.smx ?? setMeta?.smx;
+          const setNip = row?.nip ?? setMeta?.nip;
+          const setRwr = row?.rwr;
+
+          const totalEntryWeight = allEntries.reduce((s, e) => s + (e?.w || 0), 0) || 1;
+
           return `
             <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"} ${row._mod ? "is-mod-set" : ""}">
               <button
@@ -444,15 +460,23 @@ function renderCrateTabSets(c){
                 <div class="meta-grid">
                   <div class="meta-cell">
                     <div class="meta-label">Set Weight</div>
-                    <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
+                    <div class="meta-value">${
+                      weightPct != null
+                        ? escapeHtml(`${fmt(weight)} (${weightPct}%)`)
+                        : escapeHtml(fmt(weight) || "--")
+                    }</div>
                   </div>
 
                   ${
-                    setMeta?.smn != null || setMeta?.smx != null
+                    smn != null || smx != null
                       ? `
                         <div class="meta-cell">
-                          <div class="meta-label">Items Chosen</div>
-                          <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
+                          <div class="meta-label">Draws</div>
+                          <div class="meta-value">${escapeHtml(fmtRange(smn, smx))}${
+                            setRwr === true ? " · unique"
+                            : setRwr === false ? " · repeatable"
+                            : ""
+                          }</div>
                         </div>
                       `
                       : ``
@@ -461,7 +485,7 @@ function renderCrateTabSets(c){
 
                 ${
                   allEntries.length
-                    ? allEntries.map(renderLootEntryBlock).join("")
+                    ? allEntries.map(e => renderLootEntryBlock(e, totalEntryWeight)).join("")
                     : `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
                 }
               </div>
@@ -474,9 +498,17 @@ function renderCrateTabSets(c){
 }
 
 
-function renderLootEntryBlock(entry){
+function renderLootEntryBlock(entry, totalEntryWeight){
   const itemIds = Array.isArray(entry?.i) ? entry.i : [];
   const itemWeights = Array.isArray(entry?.iw) ? entry.iw : [];
+  const totalItemWeight = itemWeights.length ? itemWeights.reduce((s, w) => s + (w || 0), 0) : 0;
+
+  const ew = entry?.w;
+  const ewPct = (ew != null && totalEntryWeight > 0)
+    ? Math.round((ew / totalEntryWeight) * 100) : null;
+
+  const isStack = isTrue01(entry?.aq);
+  const qtyLabel = isStack ? "Stack" : "Quantity";
 
   return `
     <div class="info-section-sub" style="margin-top:8px;">
@@ -486,13 +518,17 @@ function renderLootEntryBlock(entry){
         <div class="meta-cell">
           <div class="meta-stack">
             <div class="meta-label">Entry Weight</div>
-            <div class="meta-value">${escapeHtml(fmt(entry?.w) || "--")}</div>
+            <div class="meta-value">${
+              ewPct != null
+                ? escapeHtml(`${fmt(ew)} (${ewPct}%)`)
+                : escapeHtml(fmt(ew) || "--")
+            }</div>
           </div>
         </div>
 
         <div class="meta-cell">
           <div class="meta-stack">
-            <div class="meta-label">Quantity</div>
+            <div class="meta-label">${qtyLabel}</div>
             <div class="meta-value">${escapeHtml(fmtRange(entry?.mn, entry?.mx))}</div>
           </div>
         </div>
@@ -515,8 +551,8 @@ function renderLootEntryBlock(entry){
             ? `
               <div class="meta-cell">
                 <div class="meta-stack">
-                  <div class="meta-label">BP Chance</div>
-                  <div class="meta-value">${escapeHtml(pct(entry.b) || "0%")}</div>
+                  <div class="meta-label">${isTrue01(entry?.fb) ? "Force BP" : "BP Chance"}</div>
+                  <div class="meta-value">${isTrue01(entry?.fb) ? "Yes" : escapeHtml(pct(entry.b) || "0%")}</div>
                 </div>
               </div>
             `
@@ -524,25 +560,12 @@ function renderLootEntryBlock(entry){
         }
 
         ${
-          isTrue01(entry?.fb)
+          entry?.cg != null && entry.cg < 1.0
             ? `
               <div class="meta-cell">
                 <div class="meta-stack">
-                  <div class="meta-label">Force BP</div>
-                  <div class="meta-value">Yes</div>
-                </div>
-              </div>
-            `
-            : ``
-        }
-
-        ${
-          isTrue01(entry?.aq)
-            ? `
-              <div class="meta-cell">
-                <div class="meta-stack">
-                  <div class="meta-label">Single Qty</div>
-                  <div class="meta-value">Yes</div>
+                  <div class="meta-label">Drop Chance</div>
+                  <div class="meta-value">${escapeHtml(pct(entry.cg))}</div>
                 </div>
               </div>
             `
@@ -555,15 +578,14 @@ function renderLootEntryBlock(entry){
           itemIds.length
             ? itemIds.map((itemId, i) => {
                 const iw = itemWeights[i];
+                const iwPct = (iw != null && totalItemWeight > 0)
+                  ? Math.round((iw / totalItemWeight) * 100) : null;
                 return `
                   <div class="item-row">
                     <div class="item-main">
-                      <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}</div>
-                      ${
-                        iw != null
-                          ? `<div class="entry-meta"><div class="entry-meta-line">Item Weight: ${escapeHtml(fmt(iw) || "--")}</div></div>`
-                          : ``
-                      }
+                      <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}${
+                        iwPct != null ? ` <span style="opacity:.55;font-size:11px">(${iwPct}%)</span>` : ``
+                      }</div>
                     </div>
                   </div>
                 `;
