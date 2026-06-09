@@ -445,10 +445,10 @@ function renderCrateTabSets(c){
           const totalWeight = rows.reduce((s, r) => s + (r?.w || 0), 0) || 1;
           const weightPct = weight != null ? Math.round((weight / totalWeight) * 100) : null;
 
-          const smn = row?.smn ?? setMeta?.smn;
-          const smx = row?.smx ?? setMeta?.smx;
-          const setNip = row?.nip ?? setMeta?.nip;
-          const setRwr = row?.rwr;
+          const smn = setMeta?.smn ?? row?.smn;
+          const smx = setMeta?.smx ?? row?.smx;
+          const setNip = setMeta?.nip ?? row?.nip;
+          const setRwr = setMeta?.rwr ?? row?.rwr;
 
           const totalEntryWeight = allEntries.reduce((s, e) => s + (e?.w || 0), 0) || 1;
 
@@ -688,10 +688,10 @@ function simulateCrateDrop(c){
     const row = sets[si];
     const { allEntries, setMeta } = lootSetEntriesFromRow(row);
     const setName = lootSetNameFromRow(row, `Set ${si + 1}`);
-    const smn = row?.smn ?? setMeta?.smn ?? 1;
-    const smx = row?.smx ?? setMeta?.smx ?? smn;
-    const setNip = row?.nip ?? setMeta?.nip ?? 1.0;
-    const setRwr = row?.rwr === true;
+    const smn = setMeta?.smn ?? row?.smn ?? 1;
+    const smx = setMeta?.smx ?? row?.smx ?? smn;
+    const setNip = setMeta?.nip ?? row?.nip ?? 1.0;
+    const setRwr = (setMeta?.rwr ?? row?.rwr) === true;
 
     const nEntries = simRollPower(smn, smx, setNip);
     const entryWeights = allEntries.map(e => e?.w || 0);
@@ -731,8 +731,9 @@ function simulateCrateDrop(c){
       if (isStack){
         const idx = simWeightedPick(iw.length ? iw : itemIds.map(() => 1), null);
         const itemId = itemIds[Math.max(0, idx)];
-        const qualRoll = hasQuality ? q1 + (q2 - q1) * Math.random() : 0;
-        const qualTier = hasQuality ? Math.max(0, Math.min(5, Math.floor(qualRoll))) : -1;
+        const itemUis = itemData().i?.[String(itemId)]?.uis === 1;
+        const qualRoll = hasQuality && itemUis ? q1 + (q2 - q1) * Math.random() : 0;
+        const qualTier = hasQuality && itemUis ? Math.max(0, Math.min(5, Math.floor(qualRoll))) : -1;
         const isBP = forceBP || (bpChance > 0 && Math.random() < bpChance);
         entryItems.push({
           id: itemId,
@@ -745,8 +746,9 @@ function simulateCrateDrop(c){
         for (let q = 0; q < qty; q++){
           const idx = simWeightedPick(iw.length ? iw : itemIds.map(() => 1), null);
           const itemId = itemIds[Math.max(0, idx)];
-          const qualRoll = hasQuality ? q1 + (q2 - q1) * Math.random() : 0;
-          const qualTier = hasQuality ? Math.max(0, Math.min(5, Math.floor(qualRoll))) : -1;
+          const itemUis = itemData().i?.[String(itemId)]?.uis === 1;
+          const qualRoll = hasQuality && itemUis ? q1 + (q2 - q1) * Math.random() : 0;
+          const qualTier = hasQuality && itemUis ? Math.max(0, Math.min(5, Math.floor(qualRoll))) : -1;
           const isBP = forceBP || (bpChance > 0 && Math.random() < bpChance);
           entryItems.push({
             id: itemId,
@@ -806,6 +808,21 @@ function renderCrateTabSimulate(c){
   }
 
   const { picks, allItems, nSetPicks } = result;
+
+  // Consolidate duplicates: same item + quality + BP status → sum quantities
+  const consolidated = [];
+  const seen = new Map();
+  for (const it of allItems){
+    const key = `${it.id}::${it.qualTier}::${it.isBP}`;
+    if (seen.has(key)){
+      seen.get(key).qty += it.qty;
+    } else {
+      const copy = { ...it };
+      seen.set(key, copy);
+      consolidated.push(copy);
+    }
+  }
+
   const totalItems = allItems.reduce((s, it) => s + it.qty, 0);
 
   return `
@@ -820,16 +837,16 @@ function renderCrateTabSimulate(c){
         </span>
       </div>
 
-      ${allItems.length
+      ${consolidated.length
         ? `<div class="sim-items">
-            ${allItems.map(renderSimItem).join("")}
+            ${consolidated.map(renderSimItem).join("")}
           </div>`
         : `<div class="sim-empty">Nothing dropped!</div>`
       }
 
       ${picks.length
         ? `
-          <details class="sim-details" data-crate-sim-details="1">
+          <details class="sim-details" data-crate-sim-details="1"${infoPanelState.simDetailsOpen ? " open" : ""}>
             <summary>Roll details</summary>
             <div class="sim-details-body">
               <div class="sim-details-intro">Rolled ${nSetPicks} set pick${nSetPicks !== 1 ? "s" : ""} from ${(c.sets || []).length} available set${(c.sets || []).length !== 1 ? "s" : ""}</div>
@@ -871,6 +888,7 @@ function renderCratePanel(crateName){
   // Clear simulation when switching to a different crate
   if (infoPanelState._simCrateClass !== c.class){
     infoPanelState.simResult = null;
+    infoPanelState.simDetailsOpen = false;
     infoPanelState._simCrateClass = c.class;
   }
 
@@ -997,6 +1015,7 @@ function renderCratePanel(crateName){
 
   body.querySelectorAll("[data-crate-sim-details]").forEach(el => {
     el.addEventListener("toggle", () => {
+      infoPanelState.simDetailsOpen = el.open;
       refreshInfoPanelPageHeight();
       syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
     });

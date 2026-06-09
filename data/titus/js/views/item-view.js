@@ -244,16 +244,16 @@ function renderItemHero(it){
       <div class="info-submeta">${escapeHtml(typeName || "Item")}</div>
 
       ${(gfiCmd || giveCmd) ? `
-        <div class="info-subtitle" style="margin-top:10px;">Commands</div>
+        <div class="info-subtitle" style="margin-top:6px;">Commands</div>
         ${paramsHtml}
         ${gfiCmd ? `
-          <div class="note-cmd-block" style="margin-top:6px;">
+          <div class="note-cmd-block" style="margin-top:4px;">
             <div class="note-cmd-label">GFI Command</div>
             <div class="info-mono copy-on-click" data-copy="${escapeAttr(gfiCmd)}">${escapeHtml(gfiCmd)}</div>
           </div>
         ` : ""}
         ${giveCmd ? `
-          <div class="note-cmd-block" style="margin-top:6px;">
+          <div class="note-cmd-block" style="margin-top:4px;">
             <div class="note-cmd-label">GiveItem Command</div>
             <div class="info-mono copy-on-click" data-copy="${escapeAttr(giveCmd)}">${escapeHtml(giveCmd)}</div>
           </div>
@@ -474,10 +474,10 @@ function itemLootDetail(itemId, crateId){
     pSetFires = Math.min(1, Math.max(0, pSetFires));
 
     // Step 2: P(this entry fires at least once | set fired)
-    const smn = set.smn ?? setMeta?.smn ?? 1;
-    const smx = set.smx ?? setMeta?.smx ?? smn;
-    const setNip = set.nip ?? setMeta?.nip ?? 1.0;
-    const setRwr = set.rwr === true;
+    const smn = setMeta?.smn ?? set.smn ?? 1;
+    const smx = setMeta?.smx ?? set.smx ?? smn;
+    const setNip = setMeta?.nip ?? set.nip ?? 1.0;
+    const setRwr = (setMeta?.rwr ?? set.rwr) === true;
 
     let meanDraws;
     if (smn === smx) meanDraws = smn;
@@ -638,58 +638,52 @@ function renderItemTabCrates(it){
           const isOn = entryVisibility[visKey] ?? true;
           const isOpen = itemCrateIsOpen(it.name, row.crateValue);
 
+          // Probability formatting with better precision for small values
+          const fmtP = (p) => {
+            if (p >= 0.995) return "100%";
+            if (p >= 0.01) return Math.round(p * 100) + "%";
+            if (p >= 0.001) return (p * 100).toFixed(1) + "%";
+            if (p > 0) return (p * 100).toFixed(2) + "%";
+            return "0%";
+          };
+
           // Combined probability across all paths
           const pathProbs = (row.details || []).map(d => d.prob?.combined || 0);
           const pNone = pathProbs.reduce((prod, p) => prod * (1 - p), 1);
           const pCombined = 1 - pNone;
-          const pctLabel = pCombined > 0
-            ? (pCombined < 0.01 ? `~${(pCombined * 100).toFixed(1)}%`
-              : pCombined >= 0.995 ? "~100%"
-              : `~${Math.round(pCombined * 100)}%`)
-            : null;
+          const pctLabel = pCombined > 0 ? `~${fmtP(pCombined)}` : null;
 
-          const fmtP = (p) => {
-            if (p >= 0.995) return "100%";
-            if (p < 0.01 && p > 0) return (p * 100).toFixed(1) + "%";
-            return Math.round(p * 100) + "%";
-          };
+          // BP chance: collect from all paths
+          const bpChances = (row.details || [])
+            .map(d => isTrue01(d.fb) ? 1.0 : (d.b ?? null))
+            .filter(v => v != null);
+          const bpLabel = bpChances.length
+            ? (bpChances.some(v => v >= 1) ? "Always BP"
+              : bpChances.every(v => v === 0) ? null
+              : `${Math.round(Math.max(...bpChances) * 100)}% BP`)
+            : null;
 
           const detailHtml = row.details?.length ? `
             <div class="item-loot-details">
               ${row.details.map(d => {
                 const prob = d.prob;
-                const breakdownHtml = prob ? `
-                  <div class="crate-note" style="margin-top:4px;margin-bottom:2px;">
-                    Set: ${fmtP(prob.setChance)} · Entry: ${fmtP(prob.entryChance)} · Item: ${fmtP(prob.itemChance)} (1 in ${prob.numItems})${prob.cgChance < 1 ? ` · Drop: ${fmtP(prob.cgChance)}` : ""}
-                  </div>
-                ` : "";
-
                 return `
                 <div class="item-loot-detail">
                   <div class="item-loot-set-name">${escapeHtml(d.setName)}${prob ? ` <span class="item-weight-pct">— ${fmtP(prob.combined)} per crate</span>` : ""}</div>
-                  ${breakdownHtml}
-                  <div class="meta-grid" style="margin-top:4px;">
-                    ${d.w != null ? `
-                      <div class="meta-cell">
-                        <div class="meta-label">Entry Weight</div>
-                        <div class="meta-value">${escapeHtml(fmt(d.w) || "--")}</div>
-                      </div>` : ""}
-                    ${d.mn != null || d.mx != null ? `
-                      <div class="meta-cell">
-                        <div class="meta-label">Quantity</div>
-                        <div class="meta-value">${escapeHtml(fmtRange(d.mn, d.mx))}</div>
-                      </div>` : ""}
-                    ${d.q1 != null || d.q2 != null ? `
-                      <div class="meta-cell">
-                        <div class="meta-label">Quality</div>
-                        <div class="meta-value">${escapeHtml(fmtRange(d.q1, d.q2))}</div>
-                      </div>` : ""}
-                    ${d.b != null ? `
-                      <div class="meta-cell">
-                        <div class="meta-label">${isTrue01(d.fb) ? "Force BP" : "BP Chance"}</div>
-                        <div class="meta-value">${isTrue01(d.fb) ? "Yes" : escapeHtml(pct(d.b) || "0%")}</div>
-                      </div>` : ""}
-                  </div>
+
+                  ${prob ? `
+                    <div class="crate-note" style="margin-top:3px;line-height:1.5;">
+                      Set chosen: ${fmtP(prob.setChance)}<br>
+                      Entry chosen: ${fmtP(prob.entryChance)}<br>
+                      Item picked: ${fmtP(prob.itemChance)} (1 in ${prob.numItems})${prob.cgChance < 1 ? `<br>Drop chance: ${fmtP(prob.cgChance)}` : ""}
+                    </div>
+                  ` : ""}
+
+                  ${d.q1 != null || d.q2 != null || d.b != null ? `
+                    <div class="crate-note" style="margin-top:3px;">
+                      ${d.q1 != null || d.q2 != null ? `Quality: ${escapeHtml(fmtRange(d.q1, d.q2))}` : ""}${(d.q1 != null || d.q2 != null) && d.b != null ? " · " : ""}${d.b != null ? (isTrue01(d.fb) ? "Always Blueprint" : `BP: ${escapeHtml(pct(d.b) || "0%")}`) : ""}
+                    </div>
+                  ` : ""}
                 </div>
               `}).join("")}
             </div>
@@ -709,7 +703,7 @@ function renderItemTabCrates(it){
                 >
                   <span class="dino-spawn-title">${escapeHtml(row.name)}</span>
                   <span class="dino-spawn-meta-line" style="margin-top:2px;">
-                    ${row.level != null ? `Required Level: ${escapeHtml(String(row.level))}` : "Mission Source"}${pctLabel ? ` · ${pctLabel} chance` : ""}
+                    ${row.level != null ? `Required Level: ${escapeHtml(String(row.level))}` : "Mission Source"}${pctLabel ? ` · ${pctLabel} chance` : ""}${bpLabel ? ` · ${bpLabel}` : ""}
                   </span>
                 </button>
 
