@@ -5488,3 +5488,107 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
       color-mix(in srgb, var(--accent, #5ab4ff) 6%,  transparent));
   color: color-mix(in srgb, var(--accent, #5ab4ff) 90%, white);
 }
+
+
+/* ============================================================
+   CRATE VIEW — Notes & Simulate Tab
+   ============================================================ */
+
+.crate-note{
+  font-size: 11px;
+  opacity: .6;
+  margin-top: 2px;
+}
+
+.item-weight-pct{
+  opacity: .55;
+  font-size: 11px;
+}
+
+/* ── Simulate tab ──────────────────────────────────────────── */
+
+.sim-prompt{
+  padding: 12px 4px;
+  text-align: center;
+}
+.sim-prompt-hint{
+  font-size: 12px;
+  opacity: .5;
+  margin-top: 8px;
+}
+
+.sim-results{
+  padding: 4px;
+}
+.sim-header{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.sim-summary{
+  font-size: 11px;
+  opacity: .6;
+}
+
+.sim-items{
+  margin-bottom: 10px;
+}
+.sim-item{
+  padding: 3px 6px;
+  margin: 2px 0;
+  border-left: 3px solid #b0b0b0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.sim-item.is-bp{
+  font-weight: 600;
+}
+
+.sim-empty{
+  font-size: 12px;
+  opacity: .5;
+  padding: 8px 0;
+}
+
+/* Details / roll breakdown */
+.sim-details{
+  margin-top: 4px;
+}
+.sim-details > summary{
+  font-size: 11px;
+  opacity: .6;
+  cursor: pointer;
+  user-select: none;
+}
+.sim-details-body{
+  margin-top: 6px;
+  font-size: 11px;
+  opacity: .75;
+}
+.sim-details-intro{
+  margin-bottom: 6px;
+}
+.sim-pick{
+  margin-bottom: 8px;
+  padding-left: 8px;
+  border-left: 2px solid rgba(255,255,255,.1);
+}
+.sim-pick-name{
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.sim-pick-entry{
+  padding-left: 8px;
+  margin-top: 2px;
+}
+.sim-pick-entry-name{
+  opacity: .7;
+}
+.sim-pick-entry-item{
+  padding-left: 8px;
+}
+.sim-pick-empty{
+  padding-left: 8px;
+  opacity: .4;
+}

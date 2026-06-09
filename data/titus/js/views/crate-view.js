@@ -275,9 +275,9 @@ function renderCrateHero(c) {
             </div>
             ${
               c.rwr === true
-                ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Item sets may not be chosen more than once</div>`
+                ? `<div class="crate-note">Item sets may not be chosen more than once</div>`
               : c.rwr === false
-                ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Item sets may be chosen multiple times</div>`
+                ? `<div class="crate-note">Item sets may be chosen multiple times</div>`
               : ``
             }
           `
@@ -502,9 +502,9 @@ function renderCrateTabSets(c){
                 </div>
                 ${
                   setRwr === true
-                    ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Entries may not be chosen more than once</div>`
+                    ? `<div class="crate-note">Entries may not be chosen more than once</div>`
                   : setRwr === false
-                    ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Entries may be chosen multiple times</div>`
+                    ? `<div class="crate-note">Entries may be chosen multiple times</div>`
                   : ``
                 }
 
@@ -604,7 +604,7 @@ function renderLootEntryBlock(entry, totalEntryWeight){
       </div>
       ${
         isStack
-          ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Quantity is applied to a single item</div>`
+          ? `<div class="crate-note">Quantity is applied to a single item</div>`
           : ``
       }
 
@@ -619,7 +619,7 @@ function renderLootEntryBlock(entry, totalEntryWeight){
                   <div class="item-row">
                     <div class="item-main">
                       <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}${
-                        iwPctStr != null ? ` <span style="opacity:.55;font-size:11px">(${iwPctStr})</span>` : ``
+                        iwPctStr != null ? ` <span class="item-weight-pct">(${iwPctStr})</span>` : ``
                       }</div>
                     </div>
                   </div>
@@ -783,13 +783,8 @@ function renderSimItem(item){
   const prefix = tier && item.qualTier > 0 ? tier.prefix : "";
   const bpTag = item.isBP ? "Blueprint: " : "";
   const qtyTag = item.qty > 1 ? ` (×${item.qty})` : "";
-  return `<div style="
-    padding:3px 6px;
-    margin:2px 0;
-    border-left:3px solid ${color};
-    font-size:12px;
-    line-height:1.4;
-  "><span style="color:${color}">${escapeHtml(bpTag + prefix)}${escapeHtml(item.name)}</span>${escapeHtml(qtyTag)}</div>`;
+  const bpClass = item.isBP ? " is-bp" : "";
+  return `<div class="sim-item${bpClass}" style="border-left-color:${color}"><span style="color:${color}">${escapeHtml(bpTag + prefix)}${escapeHtml(item.name)}</span>${escapeHtml(qtyTag)}</div>`;
 }
 
 
@@ -797,12 +792,12 @@ function renderCrateTabSimulate(c){
   const result = infoPanelState.simResult;
   if (!result){
     return `
-      <div style="padding:12px 4px;text-align:center;">
+      <div class="sim-prompt">
         <button type="button" class="loot-set-toggle-all" data-crate-sim-roll="1"
           style="font-size:14px;padding:8px 20px;">
           🎲 Simulate Drop
         </button>
-        <div style="font-size:12px;opacity:.5;margin-top:8px;">
+        <div class="sim-prompt-hint">
           Roll the crate to see a possible drop
         </div>
       </div>
@@ -813,49 +808,47 @@ function renderCrateTabSimulate(c){
   const totalItems = allItems.reduce((s, it) => s + it.qty, 0);
 
   return `
-    <div style="padding:4px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+    <div class="sim-results">
+      <div class="sim-header">
         <button type="button" class="loot-set-toggle-all" data-crate-sim-roll="1"
           style="font-size:13px;padding:6px 16px;">
           🎲 Roll Again
         </button>
-        <span style="font-size:11px;opacity:.6;">
+        <span class="sim-summary">
           ${totalItems} item${totalItems !== 1 ? "s" : ""} from ${picks.length} set pick${picks.length !== 1 ? "s" : ""}
         </span>
       </div>
 
       ${allItems.length
-        ? `<div style="margin-bottom:10px;">
+        ? `<div class="sim-items">
             ${allItems.map(renderSimItem).join("")}
           </div>`
-        : `<div style="font-size:12px;opacity:.5;padding:8px 0;">Nothing dropped!</div>`
+        : `<div class="sim-empty">Nothing dropped!</div>`
       }
 
       ${picks.length
         ? `
-          <details style="margin-top:4px;">
-            <summary style="font-size:11px;opacity:.6;cursor:pointer;user-select:none;">
-              Roll details
-            </summary>
-            <div style="margin-top:6px;font-size:11px;opacity:.75;">
-              <div style="margin-bottom:6px;">Rolled ${nSetPicks} set pick${nSetPicks !== 1 ? "s" : ""} from ${(c.sets || []).length} available set${(c.sets || []).length !== 1 ? "s" : ""}</div>
+          <details class="sim-details" data-crate-sim-details="1">
+            <summary>Roll details</summary>
+            <div class="sim-details-body">
+              <div class="sim-details-intro">Rolled ${nSetPicks} set pick${nSetPicks !== 1 ? "s" : ""} from ${(c.sets || []).length} available set${(c.sets || []).length !== 1 ? "s" : ""}</div>
               ${picks.map((pick, pi) => `
-                <div style="margin-bottom:8px;padding-left:8px;border-left:2px solid rgba(255,255,255,.1);">
-                  <div style="font-weight:600;margin-bottom:2px;">Pick ${pi + 1}: ${escapeHtml(pick.setName)}</div>
+                <div class="sim-pick">
+                  <div class="sim-pick-name">Pick ${pi + 1}: ${escapeHtml(pick.setName)}</div>
                   ${pick.entries.map(ent => `
-                    <div style="padding-left:8px;margin-top:2px;">
-                      <div style="opacity:.7;">→ ${escapeHtml(ent.entryName)}</div>
+                    <div class="sim-pick-entry">
+                      <div class="sim-pick-entry-name">→ ${escapeHtml(ent.entryName)}</div>
                       ${ent.items.map(it => {
                         const tier = (it.qualTier >= 0 && it.qualTier <= 5) ? QUALITY_TIERS[it.qualTier] : null;
                         const color = tier ? tier.color : "#b0b0b0";
                         const prefix = tier && it.qualTier > 0 ? tier.prefix : "";
                         const bpTag = it.isBP ? "Blueprint: " : "";
                         const qtyTag = it.qty > 1 ? ` (×${it.qty})` : "";
-                        return `<div style="padding-left:8px;color:${color}">${escapeHtml(bpTag + prefix + it.name + qtyTag)}</div>`;
+                        return `<div class="sim-pick-entry-item" style="color:${color}">${escapeHtml(bpTag + prefix + it.name + qtyTag)}</div>`;
                       }).join("")}
                     </div>
                   `).join("")}
-                  ${!pick.entries.length ? `<div style="padding-left:8px;opacity:.4;">No items (filtered by drop chance)</div>` : ""}
+                  ${!pick.entries.length ? `<div class="sim-pick-empty">No items (filtered by drop chance)</div>` : ""}
                 </div>
               `).join("")}
             </div>
@@ -999,6 +992,13 @@ function renderCratePanel(crateName){
       infoPanelState.simResult = simulateCrateDrop(c);
       renderCratePanel(crateName);
     };
+  });
+
+  body.querySelectorAll("[data-crate-sim-details]").forEach(el => {
+    el.addEventListener("toggle", () => {
+      refreshInfoPanelPageHeight();
+      syncActivePageHeight(body.querySelector(".fp-pages"), activeTab);
+    });
   });
 
   refreshInfoPanelPageHeight();
