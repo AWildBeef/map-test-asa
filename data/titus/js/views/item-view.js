@@ -434,6 +434,20 @@ function itemLootDetail(itemId, crateId){
   if (!crate) return [];
 
   const out = [];
+  const sets = crate.s || [];
+
+  // Crate-level probability helpers
+  const totalSetWeight = sets.reduce((s, r) => s + (r?.w || 0), 0) || 1;
+  const crateMin = crate.mn ?? 1;
+  const crateMax = crate.mx ?? crateMin;
+  const crateNsp = crate.nsp ?? 1.0;
+  const crateRwr = crate.rwr === true;
+
+  // Expected number of set-picks
+  let meanPicks;
+  if (crateMin === crateMax || crateMin == null) meanPicks = crateMin ?? crateMax ?? 1;
+  else if (crateNsp < 1.0 && crateNsp > 0) meanPicks = crateMax;
+  else meanPicks = crateMin + (crateMax - crateMin) / (crateNsp + 1);
 
   const rRows = lootData().r?.[String(itemId)] || [];
   for (const r of rRows){
@@ -442,12 +456,78 @@ function itemLootDetail(itemId, crateId){
 
     const setIdx   = r[1] ?? 0;
     const entryIdx = r[2] ?? 0;
-    const set      = (crate.s || [])[setIdx];
+    const set      = sets[setIdx];
     if (!set) continue;
 
-    const { allEntries } = lootSetEntriesFromRow(set);
+    const { allEntries, setMeta } = lootSetEntriesFromRow(set);
     const entry = allEntries[entryIdx];
     if (!entry) continue;
+
+    // --- Probability chain ---
+
+    // Step 1: P(this set fires at least once)
+    const sw = set.w || 0;
+    const pSetPerPick = sw / totalSetWeight;
+    let pSetFires;
+    if (crateRwr && meanPicks >= sets.length) pSetFires = 1.0;
+    else pSetFires = 1 - Math.pow(1 - pSetPerPick, meanPicks);
+    pSetFires = Math.min(1, Math.max(0, pSetFires));
+
+    // Step 2: P(this entry fires at least once | set fired)
+    const smn = set.smn ?? setMeta?.smn ?? 1;
+    const smx = set.smx ?? setMeta?.smx ?? smn;
+    const setNip = set.nip ?? setMeta?.nip ?? 1.0;
+    const setRwr = set.rwr === true;
+
+    let meanDraws;
+    if (smn === smx) meanDraws = smn;
+    else if (setNip < 1.0 && setNip > 0) meanDraws = smx;
+    else meanDraws = smn + (smx - smn) / (setNip + 1);
+
+    const totalEntryWeight = allEntries.reduce((s, e) => s + (e?.w || 0), 0) || 1;
+    const ew = entry.w || 0;
+    const pEntryPerDraw = ew / totalEntryWeight;
+    let pEntryFires;
+    if (setRwr && meanDraws >= allEntries.length) pEntryFires = 1.0;
+    else pEntryFires = 1 - Math.pow(1 - pEntryPerDraw, meanDraws);
+    pEntryFires = Math.min(1, Math.max(0, pEntryFires));
+
+    // Step 3: P(this item chosen | entry fired)
+    const itemIds = Array.isArray(entry.i) ? entry.i : [];
+    const iw = Array.isArray(entry.iw) ? entry.iw : [];
+    const numItems = itemIds.length || 1;
+    let pItemPick;
+
+    if (iw.length && iw.length === itemIds.length){
+      const itemIdx = itemIds.indexOf(itemId);
+      const totalIw = iw.reduce((s, w) => s + (w || 0), 0) || 1;
+      pItemPick = itemIdx >= 0 ? ((iw[itemIdx] || 0) / totalIw) : (1 / numItems);
+    } else {
+      pItemPick = 1 / numItems;
+    }
+
+    // Factor in quantity (multiple draws from pool)
+    const qtyMin = entry.mn ?? 1;
+    const qtyMax = entry.mx ?? qtyMin;
+    const qp = entry.qp ?? 1.0;
+    let meanQty;
+    if (qtyMin === qtyMax) meanQty = qtyMin;
+    else if (qp < 1.0 && qp > 0) meanQty = qtyMax;
+    else meanQty = qtyMin + (qtyMax - qtyMin) / (qp + 1);
+
+    let pItemAppears;
+    if (isTrue01(entry.aq)){
+      pItemAppears = pItemPick;  // one item chosen, stacked
+    } else {
+      pItemAppears = 1 - Math.pow(1 - pItemPick, Math.max(1, meanQty));
+    }
+    pItemAppears = Math.min(1, Math.max(0, pItemAppears));
+
+    // ChanceToActuallyGiveItem
+    const cg = entry.cg ?? 1.0;
+
+    // Combined
+    const pCombined = pSetFires * pEntryFires * pItemAppears * cg;
 
     out.push({
       setName:   lootSetNameFromRow(set, `Set ${setIdx + 1}`),
@@ -459,6 +539,14 @@ function itemLootDetail(itemId, crateId){
       q2:  entry.q2  ?? null,
       b:   entry.b   ?? null,
       fb:  entry.fb  ?? null,
+      prob: {
+        setChance:   pSetFires,
+        entryChance: pEntryFires,
+        itemChance:  pItemAppears,
+        cgChance:    cg,
+        combined:    pCombined,
+        numItems:    numItems,
+      }
     });
   }
 
@@ -550,11 +638,36 @@ function renderItemTabCrates(it){
           const isOn = entryVisibility[visKey] ?? true;
           const isOpen = itemCrateIsOpen(it.name, row.crateValue);
 
+          // Combined probability across all paths
+          const pathProbs = (row.details || []).map(d => d.prob?.combined || 0);
+          const pNone = pathProbs.reduce((prod, p) => prod * (1 - p), 1);
+          const pCombined = 1 - pNone;
+          const pctLabel = pCombined > 0
+            ? (pCombined < 0.01 ? `~${(pCombined * 100).toFixed(1)}%`
+              : pCombined >= 0.995 ? "~100%"
+              : `~${Math.round(pCombined * 100)}%`)
+            : null;
+
+          const fmtP = (p) => {
+            if (p >= 0.995) return "100%";
+            if (p < 0.01 && p > 0) return (p * 100).toFixed(1) + "%";
+            return Math.round(p * 100) + "%";
+          };
+
           const detailHtml = row.details?.length ? `
             <div class="item-loot-details">
-              ${row.details.map(d => `
+              ${row.details.map(d => {
+                const prob = d.prob;
+                const breakdownHtml = prob ? `
+                  <div class="crate-note" style="margin-top:4px;margin-bottom:2px;">
+                    Set: ${fmtP(prob.setChance)} · Entry: ${fmtP(prob.entryChance)} · Item: ${fmtP(prob.itemChance)} (1 in ${prob.numItems})${prob.cgChance < 1 ? ` · Drop: ${fmtP(prob.cgChance)}` : ""}
+                  </div>
+                ` : "";
+
+                return `
                 <div class="item-loot-detail">
-                  <div class="item-loot-set-name">${escapeHtml(d.setName)}</div>
+                  <div class="item-loot-set-name">${escapeHtml(d.setName)}${prob ? ` <span class="item-weight-pct">— ${fmtP(prob.combined)} per crate</span>` : ""}</div>
+                  ${breakdownHtml}
                   <div class="meta-grid" style="margin-top:4px;">
                     ${d.w != null ? `
                       <div class="meta-cell">
@@ -578,7 +691,7 @@ function renderItemTabCrates(it){
                       </div>` : ""}
                   </div>
                 </div>
-              `).join("")}
+              `}).join("")}
             </div>
           ` : "";
 
@@ -596,7 +709,7 @@ function renderItemTabCrates(it){
                 >
                   <span class="dino-spawn-title">${escapeHtml(row.name)}</span>
                   <span class="dino-spawn-meta-line" style="margin-top:2px;">
-                    ${row.level != null ? `Required Level: ${escapeHtml(String(row.level))}` : "Mission Source"}
+                    ${row.level != null ? `Required Level: ${escapeHtml(String(row.level))}` : "Mission Source"}${pctLabel ? ` · ${pctLabel} chance` : ""}
                   </span>
                 </button>
 

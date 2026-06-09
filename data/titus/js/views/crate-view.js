@@ -615,12 +615,13 @@ function renderLootEntryBlock(entry, totalEntryWeight){
                 const iw = itemWeights[i];
                 const iwPctStr = (iw != null && totalItemWeight > 0)
                   ? fmtPct(iw, totalItemWeight) : null;
+                const iwLabel = iw != null
+                  ? (iwPctStr ? ` <span class="item-weight-pct">${escapeHtml(fmt(iw))} (${iwPctStr})</span>` : ` <span class="item-weight-pct">${escapeHtml(fmt(iw))}</span>`)
+                  : ``;
                 return `
                   <div class="item-row">
                     <div class="item-main">
-                      <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}${
-                        iwPctStr != null ? ` <span class="item-weight-pct">(${iwPctStr})</span>` : ``
-                      }</div>
+                      <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}${iwLabel}</div>
                     </div>
                   </div>
                 `;
