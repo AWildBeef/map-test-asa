@@ -633,11 +633,251 @@ function renderLootEntryBlock(entry, totalEntryWeight){
 }
 
 
+/* ── Simulate tab ────────────────────────────────────────── */
+
+const QUALITY_TIERS = [
+  { name: "Primitive",    prefix: "",             color: "#b0b0b0" },
+  { name: "Ramshackle",   prefix: "Ramshackle ",  color: "#3dd43d" },
+  { name: "Apprentice",   prefix: "Apprentice ",  color: "#48b8ff" },
+  { name: "Journeyman",   prefix: "Journeyman ",  color: "#c06dff" },
+  { name: "Mastercraft",  prefix: "Mastercraft ", color: "#ffd033" },
+  { name: "Ascendant",    prefix: "Ascendant ",   color: "#33ffee" },
+];
+
+function simWeightedPick(weights, excludeSet){
+  let total = 0;
+  for (let i = 0; i < weights.length; i++){
+    if (excludeSet && excludeSet.has(i)) continue;
+    total += (weights[i] || 0);
+  }
+  if (total <= 0) return -1;
+  let r = Math.random() * total;
+  for (let i = 0; i < weights.length; i++){
+    if (excludeSet && excludeSet.has(i)) continue;
+    r -= (weights[i] || 0);
+    if (r <= 0) return i;
+  }
+  return weights.length - 1;
+}
+
+function simRollPower(min, max, power){
+  if (min === max || min == null) return min ?? max ?? 1;
+  const p = power ?? 1.0;
+  if (p < 1.0 && p > 0) return max;               // Power < 1 quirk
+  const raw = min + (max - min) * Math.pow(Math.random(), p);
+  return Math.round(raw);
+}
+
+function simulateCrateDrop(c){
+  const sets = c.sets || [];
+  if (!sets.length) return { picks: [], allItems: [], nSetPicks: 0 };
+
+  const nSetPicks = simRollPower(c.minSets, c.maxSets, c.nsp);
+  const crateRwr = c.rwr === true;
+  const setWeights = sets.map(s => s.w || 0);
+
+  const picks = [];
+  const usedSets = crateRwr ? new Set() : null;
+
+  for (let p = 0; p < nSetPicks; p++){
+    const si = simWeightedPick(setWeights, usedSets);
+    if (si < 0) break;
+    if (usedSets) usedSets.add(si);
+
+    const row = sets[si];
+    const { allEntries, setMeta } = lootSetEntriesFromRow(row);
+    const setName = lootSetNameFromRow(row, `Set ${si + 1}`);
+    const smn = row?.smn ?? setMeta?.smn ?? 1;
+    const smx = row?.smx ?? setMeta?.smx ?? smn;
+    const setNip = row?.nip ?? setMeta?.nip ?? 1.0;
+    const setRwr = row?.rwr === true;
+
+    const nEntries = simRollPower(smn, smx, setNip);
+    const entryWeights = allEntries.map(e => e?.w || 0);
+    const usedEntries = setRwr ? new Set() : null;
+    const pickEntries = [];
+
+    for (let ep = 0; ep < nEntries; ep++){
+      const ei = simWeightedPick(entryWeights, usedEntries);
+      if (ei < 0) break;
+      if (usedEntries) usedEntries.add(ei);
+
+      const entry = allEntries[ei];
+      if (!entry) continue;
+
+      const cg = entry.cg ?? 1.0;
+      if (Math.random() >= cg) continue;
+
+      const qMin = entry.mn ?? 1;
+      const qMax = entry.mx ?? qMin;
+      const qp = entry.qp ?? 1.0;
+      let qty = simRollPower(qMin, qMax, qp);
+      qty = Math.max(1, qty);
+
+      const isStack = isTrue01(entry.aq);
+      const itemIds = Array.isArray(entry.i) ? entry.i : [];
+      const iw = Array.isArray(entry.iw) ? entry.iw : [];
+      if (!itemIds.length) continue;
+
+      const q1 = entry.q1 ?? 0;
+      const q2 = entry.q2 ?? q1;
+      const hasQuality = q1 > 0 || q2 > 0;
+      const bpChance = entry.b ?? 0;
+      const forceBP = isTrue01(entry.fb);
+
+      const entryItems = [];
+
+      if (isStack){
+        const idx = simWeightedPick(iw.length ? iw : itemIds.map(() => 1), null);
+        const itemId = itemIds[Math.max(0, idx)];
+        const qualRoll = hasQuality ? q1 + (q2 - q1) * Math.random() : 0;
+        const qualTier = hasQuality ? Math.max(0, Math.min(5, Math.floor(qualRoll))) : -1;
+        const isBP = forceBP || (bpChance > 0 && Math.random() < bpChance);
+        entryItems.push({
+          id: itemId,
+          name: itemDisplayNameById(itemId),
+          qty,
+          qualTier,
+          isBP
+        });
+      } else {
+        for (let q = 0; q < qty; q++){
+          const idx = simWeightedPick(iw.length ? iw : itemIds.map(() => 1), null);
+          const itemId = itemIds[Math.max(0, idx)];
+          const qualRoll = hasQuality ? q1 + (q2 - q1) * Math.random() : 0;
+          const qualTier = hasQuality ? Math.max(0, Math.min(5, Math.floor(qualRoll))) : -1;
+          const isBP = forceBP || (bpChance > 0 && Math.random() < bpChance);
+          entryItems.push({
+            id: itemId,
+            name: itemDisplayNameById(itemId),
+            qty: 1,
+            qualTier,
+            isBP
+          });
+        }
+      }
+
+      pickEntries.push({
+        entryName: entry.n || "Entry",
+        items: entryItems
+      });
+    }
+
+    picks.push({ setIdx: si, setName, entries: pickEntries });
+  }
+
+  const allItems = [];
+  for (const pick of picks){
+    for (const entry of pick.entries){
+      allItems.push(...entry.items);
+    }
+  }
+
+  return { picks, allItems, nSetPicks };
+}
+
+
+function renderSimItem(item){
+  const tier = (item.qualTier >= 0 && item.qualTier <= 5) ? QUALITY_TIERS[item.qualTier] : null;
+  const color = tier ? tier.color : "#b0b0b0";
+  const prefix = tier && item.qualTier > 0 ? tier.prefix : "";
+  const bpTag = item.isBP ? "Blueprint: " : "";
+  const qtyTag = item.qty > 1 ? ` (×${item.qty})` : "";
+  return `<div style="
+    padding:3px 6px;
+    margin:2px 0;
+    border-left:3px solid ${color};
+    font-size:12px;
+    line-height:1.4;
+  "><span style="color:${color}">${escapeHtml(bpTag + prefix)}${escapeHtml(item.name)}</span>${escapeHtml(qtyTag)}</div>`;
+}
+
+
+function renderCrateTabSimulate(c){
+  const result = infoPanelState.simResult;
+  if (!result){
+    return `
+      <div style="padding:12px 4px;text-align:center;">
+        <button type="button" class="loot-set-toggle-all" data-crate-sim-roll="1"
+          style="font-size:14px;padding:8px 20px;">
+          🎲 Simulate Drop
+        </button>
+        <div style="font-size:12px;opacity:.5;margin-top:8px;">
+          Roll the crate to see a possible drop
+        </div>
+      </div>
+    `;
+  }
+
+  const { picks, allItems, nSetPicks } = result;
+  const totalItems = allItems.reduce((s, it) => s + it.qty, 0);
+
+  return `
+    <div style="padding:4px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <button type="button" class="loot-set-toggle-all" data-crate-sim-roll="1"
+          style="font-size:13px;padding:6px 16px;">
+          🎲 Roll Again
+        </button>
+        <span style="font-size:11px;opacity:.6;">
+          ${totalItems} item${totalItems !== 1 ? "s" : ""} from ${picks.length} set pick${picks.length !== 1 ? "s" : ""}
+        </span>
+      </div>
+
+      ${allItems.length
+        ? `<div style="margin-bottom:10px;">
+            ${allItems.map(renderSimItem).join("")}
+          </div>`
+        : `<div style="font-size:12px;opacity:.5;padding:8px 0;">Nothing dropped!</div>`
+      }
+
+      ${picks.length
+        ? `
+          <details style="margin-top:4px;">
+            <summary style="font-size:11px;opacity:.6;cursor:pointer;user-select:none;">
+              Roll details
+            </summary>
+            <div style="margin-top:6px;font-size:11px;opacity:.75;">
+              <div style="margin-bottom:6px;">Rolled ${nSetPicks} set pick${nSetPicks !== 1 ? "s" : ""} from ${(c.sets || []).length} available set${(c.sets || []).length !== 1 ? "s" : ""}</div>
+              ${picks.map((pick, pi) => `
+                <div style="margin-bottom:8px;padding-left:8px;border-left:2px solid rgba(255,255,255,.1);">
+                  <div style="font-weight:600;margin-bottom:2px;">Pick ${pi + 1}: ${escapeHtml(pick.setName)}</div>
+                  ${pick.entries.map(ent => `
+                    <div style="padding-left:8px;margin-top:2px;">
+                      <div style="opacity:.7;">→ ${escapeHtml(ent.entryName)}</div>
+                      ${ent.items.map(it => {
+                        const tier = (it.qualTier >= 0 && it.qualTier <= 5) ? QUALITY_TIERS[it.qualTier] : null;
+                        const color = tier ? tier.color : "#b0b0b0";
+                        const prefix = tier && it.qualTier > 0 ? tier.prefix : "";
+                        const bpTag = it.isBP ? "Blueprint: " : "";
+                        const qtyTag = it.qty > 1 ? ` (×${it.qty})` : "";
+                        return `<div style="padding-left:8px;color:${color}">${escapeHtml(bpTag + prefix + it.name + qtyTag)}</div>`;
+                      }).join("")}
+                    </div>
+                  `).join("")}
+                  ${!pick.entries.length ? `<div style="padding-left:8px;opacity:.4;">No items (filtered by drop chance)</div>` : ""}
+                </div>
+              `).join("")}
+            </div>
+          </details>
+        `
+        : ``
+      }
+    </div>
+  `;
+}
+
 function renderCratePanel(crateName){
   const c = getSelectedCrate(crateName);
   if (!c){
     renderInfoPanelBodyEmpty();
     return;
+  }
+
+  // Clear simulation when switching to a different crate
+  if (infoPanelState._simCrateClass !== c.class){
+    infoPanelState.simResult = null;
+    infoPanelState._simCrateClass = c.class;
   }
 
   const panel = ensureInfoPanel();
@@ -659,7 +899,8 @@ function renderCratePanel(crateName){
 
   const crateTabs = [
     { id: "sets", label: `Loot Sets (${shownSetCount})` },
-    { id: "info", label: `All Items (${itemCount})` }
+    { id: "info", label: `All Items (${itemCount})` },
+    { id: "sim",  label: "Simulate" }
   ];
 
   const activeTab = crateTabs.some(t => t.id === infoPanelState.crateTab)
@@ -701,6 +942,7 @@ function renderCratePanel(crateName){
       renderPage: (id) => {
         if (id === "sets") return renderCrateTabSets(c);
         if (id === "info") return renderCrateTabInfo(c);
+        if (id === "sim")  return renderCrateTabSimulate(c);
         return "";
       }
     })}
@@ -748,6 +990,13 @@ function renderCratePanel(crateName){
   body.querySelectorAll("[data-crate-official-toggle]").forEach(btn => {
     btn.onclick = () => {
       infoPanelState.showOfficialSets = !infoPanelState.showOfficialSets;
+      renderCratePanel(crateName);
+    };
+  });
+
+  body.querySelectorAll("[data-crate-sim-roll]").forEach(btn => {
+    btn.onclick = () => {
+      infoPanelState.simResult = simulateCrateDrop(c);
       renderCratePanel(crateName);
     };
   });
