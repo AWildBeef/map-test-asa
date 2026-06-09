@@ -178,6 +178,24 @@ function getSelectedCrate(selectionValue){
 }
 
 
+/* ── Crate display helpers ────────────────────────────────── */
+
+function fmtRangeCollapsed(a, b, empty = "--"){
+  const fa = fmt(a);
+  const fb = fmt(b);
+  if (!fa && !fb) return empty;
+  if (fa && fb) return fa === fb ? fa : `${fa} - ${fb}`;
+  return fa || fb || empty;
+}
+
+function fmtPct(weight, total){
+  if (weight == null || !total) return null;
+  const raw = (weight / total) * 100;
+  if (raw <= 0) return "0%";
+  if (raw < 1) return raw.toFixed(1) + "%";
+  return Math.round(raw) + "%";
+}
+
 function renderCrateHero(c) {
   const mission = missionMetaByClass(c.missionClass);
   const rewardIds = Array.isArray(mission?.ri) ? mission.ri : [];
@@ -238,18 +256,8 @@ function renderCrateHero(c) {
               </div>
               <div class="meta-cell">
                 <div class="meta-stack">
-                  <div class="meta-label">Sets Rolled</div>
-                  <div class="meta-value">${
-                    c.minSets != null && c.maxSets != null
-                      ? c.minSets === c.maxSets
-                        ? escapeHtml(String(c.minSets))
-                        : escapeHtml(`${c.minSets} – ${c.maxSets}`)
-                      : escapeHtml(String(c.minSets ?? c.maxSets ?? "--"))
-                  }${
-                    c.rwr === true ? " · unique"
-                    : c.rwr === false ? " · repeatable"
-                    : ""
-                  }</div>
+                  <div class="meta-label">Item Sets Chosen</div>
+                  <div class="meta-value">${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))}</div>
                 </div>
               </div>
               ${
@@ -265,6 +273,13 @@ function renderCrateHero(c) {
                   : ``
               }
             </div>
+            ${
+              c.rwr === true
+                ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Item sets may not be chosen more than once</div>`
+              : c.rwr === false
+                ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Item sets may be chosen multiple times</div>`
+              : ``
+            }
           `
       }
 
@@ -460,28 +475,38 @@ function renderCrateTabSets(c){
                 <div class="meta-grid">
                   <div class="meta-cell">
                     <div class="meta-label">Set Weight</div>
-                    <div class="meta-value">${
-                      weightPct != null
-                        ? escapeHtml(`${fmt(weight)} (${weightPct}%)`)
-                        : escapeHtml(fmt(weight) || "--")
-                    }</div>
+                    <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
                   </div>
+
+                  ${
+                    weightPct != null
+                      ? `
+                        <div class="meta-cell">
+                          <div class="meta-label">Chance</div>
+                          <div class="meta-value">${escapeHtml(fmtPct(weight, totalWeight))}</div>
+                        </div>
+                      `
+                      : ``
+                  }
 
                   ${
                     smn != null || smx != null
                       ? `
                         <div class="meta-cell">
-                          <div class="meta-label">Draws</div>
-                          <div class="meta-value">${escapeHtml(fmtRange(smn, smx))}${
-                            setRwr === true ? " · unique"
-                            : setRwr === false ? " · repeatable"
-                            : ""
-                          }</div>
+                          <div class="meta-label">Entries Chosen</div>
+                          <div class="meta-value">${escapeHtml(fmtRangeCollapsed(smn, smx))}</div>
                         </div>
                       `
                       : ``
                   }
                 </div>
+                ${
+                  setRwr === true
+                    ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Entries may not be chosen more than once</div>`
+                  : setRwr === false
+                    ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Entries may be chosen multiple times</div>`
+                  : ``
+                }
 
                 ${
                   allEntries.length
@@ -504,11 +529,7 @@ function renderLootEntryBlock(entry, totalEntryWeight){
   const totalItemWeight = itemWeights.length ? itemWeights.reduce((s, w) => s + (w || 0), 0) : 0;
 
   const ew = entry?.w;
-  const ewPct = (ew != null && totalEntryWeight > 0)
-    ? Math.round((ew / totalEntryWeight) * 100) : null;
-
   const isStack = isTrue01(entry?.aq);
-  const qtyLabel = isStack ? "Stack" : "Quantity";
 
   return `
     <div class="info-section-sub" style="margin-top:8px;">
@@ -518,18 +539,27 @@ function renderLootEntryBlock(entry, totalEntryWeight){
         <div class="meta-cell">
           <div class="meta-stack">
             <div class="meta-label">Entry Weight</div>
-            <div class="meta-value">${
-              ewPct != null
-                ? escapeHtml(`${fmt(ew)} (${ewPct}%)`)
-                : escapeHtml(fmt(ew) || "--")
-            }</div>
+            <div class="meta-value">${escapeHtml(fmt(ew) || "--")}</div>
           </div>
         </div>
 
+        ${
+          totalEntryWeight > 0 && ew != null
+            ? `
+              <div class="meta-cell">
+                <div class="meta-stack">
+                  <div class="meta-label">Chance</div>
+                  <div class="meta-value">${escapeHtml(fmtPct(ew, totalEntryWeight))}</div>
+                </div>
+              </div>
+            `
+            : ``
+        }
+
         <div class="meta-cell">
           <div class="meta-stack">
-            <div class="meta-label">${qtyLabel}</div>
-            <div class="meta-value">${escapeHtml(fmtRange(entry?.mn, entry?.mx))}</div>
+            <div class="meta-label">Quantity</div>
+            <div class="meta-value">${escapeHtml(fmtRangeCollapsed(entry?.mn, entry?.mx))}</div>
           </div>
         </div>
 
@@ -539,7 +569,7 @@ function renderLootEntryBlock(entry, totalEntryWeight){
               <div class="meta-cell">
                 <div class="meta-stack">
                   <div class="meta-label">Quality</div>
-                  <div class="meta-value">${escapeHtml(fmtRange(entry?.q1, entry?.q2))}</div>
+                  <div class="meta-value">${escapeHtml(fmtRangeCollapsed(entry?.q1, entry?.q2))}</div>
                 </div>
               </div>
             `
@@ -572,19 +602,24 @@ function renderLootEntryBlock(entry, totalEntryWeight){
             : ``
         }
       </div>
+      ${
+        isStack
+          ? `<div style="font-size:11px;opacity:.6;margin-top:2px;">Quantity is applied to a single item</div>`
+          : ``
+      }
 
       <div class="item-entries">
         ${
           itemIds.length
             ? itemIds.map((itemId, i) => {
                 const iw = itemWeights[i];
-                const iwPct = (iw != null && totalItemWeight > 0)
-                  ? Math.round((iw / totalItemWeight) * 100) : null;
+                const iwPctStr = (iw != null && totalItemWeight > 0)
+                  ? fmtPct(iw, totalItemWeight) : null;
                 return `
                   <div class="item-row">
                     <div class="item-main">
                       <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}${
-                        iwPct != null ? ` <span style="opacity:.55;font-size:11px">(${iwPct}%)</span>` : ``
+                        iwPctStr != null ? ` <span style="opacity:.55;font-size:11px">(${iwPctStr})</span>` : ``
                       }</div>
                     </div>
                   </div>
