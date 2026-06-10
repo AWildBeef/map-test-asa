@@ -30,6 +30,22 @@ function setCrateSetOpen(crateObj, idx, open){
   crateSetOpenState[key] = !!open;
 }
 
+// Per-entry collapse state within a set. Entries default open in
+// single-entry sets and collapsed in multi-entry sets (scannability).
+function crateEntryStateKey(crateObj, setIdx, entryIdx){
+  return `${crateSetStateKey(crateObj, setIdx)}::e${entryIdx}`;
+}
+
+function isCrateEntryOpen(crateObj, setIdx, entryIdx, defaultOpen){
+  const key = crateEntryStateKey(crateObj, setIdx, entryIdx);
+  return crateSetOpenState[key] ?? !!defaultOpen;
+}
+
+function setCrateEntryOpen(crateObj, setIdx, entryIdx, open){
+  const key = crateEntryStateKey(crateObj, setIdx, entryIdx);
+  crateSetOpenState[key] = !!open;
+}
+
 function getActiveInfoPanelScroll(activeTabId){
   const panel = document.getElementById("dinoInfoPanel");
   if (!panel) return 0;
@@ -554,7 +570,10 @@ function renderCrateTabSets(c){
                         drawsDist,
                         entryWeights,
                         entryIdx: ei,
-                        setRwr: setRwr === true
+                        setRwr: setRwr === true,
+                        collapsible: true,
+                        isOpen: isCrateEntryOpen(c, origIdx, ei, allEntries.length <= 1),
+                        toggleAttr: `${origIdx}:${ei}`
                       })).join("")
                     : `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
                 }
@@ -614,12 +633,25 @@ function renderLootEntryBlock(entry, totalEntryWeight, probCtx){
     summary += ` Each item only has a <b>${escapeHtml(pct(entry.cg))}</b> chance to actually be given.`;
   }
 
+  const collapsible = probCtx?.collapsible === true;
+  const entryOpen = collapsible ? probCtx.isOpen !== false : true;
+
+  const headInner = `
+    <span class="lc-entry-name">${escapeHtml(entry?.n || "Entry")}</span>
+    ${pEntryStr != null ? `<span class="lc-entry-pct">${pEntryStr}</span>` : ``}
+    ${collapsible ? `<span class="lc-entry-chev">${entryOpen ? "⌄" : "›"}</span>` : ``}
+  `;
+
   return `
-    <div class="lc-entry">
-      <div class="lc-entry-head">
-        <span class="lc-entry-name">${escapeHtml(entry?.n || "Entry")}</span>
-        ${pEntryStr != null ? `<span class="lc-entry-pct">${pEntryStr}</span>` : ``}
-      </div>
+    <div class="lc-entry ${entryOpen ? "is-open" : "is-closed"}">
+      ${
+        collapsible
+          ? `<button type="button" class="lc-entry-toggle" data-crate-entry-toggle="${escapeAttr(probCtx.toggleAttr)}">${headInner}</button>`
+          : `<div class="lc-entry-head">${headInner}</div>`
+      }
+      ${
+        entryOpen
+          ? `
       ${pEntryStr != null ? `<div class="lc-entry-cap">chance to appear in this set</div>` : ``}
 
       <div class="lc-chips">${chips.join("")}</div>
@@ -643,6 +675,9 @@ function renderLootEntryBlock(entry, totalEntryWeight, probCtx){
             : `<div class="entry-meta"><div class="entry-meta-line">No items listed.</div></div>`
         }
       </div>
+          `
+          : ``
+      }
     </div>
   `;
 }
@@ -997,6 +1032,26 @@ function renderCratePanel(crateName){
       const prevScroll = getActiveInfoPanelScroll();
 
       setCrateSetOpen(c, idx, !isCrateSetOpen(c, idx));
+      renderCratePanel(crateName);
+
+      restoreActiveInfoPanelScroll(prevScroll);
+    };
+  });
+
+  body.querySelectorAll("[data-crate-entry-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const parts = String(btn.dataset.crateEntryToggle || "").split(":");
+      const setIdx = Number(parts[0]);
+      const entryIdx = Number(parts[1]);
+      if (!Number.isInteger(setIdx) || !Number.isInteger(entryIdx)) return;
+
+      const prevScroll = getActiveInfoPanelScroll();
+
+      // Default mirrors render-time default: open only for single-entry sets
+      const row = (c.sets || [])[setIdx];
+      const { allEntries } = lootSetEntriesFromRow(row || {});
+      const defOpen = allEntries.length <= 1;
+      setCrateEntryOpen(c, setIdx, entryIdx, !isCrateEntryOpen(c, setIdx, entryIdx, defOpen));
       renderCratePanel(crateName);
 
       restoreActiveInfoPanelScroll(prevScroll);
