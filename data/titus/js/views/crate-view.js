@@ -205,6 +205,31 @@ function fmtProb(p){
   return "0%";
 }
 
+// Six-segment tier ribbon with the entry's quality window lit.
+// Quality values can exceed 6 (e.g. 7.2); the window clamps to the
+// track but the label keeps the raw numbers.
+function renderQualityRibbon(q1, q2){
+  if (q1 == null && q2 == null) return "";
+  const a = q1 ?? 0;
+  const b = q2 ?? a;
+  const tierName = q => QUALITY_TIERS[Math.max(0, Math.min(5, Math.floor(q)))].name;
+  const segs = [0,1,2,3,4,5].map(i => {
+    const on = (b > i && a < i + 1) || (a === b && Math.floor(Math.min(a, 5)) === i);
+    return `<i class="lc-q${i}${on ? " on" : ""}"></i>`;
+  }).join("");
+  const t1 = tierName(a);
+  const t2 = tierName(Math.min(b, 5.99));
+  return `
+    <div class="lc-qrib">
+      <div class="lc-qrib-track">${segs}</div>
+      <div class="lc-qrib-label">
+        <span>Quality <span class="lc-mono">${escapeHtml(fmtRangeCollapsed(q1, q2))}</span></span>
+        <span>${escapeHtml(t1 === t2 ? t1 : `${t1} → ${t2}`)}</span>
+      </div>
+    </div>
+  `;
+}
+
 function renderCrateHero(c) {
   const mission = missionMetaByClass(c.missionClass);
   const rewardIds = Array.isArray(mission?.ri) ? mission.ri : [];
@@ -260,27 +285,20 @@ function renderCrateHero(c) {
             </div>
           `
           : `
-            <div class="meta-grid">
-              <div class="meta-cell">
-                <div class="meta-stack">
-                  <div class="meta-label">Item Sets Chosen</div>
-                  <div class="meta-value">${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))}</div>
-                </div>
-              </div>
+            <div class="lc-chips">
+              <span class="lc-chip">Item sets <b>${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))}</b></span>
               ${
                 c.qmin != null || c.qmax != null
-                  ? `
-                    <div class="meta-cell">
-                      <div class="meta-stack">
-                        <div class="meta-label">Quality Mult</div>
-                        <div class="meta-value">${escapeHtml(fmtRange(c.qmin, c.qmax))}</div>
-                      </div>
-                    </div>
-                  `
+                  ? `<span class="lc-chip">Quality ×<b>${escapeHtml(fmtRangeCollapsed(c.qmin, c.qmax))}</b></span>`
                   : ``
               }
+              ${
+                c.rwr === true ? `<span class="lc-chip rwr">⊘ no repeats</span>`
+                : c.rwr === false ? `<span class="lc-chip rwr">↻ repeats allowed</span>`
+                : ``
+              }
             </div>
-            <div class="crate-note">This crate will contain ${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))} of the following item sets.${
+            <div class="lc-mech">This crate will contain <b>${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))}</b> of the item sets below.${
               c.rwr === true ? " Repeats are not allowed."
               : c.rwr === false ? " Repeats are allowed."
               : ""
@@ -485,36 +503,44 @@ function renderCrateTabSets(c){
                 </div>
 
                 <div class="loot-set-toggle-right">
+                  ${pSetStr != null ? `<span class="lc-set-pct">${pSetStr}</span>` : ``}
                   <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
                 </div>
               </button>
 
-              <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
-                ${
-                  pSetStr != null
-                    ? `<div class="crate-note" style="margin-bottom:4px;">This item set has a ${pSetStr} chance of appearing in the crate.</div>`
-                    : ``
-                }
-                <div class="meta-grid">
-                  <div class="meta-cell">
-                    <div class="meta-label">Set Weight</div>
-                    <div class="meta-value">${escapeHtml(fmt(weight) || "--")}</div>
-                  </div>
+              ${
+                pSet != null
+                  ? `
+                    <div class="lc-pbar"><i style="width:${Math.max(2, Math.round(pSet * 100))}%"></i></div>
+                    <div class="lc-set-sub">
+                      <span>chance of appearing in this crate</span>
+                      <span class="lc-mono">weight ${escapeHtml(fmt(weight) || "--")}</span>
+                    </div>
+                  `
+                  : ``
+              }
 
+              <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+                <div class="lc-chips">
+                  ${
+                    pSet == null
+                      ? `<span class="lc-chip">Weight <b>${escapeHtml(fmt(weight) || "--")}</b></span>`
+                      : ``
+                  }
                   ${
                     smn != null || smx != null
-                      ? `
-                        <div class="meta-cell">
-                          <div class="meta-label">Item Entries</div>
-                          <div class="meta-value">${escapeHtml(fmtRangeCollapsed(smn, smx))}</div>
-                        </div>
-                      `
+                      ? `<span class="lc-chip">Entry picks <b>${escapeHtml(fmtRangeCollapsed(smn, smx))}</b></span>`
                       : ``
+                  }
+                  ${
+                    setRwr === true ? `<span class="lc-chip rwr">⊘ no repeats</span>`
+                    : setRwr === false ? `<span class="lc-chip rwr">↻ repeats allowed</span>`
+                    : ``
                   }
                 </div>
                 ${
                   smn != null || smx != null
-                    ? `<div class="crate-note">This item set will include ${escapeHtml(fmtRangeCollapsed(smn, smx))} of the following item entries.${
+                    ? `<div class="lc-set-mech">Will include <b>${escapeHtml(fmtRangeCollapsed(smn, smx))}</b> of the item entries below.${
                         setRwr === true ? " Repeats are not allowed."
                         : setRwr === false ? " Repeats are allowed."
                         : ""
@@ -557,105 +583,62 @@ function renderLootEntryBlock(entry, totalEntryWeight, probCtx){
     pEntryStr = fmtProb(pEntry);
   }
 
-  // Summary sentence
+  // Stat chips
+  const chips = [];
+  chips.push(`<span class="lc-chip">Weight <b>${escapeHtml(fmt(ew) || "--")}</b></span>`);
+  chips.push(`<span class="lc-chip">Qty <b>${escapeHtml(fmtRangeCollapsed(entry?.mn, entry?.mx))}</b></span>`);
+  if (isTrue01(entry?.fb)){
+    chips.push(`<span class="lc-chip">BP <b>Always</b></span>`);
+  } else if (entry?.b != null){
+    chips.push(`<span class="lc-chip">BP <b>${escapeHtml(pct(entry.b) || "0%")}</b></span>`);
+  }
+  if (isStack) chips.push(`<span class="lc-chip rwr">Single stack</span>`);
+  if (entry?.cg != null && entry.cg < 1.0){
+    chips.push(`<span class="lc-chip">Drop <b>${escapeHtml(pct(entry.cg))}</b></span>`);
+  }
+
+  // Summary sentence (numbers bolded, all values from our own formatters)
   const qtyStr = fmtRangeCollapsed(entry?.mn, entry?.mx, "1");
   const plural = qtyStr !== "1";
   let summary = isStack
-    ? `This item entry will include ${qtyStr} of one specific item from the following items`
-    : `This item entry will include ${qtyStr} random item${plural ? "s" : ""} from the following items`;
+    ? `Will include <b>${escapeHtml(qtyStr)}</b> of one specific item from the pool below`
+    : `Will include <b>${escapeHtml(qtyStr)}</b> random item${plural ? "s" : ""} from the pool below`;
   if (isTrue01(entry?.fb)){
-    summary += ", and it will always be a blueprint.";
+    summary += `, and it will always be a <b>blueprint</b>.`;
   } else if (entry?.b != null && entry.b > 0){
-    summary += `, with a ${pct(entry.b)} chance to be a blueprint.`;
+    summary += `, with a <b>${escapeHtml(pct(entry.b))}</b> chance to be a blueprint.`;
   } else {
-    summary += ".";
+    summary += `.`;
   }
   if (entry?.cg != null && entry.cg < 1.0){
-    summary += ` Items included only have a ${pct(entry.cg)} chance to actually be given.`;
+    summary += ` Each item only has a <b>${escapeHtml(pct(entry.cg))}</b> chance to actually be given.`;
   }
 
   return `
-    <div class="info-section-sub" style="margin-top:8px;">
-      <div class="info-subtitle-sub">${escapeHtml(entry?.n || "Entry")}</div>
-      ${
-        pEntryStr != null
-          ? `<div class="crate-note" style="margin-bottom:4px;">This item entry has a ${pEntryStr} chance to appear in the item set.</div>`
-          : ``
-      }
-
-      <div class="meta-grid">
-        <div class="meta-cell">
-          <div class="meta-stack">
-            <div class="meta-label">Entry Weight</div>
-            <div class="meta-value">${escapeHtml(fmt(ew) || "--")}</div>
-          </div>
-        </div>
-
-        <div class="meta-cell">
-          <div class="meta-stack">
-            <div class="meta-label">Quantity</div>
-            <div class="meta-value">${escapeHtml(fmtRangeCollapsed(entry?.mn, entry?.mx))}</div>
-          </div>
-        </div>
-
-        ${
-          entry?.q1 != null || entry?.q2 != null
-            ? `
-              <div class="meta-cell">
-                <div class="meta-stack">
-                  <div class="meta-label">Quality</div>
-                  <div class="meta-value">${escapeHtml(fmtRangeCollapsed(entry?.q1, entry?.q2))}</div>
-                </div>
-              </div>
-            `
-            : ``
-        }
-
-        ${
-          entry?.b != null
-            ? `
-              <div class="meta-cell">
-                <div class="meta-stack">
-                  <div class="meta-label">${isTrue01(entry?.fb) ? "Force BP" : "BP Chance"}</div>
-                  <div class="meta-value">${isTrue01(entry?.fb) ? "Yes" : escapeHtml(pct(entry.b) || "0%")}</div>
-                </div>
-              </div>
-            `
-            : ``
-        }
-
-        ${
-          entry?.cg != null && entry.cg < 1.0
-            ? `
-              <div class="meta-cell">
-                <div class="meta-stack">
-                  <div class="meta-label">Drop Chance</div>
-                  <div class="meta-value">${escapeHtml(pct(entry.cg))}</div>
-                </div>
-              </div>
-            `
-            : ``
-        }
+    <div class="lc-entry">
+      <div class="lc-entry-head">
+        <span class="lc-entry-name">${escapeHtml(entry?.n || "Entry")}</span>
+        ${pEntryStr != null ? `<span class="lc-entry-pct">${pEntryStr}</span>` : ``}
       </div>
-      <div class="crate-note">${escapeHtml(summary)}</div>
+      ${pEntryStr != null ? `<div class="lc-entry-cap">chance to appear in this set</div>` : ``}
 
-      <div class="item-entries">
+      <div class="lc-chips">${chips.join("")}</div>
+
+      ${renderQualityRibbon(entry?.q1, entry?.q2)}
+
+      <div class="lc-entry-sum">${summary}</div>
+
+      <div class="lc-items">
         ${
           itemIds.length
             ? itemIds.map((itemId, i) => {
                 const iw = itemWeights[i];
                 const iwPctStr = (iw != null && totalItemWeight > 0)
                   ? fmtPct(iw, totalItemWeight) : null;
-                const iwLabel = iw != null
-                  ? (iwPctStr ? ` <span class="item-weight-pct">weight: ${escapeHtml(fmt(iw))} (${iwPctStr})</span>` : ` <span class="item-weight-pct">weight: ${escapeHtml(fmt(iw))}</span>`)
+                const iwHtml = iw != null
+                  ? `<span class="lc-iw">${escapeHtml(fmt(iw))}${iwPctStr ? ` · ${iwPctStr}` : ``}</span>`
                   : ``;
-                return `
-                  <div class="item-row">
-                    <div class="item-main">
-                      <div class="item-name">${escapeHtml(itemDisplayNameById(itemId))}${iwLabel}</div>
-                    </div>
-                  </div>
-                `;
+                return `<div class="lc-item"><span>${escapeHtml(itemDisplayNameById(itemId))}</span>${iwHtml}</div>`;
               }).join("")
             : `<div class="entry-meta"><div class="entry-meta-line">No items listed.</div></div>`
         }
@@ -663,6 +646,7 @@ function renderLootEntryBlock(entry, totalEntryWeight, probCtx){
     </div>
   `;
 }
+
 
 
 /* ── Simulate tab ────────────────────────────────────────── */

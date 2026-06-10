@@ -5628,3 +5628,141 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   padding-top: 5px;
   border-top: 1px solid rgba(255,255,255,.08);
 }
+
+/* ============================================================
+   CRATE VIEW — chip / rail / ribbon redesign
+   ============================================================ */
+
+.lc-chips{
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.lc-chip{
+  display:inline-flex; align-items:baseline; gap:5px;
+  border:1px solid var(--border-soft, rgba(120,210,255,.10));
+  border-radius:7px;
+  background:linear-gradient(180deg, rgba(var(--accent-rgb,57,200,255),.07), rgba(var(--accent-rgb,57,200,255),.02));
+  padding:4px 9px;
+  font-size:11px; color:var(--text-3, #9fb8c8);
+  letter-spacing:.05em; text-transform:uppercase;
+}
+.lc-chip b{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px; font-weight:600;
+  color:var(--text-1, #f0fbff);
+  letter-spacing:0; text-transform:none;
+}
+.lc-chip.rwr{
+  text-transform:none; letter-spacing:.01em; font-size:11.5px;
+}
+
+.lc-mech{
+  margin-top:8px;
+  font-size:12px; color:var(--text-dim, #7f98a8); line-height:1.5;
+}
+.lc-mech b{
+  color:var(--text-2, #d9edf7);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
+
+/* set header additions */
+.lc-set-pct{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:16px; font-weight:700;
+  color:var(--accent-bright, #86e6ff);
+  white-space:nowrap;
+}
+.lc-pbar{
+  height:3px; margin:0 13px; border-radius:2px;
+  background:rgba(255,255,255,.06); overflow:hidden;
+}
+.lc-pbar i{
+  display:block; height:100%; border-radius:2px;
+  background:linear-gradient(90deg, var(--accent, #39c8ff), var(--accent-bright, #86e6ff));
+}
+.lc-set-sub{
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  padding:6px 13px 9px;
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+.lc-set-sub .lc-mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+}
+.lc-set-mech{
+  font-size:12px; color:var(--text-dim, #7f98a8);
+  margin:8px 0 10px; line-height:1.5;
+}
+.lc-set-mech b{
+  color:var(--text-2, #d9edf7);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
+
+/* entries on a rail */
+.lc-entry{
+  position:relative;
+  padding:0 0 2px 13px;
+  margin:0 0 13px;
+}
+.lc-entry:last-child{margin-bottom:2px;}
+.lc-entry::before{
+  content:""; position:absolute; left:0; top:2px; bottom:2px; width:2px;
+  border-radius:2px;
+  background:linear-gradient(180deg, var(--accent, #39c8ff), rgba(var(--accent-rgb,57,200,255),.15));
+}
+.lc-entry-head{display:flex; align-items:baseline; gap:8px;}
+.lc-entry-name{flex:1; font-size:13.5px; font-weight:650; color:var(--text-1, #f0fbff);}
+.lc-entry-pct{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13.5px; font-weight:650;
+  color:var(--accent, #39c8ff);
+  white-space:nowrap;
+}
+.lc-entry-cap{font-size:11px; color:var(--text-dim, #7f98a8); margin:1px 0 7px;}
+.lc-entry .lc-chips{margin-bottom:8px;}
+.lc-entry-sum{
+  font-size:12px; color:var(--text-dim, #7f98a8);
+  line-height:1.5; margin-bottom:9px;
+}
+.lc-entry-sum b{
+  color:var(--text-2, #d9edf7);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
+
+/* quality tier ribbon */
+.lc-qrib{margin:2px 0 9px;}
+.lc-qrib-track{display:flex; gap:2px; height:8px; border-radius:3px; overflow:hidden;}
+.lc-qrib-track i{flex:1; opacity:.16; border-radius:1px;}
+.lc-qrib-track i.on{opacity:1; box-shadow:0 0 6px rgba(255,255,255,.12) inset;}
+.lc-q0{background:#b0b0b0;}
+.lc-q1{background:#3dd43d;}
+.lc-q2{background:#48b8ff;}
+.lc-q3{background:#c06dff;}
+.lc-q4{background:#ffd033;}
+.lc-q5{background:#33ffee;}
+.lc-qrib-label{
+  display:flex; justify-content:space-between;
+  font-size:10.5px; color:var(--text-dim, #7f98a8); margin-top:3px;
+}
+.lc-qrib-label .lc-mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+}
+
+/* item pool grid */
+.lc-items{display:grid; grid-template-columns:1fr 1fr; gap:4px 10px;}
+.lc-item{
+  display:flex; justify-content:space-between; align-items:baseline; gap:8px;
+  font-size:12px; color:var(--text-2, #d9edf7);
+  padding:4px 7px; border-radius:6px;
+  background:rgba(var(--accent-rgb,57,200,255),.045);
+  border:1px solid rgba(120,210,255,.06);
+}
+.lc-item .lc-iw{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:10.5px; font-weight:500;
+  color:var(--text-dim, #7f98a8); white-space:nowrap;
+}
+@media (max-width:380px){ .lc-items{grid-template-columns:1fr;} }
