@@ -135,7 +135,10 @@ function buildEntryIndexForCurrentMap(){
     const rows = Global.spawn?.entries?.[entryName]?.d || [];
 
     for (const r of rows){
-      const rawBp = normalizeBp(r?.[0]);
+      // r[0] is a dino reference: a numeric dino index in current data, or a
+      // bp string in older/mod data. Resolve to a bp before the world-
+      // replacement lookup, otherwise replacement rules never match.
+      const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
       if (!rawBp) continue;
 
       const outs = worldOutputsForBp(rawBp);

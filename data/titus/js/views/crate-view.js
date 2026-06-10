@@ -196,6 +196,15 @@ function fmtPct(weight, total){
   return Math.round(raw) + "%";
 }
 
+function fmtProb(p){
+  if (p == null || isNaN(p)) return null;
+  if (p >= 0.995) return "100%";
+  if (p >= 0.01) return Math.round(p * 100) + "%";
+  if (p >= 0.001) return (p * 100).toFixed(1) + "%";
+  if (p > 0) return (p * 100).toFixed(2) + "%";
+  return "0%";
+}
+
 function renderCrateHero(c) {
   const mission = missionMetaByClass(c.missionClass);
   const rewardIds = Array.isArray(mission?.ri) ? mission.ri : [];
@@ -205,7 +214,11 @@ function renderCrateHero(c) {
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(c.name)}</div>
-
+      ${
+        c.kind !== "mission" && c.level != null
+          ? `<div style="margin:2px 0 4px;"><span class="dino-badge">Required Level: ${escapeHtml(String(c.level))}</span></div>`
+          : ``
+      }
       ${
         c.kind === "mission"
           ? `
@@ -250,12 +263,6 @@ function renderCrateHero(c) {
             <div class="meta-grid">
               <div class="meta-cell">
                 <div class="meta-stack">
-                  <div class="meta-label">Required Level</div>
-                  <div class="meta-value">${escapeHtml(String(c.level ?? "--"))}</div>
-                </div>
-              </div>
-              <div class="meta-cell">
-                <div class="meta-stack">
                   <div class="meta-label">Item Sets Chosen</div>
                   <div class="meta-value">${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))}</div>
                 </div>
@@ -273,13 +280,11 @@ function renderCrateHero(c) {
                   : ``
               }
             </div>
-            ${
-              c.rwr === true
-                ? `<div class="crate-note">Item sets may not be chosen more than once</div>`
-              : c.rwr === false
-                ? `<div class="crate-note">Item sets may be chosen multiple times</div>`
-              : ``
-            }
+            <div class="crate-note">This crate will contain ${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))} of the following item sets.${
+              c.rwr === true ? " Repeats are not allowed."
+              : c.rwr === false ? " Repeats are allowed."
+              : ""
+            }</div>
           `
       }
 
@@ -442,15 +447,28 @@ function renderCrateTabSets(c){
           const weight = row?.w;
           const isOpen = isCrateSetOpen(c, origIdx);
 
-          const totalWeight = rows.reduce((s, r) => s + (r?.w || 0), 0) || 1;
-          const weightPct = weight != null ? Math.round((weight / totalWeight) * 100) : null;
-
           const smn = setMeta?.smn ?? row?.smn;
           const smx = setMeta?.smx ?? row?.smx;
           const setNip = setMeta?.nip ?? row?.nip;
           const setRwr = setMeta?.rwr ?? row?.rwr;
 
           const totalEntryWeight = allEntries.reduce((s, e) => s + (e?.w || 0), 0) || 1;
+
+          // Exact appears-in-crate chance (helpers live in item-view.js)
+          const allWeights = allRows.map(r => r?.w || 0);
+          let pSet = null;
+          if (typeof rollCountDistribution === "function" && typeof pFiresAtLeastOnce === "function"){
+            const picksDist = rollCountDistribution(c.minSets ?? 1, c.maxSets ?? c.minSets ?? 1, c.nsp ?? 1.0);
+            pSet = pFiresAtLeastOnce(allWeights, origIdx, picksDist, c.rwr === true);
+          }
+          const pSetStr = fmtProb(pSet);
+
+          // Per-entry draw context for the entry chance sentences
+          let drawsDist = null;
+          if (typeof rollCountDistribution === "function"){
+            drawsDist = rollCountDistribution(smn ?? 1, smx ?? smn ?? 1, setNip ?? 1.0);
+          }
+          const entryWeights = allEntries.map(e => e?.w || 0);
 
           return `
             <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"} ${row._mod ? "is-mod-set" : ""}">
@@ -472,6 +490,11 @@ function renderCrateTabSets(c){
               </button>
 
               <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+                ${
+                  pSetStr != null
+                    ? `<div class="crate-note" style="margin-bottom:4px;">This item set has a ${pSetStr} chance of appearing in the crate.</div>`
+                    : ``
+                }
                 <div class="meta-grid">
                   <div class="meta-cell">
                     <div class="meta-label">Set Weight</div>
@@ -479,21 +502,10 @@ function renderCrateTabSets(c){
                   </div>
 
                   ${
-                    weightPct != null
-                      ? `
-                        <div class="meta-cell">
-                          <div class="meta-label">Chance</div>
-                          <div class="meta-value">${escapeHtml(fmtPct(weight, totalWeight))}</div>
-                        </div>
-                      `
-                      : ``
-                  }
-
-                  ${
                     smn != null || smx != null
                       ? `
                         <div class="meta-cell">
-                          <div class="meta-label">Entries Chosen</div>
+                          <div class="meta-label">Item Entries</div>
                           <div class="meta-value">${escapeHtml(fmtRangeCollapsed(smn, smx))}</div>
                         </div>
                       `
@@ -501,16 +513,23 @@ function renderCrateTabSets(c){
                   }
                 </div>
                 ${
-                  setRwr === true
-                    ? `<div class="crate-note">Entries may not be chosen more than once</div>`
-                  : setRwr === false
-                    ? `<div class="crate-note">Entries may be chosen multiple times</div>`
-                  : ``
+                  smn != null || smx != null
+                    ? `<div class="crate-note">This item set will include ${escapeHtml(fmtRangeCollapsed(smn, smx))} of the following item entries.${
+                        setRwr === true ? " Repeats are not allowed."
+                        : setRwr === false ? " Repeats are allowed."
+                        : ""
+                      }</div>`
+                    : ``
                 }
 
                 ${
                   allEntries.length
-                    ? allEntries.map(e => renderLootEntryBlock(e, totalEntryWeight)).join("")
+                    ? allEntries.map((e, ei) => renderLootEntryBlock(e, totalEntryWeight, {
+                        drawsDist,
+                        entryWeights,
+                        entryIdx: ei,
+                        setRwr: setRwr === true
+                      })).join("")
                     : `<div class="entry-meta"><div class="entry-meta-line">No entries found.</div></div>`
                 }
               </div>
@@ -523,7 +542,7 @@ function renderCrateTabSets(c){
 }
 
 
-function renderLootEntryBlock(entry, totalEntryWeight){
+function renderLootEntryBlock(entry, totalEntryWeight, probCtx){
   const itemIds = Array.isArray(entry?.i) ? entry.i : [];
   const itemWeights = Array.isArray(entry?.iw) ? entry.iw : [];
   const totalItemWeight = itemWeights.length ? itemWeights.reduce((s, w) => s + (w || 0), 0) : 0;
@@ -531,9 +550,38 @@ function renderLootEntryBlock(entry, totalEntryWeight){
   const ew = entry?.w;
   const isStack = isTrue01(entry?.aq);
 
+  // Exact appears-in-set chance, when the set context is provided
+  let pEntryStr = null;
+  if (probCtx?.drawsDist && typeof pFiresAtLeastOnce === "function"){
+    const pEntry = pFiresAtLeastOnce(probCtx.entryWeights, probCtx.entryIdx, probCtx.drawsDist, probCtx.setRwr);
+    pEntryStr = fmtProb(pEntry);
+  }
+
+  // Summary sentence
+  const qtyStr = fmtRangeCollapsed(entry?.mn, entry?.mx, "1");
+  const plural = qtyStr !== "1";
+  let summary = isStack
+    ? `This item entry will include ${qtyStr} of one specific item from the following items`
+    : `This item entry will include ${qtyStr} random item${plural ? "s" : ""} from the following items`;
+  if (isTrue01(entry?.fb)){
+    summary += ", and it will always be a blueprint.";
+  } else if (entry?.b != null && entry.b > 0){
+    summary += `, with a ${pct(entry.b)} chance to be a blueprint.`;
+  } else {
+    summary += ".";
+  }
+  if (entry?.cg != null && entry.cg < 1.0){
+    summary += ` Items included only have a ${pct(entry.cg)} chance to actually be given.`;
+  }
+
   return `
     <div class="info-section-sub" style="margin-top:8px;">
       <div class="info-subtitle-sub">${escapeHtml(entry?.n || "Entry")}</div>
+      ${
+        pEntryStr != null
+          ? `<div class="crate-note" style="margin-bottom:4px;">This item entry has a ${pEntryStr} chance to appear in the item set.</div>`
+          : ``
+      }
 
       <div class="meta-grid">
         <div class="meta-cell">
@@ -542,19 +590,6 @@ function renderLootEntryBlock(entry, totalEntryWeight){
             <div class="meta-value">${escapeHtml(fmt(ew) || "--")}</div>
           </div>
         </div>
-
-        ${
-          totalEntryWeight > 0 && ew != null
-            ? `
-              <div class="meta-cell">
-                <div class="meta-stack">
-                  <div class="meta-label">Chance</div>
-                  <div class="meta-value">${escapeHtml(fmtPct(ew, totalEntryWeight))}</div>
-                </div>
-              </div>
-            `
-            : ``
-        }
 
         <div class="meta-cell">
           <div class="meta-stack">
@@ -602,11 +637,7 @@ function renderLootEntryBlock(entry, totalEntryWeight){
             : ``
         }
       </div>
-      ${
-        isStack
-          ? `<div class="crate-note">Quantity is applied to a single item</div>`
-          : ``
-      }
+      <div class="crate-note">${escapeHtml(summary)}</div>
 
       <div class="item-entries">
         ${
@@ -616,7 +647,7 @@ function renderLootEntryBlock(entry, totalEntryWeight){
                 const iwPctStr = (iw != null && totalItemWeight > 0)
                   ? fmtPct(iw, totalItemWeight) : null;
                 const iwLabel = iw != null
-                  ? (iwPctStr ? ` <span class="item-weight-pct">${escapeHtml(fmt(iw))} (${iwPctStr})</span>` : ` <span class="item-weight-pct">${escapeHtml(fmt(iw))}</span>`)
+                  ? (iwPctStr ? ` <span class="item-weight-pct">weight: ${escapeHtml(fmt(iw))} (${iwPctStr})</span>` : ` <span class="item-weight-pct">weight: ${escapeHtml(fmt(iw))}</span>`)
                   : ``;
                 return `
                   <div class="item-row">
