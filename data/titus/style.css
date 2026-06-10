@@ -5600,33 +5600,38 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   margin-top: 6px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 9px;
 }
 .prob-step{
-  padding-left: 8px;
-  border-left: 2px solid rgba(255,255,255,.12);
+  padding-left: 12px;
+  border-left: 2px solid rgba(var(--accent-rgb,57,200,255),.30);
+  border-radius: 1px;
 }
 .prob-step-title{
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-1, #f0fbff);
 }
 .prob-step-detail{
-  font-size: 11px;
-  opacity: .6;
-  line-height: 1.45;
+  font-size: 11.5px;
+  color: var(--text-dim, #7f98a8);
+  line-height: 1.5;
 }
 .prob-step-result{
-  font-size: 11px;
-  font-weight: 600;
-  opacity: .85;
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--accent, #39c8ff);
   margin-top: 1px;
 }
 .prob-combined{
-  font-size: 11px;
-  font-weight: 600;
-  margin-top: 2px;
-  padding-top: 5px;
-  border-top: 1px solid rgba(255,255,255,.08);
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--text-1, #f0fbff);
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-soft, rgba(120,210,255,.10));
 }
 
 /* ============================================================
@@ -5784,3 +5789,200 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   font-size:13px; line-height:1;
 }
 .lc-entry.is-closed{padding-bottom:0; margin-bottom:10px;}
+
+/* ============================================================
+   ITEM VIEW — consolidated hero / crate cards / boss rows
+   ============================================================ */
+
+/* hero command params as chips */
+.iv-cmd-row{
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  margin:6px 0 8px;
+}
+.iv-cmd-input{
+  display:inline-flex; align-items:baseline; gap:6px;
+  border:1px solid var(--border-soft, rgba(120,210,255,.10));
+  border-radius:7px;
+  background:rgba(255,255,255,.04);
+  padding:5px 9px;
+  font-size:11px; color:var(--text-3, #9fb8c8);
+  letter-spacing:.05em; text-transform:uppercase;
+  cursor:pointer;
+}
+.iv-cmd-input input[type=number]{
+  width:38px; background:none; border:0; outline:none;
+  color:var(--text-1, #f0fbff);
+  font:600 13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  text-align:center;
+  -moz-appearance:textfield;
+}
+.iv-cmd-input input[type=number]::-webkit-inner-spin-button,
+.iv-cmd-input input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance:none; margin:0;
+}
+.iv-cmd-bp{user-select:none;}
+.iv-cmd-bp input[type=checkbox]{
+  position:absolute; opacity:0; width:0; height:0;
+}
+.iv-bp-dot{
+  width:12px; height:12px; border-radius:4px;
+  border:1.5px solid var(--text-dim, #7f98a8);
+  display:inline-block; align-self:center;
+}
+.iv-cmd-bp.on{
+  color:var(--accent-bright, #86e6ff);
+  border-color:var(--border-strong, rgba(120,210,255,.26));
+}
+.iv-cmd-bp.on .iv-bp-dot{
+  background:var(--accent, #39c8ff);
+  border-color:var(--accent, #39c8ff);
+}
+
+/* tagged mono rows (commands, class, bp) */
+.iv-cmd-line{
+  display:flex; align-items:stretch;
+  border:1px solid var(--border-soft, rgba(120,210,255,.10));
+  border-radius:8px;
+  background:rgba(0,0,0,.25);
+  margin-bottom:6px; overflow:hidden;
+  cursor:pointer;
+}
+.iv-cmd-tag{
+  flex:0 0 auto; display:flex; align-items:center;
+  padding:6px 8px;
+  font-size:9.5px; font-weight:700; letter-spacing:.08em;
+  color:var(--accent-bright, #86e6ff);
+  background:rgba(var(--accent-rgb,57,200,255),.10);
+  border-right:1px solid var(--border-soft, rgba(120,210,255,.10));
+}
+.iv-cmd-text{
+  flex:1; padding:6px 9px;
+  font:12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-2, #d9edf7);
+  white-space:nowrap; overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.iv-cmd-hint{
+  font-size:10px; color:var(--text-dim, #7f98a8);
+  margin:-2px 0 4px 2px;
+}
+
+/* eyebrow section labels */
+.iv-eyebrow{
+  font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--text-dim, #7f98a8);
+  margin:14px 0 6px;
+}
+.iv-eyebrow:first-child{margin-top:0;}
+
+/* ── crate cards ── */
+.iv-crate{
+  transition:opacity .15s ease;
+}
+.iv-crate:not(.is-on){opacity:.42;}
+.iv-crate-head{display:flex; align-items:center;}
+.iv-crate-main{
+  flex:1; display:flex; align-items:center; gap:9px;
+  padding:11px 4px 9px 12px;
+  background:none; border:0; cursor:pointer;
+  color:inherit; font:inherit; text-align:left;
+  min-width:0;
+}
+.iv-eye{
+  flex:0 0 auto; width:10px; height:10px; border-radius:50%;
+  background:var(--accent, #39c8ff);
+  box-shadow:0 0 7px rgba(var(--accent-rgb,57,200,255),.7);
+}
+.iv-crate:not(.is-on) .iv-eye{
+  background:transparent;
+  border:1.5px solid var(--text-dim, #7f98a8);
+  box-shadow:none;
+}
+.iv-crate-namewrap{
+  flex:1; display:flex; flex-direction:column; gap:1px; min-width:0;
+}
+.iv-crate-name{
+  font-size:13.5px; font-weight:650;
+  color:var(--text-1, #f0fbff);
+}
+.iv-crate-lvl{
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+.iv-crate-pct{
+  flex:0 0 auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:17px; font-weight:700;
+  color:var(--accent-bright, #86e6ff);
+  padding:0 4px 0 6px;
+  white-space:nowrap;
+}
+.iv-crate-exp{
+  flex:0 0 auto; background:none; border:0; cursor:pointer;
+  color:var(--text-dim, #7f98a8);
+  padding:12px 13px;
+}
+.iv-crate .lc-pbar{margin:0 12px;}
+.iv-crate-sub{
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  padding:6px 12px 10px;
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+.iv-mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+}
+
+/* ── boss rows ── */
+.iv-boss-head{
+  width:100%; display:flex; align-items:center; gap:9px;
+  padding:11px 13px;
+  background:none; border:0; cursor:pointer;
+  color:inherit; font:inherit; text-align:left;
+}
+.iv-boss-qty{
+  flex:0 0 auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:14px; font-weight:700;
+  color:var(--accent-bright, #86e6ff);
+}
+.iv-boss-name{
+  flex:1; font-size:13.5px; font-weight:650;
+  color:var(--text-1, #f0fbff);
+}
+.iv-dif{
+  flex:0 0 auto;
+  font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+  border-radius:999px; padding:2.5px 9px;
+}
+.iv-dif.g{color:#3dd43d; border:1px solid rgba(61,212,61,.45);  background:rgba(61,212,61,.10);}
+.iv-dif.b{color:#48b8ff; border:1px solid rgba(72,184,255,.45); background:rgba(72,184,255,.10);}
+.iv-dif.a{color:#ff5d5d; border:1px solid rgba(255,93,93,.45);  background:rgba(255,93,93,.10);}
+.iv-boss-chev{
+  flex:0 0 auto; color:var(--text-dim, #7f98a8); font-size:13px;
+}
+.iv-boss-sub{
+  padding:0 13px 10px; margin-top:-5px;
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+
+/* ── info tab: recipe + stations ── */
+.iv-recipe{
+  border:1px solid rgba(120,210,255,.06);
+  border-radius:8px;
+  background:rgba(var(--accent-rgb,57,200,255),.045);
+  padding:2px 0;
+}
+.iv-recipe-row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  padding:6px 10px;
+  font-size:12.5px;
+}
+.iv-recipe-row + .iv-recipe-row{
+  border-top:1px solid rgba(120,210,255,.05);
+}
+.iv-recipe-qty{
+  font:600 12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+  white-space:nowrap;
+}
+.iv-station{text-transform:none; letter-spacing:.01em;}

@@ -214,26 +214,25 @@ function renderItemHero(it){
   const itemRow = itemRowById(it.id);
   const gfiCmd   = gfiCommandForItem(itemRow);
   const giveCmd  = giveItemCommandForItem(itemRow);
-  const typeName = itemRow?.t != null ? itemTypeName(itemRow.t) : "";
 
-  // Command parameter controls
+  // Command parameter controls (same data attributes; chip styling)
   const p = currentCmdParams();
   const paramsHtml = (gfiCmd || giveCmd) ? `
-    <div class="cmd-params">
-      <label class="cmd-param">
-        <span class="cmd-param-label">Qty</span>
-        <input type="number" min="1" step="1" class="cmd-param-input"
+    <div class="iv-cmd-row">
+      <label class="iv-cmd-input">
+        <span>Qty</span>
+        <input type="number" min="1" step="1"
           data-cmd-param="qty" value="${p.qty}">
       </label>
-      <label class="cmd-param">
-        <span class="cmd-param-label">Quality</span>
-        <input type="number" min="0" step="1" class="cmd-param-input"
+      <label class="iv-cmd-input">
+        <span>Quality</span>
+        <input type="number" min="0" step="1"
           data-cmd-param="quality" value="${p.quality}">
       </label>
-      <label class="cmd-param cmd-param--toggle">
-        <input type="checkbox" class="cmd-param-toggle"
-          data-cmd-param="isBp" ${p.isBp ? "checked" : ""}>
-        <span class="cmd-param-label">Blueprint</span>
+      <label class="iv-cmd-input iv-cmd-bp ${p.isBp ? "on" : ""}">
+        <input type="checkbox" data-cmd-param="isBp" ${p.isBp ? "checked" : ""}>
+        <span class="iv-bp-dot"></span>
+        <span>Blueprint</span>
       </label>
     </div>
   ` : "";
@@ -241,23 +240,22 @@ function renderItemHero(it){
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(it.name)}</div>
-      <div class="info-submeta">${escapeHtml(typeName || "Item")}</div>
 
       ${(gfiCmd || giveCmd) ? `
-        <div class="info-subtitle" style="margin-top:6px;">Commands</div>
         ${paramsHtml}
         ${gfiCmd ? `
-          <div class="note-cmd-block" style="margin-top:4px;">
-            <div class="note-cmd-label">GFI Command</div>
-            <div class="info-mono copy-on-click" data-copy="${escapeAttr(gfiCmd)}">${escapeHtml(gfiCmd)}</div>
+          <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(gfiCmd)}">
+            <span class="iv-cmd-tag">GFI</span>
+            <div class="iv-cmd-text">${escapeHtml(gfiCmd)}</div>
           </div>
         ` : ""}
         ${giveCmd ? `
-          <div class="note-cmd-block" style="margin-top:4px;">
-            <div class="note-cmd-label">GiveItem Command</div>
-            <div class="info-mono copy-on-click" data-copy="${escapeAttr(giveCmd)}">${escapeHtml(giveCmd)}</div>
+          <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(giveCmd)}">
+            <span class="iv-cmd-tag">GIVE</span>
+            <div class="iv-cmd-text">${escapeHtml(giveCmd)}</div>
           </div>
         ` : ""}
+        <div class="iv-cmd-hint">tap a command to copy</div>
       ` : ""}
     </div>
   `;
@@ -279,11 +277,19 @@ function _metaCell(label, value){
 function renderItemTabInfo(it){
   const itemRow = itemRowById(it.id);
 
-  // ── Always show Class / Blueprint (was previously in hero) ──
+  // ── Class / Blueprint as tagged mono rows ──
   const idsHtml = `
     <div class="info-section">
-      ${renderCopyField("Item Class", it.class)}
-      ${renderCopyField("Item Blueprint", it.blueprint)}
+      ${it.class ? `
+        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(it.class)}">
+          <span class="iv-cmd-tag">CLASS</span>
+          <div class="iv-cmd-text">${escapeHtml(it.class)}</div>
+        </div>` : ``}
+      ${it.blueprint ? `
+        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(it.blueprint)}">
+          <span class="iv-cmd-tag">BP</span>
+          <div class="iv-cmd-text">${escapeHtml(it.blueprint)}</div>
+        </div>` : ``}
     </div>
   `;
 
@@ -302,60 +308,58 @@ function renderItemTabInfo(it){
   const reqs  = Array.isArray(itemRow.cr) ? itemRow.cr : [];
   const stations = Array.isArray(itemRow.cs) ? itemRow.cs : [];
 
-  // ── General info: nice meta grid ──
-  const generalCells = [
-    _metaCell("Type",          typeName ? escapeHtml(typeName) : ""),
-    _metaCell("Item Index",    itemIx   != null ? escapeHtml(String(itemIx))    : ""),
-    _metaCell("Weight",        weight   != null ? escapeHtml(fmt(weight))       : ""),
-    _metaCell("Stack Size",    stack    != null ? escapeHtml(fmt(stack))        : ""),
-    _metaCell("Crafted Qty",   (qty != null && qty > 1) ? escapeHtml(fmt(qty))  : ""),
-    _metaCell("Crafting XP",   cxp      != null ? escapeHtml(fmt(cxp))          : ""),
+  // ── General info: chips ──
+  const chip = (label, val) => (val == null || val === "")
+    ? ""
+    : `<span class="lc-chip">${escapeHtml(label)} <b>${val}</b></span>`;
+
+  const generalChips = [
+    chip("Type",        typeName ? escapeHtml(typeName) : ""),
+    chip("Item Index",  itemIx   != null ? escapeHtml(String(itemIx)) : ""),
+    chip("Weight",      weight   != null ? escapeHtml(fmt(weight))    : ""),
+    chip("Stack",       stack    != null ? escapeHtml(fmt(stack))     : ""),
+    chip("Crafted Qty", (qty != null && qty > 1) ? escapeHtml(fmt(qty)) : ""),
+    chip("Crafting XP", cxp      != null ? escapeHtml(fmt(cxp))       : ""),
   ].filter(Boolean).join("");
 
-  const generalHtml = generalCells
+  const generalHtml = generalChips
     ? `<div class="info-section">
-         <div class="info-subtitle">General</div>
-         <div class="meta-grid">${generalCells}</div>
+         <div class="iv-eyebrow">General</div>
+         <div class="lc-chips">${generalChips}</div>
        </div>`
     : "";
 
-  // ── Stats: meta grid with stat names ──
+  // ── Stats: chips ──
   const statsHtml = stats.length
     ? `<div class="info-section">
-         <div class="info-subtitle">Item Stats</div>
-         <div class="meta-grid">
-           ${stats.map(([statId, val]) =>
-             _metaCell(itemStatName(statId), escapeHtml(fmt(val)))
-           ).join("")}
+         <div class="iv-eyebrow">Item Stats</div>
+         <div class="lc-chips">
+           ${stats.map(([statId, val]) => chip(itemStatName(statId), escapeHtml(fmt(val)))).join("")}
          </div>
        </div>`
     : "";
 
-  // ── Crafting card: ingredient list + station ──
+  // ── Crafting Costs + Crafted In ──
   const craftingHtml = reqs.length
     ? `<div class="info-section">
-         <div class="info-subtitle">Crafting</div>
-         <div class="crafting-card">
-           <div class="crafting-ingredients">
-             ${reqs.map(([reqId, reqQty]) => `
-               <div class="crafting-ingredient">
-                 <span class="crafting-ingredient-name item-link" data-item-link-id="${escapeAttr(String(reqId))}">
-                   ${escapeHtml(itemDisplayNameById(reqId))}
-                 </span>
-                 <span class="crafting-ingredient-qty">× ${escapeHtml(String(reqQty))}</span>
-               </div>
-             `).join("")}
-           </div>
-           <div class="crafting-station">
-             <span class="crafting-station-label">Crafted In</span>
-             <span class="crafting-station-value">${
-               stations.length
-                 ? stations.map(id =>
-                     `<span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span>`
-                   ).join(", ")
-                 : `<em>Player Inventory</em>`
-             }</span>
-           </div>
+         <div class="iv-eyebrow">Crafting Costs</div>
+         <div class="iv-recipe">
+           ${reqs.map(([reqId, reqQty]) => `
+             <div class="iv-recipe-row">
+               <span class="item-link" data-item-link-id="${escapeAttr(String(reqId))}">${escapeHtml(itemDisplayNameById(reqId))}</span>
+               <span class="iv-recipe-qty">× ${escapeHtml(String(reqQty))}</span>
+             </div>
+           `).join("")}
+         </div>
+         <div class="iv-eyebrow">Crafted In</div>
+         <div class="lc-chips">
+           ${
+             stations.length
+               ? stations.map(id =>
+                   `<span class="lc-chip iv-station"><span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span></span>`
+                 ).join("")
+               : `<span class="lc-chip iv-station"><em>Player Inventory</em></span>`
+           }
          </div>
        </div>`
     : "";
@@ -386,34 +390,41 @@ function renderItemTabEngram(it){
       });
     }
 
-    const cells = [
-      _metaCell("Unlock Level",    row.lvl != null ? escapeHtml(String(row.lvl)) : ""),
-      _metaCell("Engram Points",   row.pts != null ? escapeHtml(String(row.pts)) : ""),
-      _metaCell("Engram Index",    row.ix  != null ? escapeHtml(String(row.ix))  : ""),
-      _metaCell("Group",           groupName ? escapeHtml(groupName) : ""),
+    const chip = (label, val) => (val == null || val === "")
+      ? ""
+      : `<span class="lc-chip">${escapeHtml(label)} <b>${val}</b></span>`;
+
+    const chips = [
+      chip("Unlock Level",  row.lvl != null ? escapeHtml(String(row.lvl)) : ""),
+      chip("Engram Points", row.pts != null ? escapeHtml(String(row.pts)) : ""),
+      chip("Index",         row.ix  != null ? escapeHtml(String(row.ix))  : ""),
+      chip("Group",         groupName ? escapeHtml(groupName) : ""),
     ].filter(Boolean).join("");
 
     return `
       <div class="info-section">
-        ${cells ? `<div class="meta-grid">${cells}</div>` : ""}
+        ${chips ? `<div class="lc-chips">${chips}</div>` : ""}
 
         ${preNames.length ? `
-          <div style="margin-top:8px;">
-            <div class="meta-label">Prerequisites</div>
-            <div class="meta-value">${escapeHtml(preNames.join(", "))}</div>
+          <div class="iv-eyebrow">Prerequisites</div>
+          <div class="lc-chips">
+            ${preNames.map(n => `<span class="lc-chip iv-station">${escapeHtml(n)}</span>`).join("")}
           </div>
         ` : ""}
 
         ${engBp ? `
-          <div style="margin-top:8px;">
-            ${renderCopyField("Engram Blueprint", engBp)}
+          <div class="iv-eyebrow">Engram Blueprint</div>
+          <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(engBp)}">
+            <span class="iv-cmd-tag">BP</span>
+            <div class="iv-cmd-text">${escapeHtml(engBp)}</div>
           </div>
         ` : ""}
 
         ${unlockCmd ? `
-          <div class="note-cmd-block" style="margin-top:8px;">
-            <div class="note-cmd-label">Unlock Engram Command</div>
-            <div class="info-mono copy-on-click" data-copy="${escapeAttr(unlockCmd)}">${escapeHtml(unlockCmd)}</div>
+          <div class="iv-eyebrow">Unlock Command</div>
+          <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(unlockCmd)}">
+            <span class="iv-cmd-tag">CMD</span>
+            <div class="iv-cmd-text">${escapeHtml(unlockCmd)}</div>
           </div>
         ` : ""}
       </div>
@@ -841,37 +852,42 @@ function renderItemTabCrates(it){
                     <div class="prob-combined">${combinedParts.join(" × ")} = ${fmtP(p.combined)}</div>
                   </div>
 
-                  ${d.q1 != null || d.q2 != null || d.b != null ? `
-                    <div class="crate-note" style="margin-top:4px;">
-                      ${d.q1 != null || d.q2 != null ? `Quality: ${escapeHtml(fmtRange(d.q1, d.q2))}` : ""}${(d.q1 != null || d.q2 != null) && d.b != null ? " · " : ""}${d.b != null ? (isTrue01(d.fb) ? "Always Blueprint" : `BP: ${escapeHtml(pct(d.b) || "0%")}`) : ""}
-                    </div>
-                  ` : ""}
+                  ${
+                    (d.q1 != null || d.q2 != null) && typeof renderQualityRibbon === "function"
+                      ? renderQualityRibbon(d.q1, d.q2)
+                      : (d.q1 != null || d.q2 != null)
+                        ? `<div class="crate-note" style="margin-top:4px;">Quality: ${escapeHtml(fmtRange(d.q1, d.q2))}</div>`
+                        : ``
+                  }
+                  ${isTrue01(d.fb) ? `<div class="crate-note">Always a blueprint</div>` : ``}
                 </div>
               `}).join("")}
             </div>
           ` : "";
 
           return `
-            <div class="item-crate-card ${isOn ? "is-on" : ""} ${isOpen ? "is-open" : "is-closed"}">
+            <div class="item-crate-card iv-crate ${isOn ? "is-on" : ""} ${isOpen ? "is-open" : "is-closed"}">
 
-              <div class="item-crate-card-header">
+              <div class="iv-crate-head">
                 <button
                   type="button"
-                  class="item-crate-toggle-btn"
+                  class="iv-crate-main"
                   data-item-crate-toggle="1"
                   data-key="${escapeAttr(visKey)}"
                   data-crate-value="${escapeAttr(row.crateValue)}"
                   title="Toggle map visibility"
                 >
-                  <span class="dino-spawn-title">${escapeHtml(row.name)}</span>
-                  <span class="dino-spawn-meta-line" style="margin-top:2px;">
-                    ${row.level != null ? `Required Level: ${escapeHtml(String(row.level))}` : "Mission Source"}${pctLabel ? ` · ${pctLabel} chance` : ""}${bpLabel ? ` · ${bpLabel}` : ""}
+                  <span class="iv-eye"></span>
+                  <span class="iv-crate-namewrap">
+                    <span class="iv-crate-name">${escapeHtml(row.name)}</span>
+                    <span class="iv-crate-lvl">${row.level != null ? `Req Level ${escapeHtml(String(row.level))}` : "Mission Source"}</span>
                   </span>
+                  ${pctLabel ? `<span class="iv-crate-pct">${pctLabel}</span>` : ``}
                 </button>
 
                 <button
                   type="button"
-                  class="dino-spawn-corner-jump"
+                  class="iv-crate-exp"
                   data-item-crate-expand="${escapeAttr(row.crateValue)}"
                   title="${isOpen ? "Collapse" : "Expand"} details"
                 >
@@ -885,6 +901,22 @@ function renderItemTabCrates(it){
                   </svg>
                 </button>
               </div>
+
+              ${
+                pCombined > 0
+                  ? `<div class="lc-pbar"><i style="width:${Math.max(2, Math.round(pCombined * 100))}%"></i></div>`
+                  : ``
+              }
+              ${
+                pctLabel || bpLabel
+                  ? `
+                    <div class="iv-crate-sub">
+                      <span>${pctLabel ? "chance per crate" : ""}</span>
+                      ${bpLabel ? `<span class="iv-mono">${escapeHtml(bpLabel)}</span>` : ``}
+                    </div>
+                  `
+                  : ``
+              }
 
               ${isOpen ? `
                 <div class="item-crate-card-body">
@@ -948,7 +980,17 @@ function renderItemTabBosses(entries, itemIds){
   function renderBossRow(entry){
     const boss = entry.boss;
     const qty = getQty(boss, itemIds);
-    const qtyHtml = qty ? `<span class="boss-item-qty">${escapeHtml(qty)}×</span>` : "";
+
+    // Pull difficulty out of names like "Broodmother (Gamma)" for a pill
+    let dispName = entry.name;
+    let difHtml = "";
+    const m = /^(.*)\s*\((Gamma|Beta|Alpha)\)\s*$/i.exec(entry.name);
+    if (m){
+      dispName = m[1].trim();
+      const dif = m[2].toLowerCase();
+      const cls = dif === "gamma" ? "g" : dif === "beta" ? "b" : "a";
+      difHtml = `<span class="iv-dif ${cls}">${escapeHtml(m[2])}</span>`;
+    }
 
     // Info: show min level. Use combined label unless craft and teleport
     // are both present AND different.
@@ -956,29 +998,22 @@ function renderItemTabBosses(entries, itemIds){
     const tl = boss?.teleportLevel;
     let metaLine = "";
     if (cl != null && tl != null && cl !== tl){
-      metaLine = `<div class="boss-info-meta-row">
-        <span class="boss-info-meta">Min Level to Summon: ${cl}</span>
-        <span class="boss-info-meta">Min Level to Teleport: ${tl}</span>
-      </div>`;
+      metaLine = `Min level to summon: ${cl} · teleport: ${tl}`;
     } else if (cl != null || tl != null){
-      metaLine = `<div class="boss-info-meta-row"><span class="boss-info-meta">Min Level for Boss: ${cl ?? tl}</span></div>`;
+      metaLine = `Min level for boss: ${cl ?? tl}`;
     }
 
     return `
-      <div class="loot-set-section is-closed">
-        <button type="button" class="loot-set-toggle" data-boss-item-toggle>
-          <div class="loot-set-toggle-main">
-            <div class="info-row">
-              <span class="info-label">${qtyHtml}${escapeHtml(entry.name)}</span>
-            </div>
-          </div>
-          <div class="loot-set-toggle-right">
-            <span class="loot-set-toggle-chevron">›</span>
-          </div>
+      <div class="loot-set-section iv-boss is-closed">
+        <button type="button" class="iv-boss-head" data-boss-item-toggle>
+          ${qty ? `<span class="iv-boss-qty">${escapeHtml(qty)}×</span>` : ``}
+          <span class="iv-boss-name">${escapeHtml(dispName)}</span>
+          ${difHtml}
+          <span class="iv-boss-chev">›</span>
         </button>
+        ${metaLine ? `<div class="iv-boss-sub">${escapeHtml(metaLine)}</div>` : ``}
         <div class="loot-set-body" style="display:none;">
-          ${metaLine}
-          <button type="button" class="fp-btn" data-open-boss="${escapeHtml(entry.name)}" style="margin-top:6px; width:100%; justify-content:center;">Open in Boss View ›</button>
+          <button type="button" class="fp-btn" data-open-boss="${escapeHtml(entry.name)}" style="margin-top:2px; width:100%; justify-content:center;">Open in Boss View ›</button>
         </div>
       </div>`;
   }
@@ -987,14 +1022,14 @@ function renderItemTabBosses(entries, itemIds){
 
   if (dropEntries.length){
     html += `<div class="info-section">
-      <div class="info-subtitle">Boss Rewards</div>
+      <div class="iv-eyebrow">Boss Rewards</div>
       ${dropEntries.map(renderBossRow).join("")}
     </div>`;
   }
 
   if (unlockEntries.length){
     html += `<div class="info-section">
-      <div class="info-subtitle">Tekgram Unlock</div>
+      <div class="iv-eyebrow">Tekgram Unlock</div>
       ${unlockEntries.map(renderBossRow).join("")}
     </div>`;
   }
@@ -1172,16 +1207,21 @@ function renderItemPanel(itemName){
     const itemRow2 = itemRowById(it.id);
     const gfi  = gfiCommandForItem(itemRow2);
     const give = giveItemCommandForItem(itemRow2);
-    // Update both info-mono blocks; identify them by data-copy starting with the command prefix
-    body.querySelectorAll(".note-cmd-block .info-mono.copy-on-click").forEach(el => {
-      const txt = el.textContent || "";
+    body.querySelectorAll(".iv-cmd-line.copy-on-click").forEach(el => {
+      const textEl = el.querySelector(".iv-cmd-text");
+      const txt = textEl?.textContent || "";
       if (txt.startsWith("cheat GFI") && gfi) {
-        el.textContent = gfi;
+        textEl.textContent = gfi;
         el.dataset.copy = gfi;
       } else if (txt.startsWith("cheat giveitem") && give) {
-        el.textContent = give;
+        textEl.textContent = give;
         el.dataset.copy = give;
       }
+    });
+    // Sync the Blueprint chip's lit state
+    body.querySelectorAll(".iv-cmd-bp").forEach(chip => {
+      const cb = chip.querySelector("input[type=checkbox]");
+      chip.classList.toggle("on", !!cb?.checked);
     });
   };
 
@@ -1308,7 +1348,7 @@ function renderItemPanel(itemName){
       section.classList.toggle("is-closed", !isOpen);
       const bodyEl = section.querySelector(".loot-set-body");
       if (bodyEl) bodyEl.style.display = isOpen ? "" : "none";
-      const chevron = section.querySelector(".loot-set-toggle-chevron");
+      const chevron = section.querySelector(".loot-set-toggle-chevron, .iv-boss-chev");
       if (chevron) chevron.textContent = isOpen ? "⌄" : "›";
       refreshInfoPanelPageHeight();
     });
