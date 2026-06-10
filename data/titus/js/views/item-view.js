@@ -425,6 +425,99 @@ function itemCrateVisibilityKey(itemName, crateRef){
   return `${State.mapId}::item::${itemName}::crate::${crateRef}`;
 }
 
+// ── Probability helpers (exact, based on validated roll formula) ──
+
+// Distribution of k = round(min + (max-min) * r^power), r ~ Uniform(0,1).
+// Returns Map of k -> probability. Power < 1 forces max (confirmed quirk).
+function rollCountDistribution(min, max, power){
+  if (min == null && max == null) return new Map([[1, 1]]);
+  if (min == null) min = max;
+  if (max == null) max = min;
+  if (min === max) return new Map([[Math.round(min), 1]]);
+
+  const p = power ?? 1.0;
+  if (p < 1.0) return new Map([[Math.round(max), 1]]);  // Power<1 quirk: always max
+
+  const lo = Math.min(min, max), hi = Math.max(min, max);
+  const span = hi - lo;
+  const dist = new Map();
+  for (let k = Math.round(lo); k <= Math.round(hi); k++){
+    // r-interval where round(lo + span * r^p) === k
+    const aFrac = Math.max(0, Math.min(1, (k - 0.5 - lo) / span));
+    const bFrac = Math.max(0, Math.min(1, (k + 0.5 - lo) / span));
+    const a = Math.pow(aFrac, 1 / p);
+    const b = Math.pow(bFrac, 1 / p);
+    const prob = Math.max(0, b - a);
+    if (prob > 0) dist.set(k, prob);
+  }
+  // Normalize float dust
+  let s = 0; dist.forEach(v => { s += v; });
+  if (s > 0 && Math.abs(s - 1) > 1e-9) dist.forEach((v, k) => dist.set(k, v / s));
+  return dist;
+}
+
+// Exact P(target included in k weighted draws WITHOUT replacement).
+// Memoized recursion over removed-set bitmask; falls back to the
+// with-replacement formula for big pools where recursion is too costly.
+function pIncludedWithoutReplacement(weights, targetIdx, k){
+  const n = weights.length;
+  if (k >= n) return 1.0;
+  if (k <= 0) return 0.0;
+  const totalAll = weights.reduce((s, w) => s + (w || 0), 0);
+  if (totalAll <= 0 || (weights[targetIdx] || 0) <= 0) return 0.0;
+
+  if (n > 14 || k > 10){
+    const p = (weights[targetIdx] || 0) / totalAll;
+    return 1 - Math.pow(1 - p, k);
+  }
+
+  const memo = new Map();
+  function notPicked(mask, d){
+    if (d <= 0) return 1;
+    const key = mask * 16 + d;
+    const hit = memo.get(key);
+    if (hit !== undefined) return hit;
+    let total = 0;
+    for (let i = 0; i < n; i++){
+      if (!(mask & (1 << i))) total += (weights[i] || 0);
+    }
+    if (total <= 0) { memo.set(key, 1); return 1; }
+    let acc = 0;
+    for (let i = 0; i < n; i++){
+      if (mask & (1 << i)) continue;
+      if (i === targetIdx) continue;       // picking the target breaks "not picked"
+      const w = weights[i] || 0;
+      if (w <= 0) continue;
+      acc += (w / total) * notPicked(mask | (1 << i), d - 1);
+    }
+    memo.set(key, acc);
+    return acc;
+  }
+  return 1 - notPicked(0, k);
+}
+
+// P(target fires at least once) averaged over the exact roll-count
+// distribution. rwr=true uses the exact without-replacement math.
+function pFiresAtLeastOnce(weights, targetIdx, countDist, rwr){
+  const total = weights.reduce((s, w) => s + (w || 0), 0);
+  if (total <= 0) return 0;
+  const p = (weights[targetIdx] || 0) / total;
+  let acc = 0;
+  countDist.forEach((prob, k) => {
+    let pk;
+    if (rwr) pk = pIncludedWithoutReplacement(weights, targetIdx, k);
+    else pk = 1 - Math.pow(1 - p, k);
+    acc += prob * pk;
+  });
+  return Math.min(1, Math.max(0, acc));
+}
+
+function distMean(dist){
+  let m = 0;
+  dist.forEach((prob, k) => { m += prob * k; });
+  return m;
+}
+
 // Returns the loot set name and entry details for a specific item within a crate
 function itemLootDetail(itemId, crateId){
   const crateClass = crateIdToClass(crateId);
@@ -436,18 +529,14 @@ function itemLootDetail(itemId, crateId){
   const out = [];
   const sets = crate.s || [];
 
-  // Crate-level probability helpers
-  const totalSetWeight = sets.reduce((s, r) => s + (r?.w || 0), 0) || 1;
+  // Crate-level context
+  const setWeights = sets.map(r => r?.w || 0);
+  const totalSetWeight = setWeights.reduce((s, w) => s + w, 0) || 1;
   const crateMin = crate.mn ?? 1;
   const crateMax = crate.mx ?? crateMin;
   const crateNsp = crate.nsp ?? 1.0;
   const crateRwr = crate.rwr === true;
-
-  // Expected number of set-picks
-  let meanPicks;
-  if (crateMin === crateMax || crateMin == null) meanPicks = crateMin ?? crateMax ?? 1;
-  else if (crateNsp < 1.0 && crateNsp > 0) meanPicks = crateMax;
-  else meanPicks = crateMin + (crateMax - crateMin) / (crateNsp + 1);
+  const picksDist = rollCountDistribution(crateMin, crateMax, crateNsp);
 
   const rRows = lootData().r?.[String(itemId)] || [];
   for (const r of rRows){
@@ -463,70 +552,60 @@ function itemLootDetail(itemId, crateId){
     const entry = allEntries[entryIdx];
     if (!entry) continue;
 
-    // --- Probability chain ---
+    // --- Step 1: P(this set fires at least once) ---
+    const pSetFires = pFiresAtLeastOnce(setWeights, setIdx, picksDist, crateRwr);
 
-    // Step 1: P(this set fires at least once)
-    const sw = set.w || 0;
-    const pSetPerPick = sw / totalSetWeight;
-    let pSetFires;
-    if (crateRwr && meanPicks >= sets.length) pSetFires = 1.0;
-    else pSetFires = 1 - Math.pow(1 - pSetPerPick, meanPicks);
-    pSetFires = Math.min(1, Math.max(0, pSetFires));
-
-    // Step 2: P(this entry fires at least once | set fired)
+    // --- Step 2: P(this entry fires at least once | set fired) ---
+    // Override loot-set values trump the crate's inline slot values.
     const smn = setMeta?.smn ?? set.smn ?? 1;
     const smx = setMeta?.smx ?? set.smx ?? smn;
     const setNip = setMeta?.nip ?? set.nip ?? 1.0;
     const setRwr = (setMeta?.rwr ?? set.rwr) === true;
 
-    let meanDraws;
-    if (smn === smx) meanDraws = smn;
-    else if (setNip < 1.0 && setNip > 0) meanDraws = smx;
-    else meanDraws = smn + (smx - smn) / (setNip + 1);
+    const drawsDist = rollCountDistribution(smn, smx, setNip);
+    const entryWeights = allEntries.map(e => e?.w || 0);
+    const totalEntryWeight = entryWeights.reduce((s, w) => s + w, 0) || 1;
+    const pEntryFires = pFiresAtLeastOnce(entryWeights, entryIdx, drawsDist, setRwr);
 
-    const totalEntryWeight = allEntries.reduce((s, e) => s + (e?.w || 0), 0) || 1;
-    const ew = entry.w || 0;
-    const pEntryPerDraw = ew / totalEntryWeight;
-    let pEntryFires;
-    if (setRwr && meanDraws >= allEntries.length) pEntryFires = 1.0;
-    else pEntryFires = 1 - Math.pow(1 - pEntryPerDraw, meanDraws);
-    pEntryFires = Math.min(1, Math.max(0, pEntryFires));
-
-    // Step 3: P(this item chosen | entry fired)
+    // --- Step 3: P(this item picked | entry fired) ---
     const itemIds = Array.isArray(entry.i) ? entry.i : [];
     const iw = Array.isArray(entry.iw) ? entry.iw : [];
     const numItems = itemIds.length || 1;
-    let pItemPick;
+    const usesItemWeights = iw.length > 0 && iw.length === itemIds.length;
 
-    if (iw.length && iw.length === itemIds.length){
+    let pItemPick, itemWeight = null, itemWeightTotal = null;
+    if (usesItemWeights){
       const itemIdx = itemIds.indexOf(itemId);
-      const totalIw = iw.reduce((s, w) => s + (w || 0), 0) || 1;
-      pItemPick = itemIdx >= 0 ? ((iw[itemIdx] || 0) / totalIw) : (1 / numItems);
+      itemWeightTotal = iw.reduce((s, w) => s + (w || 0), 0) || 1;
+      itemWeight = itemIdx >= 0 ? (iw[itemIdx] || 0) : null;
+      pItemPick = itemWeight != null ? itemWeight / itemWeightTotal : (1 / numItems);
     } else {
       pItemPick = 1 / numItems;
     }
 
-    // Factor in quantity (multiple draws from pool)
+    // Quantity = number of picks from the pool (when aq=false)
     const qtyMin = entry.mn ?? 1;
     const qtyMax = entry.mx ?? qtyMin;
     const qp = entry.qp ?? 1.0;
-    let meanQty;
-    if (qtyMin === qtyMax) meanQty = qtyMin;
-    else if (qp < 1.0 && qp > 0) meanQty = qtyMax;
-    else meanQty = qtyMin + (qtyMax - qtyMin) / (qp + 1);
+    const isStack = isTrue01(entry.aq);
+    const qtyDist = rollCountDistribution(qtyMin, qtyMax, qp);
 
     let pItemAppears;
-    if (isTrue01(entry.aq)){
-      pItemAppears = pItemPick;  // one item chosen, stacked
+    if (isStack){
+      pItemAppears = pItemPick;  // one pick, quantity stacks onto it
     } else {
-      pItemAppears = 1 - Math.pow(1 - pItemPick, Math.max(1, meanQty));
+      // Item picks within an entry are with-replacement; average over qty dist
+      let acc = 0;
+      qtyDist.forEach((prob, q) => {
+        acc += prob * (1 - Math.pow(1 - pItemPick, Math.max(1, q)));
+      });
+      pItemAppears = acc;
     }
     pItemAppears = Math.min(1, Math.max(0, pItemAppears));
 
-    // ChanceToActuallyGiveItem
+    // --- Step 4: ChanceToActuallyGiveItem ---
     const cg = entry.cg ?? 1.0;
 
-    // Combined
     const pCombined = pSetFires * pEntryFires * pItemAppears * cg;
 
     out.push({
@@ -540,19 +619,46 @@ function itemLootDetail(itemId, crateId){
       b:   entry.b   ?? null,
       fb:  entry.fb  ?? null,
       prob: {
+        // step 1
         setChance:   pSetFires,
+        setWeight:   set.w ?? 0,
+        setWeightTotal: totalSetWeight,
+        numSets:     sets.length,
+        picksMin:    crateMin,
+        picksMax:    crateMax,
+        picksMean:   distMean(picksDist),
+        crateRwr,
+        // step 2
+        entryName:   entry.n || `Entry ${entryIdx + 1}`,
         entryChance: pEntryFires,
+        entryWeight: entry.w ?? 0,
+        entryWeightTotal: totalEntryWeight,
+        numEntries:  allEntries.length,
+        drawsMin:    smn,
+        drawsMax:    smx,
+        drawsMean:   distMean(drawsDist),
+        setRwr,
+        // step 3
         itemChance:  pItemAppears,
+        pItemPick,
+        numItems,
+        usesItemWeights,
+        itemWeight,
+        itemWeightTotal,
+        qtyMin,
+        qtyMax,
+        qtyMean:     distMean(qtyDist),
+        isStack,
+        // step 4
         cgChance:    cg,
         combined:    pCombined,
-        numItems:    numItems,
       }
     });
   }
 
   const seen = new Set();
   return out.filter(d => {
-    const key = `${d.setName}::${d.w}::${d.mn}`;
+    const key = `${d.setName}::${d.prob?.entryName}::${d.w}::${d.mn}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
@@ -666,21 +772,77 @@ function renderItemTabCrates(it){
           const detailHtml = row.details?.length ? `
             <div class="item-loot-details">
               ${row.details.map(d => {
-                const prob = d.prob;
+                const p = d.prob;
+                if (!p){
+                  return `
+                    <div class="item-loot-detail">
+                      <div class="item-loot-set-name">${escapeHtml(d.setName)}</div>
+                    </div>`;
+                }
+
+                // Step 1 narrative
+                const picksLabel = p.picksMin === p.picksMax
+                  ? `${fmt(p.picksMin)}`
+                  : `${fmt(p.picksMin)} - ${fmt(p.picksMax)} (avg ${p.picksMean.toFixed(1)})`;
+                const setRwrNote = p.crateRwr ? "no repeats" : "repeats allowed";
+
+                // Step 2 narrative
+                const drawsLabel = p.drawsMin === p.drawsMax
+                  ? `${fmt(p.drawsMin)}`
+                  : `${fmt(p.drawsMin)} - ${fmt(p.drawsMax)} (avg ${p.drawsMean.toFixed(1)})`;
+                const entryRwrNote = p.setRwr ? "no repeats" : "repeats allowed";
+
+                // Step 3 narrative
+                const poolDesc = p.usesItemWeights && p.itemWeight != null
+                  ? `weight ${fmt(p.itemWeight)} of ${fmt(p.itemWeightTotal)} total across ${p.numItems} items`
+                  : `1 of ${p.numItems} items, equal weights`;
+                const qtyLabel = p.qtyMin === p.qtyMax
+                  ? `${fmt(p.qtyMin)}`
+                  : `${fmt(p.qtyMin)} - ${fmt(p.qtyMax)} (avg ${p.qtyMean.toFixed(1)})`;
+                const pickDesc = p.isStack
+                  ? `1 pick (quantity ${qtyLabel} stacks onto it)`
+                  : `${qtyLabel} pick${p.qtyMax > 1 ? "s" : ""} from the pool`;
+
+                const hasCg = p.cgChance < 1;
+                const combinedParts = [fmtP(p.setChance), fmtP(p.entryChance), fmtP(p.itemChance)];
+                if (hasCg) combinedParts.push(fmtP(p.cgChance));
+
                 return `
                 <div class="item-loot-detail">
-                  <div class="item-loot-set-name">${escapeHtml(d.setName)}${prob ? ` <span class="item-weight-pct">— ${fmtP(prob.combined)} per crate</span>` : ""}</div>
+                  <div class="item-loot-set-name">${escapeHtml(d.setName)}${` <span class="item-weight-pct">— ${fmtP(p.combined)} per crate</span>`}</div>
 
-                  ${prob ? `
-                    <div class="crate-note" style="margin-top:3px;line-height:1.5;">
-                      Set chosen: ${fmtP(prob.setChance)}<br>
-                      Entry chosen: ${fmtP(prob.entryChance)}<br>
-                      Item picked: ${fmtP(prob.itemChance)} (1 in ${prob.numItems})${prob.cgChance < 1 ? `<br>Drop chance: ${fmtP(prob.cgChance)}` : ""}
+                  <div class="prob-steps">
+                    <div class="prob-step">
+                      <div class="prob-step-title">1. Set must be chosen</div>
+                      <div class="prob-step-detail">Weight ${escapeHtml(fmt(p.setWeight))} of ${escapeHtml(fmt(p.setWeightTotal))} total across ${p.numSets} sets · crate picks ${escapeHtml(picksLabel)} set${p.picksMax !== 1 ? "s" : ""} · ${setRwrNote}</div>
+                      <div class="prob-step-result">→ ${fmtP(p.setChance)}</div>
                     </div>
-                  ` : ""}
+
+                    <div class="prob-step">
+                      <div class="prob-step-title">2. Entry "${escapeHtml(p.entryName)}" must be drawn</div>
+                      <div class="prob-step-detail">Weight ${escapeHtml(fmt(p.entryWeight))} of ${escapeHtml(fmt(p.entryWeightTotal))} total across ${p.numEntries} entries · set draws ${escapeHtml(drawsLabel)} entr${p.drawsMax !== 1 ? "ies" : "y"} · ${entryRwrNote}</div>
+                      <div class="prob-step-result">→ ${fmtP(p.entryChance)}</div>
+                    </div>
+
+                    <div class="prob-step">
+                      <div class="prob-step-title">3. Item must be picked</div>
+                      <div class="prob-step-detail">${escapeHtml(poolDesc)} · ${escapeHtml(pickDesc)}</div>
+                      <div class="prob-step-result">→ ${fmtP(p.itemChance)}</div>
+                    </div>
+
+                    ${hasCg ? `
+                      <div class="prob-step">
+                        <div class="prob-step-title">4. Drop chance filter</div>
+                        <div class="prob-step-detail">This entry only actually gives its item ${fmtP(p.cgChance)} of the time</div>
+                        <div class="prob-step-result">→ ${fmtP(p.cgChance)}</div>
+                      </div>
+                    ` : ""}
+
+                    <div class="prob-combined">${combinedParts.join(" × ")} = ${fmtP(p.combined)}</div>
+                  </div>
 
                   ${d.q1 != null || d.q2 != null || d.b != null ? `
-                    <div class="crate-note" style="margin-top:3px;">
+                    <div class="crate-note" style="margin-top:4px;">
                       ${d.q1 != null || d.q2 != null ? `Quality: ${escapeHtml(fmtRange(d.q1, d.q2))}` : ""}${(d.q1 != null || d.q2 != null) && d.b != null ? " · " : ""}${d.b != null ? (isTrue01(d.fb) ? "Always Blueprint" : `BP: ${escapeHtml(pct(d.b) || "0%")}`) : ""}
                     </div>
                   ` : ""}
