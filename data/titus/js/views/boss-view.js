@@ -194,24 +194,32 @@ function bossMetaCell(label, value){
 function renderBossSummonTab(boss){
   const summon = boss.summon;
 
-  // Summon cost as a two-column grid of linked cells. Artifacts go gold so
-  // cave-run items separate from farmables at a glance.
+  // Summon cost: a collapsible card with a single-column, independently
+  // scrollable ingredient list — long boss recipes no longer eat the panel.
   const recipeHtml = (summon && summon.recipe && summon.recipe.length)
     ? `
       <div class="info-section">
-        <div class="iv-eyebrow">Summon Cost</div>
-        <div class="bv-recipe">
-          ${summon.recipe.map(r => {
-            const isArtifact = /^artifact/i.test(r.name || "");
-            const nameHtml = r.id != null
-              ? `<span class="item-link" data-item-link-id="${escapeAttr(String(r.id))}">${escapeHtml(r.name)}</span>`
-              : escapeHtml(r.name);
-            return `
-              <div class="bv-recipe-row${isArtifact ? " is-artifact" : ""}">
-                <span class="bv-recipe-name">${nameHtml}</span>
-                <span class="bv-recipe-qty">× ${escapeHtml(fmt(r.qty))}</span>
-              </div>`;
-          }).join("")}
+        <div class="bv-crate bv-cost is-open">
+          <button type="button" class="bv-crate-head" data-boss-crate-toggle>
+            <span class="bv-crate-name">Summon Cost</span>
+            <span class="bv-cost-n">${summon.recipe.length} items</span>
+            <span class="bv-crate-chev">⌄</span>
+          </button>
+          <div class="bv-crate-body">
+            <div class="bv-cost-scroll iv-recipe">
+              ${summon.recipe.map(r => {
+                const isArtifact = /^artifact/i.test(r.name || "");
+                const nameHtml = r.id != null
+                  ? `<span class="item-link" data-item-link-id="${escapeAttr(String(r.id))}">${escapeHtml(r.name)}</span>`
+                  : escapeHtml(r.name);
+                return `
+                  <div class="iv-recipe-row${isArtifact ? " is-artifact" : ""}">
+                    <span>${nameHtml}</span>
+                    <span class="iv-recipe-qty">× ${escapeHtml(fmt(r.qty))}</span>
+                  </div>`;
+              }).join("")}
+            </div>
+          </div>
         </div>
       </div>`
     : `<div class="info-section"><div class="iv-eyebrow">Summon Cost</div>
@@ -314,10 +322,14 @@ function renderBossLootSetSection(name, entries, opts = {}){
 }
 
 // Render pool item sets from drop component overrides ("o" field).
-function renderBossPoolSets(poolSets){
+function renderBossPoolSets(poolSets, poolPicks){
   if (!poolSets || !poolSets.length) return "";
+  const picksLine = (poolPicks && (poolPicks.mn != null || poolPicks.mx != null))
+    ? `<div class="bv-crate-mech" style="padding:0 0 8px;">Will include <b>${escapeHtml(typeof fmtRangeCollapsed === "function" ? fmtRangeCollapsed(poolPicks.mn, poolPicks.mx) : fmtRange(poolPicks.mn, poolPicks.mx))}</b> of the item sets below.</div>`
+    : "";
   return `<div class="info-section">
     <div class="iv-eyebrow">Loot Pool</div>
+    ${picksLine}
     <div class="entries">${
     poolSets.map((row, idx) => {
       const { allEntries, setMeta } = lootSetEntriesFromRow(row);
@@ -381,7 +393,7 @@ function renderBossLootTab(boss){
 
   // Pool loot from ItemSetOverride sets (e.g. Astraeos boar's miniboss loot).
   if (r.poolSets && r.poolSets.length){
-    sections.push(renderBossPoolSets(r.poolSets));
+    sections.push(renderBossPoolSets(r.poolSets, r.poolPicks));
   }
 
   // Arena loot crates — each wrapped in a card that represents the crate

@@ -5758,7 +5758,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 }
 
 /* item pool grid */
-.lc-items{display:grid; grid-template-columns:1fr 1fr; gap:4px 10px;}
+.lc-items{display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:4px 8px;}
 .lc-item{
   display:flex; flex-direction:column; align-items:flex-start; gap:1px;
   font-size:12px; color:var(--text-2, #d9edf7);
@@ -5771,7 +5771,6 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   font-size:10.5px; font-weight:500;
   color:var(--text-dim, #7f98a8); white-space:nowrap;
 }
-@media (max-width:380px){ .lc-items{grid-template-columns:1fr;} }
 
 /* collapsible item entries (crate view) */
 .lc-entry-toggle{
@@ -5990,29 +5989,23 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
    BOSS VIEW — recipe grid / reward grid / crate wrapper
    ============================================================ */
 
-/* summon cost: two-column grid of linked cells */
-.bv-recipe{display:grid; grid-template-columns:1fr 1fr; gap:5px 10px;}
-.bv-recipe-row{
-  display:flex; justify-content:space-between; align-items:baseline; gap:8px;
-  padding:6px 9px; border-radius:7px;
-  background:rgba(var(--accent-rgb,57,200,255),.045);
-  border:1px solid rgba(120,210,255,.06);
-  font-size:12.5px;
+/* summon cost: collapsible card with scrollable single-column list */
+.bv-cost-n{
+  font-size:11px; color:var(--text-dim, #7f98a8); white-space:nowrap;
 }
-.bv-recipe-row .item-link{color:var(--accent-bright, #86e6ff);}
-.bv-recipe-row.is-artifact .item-link,
-.bv-recipe-row.is-artifact .bv-recipe-name{color:#ffd033;}
-.bv-recipe-qty{
-  font:600 12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  color:var(--text-3, #9fb8c8); white-space:nowrap;
+.bv-cost .bv-crate-body{padding:0 10px 10px;}
+.bv-cost-scroll{
+  max-height:248px; overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
 }
-@media (max-width:380px){ .bv-recipe{grid-template-columns:1fr;} }
+.iv-recipe-row.is-artifact .item-link,
+.iv-recipe-row.is-artifact > span:first-child{color:#ffd033;}
 
 /* reward grid */
-.bv-rewards{display:grid; grid-template-columns:1fr 1fr; gap:5px 10px;}
+.bv-rewards{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:5px 8px;}
 .bv-reward{
-  display:flex; align-items:baseline; gap:7px;
-  padding:6px 8px; border-radius:7px;
+  display:flex; align-items:baseline; gap:6px;
+  padding:5px 7px; border-radius:7px;
   background:rgba(var(--accent-rgb,57,200,255),.045);
   border:1px solid rgba(120,210,255,.06);
   font-size:12.5px;
@@ -6024,7 +6017,6 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .bv-reward-name, .bv-reward .item-link{color:var(--text-1, #f0fbff);}
 .bv-reward.is-element .bv-reward-name,
 .bv-reward.is-element .item-link{color:var(--accent-bright, #86e6ff);}
-@media (max-width:380px){ .bv-rewards{grid-template-columns:1fr;} }
 
 .bv-cap{
   font-size:10.5px; color:var(--text-dim, #7f98a8);
@@ -6079,10 +6071,10 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .bv-bonus .item-link{color:var(--text-1, #f0fbff);}
 
 /* unlocks grid */
-.bv-unlocks{display:grid; grid-template-columns:1fr 1fr; gap:5px 10px;}
+.bv-unlocks{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:5px 8px;}
 .bv-unlock{
   font-size:12.5px;
-  padding:7px 9px; border-radius:7px;
+  padding:6px 8px; border-radius:7px;
   background:rgba(var(--accent-rgb,57,200,255),.045);
   border:1px solid rgba(120,210,255,.06);
 }

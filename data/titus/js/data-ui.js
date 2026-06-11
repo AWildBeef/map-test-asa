@@ -1689,15 +1689,50 @@ function resolveBossRewards(boss){
     else { map.set(iid, { id: iid, mn, mx }); }
   };
 
+  const seenPoolComps = new Set();
+  let poolPicks = null;       // { mn, mx } of the comp that contributed pool sets
+  let poolCompCount = 0;      // suppress picks line if multiple comps contribute
+
   const extractDropComp = (comp, targetMap, poolSets) => {
     if (!comp) return;
-    for (const setRow of (comp.s || [])){
+    const sets = comp.s || [];
+
+    // A comp "picks each set exactly once" when its pick count is fixed and
+    // equals the set count — the guaranteed boss-bag pattern (Element +
+    // Trophy). Anything else (e.g. the Titans picking 12–18 of 5 weighted
+    // sets) is a real loot container and must render as a pool.
+    const cmn = Number(comp.mn), cmx = Number(comp.mx);
+    const picksEachOnce =
+      (Number.isFinite(cmn) && cmn === cmx && cmn === sets.length) ||
+      // Some comps omit the pick count entirely (e.g. The Center's arena
+      // Element bag) — with a single set, that set is the loot.
+      (!Number.isFinite(cmn) && !Number.isFinite(cmx) && sets.length === 1);
+
+    // A set's contents are fixed only when the comp always includes it, it
+    // draws ALL of its entries, and each entry has exactly one possible item
+    // with no drop-chance filter. Quantity ranges (mn–mx) are fine.
+    const setIsDeterministic = (setRow) => {
+      if (!picksEachOnce) return false;
+      const entries = setRow.e || [];
+      if (!entries.length) return false;
+      const smn = Number(setRow.smn ?? 1);
+      const smx = Number(setRow.smx ?? setRow.smn ?? 1);
+      if (smn !== entries.length || smx !== entries.length) return false;
+      if (entries.length > 1 && !(setRow.rwr === 1 || setRow.rwr === true)) return false;
+      return entries.every(e =>
+        Array.isArray(e.i) && e.i.length === 1 &&
+        (e.cg == null || Number(e.cg) >= 1));
+    };
+
+    let pushedPool = false;
+    for (const setRow of sets){
       if (setRow.o != null){
         if (!seenOverrides.has(setRow.o)){
           seenOverrides.add(setRow.o);
           poolSets.push(setRow);
+          pushedPool = true;
         }
-      } else {
+      } else if (setIsDeterministic(setRow)){
         for (const entry of (setRow.e || [])){
           const mn = Number(entry.mn), mx = Number(entry.mx);
           for (const iid of (entry.i || [])){
@@ -1706,7 +1741,17 @@ function resolveBossRewards(boss){
               Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
           }
         }
+      } else if (!seenPoolComps.has(comp)){
+        poolSets.push(setRow);
+        pushedPool = true;
       }
+    }
+    if (pushedPool && !seenPoolComps.has(comp)){
+      seenPoolComps.add(comp);
+      poolCompCount++;
+      poolPicks = (poolCompCount === 1 && Number.isFinite(cmn))
+        ? { mn: comp.mn, mx: comp.mx }
+        : null;
     }
   };
 
@@ -1785,7 +1830,7 @@ function resolveBossRewards(boss){
   return {
     drops: [...totalDrops.values()],
     given: [...givenIds].map(id => ({ id, name: cleanBossText(itemDisplayNameById(id)), mn: 1, mx: 1 })),
-    poolSets, rlsData,
+    poolSets, poolPicks, rlsData,
     crates: arenaCrates, bonusItems
   };
 }
