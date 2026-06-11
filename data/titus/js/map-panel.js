@@ -3189,7 +3189,7 @@ function makeSupplySolidIcon(color, opts = {}){
 }
 
 
-function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer } = {}) {
+function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer, iconOverride = null } = {}) {
   if (!layer || !Array.isArray(points)) return;
 
   const legend = supplyLegendForCurrentMap();
@@ -3202,7 +3202,9 @@ function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer } = {}) {
     const slices = supplyCrateSlicesForPoint(p, legend);
 
     let icon;
-    if (slices.length <= 1) {
+    if (iconOverride) {
+      icon = iconOverride;
+    } else if (slices.length <= 1) {
       icon = makeSupplySolidIcon(slices[0]?.color || "#ffd54a");
     } else {
       icon = makeSupplyPieIcon(slices);
@@ -3777,7 +3779,7 @@ function isDossierNote(name) {
   return String(name || "").toLowerCase().includes("dossier");
 }
 
-function noteTooltipHtml(note) {
+function noteTooltipHtml(note, { hideJump = false } = {}) {
   const [idx, name, ue_x, ue_y] = note;
   const gps = ueToGps(ue_x, ue_y);
   const gpsStr = gps ? `${gps.lat.toFixed(1)}, ${gps.lon.toFixed(1)}` : "N/A";
@@ -3786,7 +3788,7 @@ function noteTooltipHtml(note) {
     <div class="poi-tip-title">${escapeHtml(name)}</div>
     <div class="poi-tip-line">${type} #${idx}</div>
     <div class="poi-tip-line">GPS: ${escapeHtml(gpsStr)}</div>
-    <div class="poi-tip-action note-view-jump" data-note-idx="${idx}">Open in Note View &#8594;</div>
+    ${hideJump ? "" : `<div class="poi-tip-action note-view-jump" data-note-idx="${idx}">Open in Note View &#8594;</div>`}
   </div>`;
 }
 

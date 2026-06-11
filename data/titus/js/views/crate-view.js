@@ -125,7 +125,11 @@ function drawCrate(crateName) {
   
   if (ref.kind === "crate") {
     const supplyRows = cratePoiRowsForSelectedCrate(ref.crateId);
-    addSupplyCrateMarkers(supplyRows, { layer: mapObj.poiLayer });
+    // Artifact crates use the same yellow triangle the Artifacts POI layer
+    // uses, instead of the generic supply dot.
+    const cls = String(crateIdToClass(ref.crateId) || "").toLowerCase();
+    const iconOverride = cls.includes("artifactcrate") ? makeArtifactIcon() : null;
+    addSupplyCrateMarkers(supplyRows, { layer: mapObj.poiLayer, iconOverride });
 
     const hordeRows = hordePoiRowsForSelectedCrate(ref.crateId);
     addHordeMarkers(hordeRows, { layer: mapObj.poiLayer });

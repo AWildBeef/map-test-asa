@@ -6079,3 +6079,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   border:1px solid rgba(120,210,255,.06);
 }
 .bv-unlock .item-link{color:var(--accent-bright, #86e6ff);}
+
+/* boss view markers: glowing terminal dot + skull for arena bosses */
+.boss-terminal-marker{ filter:drop-shadow(0 0 5px rgba(255,210,74,.85)); }
+.poi-boss-skull svg{ filter:drop-shadow(0 0 4px rgba(255,93,93,.75)); }

@@ -63,40 +63,33 @@ function renderNotePanel(note) {
 
   setInfoPanelTitle(name);
   setInfoPanelHTML(`
-    <div class="entry-hero">
-      <div class="entry-hero-title">${escapeHtml(name)}</div>
-      <div class="meta-grid">
-        <div class="meta-cell"><div class="meta-stack">
-          <div class="meta-label">Type</div>
-          <div class="meta-value">${dossier ? "Dino Dossier" : "Explorer Note"}</div>
-        </div></div>
-        <div class="meta-cell"><div class="meta-stack">
-          <div class="meta-label">Index</div>
-          <div class="meta-value">${escapeHtml(String(idx))}</div>
-        </div></div>
-        <div class="meta-cell"><div class="meta-stack">
-          <div class="meta-label">GPS</div>
-          <div class="meta-value">${escapeHtml(gpsStr)}</div>
-        </div></div>
+    <div class="info-section">
+      <div class="lc-chips">
+        <span class="lc-chip">${dossier ? "Dino Dossier" : "Explorer Note"}</span>
+        <span class="lc-chip">Index <b>${escapeHtml(String(idx))}</b></span>
+        <span class="lc-chip">GPS <b>${escapeHtml(gpsStr)}</b></span>
       </div>
     </div>
     <div class="info-section">
-      <div class="info-subtitle">Commands</div>
-      <div class="note-cmd-block">
-        <div class="note-cmd-label">Teleport To Note</div>
-        <div class="info-mono copy-on-click" data-copy="${escapeAttr(teleportCmd)}">${escapeHtml(teleportCmd)}</div>
+      <div class="iv-eyebrow">Commands</div>
+      <div class="iv-cmd-lines">
+        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(teleportCmd)}">
+          <span class="iv-cmd-tag">TP</span>
+          <span class="iv-cmd-text">${escapeHtml(teleportCmd)}</span>
+        </div>
+        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(unlockCmd)}">
+          <span class="iv-cmd-tag">${dossier ? "DOSSIER" : "NOTE"}</span>
+          <span class="iv-cmd-text">${escapeHtml(unlockCmd)}</span>
+        </div>
       </div>
-      <div class="note-cmd-block" style="margin-top:8px;">
-        <div class="note-cmd-label">Unlock Note</div>
-        <div class="info-mono copy-on-click" data-copy="${escapeAttr(unlockCmd)}">${escapeHtml(unlockCmd)}</div>
-      </div>
+      <div class="iv-cmd-hint">tap a command to copy</div>
     </div>
     <div class="info-section">
-      <div class="info-subtitle">UE Coordinates</div>
-      <div class="entry-meta">
-        <div class="entry-meta-line">X: ${escapeHtml(String(Math.round(ue_x)))}</div>
-        <div class="entry-meta-line">Y: ${escapeHtml(String(Math.round(ue_y)))}</div>
-        <div class="entry-meta-line">Z: ${escapeHtml(String(Math.round(ue_z || 0)))}</div>
+      <div class="iv-eyebrow">UE Coordinates</div>
+      <div class="lc-chips">
+        <span class="lc-chip">X <b>${escapeHtml(String(Math.round(ue_x)))}</b></span>
+        <span class="lc-chip">Y <b>${escapeHtml(String(Math.round(ue_y)))}</b></span>
+        <span class="lc-chip">Z <b>${escapeHtml(String(Math.round(ue_z || 0)))}</b></span>
       </div>
     </div>
   `);
@@ -176,7 +169,7 @@ function drawNote(note) {
   if (!latlng) return;
   L.marker(latlng, { icon: _makeNoteIcon(isDossierNote(name)), pane: "poiPane" })
     .addTo(mapObj.poiLayer)
-    .bindTooltip(noteTooltipHtml(note), {
+    .bindTooltip(noteTooltipHtml(note, { hideJump: true }), {
       direction: "auto", sticky: true, offset: [0, -10],
       opacity: 0.97, className: "note-tooltip", autoPan: true
     });

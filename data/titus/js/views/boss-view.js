@@ -8,24 +8,34 @@
 
 // ── Marker icon for a boss summon location ──────────────────────
 // A diamond (echoing the terminal icon) in a distinct boss colour.
-function makeBossIcon(){
-  const size = 46;
+// Skull & crossbones marker for bosses fought directly in the world
+// (no summon terminal — e.g. the Ragnarok world bosses).
+function makeBossSkullIcon(){
+  const size = 30;
   return L.divIcon({
-    className: "poi-icon poi-boss-marker",
+    className: "poi-icon poi-boss-skull",
     html: `
-      <svg width="${size}" height="${size}" viewBox="-10 -12 20 26">
-        <path d="M -3.4 0 L 0 -9 L 3.4 0 L 0 6 Z"
-              fill="#1a1020"
-              stroke="#ffd24a"
-              stroke-width="0.8"
-              opacity="0.97"/>
-        <path d="M -2 0 L 0 -6 L 2 0 L 0 3.5 Z"
-              fill="#ff5d5d"
-              opacity="0.95"/>
+      <svg width="${size}" height="${size}" viewBox="-11 -11 22 22">
+        <g stroke="#f4ecd8" stroke-width="2.4" stroke-linecap="round" opacity="0.95">
+          <line x1="-7.5" y1="-6" x2="7.5" y2="7"/>
+          <line x1="7.5" y1="-6" x2="-7.5" y2="7"/>
+        </g>
+        <g stroke="#111" stroke-width="0.9">
+          <path d="M -5.2 -2.2 a 5.2 5.4 0 1 1 10.4 0 q 0 2.6 -1.7 3.6 l 0 2.4 l -7 0 l 0 -2.4 q -1.7 -1 -1.7 -3.6 Z"
+                fill="#f4ecd8"/>
+          <circle cx="-2.2" cy="-2.4" r="1.55" fill="#111" stroke="none"/>
+          <circle cx="2.2" cy="-2.4" r="1.55" fill="#111" stroke="none"/>
+          <path d="M 0 0.2 l -1 1.7 l 2 0 Z" fill="#111" stroke="none"/>
+          <g stroke="#111" stroke-width="0.8">
+            <line x1="-1.6" y1="2.2" x2="-1.6" y2="3.8"/>
+            <line x1="0" y1="2.2" x2="0" y2="3.8"/>
+            <line x1="1.6" y1="2.2" x2="1.6" y2="3.8"/>
+          </g>
+        </g>
       </svg>
     `,
     iconSize: [size, size],
-    iconAnchor: [size / 2, size * 0.58333]
+    iconAnchor: [size / 2, size / 2]
   });
 }
 
@@ -48,16 +58,35 @@ function drawBoss(bossName){
     if (seen.has(key)) continue;
     seen.add(key);
 
-    L.marker([y, x], { icon: makeBossIcon(), pane: "poiPane" })
-      .addTo(mapObj.poiLayer)
-      .bindTooltip(bossLocationTooltipHtml(boss, loc), {
-        direction: "auto",
-        sticky: true,
-        offset: [0, -14],
-        opacity: 0.97,
-        className: "dark-tooltip term-tooltip",
-        autoPan: true
+    const tipOpts = {
+      direction: "auto",
+      sticky: true,
+      offset: [0, -14],
+      opacity: 0.97,
+      className: "dark-tooltip term-tooltip",
+      autoPan: true
+    };
+
+    let marker;
+    if (loc.terminalIndex != null && !loc.direct){
+      // Terminal-backed location: the same dot the terminal normally shows
+      // (color/size by type), popped with a gold ring + glow.
+      marker = L.circleMarker([y, x], {
+        radius: poiRadius(loc.type),
+        color: "#ffd24a",
+        weight: 2.5,
+        fillColor: poiColor(loc.type),
+        fillOpacity: 0.95,
+        pane: "poiPane",
+        className: "boss-terminal-marker"
       });
+    } else {
+      // Direct arena / world-boss location.
+      marker = L.marker([y, x], { icon: makeBossSkullIcon(), pane: "poiPane" });
+    }
+
+    marker.addTo(mapObj.poiLayer)
+      .bindTooltip(bossLocationTooltipHtml(boss, loc), tipOpts);
   }
 }
 
