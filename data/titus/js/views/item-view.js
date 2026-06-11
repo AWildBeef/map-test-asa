@@ -278,12 +278,16 @@ function renderItemTabInfo(it){
   const itemRow = itemRowById(it.id);
 
   // ── Class / Blueprint as tagged mono rows ──
+  // Data stores the class without the _C suffix; restore it for display/copy.
+  const clsFull = it.class
+    ? (String(it.class).endsWith("_C") ? it.class : `${it.class}_C`)
+    : "";
   const idsHtml = `
     <div class="info-section">
-      ${it.class ? `
-        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(it.class)}">
+      ${clsFull ? `
+        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(clsFull)}">
           <span class="iv-cmd-tag">CLASS</span>
-          <div class="iv-cmd-text">${escapeHtml(it.class)}</div>
+          <div class="iv-cmd-text">${escapeHtml(clsFull)}</div>
         </div>` : ``}
       ${it.blueprint ? `
         <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(it.blueprint)}">
@@ -403,7 +407,7 @@ function renderItemTabEngram(it){
 
     return `
       <div class="info-section">
-        ${chips ? `<div class="lc-chips">${chips}</div>` : ""}
+        ${chips ? `<div class="lc-chips" style="margin-top:4px;">${chips}</div>` : ""}
 
         ${preNames.length ? `
           <div class="iv-eyebrow">Prerequisites</div>
@@ -880,7 +884,7 @@ function renderItemTabCrates(it){
                   <span class="iv-eye"></span>
                   <span class="iv-crate-namewrap">
                     <span class="iv-crate-name">${escapeHtml(row.name)}</span>
-                    <span class="iv-crate-lvl">${row.level != null ? `Req Level ${escapeHtml(String(row.level))}` : "Mission Source"}</span>
+                    <span class="iv-crate-lvl">${row.level != null ? `Req Level ${escapeHtml(String(row.level))}` : "Mission Source"}${bpLabel ? ` · ${escapeHtml(bpLabel)}` : ``}</span>
                   </span>
                   ${pctLabel ? `<span class="iv-crate-pct">${pctLabel}</span>` : ``}
                 </button>
@@ -905,16 +909,6 @@ function renderItemTabCrates(it){
               ${
                 pCombined > 0
                   ? `<div class="lc-pbar"><i style="width:${Math.max(2, Math.round(pCombined * 100))}%"></i></div>`
-                  : ``
-              }
-              ${
-                pctLabel || bpLabel
-                  ? `
-                    <div class="iv-crate-sub">
-                      <span>${pctLabel ? "chance per crate" : ""}</span>
-                      ${bpLabel ? `<span class="iv-mono">${escapeHtml(bpLabel)}</span>` : ``}
-                    </div>
-                  `
                   : ``
               }
 
