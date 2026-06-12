@@ -172,14 +172,115 @@ function buildEntryIndexForCurrentMap(){
 function renderEntryHero(entryName){
   const entryBp = Global.spawn?.entries?.[entryName]?.bp || "";
 
+  const idRow = (tag, value) => value ? `
+    <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(value)}" title="Tap to copy">
+      <span class="iv-cmd-tag">${escapeHtml(tag)}</span>
+      <span class="iv-cmd-text">${escapeHtml(value)}</span>
+    </div>` : "";
+
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(entryName)}</div>
       <div class="info-submeta">Spawn Entry</div>
-      ${renderCopyField("Entry Blueprint", entryBp)}
-      ${renderCopyField("Entry Class", entryName)}
+      <div class="sv-idrows">
+        ${idRow("CLASS", entryName)}
+        ${idRow("BP", entryBp)}
+      </div>
+      <div class="iv-cmd-hint">tap a row to copy</div>
     </div>
   `;
+}
+
+// ── Spawn manager info (md / ii / iim / c / u / dw / wiw / lm / cld / cwd / cdc) ──
+
+// Resolve cdc (OnlyCountDinoClasses) values — single index or array — to
+// display names for chips.
+function cdcDinoNames(cdc){
+  const refs = Array.isArray(cdc) ? cdc : (cdc != null ? [cdc] : []);
+  return refs
+    .map(ref => {
+      const bp = bpForDinoRef(ref);
+      const obj = bp ? getDinoObjByBp(bp) : null;
+      return obj?.n || null;
+    })
+    .filter(Boolean);
+}
+
+function managersForEntryOnCurrentMap(entryName){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  return geom?.entries?.[entryName]?.m || null;
+}
+
+function renderEntryManagersSection(entryName){
+  const managers = managersForEntryOnCurrentMap(entryName);
+  const mgrList = managers ? Object.values(managers) : [];
+  if (!mgrList.length){
+    return `
+      <div class="info-section">
+        <div class="iv-eyebrow">Spawn Managers</div>
+        <div class="info-empty">No manager data on this map.</div>
+      </div>`;
+  }
+
+  const totalMin = mgrList.reduce((s, m) => s + (Number(m?.md) || 0), 0);
+
+  // Group managers that share identical settings so a dozen clones read as
+  // one line instead of a dozen.
+  const groups = new Map();
+  for (const m of mgrList){
+    const zones = (m?.b?.length || 0) + (m?.p?.length || 0);
+    const cdcKey = Array.isArray(m?.cdc) ? [...m.cdc].sort().join(",") : (m?.cdc ?? "");
+    const sig = JSON.stringify([
+      m?.md ?? null, m?.ii ?? null, m?.iim ?? null,
+      m?.c ? 1 : 0, m?.u ? 1 : 0, m?.dw ? 1 : 0, m?.wiw ? 1 : 0,
+      m?.lm ?? null, m?.cld ? 1 : 0, m?.cwd ? 1 : 0, cdcKey, zones
+    ]);
+    if (!groups.has(sig)) groups.set(sig, { mgr: m, count: 0, zones });
+    groups.get(sig).count++;
+  }
+
+  const groupHtml = [...groups.values()].map(({ mgr, count, zones }) => {
+    const md = Number(mgr?.md) || 0;
+    const line = `
+      <div class="sv-mgr-line">
+        <b>${count}</b> manager${count > 1 ? "s" : ""}
+        · Min <b>${escapeHtml(fmt(md))}</b>${count > 1 ? ` each <span class="dim">(${escapeHtml(fmt(md * count))} total)</span>` : ""}
+        ${zones > 1 ? `<span class="dim">· ${zones} linked zones</span>` : ""}
+      </div>`;
+
+    const chips = [];
+    if (mgr?.c)  chips.push(`<span class="lc-chip flag-cave">Cave</span>`);
+    if (mgr?.u)  chips.push(`<span class="lc-chip flag-untame">Untameable</span>`);
+    if (mgr?.ii != null)  chips.push(`<span class="lc-chip">Respawn <b>${escapeHtml(fmtDuration(mgr.ii))}</b></span>`);
+    if (mgr?.iim != null) chips.push(`<span class="lc-chip">Max Respawn <b>${escapeHtml(fmtDuration(mgr.iim))}</b></span>`);
+    if (mgr?.lm != null)  chips.push(`<span class="lc-chip">Level ×<b>${escapeHtml(fmt(mgr.lm))}</b></span>`);
+    if (mgr?.cld) chips.push(`<span class="lc-chip">Counts land dinos only</span>`);
+    if (mgr?.cwd) chips.push(`<span class="lc-chip">Counts water dinos only</span>`);
+    const cdcNames = cdcDinoNames(mgr?.cdc);
+    if (cdcNames.length){
+      chips.push(`<span class="lc-chip">Counts only →</span>` +
+        cdcNames.map(n => `<span class="lc-chip dino" data-open-dino="${escapeAttr(n)}">${escapeHtml(n)}</span>`).join(""));
+    }
+    if (mgr?.dw)  chips.push(`<span class="lc-chip">No wandering</span>`);
+    if (mgr?.wiw) chips.push(`<span class="lc-chip">Ignores wild</span>`);
+
+    return `
+      <div class="sv-mgr">
+        ${line}
+        ${chips.length ? `<div class="lc-chips">${chips.join("")}</div>` : ""}
+      </div>`;
+  }).join("");
+
+  return `
+    <div class="info-section">
+      <div class="iv-eyebrow">Spawn Managers</div>
+      <div class="lc-chips" style="margin-bottom:9px;">
+        <span class="lc-chip">Managers <b>${mgrList.length}</b></span>
+        <span class="lc-chip">Min Desired NPCs <b>${escapeHtml(fmt(totalMin))}</b></span>
+      </div>
+      ${groupHtml}
+    </div>`;
 }
 
 
@@ -188,15 +289,16 @@ function renderEntryTabInfo(entryName){
 
   return `
     <div class="info-section">
-      <div class="info-subtitle">Used On Maps (${maps.length})</div>
+      <div class="iv-eyebrow" style="margin-top:2px;">Used On Maps (${maps.length})</div>
       ${
         maps.length
-          ? `<div class="entry-meta">
-              ${maps.map(m => `<div class="entry-meta-line">${escapeHtml(m)}</div>`).join("")}
+          ? `<div class="lc-chips">
+              ${maps.map(m => `<span class="lc-chip">${escapeHtml(m)}</span>`).join("")}
              </div>`
           : `<div style="color:var(--muted)">No map list found.</div>`
       }
     </div>
+    ${renderEntryManagersSection(entryName)}
   `;
 }
 

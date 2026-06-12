@@ -1252,45 +1252,44 @@ function areAllEntryDinosOpen(entryName, dinoKeys){
 
 function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino, entryName){
   const displayName = dinoObj?.n || bpClass(dinoBp) || "(Unknown)";
-  const bp = dinoBp || "";
-  const nameTag = dinoObj?.t || "";
   const isOpen = isEntryDinoOpen(entryName, dinoBp);
 
   const metaHtml = rowsForThisDino.map((r) => {
     const e = r.entry;
-    const metaLines = buildEntryMetaLines(e);
-    if (!metaLines.length) return "";
+    const lines = [];
+    const gw = e?.groupWeight ?? e?.group_weight;
+    const chances = e?.spawnChances ?? e?.spawn_chances;
+    const lim = e?.spawnLimit ?? e?.spawn_limit;
+    if (gw != null) lines.push(["Entry Weight", fmt(gw)]);
+    if (chances) lines.push(["Spawn Chances", String(chances)]);
+    if (lim != null) lines.push(["Max % To Allow", `${fmt(Number(lim) * 100)}%`]);
+    if (!lines.length) return "";
     return `
-      <div class="entry-meta" style="margin-top:4px;">
-        ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+      <div class="sv-meta">
+        ${lines.map(([label, val]) => `
+          <div class="sv-meta-line">${escapeHtml(label)}: <b>${escapeHtml(val)}</b></div>
+        `).join("")}
       </div>
     `;
   }).join("");
 
   return `
-    <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"}" style="margin-bottom:6px;">
+    <div class="sv-card ${isOpen ? "is-open" : ""}">
       <button
         type="button"
-        class="loot-set-toggle"
+        class="sv-card-head-btn"
         data-entry-dino-toggle="${escapeAttr(dinoBp)}"
       >
-        <div class="loot-set-toggle-main">
-          <div class="info-row">
-            <span class="info-label">${escapeHtml(displayName)}</span>
-          </div>
-        </div>
-        <div class="loot-set-toggle-right">
-          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
-        </div>
+        <span class="sv-card-name">${escapeHtml(displayName)}</span>
+        <span class="sv-card-chev">${isOpen ? "⌄" : "›"}</span>
       </button>
 
-      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+      <div class="sv-card-body" style="display:${isOpen ? "" : "none"};">
         ${metaHtml}
         <button
           type="button"
-          class="fp-btn"
+          class="sv-open"
           data-open-dino="${escapeAttr(displayName)}"
-          style="width:100%; justify-content:center; margin-top:6px;"
         >Open in Dino View ›</button>
       </div>
     </div>

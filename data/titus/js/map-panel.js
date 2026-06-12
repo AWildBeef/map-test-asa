@@ -846,6 +846,50 @@ function drawDino(name){
 }
 
 
+// Seconds -> friendly duration ("24h", "1h 30m", "45s")
+function fmtDuration(seconds){
+  const s = Number(seconds);
+  if (!Number.isFinite(s) || s <= 0) return "";
+  if (s >= 3600){
+    const h = Math.floor(s / 3600);
+    const m = Math.round((s % 3600) / 60);
+    return m ? `${h}h ${m}m` : `${h}h`;
+  }
+  if (s >= 60){
+    const m = Math.floor(s / 60);
+    const r = Math.round(s % 60);
+    return r ? `${m}m ${r}s` : `${m}m`;
+  }
+  return `${Math.round(s)}s`;
+}
+
+// Tooltip content for a spawn box / point: which entry, the manager's
+// minimum, linked-zone note, respawn timers, counted classes, and flags.
+function spawnBoxTooltipHtml(entryName, mgr, zoneCount){
+  const md = Number(mgr?.md) || 0;
+
+  const rows = [];
+  if (mgr?.ii != null)  rows.push(`<div class="sbt-row">Respawn: <b>${escapeHtml(fmtDuration(mgr.ii))}</b></div>`);
+  if (mgr?.iim != null) rows.push(`<div class="sbt-row">Max Respawn: <b>${escapeHtml(fmtDuration(mgr.iim))}</b></div>`);
+  if (typeof cdcDinoNames === "function"){
+    const names = cdcDinoNames(mgr?.cdc);
+    if (names.length) rows.push(`<div class="sbt-row">Counts only: <b>${escapeHtml(names.join(", "))}</b></div>`);
+  }
+
+  const flags = [];
+  if (mgr?.c) flags.push(`<span class="lc-chip flag-cave">Cave</span>`);
+  if (mgr?.u) flags.push(`<span class="lc-chip flag-untame">Untameable</span>`);
+
+  return `
+    <div class="sbt">
+      <div class="sbt-entry">${escapeHtml(entryName)}</div>
+      <div class="sbt-min">Min Desired: <b>${escapeHtml(String(md))}</b></div>
+      ${zoneCount > 1 ? `<div class="sbt-link">⛓ shared across ${zoneCount} linked zones</div>` : ""}
+      ${rows.join("")}
+      ${flags.length ? `<div class="sbt-flags">${flags.join("")}</div>` : ""}
+    </div>`;
+}
+
 function drawEntry(entryName, rarityScore){
 
   const mapMeta = MAPS.find(m => m.id === State.mapId);
@@ -866,15 +910,43 @@ function drawEntry(entryName, rarityScore){
     const color = rarityToColor(rarityLabel);
     const style = styleForEntry(meta, color);
 
+    const zoneCount = (mgr?.b?.length || 0) + (mgr?.p?.length || 0);
+    const tipHtml = spawnBoxTooltipHtml(entryName, mgr, zoneCount);
+    const tipOpts = {
+      direction: "top",
+      sticky: false,
+      opacity: 0.97,
+      className: "dark-tooltip spawn-box-tip"
+    };
+
+    // Layers of this manager, so tapping one zone highlights its siblings.
+    const mgrLayers = [];
+    const wireLinkedHighlight = (layer) => {
+      mgrLayers.push(layer);
+      if (zoneCount <= 1) return;
+      layer.on("tooltipopen", () => {
+        for (const sib of mgrLayers){
+          sib.getElement?.()?.classList.add("spawn-linked-hi");
+        }
+      });
+      layer.on("tooltipclose", () => {
+        for (const sib of mgrLayers){
+          sib.getElement?.()?.classList.remove("spawn-linked-hi");
+        }
+      });
+    };
+
     // boxes
     for (const box of mgr.b || []) {
       const [x, y, w, h] = box;
       if (![x, y, w, h].every(Number.isFinite)) continue;
 
-      L.rectangle([[y, x], [y + h, x + w]], {
+      const rect = L.rectangle([[y, x], [y + h, x + w]], {
         ...style,
         pane: "spawnPane"
       }).addTo(mapObj.layer);
+      rect.bindTooltip(tipHtml, tipOpts);
+      wireLinkedHighlight(rect);
     }
 
     // points
@@ -882,7 +954,7 @@ function drawEntry(entryName, rarityScore){
       const [x, y] = pt;
       if (![x, y].every(Number.isFinite)) continue;
 
-      L.circleMarker([y, x], {
+      const ptMarker = L.circleMarker([y, x], {
         radius: 3,
         color: style.color,
         weight: style.weight,
@@ -892,6 +964,8 @@ function drawEntry(entryName, rarityScore){
         dashArray: style.dashArray,
         pane: "spawnPane"
       }).addTo(mapObj.layer);
+      ptMarker.bindTooltip(tipHtml, tipOpts);
+      wireLinkedHighlight(ptMarker);
     }
   }
 }

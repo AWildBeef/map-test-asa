@@ -6222,3 +6222,86 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .dv-region-idx{
   font-size:10px; letter-spacing:1px; color:var(--text-dim, #7f98a8); font-weight:700;
 }
+
+/* ============================================================
+   SPAWN VIEW — entry cards / manager groups / box tooltips
+   ============================================================ */
+
+.sv-idrows{display:flex; flex-direction:column; gap:6px; margin-top:9px;}
+
+/* dino cards in the entry panel */
+.sv-card{
+  border-radius:11px; margin-bottom:7px; overflow:hidden;
+  background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
+  border:1px solid rgba(120,210,255,.06);
+}
+.sv-card-head-btn{
+  width:100%; display:flex; align-items:center; gap:8px;
+  background:none; border:0; padding:10px 14px; cursor:pointer;
+  font-family:inherit; text-align:left; color:inherit;
+}
+.sv-card-name{
+  flex:1; min-width:0; font-size:13px; font-weight:700;
+  color:var(--text-1, #f0fbff);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.sv-card-chev{color:var(--text-dim, #7f98a8); font-size:13px;}
+.sv-card-body{padding:0 14px 10px;}
+.sv-meta{margin-top:2px;}
+.sv-meta + .sv-meta{margin-top:8px; padding-top:7px; border-top:1px solid rgba(120,210,255,.07);}
+.sv-meta-line{font-size:12px; color:var(--text-3, #9fb8c8); padding:1.5px 0;}
+.sv-meta-line b{
+  color:var(--text-1, #f0fbff); font-weight:600;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.sv-open{
+  width:100%; margin-top:7px; padding:7px 0; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16));
+  background:rgba(var(--accent-rgb,57,200,255),.06);
+  color:var(--accent-bright, #86e6ff);
+  font-size:12.5px; font-weight:600; font-family:inherit; cursor:pointer;
+}
+
+/* manager groups */
+.sv-mgr{
+  border:1px solid rgba(120,210,255,.06); border-radius:10px;
+  background:rgba(var(--accent-rgb,57,200,255),.035);
+  padding:9px 11px; margin-bottom:7px;
+}
+.sv-mgr-line{font-size:12.5px; color:var(--text-2, #d9edf7); margin-bottom:6px;}
+.sv-mgr-line b{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-1, #f0fbff); font-weight:600;
+}
+.sv-mgr-line .dim{color:var(--text-dim, #7f98a8); font-size:11px;}
+
+/* chip variants */
+.lc-chip.dino{
+  color:var(--accent-bright, #86e6ff);
+  border-color:rgba(var(--accent-rgb,57,200,255),.4);
+  cursor:pointer;
+}
+.lc-chip.flag-cave{color:#ffd24a; border-color:rgba(255,210,74,.4);}
+.lc-chip.flag-untame{color:#c9d6df; border-style:dashed;}
+
+/* spawn box tooltip */
+.spawn-box-tip{max-width:236px;}
+.sbt-entry{
+  font:600 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--accent-bright, #86e6ff); word-break:break-all;
+}
+.sbt-min{font-size:12.5px; color:var(--text-1, #f0fbff); margin-top:5px;}
+.sbt-min b, .sbt-row b{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-weight:600;
+  color:var(--text-1, #f0fbff);
+}
+.sbt-link{font-size:10.5px; color:var(--gold, #ffd033); margin-top:2px;}
+.sbt-row{font-size:11px; color:var(--text-3, #9fb8c8); margin-top:4px;}
+.sbt-flags{display:flex; flex-wrap:wrap; gap:5px; margin-top:7px;}
+.sbt-flags .lc-chip{font-size:10px; padding:3px 8px;}
+
+/* sibling zones of the tapped manager */
+.spawn-linked-hi{
+  stroke:#ffffff !important;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,.7));
+}
