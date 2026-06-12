@@ -6083,3 +6083,132 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 /* boss view markers: glowing terminal dot + skull for arena bosses */
 .boss-terminal-marker{ filter:drop-shadow(0 0 5px rgba(255,210,74,.85)); }
 .poi-boss-skull svg{ filter:drop-shadow(0 0 4px rgba(255,93,93,.75)); }
+
+/* ============================================================
+   DINO VIEW — command builder / spawn cards / settings / regions
+   ============================================================ */
+
+/* command builder */
+.dv-cmdrow{display:flex; align-items:center; gap:7px; flex-wrap:wrap;}
+.dv-seg{display:flex; border:1px solid var(--border-mid, rgba(120,210,255,.16)); border-radius:8px; overflow:hidden;}
+.dv-seg button{
+  background:none; border:0; color:var(--text-3, #9fb8c8);
+  font-size:12px; font-weight:600; font-family:inherit;
+  padding:6px 11px; cursor:pointer;
+}
+.dv-seg button.on{background:rgba(var(--accent-rgb,57,200,255),.16); color:var(--accent-bright, #86e6ff);}
+.dv-skip{
+  display:flex; align-items:center; gap:6px; padding:5px 9px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16)); border-radius:8px; cursor:pointer;
+  font-size:11px; font-weight:600; color:var(--text-3, #9fb8c8);
+  background:none; font-family:inherit;
+}
+.dv-skip .dot{width:8px; height:8px; border-radius:50%; border:1.5px solid var(--text-dim, #7f98a8);}
+.dv-skip.on{color:var(--accent-bright, #86e6ff); border-color:rgba(var(--accent-rgb,57,200,255),.5);}
+.dv-skip.on .dot{
+  background:var(--accent, #39c8ff); border-color:var(--accent, #39c8ff);
+  box-shadow:0 0 6px rgba(var(--accent-rgb,57,200,255),.8);
+}
+.dv-skip.is-disabled{opacity:.45; cursor:default;}
+
+/* spawn entry cards — glow rail carries on/off */
+.dv-entry{
+  position:relative; border-radius:11px; margin-bottom:7px; overflow:hidden;
+  background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
+  border:1px solid rgba(120,210,255,.06);
+  opacity:.55; transition:opacity .15s;
+}
+.dv-entry::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:rgba(127,214,255,.18); transition:all .15s;
+}
+.dv-entry.is-on{opacity:1; border-color:var(--border-mid, rgba(120,210,255,.16));}
+.dv-entry.is-on::before{
+  width:5px; background:var(--accent, #39c8ff);
+  box-shadow:0 0 10px 1px rgba(var(--accent-rgb,57,200,255),.75), 0 0 26px rgba(var(--accent-rgb,57,200,255),.35);
+}
+.dv-entry-head{display:flex; align-items:center;}
+.dv-entry-main{
+  flex:1; min-width:0;
+  background:none; border:0; padding:11px 4px 11px 15px; cursor:pointer;
+  font-family:inherit; text-align:left; color:inherit;
+}
+.dv-entry-name{
+  display:block;
+  font:600 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-2, #d9edf7); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.dv-entry.is-on .dv-entry-name{color:var(--text-1, #f0fbff);}
+.dv-entry-chev{
+  background:none; border:0; color:var(--text-dim, #7f98a8); font-size:13px;
+  padding:11px 14px; cursor:pointer;
+}
+.dv-entry-body{padding:0 14px 11px;}
+.dv-entry-meta{padding-top:1px;}
+.dv-entry-meta-line{font-size:12px; color:var(--text-3, #9fb8c8); padding:2.5px 0;}
+.dv-entry-meta-line b{
+  color:var(--text-1, #f0fbff); font-weight:600;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.dv-openspawn{
+  width:100%; margin-top:9px; padding:8px 0; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16));
+  background:rgba(var(--accent-rgb,57,200,255),.06);
+  color:var(--accent-bright, #86e6ff);
+  font-size:12.5px; font-weight:600; font-family:inherit; cursor:pointer;
+}
+
+/* server settings card */
+.dv-settings{
+  border:1px solid var(--border-mid, rgba(120,210,255,.16)); border-radius:12px; overflow:hidden;
+  background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
+  margin-top:14px;
+}
+.dv-settings-head{
+  width:100%; display:flex; align-items:center; gap:9px;
+  padding:11px 13px; background:none; border:0; cursor:pointer;
+  color:inherit; font-family:inherit; text-align:left;
+}
+.dv-settings-name{flex:1; font-size:13.5px; font-weight:700; color:var(--text-1, #f0fbff);}
+.dv-settings-sub{font-size:10.5px; color:var(--text-dim, #7f98a8);}
+.dv-settings-chev{color:var(--text-dim, #7f98a8); font-size:13px;}
+.dv-settings-body{padding:2px 13px 12px;}
+.dv-settings:not(.is-open) .dv-settings-body{display:none;}
+.dv-set-row{
+  display:grid; grid-template-columns:1.1fr repeat(4, 1fr); gap:5px;
+  align-items:center; padding:4px 0;
+}
+.dv-set-row.head{padding-bottom:2px;}
+.dv-set-row.head div{
+  font-size:9px; font-weight:700; letter-spacing:.8px; color:var(--text-dim, #7f98a8);
+  text-align:center; text-transform:uppercase;
+}
+.dv-set-row.head div:first-child{text-align:left;}
+.dv-set-name{font-size:11.5px; color:var(--text-3, #9fb8c8); font-weight:600;}
+.dv-set-row input{
+  width:100%; padding:4px 2px; text-align:center;
+  background:rgba(0,0,0,.25); border:1px solid rgba(120,210,255,.06); border-radius:6px;
+  color:var(--text-1, #f0fbff);
+  font:600 11.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  outline:none;
+}
+.dv-set-row input:focus{border-color:rgba(var(--accent-rgb,57,200,255),.5);}
+.dv-set-row input.changed{color:var(--gold, #ffd033); border-color:rgba(255,208,51,.4);}
+.dv-reset{
+  margin-top:9px; padding:6px 13px; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16)); background:none;
+  color:var(--text-3, #9fb8c8); font-size:11.5px; font-weight:600;
+  font-family:inherit; cursor:pointer;
+}
+.dv-set-note{font-size:10px; color:var(--text-dim, #7f98a8); margin-top:7px; line-height:1.5;}
+
+/* identifier rows */
+.dv-idrows{display:flex; flex-direction:column; gap:6px;}
+
+/* color regions: name line above the swatch grid */
+.color-region-row.dv-region{display:block; margin-bottom:14px;}
+.dv-region-title{display:flex; align-items:baseline; gap:8px; margin-bottom:6px;}
+.dv-region-name{font-size:13px; font-weight:700; color:var(--text-1, #f0fbff);}
+.dv-region-idx{
+  font-size:10px; letter-spacing:1px; color:var(--text-dim, #7f98a8); font-weight:700;
+}
