@@ -6090,26 +6090,36 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 
 /* command builder */
 .dv-cmdrow{display:flex; align-items:center; gap:7px; flex-wrap:wrap;}
-.dv-seg{display:flex; border:1px solid var(--border-mid, rgba(120,210,255,.16)); border-radius:8px; overflow:hidden;}
-.dv-seg button{
-  background:none; border:0; color:var(--text-3, #9fb8c8);
-  font-size:12px; font-weight:600; font-family:inherit;
-  padding:6px 11px; cursor:pointer;
+.dv-flip{
+  min-width:74px; padding:6px 13px; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16));
+  background:rgba(0,0,0,.22); color:var(--text-2, #d9edf7);
+  font-size:12.5px; font-weight:700; font-family:inherit; cursor:pointer;
 }
-.dv-seg button.on{background:rgba(var(--accent-rgb,57,200,255),.16); color:var(--accent-bright, #86e6ff);}
+.dv-flip.is-tamed{
+  color:var(--accent-bright, #86e6ff);
+  border-color:rgba(var(--accent-rgb,57,200,255),.5);
+  background:rgba(var(--accent-rgb,57,200,255),.12);
+}
 .dv-skip{
-  display:flex; align-items:center; gap:6px; padding:5px 9px;
+  padding:6px 11px;
   border:1px solid var(--border-mid, rgba(120,210,255,.16)); border-radius:8px; cursor:pointer;
   font-size:11px; font-weight:600; color:var(--text-3, #9fb8c8);
   background:none; font-family:inherit;
 }
-.dv-skip .dot{width:8px; height:8px; border-radius:50%; border:1.5px solid var(--text-dim, #7f98a8);}
-.dv-skip.on{color:var(--accent-bright, #86e6ff); border-color:rgba(var(--accent-rgb,57,200,255),.5);}
-.dv-skip.on .dot{
-  background:var(--accent, #39c8ff); border-color:var(--accent, #39c8ff);
-  box-shadow:0 0 6px rgba(var(--accent-rgb,57,200,255),.8);
+.dv-skip.on{
+  color:var(--accent-bright, #86e6ff);
+  border-color:rgba(var(--accent-rgb,57,200,255),.5);
+  background:rgba(var(--accent-rgb,57,200,255),.1);
 }
 .dv-skip.is-disabled{opacity:.45; cursor:default;}
+
+/* hero condensing: the spawn-cmd-block flex gap does the spacing */
+.dino-hero .spawn-cmd-block{margin:4px 0 2px; gap:5px;}
+.dino-hero .spawn-cmd-block .iv-eyebrow{margin:0 0 -1px;}
+.dino-hero .iv-cmd-input input{width:46px;}
+.dino-hero .iv-cmd-lines{margin-top:0;}
+.dino-hero .iv-cmd-hint{margin:-4px 0 -2px; font-size:9.5px;}
 
 /* spawn entry cards — glow rail carries on/off */
 .dv-entry{
@@ -6130,12 +6140,12 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .dv-entry-head{display:flex; align-items:center;}
 .dv-entry-main{
   flex:1; min-width:0;
-  background:none; border:0; padding:11px 4px 11px 15px; cursor:pointer;
+  background:none; border:0; padding:10px 4px 10px 15px; cursor:pointer;
   font-family:inherit; text-align:left; color:inherit;
 }
 .dv-entry-name{
   display:block;
-  font:600 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px; font-weight:600;
   color:var(--text-2, #d9edf7); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 .dv-entry.is-on .dv-entry-name{color:var(--text-1, #f0fbff);}
@@ -6143,15 +6153,15 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   background:none; border:0; color:var(--text-dim, #7f98a8); font-size:13px;
   padding:11px 14px; cursor:pointer;
 }
-.dv-entry-body{padding:0 14px 11px;}
-.dv-entry-meta{padding-top:1px;}
-.dv-entry-meta-line{font-size:12px; color:var(--text-3, #9fb8c8); padding:2.5px 0;}
+.dv-entry-body{padding:0 14px 10px;}
+.dv-entry-meta{padding-top:0;}
+.dv-entry-meta-line{font-size:12px; color:var(--text-3, #9fb8c8); padding:1.5px 0;}
 .dv-entry-meta-line b{
   color:var(--text-1, #f0fbff); font-weight:600;
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 .dv-openspawn{
-  width:100%; margin-top:9px; padding:8px 0; border-radius:8px;
+  width:100%; margin-top:7px; padding:7px 0; border-radius:8px;
   border:1px solid var(--border-mid, rgba(120,210,255,.16));
   background:rgba(var(--accent-rgb,57,200,255),.06);
   color:var(--accent-bright, #86e6ff);
