@@ -1057,7 +1057,7 @@ function getSelectedDinoGroup(name){
   )].sort((a,b)=>a.localeCompare(b));
 
   const entries = entryList.map(entryName => {
-    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+    const rows = spawnRowsForEntry(entryName);
 
     let groupWeight = 0;
     let spawnMultiplier = 1;

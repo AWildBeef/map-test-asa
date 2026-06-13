@@ -87,10 +87,7 @@ function downgradeRarity(label,steps){
 /*=========MAP=============*/
 
 function mapNamesForEntry(entryName){
-  const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
-    ? Global.spawn.entryMaps[entryName]
-    : [];
-
+  const codes = entryMapCodesForClass(entryName);
   return codes.map(code => Global.spawn?.mapLegend?.[code] || code);
 }
 
@@ -587,16 +584,22 @@ function rebuildMapIndices(){
   const mapCode = mapMeta?.mapCode;
 
   // 1) which entries are on this map?
-  for (const [entryName, maps] of Object.entries(spawn.entryMaps || {})){
-    if (Array.isArray(maps) && maps.includes(mapCode)){
-      State.mapEntries.add(entryName);
-    }
+  // entryMaps is keyed by entry id (bp-keyed schema) or class name (legacy /
+  // mod data). The UI keeps speaking class names — unique within a map even
+  // when globally ambiguous — and State.entryIdByClass remembers which key
+  // holds this map's data for that class.
+  State.entryIdByClass = new Map();
+  for (const [key, maps] of Object.entries(spawn.entryMaps || {})){
+    if (!(Array.isArray(maps) && maps.includes(mapCode))) continue;
+    const entryName = spawn.entries?.[key]?.n || key;
+    State.mapEntries.add(entryName);
+    State.entryIdByClass.set(entryName, key);
   }
 
   // 2) build entry -> dinos and dino -> entries USING WORLD REPLACEMENTS
   for (const entryName of State.mapEntries){
 
-    const rows = spawn.entries?.[entryName]?.d || [];
+    const rows = spawnRowsForEntry(entryName);
     const finalBpsForEntry = new Set();
 
     for (const r of rows){
@@ -1666,10 +1669,11 @@ function globalBpsForName(name){
 function getEntryRowsAllMaps(){
   const rows = [];
 
-  for (const [entryName, maps] of Object.entries(Global.spawn?.entryMaps || {})){
+  for (const [key, maps] of Object.entries(Global.spawn?.entryMaps || {})){
     const codes = Array.isArray(maps) ? maps : [];
     const mapNames = codes.map(mapNameFromCode);
-    const dinoNames = dinoNamesForEntryGlobal(entryName);
+    const entryName = Global.spawn?.entries?.[key]?.n || key;
+    const dinoNames = dinoNamesForEntryGlobal(key);
 
     rows.push({
       kind: "entry",
@@ -1735,7 +1739,7 @@ function getDinoRowsAllMaps(){
 
         const rec = byName.get(name);
         rec.bps.add(finalBp);
-        rec.entryNames.add(entryName);
+        rec.entryNames.add(entryData?.n || entryName);
 
         for (const code of codes) {
           const mapName = Global.spawn?.mapLegend?.[code] || code;
@@ -1816,7 +1820,7 @@ function getDinoRowsCurrentMap() {
 
       if (!foundInThisEntry) continue;
 
-      globalEntrySet.add(entryName);
+      globalEntrySet.add(entryData?.n || entryName);
 
       const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
         ? Global.spawn.entryMaps[entryName]

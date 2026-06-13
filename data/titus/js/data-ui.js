@@ -188,6 +188,7 @@ async function loadSelectedSource() {
     const modWorldRepl = decoded.worldReplacements;
 
     Global.spawn = {
+      entryIndex: Global.baseSpawn?.entryIndex || [],
       mapLegend: {
         ...(Global.baseSpawn?.mapLegend || {}),
         ...(mod.mapLegend || {})
@@ -366,33 +367,90 @@ function isEntryVisible(dinoKey, idx){
 
 
 function mergeEntryTables(baseEntries, modEntries){
-  const out = { ...baseEntries };
+  // Base entries are id-keyed ({ n: className, d }); mod entries are
+  // class-keyed. A mod that injects rows into a vanilla entry names it by
+  // class, so map class -> base id(s) and append there. Anything else is
+  // added under its class key, which the spawn-entry resolvers accept.
+  const out = {};
+  for (const [k, v] of Object.entries(baseEntries || {})){
+    out[k] = { ...v, d: [...(v?.d || [])] };
+  }
+
+  const idsByClass = new Map();
+  for (const [k, v] of Object.entries(out)){
+    const cls = v?.n || k;
+    if (!idsByClass.has(cls)) idsByClass.set(cls, []);
+    idsByClass.get(cls).push(k);
+  }
 
   for (const [entryName, modEntry] of Object.entries(modEntries || {})){
-    if (!out[entryName]){
+    const modRows = Array.isArray(modEntry?.d) ? modEntry.d : [];
+    const targets = idsByClass.get(entryName);
+
+    if (!targets?.length){
       out[entryName] = {
+        n: entryName,
         bp: modEntry?.bp || "",
-        d: [...(modEntry?.d || [])]
+        d: [...modRows]
       };
       continue;
     }
 
-    const baseRows = Array.isArray(out[entryName].d) ? out[entryName].d : [];
-    const modRows = Array.isArray(modEntry?.d) ? modEntry.d : [];
-
-    out[entryName] = {
-      bp: out[entryName].bp || modEntry?.bp || "",
-      d: [...baseRows, ...modRows]
-    };
+    for (const id of targets){
+      out[id] = {
+        ...out[id],
+        bp: out[id].bp || modEntry?.bp || "",
+        d: [...out[id].d, ...modRows]
+      };
+    }
   }
 
   return out;
 }
 
 
+// ── Spawn entry resolution ──────────────────────────────────────────────
+// spawn_global entries are keyed by entry id (an index into entryIndex,
+// which holds the full blueprint paths). Class names are NOT globally
+// unique (e.g. DinoSpawnEntries_Cats_C exists on both Astraeos and
+// Valguero with different bps) but ARE unique within a map, so
+// rebuildMapIndices records a per-map class -> key map. These helpers
+// accept a class name, a raw id key, or a legacy class key (mod data).
+
+function spawnEntryIdForClass(entryName){
+  return State.entryIdByClass?.get?.(entryName) ?? null;
+}
+
+function spawnEntryByName(entryName){
+  const ents = Global.spawn?.entries || {};
+  const id = spawnEntryIdForClass(entryName);
+  if (id != null && ents[id]) return ents[id];
+  return ents[entryName] || null;
+}
+
+function spawnRowsForEntry(entryName){
+  return spawnEntryByName(entryName)?.d || [];
+}
+
+function spawnBpForEntry(entryName){
+  const id = spawnEntryIdForClass(entryName);
+  if (id != null){
+    const viaIndex = Global.spawn?.entryIndex?.[Number(id)];
+    if (viaIndex) return viaIndex;
+  }
+  return spawnEntryByName(entryName)?.bp || "";
+}
+
+function entryMapCodesForClass(entryName){
+  const em = Global.spawn?.entryMaps || {};
+  const id = spawnEntryIdForClass(entryName);
+  const codes = (id != null ? em[id] : undefined) ?? em[entryName];
+  return Array.isArray(codes) ? codes : [];
+}
+
 function entryTotalExpected(entryName){
 
-  const rows=Global.spawn?.entries?.[entryName]?.d||[];
+  const rows = spawnRowsForEntry(entryName);
 
   let sum=0;
 
@@ -410,7 +468,7 @@ function entryTotalExpected(entryName){
 
 function entryRarityForBps(entryName, bpSet){
 
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  const rows = spawnRowsForEntry(entryName);
   if (!rows.length) return 0;
 
   let totalExpected = 0;
@@ -494,7 +552,7 @@ function entryManagerMinStats(entryName){
 
 function entryRarityForEntry(entryName){
 
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  const rows = spawnRowsForEntry(entryName);
   if (!rows.length) return 0;
 
   let totalExpected = 0;
@@ -648,7 +706,7 @@ async function buildSources(){
 }
 
 function dinoNamesForEntryGlobal(entryName){
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  const rows = spawnRowsForEntry(entryName);
   const names = new Set();
 
   const restrictToMod = !activeSourceIsOfficial();
@@ -3015,6 +3073,7 @@ async function buildMergedGroupSource(src){
   }
 
   let mergedSpawn = {
+    entryIndex: Global.baseSpawn?.entryIndex || [],
     mapLegend: { ...(Global.baseSpawn?.mapLegend || {}) },
     entryMaps: { ...(Global.baseSpawn?.entryMaps || {}) },
     entries: { ...(Global.baseSpawn?.entries || {}) },
@@ -3041,6 +3100,7 @@ async function buildMergedGroupSource(src){
     const decoded = decodeModSource(mod, baseIndex);
 
     mergedSpawn = {
+      entryIndex: mergedSpawn.entryIndex || [],
       mapLegend: {
         ...(mergedSpawn.mapLegend || {}),
         ...(mod.mapLegend || {})
@@ -4141,7 +4201,7 @@ window.debugDinoOnMap = (bpSubstr) => {
   // 4. What entries on this map mention this BP in their raw data?
   console.log("\n--- Raw entry data search ---");
   for (const entryName of State.mapEntries){
-    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+    const rows = spawnRowsForEntry(entryName);
     for (const r of rows){
       const rawBp = String(r?.[0] || "");
       if (rawBp.toLowerCase().includes(lower)){

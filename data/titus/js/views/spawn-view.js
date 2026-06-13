@@ -1,9 +1,7 @@
 
 
 function mapsForEntry(entryName){
-  const codes = Global.spawn?.entryMaps?.[entryName] || [];
-  if (!Array.isArray(codes)) return [];
-
+  const codes = entryMapCodesForClass(entryName);
   return codes.map(code => {
     return Global.spawn?.mapLegend?.[code] || code;
   });
@@ -30,9 +28,7 @@ function buildMapEntryBrowserRows(){
   return [...State.mapEntries]
     .sort((a, b) => a.localeCompare(b))
     .map(entryName => {
-      const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
-        ? Global.spawn.entryMaps[entryName]
-        : [];
+      const codes = entryMapCodesForClass(entryName);
 
       const mapNames = codes.map(code => Global.spawn?.mapLegend?.[code] || code);
       const uniqueHere = (codes.length === 1 && codes[0] === curCode);
@@ -132,7 +128,7 @@ function buildEntryIndexForCurrentMap(){
   const idx = {};
 
   for (const entryName of State.mapEntries){
-    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+    const rows = spawnRowsForEntry(entryName);
 
     for (const r of rows){
       // r[0] is a dino reference: a numeric dino index in current data, or a
@@ -170,7 +166,7 @@ function buildEntryIndexForCurrentMap(){
 
 
 function renderEntryHero(entryName){
-  const entryBp = Global.spawn?.entries?.[entryName]?.bp || "";
+  const entryBp = spawnBpForEntry(entryName);
 
   const idRow = (tag, value) => value ? `
     <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(value)}" title="Tap to copy">
