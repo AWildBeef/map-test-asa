@@ -1971,6 +1971,59 @@ function installPanelTitleFitter(panelEl, opts = {}) {
 }
 
 
+// ── Horizontal panel drag (desktop only) ────────────────────────────────
+// The header acts as a drag handle. Vertical position stays locked.
+// Saved to localStorage so it persists across sessions.
+function installPanelDrag(panel){
+  const header = panel.querySelector(".fp-header");
+  if (!header) return;
+
+  let dragging = false;
+  let startX = 0;
+  let startLeft = 0;
+
+  function isDesktop(){ return window.innerWidth > 699; }
+
+  header.addEventListener("mousedown", (e) => {
+    // Don't drag when clicking buttons inside the header
+    if (e.target.closest("button, a, .fp-btn")) return;
+    if (!isDesktop()) return;
+
+    dragging = true;
+    startX = e.clientX;
+    startLeft = panel.offsetLeft;
+    header.style.cursor = "grabbing";
+    e.preventDefault();
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const maxLeft = window.innerWidth - panel.offsetWidth - 2;
+    const newLeft = Math.max(2, Math.min(maxLeft, startLeft + dx));
+    panel.style.left = `${newLeft}px`;
+  });
+
+  document.addEventListener("mouseup", () => {
+    if (!dragging) return;
+    dragging = false;
+    header.style.cursor = "";
+    if (isDesktop()){
+      localStorage.setItem("panelLeft", panel.offsetLeft);
+    }
+  });
+
+  // Re-clamp if viewport shrinks while panel is positioned far right
+  window.addEventListener("resize", () => {
+    if (!isDesktop()) return;
+    const maxLeft = window.innerWidth - panel.offsetWidth - 2;
+    if (panel.offsetLeft > maxLeft){
+      panel.style.left = `${Math.max(2, maxLeft)}px`;
+      localStorage.setItem("panelLeft", panel.offsetLeft);
+    }
+  });
+}
+
 function ensureInfoPanel(){
   let panel = document.getElementById("dinoInfoPanel");
   if (panel) return panel;
@@ -2033,9 +2086,15 @@ function ensureInfoPanel(){
   };
 
   panel.style.position = "absolute";
-  panel.style.left = "2px";
   panel.style.top = "2px";
   panel.style.zIndex = "800";
+
+  // Restore saved horizontal position on desktop; default to left: 2px
+  const savedLeft = localStorage.getItem("panelLeft");
+  panel.style.left = (savedLeft && window.innerWidth > 699) ? `${savedLeft}px` : "2px";
+
+  // ── Horizontal drag (desktop only) ──
+  installPanelDrag(panel);
 
   return panel;
 }

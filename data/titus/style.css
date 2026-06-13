@@ -6305,3 +6305,15 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   stroke:#ffffff !important;
   filter:drop-shadow(0 0 6px rgba(255,255,255,.7));
 }
+
+/* ── Desktop panel drag handle ── */
+@media (min-width:700px){
+  #dinoInfoPanel .fp-header{
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  #dinoInfoPanel .fp-header:active{
+    cursor: grabbing;
+  }
+}
