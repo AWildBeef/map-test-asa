@@ -181,7 +181,6 @@ function renderEntryHero(entryName){
   return `
     <div class="entry-hero">
       <div class="entry-hero-title">${escapeHtml(entryName)}</div>
-      <div class="info-submeta">Spawn Entry</div>
       <div class="sv-idrows">
         ${idRow("CLASS", entryName)}
         ${idRow("BP", entryBp)}

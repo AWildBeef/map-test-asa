@@ -913,10 +913,12 @@ function drawEntry(entryName, rarityScore){
     const zoneCount = (mgr?.b?.length || 0) + (mgr?.p?.length || 0);
     const tipHtml = spawnBoxTooltipHtml(entryName, mgr, zoneCount);
     const tipOpts = {
-      direction: "top",
-      sticky: false,
+      direction: "auto",
+      sticky: true,
+      offset: [0, -10],
       opacity: 0.97,
-      className: "dark-tooltip spawn-box-tip"
+      className: "dark-tooltip spawn-box-tip",
+      autoPan: true
     };
 
     // Layers of this manager, so tapping one zone highlights its siblings.
