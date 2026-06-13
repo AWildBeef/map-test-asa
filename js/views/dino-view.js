@@ -102,9 +102,24 @@ function buildSdfSummary(displayName, tamed, level, skipBonus) {
   const lvl  = Math.max(1, Math.round(Number(level) || 1));
   // When tamed without skip-bonus the game applies a 50% level bonus on spawn
   const effectiveLvl = (tamed && !skipBonus) ? Math.round(lvl * 1.5) : lvl;
-  const lvlStr = `level ${effectiveLvl}`;
-  return `Spawns a ${kind} ${lvlStr} ${escapeHtml(displayName)}`;
+  return `Spawns a <b>${kind}</b> level <b>${effectiveLvl}</b> ${escapeHtml(displayName)}${(tamed && skipBonus) ? " <b>(no bonus levels)</b>" : ""}`;
 }
+
+// Tame type lookup: dinos have a numeric `tt` that indexes into Global.dinos.tt
+// Returns a friendly label (e.g. "Knockout", "Passive", "Egg Steal", etc.)
+// or "" when the dino is untameable or has no tame type.
+function tameTypeLabelFromCode(tt){
+  if (tt == null) return "";
+  const table = Global.dinos?.tt;
+  if (!Array.isArray(table)) return "";
+  const raw = table[Number(tt)];
+  if (!raw) return "";
+  // Normalize "egg_steal" → "Egg Steal", "knockout" → "Knockout", etc.
+  return String(raw)
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
 
 function renderDinoHero(d, selectedName) {
   const bp = d.bpPath || "";
@@ -116,9 +131,6 @@ function renderDinoHero(d, selectedName) {
   const partial = extractSdfPartial(bp);
   const cmd = buildSdfCommand(partial, sdf.tamed, sdf.level, sdf.skipBonusLevels);
 
-  // Show the full class name as a compact copyable line beneath the command
-  const classDisplay = bp ? bp.split(".").pop() : "";
-
   return `
     <div class="dino-hero">
       <div class="dino-hero-title">${escapeHtml(displayName)}</div>
@@ -126,51 +138,42 @@ function renderDinoHero(d, selectedName) {
       ${modId ? `<div class="info-submeta">Mod ID: ${escapeHtml(modId)}</div>` : ""}
 
       ${d.tameable === false || d.tameable === 0 ? `<span class="dino-badge tameable">Untameable</span>` : ""}
+      ${(d.tameable === true || d.tameable === 1) && d.tameType ? `<span class="dino-badge tame-type">${escapeHtml(d.tameType)} Tame</span>` : ""}
       ${d.breedable === false || d.breedable === 0 ? `<span class="dino-badge breedable">Unbreedable</span>` : ""}
 
       <div class="spawn-cmd-block">
-        <div class="info-subtitle" style="margin:0 0 4px;">Spawn Command</div>
+        <div class="iv-eyebrow" style="margin:0;">Spawn Command</div>
 
-        <div class="spawn-cmd-controls">
+        <div class="dv-cmdrow">
           <button type="button"
-            class="spawn-cmd-toggle ${sdf.tamed ? 'is-tamed' : ''}"
+            class="dv-flip ${sdf.tamed ? 'is-tamed' : ''}"
             data-sdf-tamed-flip="1"
           >${sdf.tamed ? 'Tamed' : 'Wild'}</button>
 
-          <div class="spawn-cmd-level-wrap">
-            <span class="spawn-cmd-label">Level</span>
-            <input
-              type="number"
-              class="spawn-cmd-input spawn-cmd-level"
-              data-sdf-level="1"
-              value="${escapeAttr(String(sdf.level))}"
-              min="1" max="9999"
-            >
-          </div>
+          <span class="iv-cmd-input">
+            <label>LV</label>
+            <input type="number" data-sdf-level="1"
+              value="${escapeAttr(String(sdf.level))}" min="1" max="9999">
+          </span>
 
           <button type="button"
-            class="spawn-cmd-toggle spawn-cmd-toggle--skip ${!sdf.tamed ? 'is-disabled' : ''} ${sdf.tamed && sdf.skipBonusLevels ? 'is-on' : ''}"
+            class="dv-skip ${sdf.tamed && sdf.skipBonusLevels ? 'on' : ''} ${!sdf.tamed ? 'is-disabled' : ''}"
             data-sdf-skip-flip="1"
             ${!sdf.tamed ? 'disabled' : ''}
           >Skip Bonus</button>
         </div>
 
-        <div class="spawn-cmd-output copy-on-click"
-          data-copy="${escapeAttr(cmd)}"
-          title="Click to copy"
-        >${escapeHtml(cmd)}</div>
+        <div class="iv-cmd-lines">
+          <div class="iv-cmd-line copy-on-click" data-sdf-cmd-line="1"
+            data-copy="${escapeAttr(cmd)}" title="Tap to copy">
+            <span class="iv-cmd-tag">SDF</span>
+            <span class="iv-cmd-text" data-sdf-cmd-text="1">${escapeHtml(cmd)}</span>
+          </div>
+        </div>
+        <div class="iv-cmd-hint">tap the command to copy</div>
 
         <div class="spawn-cmd-summary" data-sdf-summary="1">${buildSdfSummary(displayName, sdf.tamed, sdf.level, sdf.skipBonusLevels)}</div>
       </div>
-
-      ${classDisplay ? `
-        <div class="spawn-cmd-class copy-on-click"
-          data-copy="${escapeAttr(classDisplay)}"
-          title="Click to copy class name">
-          <span class="spawn-cmd-class-label">Class name</span>
-          <span class="spawn-cmd-class-value">${escapeHtml(classDisplay)}</span>
-        </div>
-      ` : ""}
     </div>
   `;
 }
@@ -183,6 +186,13 @@ function renderDinoTabSpawns(d, selectedName){
     ? entries.every((e, i) => {
         const key = entryVisibilityKey(selectedName, i);
         return entryVisibility[key] ?? true;
+      })
+    : true;
+
+  const allCardsOpen = entries.length
+    ? entries.every((e, i) => {
+        const key = entryVisibilityKey(selectedName, i);
+        return dinoSpawnCardOpenState[key] ?? true;
       })
     : true;
 
@@ -203,7 +213,7 @@ function renderDinoTabSpawns(d, selectedName){
                   class="loot-set-toggle-all"
                   data-dino-collapse-all="1"
                   style="margin-left:auto;"
-                >Collapse All</button>
+                >${allCardsOpen ? "Collapse All" : "Expand All"}</button>
               </div>
             `
             : ``
@@ -218,11 +228,61 @@ function renderDinoTabSpawns(d, selectedName){
 function renderDinoTabStats(d){
   return `
     <div class="info-section">
-      <div class="info-subtitle">Stats</div>
-      ${renderStatsTable(d?.stats)}
+      <div class="iv-eyebrow" style="margin-top:2px;">Stats per Level</div>
+      <div data-dino-stats-table>${renderStatsTable(d?.stats)}</div>
+      ${renderStatSettingsCard(d?.stats)}
     </div>
+  `;
+}
 
-    ${renderAttacksTable(d?.attacks)}
+// Collapsible Server Settings card: per-stat PerLevelStatsMultiplier inputs
+// (Wild / Tamed / Tamed_Add / Tamed_Affinity). The stats table above
+// recomputes live as values change.
+function renderStatSettingsCard(statsObj){
+  if (!statsObj || typeof statsObj !== "object") return "";
+
+  const keys = [];
+  for (const k of STAT_ORDER) if (k in statsObj) keys.push(k);
+  for (const k of Object.keys(statsObj)) {
+    if (k.endsWith("_TBM")) continue;
+    if (!keys.includes(k)) keys.push(k);
+  }
+  if (!keys.length) return "";
+
+  const COLS = [["iw", "Wild ×"], ["it", "Tamed ×"], ["ta", "Add ×"], ["tm", "Affinity ×"]];
+
+  const rows = keys.map(statKey => {
+    const label = STAT_LABEL[statKey] || statKey;
+    const cells = COLS.map(([col]) => {
+      const val = getStatMult(statKey, col);
+      const def = ARK_DEFAULT_MULT?.[statKey]?.[col] ?? 1;
+      return `<input type="text" inputmode="decimal"
+        class="${val !== def ? "changed" : ""}"
+        data-stat-mult="1" data-stat="${escapeAttr(statKey)}" data-col="${col}"
+        value="${escapeAttr(String(val))}">`;
+    }).join("");
+    return `<div class="dv-set-row">
+      <div class="dv-set-name">${escapeHtml(label)}</div>
+      ${cells}
+    </div>`;
+  }).join("");
+
+  return `
+    <div class="dv-settings ${dinoStatSettingsOpen ? "is-open" : ""}" data-stat-settings-card="1">
+      <button type="button" class="dv-settings-head" data-stat-settings-toggle="1">
+        <span class="dv-settings-name">Server Settings</span>
+        <span class="dv-settings-sub">stats update live</span>
+        <span class="dv-settings-chev">${dinoStatSettingsOpen ? "⌄" : "›"}</span>
+      </button>
+      <div class="dv-settings-body">
+        <div class="dv-set-row head">
+          <div>Stat</div><div>Wild ×</div><div>Tamed ×</div><div>Add ×</div><div>Affinity ×</div>
+        </div>
+        ${rows}
+        <button type="button" class="dv-reset" data-stat-settings-reset="1">Reset to defaults</button>
+        <div class="dv-set-note">PerLevelStatsMultiplier — Wild, Tamed, Tamed_Add, Tamed_Affinity. Base stats can't be changed by server settings.</div>
+      </div>
+    </div>
   `;
 }
 
@@ -232,31 +292,221 @@ function renderDinoTabInfo(d) {
   const extraBps = Array.isArray(d.additionalBpPathsToDisplay)
     ? d.additionalBpPathsToDisplay
     : [];
-  const allBps = [bp, ...extraBps].filter(Boolean);
   const nameTag = d.nameTag || "";
+  const classDisplay = bp ? bp.split(".").pop() : "";
   const drag = fmtNum(d?.dragWeight, 0);
   const xp = fmtNum(d?.killXpBase, 0);
 
+  const idRow = (tag, value) => value ? `
+    <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(value)}" title="Tap to copy">
+      <span class="iv-cmd-tag">${escapeHtml(tag)}</span>
+      <span class="iv-cmd-text">${escapeHtml(value)}</span>
+    </div>` : "";
+
+  const generalChips = [
+    drag !== null ? `<span class="lc-chip">Drag Weight <b>${escapeHtml(drag)}</b></span>` : "",
+    xp !== null ? `<span class="lc-chip">Kill XP <b>${escapeHtml(String(Number(xp) * 4))}</b></span>` : ""
+  ].filter(Boolean).join("");
+
   return `
-    <div class="info-section">
-      <div class="info-subtitle">General</div>
-      <div class="entry-meta">
-        ${drag !== null ? `<div class="entry-meta-line">Drag Weight: ${escapeHtml(drag)}</div>` : ""}
-        ${xp !== null ? `<div class="entry-meta-line">Kill XP: ${escapeHtml(String(Number(xp) * 4))}</div>` : ""}
-      </div>
-    </div>
-
-    <div class="info-section">
-      ${allBps.map((v, i) =>
-        i === 0 ? renderCopyField("Blueprint", v) : renderCopyField("Blueprint (variant)", v)
-      ).join("") || renderCopyField("Blueprint", "")}
-    </div>
-
-    ${nameTag ? `
+    ${generalChips ? `
       <div class="info-section">
-        ${renderCopyField("Nametag", nameTag)}
+        <div class="iv-eyebrow" style="margin-top:2px;">General</div>
+        <div class="lc-chips">${generalChips}</div>
       </div>
     ` : ""}
+
+    <div class="info-section">
+      <div class="iv-eyebrow">Identifiers</div>
+      <div class="dv-idrows">
+        ${idRow("CLASS", classDisplay)}
+        ${idRow("TAG", nameTag)}
+        ${idRow("BP", bp)}
+        ${extraBps.filter(Boolean).map(v => idRow("VARIANT", v)).join("")}
+      </div>
+      <div class="iv-cmd-hint">tap a row to copy</div>
+    </div>
+
+    ${renderDossierSection(d)}
+
+    ${renderColorRegionsSection(d)}
+  `;
+}
+
+
+function renderDossierSection(d){
+  // The dino's Dossier Index (`di`). The dossier is an explorer note, so it
+  // unlocks with the same command notes use: cheat GiveExplorerNote <index>.
+  const idx = d?.dossierIndex;
+  if (idx == null) return "";
+
+  const unlockCmd = `cheat GiveExplorerNote ${idx}`;
+  return `
+    <div class="info-section">
+      <div class="iv-eyebrow">Dossier</div>
+      <div class="lc-chips" style="margin-bottom:7px;">
+        <span class="lc-chip">Dossier Index <b>${escapeHtml(String(idx))}</b></span>
+      </div>
+      <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(unlockCmd)}" title="Tap to copy">
+        <span class="iv-cmd-tag">NOTE</span>
+        <span class="iv-cmd-text">${escapeHtml(unlockCmd)}</span>
+      </div>
+    </div>
+  `;
+}
+
+
+function colorSetsForDino(d){
+  // Returns { male: cs|null, female: cs|null }
+  //
+  // A dino references color sets through one of two key families:
+  //   cs / mcs / fcs    -> a set in THIS dino's own file
+  //                        (vanilla file for vanilla dinos; mod file for mod dinos)
+  //   vcs / vmcs / vfcs -> a VANILLA set, even on a mod dino
+  // mcs/fcs (and vmcs/vfcs) split male vs female; cs/vcs is unified.
+  //
+  // Vanilla sets resolve against Global.dinos.cs. Mod sets resolve against the
+  // originating mod's table in Global.dinos.modCsByMod[_modId] — kept per-mod
+  // because each mod's set ids restart at 1.
+  const dinoObj = getDinoObjByBp(d?.bpPath);
+  if (!dinoObj) return { male: null, female: null };
+
+  const vanillaCs = Global.dinos?.cs || {};
+  const modCsByMod = Global.dinos?.modCsByMod || {};
+  const modId = String(dinoObj._modId || "");
+
+  // `cs`/`mcs`/`fcs` mean "a set in this dino's OWN file". For a mod dino
+  // that's the mod's color set table; for a vanilla dino it's the vanilla
+  // `cs` table. `vcs`/`vmcs`/`vfcs` always mean the vanilla table.
+  const ownCs = modId ? (modCsByMod[modId] || {}) : vanillaCs;
+
+  function lookup(table, id){
+    if (id == null) return null;
+    return table[String(id)] || table[id] || null;
+  }
+
+  // Unified set: cs (own-file set) or vcs (vanilla set).
+  if (dinoObj.cs != null){
+    const set = lookup(ownCs, dinoObj.cs);
+    return { male: set, female: set };
+  }
+  if (dinoObj.vcs != null){
+    const set = lookup(vanillaCs, dinoObj.vcs);
+    return { male: set, female: set };
+  }
+
+  // Split male/female. A dino may mix namespaces (e.g. mod male, vanilla
+  // female), so each side is resolved independently.
+  const male =
+    dinoObj.mcs  != null ? lookup(ownCs,     dinoObj.mcs)  :
+    dinoObj.vmcs != null ? lookup(vanillaCs, dinoObj.vmcs) : null;
+  const female =
+    dinoObj.fcs  != null ? lookup(ownCs,     dinoObj.fcs)  :
+    dinoObj.vfcs != null ? lookup(vanillaCs, dinoObj.vfcs) : null;
+
+  if (male || female) return { male, female };
+  return { male: null, female: null };
+}
+
+
+function colorSwatchHtml(colorIdx){
+  const defs = Global.dinos?.c || {};
+  const entry = defs[String(colorIdx)] || defs[colorIdx];
+  if (!Array.isArray(entry) || entry.length < 2) return "";
+  const name = entry[0];
+  const hex  = entry[1];
+  return `<span class="color-swatch" style="background:#${escapeAttr(hex)};"
+    data-color-name="${escapeAttr(name)}"
+    data-color-hex="${escapeAttr(hex)}"
+    data-color-idx="${escapeAttr(String(colorIdx))}"
+    role="button" tabindex="0"></span>`;
+}
+
+
+function isUsableRegionName(name){
+  // Guard against malformed source data where the color list was dumped into
+  // the RegionName field, and against names long enough to break layout.
+  if (!name || typeof name !== "string") return false;
+  const t = name.trim();
+  if (!t || t.length > 48) return false;
+  if (t.includes('("') || t.includes('","') || t.includes('")')) return false;
+  return true;
+}
+
+
+function renderColorRegionRow(regionIdx, regionData){
+  // regionData can be either:
+  //   - new format: { n: "Dark All", c: [color indices] }
+  //   - old format: [color indices]  (legacy fallback)
+  //   - null  (region not used by this dino)
+  let name = "";
+  let colorIndices = null;
+
+  if (regionData && typeof regionData === "object" && !Array.isArray(regionData)) {
+    name = isUsableRegionName(regionData.n) ? regionData.n : "";
+    colorIndices = Array.isArray(regionData.c) ? regionData.c : null;
+  } else if (Array.isArray(regionData)) {
+    colorIndices = regionData;
+  }
+
+  if (!colorIndices || !colorIndices.length) return "";
+
+  // Color indices must be numbers (ids). Drop anything else defensively —
+  // older/broken data sometimes carried raw name strings here.
+  colorIndices = colorIndices.filter(x => typeof x === "number");
+  if (!colorIndices.length) return "";
+
+  const swatches = colorIndices.map(colorSwatchHtml).join("");
+  return `
+    <div class="color-region-row dv-region">
+      <div class="dv-region-title">
+        ${name ? `<span class="dv-region-name">${escapeHtml(name)}</span>` : ""}
+        <span class="dv-region-idx">REGION ${regionIdx}</span>
+      </div>
+      <div class="color-region-swatches">${swatches}</div>
+    </div>
+  `;
+}
+
+
+function renderColorRegionsSection(d){
+  const { male, female } = colorSetsForDino(d);
+
+  // No color data at all
+  if (!male && !female) return "";
+
+  // If both exist and are the same array reference (unified cs), show single section
+  const isSameSet = male === female;
+
+  function renderSet(cs, title){
+    if (!cs) return "";
+    // cs is an array of 6 entries (objects or null). Skip empty/null regions.
+    const rows = [];
+    for (let i = 0; i < 6; i++){
+      const region = cs[i];
+      if (!region) continue;
+      // region is either {n,c} or legacy array; renderColorRegionRow handles both
+      const html = renderColorRegionRow(i, region);
+      if (html) rows.push(html);
+    }
+    if (!rows.length) return "";
+    return `
+      ${title ? `<div class="info-subtitle" style="margin-top:8px;">${escapeHtml(title)}</div>` : ""}
+      <div class="color-regions">
+        ${rows.join("")}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="info-section">
+      <div class="iv-eyebrow">Color Regions</div>
+      ${
+        isSameSet
+          ? renderSet(male, "")
+          : `${renderSet(male, "Male")}${renderSet(female, "Female")}`
+      }
+    </div>
   `;
 }
 
@@ -282,6 +532,18 @@ function setAllDinoLootSetsOpen(dinoBp, sets, open){
 }
 
 
+// Per-entry collapse state for dino loot sets, keyed by dino bp + set + entry.
+const dinoLootEntryOpenState = {};
+function dinoLootEntryKey(dinoBp, setIdx, entryIdx){
+  return `${dinoBp}|${setIdx}|${entryIdx}`;
+}
+function isDinoLootEntryOpen(dinoBp, setIdx, entryIdx, dflt){
+  return dinoLootEntryOpenState[dinoLootEntryKey(dinoBp, setIdx, entryIdx)] ?? !!dflt;
+}
+function setDinoLootEntryOpen(dinoBp, setIdx, entryIdx, open){
+  dinoLootEntryOpenState[dinoLootEntryKey(dinoBp, setIdx, entryIdx)] = open;
+}
+
 function lootSetById(id){
   return Global.loot?.si?.[id] || null;
 }
@@ -303,12 +565,39 @@ function renderLootEntryItems(e){
   return `<div class="loot-entry">${itemNames}${qty}${chance}</div>`;
 }
 
-function renderDinoLootSetCard(setRow, idx, dinoBp){
+function renderDinoLootSetCard(setRow, idx, dinoBp, allRows, dropComp){
   const { allEntries, setMeta } = lootSetEntriesFromRow(setRow);
   const setName = lootSetNameFromRow(setRow, `Set ${idx + 1}`);
   const isOpen = isDinoLootSetOpen(dinoBp, idx);
 
   if (!allEntries.length) return "";
+
+  const weight = setRow?.w;
+  const smn = setMeta?.smn ?? setRow?.smn;
+  const smx = setMeta?.smx ?? setRow?.smx;
+  const setNip = setMeta?.nip ?? setRow?.nip;
+  const setRwr = setMeta?.rwr ?? setRow?.rwr;
+
+  const totalEntryWeight = allEntries.reduce((s, e) => s + (e?.w || 0), 0) || 1;
+
+  // Exact appears-in-bag chance, same math as crates (helpers in item-view.js)
+  let pSet = null;
+  if (allRows && dropComp
+      && typeof rollCountDistribution === "function"
+      && typeof pFiresAtLeastOnce === "function"){
+    const allWeights = allRows.map(r => r?.w || 0);
+    const picksDist = rollCountDistribution(
+      dropComp.mn ?? 1, dropComp.mx ?? dropComp.mn ?? 1, dropComp.nsp ?? 1.0);
+    pSet = pFiresAtLeastOnce(allWeights, idx, picksDist, dropComp.rwr === true);
+  }
+  const pSetStr = fmtProb(pSet);
+
+  // Per-entry draw context for chance sentences inside entries
+  let drawsDist = null;
+  if (typeof rollCountDistribution === "function"){
+    drawsDist = rollCountDistribution(smn ?? 1, smx ?? smn ?? 1, setNip ?? 1.0);
+  }
+  const entryWeights = allEntries.map(e => e?.w || 0);
 
   return `
     <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"} dino-loot-set">
@@ -323,29 +612,60 @@ function renderDinoLootSetCard(setRow, idx, dinoBp){
           </div>
         </div>
         <div class="loot-set-toggle-right">
+          ${pSetStr != null ? `<span class="lc-set-pct">${pSetStr}</span>` : ``}
           <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
         </div>
       </button>
-      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
-        <div class="meta-grid">
-          <div class="meta-cell">
-            <div class="meta-label">Set Weight</div>
-            <div class="meta-value">${escapeHtml(fmt(setRow?.w) || "--")}</div>
-          </div>
 
+      ${
+        pSet != null
+          ? `
+            <div class="lc-pbar"><i style="width:${Math.max(2, Math.round(pSet * 100))}%"></i></div>
+            <div class="lc-set-sub">
+              <span>chance of appearing in their bag</span>
+              <span class="lc-mono">weight ${escapeHtml(fmt(weight) || "--")}</span>
+            </div>
+          `
+          : ``
+      }
+
+      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+        <div class="lc-chips">
           ${
-            setMeta?.smn != null || setMeta?.smx != null
-              ? `
-                <div class="meta-cell">
-                  <div class="meta-label">Items Chosen</div>
-                  <div class="meta-value">${escapeHtml(fmtRange(setMeta?.smn, setMeta?.smx))}</div>
-                </div>
-              `
+            pSet == null
+              ? `<span class="lc-chip">Weight <b>${escapeHtml(fmt(weight) || "--")}</b></span>`
               : ``
           }
+          ${
+            smn != null || smx != null
+              ? `<span class="lc-chip">Entry picks <b>${escapeHtml(fmtRangeCollapsed(smn, smx))}</b></span>`
+              : ``
+          }
+          ${
+            setRwr === true ? `<span class="lc-chip rwr">⊘ no repeats</span>`
+            : setRwr === false ? `<span class="lc-chip rwr">↻ repeats allowed</span>`
+            : ``
+          }
         </div>
+        ${
+          smn != null || smx != null
+            ? `<div class="lc-set-mech">Will include <b>${escapeHtml(fmtRangeCollapsed(smn, smx))}</b> of the item entries below.${
+                setRwr === true ? " Repeats are not allowed."
+                : setRwr === false ? " Repeats are allowed."
+                : ""
+              }</div>`
+            : ``
+        }
 
-        ${allEntries.map(renderLootEntryBlock).join("")}
+        ${allEntries.map((e, ei) => renderLootEntryBlock(e, totalEntryWeight, {
+          drawsDist,
+          entryWeights,
+          entryIdx: ei,
+          setRwr: setRwr === true,
+          collapsible: true,
+          isOpen: isDinoLootEntryOpen(dinoBp, idx, ei, allEntries.length <= 1),
+          toggleAttr: `${idx}:${ei}`
+        })).join("")}
       </div>
     </div>
   `;
@@ -369,32 +689,29 @@ function renderDinoTabLoot(d){
     const itemIds = Array.isArray(harvestComp.i) ? harvestComp.i : [];
     const itemsHtml = itemIds.map(id => {
       const name = itemDisplayNameById(id);
-      return `<span class="loot-item-tag" data-item-id="${id}">${escapeHtml(name)}</span>`;
+      return `<span class="lc-chip loot-item-tag" data-item-id="${id}">${escapeHtml(name)}</span>`;
     }).join("");
 
     html += `
       <div class="info-section">
-        <div class="info-subtitle">Harvested From Corpse</div>
-        <div class="loot-harvest-list">${itemsHtml || `<div class="info-empty">No harvest data</div>`}</div>
+        <div class="iv-eyebrow" style="margin-top:2px;">Harvested From Corpse</div>
+        <div class="lc-chips">${itemsHtml || `<div class="info-empty">No harvest data</div>`}</div>
       </div>`;
   }
 
-    if (dropComp){
+  if (dropComp){
     const sets = Array.isArray(dropComp.s) ? dropComp.s : [];
     const mn = dropComp.mn ?? 1;
     const mx = dropComp.mx ?? 1;
     const allOpen = areAllDinoLootSetsOpen(bp, sets);
     const setsHtml = sets
-      .map((setRow, idx) => renderDinoLootSetCard(setRow, idx, bp))
+      .map((setRow, idx) => renderDinoLootSetCard(setRow, idx, bp, sets, dropComp))
       .filter(Boolean)
       .join("");
     html += `
       <div class="info-section">
         <div class="dino-loot-section-head">
-          <div>
-            <div class="info-subtitle">Drops on Death</div>
-            ${mn != null && mx != null ? `<div class="loot-set-count">Loot sets: ${fmtRange(mn, mx)}</div>` : ""}
-          </div>
+          <div class="iv-eyebrow" style="margin:0;">Drops on Death</div>
 
           ${sets.length ? `
             <button
@@ -404,6 +721,9 @@ function renderDinoTabLoot(d){
             >${allOpen ? "Collapse All" : "Expand All"}</button>
           ` : ""}
         </div>
+        ${mn != null && mx != null
+          ? `<div class="lc-mech">Their drop bag will contain <b>${escapeHtml(fmtRangeCollapsed(mn, mx))}</b> of the item sets below.</div>`
+          : ""}
         <div class="entries mode-menu-like-list">
           ${setsHtml || `<div class="info-empty">No drop data</div>`}
         </div>
@@ -478,13 +798,15 @@ function renderDinoPanel(name){
     const sdf = getSdfState(name);
     const partial = extractSdfPartial(d?.bpPath || "");
     const cmd = buildSdfCommand(partial, sdf.tamed, sdf.level, sdf.skipBonusLevels);
-    const output = body.querySelector(".spawn-cmd-output");
-    if (output) { output.textContent = cmd; output.dataset.copy = cmd; }
+    const txtEl = body.querySelector("[data-sdf-cmd-text]");
+    if (txtEl) txtEl.textContent = cmd;
+    const lineEl = body.querySelector("[data-sdf-cmd-line]");
+    if (lineEl) lineEl.dataset.copy = cmd;
     const summary = body.querySelector("[data-sdf-summary]");
     if (summary) summary.innerHTML = buildSdfSummary(d?.displayName || name, sdf.tamed, sdf.level, sdf.skipBonusLevels);
   }
 
-  // Wild / Tamed flip button
+  // Wild / Tamed flip switch
   const tamedFlipBtn = body.querySelector("[data-sdf-tamed-flip]");
   if (tamedFlipBtn) {
     tamedFlipBtn.onclick = () => {
@@ -500,7 +822,7 @@ function renderDinoPanel(name){
       if (skipBtn) {
         skipBtn.disabled = !sdf.tamed;
         skipBtn.classList.toggle("is-disabled", !sdf.tamed);
-        skipBtn.classList.remove("is-on");
+        skipBtn.classList.remove("on");
       }
 
       refreshSdfOutput();
@@ -524,7 +846,7 @@ function renderDinoPanel(name){
     skipFlipBtn.onclick = () => {
       const sdf = getSdfState(name);
       sdf.skipBonusLevels = !sdf.skipBonusLevels;
-      skipFlipBtn.classList.toggle("is-on", sdf.skipBonusLevels);
+      skipFlipBtn.classList.toggle("on", sdf.skipBonusLevels);
       refreshSdfOutput();
     };
   }
@@ -539,13 +861,13 @@ function renderDinoPanel(name){
 
       // Toggle is-on on the visible card container (parent loot-set-section),
       // not on the inner button itself
-      const card = btn.closest(".dino-spawn-section");
+      const card = btn.closest(".dv-entry");
       card?.classList.toggle("is-on", next);
 
       const master = body.querySelector("[data-dino-toggle-all]");
       if (master){
         const allOn = [...body.querySelectorAll("[data-dino-entry-toggle]")]
-          .every(el => el.closest(".dino-spawn-section")?.classList.contains("is-on"));
+          .every(el => el.closest(".dv-entry")?.classList.contains("is-on"));
         master.classList.toggle("is-on", allOn);
       }
 
@@ -557,14 +879,14 @@ function renderDinoPanel(name){
   if (master){
     master.onclick = () => {
       const rows = [...body.querySelectorAll("[data-dino-entry-toggle]")];
-      const allOn = rows.every(el => el.closest(".dino-spawn-section")?.classList.contains("is-on"));
+      const allOn = rows.every(el => el.closest(".dv-entry")?.classList.contains("is-on"));
       const next = !allOn;
 
       rows.forEach(el => {
         const key = el.dataset.key;
         if (!key) return;
         entryVisibility[key] = next;
-        el.closest(".dino-spawn-section")?.classList.toggle("is-on", next);
+        el.closest(".dv-entry")?.classList.toggle("is-on", next);
       });
 
       master.classList.toggle("is-on", next);
@@ -611,6 +933,69 @@ function renderDinoPanel(name){
       const prevScroll = getActiveInfoPanelScroll(infoPanelState.dinoTab);
 
       setDinoLootSetOpen(d.bpPath, idx, !isDinoLootSetOpen(d.bpPath, idx));
+      renderDinoPanel(name);
+
+      restoreActiveInfoPanelScroll(prevScroll, infoPanelState.dinoTab);
+    };
+  });
+
+  // --- Server Settings card (Stats tab) ---
+  const settingsCard = body.querySelector("[data-stat-settings-card]");
+  if (settingsCard){
+    const headBtn = settingsCard.querySelector("[data-stat-settings-toggle]");
+    if (headBtn){
+      headBtn.onclick = () => {
+        dinoStatSettingsOpen = !dinoStatSettingsOpen;
+        settingsCard.classList.toggle("is-open", dinoStatSettingsOpen);
+        const chev = settingsCard.querySelector(".dv-settings-chev");
+        if (chev) chev.textContent = dinoStatSettingsOpen ? "⌄" : "›";
+        refreshInfoPanelPageHeight();
+        syncActivePageHeight(body.querySelector(".fp-pages"), infoPanelState.dinoTab);
+      };
+    }
+
+    // Live multiplier inputs: update the table in place so typing keeps focus
+    settingsCard.querySelectorAll("[data-stat-mult]").forEach(inp => {
+      inp.onclick = (e) => e.stopPropagation();
+      inp.oninput = () => {
+        const sk = inp.dataset.stat;
+        const ck = inp.dataset.col;
+        const def = ARK_DEFAULT_MULT?.[sk]?.[ck] ?? 1;
+        const v = parseFloat(inp.value);
+        const val = Number.isFinite(v) ? v : def;
+        if (!serverStatMult[sk]) serverStatMult[sk] = {};
+        serverStatMult[sk][ck] = val;
+        inp.classList.toggle("changed", val !== def);
+        const wrap = body.querySelector("[data-dino-stats-table]");
+        if (wrap) wrap.innerHTML = renderStatsTable(d?.stats);
+      };
+    });
+
+    const resetBtn = settingsCard.querySelector("[data-stat-settings-reset]");
+    if (resetBtn){
+      resetBtn.onclick = () => {
+        resetServerStatMult();
+        renderDinoPanel(name);
+      };
+    }
+  }
+
+  // Collapsible item entries inside dino loot sets (shares the attribute the
+  // shared renderLootEntryBlock emits; the handler here uses dino state).
+  body.querySelectorAll("[data-crate-entry-toggle]").forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const parts = String(btn.dataset.crateEntryToggle).split(":");
+      const si = Number(parts[0]), ei = Number(parts[1]);
+      if (!Number.isInteger(si) || !Number.isInteger(ei)) return;
+
+      const prevScroll = getActiveInfoPanelScroll(infoPanelState.dinoTab);
+
+      const comp = dropCompForDino(d.bpPath);
+      const row = comp?.s?.[si];
+      const entryCount = row ? lootSetEntriesFromRow(row).allEntries.length : 99;
+      const cur = isDinoLootEntryOpen(d.bpPath, si, ei, entryCount <= 1);
+      setDinoLootEntryOpen(d.bpPath, si, ei, !cur);
       renderDinoPanel(name);
 
       restoreActiveInfoPanelScroll(prevScroll, infoPanelState.dinoTab);
@@ -672,7 +1057,7 @@ function getSelectedDinoGroup(name){
   )].sort((a,b)=>a.localeCompare(b));
 
   const entries = entryList.map(entryName => {
-    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+    const rows = spawnRowsForEntry(entryName);
 
     let groupWeight = 0;
     let spawnMultiplier = 1;
@@ -680,7 +1065,7 @@ function getSelectedDinoGroup(name){
     let spawnChances = "";
 
     for (const r of rows){
-      const rawBp = normalizeBp(r?.[0]);
+      const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
       if (!rawBp) continue;
 
       const outs = worldOutputsForBp(rawBp);
@@ -723,11 +1108,13 @@ function getSelectedDinoGroup(name){
     mName: first?.mn || "",
     tameable: first?.flags?.tameable,
     breedable: first?.flags?.breedable,
+    tameType:  tameTypeLabelFromCode(first?.tt),
     isAlpha: first?.flags?.isAlpha,
     isBoss: first?.flags?.isBoss,
     isBossMinion: first?.flags?.isBossMinion,
     dragWeight: first?.flags?.dragWeight || 35,
     killXpBase: first?.flags?.killXpBase || 2,
+    dossierIndex: (first && first.di != null) ? first.di : null,
     stats: first?.stats || null,
     attacks: first?.attacks || null,
     entries
@@ -865,45 +1252,44 @@ function areAllEntryDinosOpen(entryName, dinoKeys){
 
 function renderEntryDinoBlock(dinoBp, dinoObj, rowsForThisDino, entryName){
   const displayName = dinoObj?.n || bpClass(dinoBp) || "(Unknown)";
-  const bp = dinoBp || "";
-  const nameTag = dinoObj?.t || "";
   const isOpen = isEntryDinoOpen(entryName, dinoBp);
 
   const metaHtml = rowsForThisDino.map((r) => {
     const e = r.entry;
-    const metaLines = buildEntryMetaLines(e);
-    if (!metaLines.length) return "";
+    const lines = [];
+    const gw = e?.groupWeight ?? e?.group_weight;
+    const chances = e?.spawnChances ?? e?.spawn_chances;
+    const lim = e?.spawnLimit ?? e?.spawn_limit;
+    if (gw != null) lines.push(["Entry Weight", fmt(gw)]);
+    if (chances) lines.push(["Spawn Chances", String(chances)]);
+    if (lim != null) lines.push(["Max % To Allow", `${fmt(Number(lim) * 100)}%`]);
+    if (!lines.length) return "";
     return `
-      <div class="entry-meta" style="margin-top:4px;">
-        ${metaLines.map(line => `<div class="entry-meta-line">${escapeHtml(line)}</div>`).join("")}
+      <div class="sv-meta">
+        ${lines.map(([label, val]) => `
+          <div class="sv-meta-line">${escapeHtml(label)}: <b>${escapeHtml(val)}</b></div>
+        `).join("")}
       </div>
     `;
   }).join("");
 
   return `
-    <div class="loot-set-section ${isOpen ? "is-open" : "is-closed"}" style="margin-bottom:6px;">
+    <div class="sv-card ${isOpen ? "is-open" : ""}">
       <button
         type="button"
-        class="loot-set-toggle"
+        class="sv-card-head-btn"
         data-entry-dino-toggle="${escapeAttr(dinoBp)}"
       >
-        <div class="loot-set-toggle-main">
-          <div class="info-row">
-            <span class="info-label">${escapeHtml(displayName)}</span>
-          </div>
-        </div>
-        <div class="loot-set-toggle-right">
-          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
-        </div>
+        <span class="sv-card-name">${escapeHtml(displayName)}</span>
+        <span class="sv-card-chev">${isOpen ? "⌄" : "›"}</span>
       </button>
 
-      <div class="loot-set-body" style="display:${isOpen ? "" : "none"};">
+      <div class="sv-card-body" style="display:${isOpen ? "" : "none"};">
         ${metaHtml}
         <button
           type="button"
-          class="fp-btn"
+          class="sv-open"
           data-open-dino="${escapeAttr(displayName)}"
-          style="width:100%; justify-content:center; margin-top:6px;"
         >Open in Dino View ›</button>
       </div>
     </div>
@@ -917,55 +1303,50 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
   const metaLines = [];
 
   if (entry.groupWeight != null){
-    metaLines.push(`Entry Weight: ${fmt(entry.groupWeight)}`);
+    metaLines.push(["Entry Weight", fmt(entry.groupWeight)]);
   }
 
   if (entry.spawnChances){
-    metaLines.push(`Spawn chances: ${entry.spawnChances}`);
+    metaLines.push(["Spawn Chances", entry.spawnChances]);
   }
 
   if (entry.spawnLimit != null){
-    metaLines.push(`Max % To Allow: ${fmt(entry.spawnLimit * 100)}%`);
+    metaLines.push(["Max % To Allow", `${fmt(entry.spawnLimit * 100)}%`]);
   }
 
   const isOpen = dinoSpawnCardOpenState[key] ?? true;
 
   return `
-    <div class="loot-set-section dino-spawn-section ${checked ? "is-on" : ""} ${isOpen ? "is-open" : "is-closed"}" style="margin-bottom:6px;">
-      <div class="loot-set-toggle dino-spawn-section-header">
+    <div class="dv-entry ${checked ? "is-on" : ""} ${isOpen ? "is-open" : "is-closed"}">
+      <div class="dv-entry-head">
         <button
           type="button"
-          class="dino-spawn-section-main"
+          class="dv-entry-main"
           data-dino-entry-toggle="1"
           data-key="${escapeAttr(key)}"
         >
-          <span class="info-label">${escapeHtml(entry.entryClass)}</span>
-          ${isOpen ? `
-            <span class="dino-spawn-meta">
-              ${metaLines.map(line => `
-                <span class="dino-spawn-meta-line">${escapeHtml(line)}</span>
-              `).join("")}
-            </span>
-          ` : ""}
+          <span class="dv-entry-name">${escapeHtml(entry.entryClass)}</span>
         </button>
 
         <button
           type="button"
-          class="loot-set-toggle-right dino-spawn-chevron-btn"
+          class="dv-entry-chev"
           data-dino-spawn-card-toggle="${escapeAttr(key)}"
           title="${isOpen ? "Collapse" : "Expand"}"
-        >
-          <span class="loot-set-toggle-chevron">${isOpen ? "⌄" : "›"}</span>
-        </button>
+        >${isOpen ? "⌄" : "›"}</button>
       </div>
 
       ${isOpen ? `
-        <div class="loot-set-body">
+        <div class="dv-entry-body">
+          <div class="dv-entry-meta">
+            ${metaLines.map(([label, val]) => `
+              <div class="dv-entry-meta-line">${escapeHtml(label)}: <b>${escapeHtml(val)}</b></div>
+            `).join("")}
+          </div>
           <button
             type="button"
-            class="fp-btn"
+            class="dv-openspawn"
             data-open-entry="${escapeAttr(entry.entryClass)}"
-            style="width:100%; justify-content:center; margin-top:6px;"
           >Open in Spawn View ›</button>
         </div>
       ` : ""}
@@ -1089,7 +1470,7 @@ function otherSexNameForSelected(d, selectedLabel){
 function applyServerMultiplier(statKey, colKey, value) {
   if (value == null) return value;
 
-  const mult = ARK_DEFAULT_MULT?.[statKey]?.[colKey] ?? 1;
+  const mult = getStatMult(statKey, colKey);
   const n = Number(value);
   if (!Number.isFinite(n)) return null;
 
@@ -1110,7 +1491,7 @@ function computeDisplayValue(statKey, colKey, data, statsObj) {
   }
 
   const base = Number(data.base);
-  const mult = ARK_DEFAULT_MULT?.[statKey]?.[colKey] ?? 1;
+  const mult = getStatMult(statKey, colKey);
   const effectiveMult = (v < 0) ? 1 : mult;
 
   if (colKey === "iw") {
@@ -1295,6 +1676,22 @@ const ARK_DEFAULT_MULT = {
   SpeedMultiplier:         { iw: 1, it: 1,    ta: 1,    tm: 1 },
   CraftingSpeedMultiplier: { iw: 1, it: 1,    ta: 1,    tm: 1 },
 };
+
+// Live copy of the multipliers — the Server Settings card on the Stats tab
+// edits these, and the stats table recomputes from them. Resetting restores
+// the ARK official defaults above.
+let serverStatMult = JSON.parse(JSON.stringify(ARK_DEFAULT_MULT));
+function resetServerStatMult(){
+  serverStatMult = JSON.parse(JSON.stringify(ARK_DEFAULT_MULT));
+}
+function getStatMult(statKey, colKey){
+  return serverStatMult?.[statKey]?.[colKey]
+      ?? ARK_DEFAULT_MULT?.[statKey]?.[colKey]
+      ?? 1;
+}
+
+// Whether the Server Settings card is expanded (persists across re-renders).
+let dinoStatSettingsOpen = false;
 
 
 

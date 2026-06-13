@@ -87,10 +87,7 @@ function downgradeRarity(label,steps){
 /*=========MAP=============*/
 
 function mapNamesForEntry(entryName){
-  const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
-    ? Global.spawn.entryMaps[entryName]
-    : [];
-
+  const codes = entryMapCodesForClass(entryName);
   return codes.map(code => Global.spawn?.mapLegend?.[code] || code);
 }
 
@@ -521,13 +518,13 @@ function drawPlayerStarts(groups){
         className:"poi-pstart"
       })
         .addTo(mapObj.poiLayer)
-        .bindTooltip(tip || "Player Start"), {
+        .bindTooltip(tip || "Player Start", {
           direction: "auto",
           sticky: true,
           opacity: 0.97,
-          className: "pstart-tooltip",
+          className: "dark-tooltip",
           autoPan: true
-        };
+        });
     }
   }
 }
@@ -553,13 +550,30 @@ function worldRulesForCurrentMap(){
   const mapRules = Array.isArray(all?.[State.mapId]) ? all[State.mapId] : [];
   const globalRules = Array.isArray(all?.__global__) ? all.__global__ : [];
 
-  return [...mapRules, ...globalRules];
+  // Rule `from` and `outs[][0]` are dino indices in current data. Resolve to
+  // bp here so the world-replacement engine operates purely on bps. This runs
+  // only once per map change now (result is cached in worldRuleIndexForCurrentMap),
+  // so the per-call resolution cost is negligible.
+  const resolveRule = (r) => {
+    if (!r || typeof r !== "object") return r;
+    const out = { ...r, from: bpForDinoRef(r.from) };
+    if (Array.isArray(r.outs)){
+      out.outs = r.outs.map(o => Array.isArray(o) ? [bpForDinoRef(o[0]), o[1]] : o);
+    }
+    return out;
+  };
+
+  return [...mapRules, ...globalRules].map(resolveRule);
 }
 
 
 function rebuildMapIndices(){
 
   const spawn = Global.spawn || {};
+
+  // Invalidate the world-rule index cache — it's map-specific and must be
+  // rebuilt for the new map before worldOutputsForBp() is called.
+  invalidateWorldRuleCache();
 
   State.mapEntries.clear();
   State.entryToDinos.clear();
@@ -570,20 +584,28 @@ function rebuildMapIndices(){
   const mapCode = mapMeta?.mapCode;
 
   // 1) which entries are on this map?
-  for (const [entryName, maps] of Object.entries(spawn.entryMaps || {})){
-    if (Array.isArray(maps) && maps.includes(mapCode)){
-      State.mapEntries.add(entryName);
-    }
+  // entryMaps is keyed by entry id (bp-keyed schema) or class name (legacy /
+  // mod data). The UI keeps speaking class names — unique within a map even
+  // when globally ambiguous — and State.entryIdByClass remembers which key
+  // holds this map's data for that class.
+  State.entryIdByClass = new Map();
+  for (const [key, maps] of Object.entries(spawn.entryMaps || {})){
+    if (!(Array.isArray(maps) && maps.includes(mapCode))) continue;
+    const entryName = spawn.entries?.[key]?.n || key;
+    State.mapEntries.add(entryName);
+    State.entryIdByClass.set(entryName, key);
   }
 
   // 2) build entry -> dinos and dino -> entries USING WORLD REPLACEMENTS
   for (const entryName of State.mapEntries){
 
-    const rows = spawn.entries?.[entryName]?.d || [];
+    const rows = spawnRowsForEntry(entryName);
     const finalBpsForEntry = new Set();
 
     for (const r of rows){
-      const rawBp = normalizeBp(r?.[0]);
+      // r[0] is a dino reference: a numeric dino index in current data, or a
+      // bp string in older/mod data. Resolve to a bp up front.
+      const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
       if (!rawBp) continue;
 
       const outs = worldOutputsForBp(rawBp);
@@ -641,6 +663,9 @@ function rebuildMapIndices(){
 
   State.names = [...State.nameToBps.keys()].sort((a,b)=>a.localeCompare(b));
   State.entryList = [...State.mapEntries].sort((a,b)=>a.localeCompare(b));
+
+  // Boss list for the current map (used by Boss View's dropdown).
+  if (typeof rebuildBossIndex === "function") rebuildBossIndex();
 }
 
 
@@ -798,6 +823,10 @@ async function onMapChanged(){
   if (isPanelVisible("mapEntriesPanel")) {
     renderMapEntriesPanel();
   }
+  if (isPanelVisible("noteViewPanel")) {
+    noteViewState.selected = null;
+    renderNoteViewPanel();
+  }
 
   render();
 }
@@ -820,6 +849,50 @@ function drawDino(name){
 }
 
 
+// Seconds -> friendly duration ("24h", "1h 30m", "45s")
+function fmtDuration(seconds){
+  const s = Number(seconds);
+  if (!Number.isFinite(s) || s <= 0) return "";
+  if (s >= 3600){
+    const h = Math.floor(s / 3600);
+    const m = Math.round((s % 3600) / 60);
+    return m ? `${h}h ${m}m` : `${h}h`;
+  }
+  if (s >= 60){
+    const m = Math.floor(s / 60);
+    const r = Math.round(s % 60);
+    return r ? `${m}m ${r}s` : `${m}m`;
+  }
+  return `${Math.round(s)}s`;
+}
+
+// Tooltip content for a spawn box / point: which entry, the manager's
+// minimum, linked-zone note, respawn timers, counted classes, and flags.
+function spawnBoxTooltipHtml(entryName, mgr, zoneCount){
+  const md = Number(mgr?.md) || 0;
+
+  const rows = [];
+  if (mgr?.ii != null)  rows.push(`<div class="sbt-row">Respawn: <b>${escapeHtml(fmtDuration(mgr.ii))}</b></div>`);
+  if (mgr?.iim != null) rows.push(`<div class="sbt-row">Max Respawn: <b>${escapeHtml(fmtDuration(mgr.iim))}</b></div>`);
+  if (typeof cdcDinoNames === "function"){
+    const names = cdcDinoNames(mgr?.cdc);
+    if (names.length) rows.push(`<div class="sbt-row">Counts only: <b>${escapeHtml(names.join(", "))}</b></div>`);
+  }
+
+  const flags = [];
+  if (mgr?.c) flags.push(`<span class="lc-chip flag-cave">Cave</span>`);
+  if (mgr?.u) flags.push(`<span class="lc-chip flag-untame">Untameable</span>`);
+
+  return `
+    <div class="sbt">
+      <div class="sbt-entry">${escapeHtml(entryName)}</div>
+      <div class="sbt-min">Min Desired: <b>${escapeHtml(String(md))}</b></div>
+      ${zoneCount > 1 ? `<div class="sbt-link">⛓ shared across ${zoneCount} linked zones</div>` : ""}
+      ${rows.join("")}
+      ${flags.length ? `<div class="sbt-flags">${flags.join("")}</div>` : ""}
+    </div>`;
+}
+
 function drawEntry(entryName, rarityScore){
 
   const mapMeta = MAPS.find(m => m.id === State.mapId);
@@ -840,15 +913,45 @@ function drawEntry(entryName, rarityScore){
     const color = rarityToColor(rarityLabel);
     const style = styleForEntry(meta, color);
 
+    const zoneCount = (mgr?.b?.length || 0) + (mgr?.p?.length || 0);
+    const tipHtml = spawnBoxTooltipHtml(entryName, mgr, zoneCount);
+    const tipOpts = {
+      direction: "auto",
+      sticky: true,
+      offset: [0, -10],
+      opacity: 0.97,
+      className: "dark-tooltip spawn-box-tip",
+      autoPan: true
+    };
+
+    // Layers of this manager, so tapping one zone highlights its siblings.
+    const mgrLayers = [];
+    const wireLinkedHighlight = (layer) => {
+      mgrLayers.push(layer);
+      if (zoneCount <= 1) return;
+      layer.on("tooltipopen", () => {
+        for (const sib of mgrLayers){
+          sib.getElement?.()?.classList.add("spawn-linked-hi");
+        }
+      });
+      layer.on("tooltipclose", () => {
+        for (const sib of mgrLayers){
+          sib.getElement?.()?.classList.remove("spawn-linked-hi");
+        }
+      });
+    };
+
     // boxes
     for (const box of mgr.b || []) {
       const [x, y, w, h] = box;
       if (![x, y, w, h].every(Number.isFinite)) continue;
 
-      L.rectangle([[y, x], [y + h, x + w]], {
+      const rect = L.rectangle([[y, x], [y + h, x + w]], {
         ...style,
         pane: "spawnPane"
       }).addTo(mapObj.layer);
+      rect.bindTooltip(tipHtml, tipOpts);
+      wireLinkedHighlight(rect);
     }
 
     // points
@@ -856,7 +959,7 @@ function drawEntry(entryName, rarityScore){
       const [x, y] = pt;
       if (![x, y].every(Number.isFinite)) continue;
 
-      L.circleMarker([y, x], {
+      const ptMarker = L.circleMarker([y, x], {
         radius: 3,
         color: style.color,
         weight: style.weight,
@@ -866,6 +969,8 @@ function drawEntry(entryName, rarityScore){
         dashArray: style.dashArray,
         pane: "spawnPane"
       }).addTo(mapObj.layer);
+      ptMarker.bindTooltip(tipHtml, tipOpts);
+      wireLinkedHighlight(ptMarker);
     }
   }
 }
@@ -1365,6 +1470,166 @@ function clearDraw(){
   mapObj?.layer.clearLayers();
 }
 
+/* ============================================================
+   UE COORDINATE CONVERSION
+   Reads worldBounds from the geom file (added by the POI exporter).
+   worldBounds format: { minX, maxX, minY, maxY }  (UE world units)
+
+   ARK GPS convention:
+     lat 0  = north (UE_Y minimum)
+     lat 100= south (UE_Y maximum)
+     lon 0  = west  (UE_X minimum)
+     lon 100= east  (UE_X maximum)
+
+   In our Leaflet CRS.Simple setup (bounds [[0,0],[imgH,imgW]]):
+     leaflet lat = (1 - gps_lat/100) * imgH
+     leaflet lng = (gps_lon/100) * imgW
+============================================================ */
+
+// geom.bounds format: [minX, maxX, minY, maxY]  (UE world units, flat array)
+function boundsForCurrentMap() {
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const b = geom?.bounds;
+  if (!Array.isArray(b) || b.length < 4) return null;
+  return { minX: b[0], maxX: b[1], minY: b[2], maxY: b[3] };
+}
+
+// Convert UE world coords → ARK GPS (lat 0-100, lon 0-100).
+// Returns null if bounds are unavailable.
+function ueToGps(ue_x, ue_y) {
+  const b = boundsForCurrentMap();
+  if (!b) return null;
+  const lon = (ue_x - b.minX) / (b.maxX - b.minX) * 100;
+  const lat = (ue_y - b.minY) / (b.maxY - b.minY) * 100;
+  return { lat, lon };
+}
+
+// Convert UE world coords → Leaflet [lat, lng] for our CRS.Simple map.
+// Returns null if bounds are unavailable.
+function ueToLeaflet(ue_x, ue_y) {
+  const gps = ueToGps(ue_x, ue_y);
+  if (!gps) return null;
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const [imgW, imgH] = geom?.size || [2048, 2048];
+  return [
+    (1 - gps.lat / 100) * imgH,   // leaflet lat (Y axis inverted: lat 0=top, lat 100=bottom)
+    (gps.lon / 100) * imgW         // leaflet lng
+  ];
+}
+
+
+/* ============================================================
+   CAVE / OCEAN / DESERT CRATE DETECTION
+============================================================ */
+
+function isCaveCrate(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("cave") || cls.includes("underwater");
+}
+
+// LC "normal" drops: LostLootChest without Cave in the name
+function isLcNormalCrate(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("lostlootchest") && !cls.includes("cave");
+}
+
+// LC cave drops: LostLootChest_Cave_*
+function isLcCaveCrate(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("lostlootchest") && cls.includes("cave");
+}
+
+// Extinction OSD (Orbital Supply Drop / Horde Event) crates
+function isHordeCrate(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("horde");
+}
+
+// Ocean/Desert drops share the same loot set and are grouped together.
+// "High" class variants (SupplyCreate_OceanInstant_High_*) are used for desert spawns
+// on maps like Scorched Earth and Ragnarok but reference the same ocean loot set.
+function isOceanCrate(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("ocean") || cls.includes("seabed") || cls.includes("high");
+}
+
+// isDesertCrate is an alias for isOceanCrate - kept for potential future separation
+function isDesertCrate(crateClass) { return isOceanCrate(crateClass); }
+
+// Beaver dams — giant beaver lodges that act as lootable supply containers.
+// Two known classes: DenLogs_Child2 and DamLogs_Child. Matched on the
+// distinctive "...Logs_..." segment so either variant is caught.
+function isBeaverDam(crateClass) {
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("denlogs") || cls.includes("damlogs");
+}
+
+// ── Aberration special crate types ───────────────────────────────────────────
+// Ab "cave" = normal gameplay drops (inside the main cave map)
+// Ab "dungeon" = challenging cave areas
+// Ab "surface" = the dangerous irradiated surface zone
+// These only apply on Aberration; on other maps cave detection is the usual logic.
+
+function isAbMap() {
+  return State.mapId === "Aberration";
+}
+
+function isAbNormalCrate(crateClass) {
+  if (!isAbMap()) return false;
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("cave") && cls.includes("aberration");
+}
+
+function isAbDungeonCrate(crateClass) {
+  if (!isAbMap()) return false;
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("dungeon") && cls.includes("aberration");
+}
+
+function isAbSurfaceCrate(crateClass) {
+  if (!isAbMap()) return false;
+  const cls = String(crateClass || "").toLowerCase();
+  return cls.includes("surface") && cls.includes("aberrant");
+}
+
+// A crate is "special" (excluded from the normal surface drop bucket)
+function isExMap() { return State.mapId === "Extinction"; }
+function isLcMap() { return State.mapId === "Lost Colony"; }
+
+function isSpecialCrate(crateClass) {
+  if (isAbMap()) {
+    return isAbNormalCrate(crateClass) || isAbDungeonCrate(crateClass) || isAbSurfaceCrate(crateClass)
+        || isBeaverDam(crateClass);
+  }
+  // For all other maps including LC and EX: special = cave or ocean or beaver dam
+  // (LC cave drops have "cave" in their class name; EX cave drops do too)
+  return isCaveCrate(crateClass) || isOceanCrate(crateClass) || isBeaverDam(crateClass);
+}
+
+function _poiMatchesCrateFn(point, fn) {
+  const legend = resolvedSupplyLegendForCurrentMap();
+  const rows = Array.isArray(point?.c) ? point.c : [];
+  for (const row of rows) {
+    if (!Array.isArray(row)) continue;
+    const idx = Number(row[0]);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
+    if (fn(legend[idx]?.cls || "")) return true;
+  }
+  return false;
+}
+
+function poiHasCaveCrate(point)      { return _poiMatchesCrateFn(point, isCaveCrate); }
+function poiHasOsdCrate(point)       { return _poiMatchesCrateFn(point, isOsdCrate); }
+function poiHasOceanCrate(point)     { return _poiMatchesCrateFn(point, isOceanCrate); }
+function poiHasDesertCrate(point)    { return poiHasOceanCrate(point); } // alias
+function poiHasAbNormalCrate(point)  { return _poiMatchesCrateFn(point, isAbNormalCrate); }
+function poiHasAbDungeonCrate(point) { return _poiMatchesCrateFn(point, isAbDungeonCrate); }
+function poiHasAbSurfaceCrate(point) { return _poiMatchesCrateFn(point, isAbSurfaceCrate); }
+function poiIsSpecialCrate(point)    { return _poiMatchesCrateFn(point, isSpecialCrate); }
+function poiHasBeaverDam(point)      { return _poiMatchesCrateFn(point, isBeaverDam); }
+
 
 
 let mapObj = null;
@@ -1404,10 +1669,11 @@ function globalBpsForName(name){
 function getEntryRowsAllMaps(){
   const rows = [];
 
-  for (const [entryName, maps] of Object.entries(Global.spawn?.entryMaps || {})){
+  for (const [key, maps] of Object.entries(Global.spawn?.entryMaps || {})){
     const codes = Array.isArray(maps) ? maps : [];
     const mapNames = codes.map(mapNameFromCode);
-    const dinoNames = dinoNamesForEntryGlobal(entryName);
+    const entryName = Global.spawn?.entries?.[key]?.n || key;
+    const dinoNames = dinoNamesForEntryGlobal(key);
 
     rows.push({
       kind: "entry",
@@ -1440,7 +1706,7 @@ function getDinoRowsAllMaps(){
     const rowsInEntry = entryData?.d || [];
 
     for (const r of rowsInEntry) {
-      const rawBp = normalizeBp(r?.[0]);
+      const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
       if (!rawBp) continue;
 
       const outs = worldOutputsForBp(rawBp);
@@ -1473,7 +1739,7 @@ function getDinoRowsAllMaps(){
 
         const rec = byName.get(name);
         rec.bps.add(finalBp);
-        rec.entryNames.add(entryName);
+        rec.entryNames.add(entryData?.n || entryName);
 
         for (const code of codes) {
           const mapName = Global.spawn?.mapLegend?.[code] || code;
@@ -1532,7 +1798,7 @@ function getDinoRowsCurrentMap() {
       let foundInThisEntry = false;
 
       for (const r of rowsInEntry) {
-        const rawBp = normalizeBp(r?.[0]);
+        const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
         if (!rawBp) continue;
 
         const outs = worldOutputsForBp(rawBp);
@@ -1554,7 +1820,7 @@ function getDinoRowsCurrentMap() {
 
       if (!foundInThisEntry) continue;
 
-      globalEntrySet.add(entryName);
+      globalEntrySet.add(entryData?.n || entryName);
 
       const codes = Array.isArray(Global.spawn?.entryMaps?.[entryName])
         ? Global.spawn.entryMaps[entryName]
@@ -1705,6 +1971,59 @@ function installPanelTitleFitter(panelEl, opts = {}) {
 }
 
 
+// ── Horizontal panel drag (desktop only) ────────────────────────────────
+// The header acts as a drag handle. Vertical position stays locked.
+// Saved to localStorage so it persists across sessions.
+function installPanelDrag(panel){
+  const header = panel.querySelector(".fp-header");
+  if (!header) return;
+
+  let dragging = false;
+  let startX = 0;
+  let startLeft = 0;
+
+  function isDesktop(){ return window.innerWidth > 699; }
+
+  header.addEventListener("mousedown", (e) => {
+    // Don't drag when clicking buttons inside the header
+    if (e.target.closest("button, a, .fp-btn")) return;
+    if (!isDesktop()) return;
+
+    dragging = true;
+    startX = e.clientX;
+    startLeft = panel.offsetLeft;
+    header.style.cursor = "grabbing";
+    e.preventDefault();
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const maxLeft = window.innerWidth - panel.offsetWidth - 2;
+    const newLeft = Math.max(2, Math.min(maxLeft, startLeft + dx));
+    panel.style.left = `${newLeft}px`;
+  });
+
+  document.addEventListener("mouseup", () => {
+    if (!dragging) return;
+    dragging = false;
+    header.style.cursor = "";
+    if (isDesktop()){
+      localStorage.setItem("panelLeft", panel.offsetLeft);
+    }
+  });
+
+  // Re-clamp if viewport shrinks while panel is positioned far right
+  window.addEventListener("resize", () => {
+    if (!isDesktop()) return;
+    const maxLeft = window.innerWidth - panel.offsetWidth - 2;
+    if (panel.offsetLeft > maxLeft){
+      panel.style.left = `${Math.max(2, maxLeft)}px`;
+      localStorage.setItem("panelLeft", panel.offsetLeft);
+    }
+  });
+}
+
 function ensureInfoPanel(){
   let panel = document.getElementById("dinoInfoPanel");
   if (panel) return panel;
@@ -1767,9 +2086,15 @@ function ensureInfoPanel(){
   };
 
   panel.style.position = "absolute";
-  panel.style.left = "2px";
   panel.style.top = "2px";
   panel.style.zIndex = "800";
+
+  // Restore saved horizontal position on desktop; default to left: 2px
+  const savedLeft = localStorage.getItem("panelLeft");
+  panel.style.left = (savedLeft && window.innerWidth > 699) ? `${savedLeft}px` : "2px";
+
+  // ── Horizontal drag (desktop only) ──
+  installPanelDrag(panel);
 
   return panel;
 }
@@ -1902,14 +2227,19 @@ function mountPanelSwipe(container, tabs, getActive, setActive){
 
 
 function renderInfoPanel() {
-  console.log("MODE:", State.mode);
-  console.log("SELECTION:", State.selection);
   syncInfoPanelState();
-  if (!State.selection) {
+
+  if (!State.selection && State.mode !== "note") {
     renderInfoPanelBodyEmpty();
     return;
   }
-  
+
+  if (State.mode === "note") {
+    if (noteViewState.selected) renderNotePanel(noteViewState.selected);
+    else renderInfoPanelBodyEmpty();
+    return;
+  }
+
   if (State.mode === "dino") {
     try {
       renderDinoPanel(State.selection);
@@ -1929,6 +2259,8 @@ function renderInfoPanel() {
     
   } else if (State.mode === "item") {
     renderItemPanel(State.selection);
+  } else if (State.mode === "boss") {
+    renderBossPanel(State.selection);
   }
 }
 
@@ -2119,7 +2451,7 @@ function buildResolvedSupplyLegend(geom){
       : null;
 
     const isArtifact = cls.toLowerCase().includes("artifactcrate");
-    const isSupply = cls.toLowerCase().includes("supplycrate");
+    const isSupply = /supplycr[ea]te/i.test(cls); // handles both SupplyCrate and SupplyCreate (desert crates)
 
     out.push({
       bp,
@@ -2183,12 +2515,72 @@ function poiHasSupplyCrate(poi){
 }
 
 function countArtifactPois(points){
-  return (Array.isArray(points) ? points : []).filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p)).length;
+  return (Array.isArray(points) ? points : []).filter(p =>
+    poiHasArtifactCrate(p) && !poiHasSupplyCrate(p) && !poiIsSpecialCrate(p)
+  ).length;
 }
 
 function countSupplyPois(points){
-  return (Array.isArray(points) ? points : []).filter(p => poiHasSupplyCrate(p)).length;
+  return (Array.isArray(points) ? points : []).filter(p =>
+    poiHasSupplyCrate(p) && !poiIsSpecialCrate(p)
+  ).length;
 }
+
+function countCavePois(points)          { return (Array.isArray(points) ? points : []).filter(p => poiHasCaveCrate(p)).length; }
+function countLcNormalPois(points)     { return (Array.isArray(points) ? points : []).filter(p => _poiMatchesCrateFn(p, isLcNormalCrate)).length; }
+function countLcCavePois(points)       { return (Array.isArray(points) ? points : []).filter(p => _poiMatchesCrateFn(p, isLcCaveCrate)).length; }
+
+// Builds the dynamic "special crate" rows for the POI menu based on the current map
+function buildSpecialCrateRows(supplyCrates) {
+  if (isAbMap()) {
+    return [
+      { key: "abNormalCrates",  label: "Cave Drops",    count: countAbNormalPois(supplyCrates) },
+      { key: "abDungeonCrates", label: "Dungeon Drops", count: countAbDungeonPois(supplyCrates) },
+      { key: "abSurfaceCrates", label: "Surface Drops", count: countAbSurfacePois(supplyCrates) },
+    ];
+  }
+  if (isExMap()) {
+    // Extinction only has cave drops (no surface drops, no ocean - OSDs are in Horde Events)
+    return [
+      { key: "caveCrates", label: "Cave Drops", count: countCavePois(supplyCrates) },
+    ];
+  }
+  if (isLcMap()) {
+    // LC: Supply Drops (handled by main "supplyCrates" toggle) + Cave Drops
+    return [
+      { key: "caveCrates", label: "Cave Drops", count: countCavePois(supplyCrates) },
+    ];
+  }
+  // Determine ocean/desert label dynamically
+  const hasOcean  = supplyCrates.some(p => _poiMatchesCrateFn(p, c => isOceanCrate(c) && !isOceanHigh(c)));
+  const hasDesert = supplyCrates.some(p => _poiMatchesCrateFn(p, isOceanHigh));
+  const oceanLabel = hasOcean && hasDesert ? "Ocean / Desert Drops"
+                   : hasDesert             ? "Desert Drops"
+                   : "Ocean Drops";
+  const rows = [];
+  if (!isLcMap()) {  // LC has no ocean/desert
+    const oceanCount = countOceanPois(supplyCrates);
+    if (oceanCount > 0) rows.push({ key: "oceanCrates", label: oceanLabel, count: oceanCount });
+  }
+  // Cave drops (skip if none)
+  const caveCount = countCavePois(supplyCrates);
+  if (caveCount > 0) rows.push({ key: "caveCrates", label: "Cave Drops", count: caveCount });
+  // Beaver dams (skip if none)
+  const beaverCount = countBeaverDamPois(supplyCrates);
+  if (beaverCount > 0) rows.push({ key: "beaverDams", label: "Beaver Dams", count: beaverCount });
+  return rows;
+}
+
+// "High" variant = desert drop specifically
+function isOceanHigh(crateClass) {
+  return /supplycr[ea]te.*high/i.test(crateClass) || /high.*supplycr[ea]te/i.test(crateClass)
+      || String(crateClass).toLowerCase().includes("oceaninstant_high");
+}
+function countOceanPois(points)     { return (Array.isArray(points) ? points : []).filter(p => poiHasOceanCrate(p)).length; }
+function countBeaverDamPois(points) { return (Array.isArray(points) ? points : []).filter(p => poiHasBeaverDam(p)).length; }
+function countAbNormalPois(points)  { return (Array.isArray(points) ? points : []).filter(p => poiHasAbNormalCrate(p)).length; }
+function countAbDungeonPois(points) { return (Array.isArray(points) ? points : []).filter(p => poiHasAbDungeonCrate(p)).length; }
+function countAbSurfacePois(points) { return (Array.isArray(points) ? points : []).filter(p => poiHasAbSurfaceCrate(p)).length; }
 
 
 function renderPoiPanel(){
@@ -2204,16 +2596,37 @@ function renderPoiPanel(){
   console.log("supply count:", countSupplyPois(pois.supplyCrates || []));
   console.log("artifact count:", countArtifactPois(pois.supplyCrates || []));
 
+  const supplyCrates = pois.supplyCrates || [];
+  const allNotes = pois.explorerNotes || [];
+  const dossierCount = allNotes.filter(n => isDossierNote(n[1])).length;
+  const noteCount = allNotes.length - dossierCount;
+
   const rows = [
-    { key: "tributeTerminals", label: "Tribute Terminals", count: (pois.tributeTerminals || []).length },
-    { key: "supplyCrates", label: "Supply Drops", count: countSupplyPois(pois.supplyCrates || []) },
-    { key: "artifactCrates", label: "Artifacts", count: countArtifactPois(pois.supplyCrates || []) },
-    { key: "playerStarts", label: "Player Start Points", count: poiCount(pois.playerStarts) },
-    { key: "explorerNotes", label: "Explorer Notes", count: (pois.explorerNotes || []).length },
-    { key: "missions", label: "Missions", count: (pois.missions || []).length },
-    { key: "hordeEvents", label: "Horde Events", count: (pois.hordeEvents || []).length },
-    { key: "cityTerminals", label: "City Terminals", count: (pois.cityTerminals || []).length },
-    { key: "beacons", label: "Border Beacons", count: (pois.beacons || []).length }
+    { key: "tributeTerminals",  label: "Tribute Terminals",  count: (pois.tributeTerminals || []).length },
+    { key: "supplyCrates",      label: "Supply Drops",        count: countSupplyPois(supplyCrates) },
+    ...buildSpecialCrateRows(supplyCrates),
+    { key: "artifactCrates",    label: "Artifacts",           count: countArtifactPois(supplyCrates) },
+    { key: "playerStarts",      label: "Player Start Points", count: poiCount(pois.playerStarts) },
+    { key: "explorerNotes",     label: "Explorer Notes",      count: noteCount },
+    { key: "dinoDossiers",      label: "Dino Dossiers",       count: dossierCount },
+    { key: "missions",          label: "Missions",            count: (pois.missions || []).length },
+    { key: "hordeEvents",       label: "Horde Events",        count: (pois.hordeEvents || []).length },
+    { key: "cityTerminals",     label: "City Terminals",      count: (pois.cityTerminals || []).length },
+    { key: "beacons",           label: "Border Beacons",      count: ((pois.beacons||[]).length||(pois.borderBeacons||[]).length) },
+    { key: "waterVeins",        label: "Water Veins",         count: (pois.waterVeins || []).length },
+    { key: "oilVeins",          label: "Oil Veins",           count: (pois.oilVeins || []).length },
+    { key: "gasVeins",          label: "Gas Veins",           count: (pois.gasVeins || []).length },
+    { key: "chargeNodes",       label: "Charge Nodes",        count: (pois.chargeNodes || []).length },
+    { key: "hyperChargeNodes",  label: "Hyper Charge Nodes",  count: (pois.hyperChargeNodes || []).length },
+    { key: "plantZ",            label: "Wild Plant Z",        count: (pois.plantZ || []).length },
+    { key: "plantR",            label: "Proto Plant R",       count: (pois.plantR || []).length },
+    { key: "wyvernNests",       label: "Wyvern Nests",        count: (pois.wyvernNests || []).length },
+    { key: "iceWyvernNests",    label: "Ice Wyvern Nests",    count: (pois.iceWyvernNests || []).length },
+    { key: "rockDrakeNests",    label: "Rock Drake Nests",    count: (pois.rockDrakeNests || []).length },
+    { key: "deinonychusNests",  label: "Deinonychus Nests",   count: (pois.deinonychusNests || []).length },
+    { key: "beachChests",       label: "Beach Crates",        count: (pois.beachChests || []).length },
+    { key: "memorial",          label: "Memorial",            count: (pois.memorial || []).length },
+    { key: "teleporters",       label: "Teleporters",         count: (pois.teleporters || []).length }
   ].filter(r => r.count > 0);
 
   body.innerHTML = rows.length ? `
@@ -2285,14 +2698,124 @@ async function copyText(text){
 
 
 function installCopyDelegation(){
+  // Tooltip jump buttons use mousedown (fires before Leaflet closes the tooltip).
+  // We stop propagation so Leaflet's tooltip close handler doesn't run before us.
+  const jumpHandler = (e) => {
+    const artJump = e.target.closest(".artifact-crate-jump");
+    if (artJump) {
+      e.preventDefault();
+      e.stopPropagation();
+      const crateValue = artJump.dataset.crateValue;
+      if (crateValue) openCrateView(crateValue);
+      return;
+    }
+    const noteJump = e.target.closest(".note-view-jump");
+    if (noteJump) {
+      e.preventDefault();
+      e.stopPropagation();
+      const idx = Number(noteJump.dataset.noteIdx);
+      if (Number.isInteger(idx)) {
+        const mapMeta = MAPS.find(m => m.id === State.mapId);
+        const geom = Global.mapGeom.get(mapMeta?.geomShort);
+        const note = (geom?.pois?.explorerNotes || []).find(n => n[0] === idx);
+        if (note) openNoteView(note);
+      }
+      return;
+    }
+  };
+  // mousedown captures the event before Leaflet's click handler runs
+  document.addEventListener("mousedown", jumpHandler, true);
+  document.addEventListener("touchstart", jumpHandler, { capture: true, passive: false });
+
+  // Copy-on-click stays on click (no tooltip involved)
   document.addEventListener("click", async (e) => {
+    // Color swatch tap → show floating popover with name + hex
+    const swatch = e.target.closest(".color-swatch");
+    if (swatch) {
+      e.stopPropagation();
+      showColorSwatchPopover(swatch);
+      return;
+    }
+
+    // Item link → navigate to that item in Item View
+    // Matches both data-item-link-id (new explicit links) and data-item-id (loot tags)
+    const link = e.target.closest("[data-item-link-id], .loot-item-tag[data-item-id]");
+    if (link) {
+      const itemId = Number(link.dataset.itemLinkId || link.dataset.itemId);
+      if (Number.isFinite(itemId)) {
+        const name = itemDisplayNameById(itemId);
+        if (name && typeof openItemView === "function") {
+          openItemView(name);
+          return;
+        }
+      }
+    }
+
     const el = e.target.closest(".copy-on-click");
     if (!el) return;
-
     const text = el.dataset.copy ?? el.textContent ?? "";
     await copyText(String(text).trim());
     showCopiedBubble(el);
   });
+
+  // Reflow the panel scroll area on viewport changes (rotation, browser chrome
+  // collapsing on scroll, keyboard appearing, etc.)
+  let _resizeRaf = 0;
+  const onResize = () => {
+    if (_resizeRaf) cancelAnimationFrame(_resizeRaf);
+    _resizeRaf = requestAnimationFrame(() => {
+      _resizeRaf = 0;
+      refreshInfoPanelPageHeight();
+    });
+  };
+  window.addEventListener("resize", onResize);
+  window.addEventListener("orientationchange", onResize);
+}
+
+
+// Floating popover for color swatch info
+let _swatchPopoverEl = null;
+function showColorSwatchPopover(swatch) {
+  // Remove existing popover if any
+  if (_swatchPopoverEl) { _swatchPopoverEl.remove(); _swatchPopoverEl = null; }
+
+  const name = swatch.dataset.colorName || "";
+  const hex  = swatch.dataset.colorHex  || "";
+  const idx  = swatch.dataset.colorIdx  || "";
+
+  const pop = document.createElement("div");
+  pop.className = "color-swatch-popover";
+  pop.innerHTML = `
+    <div class="color-swatch-popover-row">
+      <span class="color-swatch-popover-chip" style="background:#${escapeAttr(hex)};"></span>
+      <div class="color-swatch-popover-text">
+        <div class="color-swatch-popover-name">${escapeHtml(name)}</div>
+        <div class="color-swatch-popover-hex">#${escapeHtml(hex)} <span class="color-swatch-popover-idx">· id ${escapeHtml(idx)}</span></div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(pop);
+  _swatchPopoverEl = pop;
+
+  // Position above the swatch
+  const r = swatch.getBoundingClientRect();
+  const popR = pop.getBoundingClientRect();
+  let left = r.left + (r.width / 2) - (popR.width / 2);
+  let top  = r.top - popR.height - 8;
+  // Clamp to viewport
+  const margin = 4;
+  left = Math.max(margin, Math.min(left, window.innerWidth - popR.width - margin));
+  if (top < margin) top = r.bottom + 8; // flip below if not enough room above
+  pop.style.left = `${left}px`;
+  pop.style.top  = `${top}px`;
+
+  // Auto-dismiss on any next click outside, or after 3s
+  const dismiss = () => {
+    if (_swatchPopoverEl === pop) { pop.remove(); _swatchPopoverEl = null; }
+    document.removeEventListener("click", dismiss, true);
+  };
+  setTimeout(() => document.addEventListener("click", dismiss, true), 0);
+  setTimeout(dismiss, 3500);
 }
 
 
@@ -2333,12 +2856,8 @@ function createIconButton(svgPath, viewBox = "0 0 24 24"){
 }
 
 
-function syncActivePageHeight(pagesEl, activeId, opts = {}) {
-  if (!pagesEl || !activeId) return;
-
-  const {
-    maxHeight = Math.floor(window.innerHeight * 0.42)
-  } = opts;
+function syncActivePageHeight(pagesEl, activeId, opts = {}){
+  if (!pagesEl) return;
 
   const activePage = pagesEl.querySelector(`.fp-page[data-page="${CSS.escape(activeId)}"]`);
   if (!activePage) return;
@@ -2352,10 +2871,53 @@ function syncActivePageHeight(pagesEl, activeId, opts = {}) {
   // temporarily let wrapper size naturally so measurement is real
   pagesEl.style.height = "auto";
 
+  // Compute the actual available height inside the panel:
+  // panel.clientHeight − (everything above .fp-pages inside .fp-body)
+  const panel = pagesEl.closest(".floating-panel");
+  const body  = pagesEl.closest(".fp-body");
+  let availableHeight = Infinity;
+
+  if (panel && body) {
+    const panelRect = panel.getBoundingClientRect();
+    const pagesRect = pagesEl.getBoundingClientRect();
+
+    // Find the bottom dock (Leaflet map controls) so we don't scroll under it.
+    // It lives in the leaflet-bottom container which holds dock buttons + zoom.
+    let dockTop = window.innerHeight;
+    const dockEl =
+      document.querySelector(".leaflet-bottom.leaflet-left") ||
+      document.querySelector(".leaflet-bottom.leaflet-right") ||
+      document.querySelector(".leaflet-control.map-dock") ||
+      document.querySelector(".leaflet-bottom");
+    if (dockEl) {
+      const r = dockEl.getBoundingClientRect();
+      if (r.top > 0 && r.top < window.innerHeight) dockTop = r.top;
+    }
+
+    // Read CSS vars for a safe fallback when the dock element isn't measurable yet
+    const cs = getComputedStyle(document.documentElement);
+    const toolbarH = parseFloat(cs.getPropertyValue("--leaflet-toolbar-h")) || 50;
+    const safeAreaFallback = window.innerHeight - toolbarH - 12;
+
+    // Skip layout-not-ready edge cases (zero rects during mount)
+    if (panelRect.bottom > 0 && pagesRect.top >= 0) {
+      // Cap to whichever is closer: bottom of panel, top of dock, or safe-area fallback
+      const usableBottom = Math.min(panelRect.bottom, dockTop - 8, safeAreaFallback);
+      const computed = usableBottom - pagesRect.top - 8;
+      availableHeight = computed > 80
+        ? computed
+        : Math.floor(window.innerHeight * 0.5);
+    } else {
+      availableHeight = Math.floor(window.innerHeight * 0.5);
+    }
+  }
+
+  // Caller can also pass a maxHeight to further cap
+  const explicitMax = Number.isFinite(opts.maxHeight) ? opts.maxHeight : Infinity;
+  const cap = Math.min(availableHeight, explicitMax);
+
   const naturalHeight = activePage.scrollHeight;
-  const finalHeight = Number.isFinite(maxHeight)
-    ? Math.min(naturalHeight, maxHeight)
-    : naturalHeight;
+  const finalHeight = Math.min(naturalHeight, cap);
 
   pagesEl.style.height = `${finalHeight}px`;
 
@@ -2380,6 +2942,7 @@ function refreshInfoPanelPageHeight() {
   else if (State.mode === "entry") activeId = infoPanelState.entryTab;
   else if (State.mode === "crate") activeId = infoPanelState.crateTab;
   else if (State.mode === "item") activeId = infoPanelState.itemTab;
+  else if (State.mode === "boss") activeId = infoPanelState.bossTab;
 
   requestAnimationFrame(() => {
     syncActivePageHeight(pagesEl, activeId);
@@ -2466,9 +3029,14 @@ let infoPanelState = {
   entryTab: "dinos",
   crateTab: "sets",
   itemTab: "crates",
+  bossTab: "summon",
+  itemCmdQty: 1,
+  itemCmdQuality: 0,
+  itemCmdIsBp: 0,
   showOfficialSets: false,   // when mod active, also show official sets in panel
   showAllCrates: false,      // when mod active, show all crates not just mod ones
-  showAllEntries: false      // when mod active, show all entries not just mod ones
+  showAllEntries: false,     // when mod active, show all entries not just mod ones
+  crateTypeFilter: "all"     // "all" | "normal" | "cave" | "artifact"
 };
 
 
@@ -2516,8 +3084,48 @@ function makeArtifactIcon() {
   });
 }
 
-function artifactTooltipHtml(p, legend){
-  return supplyCrateTooltipHtml(p, legend);
+function artifactNameFromCrateClass(crateClass) {
+  const crateData = Global.loot?.c?.[crateClass];
+  if (!crateData) return null;
+  // Drill into sets → entries → first item id
+  for (const set of (crateData.s || [])) {
+    for (const entry of (set.e || [])) {
+      const itemId = entry.i?.[0];
+      if (itemId != null) {
+        const item = Global.items?.i?.[String(itemId)];
+        if (item?.n) return item.n;
+      }
+    }
+  }
+  return crateData.dn || null;
+}
+
+function artifactTooltipHtml(p, legend) {
+  const rows = Array.isArray(p?.c) ? p.c : [];
+  let crateValue = "";
+  const lines = rows.map(row => {
+    if (!Array.isArray(row)) return "";
+    const idx = Number(row[0]);
+    const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length ? legend[idx] : null;
+    if (!meta) return "";
+    const cls = meta.cls || crateClassFromLegendRow(meta);
+    const artifactName = artifactNameFromCrateClass(cls);
+    const displayName = artifactName || crateDisplayNameByClass(cls) || meta.n || shortBpName(meta.bp || "") || "Artifact";
+    // Capture the crateId for the jump button
+    if (!crateValue) {
+      const crateId = Global.crateClassToId?.get(cls);
+      if (Number.isInteger(crateId)) crateValue = `crate:${crateId}`;
+    }
+    return `<div class="poi-tip-line">${escapeHtml(displayName)}</div>`;
+  }).filter(Boolean).join("");
+  const jumpBtn = crateValue
+    ? `<div class="poi-tip-action artifact-crate-jump" data-crate-value="${escapeAttr(crateValue)}">Open in Crate View &#8594;</div>`
+    : "";
+  return `<div class="poi-tip-block">
+    <div class="poi-tip-title">Artifact</div>
+    ${lines || '<div class="poi-tip-line">Unknown artifact</div>'}
+    ${jumpBtn}
+  </div>`;
 }
 
 function addArtifactMarkers(points, { layer = mapObj.poiLayer } = {}) {
@@ -2531,19 +3139,22 @@ function addArtifactMarkers(points, { layer = mapObj.poiLayer } = {}) {
     const y = Number(p?.y);
     if (![x, y].every(Number.isFinite)) continue;
 
-    L.marker([y, x], {
+    const marker = L.marker([y, x], {
       icon,
       pane: "poiPane"
     })
       .addTo(layer)
       .bindTooltip(artifactTooltipHtml(p, legend), {
         direction: "auto",
-        sticky: true,
+        sticky: false,
         offset: [0, -12],
         opacity: 0.97,
-        className: "supply-tooltip",
-        autoPan: true
+        className: "supply-tooltip supply-tooltip--interactive",
+        autoPan: true,
+        interactive: true
       });
+
+    // Click handled via delegation on .artifact-crate-jump in the tooltip
   }
 }
 
@@ -2551,7 +3162,7 @@ function drawArtifactCratePois(points){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.artifactCrates) return;
 
-  const artifactRows = points.filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p));
+  const artifactRows = points.filter(p => poiHasArtifactCrate(p) && !poiHasSupplyCrate(p) && !poiIsSpecialCrate(p));
   addArtifactMarkers(artifactRows, { layer: mapObj.poiLayer });
 }
 
@@ -2717,7 +3328,7 @@ function makeSupplySolidIcon(color, opts = {}){
 }
 
 
-function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer } = {}) {
+function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer, iconOverride = null } = {}) {
   if (!layer || !Array.isArray(points)) return;
 
   const legend = supplyLegendForCurrentMap();
@@ -2730,7 +3341,9 @@ function addSupplyCrateMarkers(points, { layer = mapObj.poiLayer } = {}) {
     const slices = supplyCrateSlicesForPoint(p, legend);
 
     let icon;
-    if (slices.length <= 1) {
+    if (iconOverride) {
+      icon = iconOverride;
+    } else if (slices.length <= 1) {
       icon = makeSupplySolidIcon(slices[0]?.color || "#ffd54a");
     } else {
       icon = makeSupplyPieIcon(slices);
@@ -2894,8 +3507,68 @@ function drawSupplyCratePois(points) {
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility.supplyCrates) return;
 
-  const supplyRows = points.filter(p => poiHasSupplyCrate(p));
+  const supplyRows = points.filter(p => poiHasSupplyCrate(p) && !poiIsSpecialCrate(p));
   addSupplyCrateMarkers(supplyRows, { layer: mapObj.poiLayer });
+}
+
+
+function caveCrateTooltipHtml(p, legend) {
+  const crateRows = Array.isArray(p?.c) ? p.c : [];
+  const lines = crateRows.map(row => {
+    if (!Array.isArray(row)) return "";
+    const idx = Number(row[0]);
+    const meta = Number.isInteger(idx) && idx >= 0 && idx < legend.length ? legend[idx] : null;
+    const crateClass = meta ? crateClassFromLegendRow(meta) : "";
+    const name = crateDisplayNameByClass(crateClass) || meta?.n || shortBpName(meta?.bp || "") || "Cave Drop";
+    const w = Number(row[1]);
+    const suffix = Number.isFinite(w) ? " (" + fmt(w) + ")" : "";
+    return `<div class="poi-tip-line">${escapeHtml(name + suffix)}</div>`;
+  }).filter(Boolean).join("");
+  return `<div class="poi-tip-block"><div class="poi-tip-title">Cave Drop</div>${lines || '<div class="poi-tip-line">No crates listed</div>'}</div>`;
+}
+
+
+function drawCaveCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.caveCrates) return;
+  // Use the same pie-chart markers as regular supply drops
+  addSupplyCrateMarkers(points.filter(p => poiHasCaveCrate(p)), { layer: mapObj.poiLayer });
+}
+
+function drawOceanCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.oceanCrates) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasOceanCrate(p)), { layer: mapObj.poiLayer });
+}
+
+function drawBeaverDamPois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points)) return;
+  if (!poiVisibility.beaverDams) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasBeaverDam(p)), { layer: mapObj.poiLayer });
+}
+
+// Lost Colony drop drawers
+function drawLcNormalCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points) || !poiVisibility.lcNormalCrates) return;
+  addSupplyCrateMarkers(points.filter(p => _poiMatchesCrateFn(p, isLcNormalCrate)), { layer: mapObj.poiLayer });
+}
+function drawLcCaveCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points) || !poiVisibility.lcCaveCrates) return;
+  addSupplyCrateMarkers(points.filter(p => _poiMatchesCrateFn(p, isLcCaveCrate)), { layer: mapObj.poiLayer });
+}
+
+// Aberration-specific drop drawers
+function drawAbNormalCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points) || !poiVisibility.abNormalCrates) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasAbNormalCrate(p)), { layer: mapObj.poiLayer });
+}
+function drawAbDungeonCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points) || !poiVisibility.abDungeonCrates) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasAbDungeonCrate(p)), { layer: mapObj.poiLayer });
+}
+function drawAbSurfaceCratePois(points) {
+  if (!mapObj?.poiLayer || !Array.isArray(points) || !poiVisibility.abSurfaceCrates) return;
+  addSupplyCrateMarkers(points.filter(p => poiHasAbSurfaceCrate(p)), { layer: mapObj.poiLayer });
 }
 
 
@@ -3016,6 +3689,90 @@ function clearPois(){
 }
 
 
+// Strip a difficulty/tier marker from a boss or boss-dino name, whether it's a
+// trailing "(Gamma)" suffix ("Rockwell (Gamma)" -> "Rockwell") or a leading
+// word ("Gamma King Titan" -> "King Titan").
+function stripBossDifficulty(name){
+  return String(name == null ? "" : name)
+    .replace(/\s*\((?:Gamma|Beta|Alpha|Easy|Medium|Hard)\)\s*$/i, "")
+    .replace(/^(?:Gamma|Beta|Alpha)\s+/i, "")
+    .trim();
+}
+
+// Join a list of names naturally: ["A"] -> "A", ["A","B"] -> "A & B",
+// ["A","B","C"] -> "A, B & C".
+function joinNatural(arr){
+  const a = (arr || []).filter(Boolean);
+  if (a.length <= 1) return a[0] || "";
+  if (a.length === 2) return `${a[0]} & ${a[1]}`;
+  return `${a.slice(0, -1).join(", ")} & ${a[a.length - 1]}`;
+}
+
+// Build an enriched tooltip for a tribute terminal: its name, the bosses it can
+// summon (from the terminal's `b` -> boss legend indices), and a short summary
+// of craftable items (`i` -> item ids). Falls back to the plain label when the
+// terminal carries no boss/item data.
+function terminalTooltipHtml(p){
+  const label = escapeHtml(p?.label || p?.type || "Terminal");
+  const bosses = bossesForCurrentMap();
+
+  const bossIdxs = Array.isArray(p?.b) ? p.b : [];
+  const itemIds  = Array.isArray(p?.i) ? p.i : [];
+
+  if (!bossIdxs.length && !itemIds.length) return label;
+
+  let html = `<div class="term-tip"><div class="term-tip-title">${label}</div>`;
+
+  if (bossIdxs.length){
+    // Use the boss DINO names rather than the summon-item names — item names
+    // are inconsistent across maps (e.g. "Center", "Aberration"), but the dino
+    // is what the player actually fights. Strip difficulty suffixes and dedupe,
+    // so e.g. the Center obelisk reads "Broodmother Lysrix & Megapithecus" and
+    // the Aberration terminal reads "Rockwell".
+    const seen = new Set();
+    const dinoNames = [];
+    for (const bi of bossIdxs){
+      if (bi < 0 || bi >= bosses.length) continue;
+      for (const d of (bosses[bi].dinos || [])){
+        const baseName = stripBossDifficulty(d.name);
+        if (baseName && !seen.has(baseName)){
+          seen.add(baseName);
+          dinoNames.push(baseName);
+        }
+      }
+    }
+    if (dinoNames.length){
+      html += `<div class="term-tip-section"><span class="term-tip-head">Summons:</span> `
+            + escapeHtml(joinNatural(dinoNames))
+            + `</div>`;
+    }
+  }
+
+  if (itemIds.length){
+    // Separate boss summon portals (those referenced as a boss's summon item)
+    // from other craftables (tribute/element items) for a cleaner summary.
+    const summonItemIds = new Set(
+      bosses.map(b => b.summon?.id).filter(id => id != null).map(Number)
+    );
+    const craftNames = itemIds
+      .filter(id => !summonItemIds.has(Number(id)))
+      .map(id => cleanBossText(itemDisplayNameById(id)))
+      .filter(Boolean);
+    if (craftNames.length){
+      const shown = craftNames.slice(0, 6);
+      const extra = craftNames.length - shown.length;
+      html += `<div class="term-tip-section"><span class="term-tip-head">Crafts:</span> `
+            + shown.map(n => escapeHtml(n)).join(", ")
+            + (extra > 0 ? ` +${extra} more` : "")
+            + `</div>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+
 function drawPoiGroup(points, groupName){
   if (!mapObj?.poiLayer || !Array.isArray(points)) return;
   if (!poiVisibility[groupName]) return;
@@ -3027,10 +3784,20 @@ function drawPoiGroup(points, groupName){
 
     const color = poiColor(p.type);
     const type = String(p.type || "").toLowerCase();
+    const isTerminalGroup = groupName === "tributeTerminals";
     const tooltipHtml =
       groupName === "supplyCrates"
         ? supplyCrateTooltipHtml(p)
-        : (p.label || p.type || "POI");
+        : isTerminalGroup
+          ? terminalTooltipHtml(p)
+          : (p.label || p.type || "POI");
+
+    // Match the supply-crate tooltip behaviour: direction:"auto" lets Leaflet
+    // open the tooltip toward whichever side has room (markers left of center
+    // open rightward, away from the edge), and sticky+autoPan keep it visible.
+    const tipOpts = isTerminalGroup
+      ? { direction: "auto", sticky: true, offset: [0, -14], opacity: 0.97, className: "dark-tooltip term-tooltip", autoPan: true }
+      : { direction: "auto", sticky: true, opacity: 0.97, className: "dark-tooltip", autoPan: true };
 
     // TEK terminals get the special icon
     if (type.includes("tek") || type.includes("titan")) {
@@ -3042,7 +3809,7 @@ function drawPoiGroup(points, groupName){
         pane: "poiPane"
       })
         .addTo(mapObj.poiLayer)
-        .bindTooltip(tooltipHtml, {
+        .bindTooltip(tooltipHtml, isTerminalGroup ? tipOpts : {
           direction: "auto",
           sticky: true,
           opacity: 0.97,
@@ -3065,10 +3832,157 @@ function drawPoiGroup(points, groupName){
       className:"poi-basic"
     })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(p.label || p.type || "POI");
+      .bindTooltip(tooltipHtml, tipOpts);
   }
 }
 
+
+/* ── Simple [x,y] array POI drawer ── */
+function drawSimpleDotPois(points, visKey, color, label, outlineColor) {
+  if (!mapObj?.poiLayer || !poiVisibility[visKey]) return;
+  // Default outline is the standard near-black ring. A caller can pass a
+  // custom outlineColor to distinguish a POI type while keeping the same dot
+  // fill (e.g. hyper charge nodes share the charge-node green fill but get a
+  // different ring). A custom ring is drawn slightly thicker so it reads.
+  const ring = outlineColor || "#111";
+  const ringWeight = outlineColor ? 2.5 : 1.5;
+  for (const pt of (Array.isArray(points) ? points : [])) {
+    const x = Number(pt?.[0] ?? pt?.x);
+    const y = Number(pt?.[1] ?? pt?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+    L.circleMarker([y, x], {
+      radius: 5, color: ring, weight: ringWeight,
+      fillColor: color, fillOpacity: 0.9, pane: "poiPane"
+    }).addTo(mapObj.poiLayer).bindTooltip(escapeHtml(label), {
+      direction: "auto", sticky: true, opacity: 0.97,
+      className: "basic-tooltip", autoPan: true
+    });
+  }
+}
+
+function drawNestPois(points, visKey, color, label) {
+  if (!mapObj?.poiLayer || !poiVisibility[visKey]) return;
+  const size = 16;
+  const icon = L.divIcon({
+    className: `poi-nest-icon`,
+    html: `<svg width="${size}" height="${size}" viewBox="-8 -8 16 16" aria-hidden="true">
+      <ellipse cx="0" cy="2" rx="7" ry="4" fill="${color}" stroke="#111" stroke-width="1.5"/>
+      <ellipse cx="0" cy="-2" rx="4" ry="3" fill="${color}" stroke="#111" stroke-width="1.2"/>
+    </svg>`,
+    iconSize: [size, size], iconAnchor: [size/2, size/2]
+  });
+  for (const pt of (Array.isArray(points) ? points : [])) {
+    const x = Number(pt?.[0] ?? pt?.x);
+    const y = Number(pt?.[1] ?? pt?.y);
+    if (![x, y].every(Number.isFinite)) continue;
+    L.marker([y, x], { icon, pane: "poiPane" })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(escapeHtml(label), {
+        direction: "auto", sticky: true, opacity: 0.97,
+        className: "basic-tooltip", autoPan: true
+      });
+  }
+}
+
+function drawTeleporterPois(teleporters) {
+  if (!mapObj?.poiLayer || !poiVisibility.teleporters) return;
+  const size = 18;
+  const icon = L.divIcon({
+    className: "poi-teleporter-icon",
+    html: `<svg width="${size}" height="${size}" viewBox="-9 -9 18 18" aria-hidden="true">
+      <polygon points="0,-8 8,4 -8,4" fill="#a78bfa" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/>
+      <polygon points="0,8 8,-4 -8,-4" fill="#a78bfa" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>`,
+    iconSize: [size, size], iconAnchor: [size/2, size/2]
+  });
+  for (const tp of (Array.isArray(teleporters) ? teleporters : [])) {
+    let x, y, label;
+    if (Array.isArray(tp)) {
+      if (tp.length >= 4) { x = tp[2]; y = tp[3]; label = `${tp[0]} ↔ ${tp[1]}`; }
+      else if (tp.length >= 3) { x = tp[1]; y = tp[2]; label = String(tp[0]); }
+      else continue;
+    } else { x = tp?.x; y = tp?.y; label = tp?.label || "Teleporter"; }
+    x = Number(x); y = Number(y);
+    if (![x, y].every(Number.isFinite)) continue;
+    L.marker([y, x], { icon, pane: "poiPane" })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(escapeHtml(String(label)), {
+        direction: "auto", sticky: true, opacity: 0.97,
+        className: "basic-tooltip", autoPan: true
+      });
+  }
+}
+
+/* ── Explorer Notes / Dossiers helpers ── */
+function isDossierNote(name) {
+  return String(name || "").toLowerCase().includes("dossier");
+}
+
+function noteTooltipHtml(note, { hideJump = false } = {}) {
+  const [idx, name, ue_x, ue_y] = note;
+  const gps = ueToGps(ue_x, ue_y);
+  const gpsStr = gps ? `${gps.lat.toFixed(1)}, ${gps.lon.toFixed(1)}` : "N/A";
+  const type = isDossierNote(name) ? "Dossier" : "Note";
+  return `<div class="poi-tip-block">
+    <div class="poi-tip-title">${escapeHtml(name)}</div>
+    <div class="poi-tip-line">${type} #${idx}</div>
+    <div class="poi-tip-line">GPS: ${escapeHtml(gpsStr)}</div>
+    ${hideJump ? "" : `<div class="poi-tip-action note-view-jump" data-note-idx="${idx}">Open in Note View &#8594;</div>`}
+  </div>`;
+}
+
+function drawExplorerNotePois(notes) {
+  if (!mapObj?.poiLayer || !poiVisibility.explorerNotes) return;
+  const size = 16;
+  const icon = L.divIcon({
+    className: "poi-note-icon",
+    html: `<svg width="${size}" height="${size}" viewBox="-8 -8 16 16" aria-hidden="true">
+      <rect x="-6" y="-7" width="12" height="14" rx="1.5" fill="#ffd54a" stroke="#111" stroke-width="1.5"/>
+      <line x1="-3" y1="-3" x2="3" y2="-3" stroke="#111" stroke-width="1.2"/>
+      <line x1="-3" y1="0" x2="3" y2="0" stroke="#111" stroke-width="1.2"/>
+      <line x1="-3" y1="3" x2="1" y2="3" stroke="#111" stroke-width="1.2"/>
+    </svg>`,
+    iconSize: [size, size], iconAnchor: [size/2, size/2]
+  });
+  for (const note of notes) {
+    if (!Array.isArray(note) || note.length < 4 || isDossierNote(note[1])) continue;
+    const latlng = ueToLeaflet(note[2], note[3]);
+    if (!latlng) continue;
+    L.marker(latlng, { icon, pane: "poiPane" })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(noteTooltipHtml(note), {
+        direction: "auto", sticky: false, offset: [0,-10],
+        opacity: 0.97, className: "note-tooltip note-tooltip--interactive", autoPan: true,
+        interactive: true
+      });
+  }
+}
+
+function drawDossierPois(notes) {
+  if (!mapObj?.poiLayer || !poiVisibility.dinoDossiers) return;
+  const size = 16;
+  const icon = L.divIcon({
+    className: "poi-dossier-icon",
+    html: `<svg width="${size}" height="${size}" viewBox="-8 -8 16 16" aria-hidden="true">
+      <rect x="-6" y="-7" width="12" height="14" rx="1.5" fill="#66ccff" stroke="#111" stroke-width="1.5"/>
+      <path d="M -3 -3 Q 0 -6 3 -3 L 3 4 L -3 4 Z" fill="#111" opacity="0.3"/>
+      <line x1="-3" y1="0" x2="3" y2="0" stroke="#111" stroke-width="1.2"/>
+      <line x1="-3" y1="3" x2="1" y2="3" stroke="#111" stroke-width="1.2"/>
+    </svg>`,
+    iconSize: [size, size], iconAnchor: [size/2, size/2]
+  });
+  for (const note of notes) {
+    if (!Array.isArray(note) || note.length < 4 || !isDossierNote(note[1])) continue;
+    const latlng = ueToLeaflet(note[2], note[3]);
+    if (!latlng) continue;
+    L.marker(latlng, { icon, pane: "poiPane" })
+      .addTo(mapObj.poiLayer)
+      .bindTooltip(noteTooltipHtml(note), {
+        direction: "auto", sticky: true, offset: [0,-10],
+        opacity: 0.97, className: "note-tooltip", autoPan: true
+      });
+  }
+}
 
 function drawPois(){
   clearPois();
@@ -3077,15 +3991,41 @@ function drawPois(){
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
   if (!geom?.pois) return;
 
-  drawPoiGroup(geom.pois.tributeTerminals, "tributeTerminals");
-  drawSupplyCratePois(geom.pois.supplyCrates || []);
-  drawArtifactCratePois(geom.pois.supplyCrates || []);
-  drawPlayerStarts(geom.pois.playerStarts);
-  drawPoiGroup(geom.pois.explorerNotes, "explorerNotes");
-  drawMissionPois(geom.pois.missions || []);
-  drawHordePois(geom.pois.hordeEvents || []);
-  drawPoiGroup(geom.pois.cityTerminals, "cityTerminals");
-  drawPoiGroup(geom.pois.beacons, "beacons");
+  const pois = geom.pois;
+
+  drawPoiGroup(pois.tributeTerminals, "tributeTerminals");
+  drawSupplyCratePois(pois.supplyCrates || []);
+  if (isAbMap()) {
+    drawAbNormalCratePois(pois.supplyCrates || []);
+    drawAbDungeonCratePois(pois.supplyCrates || []);
+    drawAbSurfaceCratePois(pois.supplyCrates || []);
+  } else {
+    drawCaveCratePois(pois.supplyCrates || []);
+    drawOceanCratePois(pois.supplyCrates || []);
+    drawBeaverDamPois(pois.supplyCrates || []);
+  }
+  drawArtifactCratePois(pois.supplyCrates || []);
+  drawPlayerStarts(pois.playerStarts);
+  drawExplorerNotePois(pois.explorerNotes || []);
+  drawDossierPois(pois.explorerNotes || []);
+  drawMissionPois(pois.missions || []);
+  drawHordePois(pois.hordeEvents || []);
+  drawPoiGroup(pois.cityTerminals, "cityTerminals");
+  drawSimpleDotPois(pois.beacons || pois.borderBeacons, "beacons", "#ff8a3d", "Border Beacon");
+  drawSimpleDotPois(pois.waterVeins,       "waterVeins",       "#5ab4ff", "Water Vein");
+  drawSimpleDotPois(pois.oilVeins,         "oilVeins",         "#555",    "Oil Vein");
+  drawSimpleDotPois(pois.gasVeins,         "gasVeins",         "#ff4dff", "Gas Vein");
+  drawSimpleDotPois(pois.chargeNodes,      "chargeNodes",      "#00ff55", "Charge Node");
+  drawSimpleDotPois(pois.hyperChargeNodes, "hyperChargeNodes", "#00ff55", "Hyper Charge Node", "#aa55ff");
+  drawSimpleDotPois(pois.plantZ,           "plantZ",           "#00eeff", "Wild Plant Z");
+  drawSimpleDotPois(pois.plantR,           "plantR",           "#ff6040", "Proto Plant R");
+  drawNestPois(pois.wyvernNests,           "wyvernNests",      "#ff9933", "Wyvern Nest");
+  drawNestPois(pois.iceWyvernNests,        "iceWyvernNests",   "#88eeff", "Ice Wyvern Nest");
+  drawNestPois(pois.rockDrakeNests,        "rockDrakeNests",   "#00ffcc", "Rock Drake Nest");
+  drawNestPois(pois.deinonychusNests,      "deinonychusNests", "#ff5050", "Deinonychus Nest");
+  drawSimpleDotPois(pois.beachChests,      "beachChests",      "#f0c040", "Beach Crate");
+  drawSimpleDotPois(pois.memorial,         "memorial",         "#f0f0f0", "Memorial");
+  drawTeleporterPois(pois.teleporters);
 }
 
 

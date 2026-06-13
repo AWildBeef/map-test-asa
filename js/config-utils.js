@@ -135,7 +135,9 @@ const State = {
     dino: "",
     entry: "",
     crate: "",
-    item: ""
+    item: "",
+    note: "",
+    boss: ""
   },
   
   mapEntries: new Set(),
@@ -149,6 +151,10 @@ const State = {
   
   itemNames: [],
   itemNameToIds: new Map(),
+
+  bossNames: [],
+  bossNameToIndex: new Map(),
+  bossItemIndex: new Map(),  // itemId -> [bossName1, ...]
   
   mapCrateIds: new Set(),
   mapItemIds: new Set(),
@@ -165,13 +171,36 @@ let dockState = { mapMeta: null, cfg: null };
 const poiVisibility = {
   tributeTerminals: true,
   supplyCrates: false,
+  caveCrates: false,
+  oceanCrates: false,
+  beaverDams: false,
+  lcNormalCrates: false,
+  lcCaveCrates: false,
+  abNormalCrates: false,
+  abDungeonCrates: false,
+  abSurfaceCrates: false,
   artifactCrates: false,
   playerStarts: false,
   explorerNotes: false,
+  dinoDossiers: false,
   missions: false,
   hordeEvents: false,
   cityTerminals: false,
-  beacons: false
+  beacons: false,
+  waterVeins: false,
+  oilVeins: false,
+  gasVeins: false,
+  chargeNodes: false,
+  hyperChargeNodes: false,
+  plantZ: false,
+  plantR: false,
+  wyvernNests: false,
+  iceWyvernNests: false,
+  rockDrakeNests: false,
+  deinonychusNests: false,
+  beachChests: false,
+  memorial: false,
+  teleporters: false
 };
 
 let showRarityLegend = false;
@@ -217,12 +246,28 @@ const MODE_OPTIONS = [
   { id: "dino",  label: "Dino View" },
   { id: "entry", label: "Spawn View" },
   { id: "crate", label: "Crate View" },
-  { id: "item",  label: "Item View" }
+  { id: "item",  label: "Item View" },
+  { id: "note",  label: "Note View" },
+  { id: "boss",  label: "Boss View" }
 ];
+
+// Note view state
+const noteViewState = {
+  noteTab:    "notes",  // "notes" | "dossiers"
+  searchMode: "name",   // "name" | "index"
+  query:      "",
+  selected:   null      // selected note: [index, name, ue_x, ue_y, ue_z]
+};
 
 function setMode(mode){
   if (!MODE_OPTIONS.some(m => m.id === mode)) return;
   if (State.mode === mode) return;
+
+  // Close note panel when leaving note mode
+  if (State.mode === "note" && mode !== "note") {
+    const notePanel = document.getElementById("noteViewPanel");
+    if (notePanel) { notePanel.style.display = "none"; notePanel.dataset.hidden = "1"; }
+  }
 
   State.selections[State.mode] = State.selection || "";
   State.mode = mode;
@@ -242,6 +287,21 @@ function openCrateView(crateValue){
   State.mode = "crate";
   State.selection = crateValue;
   State.selections.crate = crateValue;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  applyEmbedRestrictions();
+  render();
+}
+
+function openItemView(itemName){
+  if (!itemName) return;
+
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "item";
+  State.selection = itemName;
+  State.selections.item = itemName;
 
   syncModeButton();
   syncModeClass();
@@ -278,6 +338,20 @@ function openDinoView(name){
   State.mode = "dino";
   State.selection = name;
   State.selections.dino = name;
+
+  syncModeButton();
+  syncModeClass();
+  rebuildSelectionSelect();
+  render();
+}
+
+function openBossView(name){
+  if (!name) return;
+
+  State.selections[State.mode] = State.selection || "";
+  State.mode = "boss";
+  State.selection = name;
+  State.selections.boss = name;
 
   syncModeButton();
   syncModeClass();
@@ -376,10 +450,12 @@ function syncModeButton() {
   if (!UI.modeToggle) return;
 
   const labels = {
-    dino: "Dino View",
+    dino:  "Dino View",
     entry: "Spawn View",
     crate: "Crate View",
-    item: "Item View"
+    item:  "Item View",
+    note:  "Note View",
+    boss:  "Boss View"
   };
 
   UI.modeToggle.innerHTML = `

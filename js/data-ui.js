@@ -175,9 +175,20 @@ async function loadSelectedSource() {
 
     const mod = await loadJSON(src.file);
 
-    Global.modMeta = mod;
+    const modId = String(mod.modId || "");
+    const baseIndex = Global.baseDinos?.dinoIndex || [];
+    const decoded = decodeModSource(mod, baseIndex);
+
+    // modMeta carries mod metadata plus the mod's dinos keyed by BP (decoded),
+    // so modBlueprintSet() — which keys off Object.keys(modMeta.dinos) — yields
+    // bps that match the bp-keyed dino collection used everywhere else.
+    Global.modMeta = { ...mod, dinos: decoded.dinos };
+    const taggedModDinos = decoded.dinos;
+    const modSpawnEntries = decoded.entries;
+    const modWorldRepl = decoded.worldReplacements;
 
     Global.spawn = {
+      entryIndex: Global.baseSpawn?.entryIndex || [],
       mapLegend: {
         ...(Global.baseSpawn?.mapLegend || {}),
         ...(mod.mapLegend || {})
@@ -188,7 +199,7 @@ async function loadSelectedSource() {
       },
       entries: mergeEntryTables(
         Global.baseSpawn?.entries || {},
-        mod.entries || {}
+        modSpawnEntries
       ),
       maps: {
         ...(Global.baseSpawn?.maps || {}),
@@ -200,20 +211,29 @@ async function loadSelectedSource() {
       },
       worldReplacements: mergeWorldReplacementTables(
         Global.baseSpawn?.worldReplacements || {},
-        mod.worldReplacements || {}
+        modWorldRepl
       )
     };
 
     Global.dinos = {
+      // Base dinos stay index-keyed; mod dinos are bp-keyed. The layer keys
+      // both by bp, so the differing key styles coexist without collision.
       dinos: {
         ...(Global.baseDinos?.dinos || {}),
-        ...(mod.dinos || {})
-      }
+        ...taggedModDinos
+      },
+      dinoIndex: baseIndex,
+      c: Global.baseDinos?.c || {},
+      cs: Global.baseDinos?.cs || {},
+      modCsByMod: (modId && mod.cs) ? { [modId]: mod.cs } : {}
     };
 
     mergeLootFromMod(mod);
 
   }
+
+  // Rebuild the dino index compatibility maps for whatever source is now active.
+  rebuildDinoIndex();
 
   rebuildMapIndices();
   rebuildLootIndices();
@@ -254,9 +274,31 @@ function buildWorldRuleIndex(rules){
 }
 
 
+// Cached world-rule index. Keyed to the map it was built for, so a map change
+// auto-invalidates it even if invalidateWorldRuleCache() isn't called on that
+// path. Rebuilt at most once per map (then reused across all dino selections).
+let _worldRuleIndexCache = null;
+let _worldRuleIndexCacheKey = null;
+
+function invalidateWorldRuleCache(){
+  _worldRuleIndexCache = null;
+  _worldRuleIndexCacheKey = null;
+  _ancestorDistCache.clear();
+  if (typeof invalidateBossCache === "function") invalidateBossCache();
+}
+
 function worldRuleIndexForCurrentMap(){
+  // Cache key combines map id and source identity. If either changed since the
+  // cache was built, rebuild. This makes stale-rule bugs impossible regardless
+  // of whether an explicit invalidation happened.
+  const key = String(State.mapId) + "\x00" + (Global.modMeta?.modId || "official");
+  if (_worldRuleIndexCache && _worldRuleIndexCacheKey === key){
+    return _worldRuleIndexCache;
+  }
   const rules = worldRulesForCurrentMap();
-  return buildWorldRuleIndex(rules);
+  _worldRuleIndexCache = buildWorldRuleIndex(rules);
+  _worldRuleIndexCacheKey = key;
+  return _worldRuleIndexCache;
 }
 
 
@@ -325,33 +367,90 @@ function isEntryVisible(dinoKey, idx){
 
 
 function mergeEntryTables(baseEntries, modEntries){
-  const out = { ...baseEntries };
+  // Base entries are id-keyed ({ n: className, d }); mod entries are
+  // class-keyed. A mod that injects rows into a vanilla entry names it by
+  // class, so map class -> base id(s) and append there. Anything else is
+  // added under its class key, which the spawn-entry resolvers accept.
+  const out = {};
+  for (const [k, v] of Object.entries(baseEntries || {})){
+    out[k] = { ...v, d: [...(v?.d || [])] };
+  }
+
+  const idsByClass = new Map();
+  for (const [k, v] of Object.entries(out)){
+    const cls = v?.n || k;
+    if (!idsByClass.has(cls)) idsByClass.set(cls, []);
+    idsByClass.get(cls).push(k);
+  }
 
   for (const [entryName, modEntry] of Object.entries(modEntries || {})){
-    if (!out[entryName]){
+    const modRows = Array.isArray(modEntry?.d) ? modEntry.d : [];
+    const targets = idsByClass.get(entryName);
+
+    if (!targets?.length){
       out[entryName] = {
+        n: entryName,
         bp: modEntry?.bp || "",
-        d: [...(modEntry?.d || [])]
+        d: [...modRows]
       };
       continue;
     }
 
-    const baseRows = Array.isArray(out[entryName].d) ? out[entryName].d : [];
-    const modRows = Array.isArray(modEntry?.d) ? modEntry.d : [];
-
-    out[entryName] = {
-      bp: out[entryName].bp || modEntry?.bp || "",
-      d: [...baseRows, ...modRows]
-    };
+    for (const id of targets){
+      out[id] = {
+        ...out[id],
+        bp: out[id].bp || modEntry?.bp || "",
+        d: [...out[id].d, ...modRows]
+      };
+    }
   }
 
   return out;
 }
 
 
+// ── Spawn entry resolution ──────────────────────────────────────────────
+// spawn_global entries are keyed by entry id (an index into entryIndex,
+// which holds the full blueprint paths). Class names are NOT globally
+// unique (e.g. DinoSpawnEntries_Cats_C exists on both Astraeos and
+// Valguero with different bps) but ARE unique within a map, so
+// rebuildMapIndices records a per-map class -> key map. These helpers
+// accept a class name, a raw id key, or a legacy class key (mod data).
+
+function spawnEntryIdForClass(entryName){
+  return State.entryIdByClass?.get?.(entryName) ?? null;
+}
+
+function spawnEntryByName(entryName){
+  const ents = Global.spawn?.entries || {};
+  const id = spawnEntryIdForClass(entryName);
+  if (id != null && ents[id]) return ents[id];
+  return ents[entryName] || null;
+}
+
+function spawnRowsForEntry(entryName){
+  return spawnEntryByName(entryName)?.d || [];
+}
+
+function spawnBpForEntry(entryName){
+  const id = spawnEntryIdForClass(entryName);
+  if (id != null){
+    const viaIndex = Global.spawn?.entryIndex?.[Number(id)];
+    if (viaIndex) return viaIndex;
+  }
+  return spawnEntryByName(entryName)?.bp || "";
+}
+
+function entryMapCodesForClass(entryName){
+  const em = Global.spawn?.entryMaps || {};
+  const id = spawnEntryIdForClass(entryName);
+  const codes = (id != null ? em[id] : undefined) ?? em[entryName];
+  return Array.isArray(codes) ? codes : [];
+}
+
 function entryTotalExpected(entryName){
 
-  const rows=Global.spawn?.entries?.[entryName]?.d||[];
+  const rows = spawnRowsForEntry(entryName);
 
   let sum=0;
 
@@ -369,14 +468,14 @@ function entryTotalExpected(entryName){
 
 function entryRarityForBps(entryName, bpSet){
 
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  const rows = spawnRowsForEntry(entryName);
   if (!rows.length) return 0;
 
   let totalExpected = 0;
   let matchedRarity = 0;
 
   for (const r of rows){
-    const rawBp = normalizeBp(r?.[0]);
+    const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
     if (!rawBp) continue;
 
     const gw = Number(r?.[1] || 0);
@@ -453,14 +552,14 @@ function entryManagerMinStats(entryName){
 
 function entryRarityForEntry(entryName){
 
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  const rows = spawnRowsForEntry(entryName);
   if (!rows.length) return 0;
 
   let totalExpected = 0;
   let rarity = 0;
 
   for (const r of rows){
-    const rawBp = normalizeBp(r?.[0]);
+    const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
     if (!rawBp) continue;
 
     const gw = Number(r?.[1] || 0);
@@ -607,14 +706,14 @@ async function buildSources(){
 }
 
 function dinoNamesForEntryGlobal(entryName){
-  const rows = Global.spawn?.entries?.[entryName]?.d || [];
+  const rows = spawnRowsForEntry(entryName);
   const names = new Set();
 
   const restrictToMod = !activeSourceIsOfficial();
   const allowedModBps = restrictToMod ? modBlueprintSet() : null;
 
   for (const r of rows){
-    const rawBp = normalizeBp(r?.[0]);
+    const rawBp = normalizeBp(bpForDinoRef(r?.[0]));
     if (!rawBp) continue;
 
     const outs = worldOutputsForBp(rawBp);
@@ -639,15 +738,147 @@ function dinoNamesForEntryGlobal(entryName){
 }
 
 
-function getDinoObjByBp(bp){
-  const dinos = Global.dinos?.dinos || {};
-  if (dinos[bp]) return dinos[bp];
+// Decode an entire mod's dino/spawn/world data from its index space into the
+// shared bp space. Returns { dinos (bp-keyed), entries, worldReplacements }.
+function decodeModSource(mod, baseIndex){
+  const modId = String(mod.modId || "");
+  const modIndex = Array.isArray(mod.dinoIndex) ? mod.dinoIndex : [];
 
-  const cls = bpClass(bp);
-  for (const [k, v] of Object.entries(dinos)){
-    if (bpClass(k) === cls) return v;
+  const dinos = {};
+  for (const [key, dino] of Object.entries(mod.dinos || {})){
+    if (!dino || typeof dino !== "object") continue;
+    const bp = /^-?\d+$/.test(key)
+      ? decodeModDinoRef(Number(key), modIndex, baseIndex)
+      : key;
+    if (!bp) continue;
+    const resolved = { ...dino, _modId: modId };
+    if (dino.p != null){
+      resolved.p = Array.isArray(dino.p)
+        ? dino.p.map(ref => decodeModDinoRef(ref, modIndex, baseIndex) || ref)
+        : (decodeModDinoRef(dino.p, modIndex, baseIndex) || dino.p);
+    }
+    dinos[bp] = resolved;
   }
 
+  const entries = {};
+  for (const [ename, entry] of Object.entries(mod.entries || {})){
+    if (!entry || !Array.isArray(entry.d)){ entries[ename] = entry; continue; }
+    entries[ename] = {
+      ...entry,
+      d: entry.d.map(r => Array.isArray(r)
+        ? [decodeModDinoRef(r[0], modIndex, baseIndex) || r[0], ...r.slice(1)]
+        : r)
+    };
+  }
+
+  const worldReplacements = {};
+  for (const [scope, rules] of Object.entries(mod.worldReplacements || {})){
+    worldReplacements[scope] = Array.isArray(rules) ? rules.map(rule => {
+      if (!rule || typeof rule !== "object") return rule;
+      const out = { ...rule, from: decodeModDinoRef(rule.from, modIndex, baseIndex) || rule.from };
+      if (Array.isArray(rule.outs)){
+        out.outs = rule.outs.map(o => Array.isArray(o)
+          ? [decodeModDinoRef(o[0], modIndex, baseIndex) || o[0], o[1]] : o);
+      }
+      return out;
+    }) : rules;
+  }
+
+  return { dinos, entries, worldReplacements };
+}
+
+// Decode a dino reference using a specific mod's index plus the base index.
+// In mod files: ref >= 0 -> that mod's own dinoIndex[ref];
+//               ref < 0  -> a VANILLA dino at baseIndex[-ref - 1].
+// Returns a bp string ("" if unresolvable).
+function decodeModDinoRef(ref, modIndex, baseIndex){
+  if (ref == null) return "";
+  if (typeof ref === "string" && !/^-?\d+$/.test(ref)) return ref; // already a bp
+  const n = Number(ref);
+  if (!Number.isFinite(n)) return "";
+  if (n < 0){
+    const vi = -n - 1;
+    return (baseIndex && baseIndex[vi]) || "";
+  }
+  return (modIndex && modIndex[n]) || "";
+}
+
+// ---------------------------------------------------------------------------
+// Dino index compatibility layer
+//
+// The base dinos section is keyed by a numeric dino index, and `dinoIndex` is
+// an array mapping index -> bp. Parent (`p`) and spawn/boss references are
+// also given as indices. Mod dinos, however, are still keyed by bp. To let the
+// rest of the app keep working in terms of bp, we build lookup maps once per
+// source load:
+//   _dinoIdxToBp : index -> bp           (from Global.dinos.dinoIndex)
+//   _dinoBpToObj : bp    -> dino object  (covers both index- and bp-keyed)
+//   _dinoBpToIdx : bp    -> index
+// Anything that needs to resolve an index (boss.d, parent p, spawn refs) goes
+// through bpForDinoRef(); object lookup goes through getDinoObjByBp().
+// ---------------------------------------------------------------------------
+let _dinoIdxToBp = [];
+let _dinoBpToObj = new Map();
+let _dinoBpToIdx = new Map();
+
+function rebuildDinoIndex(){
+  _dinoIdxToBp = Array.isArray(Global.dinos?.dinoIndex) ? Global.dinos.dinoIndex : [];
+  _dinoBpToObj = new Map();
+  _dinoBpToIdx = new Map();
+
+  // Map index -> bp both ways.
+  _dinoIdxToBp.forEach((bp, i) => {
+    if (bp){
+      _dinoBpToIdx.set(bp, i);
+      _dinoBpToIdx.set(bpClass(bp), i);
+    }
+  });
+
+  const dinos = Global.dinos?.dinos || {};
+  for (const [key, obj] of Object.entries(dinos)){
+    // key is either a numeric index (base) or a bp string (mod).
+    let bp = null;
+    if (/^-?\d+$/.test(key)){
+      bp = _dinoIdxToBp[Number(key)] || null;
+    } else {
+      bp = key; // mod dino, already bp-keyed
+    }
+    if (!bp) continue;
+    _dinoBpToObj.set(bp, obj);
+    _dinoBpToObj.set(bpClass(bp), obj);
+  }
+}
+
+// Resolve a dino reference (bp string OR numeric index) to a bp string.
+function bpForDinoRef(ref){
+  if (ref == null) return "";
+  if (typeof ref === "number" || /^-?\d+$/.test(String(ref))){
+    return _dinoIdxToBp[Number(ref)] || "";
+  }
+  return String(ref);
+}
+
+function getDinoObjByBp(bp){
+  if (bp == null) return null;
+
+  // Numeric ref -> resolve through the index.
+  if (typeof bp === "number" || /^-?\d+$/.test(String(bp))){
+    const resolved = _dinoIdxToBp[Number(bp)];
+    if (resolved && _dinoBpToObj.has(resolved)) return _dinoBpToObj.get(resolved);
+  }
+
+  // Direct bp (or class) hit via the prebuilt map.
+  if (_dinoBpToObj.has(bp)) return _dinoBpToObj.get(bp);
+  const cls = bpClass(bp);
+  if (_dinoBpToObj.has(cls)) return _dinoBpToObj.get(cls);
+
+  // Fallback: linear scan of the raw section (covers anything missed).
+  const dinos = Global.dinos?.dinos || {};
+  if (dinos[bp]) return dinos[bp];
+  for (const [k, v] of Object.entries(dinos)){
+    const kbp = /^-?\d+$/.test(k) ? (_dinoIdxToBp[Number(k)] || "") : k;
+    if (kbp && bpClass(kbp) === cls) return v;
+  }
   return null;
 }
 
@@ -658,10 +889,15 @@ function normalizeBp(bp){
 
 
 function getParentBp(bp){
-  const d = Global.dinos?.dinos?.[bp];
-  return normalizeBp(d?.p);
+  const d = getDinoObjByBp(bp);
+  // Parent `p` is now a tree array [direct, grandparent, ...]; use p[0] for
+  // the direct parent. Each element is a dino index (base) or bp string (mod).
+  const pRef = Array.isArray(d?.p) ? d.p[0] : d?.p;
+  return normalizeBp(bpForDinoRef(pRef));
 }
 
+
+const _ancestorDistCache = new Map();
 
 function ancestorDistance(childBp, ancestorBp){
   childBp = normalizeBp(childBp);
@@ -669,6 +905,9 @@ function ancestorDistance(childBp, ancestorBp){
 
   if (!childBp || !ancestorBp) return null;
   if (childBp === ancestorBp) return 0;
+
+  const cacheKey = childBp + "\x00" + ancestorBp;
+  if (_ancestorDistCache.has(cacheKey)) return _ancestorDistCache.get(cacheKey);
 
   let cur = childBp;
   let dist = 0;
@@ -678,9 +917,13 @@ function ancestorDistance(childBp, ancestorBp){
     seen.add(cur);
     cur = getParentBp(cur);
     dist += 1;
-    if (cur === ancestorBp) return dist;
+    if (cur === ancestorBp){
+      _ancestorDistCache.set(cacheKey, dist);
+      return dist;
+    }
   }
 
+  _ancestorDistCache.set(cacheKey, null);
   return null;
 }
 
@@ -810,10 +1053,12 @@ function finalRarityForManager(entryName,meta,score){
 
 
 function selectionListForMode(mode) {
-  if (mode === "dino") return State.names;
+  if (mode === "dino")  return State.names;
   if (mode === "entry") return State.entryList;
   if (mode === "crate") return State.crateNames;
-  if (mode === "item") return State.itemNames;
+  if (mode === "item")  return State.itemNames;
+  if (mode === "boss")  return State.bossNames;
+  if (mode === "note")  return []; // note view uses its own panel
   return [];
 }
 
@@ -1274,16 +1519,34 @@ function buildLootIndexes(){
 
 // ── Dino drop / harvest loot helpers ─────────────────────────────────────
 
+// Resolve a dino dd/dh field (numeric index or class name) to the actual loot row.
+// Numeric indices map via loot.di[] (drops) or loot.hi[] (harvest) to a class name,
+// then loot.dd[cls] / loot.dh[cls] gives the row.
+function _resolveDinoLootComp(ref, lootTable, indexArr){
+  if (ref == null || !lootTable) return null;
+  // String → look up directly
+  if (typeof ref === "string") return lootTable[ref] || null;
+  // Numeric → resolve via index array first
+  const idx = Number(ref);
+  if (!Number.isFinite(idx)) return null;
+  if (Array.isArray(indexArr) && idx >= 0 && idx < indexArr.length) {
+    const cls = indexArr[idx];
+    if (cls && lootTable[cls]) return lootTable[cls];
+  }
+  // Fallback: maybe lootTable itself is array-indexed
+  if (Array.isArray(lootTable)) return lootTable[idx] || null;
+  // Fallback: maybe lootTable is keyed by stringified index
+  return lootTable[String(idx)] || null;
+}
+
 function dropCompForDino(bp){
   const d = getDinoObjByBp(bp);
-  if (!d?.dd) return null;
-  return Global.loot?.dd?.[d.dd] || null;
+  return _resolveDinoLootComp(d?.dd, Global.loot?.dd, Global.loot?.di);
 }
 
 function harvestCompForDino(bp){
   const d = getDinoObjByBp(bp);
-  if (!d?.dh) return null;
-  return Global.loot?.dh?.[d.dh] || null;
+  return _resolveDinoLootComp(d?.dh, Global.loot?.dh, Global.loot?.hi);
 }
 
 function dropCompClassForDino(bp){
@@ -1294,28 +1557,85 @@ function harvestCompClassForDino(bp){
   return getDinoObjByBp(bp)?.dh || null;
 }
 
-function dinoBpsThatUseDropComp(compClass){
-  // Returns all dino BPs whose dd field matches compClass (vanilla + active mod)
+function dinoBpsThatUseDropComp(compRef){
+  if (compRef == null) return [];
+  const refStr = String(compRef);
+  // Also resolve numeric → class name (and vice versa) so both representations match
+  let altRef = null;
+  if (typeof compRef === "number" || /^\d+$/.test(refStr)) {
+    const idx = Number(compRef);
+    altRef = Global.loot?.di?.[idx] || null;
+  } else if (typeof compRef === "string" && Array.isArray(Global.loot?.di)) {
+    const idx = Global.loot.di.indexOf(compRef);
+    altRef = idx >= 0 ? String(idx) : null;
+  }
   const out = [];
-  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
-    if (obj.dd === compClass) out.push(bp);
+  for (const [key, obj] of Object.entries(Global.dinos?.dinos || {})){
+    if (obj.dd == null) continue;
+    const ddStr = String(obj.dd);
+    if (ddStr === refStr || (altRef && ddStr === altRef)){
+      out.push(/^-?\d+$/.test(key) ? (_dinoIdxToBp[Number(key)] || key) : key);
+    }
   }
   return out;
 }
 
-function dinoBpsThatUseHarvestComp(compClass){
+function dinoBpsThatUseHarvestComp(compRef){
+  if (compRef == null) return [];
+  const refStr = String(compRef);
+  let altRef = null;
+  if (typeof compRef === "number" || /^\d+$/.test(refStr)) {
+    const idx = Number(compRef);
+    altRef = Global.loot?.hi?.[idx] || null;
+  } else if (typeof compRef === "string" && Array.isArray(Global.loot?.hi)) {
+    const idx = Global.loot.hi.indexOf(compRef);
+    altRef = idx >= 0 ? String(idx) : null;
+  }
   const out = [];
-  for (const [bp, obj] of Object.entries(Global.dinos?.dinos || {})){
-    if (obj.dh === compClass) out.push(bp);
+  for (const [key, obj] of Object.entries(Global.dinos?.dinos || {})){
+    if (obj.dh == null) continue;
+    const dhStr = String(obj.dh);
+    if (dhStr === refStr || (altRef && dhStr === altRef)){
+      out.push(/^-?\d+$/.test(key) ? (_dinoIdxToBp[Number(key)] || key) : key);
+    }
   }
   return out;
+}
+
+// A dino's dd/dh references a loot component either by integer id (an index
+// into loot.di / loot.hi) or, in older data, by the class name directly.
+// These resolve either representation to the actual component object.
+function lookupDropComp(loot, ref){
+  if (ref == null || !loot?.dd) return null;
+  if (loot.dd[ref]) return loot.dd[ref];                 // direct (class name)
+  const idx = Number(ref);
+  if (Number.isInteger(idx) && Array.isArray(loot.di)){
+    const cls = loot.di[idx];
+    if (cls && loot.dd[cls]) return loot.dd[cls];        // id -> class -> comp
+  }
+  return null;
+}
+
+function lookupHarvestComp(loot, ref){
+  if (ref == null || !loot?.dh) return null;
+  if (loot.dh[ref]) return loot.dh[ref];
+  const idx = Number(ref);
+  if (Number.isInteger(idx) && Array.isArray(loot.hi)){
+    const cls = loot.hi[idx];
+    if (cls && loot.dh[cls]) return loot.dh[cls];
+  }
+  return null;
 }
 
 function dinoBpsThatDropItem(itemId){
   const loot = Global.loot;
   if (!loot?.rd || !loot?.di) return [];
+
   const compIndices = loot.rd[String(itemId)] || [];
   return compIndices.flatMap(idx => {
+    // Try matching dinos by index (new format) OR by class name (legacy)
+    const byIdx = dinoBpsThatUseDropComp(idx);
+    if (byIdx.length) return byIdx;
     const cls = loot.di[idx];
     return cls ? dinoBpsThatUseDropComp(cls) : [];
   });
@@ -1326,6 +1646,8 @@ function dinoBpsThatHarvestItem(itemId){
   if (!loot?.rh || !loot?.hi) return [];
   const compIndices = loot.rh[String(itemId)] || [];
   return compIndices.flatMap(idx => {
+    const byIdx = dinoBpsThatUseHarvestComp(idx);
+    if (byIdx.length) return byIdx;
     const cls = loot.hi[idx];
     return cls ? dinoBpsThatUseHarvestComp(cls) : [];
   });
@@ -1335,6 +1657,317 @@ function dinoBpsThatHarvestItem(itemId){
 function currentGeom(){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   return Global.mapGeom.get(mapMeta?.geomShort);
+}
+
+
+// ---------------------------------------------------------------------------
+// Boss data layer (Boss View)
+//
+// A geom file's `bosses.legend` lists the bosses summonable/fightable on that
+// map. This resolves each raw boss entry into a fully-hydrated object:
+//   n   -> name (whitespace-normalized)
+//   i   -> summon item id; resolved to { id, name, recipe:[{id,name,qty}] }
+//   d   -> boss dino indices; resolved to dino objects (+ their `de` unlocks)
+//   t   -> tributeTerminal POI indices; resolved to { label, type, x, y }
+//   xy  -> direct [x,y] arena location (for non-terminal bosses)
+//   cl/tl/md/mp/mw -> craft level / teleport level / max dinos / max players /
+//                     max drag weight requirements (any may be null)
+// ---------------------------------------------------------------------------
+
+// Collapse the embedded newlines some summon item names carry.
+function cleanBossText(s){
+  return String(s == null ? "" : s).replace(/\s+/g, " ").trim();
+}
+
+// Resolve an item id to { id, name, recipe }, where recipe is the crafting
+// cost list (cr) expanded to ingredient names. Returns null for no item.
+function resolveBossSummonItem(itemId){
+  if (itemId == null) return null;
+  const row = itemData().i?.[String(itemId)];
+  if (!row) return { id: itemId, name: `Item ${itemId}`, recipe: [] };
+  const recipe = Array.isArray(row.cr) ? row.cr.map(([ing, qty]) => ({
+    id: ing,
+    name: cleanBossText(itemDisplayNameById(ing)),
+    qty: Number(qty) || 0
+  })) : [];
+  return { id: itemId, name: cleanBossText(row.n || `Item ${itemId}`), recipe };
+}
+
+// Resolve a boss dino ref (index) to { bp, name, de } where de is the list of
+// items/engrams unlocked on the boss's death.
+function resolveBossDino(ref){
+  const bp = bpForDinoRef(ref);
+  const obj = getDinoObjByBp(bp) || getDinoObjByBp(ref);
+  if (!obj) return { bp, name: cleanBossText(bp.split("/").pop()), de: [] };
+  const de = Array.isArray(obj.de) ? obj.de.map(id => ({
+    id,
+    name: cleanBossText(itemDisplayNameById(id))
+  })) : [];
+  return { bp, name: cleanBossText(obj.n || bp), de, obj };
+}
+
+// Resolve a boss's terminal references (t -> tributeTerminals indices) and/or
+// its direct xy location into a list of { label, type, x, y } markers.
+function resolveBossLocations(boss, geom){
+  const terminals = geom?.pois?.tributeTerminals || [];
+  const out = [];
+  if (Array.isArray(boss?.t)){
+    for (const ti of boss.t){
+      const t = terminals[ti];
+      if (!t) continue;
+      const x = Number(t.x), y = Number(t.y);
+      if (![x, y].every(Number.isFinite)) continue;
+      out.push({
+        label: cleanBossText(t.label || t.type || "Terminal"),
+        type: t.type || "terminal",
+        x, y,
+        terminalIndex: ti
+      });
+    }
+  }
+  if (Array.isArray(boss?.xy) && boss.xy.length === 2){
+    const x = Number(boss.xy[0]), y = Number(boss.xy[1]);
+    if ([x, y].every(Number.isFinite)){
+      out.push({ label: cleanBossText(boss.n) || "Boss", type: "arena", x, y, direct: true });
+    }
+  }
+  return out;
+}
+
+// Resolve a boss's loot rewards (distinct from engram unlocks). Three sources:
+//   1. The boss dino's `dd` drop component  -> items in the boss bag (Element, trophy)
+//   2. The boss dino's `dg` (DeathGiveItemClasses) -> items handed straight to the player
+//   3. The boss's arena loot crate `lc` (+ optional bonus item `li`) -> crate that
+//      spawns on defeat (used by the terminal-less Ragnarok world bosses)
+// Returns { drops:[{id,name}], given:[{id,name}], crates:[{name}], bonusItems:[{id,name}] }.
+function resolveBossRewards(boss){
+  const loot = Global.loot || {};
+  const raw = boss.raw || {};
+  const hasArenaCrate = raw.lc != null;
+
+  const addToSource = (map, iid, mn, mx) => {
+    const prev = map.get(iid);
+    if (prev){ prev.mn = Math.min(prev.mn, mn); prev.mx = Math.max(prev.mx, mx); }
+    else { map.set(iid, { id: iid, mn, mx }); }
+  };
+
+  const seenPoolComps = new Set();
+  let poolPicks = null;       // { mn, mx } of the comp that contributed pool sets
+  let poolCompCount = 0;      // suppress picks line if multiple comps contribute
+
+  const extractDropComp = (comp, targetMap, poolSets) => {
+    if (!comp) return;
+    const sets = comp.s || [];
+
+    // A comp "picks each set exactly once" when its pick count is fixed and
+    // equals the set count — the guaranteed boss-bag pattern (Element +
+    // Trophy). Anything else (e.g. the Titans picking 12–18 of 5 weighted
+    // sets) is a real loot container and must render as a pool.
+    const cmn = Number(comp.mn), cmx = Number(comp.mx);
+    const picksEachOnce =
+      (Number.isFinite(cmn) && cmn === cmx && cmn === sets.length) ||
+      // Some comps omit the pick count entirely (e.g. The Center's arena
+      // Element bag) — with a single set, that set is the loot.
+      (!Number.isFinite(cmn) && !Number.isFinite(cmx) && sets.length === 1);
+
+    // A set's contents are fixed only when the comp always includes it, it
+    // draws ALL of its entries, and each entry has exactly one possible item
+    // with no drop-chance filter. Quantity ranges (mn–mx) are fine.
+    const setIsDeterministic = (setRow) => {
+      if (!picksEachOnce) return false;
+      const entries = setRow.e || [];
+      if (!entries.length) return false;
+      const smn = Number(setRow.smn ?? 1);
+      const smx = Number(setRow.smx ?? setRow.smn ?? 1);
+      if (smn !== entries.length || smx !== entries.length) return false;
+      if (entries.length > 1 && !(setRow.rwr === 1 || setRow.rwr === true)) return false;
+      return entries.every(e =>
+        Array.isArray(e.i) && e.i.length === 1 &&
+        (e.cg == null || Number(e.cg) >= 1));
+    };
+
+    let pushedPool = false;
+    for (const setRow of sets){
+      if (setRow.o != null){
+        if (!seenOverrides.has(setRow.o)){
+          seenOverrides.add(setRow.o);
+          poolSets.push(setRow);
+          pushedPool = true;
+        }
+      } else if (setIsDeterministic(setRow)){
+        for (const entry of (setRow.e || [])){
+          const mn = Number(entry.mn), mx = Number(entry.mx);
+          for (const iid of (entry.i || [])){
+            addToSource(targetMap, iid,
+              Number.isFinite(mn) ? mn : 1,
+              Number.isFinite(mx) ? mx : (Number.isFinite(mn) ? mn : 1));
+          }
+        }
+      } else if (!seenPoolComps.has(comp)){
+        poolSets.push(setRow);
+        pushedPool = true;
+      }
+    }
+    if (pushedPool && !seenPoolComps.has(comp)){
+      seenPoolComps.add(comp);
+      poolCompCount++;
+      poolPicks = (poolCompCount === 1 && Number.isFinite(cmn))
+        ? { mn: comp.mn, mx: comp.mx }
+        : null;
+    }
+  };
+
+  const perSourceDrops = [];
+  const poolSets = [];
+  const seenOverrides = new Set();
+  const givenIds = new Set();
+
+  for (const d of (boss.dinos || [])){
+    const obj = d.obj;
+    if (!obj) continue;
+    // lc suppresses dd: arena crate replaces the boss bag.
+    if (!hasArenaCrate && obj.dd != null){
+      const m = new Map();
+      extractDropComp(lookupDropComp(loot, obj.dd), m, poolSets);
+      if (m.size) perSourceDrops.push(m);
+    }
+    // rd suppresses dg
+    if (!raw.rd && Array.isArray(obj.dg)){
+      for (const iid of obj.dg) givenIds.add(iid);
+    }
+  }
+
+  const rdList = Array.isArray(raw.rd) ? raw.rd : (raw.rd != null ? [raw.rd] : []);
+  for (const rdRef of rdList){
+    const m = new Map();
+    extractDropComp(lookupDropComp(loot, rdRef), m, poolSets);
+    if (m.size) perSourceDrops.push(m);
+  }
+
+  const totalDrops = new Map();
+  for (const srcMap of perSourceDrops){
+    for (const [iid, item] of srcMap){
+      const prev = totalDrops.get(iid);
+      if (prev){ prev.mn += item.mn; prev.mx += item.mx; }
+      else { totalDrops.set(iid, { id: iid, mn: item.mn, mx: item.mx }); }
+    }
+  }
+  for (const v of totalDrops.values()) v.name = cleanBossText(itemDisplayNameById(v.id));
+
+  // rls — for ascension loot sets, filter entries by boss difficulty tier.
+  let rlsData = null;
+  if (raw.rls != null){
+    const si = loot.si || [];
+    const idx = Number(raw.rls);
+    if (Number.isInteger(idx) && idx >= 0 && idx < si.length){
+      const cls = si[idx];
+      const setData = cls ? (loot.s?.[cls]) : null;
+      if (setData){
+        let entries = setData.e || [];
+        if (/Ascension/i.test(cls)){
+          const tier = bossDifficultyTier(boss.name);
+          if (tier >= 0 && tier < entries.length) entries = entries.slice(0, tier + 1);
+        }
+        rlsData = { name: setData.n || cls, entries, smn: setData.smn, smx: setData.smx };
+      }
+    }
+  }
+
+  // Arena crates — fully resolve for rendering, with quantity.
+  const arenaCrates = [];
+  const bonusItems = [];
+  const lcList = Array.isArray(raw.lc) ? raw.lc : (raw.lc != null ? [raw.lc] : []);
+  const lcq = Number(raw.lcq) || 1;
+  for (const lc of lcList){
+    const cls = crateIdToClass(lc);
+    const crateObj = cls ? (loot.c?.[cls]) : null;
+    const name = cleanBossText(crateObj?.dn || cls || `Crate ${lc}`);
+    arenaCrates.push({ id: lc, name, crateClass: cls, qty: lcq, crateObj });
+  }
+  const liList = Array.isArray(raw.li) ? raw.li : (raw.li != null ? [raw.li] : []);
+  for (const li of liList){
+    bonusItems.push({ id: li, name: cleanBossText(itemDisplayNameById(li)), mn: 1, mx: 1 });
+  }
+
+  return {
+    drops: [...totalDrops.values()],
+    given: [...givenIds].map(id => ({ id, name: cleanBossText(itemDisplayNameById(id)), mn: 1, mx: 1 })),
+    poolSets, poolPicks, rlsData,
+    crates: arenaCrates, bonusItems
+  };
+}
+
+// Detect boss difficulty tier from name: 0=Gamma/Easy, 1=Beta/Medium, 2=Alpha/Hard.
+function bossDifficultyTier(name){
+  const n = String(name || "").toLowerCase();
+  if (/\(gamma\)|gamma |\(easy\)/i.test(n)) return 0;
+  if (/\(beta\)|beta |\(medium\)/i.test(n)) return 1;
+  if (/\(alpha\)|alpha |\(hard\)/i.test(n)) return 2;
+  return -1;
+}
+
+// Build the fully-resolved boss list for the current map. Cached per map+source.
+let _bossListCache = null;
+let _bossListCacheKey = null;
+
+function bossesForCurrentMap(){
+  const key = String(State.mapId) + "\x00" + (Global.modMeta?.modId || "official");
+  if (_bossListCache && _bossListCacheKey === key) return _bossListCache;
+
+  const geom = currentGeom();
+  const legend = geom?.bosses?.legend;
+  const list = Array.isArray(legend) ? legend.map((boss, idx) => {
+    const resolved = {
+      index: idx,
+      name: cleanBossText(boss.n) || `Boss ${idx}`,
+      summon: resolveBossSummonItem(boss.i),
+      dinos: (Array.isArray(boss.d) ? boss.d : []).map(resolveBossDino),
+      locations: resolveBossLocations(boss, geom),
+      craftLevel: boss.cl ?? null,
+      teleportLevel: boss.tl ?? null,
+      maxDinos: boss.md ?? null,
+      maxPlayers: boss.mp ?? null,
+      maxDragWeight: boss.mw ?? null,
+      raw: boss
+    };
+    resolved.rewards = resolveBossRewards(resolved);
+    return resolved;
+  }) : [];
+
+  _bossListCache = list;
+  _bossListCacheKey = key;
+  return list;
+}
+
+function invalidateBossCache(){
+  _bossListCache = null;
+  _bossListCacheKey = null;
+}
+
+// Resolve the Boss View dropdown selection (a boss name) to its boss object.
+function getBossByName(name){
+  if (!name) return null;
+  const idx = State.bossNameToIndex.get(name);
+  if (idx == null) return null;
+  const bosses = bossesForCurrentMap();
+  return bosses[idx] || null;
+}
+
+// Populate State.bossNames / bossNameToIndex from the current map's bosses,
+// for the Boss View dropdown. The display name is derived from the boss's
+// creature(s) plus its difficulty tier (e.g. "Broodmother (Beta)",
+// "Broodmother Lysrix & Megapithecus (Gamma)"), rather than the inconsistent
+// summon-item name. Names map 1:1 to a legend index.
+function rebuildBossIndex(){
+  const bosses = bossesForCurrentMap();
+  State.bossNames = [];
+  State.bossNameToIndex = new Map();
+  for (const b of bosses){
+    let name = b.name;
+    if (State.bossNameToIndex.has(name)) name = `${name} (#${b.index})`;
+    State.bossNames.push(name);
+    State.bossNameToIndex.set(name, b.index);
+  }
 }
 
 
@@ -1514,6 +2147,9 @@ function rebuildLootIndices(){
 
   const modActive = !activeSourceIsOfficial();
 
+  // typeFilter is declared once and used for both the crate loop and mission loop
+  const typeFilter = infoPanelState.crateTypeFilter || "all";
+
   // --- normal crates on this map ---
   for (const crateClass of mapCrateClasses){
     const crateId = crateClassToId(crateClass);
@@ -1527,6 +2163,30 @@ function rebuildLootIndices(){
       const crateMeta = loot.c?.[crateClass];
       const hasModSet = Array.isArray(crateMeta?.s) && crateMeta.s.some(s => s._mod);
       if (!hasModSet) continue;
+    }
+
+    // Apply crate type filter
+    if (typeFilter !== "all") {
+      const isArtifact  = crateClass.toLowerCase().includes("artifact");
+      const isCave      = isCaveCrate(crateClass);
+      const isOcean     = isOceanCrate(crateClass);
+      const isHorde     = isHordeCrate(crateClass);
+      const isAbNormal  = isAbNormalCrate(crateClass);
+      const isAbDungeon = isAbDungeonCrate(crateClass);
+      const isAbSurface = isAbSurfaceCrate(crateClass);
+      const isSpecial   = isSpecialCrate(crateClass);
+
+      // Filter "mission" means crates should be excluded entirely
+      if (typeFilter === "mission") continue;
+
+      if (typeFilter === "cave"      && !isCave) continue;
+      if (typeFilter === "ocean"     && !isOcean) continue;
+      if (typeFilter === "osd"       && !isHorde) continue;
+      if (typeFilter === "abnormal"  && !isAbNormal) continue;
+      if (typeFilter === "abdungeon" && !isAbDungeon) continue;
+      if (typeFilter === "absurface" && !isAbSurface) continue;
+      if (typeFilter === "artifact"  && !isArtifact) continue;
+      if (typeFilter === "normal"    && (isSpecial || isArtifact || isHorde)) continue;
     }
 
     const value = `crate:${crateId}`;
@@ -1543,24 +2203,29 @@ function rebuildLootIndices(){
   // --- mission loot sources on this map ---
   const missionClasses = missionClassesUsedOnCurrentMap();
 
-  for (const missionClass of missionClasses){
-    const m = loot.m?.[missionClass];
-    if (!m) continue;
+  // Missions only appear when filter is "all" or "mission"
+  const showMissions = typeFilter === "all" || typeFilter === "mission";
 
-    const structs = Array.isArray(m.ls) ? m.ls : [];
-    for (const structClass of structs){
-      if (!structClass || !loot.ls?.[structClass]) continue;
+  if (showMissions) {
+    for (const missionClass of missionClasses){
+      const m = loot.m?.[missionClass];
+      if (!m) continue;
 
-      const value = `mission:${missionClass}:${structClass}`;
-      const label = missionDisplayName(missionClass);
+      const structs = Array.isArray(m.ls) ? m.ls : [];
+      for (const structClass of structs){
+        if (!structClass || !loot.ls?.[structClass]) continue;
 
-      State.crateOptions.push({ value, label });
-      State.crateNameToRef.set(value, {
-        kind: "mission",
-        missionClass,
-        missionName: m.n || missionClass,
-        lootStructClass: structClass
-      });
+        const value = `mission:${missionClass}:${structClass}`;
+        const label = missionDisplayName(missionClass);
+
+        State.crateOptions.push({ value, label });
+        State.crateNameToRef.set(value, {
+          kind: "mission",
+          missionClass,
+          missionName: m.n || missionClass,
+          lootStructClass: structClass
+        });
+      }
     }
   }
 
@@ -1630,25 +2295,24 @@ function rebuildLootIndices(){
     const dinoObj = getDinoObjByBp(bp);
     if (!dinoObj) continue;
 
-    if (dinoObj.dd){
-      const comp = loot.dd?.[dinoObj.dd];
-      if (comp){
-        for (const setRow of (comp.s || [])){
-          for (const entry of (setRow.e || [])){
-            for (const iid of (entry.i || [])){
-              dinoDropItemIds.add(iid);
-            }
+    // A dino's dd/dh is a component id (index into loot.di / loot.hi), though
+    // older data used the class name directly. Resolve to a class name first,
+    // then look up the component. lookupDropComp/lookupHarvestComp handles both.
+    const dropComp = lookupDropComp(loot, dinoObj.dd);
+    if (dropComp){
+      for (const setRow of (dropComp.s || [])){
+        for (const entry of (setRow.e || [])){
+          for (const iid of (entry.i || [])){
+            dinoDropItemIds.add(iid);
           }
         }
       }
     }
 
-    if (dinoObj.dh){
-      const comp = loot.dh?.[dinoObj.dh];
-      if (comp){
-        for (const iid of (comp.i || [])){
-          dinoHarvestItemIds.add(iid);
-        }
+    const harvestComp = lookupHarvestComp(loot, dinoObj.dh);
+    if (harvestComp){
+      for (const iid of (harvestComp.i || [])){
+        dinoHarvestItemIds.add(iid);
       }
     }
   }
@@ -1668,6 +2332,74 @@ function rebuildLootIndices(){
   }
 
   // Rebuild itemNames to include dino loot items
+  State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
+
+  // --- boss reward items + engram unlocks on this map ---
+  State.bossItemIndex = new Map();
+  if (typeof bossesForCurrentMap === "function"){
+    const bosses = bossesForCurrentMap();
+    const addBossItem = (itemId, bossName, type, boss) => {
+      if (!State.bossItemIndex.has(itemId)) State.bossItemIndex.set(itemId, []);
+      const arr = State.bossItemIndex.get(itemId);
+      if (!arr.some(e => e.name === bossName && e.type === type)){
+        arr.push({ name: bossName, type, boss });
+      }
+      State.mapItemIds.add(itemId);
+      const itemRow = items.i?.[String(itemId)];
+      if (!itemRow) return;
+      if (modActive && !itemRow._mod) return;
+      const name = itemRow.n || `Item ${itemId}`;
+      if (!State.itemNameToIds.has(name)) State.itemNameToIds.set(name, []);
+      if (!State.itemNameToIds.get(name).includes(itemId))
+        State.itemNameToIds.get(name).push(itemId);
+    };
+
+    for (let bi = 0; bi < bosses.length; bi++){
+      const boss = bosses[bi];
+      const bossName = State.bossNames[bi] || boss.name;
+      const rewards = boss.rewards;
+
+      // Loot/reward items (type: "drop")
+      if (rewards){
+        const ids = new Set();
+        for (const d of (rewards.drops || [])) if (d.id != null) ids.add(d.id);
+        for (const d of (rewards.given || [])) if (d.id != null) ids.add(d.id);
+        for (const d of (rewards.bonusItems || [])) if (d.id != null) ids.add(d.id);
+        for (const setRow of (rewards.poolSets || [])){
+          const { allEntries } = lootSetEntriesFromRow(setRow);
+          for (const entry of allEntries)
+            for (const iid of (entry.i || [])) ids.add(iid);
+        }
+        if (rewards.rlsData)
+          for (const entry of (rewards.rlsData.entries || []))
+            for (const iid of (entry.i || [])) ids.add(iid);
+        // Arena crate items (lc → crateObj → sets → entries → items)
+        for (const crate of (rewards.crates || [])){
+          if (crate.crateObj?.s){
+            for (const setRow of crate.crateObj.s){
+              const { allEntries } = lootSetEntriesFromRow(setRow);
+              for (const entry of allEntries)
+                for (const iid of (entry.i || [])) ids.add(iid);
+            }
+          }
+        }
+        for (const id of ids) addBossItem(id, bossName, "drop", boss);
+      }
+
+      // Engram/tekgram unlocks (type: "unlock")
+      const raw = boss.raw || {};
+      const unlockIds = new Set();
+      if (Array.isArray(raw.re) && raw.re.length){
+        for (const iid of raw.re) unlockIds.add(iid);
+      } else {
+        for (const d of (boss.dinos || []))
+          for (const u of (d.de || [])) if (u.id != null) unlockIds.add(u.id);
+      }
+      for (const id of unlockIds) addBossItem(id, bossName, "unlock", boss);
+    }
+  }
+
+  // Final rebuild of itemNames to include boss reward items
   State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 }
 
@@ -1939,10 +2671,15 @@ async function ensureLootAndItemsLoaded() {
         Global.resolvedSupplyLegend.set(geomShort, resolvedLegend);
       }
 
+      // Boss names, summon recipes, and unlock labels all depend on the item
+      // table, which loads lazily. Rebuild the boss index now that items exist.
+      if (typeof invalidateBossCache === "function") invalidateBossCache();
+      if (typeof rebuildBossIndex === "function") rebuildBossIndex();
+
       rebuildLootIndices();
 
       // If we're currently in a loot-dependent mode, refresh the UI
-      if (State.mode === "crate" || State.mode === "item") {
+      if (State.mode === "crate" || State.mode === "item" || State.mode === "dino" || State.mode === "boss") {
         rebuildSelectionSelect();
         render();
       }
@@ -2340,6 +3077,7 @@ async function buildMergedGroupSource(src){
   }
 
   let mergedSpawn = {
+    entryIndex: Global.baseSpawn?.entryIndex || [],
     mapLegend: { ...(Global.baseSpawn?.mapLegend || {}) },
     entryMaps: { ...(Global.baseSpawn?.entryMaps || {}) },
     entries: { ...(Global.baseSpawn?.entries || {}) },
@@ -2349,13 +3087,24 @@ async function buildMergedGroupSource(src){
   };
 
   let mergedDinos = {
-    dinos: { ...(Global.baseDinos?.dinos || {}) }
+    dinos: { ...(Global.baseDinos?.dinos || {}) },
+    dinoIndex: Global.baseDinos?.dinoIndex || [],
+    c: Global.baseDinos?.c || {},
+    cs: Global.baseDinos?.cs || {},
+    // Per-mod color sets: { modId: { setId: [...regions] } }. Keyed by mod id
+    // because each mod's set ids restart at 1 and would otherwise collide.
+    modCsByMod: {}
   };
 
   let modOnlyDinos = {};
 
   for (const mod of mods){
+    const modId = String(mod.modId || "");
+    const baseIndex = Global.baseDinos?.dinoIndex || [];
+    const decoded = decodeModSource(mod, baseIndex);
+
     mergedSpawn = {
+      entryIndex: mergedSpawn.entryIndex || [],
       mapLegend: {
         ...(mergedSpawn.mapLegend || {}),
         ...(mod.mapLegend || {})
@@ -2366,7 +3115,7 @@ async function buildMergedGroupSource(src){
       },
       entries: mergeEntryTables(
         mergedSpawn.entries || {},
-        mod.entries || {}
+        decoded.entries
       ),
       maps: {
         ...(mergedSpawn.maps || {}),
@@ -2378,20 +3127,30 @@ async function buildMergedGroupSource(src){
       },
       worldReplacements: mergeWorldReplacementTables(
         mergedSpawn.worldReplacements || {},
-        mod.worldReplacements || {}
+        decoded.worldReplacements
       )
     };
+
+    // decoded.dinos is already bp-keyed and mod-tagged.
+    const taggedModDinos = decoded.dinos;
+    if (modId && mod.cs){
+      mergedDinos.modCsByMod[modId] = mod.cs;
+    }
 
     mergedDinos = {
       dinos: {
         ...(mergedDinos.dinos || {}),
-        ...(mod.dinos || {})
-      }
+        ...taggedModDinos
+      },
+      dinoIndex: mergedDinos.dinoIndex,
+      c: mergedDinos.c,
+      cs: mergedDinos.cs,
+      modCsByMod: mergedDinos.modCsByMod
     };
 
     modOnlyDinos = {
       ...modOnlyDinos,
-      ...(mod.dinos || {})
+      ...taggedModDinos
     };
   }
 
@@ -2705,7 +3464,9 @@ function mountFancyDropdown(native, host, placeholder, { buildToolbar } = {}){
 
       row.className="dd-item";
       row.textContent=o.textContent;
-      row.dataset.search=normSearch(o.textContent);
+      // Search key: visible label + any hidden searchExtra (e.g. note index)
+      const extra = o.dataset?.searchExtra ? " " + o.dataset.searchExtra : "";
+      row.dataset.search = normSearch(o.textContent + extra);
 
       row.onclick=()=>{
         native.value=o.value;
@@ -2804,7 +3565,7 @@ function applyEmbedRestrictions(){
   }
 
   if (EMBED_MODE_LOCK) {
-    const validModes = new Set(["dino", "entry"]);
+    const validModes = new Set(["dino", "entry", "crate", "item", "note"]);
     if (validModes.has(EMBED_MODE_LOCK)) {
       State.mode = EMBED_MODE_LOCK;
       syncModeButton();
@@ -3137,6 +3898,8 @@ function syncInfoPanelState() {
     panel.dataset.tab = infoPanelState.crateTab;
   } else if (State.mode === "item") {
     panel.dataset.tab = infoPanelState.itemTab;
+  } else if (State.mode === "boss") {
+    panel.dataset.tab = infoPanelState.bossTab;
   } else {
     panel.dataset.tab = "";
   }
@@ -3167,6 +3930,17 @@ function rebuildSelectionSelect() {
   } else if (State.mode === "item") {
     placeholder = "(Select an Item)";
     options = State.itemNames.map(v => ({ value: v, label: v }));
+  } else if (State.mode === "boss") {
+    placeholder = "(Select a Boss)";
+    options = State.bossNames.map(v => ({ value: v, label: v }));
+  } else if (State.mode === "note") {
+    placeholder = "(Select a Note or Dossier)";
+    const allNotes = getNoteOptionsForCurrentMap();
+    options = allNotes.map(n => ({
+      value: `note:${n[0]}`,
+      label: n[1],                // clean label, no #N suffix
+      searchExtra: String(n[0]),  // index kept for hidden search matching
+    }));
   }
 
   UI.dinoSelect.innerHTML = "";
@@ -3180,6 +3954,7 @@ function rebuildSelectionSelect() {
     const o = document.createElement("option");
     o.value = opt.value;
     o.textContent = opt.label;
+    if (opt.searchExtra) o.dataset.searchExtra = opt.searchExtra;
     UI.dinoSelect.appendChild(o);
   }
 
@@ -3193,6 +3968,10 @@ function rebuildSelectionSelect() {
     const newValue = UI.dinoSelect.value || "";
     State.selection = newValue;
     State.selections[State.mode] = newValue;
+    // For note mode, sync noteViewState.selected from the selection value
+    if (State.mode === "note" && newValue.startsWith("note:")) {
+      noteViewState.selected = noteFromSelection(newValue);
+    }
     render();
   };
 
@@ -3219,37 +3998,112 @@ function rebuildSelectionSelect() {
       }
     : null;
 
-  const crateDropdownToolbar = (State.mode === "crate" && !activeSourceIsOfficial())
+  const crateDropdownToolbar = State.mode === "crate"
     ? ({ rebuild }) => {
         const bar = document.createElement("div");
         bar.className = "dd-source-toolbar";
+        bar.style.cssText = "display:flex; flex-wrap:wrap; gap:4px;";
 
-        const pill = document.createElement("button");
-        pill.type = "button";
-        pill.className = "dd-source-mode-btn" + (infoPanelState.showAllCrates ? " is-on" : "");
-        pill.textContent = infoPanelState.showAllCrates ? "All crates" : "Mod crates";
-        pill.title = infoPanelState.showAllCrates
-          ? "Showing all crates — click to show mod crates only"
-          : "Showing mod crates only — click to show all";
-        pill.onclick = () => {
-          infoPanelState.showAllCrates = !infoPanelState.showAllCrates;
-          rebuildLootIndices();
-          rebuildSelectionSelect();
-          // Re-open the dropdown so the user sees the updated list
-          UI.dinoFancy?.querySelector(".dd-btn")?.click();
-          // Re-render panel if a crate is selected
-          if (State.selection) render();
-        };
-        bar.appendChild(pill);
+        // Mod filter pill — only when a mod source is active
+        if (!activeSourceIsOfficial()) {
+          const modPill = document.createElement("button");
+          modPill.type = "button";
+          modPill.className = "dd-source-mode-btn" + (infoPanelState.showAllCrates ? " is-on" : "");
+          modPill.textContent = infoPanelState.showAllCrates ? "All crates" : "Mod crates";
+          modPill.title = infoPanelState.showAllCrates
+            ? "Showing all crates — click to show mod only"
+            : "Showing mod crates only — click to show all";
+          modPill.onclick = () => {
+            infoPanelState.showAllCrates = !infoPanelState.showAllCrates;
+            rebuildLootIndices();
+            rebuildSelectionSelect();
+            UI.dinoFancy?.querySelector(".dd-btn")?.click();
+            if (State.selection) render();
+          };
+          bar.appendChild(modPill);
+        }
+
+        // Type filter pills: All | Normal | Cave | Artifact
+        const pillRow = document.createElement("div");
+        pillRow.style.cssText = "display:flex; gap:4px; flex-wrap:wrap; width:100%; margin-top:2px;";
+
+        // Build filter pills based on what's actually present on this map.
+        // We scan the supply legend and mission legend to decide which pills to show.
+        const isAb = State.mapId === "Aberration";
+        const mapMeta_ = MAPS.find(m => m.id === State.mapId);
+        const geom_   = Global.mapGeom.get(mapMeta_?.geomShort);
+        const legend_ = geom_?.supplyLegend || [];
+
+        const classes_ = legend_.map(row => (row.bp||"").split(".").pop());
+        const hasNormal   = !isAb && classes_.some(c => {
+          const cl = c.toLowerCase();
+          return cl.includes("supplycr") && !cl.includes("cave") && !cl.includes("ocean") &&
+                 !cl.includes("high") && !cl.includes("underwater") && !cl.includes("horde") &&
+                 !cl.includes("artifact") && !cl.includes("dungeon") && !cl.includes("aberrant_surface");
+        });
+        const hasCave     = !isAb && classes_.some(c => isCaveCrate(c));
+        const hasOceanReg = classes_.some(c => { const cl = c.toLowerCase(); return cl.includes("ocean") && !cl.includes("high"); });
+        const hasDesert   = classes_.some(c => { const cl = c.toLowerCase(); return cl.includes("high"); });
+        const hasOcean    = hasOceanReg || hasDesert;
+        const oceanLabel  = hasOceanReg && hasDesert ? "Ocean / Desert"
+                          : hasDesert                ? "Desert"
+                          : "Ocean";
+        const hasArtifact = classes_.some(c => c.toLowerCase().includes("artifact"));
+        const hasMissions = (missionClassesUsedOnCurrentMap?.()?.size || 0) > 0;
+
+        // Horde crates come from the horde legend, not supply legend
+        const hordeLegend_ = geom_?.hordeLegend || [];
+        const hasHorde    = hordeLegend_.some(row => {
+          const cl = ((row.bp||"").split(".").pop()).toLowerCase();
+          return cl.includes("supplycrate") && cl.includes("horde");
+        });
+
+        // Aberration always has cave/dungeon/surface
+        const hasAbNormal  = isAb && classes_.some(c => isAbNormalCrate(c));
+        const hasAbDungeon = isAb && classes_.some(c => isAbDungeonCrate(c));
+        const hasAbSurface = isAb && classes_.some(c => isAbSurfaceCrate(c));
+
+        const typeFilterOptions = [
+          { id: "all", label: "All" }
+        ];
+        if (hasNormal)     typeFilterOptions.push({ id: "normal",    label: "Normal" });
+        if (hasCave)       typeFilterOptions.push({ id: "cave",      label: "Cave" });
+        if (hasOcean)      typeFilterOptions.push({ id: "ocean",     label: oceanLabel });
+        if (hasHorde)      typeFilterOptions.push({ id: "osd",       label: "OSD" });
+        if (hasAbNormal)   typeFilterOptions.push({ id: "abnormal",  label: "Cave" });
+        if (hasAbDungeon)  typeFilterOptions.push({ id: "abdungeon", label: "Dungeon" });
+        if (hasAbSurface)  typeFilterOptions.push({ id: "absurface", label: "Surface" });
+        if (hasArtifact)   typeFilterOptions.push({ id: "artifact",  label: "Artifacts" });
+        if (hasMissions)   typeFilterOptions.push({ id: "mission",   label: "Missions" });
+
+        typeFilterOptions.forEach(tf => {
+          const pill = document.createElement("button");
+          pill.type = "button";
+          pill.className = "dd-source-mode-btn" + ((infoPanelState.crateTypeFilter||"all") === tf.id ? " is-on" : "");
+          pill.textContent = tf.label;
+          pill.onclick = () => {
+            infoPanelState.crateTypeFilter = tf.id;
+            rebuildLootIndices();
+            rebuildSelectionSelect();
+            UI.dinoFancy?.querySelector(".dd-btn")?.click();
+            if (State.selection) render();
+          };
+          pillRow.appendChild(pill);
+        });
+        bar.appendChild(pillRow);
         return bar;
       }
+    : null;
+
+  const noteDropdownToolbar = State.mode === "note"
+    ? buildNoteDropdownToolbar
     : null;
 
   mountFancyDropdown(
     UI.dinoSelect,
     UI.dinoFancy,
     placeholder.replace(/[()]/g, ""),
-    { buildToolbar: entryDropdownToolbar || crateDropdownToolbar }
+    { buildToolbar: entryDropdownToolbar || crateDropdownToolbar || noteDropdownToolbar }
   );
 }
 
@@ -3351,7 +4205,7 @@ window.debugDinoOnMap = (bpSubstr) => {
   // 4. What entries on this map mention this BP in their raw data?
   console.log("\n--- Raw entry data search ---");
   for (const entryName of State.mapEntries){
-    const rows = Global.spawn?.entries?.[entryName]?.d || [];
+    const rows = spawnRowsForEntry(entryName);
     for (const r of rows){
       const rawBp = String(r?.[0] || "");
       if (rawBp.toLowerCase().includes(lower)){

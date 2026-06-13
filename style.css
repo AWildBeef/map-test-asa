@@ -25,7 +25,7 @@
 
   --panel-radius: 10px;
   --panel-w: 420px;
-  --panel-w-mobile: 210px;
+  --panel-w-mobile: 230px;
   --panel-max-w: 420px;
 
   /* Floating panel body max height */
@@ -34,7 +34,7 @@
   --leaflet-toolbar-h: 50px;
 
   /* Mobile panel widths */
-  --dino-w-mobile: 300px;
+  --dino-w-mobile: 330px;
   --dino-w-mobile-compact: 225px;
   --mod-w-mobile: 150px;
   --mod-w-mobile-collapsed: 100px;
@@ -1701,7 +1701,10 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .item-entries,
 body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row,
-body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section{
+body[data-mode="entry"] #dinoInfoPanel[data-tab="dinos"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   border: 1px solid var(--border-soft);
   border-radius: 12px;
   padding: 6px 8px;
@@ -3108,6 +3111,14 @@ body[data-no-mods="1"] #sourceSelectFancy{
   -webkit-overflow-scrolling: touch;
 }
 
+/* dinoInfoPanel uses its own internal flex layout so .fp-body grows
+   to fill remaining panel height (after the header), letting .fp-pages
+   compute the real available space. */
+#dinoInfoPanel {
+  display: flex;
+  flex-direction: column;
+}
+
 .floating-panel.collapsed .fp-body{
   max-height: 0;
   opacity: 0;
@@ -3356,7 +3367,8 @@ body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub{
   padding: 5px;
 }
 
-body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section{
+body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 5px;
@@ -3545,6 +3557,10 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
+  /* Use whatever space the panel gives us (panel.max-height − header).
+     Override the generic .fp-body max-height so content can use the full panel. */
+  max-height: none;
+  flex: 1 1 auto;
 }
 
 #dinoInfoPanel .dino-hero,
@@ -4042,7 +4058,11 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
     width: var(--dino-w-mobile);
     left: 6px !important;
     margin: 0 !important;
-    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 12px);
+    /* Panel sits at top:2px. Subtract that + dock toolbar + safe area + margin so
+       the panel's bottom edge stays above the dock instead of sliding under it. */
+    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 24px);
+    display: flex;
+    flex-direction: column;
   }
 
   #modStylePanel{
@@ -4054,7 +4074,7 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
 
   #mapEntriesPanel{
     width: var(--dino-w-mobile);
-    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 12px);
+    max-height: calc(100dvh - var(--leaflet-toolbar-h) - env(safe-area-inset-bottom) - 24px);
   }
 
   body:has(#modStylePanel:not(.collapsed)) #dinoInfoPanel{
@@ -4882,7 +4902,10 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 /* Dino Loot tab uses the same visual pattern as Crate Loot Sets */
 body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
 body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   border: 1px solid var(--border-soft);
   border-radius: 12px;
   padding: 6px 8px;
@@ -4897,7 +4920,8 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
     0 6px 18px rgba(0,0,0,.18);
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 5px;
@@ -4905,13 +4929,15 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .loot-set-section{
   margin-right: -5px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-section-sub{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-section-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-section-sub{
   border-radius: 8px;
   margin: 5px;
   padding: 5px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   margin-top: 6px;
   margin-left: 2mm;
   margin-right: 2mm;
@@ -4923,7 +4949,8 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   border-radius: 8px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-name{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-name,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-name{
   margin-top: 1px;
   padding-left: 3mm;
   margin-bottom: 1px;
@@ -4931,16 +4958,19 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .item-name{
   text-align: left;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-subtitle-sub{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-subtitle-sub,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-subtitle-sub{
   font-size: 12px;
   font-weight: 450;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .fp-page{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .fp-page,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .fp-page{
   padding: 14px 8px 8px 8px;
 }
 
-body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-row{
+body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .info-row,
+body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .info-row{
   padding: 0;
 }
 
@@ -4956,4 +4986,1334 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .dino-loot-section-head .
   padding-top: 0;
   margin-left: auto;
   white-space: nowrap;
+}
+
+/* ============================================================
+   NOTE VIEW / EXPLORER NOTES (v5.12)
+============================================================ */
+
+#noteViewPanel {
+  min-width: 240px;
+  max-width: 300px;
+}
+
+.note-cmd-block {
+  margin-bottom: 6px;
+}
+
+.note-cmd-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-3);
+  margin-bottom: 2px;
+}
+
+.dd-item.is-active {
+  background: rgba(var(--accent-rgb), .12);
+  border-radius: 6px;
+}
+
+/* New POI marker icons */
+.poi-cave-icon svg,
+.poi-nest-icon svg,
+.poi-teleporter-icon svg,
+.poi-note-icon svg,
+.poi-dossier-icon svg,
+.poi-note-selected-icon svg {
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.55));
+}
+
+body[data-mode="note"] .mode-toggle {
+  background: rgba(var(--accent-rgb), .18);
+}
+
+/* ── Dark tooltip (tribute terminals, player starts, obelisks) ─ */
+.leaflet-tooltip.dark-tooltip {
+  background: rgba(18, 22, 30, 0.92);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #e8eaf0;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.leaflet-tooltip.dark-tooltip::before {
+  border-top-color: rgba(18, 22, 30, 0.92);
+}
+
+/* ── Tribute terminal enriched tooltip ───────────────────────── */
+.leaflet-tooltip.term-tooltip {
+  width: 210px;
+  max-width: 210px;
+  min-width: 120px;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+.term-tip {
+  line-height: 1.35;
+}
+.term-tip-title {
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #fff;
+}
+.term-tip-section {
+  font-size: 11.5px;
+  margin-top: 2px;
+}
+.term-tip-head {
+  color: #8fd0ff;
+  font-weight: 600;
+}
+
+/* ── Boss View panel ─────────────────────────────────────────── */
+.boss-loc-line {
+  font-size: 12.5px;
+  color: #e8eaf0;
+}
+.boss-recipe {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+/* Two-column layout for longer summon recipes. */
+.boss-recipe--cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 10px;
+}
+.boss-recipe-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+}
+.boss-recipe-qty {
+  color: #ffd24a;
+  font-weight: 700;
+  min-width: 30px;
+  text-align: right;
+}
+.boss-recipe-name {
+  color: #e8eaf0;
+}
+.boss-empty {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 4px 0;
+}
+.boss-item-qty {
+  color: #ffd24a;
+  font-weight: 700;
+  margin-right: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.boss-info-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 6px;
+}
+.boss-info-meta {
+  font-size: 11px;
+  color: var(--muted);
+  opacity: 0.8;
+}
+.boss-view-link {
+  width: 100%;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Item View → Bosses tab: reuse loot-set-section styling */
+body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .loot-set-section{
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-left: -5px;
+  margin-right: -5px;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--fill-strong),
+      var(--fill-soft)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 6px 18px rgba(0,0,0,.18);
+}
+body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .fp-page{
+  padding: 14px 8px 8px 8px;
+}
+body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
+  padding: 0;
+}
+/* Reward / unlock rows — same visual language as the summon recipe rows. */
+.boss-reward-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 14px;
+}
+.boss-reward-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+  min-width: 0;
+}
+.boss-reward-qty {
+  color: #ffd24a;
+  font-weight: 700;
+  min-width: 34px;
+  text-align: right;
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+.boss-reward-name {
+  color: #e8eaf0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.boss-reward-name.is-element {
+  color: #bfe6ff;
+  font-weight: 600;
+}
+.boss-reward-name.is-bonus {
+  color: #ffe6a3;
+}
+
+/* ── Note tooltip dark background ─────────────────────────────── */
+.leaflet-tooltip.note-tooltip {
+  background: rgba(18, 22, 30, 0.92);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #e8eaf0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  max-width: 220px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.leaflet-tooltip.note-tooltip--interactive,
+.leaflet-tooltip.supply-tooltip--interactive {
+  pointer-events: auto !important;
+}
+.leaflet-tooltip.note-tooltip::before {
+  border-top-color: rgba(18, 22, 30, 0.92);
+}
+.note-tooltip .poi-tip-title {
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.note-tooltip .poi-tip-line {
+  font-size: 11px;
+  opacity: .8;
+}
+
+/* POI tooltip action button (e.g. "Open in Note View →", "Click to open in Crate View") */
+.poi-tip-action {
+  margin-top: 5px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: 11px;
+  color: var(--accent, #5ab4ff);
+  cursor: pointer;
+  font-weight: 500;
+}
+.poi-tip-action:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   COLOR REGIONS (Dino Info tab)
+============================================================ */
+
+.color-regions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.color-region-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.color-region-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  min-width: 82px;
+  line-height: 1.1;
+}
+.color-region-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-1, #e8eaf0);
+}
+.color-region-index {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-3, #aab);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  opacity: .7;
+}
+
+.color-region-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  flex: 1;
+}
+
+.color-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,.6);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+  cursor: help;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   ITEM LINKS (clickable spans inside item / dino panels)
+============================================================ */
+
+.item-link {
+  color: var(--accent, #5ab4ff);
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px dotted color-mix(in srgb, var(--accent, #5ab4ff) 50%, transparent);
+}
+.item-link:hover {
+  text-decoration: underline;
+  border-bottom-color: var(--accent, #5ab4ff);
+}
+
+/* Loot item tags also clickable (same hover treatment) */
+.loot-item-tag {
+  cursor: pointer;
+  transition: background-color .12s ease;
+}
+.loot-item-tag:hover {
+  background-color: color-mix(in srgb, var(--accent, #5ab4ff) 18%, transparent);
+}
+
+
+/* ============================================================
+   COLOR SWATCH POPOVER
+============================================================ */
+.color-swatch {
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.color-swatch:hover,
+.color-swatch:focus {
+  transform: scale(1.15);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.3), 0 0 0 2px rgba(90,180,255,.4);
+  outline: none;
+}
+
+.color-swatch-popover {
+  position: fixed;
+  z-index: 10000;
+  background: rgba(18, 22, 30, 0.96);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 6px;
+  padding: 6px 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.5);
+  color: #e8eaf0;
+  font-size: 12px;
+  pointer-events: none;
+  animation: swatch-pop-fade-in .12s ease-out;
+}
+@keyframes swatch-pop-fade-in {
+  from { opacity: 0; transform: translateY(2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.color-swatch-popover-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.color-swatch-popover-chip {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,.6);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+  flex-shrink: 0;
+}
+.color-swatch-popover-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.color-swatch-popover-name {
+  font-weight: 600;
+  line-height: 1.1;
+}
+.color-swatch-popover-hex {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  opacity: .8;
+}
+.color-swatch-popover-idx {
+  opacity: .6;
+}
+
+
+/* ============================================================
+   ITEM COMMAND PARAMETER CONTROLS
+============================================================ */
+.cmd-params {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 6px 0 0;
+}
+.cmd-param {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-3, #aab);
+}
+.cmd-param--toggle {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.cmd-param-label {
+  font-weight: 600;
+}
+.cmd-param-input {
+  width: 64px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 4px;
+  color: inherit;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+.cmd-param-input:focus {
+  outline: none;
+  border-color: var(--accent, #5ab4ff);
+}
+.cmd-param-toggle {
+  margin: 0;
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   CRAFTING CARD (Item Info tab)
+============================================================ */
+.crafting-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+.crafting-ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.crafting-ingredient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.crafting-ingredient-name {
+  flex: 1;
+}
+.crafting-ingredient-qty {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color: var(--text-3, #aab);
+  font-size: 12px;
+}
+.crafting-station {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.crafting-station-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-3, #aab);
+}
+.crafting-station-value {
+  text-align: right;
+}
+
+
+/* ============================================================
+   TAME TYPE BADGE (e.g. "Knockout Tame", "Passive Tame")
+============================================================ */
+.dino-badge.tame-type {
+  border-color: color-mix(in srgb, var(--accent, #5ab4ff) 35%, transparent);
+  background:
+    linear-gradient(to bottom,
+      color-mix(in srgb, var(--accent, #5ab4ff) 14%, transparent),
+      color-mix(in srgb, var(--accent, #5ab4ff) 6%,  transparent));
+  color: color-mix(in srgb, var(--accent, #5ab4ff) 90%, white);
+}
+
+
+/* ============================================================
+   CRATE VIEW — Notes & Simulate Tab
+   ============================================================ */
+
+.crate-note{
+  font-size: 11px;
+  opacity: .6;
+  margin-top: 2px;
+}
+
+.item-weight-pct{
+  opacity: .55;
+  font-size: 11px;
+}
+
+/* ── Simulate tab ──────────────────────────────────────────── */
+
+.sim-prompt{
+  padding: 12px 4px;
+  text-align: center;
+}
+.sim-prompt-hint{
+  font-size: 12px;
+  opacity: .5;
+  margin-top: 8px;
+}
+
+.sim-results{
+  padding: 4px;
+}
+.sim-header{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.sim-summary{
+  font-size: 11px;
+  opacity: .6;
+}
+
+.sim-items{
+  margin-bottom: 10px;
+}
+.sim-item{
+  padding: 3px 6px;
+  margin: 2px 0;
+  border-left: 3px solid #b0b0b0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.sim-item.is-bp{
+  font-weight: 600;
+  opacity: .85;
+}
+
+.sim-empty{
+  font-size: 12px;
+  opacity: .5;
+  padding: 8px 0;
+}
+
+/* Details / roll breakdown */
+.sim-details{
+  margin-top: 4px;
+}
+.sim-details > summary{
+  font-size: 11px;
+  opacity: .6;
+  cursor: pointer;
+  user-select: none;
+}
+.sim-details-body{
+  margin-top: 6px;
+  font-size: 11px;
+  opacity: .75;
+}
+.sim-details-intro{
+  margin-bottom: 6px;
+}
+.sim-pick{
+  margin-bottom: 8px;
+  padding-left: 8px;
+  border-left: 2px solid rgba(255,255,255,.1);
+}
+.sim-pick-name{
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.sim-pick-entry{
+  padding-left: 8px;
+  margin-top: 2px;
+}
+.sim-pick-entry-name{
+  opacity: .7;
+}
+.sim-pick-entry-item{
+  padding-left: 8px;
+}
+.sim-pick-empty{
+  padding-left: 8px;
+  opacity: .4;
+}
+
+/* ── Item View probability breakdown ──────────────────────── */
+
+.prob-steps{
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.prob-step{
+  padding-left: 12px;
+  border-left: 2px solid rgba(var(--accent-rgb,57,200,255),.30);
+  border-radius: 1px;
+}
+.prob-step-title{
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-1, #f0fbff);
+}
+.prob-step-detail{
+  font-size: 11.5px;
+  color: var(--text-dim, #7f98a8);
+  line-height: 1.5;
+}
+.prob-step-result{
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--accent, #39c8ff);
+  margin-top: 1px;
+}
+.prob-combined{
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--text-1, #f0fbff);
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-soft, rgba(120,210,255,.10));
+}
+
+/* ============================================================
+   CRATE VIEW — chip / rail / ribbon redesign
+   ============================================================ */
+
+.lc-chips{
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.lc-chip{
+  display:inline-flex; align-items:baseline; gap:5px;
+  border:1px solid var(--border-soft, rgba(120,210,255,.10));
+  border-radius:7px;
+  background:linear-gradient(180deg, rgba(var(--accent-rgb,57,200,255),.07), rgba(var(--accent-rgb,57,200,255),.02));
+  padding:4px 9px;
+  font-size:11px; color:var(--text-3, #9fb8c8);
+  letter-spacing:.05em; text-transform:uppercase;
+}
+.lc-chip b{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px; font-weight:600;
+  color:var(--text-1, #f0fbff);
+  letter-spacing:0; text-transform:none;
+}
+.lc-chip.rwr{
+  text-transform:none; letter-spacing:.01em; font-size:11.5px;
+}
+
+.lc-mech{
+  margin-top:8px;
+  font-size:12px; color:var(--text-dim, #7f98a8); line-height:1.5;
+}
+.lc-mech b{
+  color:var(--text-2, #d9edf7);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
+
+/* set header additions */
+.lc-set-pct{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:16px; font-weight:700;
+  color:var(--accent-bright, #86e6ff);
+  white-space:nowrap;
+  margin-right:10px;
+}
+.lc-pbar{
+  height:3px; margin:0 13px; border-radius:2px;
+  background:rgba(255,255,255,.06); overflow:hidden;
+}
+.lc-pbar i{
+  display:block; height:100%; border-radius:2px;
+  background:linear-gradient(90deg, var(--accent, #39c8ff), var(--accent-bright, #86e6ff));
+}
+.lc-set-sub{
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  padding:6px 13px 9px;
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+.lc-set-sub .lc-mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+}
+.lc-set-mech{
+  font-size:12px; color:var(--text-dim, #7f98a8);
+  margin:8px 0 10px; line-height:1.5;
+}
+.lc-set-mech b{
+  color:var(--text-2, #d9edf7);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
+
+/* entries on a rail */
+.lc-entry{
+  position:relative;
+  padding:0 0 2px 13px;
+  margin:0 0 13px;
+}
+.lc-entry:last-child{margin-bottom:2px;}
+.lc-entry::before{
+  content:""; position:absolute; left:0; top:2px; bottom:2px; width:2px;
+  border-radius:2px;
+  background:linear-gradient(180deg, var(--accent, #39c8ff), rgba(var(--accent-rgb,57,200,255),.15));
+}
+.lc-entry-head{display:flex; align-items:baseline; gap:8px;}
+.lc-entry-name{flex:1; font-size:13.5px; font-weight:650; color:var(--text-1, #f0fbff);}
+.lc-entry-pct{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13.5px; font-weight:650;
+  color:var(--accent, #39c8ff);
+  white-space:nowrap;
+}
+.lc-entry-cap{font-size:11px; color:var(--text-dim, #7f98a8); margin:1px 0 7px;}
+.lc-entry .lc-chips{margin-bottom:8px;}
+.lc-entry-sum{
+  font-size:12px; color:var(--text-dim, #7f98a8);
+  line-height:1.5; margin-bottom:9px;
+}
+.lc-entry-sum b{
+  color:var(--text-2, #d9edf7);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
+
+/* quality tier ribbon */
+.lc-qrib{margin:2px 0 9px;}
+.lc-qrib-track{display:flex; gap:2px; height:8px; border-radius:3px; overflow:hidden;}
+.lc-qrib-track i{flex:1; opacity:.16; border-radius:1px;}
+.lc-qrib-track i.on{opacity:1; box-shadow:0 0 6px rgba(255,255,255,.12) inset;}
+.lc-q0{background:#b0b0b0;}
+.lc-q1{background:#3dd43d;}
+.lc-q2{background:#48b8ff;}
+.lc-q3{background:#c06dff;}
+.lc-q4{background:#ffd033;}
+.lc-q5{background:#33ffee;}
+.lc-qrib-label{
+  display:flex; justify-content:space-between;
+  font-size:10.5px; color:var(--text-dim, #7f98a8); margin-top:3px;
+}
+.lc-qrib-label .lc-mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+}
+
+/* item pool grid */
+.lc-items{display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:4px 8px;}
+.lc-item{
+  display:flex; flex-direction:column; align-items:flex-start; gap:1px;
+  font-size:12px; color:var(--text-2, #d9edf7);
+  padding:4px 7px; border-radius:6px;
+  background:rgba(var(--accent-rgb,57,200,255),.045);
+  border:1px solid rgba(120,210,255,.06);
+}
+.lc-item .lc-iw{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:10.5px; font-weight:500;
+  color:var(--text-dim, #7f98a8); white-space:nowrap;
+}
+
+/* collapsible item entries (crate view) */
+.lc-entry-toggle{
+  display:flex; align-items:baseline; gap:8px;
+  width:100%; padding:0; margin:0;
+  background:none; border:0; cursor:pointer;
+  color:inherit; font:inherit; text-align:left;
+}
+.lc-entry-toggle:focus-visible{
+  outline:2px solid var(--accent, #39c8ff);
+  outline-offset:2px; border-radius:4px;
+}
+.lc-entry-chev{
+  color:var(--text-dim, #7f98a8);
+  font-size:13px; line-height:1;
+}
+.lc-entry.is-closed{padding-bottom:0; margin-bottom:10px;}
+
+/* ============================================================
+   ITEM VIEW — consolidated hero / crate cards / boss rows
+   ============================================================ */
+
+/* hero command params as chips */
+.iv-cmd-row{
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  margin:4px 0 7px;
+}
+.iv-cmd-input{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--border-soft, rgba(120,210,255,.10));
+  border-radius:6px;
+  background:rgba(255,255,255,.04);
+  padding:3px 7px;
+  font-size:10px; color:var(--text-3, #9fb8c8);
+  letter-spacing:.05em; text-transform:uppercase;
+  cursor:pointer;
+}
+.iv-cmd-input input[type=number]{
+  width:28px; background:none; border:0; outline:none;
+  color:var(--text-1, #f0fbff);
+  font:600 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  text-align:center;
+  -moz-appearance:textfield;
+}
+.iv-cmd-input input[type=number]::-webkit-inner-spin-button,
+.iv-cmd-input input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance:none; margin:0;
+}
+.iv-cmd-bp{user-select:none;}
+.iv-cmd-bp input[type=checkbox]{
+  position:absolute; opacity:0; width:0; height:0;
+}
+.iv-bp-dot{
+  width:11px; height:11px; border-radius:4px;
+  border:1.5px solid var(--text-dim, #7f98a8);
+  display:inline-block; align-self:center;
+}
+.iv-cmd-bp.on{
+  color:var(--accent-bright, #86e6ff);
+  border-color:var(--border-strong, rgba(120,210,255,.26));
+}
+.iv-cmd-bp.on .iv-bp-dot{
+  background:var(--accent, #39c8ff);
+  border-color:var(--accent, #39c8ff);
+}
+
+/* tagged mono rows (commands, class, bp) */
+.iv-cmd-line{
+  display:flex; align-items:stretch;
+  border:1px solid var(--border-soft, rgba(120,210,255,.10));
+  border-radius:8px;
+  background:rgba(0,0,0,.25);
+  margin-bottom:6px; overflow:hidden;
+  cursor:pointer;
+}
+.iv-cmd-tag{
+  flex:0 0 auto; display:flex; align-items:center;
+  padding:6px 8px;
+  font-size:9.5px; font-weight:700; letter-spacing:.08em;
+  color:var(--accent-bright, #86e6ff);
+  background:rgba(var(--accent-rgb,57,200,255),.10);
+  border-right:1px solid var(--border-soft, rgba(120,210,255,.10));
+}
+.iv-cmd-text{
+  flex:1; padding:6px 9px;
+  font:12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-2, #d9edf7);
+  white-space:nowrap; overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.iv-cmd-hint{
+  font-size:10px; color:var(--text-dim, #7f98a8);
+  margin:-2px 0 4px 2px;
+}
+
+/* eyebrow section labels */
+.iv-eyebrow{
+  font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--text-dim, #7f98a8);
+  margin:14px 0 6px;
+}
+
+/* ── crate cards ── */
+.iv-crate{
+  transition:opacity .15s ease;
+}
+.iv-crate:not(.is-on){opacity:.42;}
+.iv-crate-head{display:flex; align-items:center;}
+.iv-crate-main{
+  flex:1; display:flex; align-items:center; gap:9px;
+  padding:8px 4px 6px 11px;
+  background:none; border:0; cursor:pointer;
+  color:inherit; font:inherit; text-align:left;
+  min-width:0;
+}
+.iv-eye{
+  flex:0 0 auto; width:10px; height:10px; border-radius:50%;
+  background:var(--accent, #39c8ff);
+  box-shadow:0 0 7px rgba(var(--accent-rgb,57,200,255),.7);
+}
+.iv-crate:not(.is-on) .iv-eye{
+  background:transparent;
+  border:1.5px solid var(--text-dim, #7f98a8);
+  box-shadow:none;
+}
+.iv-crate-namewrap{
+  flex:1; display:flex; flex-direction:column; gap:1px; min-width:0;
+}
+.iv-crate-name{
+  font-size:13.5px; font-weight:650;
+  color:var(--text-1, #f0fbff);
+}
+.iv-crate-lvl{
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+.iv-crate-pct{
+  flex:0 0 auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:15.5px; font-weight:700;
+  color:var(--accent-bright, #86e6ff);
+  padding:0 4px 0 6px;
+  white-space:nowrap;
+}
+.iv-crate-exp{
+  flex:0 0 auto; background:none; border:0; cursor:pointer;
+  color:var(--text-dim, #7f98a8);
+  padding:10px 12px;
+}
+.iv-crate .lc-pbar{margin:0 11px 9px;}
+.iv-crate-sub{
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  padding:6px 12px 10px;
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+.iv-mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+}
+
+/* ── boss rows ── */
+.iv-boss-head{
+  width:100%; display:flex; align-items:center; gap:9px;
+  padding:11px 13px;
+  background:none; border:0; cursor:pointer;
+  color:inherit; font:inherit; text-align:left;
+}
+.iv-boss-qty{
+  flex:0 0 auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:14px; font-weight:700;
+  color:var(--accent-bright, #86e6ff);
+}
+.iv-boss-name{
+  flex:1; font-size:13.5px; font-weight:650;
+  color:var(--text-1, #f0fbff);
+}
+.iv-dif{
+  flex:0 0 auto;
+  font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+  border-radius:999px; padding:2.5px 9px;
+}
+.iv-dif.g{color:#3dd43d; border:1px solid rgba(61,212,61,.45);  background:rgba(61,212,61,.10);}
+.iv-dif.b{color:#48b8ff; border:1px solid rgba(72,184,255,.45); background:rgba(72,184,255,.10);}
+.iv-dif.a{color:#ff5d5d; border:1px solid rgba(255,93,93,.45);  background:rgba(255,93,93,.10);}
+.iv-boss-chev{
+  flex:0 0 auto; color:var(--text-dim, #7f98a8); font-size:13px;
+}
+.iv-boss-sub{
+  padding:0 13px 10px; margin-top:-5px;
+  font-size:11px; color:var(--text-dim, #7f98a8);
+}
+
+/* ── info tab: recipe + stations ── */
+.iv-recipe{
+  border:1px solid rgba(120,210,255,.06);
+  border-radius:8px;
+  background:rgba(var(--accent-rgb,57,200,255),.045);
+  padding:2px 0;
+}
+.iv-recipe-row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  padding:6px 10px;
+  font-size:12.5px;
+}
+.iv-recipe-row + .iv-recipe-row{
+  border-top:1px solid rgba(120,210,255,.05);
+}
+.iv-recipe-qty{
+  font:600 12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-3, #9fb8c8);
+  white-space:nowrap;
+}
+.iv-station{text-transform:none; letter-spacing:.01em;}
+
+/* ============================================================
+   BOSS VIEW — recipe grid / reward grid / crate wrapper
+   ============================================================ */
+
+/* summon cost: collapsible card with scrollable single-column list */
+.bv-cost-n{
+  font-size:11px; color:var(--text-dim, #7f98a8); white-space:nowrap;
+}
+.bv-cost .bv-crate-body{padding:0 10px 10px;}
+.bv-cost-scroll{
+  max-height:248px; overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.iv-recipe-row.is-artifact .item-link,
+.iv-recipe-row.is-artifact > span:first-child{color:#ffd033;}
+
+/* reward grid */
+.bv-rewards{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:5px 8px;}
+.bv-reward{
+  display:flex; align-items:baseline; gap:6px;
+  padding:5px 7px; border-radius:7px;
+  background:rgba(var(--accent-rgb,57,200,255),.045);
+  border:1px solid rgba(120,210,255,.06);
+  font-size:12.5px;
+}
+.bv-reward b{
+  font:700 13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--accent-bright, #86e6ff); white-space:nowrap;
+}
+.bv-reward-name, .bv-reward .item-link{color:var(--text-1, #f0fbff);}
+.bv-reward.is-element .bv-reward-name,
+.bv-reward.is-element .item-link{color:var(--accent-bright, #86e6ff);}
+
+.bv-cap{
+  font-size:10.5px; color:var(--text-dim, #7f98a8);
+  margin:8px 0 4px;
+}
+
+/* spawned-crate wrapper card */
+.bv-crate{
+  border:1px solid var(--border-mid, rgba(120,210,255,.16));
+  border-radius:12px;
+  background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
+  margin-bottom:10px; overflow:hidden;
+}
+.bv-crate-head{
+  width:100%; display:flex; align-items:center; gap:9px;
+  padding:11px 13px 8px;
+  background:none; border:0; cursor:pointer;
+  color:inherit; font:inherit; text-align:left;
+}
+.bv-crate-count{
+  font:700 14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--accent-bright, #86e6ff); white-space:nowrap;
+}
+.bv-crate-name{flex:1; font-size:14px; font-weight:700; color:var(--text-1, #f0fbff);}
+.bv-crate-chev{color:var(--text-dim, #7f98a8); font-size:13px;}
+.bv-crate-meta{padding:0 13px 4px;}
+.bv-crate-mech{
+  font-size:12px; color:var(--text-dim, #7f98a8); line-height:1.5;
+  padding:6px 13px 10px;
+}
+.bv-crate-mech b{
+  color:var(--text-2, #d9edf7);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
+.bv-crate-body{padding:0 10px 10px;}
+.bv-crate:not(.is-open) .bv-crate-body{display:none;}
+
+/* injected bonus loot (e.g. Iceworm Queen Trophy) */
+.bv-bonus{
+  display:flex; align-items:baseline; gap:7px;
+  margin:0 13px 10px; padding:7px 10px;
+  border-radius:8px;
+  border:1px dashed rgba(255,208,51,.4);
+  background:rgba(255,208,51,.06);
+  font-size:12px; color:var(--text-2, #d9edf7);
+}
+.bv-bonus b{
+  font:700 12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:#ffd033; white-space:nowrap;
+}
+.bv-bonus .item-link{color:var(--text-1, #f0fbff);}
+
+/* unlocks grid */
+.bv-unlocks{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:5px 8px;}
+.bv-unlock{
+  font-size:12.5px;
+  padding:6px 8px; border-radius:7px;
+  background:rgba(var(--accent-rgb,57,200,255),.045);
+  border:1px solid rgba(120,210,255,.06);
+}
+.bv-unlock .item-link{color:var(--accent-bright, #86e6ff);}
+
+/* boss view markers: glowing terminal dot + skull for arena bosses */
+.boss-terminal-marker{ filter:drop-shadow(0 0 5px rgba(255,210,74,.85)); }
+.poi-boss-skull svg{ filter:drop-shadow(0 0 4px rgba(255,93,93,.75)); }
+
+/* ============================================================
+   DINO VIEW — command builder / spawn cards / settings / regions
+   ============================================================ */
+
+/* command builder */
+.dv-cmdrow{display:flex; align-items:center; gap:7px; flex-wrap:wrap;}
+.dv-flip{
+  min-width:74px; padding:6px 13px; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16));
+  background:rgba(0,0,0,.22); color:var(--text-2, #d9edf7);
+  font-size:12.5px; font-weight:700; font-family:inherit; cursor:pointer;
+}
+.dv-flip.is-tamed{
+  color:var(--accent-bright, #86e6ff);
+  border-color:rgba(var(--accent-rgb,57,200,255),.5);
+  background:rgba(var(--accent-rgb,57,200,255),.12);
+}
+.dv-skip{
+  padding:6px 11px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16)); border-radius:8px; cursor:pointer;
+  font-size:11px; font-weight:600; color:var(--text-3, #9fb8c8);
+  background:none; font-family:inherit;
+}
+.dv-skip.on{
+  color:var(--accent-bright, #86e6ff);
+  border-color:rgba(var(--accent-rgb,57,200,255),.5);
+  background:rgba(var(--accent-rgb,57,200,255),.1);
+}
+.dv-skip.is-disabled{opacity:.45; cursor:default;}
+
+/* hero condensing: the spawn-cmd-block flex gap does the spacing */
+.dino-hero .spawn-cmd-block{margin:4px 0 2px; gap:5px;}
+.dino-hero .spawn-cmd-block .iv-eyebrow{margin:0 0 -1px;}
+.dino-hero .iv-cmd-input input{width:46px;}
+.dino-hero .iv-cmd-lines{margin-top:0;}
+.dino-hero .iv-cmd-hint{margin:-4px 0 -2px; font-size:9.5px;}
+
+/* spawn entry cards — glow rail carries on/off */
+.dv-entry{
+  position:relative; border-radius:11px; margin-bottom:7px; overflow:hidden;
+  background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
+  border:1px solid rgba(120,210,255,.06);
+  opacity:.55; transition:opacity .15s;
+}
+.dv-entry::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:rgba(127,214,255,.18); transition:all .15s;
+}
+.dv-entry.is-on{opacity:1; border-color:var(--border-mid, rgba(120,210,255,.16));}
+.dv-entry.is-on::before{
+  width:5px; background:var(--accent, #39c8ff);
+  box-shadow:0 0 10px 1px rgba(var(--accent-rgb,57,200,255),.75), 0 0 26px rgba(var(--accent-rgb,57,200,255),.35);
+}
+.dv-entry-head{display:flex; align-items:center;}
+.dv-entry-main{
+  flex:1; min-width:0;
+  background:none; border:0; padding:10px 4px 10px 15px; cursor:pointer;
+  font-family:inherit; text-align:left; color:inherit;
+}
+.dv-entry-name{
+  display:block;
+  font-size:13px; font-weight:600;
+  color:var(--text-2, #d9edf7); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.dv-entry.is-on .dv-entry-name{color:var(--text-1, #f0fbff);}
+.dv-entry-chev{
+  background:none; border:0; color:var(--text-dim, #7f98a8); font-size:13px;
+  padding:11px 14px; cursor:pointer;
+}
+.dv-entry-body{padding:0 14px 10px;}
+.dv-entry-meta{padding-top:0;}
+.dv-entry-meta-line{font-size:12px; color:var(--text-3, #9fb8c8); padding:1.5px 0;}
+.dv-entry-meta-line b{
+  color:var(--text-1, #f0fbff); font-weight:600;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.dv-openspawn{
+  width:100%; margin-top:7px; padding:7px 0; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16));
+  background:rgba(var(--accent-rgb,57,200,255),.06);
+  color:var(--accent-bright, #86e6ff);
+  font-size:12.5px; font-weight:600; font-family:inherit; cursor:pointer;
+}
+
+/* server settings card */
+.dv-settings{
+  border:1px solid var(--border-mid, rgba(120,210,255,.16)); border-radius:12px; overflow:hidden;
+  background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
+  margin-top:14px;
+}
+.dv-settings-head{
+  width:100%; display:flex; align-items:center; gap:9px;
+  padding:11px 13px; background:none; border:0; cursor:pointer;
+  color:inherit; font-family:inherit; text-align:left;
+}
+.dv-settings-name{flex:1; font-size:13.5px; font-weight:700; color:var(--text-1, #f0fbff);}
+.dv-settings-sub{font-size:10.5px; color:var(--text-dim, #7f98a8);}
+.dv-settings-chev{color:var(--text-dim, #7f98a8); font-size:13px;}
+.dv-settings-body{padding:2px 13px 12px;}
+.dv-settings:not(.is-open) .dv-settings-body{display:none;}
+.dv-set-row{
+  display:grid; grid-template-columns:1.1fr repeat(4, 1fr); gap:5px;
+  align-items:center; padding:4px 0;
+}
+.dv-set-row.head{padding-bottom:2px;}
+.dv-set-row.head div{
+  font-size:9px; font-weight:700; letter-spacing:.8px; color:var(--text-dim, #7f98a8);
+  text-align:center; text-transform:uppercase;
+}
+.dv-set-row.head div:first-child{text-align:left;}
+.dv-set-name{font-size:11.5px; color:var(--text-3, #9fb8c8); font-weight:600;}
+.dv-set-row input{
+  width:100%; padding:4px 2px; text-align:center;
+  background:rgba(0,0,0,.25); border:1px solid rgba(120,210,255,.06); border-radius:6px;
+  color:var(--text-1, #f0fbff);
+  font:600 11.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  outline:none;
+}
+.dv-set-row input:focus{border-color:rgba(var(--accent-rgb,57,200,255),.5);}
+.dv-set-row input.changed{color:var(--gold, #ffd033); border-color:rgba(255,208,51,.4);}
+.dv-reset{
+  margin-top:9px; padding:6px 13px; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16)); background:none;
+  color:var(--text-3, #9fb8c8); font-size:11.5px; font-weight:600;
+  font-family:inherit; cursor:pointer;
+}
+.dv-set-note{font-size:10px; color:var(--text-dim, #7f98a8); margin-top:7px; line-height:1.5;}
+
+/* identifier rows */
+.dv-idrows{display:flex; flex-direction:column; gap:6px;}
+
+/* color regions: name line above the swatch grid */
+.color-region-row.dv-region{display:block; margin-bottom:14px;}
+.dv-region-title{display:flex; align-items:baseline; gap:8px; margin-bottom:6px;}
+.dv-region-name{font-size:13px; font-weight:700; color:var(--text-1, #f0fbff);}
+.dv-region-idx{
+  font-size:10px; letter-spacing:1px; color:var(--text-dim, #7f98a8); font-weight:700;
+}
+
+/* ============================================================
+   SPAWN VIEW — entry cards / manager groups / box tooltips
+   ============================================================ */
+
+.sv-idrows{display:flex; flex-direction:column; gap:6px; margin-top:9px;}
+
+/* dino cards in the entry panel */
+.sv-card{
+  border-radius:11px; margin-bottom:7px; overflow:hidden;
+  background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
+  border:1px solid rgba(120,210,255,.06);
+}
+.sv-card-head-btn{
+  width:100%; display:flex; align-items:center; gap:8px;
+  background:none; border:0; padding:10px 14px; cursor:pointer;
+  font-family:inherit; text-align:left; color:inherit;
+}
+.sv-card-name{
+  flex:1; min-width:0; font-size:13px; font-weight:700;
+  color:var(--text-1, #f0fbff);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.sv-card-chev{color:var(--text-dim, #7f98a8); font-size:13px;}
+.sv-card-body{padding:0 14px 10px;}
+.sv-meta{margin-top:2px;}
+.sv-meta + .sv-meta{margin-top:8px; padding-top:7px; border-top:1px solid rgba(120,210,255,.07);}
+.sv-meta-line{font-size:12px; color:var(--text-3, #9fb8c8); padding:1.5px 0;}
+.sv-meta-line b{
+  color:var(--text-1, #f0fbff); font-weight:600;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.sv-open{
+  width:100%; margin-top:7px; padding:7px 0; border-radius:8px;
+  border:1px solid var(--border-mid, rgba(120,210,255,.16));
+  background:rgba(var(--accent-rgb,57,200,255),.06);
+  color:var(--accent-bright, #86e6ff);
+  font-size:12.5px; font-weight:600; font-family:inherit; cursor:pointer;
+}
+
+/* manager groups */
+.sv-mgr{
+  border:1px solid rgba(120,210,255,.06); border-radius:10px;
+  background:rgba(var(--accent-rgb,57,200,255),.035);
+  padding:9px 11px; margin-bottom:7px;
+}
+.sv-mgr-line{font-size:12.5px; color:var(--text-2, #d9edf7); margin-bottom:6px;}
+.sv-mgr-line b{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--text-1, #f0fbff); font-weight:600;
+}
+.sv-mgr-line .dim{color:var(--text-dim, #7f98a8); font-size:11px;}
+
+/* chip variants */
+.lc-chip.dino{
+  color:var(--accent-bright, #86e6ff);
+  border-color:rgba(var(--accent-rgb,57,200,255),.4);
+  cursor:pointer;
+}
+.lc-chip.flag-cave{color:#ffd24a; border-color:rgba(255,210,74,.4);}
+.lc-chip.flag-untame{color:#c9d6df; border-style:dashed;}
+
+/* spawn box tooltip */
+.spawn-box-tip{max-width:236px;}
+.sbt-entry{
+  font:600 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--accent-bright, #86e6ff); word-break:break-all;
+}
+.sbt-min{font-size:12.5px; color:var(--text-1, #f0fbff); margin-top:5px;}
+.sbt-min b, .sbt-row b{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-weight:600;
+  color:var(--text-1, #f0fbff);
+}
+.sbt-link{font-size:10.5px; color:var(--gold, #ffd033); margin-top:2px;}
+.sbt-row{font-size:11px; color:var(--text-3, #9fb8c8); margin-top:4px;}
+.sbt-flags{display:flex; flex-wrap:wrap; gap:5px; margin-top:7px;}
+.sbt-flags .lc-chip{font-size:10px; padding:3px 8px;}
+
+/* sibling zones of the tapped manager */
+.spawn-linked-hi{
+  stroke:#ffffff !important;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,.7));
+}
+
+/* ── Desktop panel drag handle ── */
+@media (min-width:700px){
+  #dinoInfoPanel .fp-header{
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  #dinoInfoPanel .fp-header:active{
+    cursor: grabbing;
+  }
 }
