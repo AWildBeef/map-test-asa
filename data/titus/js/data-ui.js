@@ -753,7 +753,9 @@ function decodeModSource(mod, baseIndex){
     if (!bp) continue;
     const resolved = { ...dino, _modId: modId };
     if (dino.p != null){
-      resolved.p = decodeModDinoRef(dino.p, modIndex, baseIndex) || dino.p;
+      resolved.p = Array.isArray(dino.p)
+        ? dino.p.map(ref => decodeModDinoRef(ref, modIndex, baseIndex) || ref)
+        : (decodeModDinoRef(dino.p, modIndex, baseIndex) || dino.p);
     }
     dinos[bp] = resolved;
   }
@@ -888,8 +890,10 @@ function normalizeBp(bp){
 
 function getParentBp(bp){
   const d = getDinoObjByBp(bp);
-  // Parent `p` is a dino index in base data, or a bp string in mod data.
-  return normalizeBp(bpForDinoRef(d?.p));
+  // Parent `p` is now a tree array [direct, grandparent, ...]; use p[0] for
+  // the direct parent. Each element is a dino index (base) or bp string (mod).
+  const pRef = Array.isArray(d?.p) ? d.p[0] : d?.p;
+  return normalizeBp(bpForDinoRef(pRef));
 }
 
 
