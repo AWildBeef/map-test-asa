@@ -2082,7 +2082,7 @@ body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   margin-top: 2px;
 }
 
-/* Dino panel spawn rows — uses loot-set-section pattern but with
+/* Dino panel spawn rows -- uses loot-set-section pattern but with
    two buttons inside the header (visibility toggle + collapse chevron) */
 .dino-spawn-section{
   position: relative;
@@ -2219,7 +2219,7 @@ body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
   padding: 0 10px 10px;
 }
 
-/* Item loot detail block — inner bubble inside each crate card */
+/* Item loot detail block -- inner bubble inside each crate card */
 .item-loot-details{
   margin-top: 6px;
   display: flex;
@@ -3631,7 +3631,7 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   color: var(--text-1);
 }
 
-/* Tamed state — accent coloured */
+/* Tamed state -- accent coloured */
 .spawn-cmd-toggle.is-tamed {
   background: var(--accent, #00ff88);
   border-color: transparent;
@@ -3639,7 +3639,7 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   font-weight: 600;
 }
 
-/* Skip Bonus: inactive — subtle ghost border, no fill */
+/* Skip Bonus: inactive -- subtle ghost border, no fill */
 .spawn-cmd-toggle--skip {
   border-color: var(--border-soft);
   background: transparent;
@@ -4146,13 +4146,14 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="spawns"] .entry-row{
   }
 
   #dinoInfoPanel .fp-tabs{
-    padding-top: 8px;
+    padding-top: 0px;
   }
 
   #dinoInfoPanel .fp-tab{
     font-size: 10px;
   }
 }
+
 
 /* ============================================================
    3) UTILITY
@@ -4718,8 +4719,8 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 
 
 /* ============================================================
-   TOUCH DEVICES — kill iOS Safari tap focus rings only.
-   Note: don't try to neutralize :hover globally — it breaks the
+   TOUCH DEVICES -- kill iOS Safari tap focus rings only.
+   Note: don't try to neutralize :hover globally -- it breaks the
    normal cascade in unpredictable ways. The native -webkit-tap-
    highlight-color: transparent (set elsewhere) handles most of
    the persistent tap state on iOS already.
@@ -4739,7 +4740,7 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
 
 
 /* ============================================================
-   DINO LOOT TAB — drop components + harvest components
+   DINO LOOT TAB -- drop components + harvest components
    ============================================================ */
 
 /* Empty state */
@@ -4845,7 +4846,7 @@ body.discord-activity #mapEntriesPanel [data-action="export"]{
   padding: 4px 0 2px;
 }
 
-/* ── Item View — Dino sources tab ── */
+/* ── Item View -- Dino sources tab ── */
 
 .loot-dino-row{
   display: flex;
@@ -5154,7 +5155,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .fp-page{
 body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   padding: 0;
 }
-/* Reward / unlock rows — same visual language as the summon recipe rows. */
+/* Reward / unlock rows -- same visual language as the summon recipe rows. */
 .boss-reward-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5491,7 +5492,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 
 
 /* ============================================================
-   CRATE VIEW — Notes & Simulate Tab
+   CRATE VIEW -- Notes & Simulate Tab
    ============================================================ */
 
 .crate-note{
@@ -5635,7 +5636,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 }
 
 /* ============================================================
-   CRATE VIEW — chip / rail / ribbon redesign
+   CRATE VIEW -- chip / rail / ribbon redesign
    ============================================================ */
 
 .lc-chips{
@@ -5790,7 +5791,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .lc-entry.is-closed{padding-bottom:0; margin-bottom:10px;}
 
 /* ============================================================
-   ITEM VIEW — consolidated hero / crate cards / boss rows
+   ITEM VIEW -- consolidated hero / crate cards / boss rows
    ============================================================ */
 
 /* hero command params as chips */
@@ -5986,7 +5987,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .iv-station{text-transform:none; letter-spacing:.01em;}
 
 /* ============================================================
-   BOSS VIEW — recipe grid / reward grid / crate wrapper
+   BOSS VIEW -- recipe grid / reward grid / crate wrapper
    ============================================================ */
 
 /* summon cost: collapsible card with scrollable single-column list */
@@ -6085,7 +6086,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .poi-boss-skull svg{ filter:drop-shadow(0 0 4px rgba(255,93,93,.75)); }
 
 /* ============================================================
-   DINO VIEW — command builder / spawn cards / settings / regions
+   DINO VIEW -- command builder / spawn cards / settings / regions
    ============================================================ */
 
 /* command builder */
@@ -6121,7 +6122,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .dino-hero .iv-cmd-lines{margin-top:0;}
 .dino-hero .iv-cmd-hint{margin:-4px 0 -2px; font-size:9.5px;}
 
-/* spawn entry cards — glow rail carries on/off */
+/* spawn entry cards -- glow rail carries on/off */
 .dv-entry{
   position:relative; border-radius:11px; margin-bottom:7px; overflow:hidden;
   background:linear-gradient(180deg, var(--bg-2, #102231), var(--bg-1, #0d1b26));
@@ -6224,7 +6225,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 }
 
 /* ============================================================
-   SPAWN VIEW — entry cards / manager groups / box tooltips
+   SPAWN VIEW -- entry cards / manager groups / box tooltips
    ============================================================ */
 
 .sv-idrows{display:flex; flex-direction:column; gap:6px; margin-top:9px;}
@@ -6315,5 +6316,76 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   }
   #dinoInfoPanel .fp-header:active{
     cursor: grabbing;
+  }
+}
+
+@media (max-width:699px){
+  .dv-entry-main{
+  	padding-top:4px;
+  	padding-bottom:4px;
+  }
+
+  .dv-entry-chev{
+  	padding-top:4px;
+  	padding-bottom:4px;
+  }
+
+  .dv-entry-meta-line{
+  	padding-top:0px;
+  	padding-bottom:0px;
+  }
+
+  .dv-openspawn{
+  	margin-top:2px;
+  }
+  .dv-entry-body{
+  	padding-bottom:4px;
+  }
+
+  #dinoInfoPanel .fp-tabs{
+  	padding-top:0px
+  }
+
+  .iv-cmd-line{
+  	margin-bottom:0px;
+  }
+
+  /* ── Spawn View dino cards ── */
+  .sv-card-head-btn{
+    padding-top:4px;
+    padding-bottom:4px;
+  }
+  .sv-card-body{
+    padding-bottom:4px;
+  }
+  .sv-meta-line{
+    padding-top:0;
+    padding-bottom:0;
+  }
+  .sv-open{
+    margin-top:2px;
+  }
+  .sv-card{
+    margin-bottom:5px;
+  }
+
+  /* ── Crate View loot sets ── */
+  .lc-set-sub{
+    padding:3px 13px 5px;
+  }
+  .lc-pbar{
+    margin:0 13px;
+  }
+  .loot-set-toggle{
+    margin-bottom:3px;
+  }
+  .loot-set-section.is-closed .loot-set-toggle{
+    margin-bottom:0;
+  }
+  .lc-mech{
+    margin-top:4px;
+  }
+  .lc-set-mech{
+    margin:4px 0 6px;
   }
 }
