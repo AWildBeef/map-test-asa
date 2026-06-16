@@ -1054,7 +1054,12 @@ function getSelectedDinoGroup(name){
 
   const entryList = [...new Set(
     bps.flatMap(bp => State.dinoToEntries.get(bp) || [])
-  )].sort((a,b)=>a.localeCompare(b));
+  )].sort((a,b)=>{
+    const aTek = /CaveTek/i.test(a) ? 1 : 0;
+    const bTek = /CaveTek/i.test(b) ? 1 : 0;
+    if (aTek !== bTek) return aTek - bTek;
+    return a.localeCompare(b);
+  });
 
   const entries = entryList.map(entryName => {
     const rows = spawnRowsForEntry(entryName);
