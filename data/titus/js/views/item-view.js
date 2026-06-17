@@ -177,6 +177,8 @@ function craftingStationName(stationItemId){
   return row?.n || `Item ${stationItemId}`;
 }
 
+
+
 // Current command parameters (from infoPanelState)
 function currentCmdParams(){
   return {
