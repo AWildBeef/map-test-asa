@@ -287,6 +287,156 @@ function renderStatSettingsCard(statsObj){
 }
 
 
+// ── Dino inventory section (weight reductions, passive gen, etc.) ─────────
+// Known broad parent items that should be shown as summaries rather than
+// expanding every child item.
+const INV_SUMMARY_NAMES = {
+  443: "All Consumables",
+  445: "All Consumables",
+  311: "All Artifacts",
+  460: "All Berries",
+  812: "All Kibble",
+  809: "All Kibble (Simple+)",
+  808: "All Kibble (Regular+)",
+  807: "All Kibble (Superior+)",
+  811: "All Kibble (Exceptional+)",
+  2239: "All Structures",
+  2962: "All Weapons",
+  1307: "All Items",
+  1532: "Chitin / Keratin",
+};
+
+function invItemName(itemId){
+  if (INV_SUMMARY_NAMES[itemId]) return INV_SUMMARY_NAMES[itemId];
+  return itemDisplayNameById(itemId);
+}
+
+function invItemChip(itemId, suffix){
+  const name = invItemName(itemId);
+  const isSummary = !!INV_SUMMARY_NAMES[itemId];
+  // Summary items aren't tappable (no real item to open); specific items link
+  if (isSummary){
+    return `<span class="lc-chip"><em>${escapeHtml(name)}</em>${suffix ? ` <b>${escapeHtml(suffix)}</b>` : ""}</span>`;
+  }
+  return `<span class="lc-chip loot-item-tag" data-item-id="${escapeAttr(String(itemId))}">${escapeHtml(name)}${suffix ? ` <b>${escapeHtml(suffix)}</b>` : ""}</span>`;
+}
+
+function renderDinoInventorySection(d){
+  const dinoObj = getDinoObjByBp(d?.bpPath);
+  if (dinoObj?.iv == null) return "";
+  const invObj = itemData()?.inv?.[String(dinoObj.iv)];
+  if (!invObj) return "";
+
+  const sections = [];
+
+  // ── Weight Reductions ──
+  const wm = invObj.wm || [];
+  if (wm.length){
+    const chips = wm.map(pair =>
+      invItemChip(pair[0], `×${pair[1]}`)
+    ).join("");
+    sections.push(`
+      <div class="iv-eyebrow">Weight Reductions</div>
+      <div class="lc-chips">${chips}</div>
+    `);
+  }
+
+  // ── Passive Generation ──
+  const gi = invObj.gi || [];
+  if (gi.length){
+    const rows = gi.map(entry => {
+      const name = itemDisplayNameById(entry[0]);
+      const interval = fmtDuration(entry[1]);
+      const max = entry[2];
+      return `<div class="dv-inv-row">
+        <span class="loot-item-tag" data-item-id="${escapeAttr(String(entry[0]))}">${escapeHtml(name)}</span>
+        <span class="dv-inv-detail">every <b>${escapeHtml(interval)}</b> · max <b>${escapeHtml(String(max))}</b></span>
+      </div>`;
+    }).join("");
+    sections.push(`
+      <div class="iv-eyebrow">Generates</div>
+      ${rows}
+    `);
+  }
+
+  // ── Spoil Multipliers ──
+  const sm = invObj.sm || [];
+  if (sm.length){
+    const chips = sm.map(pair =>
+      invItemChip(pair[0], `×${pair[1]}`)
+    ).join("");
+    sections.push(`
+      <div class="iv-eyebrow">Spoil Time</div>
+      <div class="lc-chips">${chips}</div>
+    `);
+  }
+
+  // ── Prevented Items ──
+  const pi = invObj.pi || [];
+  if (pi.length){
+    const chips = pi.map(id => invItemChip(id, "")).join("");
+    sections.push(`
+      <div class="iv-eyebrow">Cannot Carry</div>
+      <div class="lc-chips">${chips}</div>
+    `);
+  }
+
+  // ── Allowed Items Only ──
+  const ai = invObj.ai || [];
+  if (ai.length){
+    const chips = ai.map(id => invItemChip(id, "")).join("");
+    sections.push(`
+      <div class="iv-eyebrow">Allowed Items Only</div>
+      <div class="lc-chips">${chips}</div>
+    `);
+  }
+
+  // ── Max Slots ──
+  const mi = invObj.mi;
+  if (mi != null){
+    sections.push(`
+      <div class="lc-chips" style="margin-top:6px;">
+        <span class="lc-chip">Max Slots <b>${escapeHtml(String(mi))}</b></span>
+      </div>
+    `);
+  }
+
+  // ── Saddle crafting (fc → linked inventories' structures) ──
+  const fc = invObj.fc;
+  if (fc != null){
+    const data = itemData();
+    const structs = data?.st || {};
+    const fcIds = Array.isArray(fc) ? fc : [fc];
+    const stationNames = [];
+    for (const fcId of fcIds){
+      for (const stObj of Object.values(structs)){
+        if (stObj?.inv === fcId && stObj.n){
+          if (!stationNames.includes(stObj.n)) stationNames.push(stObj.n);
+          break;
+        }
+      }
+    }
+    if (stationNames.length){
+      const label = stationNames.length === 1
+        ? `Crafts <b>${escapeHtml(stationNames[0])}</b> items with saddle`
+        : `Crafts ${stationNames.map(n => `<b>${escapeHtml(n)}</b>`).join(" + ")} items with saddle`;
+      sections.push(`
+        <div class="lc-chips" style="margin-top:6px;">
+          <span class="lc-chip">${label}</span>
+        </div>
+      `);
+    }
+  }
+
+  if (!sections.length) return "";
+  return `
+    <div class="info-section">
+      <div class="iv-eyebrow" style="margin-top:2px;">Inventory</div>
+      ${sections.join("")}
+    </div>
+  `;
+}
+
 function renderDinoTabInfo(d) {
   const bp = d.bpPath || "";
   const extraBps = Array.isArray(d.additionalBpPathsToDisplay)
@@ -315,6 +465,8 @@ function renderDinoTabInfo(d) {
         <div class="lc-chips">${generalChips}</div>
       </div>
     ` : ""}
+
+    ${renderDinoInventorySection(d)}
 
     <div class="info-section">
       <div class="iv-eyebrow">Identifiers</div>

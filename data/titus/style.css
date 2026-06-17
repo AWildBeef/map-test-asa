@@ -6389,3 +6389,21 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
     margin:4px 0 6px;
   }
 }
+
+/* ── Dino inventory info rows ── */
+.dv-inv-row{
+  display:flex; align-items:baseline; gap:8px;
+  padding:3px 0; font-size:12.5px; color:var(--text-2, #d9edf7);
+}
+.dv-inv-row .loot-item-tag{
+  font-size:12.5px; color:var(--accent-bright, #86e6ff);
+  cursor:pointer;
+}
+.dv-inv-detail{
+  font-size:11.5px; color:var(--text-3, #9fb8c8);
+}
+.dv-inv-detail b{
+  color:var(--text-1, #f0fbff);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:600;
+}
