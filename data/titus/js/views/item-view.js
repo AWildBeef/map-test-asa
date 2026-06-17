@@ -346,7 +346,20 @@ function renderItemTabInfo(it){
     : "";
 
   // ── Crafting Costs + Crafted In ──
-  const craftingHtml = reqs.length
+  // Crafted-in sources: structures from cs + Player Inventory from engram ple
+  const isPlayerCraftable = engramRowsForItem(itemRow)
+    .some(({ row }) => row?.ple === 1);
+
+  const stationChips = stations.map(id =>
+    `<span class="lc-chip iv-station"><span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span></span>`
+  ).join("");
+  const playerChip = isPlayerCraftable
+    ? `<span class="lc-chip iv-station">Player Inventory</span>`
+    : "";
+  const allStationChips = stationChips + playerChip;
+  const hasCraftingSource = stations.length > 0 || isPlayerCraftable;
+
+  const craftingHtml = (reqs.length && hasCraftingSource)
     ? `<div class="info-section">
          <div class="iv-eyebrow">Crafting Costs</div>
          <div class="iv-recipe">
@@ -359,13 +372,7 @@ function renderItemTabInfo(it){
          </div>
          <div class="iv-eyebrow">Crafted In</div>
          <div class="lc-chips">
-           ${
-             stations.length
-               ? stations.map(id =>
-                   `<span class="lc-chip iv-station"><span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span></span>`
-                 ).join("")
-               : `<span class="lc-chip iv-station"><em>Player Inventory</em></span>`
-           }
+           ${allStationChips}
          </div>
        </div>`
     : "";
