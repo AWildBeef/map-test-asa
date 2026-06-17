@@ -293,13 +293,13 @@ function ensureReverseLookups(){
   const dinos = Global.dinos?.dinos || Global.baseDinos?.dinos || {};
   const dinoIndex = Global.dinos?.dinoIndex || Global.baseDinos?.dinoIndex || [];
 
-  // inv → dino display names
+  // inv → tame-able dino display names (filter out untameable: tt absent)
   _invToDinos = new Map();
   for (const [dk, dv] of Object.entries(dinos)){
-    if (dv?.iv == null) continue;
+    if (dv?.iv == null || dv.tt == null) continue;
     const key = String(dv.iv);
     if (!_invToDinos.has(key)) _invToDinos.set(key, []);
-    _invToDinos.get(key).push(dv.n);
+    if (!_invToDinos.get(key).includes(dv.n)) _invToDinos.get(key).push(dv.n);
   }
 
   // wm reverse: targetItemId → [{invId, mult}]
@@ -363,6 +363,45 @@ function giDinosForItem(itemId){
     }
   }
   return results.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// Find dinos that can craft items from a given structure inventory (via fc/saddle).
+function fcDinosForStructureInvId(structInvId){
+  ensureReverseLookups();
+  const data = itemData();
+  const invs = data?.inv || {};
+  const results = [];
+  for (const [invId, invObj] of Object.entries(invs)){
+    const fc = invObj?.fc;
+    if (!fc) continue;
+    const fcIds = Array.isArray(fc) ? fc : [fc];
+    if (!fcIds.includes(structInvId)) continue;
+    const names = _invToDinos.get(invId) || [];
+    for (const name of names){
+      if (!results.includes(name)) results.push(name);
+    }
+  }
+  return results.sort();
+}
+
+// For an item's cs (structure item IDs), find dinos that can also craft via saddle.
+function saddleCrafterNames(stationItemIds){
+  const data = itemData();
+  const structs = data?.st || {};
+  const allNames = [];
+  for (const stItemId of stationItemIds){
+    // Find the structure's inventory id
+    for (const stObj of Object.values(structs)){
+      if (stObj?.i === stItemId && stObj.inv != null){
+        const names = fcDinosForStructureInvId(stObj.inv);
+        for (const n of names){
+          if (!allNames.includes(n)) allNames.push(n);
+        }
+        break;
+      }
+    }
+  }
+  return allNames.sort();
 }
 
 function renderItemDinoSections(it){
@@ -481,7 +520,11 @@ function renderItemTabInfo(it){
   const playerChip = isPlayerCraftable
     ? `<span class="lc-chip iv-station">Player Inventory</span>`
     : "";
-  const allStationChips = stationChips + playerChip;
+  const saddleDinos = stations.length ? saddleCrafterNames(stations) : [];
+  const saddleChips = saddleDinos.map(name =>
+    `<span class="lc-chip iv-station"><span class="dino-link" data-open-dino="${escapeAttr(name)}">${escapeHtml(name)}</span> <em>(saddle)</em></span>`
+  ).join("");
+  const allStationChips = stationChips + saddleChips + playerChip;
   const hasCraftingSource = stations.length > 0 || isPlayerCraftable;
 
   const craftingHtml = (reqs.length && hasCraftingSource)
