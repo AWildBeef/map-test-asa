@@ -157,6 +157,8 @@ function engramRowsForItem(itemRow){
 // Build a full blueprint path from an engram row
 function engramBlueprintPath(engramRow){
   if (!engramRow) return "";
+  // Mod engrams store the full blueprint directly
+  if (engramRow.bp) return engramRow.bp;
   const path = itemData().p?.[String(engramRow.p)] || "";
   const cls  = engramRow.c || "";
   if (!path || !cls) return "";
@@ -471,6 +473,7 @@ function renderItemTabInfo(it){
   const weight   = itemRow.w;
   const stack    = itemRow.st;
   const cxp      = itemRow.cxp;
+  const rxp      = itemRow.rxp;
   const qty      = itemRow.q;
   const itemIx   = itemRow.ix;  // master item index (game's internal index)
 
@@ -490,6 +493,7 @@ function renderItemTabInfo(it){
     chip("Stack",       stack    != null ? escapeHtml(fmt(stack))     : ""),
     chip("Crafted Qty", (qty != null && qty > 1) ? escapeHtml(fmt(qty)) : ""),
     chip("Crafting XP", cxp      != null ? escapeHtml(fmt(cxp))       : ""),
+    chip("Repair XP",   rxp      != null ? escapeHtml(fmt(rxp))       : ""),
   ].filter(Boolean).join("");
 
   const generalHtml = generalChips
@@ -509,7 +513,7 @@ function renderItemTabInfo(it){
        </div>`
     : "";
 
-  // ── Crafting Costs + Crafted In ──
+  // ── Crafted In ──
   // Crafted-in sources: structures from cs + Player Inventory from engram ple
   const isPlayerCraftable = engramRowsForItem(itemRow)
     .some(({ row }) => row?.ple === 1);
@@ -517,6 +521,7 @@ function renderItemTabInfo(it){
   const stationChips = stations.map(id =>
     `<span class="lc-chip iv-station"><span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span></span>`
   ).join("");
+
   const playerChip = isPlayerCraftable
     ? `<span class="lc-chip iv-station">Player Inventory</span>`
     : "";
@@ -527,8 +532,10 @@ function renderItemTabInfo(it){
   const allStationChips = stationChips + saddleChips + playerChip;
   const hasCraftingSource = stations.length > 0 || isPlayerCraftable;
 
-  const craftingHtml = (reqs.length && hasCraftingSource)
-    ? `<div class="info-section">
+  // Show recipe + crafted-in together, or just crafted-in if we have stations
+  let craftingHtml = "";
+  if (reqs.length && hasCraftingSource){
+    craftingHtml = `<div class="info-section">
          <div class="iv-eyebrow">Crafting Costs</div>
          <div class="iv-recipe">
            ${reqs.map(([reqId, reqQty]) => `
@@ -539,8 +546,24 @@ function renderItemTabInfo(it){
            `).join("")}
          </div>
          <div class="iv-eyebrow">Crafted In</div>
+         <div class="lc-chips">${allStationChips}</div>
+       </div>`;
+  } else if (hasCraftingSource){
+    craftingHtml = `<div class="info-section">
+         <div class="iv-eyebrow">Crafted In</div>
+         <div class="lc-chips">${allStationChips}</div>
+       </div>`;
+  }
+
+  // ── Owner types (mod items: which dinos use this item) ──
+  const ownerTypes = Array.isArray(itemRow.ot) ? itemRow.ot : [];
+  const ownerHtml = ownerTypes.length
+    ? `<div class="info-section">
+         <div class="iv-eyebrow">Used By</div>
          <div class="lc-chips">
-           ${allStationChips}
+           ${ownerTypes.map(name =>
+             `<span class="lc-chip iv-station"><span class="dino-link" data-open-dino="${escapeAttr(name)}">${escapeHtml(name)}</span></span>`
+           ).join("")}
          </div>
        </div>`
     : "";
@@ -548,7 +571,7 @@ function renderItemTabInfo(it){
   // ── Reverse lookups: which dinos affect this item? ──
   const dinoSectionsHtml = renderItemDinoSections(it);
 
-  return `${idsHtml}${generalHtml}${statsHtml}${craftingHtml}${dinoSectionsHtml}`;
+  return `${idsHtml}${generalHtml}${statsHtml}${craftingHtml}${ownerHtml}${dinoSectionsHtml}`;
 }
 
 
