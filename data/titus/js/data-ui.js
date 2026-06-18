@@ -367,10 +367,11 @@ function isEntryVisible(dinoKey, idx){
 
 
 function mergeEntryTables(baseEntries, modEntries){
-  // Base entries are id-keyed ({ n: className, d }); mod entries are
-  // class-keyed. A mod that injects rows into a vanilla entry names it by
-  // class, so map class -> base id(s) and append there. Anything else is
-  // added under its class key, which the spawn-entry resolvers accept.
+  // Base entries are id-keyed ({ n: className, d }). Mod entries may be
+  // id-keyed (same numeric keys) or class-keyed (legacy). For id-keyed
+  // mod entries we append directly; for class-keyed ones we resolve the
+  // class to its base id(s) and append there. Anything that matches
+  // neither is added as a new entry.
   const out = {};
   for (const [k, v] of Object.entries(baseEntries || {})){
     out[k] = { ...v, d: [...(v?.d || [])] };
@@ -383,26 +384,38 @@ function mergeEntryTables(baseEntries, modEntries){
     idsByClass.get(cls).push(k);
   }
 
-  for (const [entryName, modEntry] of Object.entries(modEntries || {})){
+  for (const [entryKey, modEntry] of Object.entries(modEntries || {})){
     const modRows = Array.isArray(modEntry?.d) ? modEntry.d : [];
-    const targets = idsByClass.get(entryName);
 
-    if (!targets?.length){
-      out[entryName] = {
-        n: entryName,
-        bp: modEntry?.bp || "",
-        d: [...modRows]
+    // 1) Direct id match — mod entry key matches an existing base key
+    if (out[entryKey]){
+      out[entryKey] = {
+        ...out[entryKey],
+        bp: out[entryKey].bp || modEntry?.bp || "",
+        d: [...out[entryKey].d, ...modRows]
       };
       continue;
     }
 
-    for (const id of targets){
-      out[id] = {
-        ...out[id],
-        bp: out[id].bp || modEntry?.bp || "",
-        d: [...out[id].d, ...modRows]
-      };
+    // 2) Class-name lookup — legacy mod entries keyed by class name
+    const targets = idsByClass.get(entryKey);
+    if (targets?.length){
+      for (const id of targets){
+        out[id] = {
+          ...out[id],
+          bp: out[id].bp || modEntry?.bp || "",
+          d: [...out[id].d, ...modRows]
+        };
+      }
+      continue;
     }
+
+    // 3) Completely new entry (mod-only spawn entry)
+    out[entryKey] = {
+      n: modEntry?.n || entryKey,
+      bp: modEntry?.bp || "",
+      d: [...modRows]
+    };
   }
 
   return out;
