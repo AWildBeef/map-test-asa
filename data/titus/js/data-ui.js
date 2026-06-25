@@ -3884,6 +3884,23 @@ function renderDock(){
     });
   }
 
+  // Resources toggle
+  if (isDockBtnVisible("resourcePanel")) {
+    mkBtn({
+      title: "Toggle resources",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M14 4 L20 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M5 21 L14.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10.5 6.5 L14 4 L20 10 L17.5 13.5"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+      `,
+      togglePanelId: "resourcePanel",
+      onClick: () => toggleResourcePanel()
+    });
+  }
+
   // Rarity legend toggle
   if (isDockBtnVisible("rarityLegend")) {
     mkBtn({

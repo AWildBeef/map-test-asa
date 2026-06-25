@@ -6426,3 +6426,36 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   font-weight:600;
 }
+
+/* ============================================================
+   RESOURCE NODE PANEL
+   ============================================================ */
+#poiPanel,
+#resourcePanel{
+  max-height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+}
+#poiPanel .fp-body,
+#resourcePanel .fp-body{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;
+}
+.poi-rn-item{
+  gap: 6px;
+}
+.poi-rn-dot{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+.poi-rn-count{
+  font-size: 10px;
+  opacity: .5;
+  margin-left: 2px;
+}
