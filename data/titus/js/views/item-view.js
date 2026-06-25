@@ -112,11 +112,12 @@ function drawItemFoliageNodes(){
     const catDef = RESOURCE_NODE_CATEGORIES.find(c => c.hcs.includes(cls));
     const fill = catDef?.fill || "#ff6644";
     const stroke = catDef?.stroke || "#aa3311";
+    const weight = catDef?.weight || 1;
 
     const coords = typeof rnEntry === "string" ? decodeRnBinary(rnEntry) : rnEntry;
     for (const [x, y] of coords){
       L.circleMarker([y, x], {
-        radius: 3, color: stroke, weight: 1, opacity: 0.9,
+        radius: 3, color: stroke, weight, opacity: 0.9,
         fillColor: fill, fillOpacity: 0.6,
         renderer: _resourceCanvasRenderer, pane: "poiPane"
       }).addTo(lg);

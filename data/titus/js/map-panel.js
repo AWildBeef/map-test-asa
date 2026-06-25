@@ -4268,7 +4268,7 @@ function drawResourceNodes(rn){
       for (const [x, y] of coords){
         const html = `<div style="font-size:11px"><b style="color:${cat.fill}">${escapeHtml(cat.label)}</b><br><span style="opacity:.7">${escapeHtml(tip.label)}</span><br>${tip.names.map(n => escapeHtml(n)).join(", ")}</div>`;
         L.circleMarker([y, x], {
-          radius: 3, color: cat.stroke, weight: 1, opacity: 0.9,
+          radius: 3, color: cat.stroke, weight: cat.weight || 1, opacity: 0.9,
           fillColor: cat.fill, fillOpacity: 0.6,
           renderer: _resourceCanvasRenderer, pane: "poiPane"
         }).bindTooltip(html, { direction: "top", opacity: 0.95, className: "dark-tooltip" })

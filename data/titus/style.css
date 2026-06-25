@@ -1696,6 +1696,7 @@ body{
 
 .mapEntriesList .dd-item,
 .dino-spawn-card,
+.iv-foliage-card,
 .entry-row,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .loot-set-section,
 body[data-mode="crate"] #dinoInfoPanel[data-tab="sets"] .info-section-sub,
@@ -1723,6 +1724,7 @@ body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
 
 .mapEntriesList .dd-item:hover,
 .dino-spawn-card:hover,
+.iv-foliage-card:hover,
 .entry-row:hover{
   background:
     linear-gradient(
@@ -1735,6 +1737,7 @@ body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
 
 .mapEntriesList .dd-item.is-on,
 .dino-spawn-card.is-on,
+.iv-foliage-card.is-on,
 .dino-spawn-section.is-on,
 .entry-row.is-on{
   background:
@@ -1750,6 +1753,7 @@ body[data-mode="boss"] #dinoInfoPanel[data-tab="loot"] .item-entries{
 }
 
 .dino-spawn-card.is-on::before,
+.iv-foliage-card.is-on::before,
 .dino-spawn-section.is-on::before,
 .entry-row.is-on::before{
   content:"";
@@ -6462,15 +6466,8 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 
 /* ── Item View foliage cards ── */
 .iv-foliage-card{
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 6px;
+  position: relative;
   margin-bottom: 6px;
-  background: rgba(255,255,255,.02);
-  transition: border-color .15s;
-}
-.iv-foliage-card.is-on{
-  border-color: rgba(255,255,255,.2);
-  background: rgba(255,255,255,.05);
 }
 .iv-foliage-header{
   display: flex;
