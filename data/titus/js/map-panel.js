@@ -1468,6 +1468,11 @@ function toggleMapEntriesPanel(){
 
 function clearDraw(){
   mapObj?.layer.clearLayers();
+  // Clean up item-view foliage layer (not the toggle state)
+  if (typeof _itemFoliageLayer !== "undefined" && _itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
 }
 
 /* ============================================================

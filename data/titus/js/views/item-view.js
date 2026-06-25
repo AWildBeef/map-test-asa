@@ -1,11 +1,155 @@
+// ── Item → Harvest Component reverse index ──
+let _itemToHcIndex = null;
+function getItemToHcIndex(){
+  if (_itemToHcIndex) return _itemToHcIndex;
+  const loot = Global.loot || {};
+  const dh = loot.dh || {};
+  _itemToHcIndex = new Map();
+  for (const [cls, data] of Object.entries(dh)){
+    for (const itemId of (data.i || [])){
+      if (!_itemToHcIndex.has(itemId)) _itemToHcIndex.set(itemId, []);
+      _itemToHcIndex.get(itemId).push(cls);
+    }
+  }
+  return _itemToHcIndex;
+}
+
+// Read just the point count from a base64 rn blob (first varint)
+function rnPointCount(b64){
+  if (!b64) return 0;
+  const bin = atob(b64);
+  let pos = 0, r = 0, s = 0;
+  while (pos < bin.length){
+    const b = bin.charCodeAt(pos++);
+    r |= (b & 0x7F) << s;
+    if (!(b & 0x80)) return r;
+    s += 7;
+  }
+  return r;
+}
+
+// Get foliage HCs for an item on the current map
+function foliageHcsForItem(it){
+  const index = getItemToHcIndex();
+  const loot = Global.loot || {};
+  const hi = loot.hi || [];
+  const dh = loot.dh || {};
+  const items = (Global.items || Global.baseItems || {}).i || {};
+  const rn = currentGeom()?.pois?.rn || {};
+
+  const hiClassToId = new Map();
+  for (let i = 0; i < hi.length; i++){
+    if (hi[i]) hiClassToId.set(hi[i], i);
+  }
+
+  const itemIds = Array.isArray(it?.ids) ? it.ids : (it?.id != null ? [it.id] : []);
+  const result = new Map();
+
+  for (const itemId of itemIds){
+    for (const cls of (index.get(itemId) || [])){
+      if (result.has(cls)) continue;
+      const hcId = hiClassToId.get(cls);
+      if (hcId === undefined) continue;
+      const rnEntry = rn[String(hcId)];
+      if (!rnEntry) continue;
+
+      const count = typeof rnEntry === "string" ? rnPointCount(rnEntry) : rnEntry.length;
+      const hcItems = (dh[cls]?.i || []).map(id => items[String(id)]?.n || "?");
+      const label = cls.replace(/_C$/, "").replace(/HarvestComponent/g, "").replace(/_/g, " ").trim();
+
+      // Find matching category for color
+      const catDef = RESOURCE_NODE_CATEGORIES.find(c => c.hcs.includes(cls));
+
+      result.set(cls, {
+        hcId, cls, count, label, hcItems,
+        fill: catDef?.fill || "#aaaaaa",
+        stroke: catDef?.stroke || "#666666",
+        catLabel: catDef?.label || label
+      });
+    }
+  }
+
+  return [...result.values()].sort((a, b) => b.count - a.count);
+}
+
+// Foliage visibility state for item view
+const _itemFoliageVis = {};
+let _itemFoliageLayer = null;
+let _itemFoliageCurrentItem = null;  // track item switches
+
+function clearItemFoliageState(){
+  for (const k of Object.keys(_itemFoliageVis)) delete _itemFoliageVis[k];
+  if (_itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
+}
+
+function drawItemFoliageNodes(){
+  if (_itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
+  if (!mapObj?.map) return;
+  // Only draw when foliage tab is active
+  if (infoPanelState.itemTab !== "foliage") return;
+
+  const rn = currentGeom()?.pois?.rn || {};
+  const loot = Global.loot || {};
+  const hi = loot.hi || [];
+  if (!_resourceCanvasRenderer) _resourceCanvasRenderer = L.canvas({ padding: 0.5 });
+
+  const lg = L.layerGroup();
+  let any = false;
+
+  for (const [key, visible] of Object.entries(_itemFoliageVis)){
+    if (!visible) continue;
+    const hcId = Number(key.replace("foliage:", ""));
+    const rnEntry = rn[String(hcId)];
+    if (!rnEntry) continue;
+
+    const cls = hi[hcId] || "";
+    const catDef = RESOURCE_NODE_CATEGORIES.find(c => c.hcs.includes(cls));
+    const fill = catDef?.fill || "#ff6644";
+    const stroke = catDef?.stroke || "#aa3311";
+
+    const coords = typeof rnEntry === "string" ? decodeRnBinary(rnEntry) : rnEntry;
+    for (const [x, y] of coords){
+      L.circleMarker([y, x], {
+        radius: 3, color: stroke, weight: 1, opacity: 0.9,
+        fillColor: fill, fillOpacity: 0.6,
+        renderer: _resourceCanvasRenderer, pane: "poiPane"
+      }).addTo(lg);
+    }
+    any = true;
+  }
+
+  if (any){
+    lg.addTo(mapObj.map);
+    _itemFoliageLayer = lg;
+  }
+}
+
 function drawItem(itemName) {
   clearDraw();
   clearPois();
+
+  // Clean up foliage layer
+  if (_itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
 
   const itemIds = (State.itemNameToIds.get(itemName) || [])
     .filter(id => State.mapItemIds.has(id));
 
   if (!itemIds.length) return;
+
+  // If on foliage tab, only draw foliage nodes — skip crates/missions
+  if (infoPanelState.itemTab === "foliage"){
+    drawItemFoliageNodes();
+    return;
+  }
 
   // --- visible normal/horde crate classes ---
   const visibleClasses = new Set();
@@ -70,6 +214,9 @@ function drawItem(itemName) {
     return false;
   });
   addMissionMarkers(missionRows, { layer: mapObj.poiLayer });
+
+  // Foliage resource nodes
+  drawItemFoliageNodes();
 }
 
 function getSelectedItem(itemName){
@@ -1271,11 +1418,53 @@ function renderItemTabDinos(it, dropDinos, harvestDinos){
 }
 
 
+function renderItemTabFoliage(it){
+  const hcs = foliageHcsForItem(it);
+
+  if (!hcs.length){
+    return `<div class="info-section"><div class="info-empty">No foliage sources on this map</div></div>`;
+  }
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Harvest Nodes on Map</div>
+      ${hcs.map(hc => {
+        const visKey = `foliage:${hc.hcId}`;
+        const isOn = !!_itemFoliageVis[visKey];
+        return `
+          <div class="iv-foliage-card ${isOn ? "is-on" : ""}">
+            <button type="button" class="iv-foliage-header" data-foliage-toggle="${hc.hcId}">
+              <span class="poi-rn-dot" style="background:${hc.fill};border-color:${hc.stroke}"></span>
+              <span class="iv-foliage-title">
+                <span class="iv-foliage-cat">${escapeHtml(hc.catLabel)}</span>
+                <span class="poi-rn-count">${hc.count.toLocaleString()}</span>
+              </span>
+              <span class="poi-menu-check">${isOn ? "✓" : ""}</span>
+            </button>
+            <div class="iv-foliage-class">${escapeHtml(hc.cls)}</div>
+            <button type="button" class="iv-foliage-expand" data-foliage-detail="${hc.hcId}">
+              Also drops: <span class="iv-foliage-arrow">▸</span>
+            </button>
+            <div class="iv-foliage-items" id="foliageItems${hc.hcId}" style="display:none">
+              ${hc.hcItems.map(n => `<span class="iv-foliage-item">${escapeHtml(n)}</span>`).join("")}
+            </div>
+          </div>`;
+      }).join("")}
+    </div>`;
+}
+
+
 function renderItemPanel(itemName){
   const it = getSelectedItem(itemName);
   if (!it){
     renderInfoPanelBodyEmpty();
     return;
+  }
+
+  // Clear foliage toggles when switching to a different item
+  if (_itemFoliageCurrentItem !== itemName){
+    clearItemFoliageState();
+    _itemFoliageCurrentItem = itemName;
   }
 
   const panel = ensureInfoPanel();
@@ -1318,8 +1507,13 @@ function renderItemPanel(itemName){
   const itemRowForTabs = itemRowById(it.id);
   const hasEngram = itemRowForTabs ? engramRowsForItem(itemRowForTabs).length > 0 : false;
 
+  // Foliage sources on current map
+  const foliageHcs = foliageHcsForItem(it);
+  const hasFoliage = foliageHcs.length > 0;
+
   const itemPanelTabs = [
      ...(sourceCount > 0 ? [{ id: "crates", label: `Crates (${sourceCount})` }] : []),
+     ...(hasFoliage ? [{ id: "foliage", label: `Foliage (${foliageHcs.length})` }] : []),
      ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : []),
      ...(hasBossSources ? [{ id: "bosses", label: `Bosses (${bossNameSet.size})` }] : []),
      { id: "info", label: "Info" },
@@ -1376,6 +1570,7 @@ function renderItemPanel(itemName){
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "crates") return renderItemTabCrates(it);
+        if (id === "foliage") return renderItemTabFoliage(it);
         if (id === "info")   return renderItemTabInfo(it);
         if (id === "dinos")  return renderItemTabDinos(it, dropDinos, harvestDinos);
         if (id === "bosses") return renderItemTabBosses(bossSourceList, itemIds);
@@ -1396,6 +1591,7 @@ function renderItemPanel(itemName){
     onChange: (id) => {
       infoPanelState.itemTab = id;
       renderItemPanel(itemName);
+      drawItem(itemName);
     }
   });
 
@@ -1549,6 +1745,34 @@ function renderItemPanel(itemName){
       if (chevron) chevron.textContent = isOpen ? "⌄" : "›";
       refreshInfoPanelPageHeight();
     });
+  });
+
+  // Foliage harvest-component toggles
+  body.querySelectorAll("[data-foliage-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const hcId = btn.dataset.foliageToggle;
+      const visKey = `foliage:${hcId}`;
+      _itemFoliageVis[visKey] = !_itemFoliageVis[visKey];
+      const card = btn.closest(".iv-foliage-card");
+      if (card) card.classList.toggle("is-on", _itemFoliageVis[visKey]);
+      const check = btn.querySelector(".poi-menu-check");
+      if (check) check.textContent = _itemFoliageVis[visKey] ? "✓" : "";
+      drawItemFoliageNodes();
+    };
+  });
+
+  // Foliage detail expand/collapse
+  body.querySelectorAll("[data-foliage-detail]").forEach(btn => {
+    btn.onclick = () => {
+      const hcId = btn.dataset.foliageDetail;
+      const itemsEl = document.getElementById(`foliageItems${hcId}`);
+      if (!itemsEl) return;
+      const open = itemsEl.style.display !== "none";
+      itemsEl.style.display = open ? "none" : "";
+      const arrow = btn.querySelector(".iv-foliage-arrow");
+      if (arrow) arrow.textContent = open ? "▸" : "▾";
+      refreshInfoPanelPageHeight();
+    };
   });
 
   refreshInfoPanelPageHeight();
