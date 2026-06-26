@@ -71,6 +71,81 @@ function mergeLootFromMod(mod){
     };
   }
 
+  // --- 1b. Enrich merged items with detailed data from mod.items ---
+  // mod.items.i has richer per-item data (weight, XP, crafting stations,
+  // engram info) than the compact loot.items.i. Match by class name and
+  // fold the extra fields into the global item just created.
+  const modTopItems = mod.items?.i || {};
+  const topByClass = new Map();
+  for (const def of Object.values(modTopItems)){
+    if (def?.c) topByClass.set(def.c, def);
+  }
+
+  // Build inventory-index → station-item-id lookup for ci resolution.
+  // st{} entries have { inv (ii index), i (item id) }; ci values are
+  // negative ii refs where abs(n)-1 gives the ii[] index.
+  const invIdxToStationId = new Map();
+  const stTable = Global.items?.st || {};
+  for (const stEntry of Object.values(stTable)){
+    if (stEntry?.inv != null && stEntry.i != null){
+      invIdxToStationId.set(stEntry.inv, stEntry.i);
+    }
+  }
+
+  // Next engram id (needed if any item has an inline engram object)
+  if (!Global.items.e) Global.items.e = {};
+  const eIds = Object.keys(Global.items.e).map(Number).filter(Number.isFinite);
+  let nextEId = eIds.length ? Math.max(...eIds) + 1 : 10000;
+
+  for (const [localId, globalId] of Object.entries(localToGlobalId)){
+    const cls = modItemDefs[localId]?.c;
+    if (!cls) continue;
+    const rich = topByClass.get(cls);
+    if (!rich) continue;
+
+    const gi = Global.items.i[String(globalId)];
+    if (!gi) continue;
+
+    // Copy scalar fields the loot-compact version doesn't carry
+    if (rich.w   != null) gi.w   = rich.w;
+    if (rich.cxp != null) gi.cxp = rich.cxp;
+    if (rich.rxp != null) gi.rxp = rich.rxp;
+    if (rich.q   != null) gi.q   = rich.q;
+    if (rich.pb)          gi.pb  = rich.pb;
+    if (rich.ot)          gi.ot  = rich.ot;
+    if (rich.pt)          gi.pt  = rich.pt;
+
+    // Resolve ci (crafting-inventory refs) → cs (station item IDs).
+    // ci values are negative ii[] refs: abs(n)-1 = inventory index.
+    if (Array.isArray(rich.ci) && rich.ci.length){
+      const resolved = [];
+      for (const ref of rich.ci){
+        const n = Number(ref);
+        if (!Number.isFinite(n)) continue;
+        const iiIdx = n < 0 ? Math.abs(n) - 1 : n;
+        const stationItemId = invIdxToStationId.get(iiIdx);
+        if (stationItemId != null) resolved.push(stationItemId);
+      }
+      if (resolved.length) gi.cs = resolved;
+    }
+
+    // Inline engram → create a global engram entry
+    if (rich.e && typeof rich.e === "object"){
+      const eg = rich.e;
+      const eid = nextEId++;
+      Global.items.e[String(eid)] = {
+        c:   eg.c   || "",
+        bp:  eg.bp  || "",
+        lvl: eg.lvl,
+        pts: eg.ep,
+        ix:  globalId,
+        ple: eg.ple,
+        _mod: true
+      };
+      gi.e = eid;
+    }
+  }
+
   // --- 2. Merge crate definitions ---
   // For each crate class in the mod: if it already exists in global,
   // append the mod's loot sets (tagged with _mod:true).
@@ -367,10 +442,11 @@ function isEntryVisible(dinoKey, idx){
 
 
 function mergeEntryTables(baseEntries, modEntries){
-  // Base entries are id-keyed ({ n: className, d }); mod entries are
-  // class-keyed. A mod that injects rows into a vanilla entry names it by
-  // class, so map class -> base id(s) and append there. Anything else is
-  // added under its class key, which the spawn-entry resolvers accept.
+  // Base entries are id-keyed ({ n: className, d }). Mod entries may be
+  // id-keyed (same numeric keys) or class-keyed (legacy). For id-keyed
+  // mod entries we append directly; for class-keyed ones we resolve the
+  // class to its base id(s) and append there. Anything that matches
+  // neither is added as a new entry.
   const out = {};
   for (const [k, v] of Object.entries(baseEntries || {})){
     out[k] = { ...v, d: [...(v?.d || [])] };
@@ -383,26 +459,38 @@ function mergeEntryTables(baseEntries, modEntries){
     idsByClass.get(cls).push(k);
   }
 
-  for (const [entryName, modEntry] of Object.entries(modEntries || {})){
+  for (const [entryKey, modEntry] of Object.entries(modEntries || {})){
     const modRows = Array.isArray(modEntry?.d) ? modEntry.d : [];
-    const targets = idsByClass.get(entryName);
 
-    if (!targets?.length){
-      out[entryName] = {
-        n: entryName,
-        bp: modEntry?.bp || "",
-        d: [...modRows]
+    // 1) Direct id match — mod entry key matches an existing base key
+    if (out[entryKey]){
+      out[entryKey] = {
+        ...out[entryKey],
+        bp: out[entryKey].bp || modEntry?.bp || "",
+        d: [...out[entryKey].d, ...modRows]
       };
       continue;
     }
 
-    for (const id of targets){
-      out[id] = {
-        ...out[id],
-        bp: out[id].bp || modEntry?.bp || "",
-        d: [...out[id].d, ...modRows]
-      };
+    // 2) Class-name lookup — legacy mod entries keyed by class name
+    const targets = idsByClass.get(entryKey);
+    if (targets?.length){
+      for (const id of targets){
+        out[id] = {
+          ...out[id],
+          bp: out[id].bp || modEntry?.bp || "",
+          d: [...out[id].d, ...modRows]
+        };
+      }
+      continue;
     }
+
+    // 3) Completely new entry (mod-only spawn entry)
+    out[entryKey] = {
+      n: modEntry?.n || entryKey,
+      bp: modEntry?.bp || "",
+      d: [...modRows]
+    };
   }
 
   return out;
@@ -3793,6 +3881,23 @@ function renderDock(){
       `,
       togglePanelId: "poiPanel",
       onClick: () => togglePoiPanel()
+    });
+  }
+
+  // Resources toggle
+  if (isDockBtnVisible("resourcePanel")) {
+    mkBtn({
+      title: "Toggle resources",
+      icon: `
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M14 4 L20 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M5 21 L14.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10.5 6.5 L14 4 L20 10 L17.5 13.5"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+      `,
+      togglePanelId: "resourcePanel",
+      onClick: () => toggleResourcePanel()
     });
   }
 

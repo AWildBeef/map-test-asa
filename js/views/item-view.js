@@ -1,11 +1,156 @@
+// ── Item → Harvest Component reverse index ──
+let _itemToHcIndex = null;
+function getItemToHcIndex(){
+  if (_itemToHcIndex) return _itemToHcIndex;
+  const loot = Global.loot || {};
+  const dh = loot.dh || {};
+  _itemToHcIndex = new Map();
+  for (const [cls, data] of Object.entries(dh)){
+    for (const itemId of (data.i || [])){
+      if (!_itemToHcIndex.has(itemId)) _itemToHcIndex.set(itemId, []);
+      _itemToHcIndex.get(itemId).push(cls);
+    }
+  }
+  return _itemToHcIndex;
+}
+
+// Read just the point count from a base64 rn blob (first varint)
+function rnPointCount(b64){
+  if (!b64) return 0;
+  const bin = atob(b64);
+  let pos = 0, r = 0, s = 0;
+  while (pos < bin.length){
+    const b = bin.charCodeAt(pos++);
+    r |= (b & 0x7F) << s;
+    if (!(b & 0x80)) return r;
+    s += 7;
+  }
+  return r;
+}
+
+// Get foliage HCs for an item on the current map
+function foliageHcsForItem(it){
+  const index = getItemToHcIndex();
+  const loot = Global.loot || {};
+  const hi = loot.hi || [];
+  const dh = loot.dh || {};
+  const items = (Global.items || Global.baseItems || {}).i || {};
+  const rn = currentGeom()?.pois?.rn || {};
+
+  const hiClassToId = new Map();
+  for (let i = 0; i < hi.length; i++){
+    if (hi[i]) hiClassToId.set(hi[i], i);
+  }
+
+  const itemIds = Array.isArray(it?.ids) ? it.ids : (it?.id != null ? [it.id] : []);
+  const result = new Map();
+
+  for (const itemId of itemIds){
+    for (const cls of (index.get(itemId) || [])){
+      if (result.has(cls)) continue;
+      const hcId = hiClassToId.get(cls);
+      if (hcId === undefined) continue;
+      const rnEntry = rn[String(hcId)];
+      if (!rnEntry) continue;
+
+      const count = typeof rnEntry === "string" ? rnPointCount(rnEntry) : rnEntry.length;
+      const hcItems = (dh[cls]?.i || []).map(id => items[String(id)]?.n || "?");
+      const label = cls.replace(/_C$/, "").replace(/HarvestComponent/g, "").replace(/_/g, " ").trim();
+
+      // Find matching category for color
+      const catDef = RESOURCE_NODE_CATEGORIES.find(c => c.hcs.includes(cls));
+
+      result.set(cls, {
+        hcId, cls, count, label, hcItems,
+        fill: catDef?.fill || "#aaaaaa",
+        stroke: catDef?.stroke || "#666666",
+        catLabel: catDef?.label || label
+      });
+    }
+  }
+
+  return [...result.values()].sort((a, b) => b.count - a.count);
+}
+
+// Foliage visibility state for item view
+const _itemFoliageVis = {};
+let _itemFoliageLayer = null;
+let _itemFoliageCurrentItem = null;  // track item switches
+
+function clearItemFoliageState(){
+  for (const k of Object.keys(_itemFoliageVis)) delete _itemFoliageVis[k];
+  if (_itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
+}
+
+function drawItemFoliageNodes(){
+  if (_itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
+  if (!mapObj?.map) return;
+  // Only draw when foliage tab is active
+  if (infoPanelState.itemTab !== "foliage") return;
+
+  const rn = currentGeom()?.pois?.rn || {};
+  const loot = Global.loot || {};
+  const hi = loot.hi || [];
+  if (!_resourceCanvasRenderer) _resourceCanvasRenderer = L.canvas({ padding: 0.5 });
+
+  const lg = L.layerGroup();
+  let any = false;
+
+  for (const [key, visible] of Object.entries(_itemFoliageVis)){
+    if (!visible) continue;
+    const hcId = Number(key.replace("foliage:", ""));
+    const rnEntry = rn[String(hcId)];
+    if (!rnEntry) continue;
+
+    const cls = hi[hcId] || "";
+    const catDef = RESOURCE_NODE_CATEGORIES.find(c => c.hcs.includes(cls));
+    const fill = catDef?.fill || "#ff6644";
+    const stroke = catDef?.stroke || "#aa3311";
+    const weight = catDef?.weight || 1;
+
+    const coords = typeof rnEntry === "string" ? decodeRnBinary(rnEntry) : rnEntry;
+    for (const [x, y] of coords){
+      L.circleMarker([y, x], {
+        radius: 3, color: stroke, weight, opacity: 0.9,
+        fillColor: fill, fillOpacity: 0.6,
+        renderer: _resourceCanvasRenderer, pane: "poiPane"
+      }).addTo(lg);
+    }
+    any = true;
+  }
+
+  if (any){
+    lg.addTo(mapObj.map);
+    _itemFoliageLayer = lg;
+  }
+}
+
 function drawItem(itemName) {
   clearDraw();
   clearPois();
+
+  // Clean up foliage layer
+  if (_itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
 
   const itemIds = (State.itemNameToIds.get(itemName) || [])
     .filter(id => State.mapItemIds.has(id));
 
   if (!itemIds.length) return;
+
+  // If on foliage tab, only draw foliage nodes — skip crates/missions
+  if (infoPanelState.itemTab === "foliage"){
+    drawItemFoliageNodes();
+    return;
+  }
 
   // --- visible normal/horde crate classes ---
   const visibleClasses = new Set();
@@ -70,6 +215,9 @@ function drawItem(itemName) {
     return false;
   });
   addMissionMarkers(missionRows, { layer: mapObj.poiLayer });
+
+  // Foliage resource nodes
+  drawItemFoliageNodes();
 }
 
 function getSelectedItem(itemName){
@@ -157,6 +305,8 @@ function engramRowsForItem(itemRow){
 // Build a full blueprint path from an engram row
 function engramBlueprintPath(engramRow){
   if (!engramRow) return "";
+  // Mod engrams store the full blueprint directly
+  if (engramRow.bp) return engramRow.bp;
   const path = itemData().p?.[String(engramRow.p)] || "";
   const cls  = engramRow.c || "";
   if (!path || !cls) return "";
@@ -176,6 +326,8 @@ function craftingStationName(stationItemId){
   const row = itemRowById(stationItemId);
   return row?.n || `Item ${stationItemId}`;
 }
+
+
 
 // Current command parameters (from infoPanelState)
 function currentCmdParams(){
@@ -274,6 +426,170 @@ function _metaCell(label, value){
   `;
 }
 
+// ── Reverse lookup indexes: dino inventory → item effects ─────────────────
+// Built lazily; self-invalidates when the items data object changes.
+
+let _wmIndex = null;      // Map<targetItemId, [{invId, mult}]>
+let _giIndex = null;      // Map<itemId, [{invId, interval, max}]>
+let _invToDinos = null;   // Map<invId, [dinoName, ...]>
+let _rlSource = null;     // tracks items object for invalidation
+
+function ensureReverseLookups(){
+  const data = itemData();
+  if (_rlSource === data && _wmIndex) return;
+  _rlSource = data;
+
+  const invs = data?.inv || {};
+  const dinos = Global.dinos?.dinos || Global.baseDinos?.dinos || {};
+  const dinoIndex = Global.dinos?.dinoIndex || Global.baseDinos?.dinoIndex || [];
+
+  // inv → tame-able dino display names (filter out untameable: tt absent)
+  _invToDinos = new Map();
+  for (const [dk, dv] of Object.entries(dinos)){
+    if (dv?.iv == null || dv.tt == null) continue;
+    const key = String(dv.iv);
+    if (!_invToDinos.has(key)) _invToDinos.set(key, []);
+    if (!_invToDinos.get(key).includes(dv.n)) _invToDinos.get(key).push(dv.n);
+  }
+
+  // wm reverse: targetItemId → [{invId, mult}]
+  _wmIndex = new Map();
+  for (const [invId, invObj] of Object.entries(invs)){
+    for (const pair of (invObj?.wm || [])){
+      const tid = pair[0];
+      if (!_wmIndex.has(tid)) _wmIndex.set(tid, []);
+      _wmIndex.get(tid).push({ invId, mult: pair[1] });
+    }
+  }
+
+  // gi reverse: itemId → [{invId, interval, max}]
+  _giIndex = new Map();
+  for (const [invId, invObj] of Object.entries(invs)){
+    for (const entry of (invObj?.gi || [])){
+      const iid = entry[0];
+      if (!_giIndex.has(iid)) _giIndex.set(iid, []);
+      _giIndex.get(iid).push({ invId, interval: entry[1], max: entry[2] });
+    }
+  }
+}
+
+// Find dinos whose inventories give a weight reduction for this item,
+// checking the item's own id AND its full parent tree (pt).
+function wmDinosForItem(itemId){
+  ensureReverseLookups();
+  const row = itemData()?.i?.[String(itemId)];
+  const checkIds = new Set([Number(itemId)]);
+  if (Array.isArray(row?.pt)) for (const p of row.pt) checkIds.add(p);
+
+  const results = [];
+  const seen = new Set(); // dedupe dino+mult combos
+  for (const tid of checkIds){
+    for (const entry of (_wmIndex.get(tid) || [])){
+      const names = _invToDinos.get(entry.invId) || [];
+      for (const name of names){
+        const key = `${name}|${entry.mult}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        results.push({ name, mult: entry.mult });
+      }
+    }
+  }
+  return results.sort((a, b) => a.mult - b.mult || a.name.localeCompare(b.name));
+}
+
+// Find dinos that passively generate this item (exact match, no parent tree).
+function giDinosForItem(itemId){
+  ensureReverseLookups();
+  const entries = _giIndex.get(Number(itemId)) || [];
+  const results = [];
+  const seen = new Set();
+  for (const entry of entries){
+    const names = _invToDinos.get(entry.invId) || [];
+    for (const name of names){
+      const key = `${name}|${entry.interval}|${entry.max}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      results.push({ name, interval: entry.interval, max: entry.max });
+    }
+  }
+  return results.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// Find dinos that can craft items from a given structure inventory (via fc/saddle).
+function fcDinosForStructureInvId(structInvId){
+  ensureReverseLookups();
+  const data = itemData();
+  const invs = data?.inv || {};
+  const results = [];
+  for (const [invId, invObj] of Object.entries(invs)){
+    const fc = invObj?.fc;
+    if (!fc) continue;
+    const fcIds = Array.isArray(fc) ? fc : [fc];
+    if (!fcIds.includes(structInvId)) continue;
+    const names = _invToDinos.get(invId) || [];
+    for (const name of names){
+      if (!results.includes(name)) results.push(name);
+    }
+  }
+  return results.sort();
+}
+
+// For an item's cs (structure item IDs), find dinos that can also craft via saddle.
+function saddleCrafterNames(stationItemIds){
+  const data = itemData();
+  const structs = data?.st || {};
+  const allNames = [];
+  for (const stItemId of stationItemIds){
+    // Find the structure's inventory id
+    for (const stObj of Object.values(structs)){
+      if (stObj?.i === stItemId && stObj.inv != null){
+        const names = fcDinosForStructureInvId(stObj.inv);
+        for (const n of names){
+          if (!allNames.includes(n)) allNames.push(n);
+        }
+        break;
+      }
+    }
+  }
+  return allNames.sort();
+}
+
+function renderItemDinoSections(it){
+  const itemId = it.id;
+  let html = "";
+
+  // ── Weight Reduced By ──
+  const wmDinos = wmDinosForItem(itemId);
+  if (wmDinos.length){
+    const chips = wmDinos.map(d =>
+      `<span class="lc-chip"><span class="dino-link" data-open-dino="${escapeAttr(d.name)}">${escapeHtml(d.name)}</span> <b>×${escapeHtml(String(d.mult))}</b></span>`
+    ).join("");
+    html += `
+      <div class="info-section">
+        <div class="iv-eyebrow">Weight Reduced By</div>
+        <div class="lc-chips">${chips}</div>
+      </div>`;
+  }
+
+  // ── Generated By ──
+  const giDinos = giDinosForItem(itemId);
+  if (giDinos.length){
+    const rows = giDinos.map(d =>
+      `<div class="iv-dino-gen-row">
+        <span class="dino-link" data-open-dino="${escapeAttr(d.name)}">${escapeHtml(d.name)}</span>
+        <span class="iv-dino-gen-detail">every <b>${escapeHtml(fmtDuration(d.interval))}</b> · max <b>${escapeHtml(String(d.max))}</b></span>
+      </div>`
+    ).join("");
+    html += `
+      <div class="info-section">
+        <div class="iv-eyebrow">Generated By</div>
+        ${rows}
+      </div>`;
+  }
+
+  return html;
+}
+
 function renderItemTabInfo(it){
   const itemRow = itemRowById(it.id);
 
@@ -305,6 +621,7 @@ function renderItemTabInfo(it){
   const weight   = itemRow.w;
   const stack    = itemRow.st;
   const cxp      = itemRow.cxp;
+  const rxp      = itemRow.rxp;
   const qty      = itemRow.q;
   const itemIx   = itemRow.ix;  // master item index (game's internal index)
 
@@ -324,6 +641,7 @@ function renderItemTabInfo(it){
     chip("Stack",       stack    != null ? escapeHtml(fmt(stack))     : ""),
     chip("Crafted Qty", (qty != null && qty > 1) ? escapeHtml(fmt(qty)) : ""),
     chip("Crafting XP", cxp      != null ? escapeHtml(fmt(cxp))       : ""),
+    chip("Repair XP",   rxp      != null ? escapeHtml(fmt(rxp))       : ""),
   ].filter(Boolean).join("");
 
   const generalHtml = generalChips
@@ -343,9 +661,29 @@ function renderItemTabInfo(it){
        </div>`
     : "";
 
-  // ── Crafting Costs + Crafted In ──
-  const craftingHtml = reqs.length
-    ? `<div class="info-section">
+  // ── Crafted In ──
+  // Crafted-in sources: structures from cs + Player Inventory from engram ple
+  const isPlayerCraftable = engramRowsForItem(itemRow)
+    .some(({ row }) => row?.ple === 1);
+
+  const stationChips = stations.map(id =>
+    `<span class="lc-chip iv-station"><span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span></span>`
+  ).join("");
+
+  const playerChip = isPlayerCraftable
+    ? `<span class="lc-chip iv-station">Player Inventory</span>`
+    : "";
+  const saddleDinos = stations.length ? saddleCrafterNames(stations) : [];
+  const saddleChips = saddleDinos.map(name =>
+    `<span class="lc-chip iv-station"><span class="dino-link" data-open-dino="${escapeAttr(name)}">${escapeHtml(name)}</span> <em>(saddle)</em></span>`
+  ).join("");
+  const allStationChips = stationChips + saddleChips + playerChip;
+  const hasCraftingSource = stations.length > 0 || isPlayerCraftable;
+
+  // Show recipe + crafted-in together, or just crafted-in if we have stations
+  let craftingHtml = "";
+  if (reqs.length && hasCraftingSource){
+    craftingHtml = `<div class="info-section">
          <div class="iv-eyebrow">Crafting Costs</div>
          <div class="iv-recipe">
            ${reqs.map(([reqId, reqQty]) => `
@@ -356,19 +694,32 @@ function renderItemTabInfo(it){
            `).join("")}
          </div>
          <div class="iv-eyebrow">Crafted In</div>
+         <div class="lc-chips">${allStationChips}</div>
+       </div>`;
+  } else if (hasCraftingSource){
+    craftingHtml = `<div class="info-section">
+         <div class="iv-eyebrow">Crafted In</div>
+         <div class="lc-chips">${allStationChips}</div>
+       </div>`;
+  }
+
+  // ── Owner types (mod items: which dinos use this item) ──
+  const ownerTypes = Array.isArray(itemRow.ot) ? itemRow.ot : [];
+  const ownerHtml = ownerTypes.length
+    ? `<div class="info-section">
+         <div class="iv-eyebrow">Used By</div>
          <div class="lc-chips">
-           ${
-             stations.length
-               ? stations.map(id =>
-                   `<span class="lc-chip iv-station"><span class="item-link" data-item-link-id="${escapeAttr(String(id))}">${escapeHtml(craftingStationName(id))}</span></span>`
-                 ).join("")
-               : `<span class="lc-chip iv-station"><em>Player Inventory</em></span>`
-           }
+           ${ownerTypes.map(name =>
+             `<span class="lc-chip iv-station"><span class="dino-link" data-open-dino="${escapeAttr(name)}">${escapeHtml(name)}</span></span>`
+           ).join("")}
          </div>
        </div>`
     : "";
 
-  return `${idsHtml}${generalHtml}${statsHtml}${craftingHtml}`;
+  // ── Reverse lookups: which dinos affect this item? ──
+  const dinoSectionsHtml = renderItemDinoSections(it);
+
+  return `${idsHtml}${generalHtml}${statsHtml}${craftingHtml}${ownerHtml}${dinoSectionsHtml}`;
 }
 
 
@@ -1068,11 +1419,53 @@ function renderItemTabDinos(it, dropDinos, harvestDinos){
 }
 
 
+function renderItemTabFoliage(it){
+  const hcs = foliageHcsForItem(it);
+
+  if (!hcs.length){
+    return `<div class="info-section"><div class="info-empty">No foliage sources on this map</div></div>`;
+  }
+
+  return `
+    <div class="info-section">
+      <div class="info-subtitle">Harvest Nodes on Map</div>
+      ${hcs.map(hc => {
+        const visKey = `foliage:${hc.hcId}`;
+        const isOn = !!_itemFoliageVis[visKey];
+        return `
+          <div class="iv-foliage-card ${isOn ? "is-on" : ""}">
+            <button type="button" class="iv-foliage-header" data-foliage-toggle="${hc.hcId}">
+              <span class="poi-rn-dot" style="background:${hc.fill};border-color:${hc.stroke}"></span>
+              <span class="iv-foliage-title">
+                <span class="iv-foliage-cat">${escapeHtml(hc.catLabel)}</span>
+                <span class="poi-rn-count">${hc.count.toLocaleString()}</span>
+              </span>
+              <span class="poi-menu-check">${isOn ? "✓" : ""}</span>
+            </button>
+            <div class="iv-foliage-class">${escapeHtml(hc.cls)}</div>
+            <button type="button" class="iv-foliage-expand" data-foliage-detail="${hc.hcId}">
+              Also drops: <span class="iv-foliage-arrow">▸</span>
+            </button>
+            <div class="iv-foliage-items" id="foliageItems${hc.hcId}" style="display:none">
+              ${hc.hcItems.map(n => `<span class="iv-foliage-item">${escapeHtml(n)}</span>`).join("")}
+            </div>
+          </div>`;
+      }).join("")}
+    </div>`;
+}
+
+
 function renderItemPanel(itemName){
   const it = getSelectedItem(itemName);
   if (!it){
     renderInfoPanelBodyEmpty();
     return;
+  }
+
+  // Clear foliage toggles when switching to a different item
+  if (_itemFoliageCurrentItem !== itemName){
+    clearItemFoliageState();
+    _itemFoliageCurrentItem = itemName;
   }
 
   const panel = ensureInfoPanel();
@@ -1115,8 +1508,13 @@ function renderItemPanel(itemName){
   const itemRowForTabs = itemRowById(it.id);
   const hasEngram = itemRowForTabs ? engramRowsForItem(itemRowForTabs).length > 0 : false;
 
+  // Foliage sources on current map
+  const foliageHcs = foliageHcsForItem(it);
+  const hasFoliage = foliageHcs.length > 0;
+
   const itemPanelTabs = [
      ...(sourceCount > 0 ? [{ id: "crates", label: `Crates (${sourceCount})` }] : []),
+     ...(hasFoliage ? [{ id: "foliage", label: `Foliage (${foliageHcs.length})` }] : []),
      ...(hasDinoLoot ? [{ id: "dinos", label: `Dinos (${dropDinos.length + harvestDinos.length})` }] : []),
      ...(hasBossSources ? [{ id: "bosses", label: `Bosses (${bossNameSet.size})` }] : []),
      { id: "info", label: "Info" },
@@ -1173,6 +1571,7 @@ function renderItemPanel(itemName){
       activeId: activeTab,
       renderPage: (id) => {
         if (id === "crates") return renderItemTabCrates(it);
+        if (id === "foliage") return renderItemTabFoliage(it);
         if (id === "info")   return renderItemTabInfo(it);
         if (id === "dinos")  return renderItemTabDinos(it, dropDinos, harvestDinos);
         if (id === "bosses") return renderItemTabBosses(bossSourceList, itemIds);
@@ -1193,6 +1592,7 @@ function renderItemPanel(itemName){
     onChange: (id) => {
       infoPanelState.itemTab = id;
       renderItemPanel(itemName);
+      drawItem(itemName);
     }
   });
 
@@ -1346,6 +1746,34 @@ function renderItemPanel(itemName){
       if (chevron) chevron.textContent = isOpen ? "⌄" : "›";
       refreshInfoPanelPageHeight();
     });
+  });
+
+  // Foliage harvest-component toggles
+  body.querySelectorAll("[data-foliage-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const hcId = btn.dataset.foliageToggle;
+      const visKey = `foliage:${hcId}`;
+      _itemFoliageVis[visKey] = !_itemFoliageVis[visKey];
+      const card = btn.closest(".iv-foliage-card");
+      if (card) card.classList.toggle("is-on", _itemFoliageVis[visKey]);
+      const check = btn.querySelector(".poi-menu-check");
+      if (check) check.textContent = _itemFoliageVis[visKey] ? "✓" : "";
+      drawItemFoliageNodes();
+    };
+  });
+
+  // Foliage detail expand/collapse
+  body.querySelectorAll("[data-foliage-detail]").forEach(btn => {
+    btn.onclick = () => {
+      const hcId = btn.dataset.foliageDetail;
+      const itemsEl = document.getElementById(`foliageItems${hcId}`);
+      if (!itemsEl) return;
+      const open = itemsEl.style.display !== "none";
+      itemsEl.style.display = open ? "none" : "";
+      const arrow = btn.querySelector(".iv-foliage-arrow");
+      if (arrow) arrow.textContent = open ? "▸" : "▾";
+      refreshInfoPanelPageHeight();
+    };
   });
 
   refreshInfoPanelPageHeight();

@@ -1468,6 +1468,11 @@ function toggleMapEntriesPanel(){
 
 function clearDraw(){
   mapObj?.layer.clearLayers();
+  // Clean up item-view foliage layer (not the toggle state)
+  if (typeof _itemFoliageLayer !== "undefined" && _itemFoliageLayer){
+    mapObj?.map?.removeLayer(_itemFoliageLayer);
+    _itemFoliageLayer = null;
+  }
 }
 
 /* ============================================================
@@ -2672,6 +2677,108 @@ function togglePoiPanel(){
 
   if (show){
     renderPoiPanel();
+    panel.style.display = "";
+    panel.dataset.hidden = "0";
+  } else {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+  }
+
+  updateDockToggles();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// RESOURCE PANEL — separate dock panel for resource node toggles
+// ═══════════════════════════════════════════════════════════════════════
+
+function ensureResourcePanel(){
+  let panel = document.getElementById("resourcePanel");
+  if (panel) return panel;
+
+  panel = document.createElement("div");
+  panel.id = "resourcePanel";
+  panel.className = "floating-panel floating-panel--small";
+
+  panel.innerHTML = `
+    <div class="fp-header">
+      <div class="fp-title">⛏ Resources</div>
+      <div class="fp-actions"></div>
+    </div>
+    <div class="fp-body"></div>
+  `;
+
+  const actions = panel.querySelector(".fp-actions");
+  const hideBtn = createIconButton(CLOSE_ICON);
+  hideBtn.dataset.action = "hide";
+  hideBtn.title = "Hide";
+  actions.appendChild(hideBtn);
+
+  const mapWrap = document.getElementById("mapWrap") || document.body;
+  mapWrap.appendChild(panel);
+
+  panel.style.position = "absolute";
+  panel.style.left = "2px";
+  panel.style.bottom = "90px";
+  panel.style.zIndex = "800";
+  panel.style.display = "none";
+  panel.dataset.hidden = "1";
+
+  panel.querySelector('[data-action="hide"]').onclick = () => {
+    panel.style.display = "none";
+    panel.dataset.hidden = "1";
+    updateDockToggles();
+  };
+
+  return panel;
+}
+
+function renderResourcePanel(){
+  const panel = ensureResourcePanel();
+  const body = panel.querySelector(".fp-body");
+  if (!body) return;
+
+  const rnCats = getAvailableResourceCategories();
+
+  if (!rnCats.length){
+    body.innerHTML = `<div style="color:var(--muted);padding:6px">No resource data for this map.</div>`;
+    return;
+  }
+
+  body.innerHTML = `
+    <div class="poi-menu">
+      ${rnCats.map(c => `
+        <button type="button"
+          class="poi-menu-item poi-rn-item ${poiVisibility[c.key] ? "is-on" : ""}"
+          data-rn-toggle="${escapeAttr(c.key)}"
+          aria-pressed="${poiVisibility[c.key] ? "true" : "false"}"
+        >
+          <span class="poi-rn-dot" style="background:${c.fill};border-color:${c.stroke}"></span>
+          <span class="poi-menu-label">${escapeHtml(c.label)} <span class="poi-rn-count">${c.count.toLocaleString()}</span></span>
+          <span class="poi-menu-check">${poiVisibility[c.key] ? "✓" : ""}</span>
+        </button>
+      `).join("")}
+    </div>
+  `;
+
+  body.querySelectorAll("[data-rn-toggle]").forEach(btn => {
+    btn.onclick = () => {
+      const key = btn.dataset.rnToggle;
+      toggleResourceCategory(key);
+      btn.classList.toggle("is-on", poiVisibility[key]);
+      btn.setAttribute("aria-pressed", poiVisibility[key] ? "true" : "false");
+      const check = btn.querySelector(".poi-menu-check");
+      if (check) check.textContent = poiVisibility[key] ? "✓" : "";
+    };
+  });
+}
+
+function toggleResourcePanel(){
+  const panel = ensureResourcePanel();
+  const show = panel.style.display === "none";
+
+  if (show){
+    renderResourcePanel();
     panel.style.display = "";
     panel.dataset.hidden = "0";
   } else {
@@ -3984,6 +4091,222 @@ function drawDossierPois(notes) {
   }
 }
 
+// ── Resource node rendering ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════
+// RESOURCE NODE SYSTEM — category-based, integrated with POI panel
+// ═══════════════════════════════════════════════════════════════════════
+
+
+const RESOURCE_NODE_CATEGORIES = [
+  { key: "rn_metal",       label: "Metal",           fill: "#c0c0c0", stroke: "#2b2b2b",
+    hcs: ["MetalHarvestComponent_C"] },
+  { key: "rn_richMetal",   label: "Rich Metal",      fill: "#ffd700", stroke: "#5c4501",
+    hcs: ["MetalHarvestComponent_Rich_C"] },
+  { key: "rn_crystal",     label: "Crystal",         fill: "#6ddfff", stroke: "#12262b",
+    hcs: ["CrystalHarvestComponent_C","CrystalHarvestComponent_LC_DarkCrystal_C",
+          "CrystalHarvestComponent_LC_DarkCrystal_DarkFrst_C",
+          "CrystalHarvestComponent_LC_DarkCrystal_Green_C",
+          "CrystalHarvestComponent_LC_DarkCrystal_TwiFrst_C",
+          "CrystalHarvestComponent_Summit_C","CrystalHarvestComponent_UnderwaterCave_C"] },
+  { key: "rn_obsidian",    label: "Obsidian",        fill: "#4a2a6a", stroke: "#2a0a4a",
+    hcs: ["MountainObsidianHarvestComponent_C","ObsidianHarvestComponent_C",
+          "StoneHarvestComponent_RequiresMetal_Ex_C"] },
+  { key: "rn_silicaPearls", label: "Silica Pearls",  fill: "#ffffff", stroke: "#000000",
+    hcs: ["CoralHarvestComponentUnderwater_Deep_C","SiliconHarvestComponent_C"] },
+  { key: "rn_oil",          label: "Oil",            fill: "#1a1a1a", stroke: "#666666", weight: 1.2,
+    hcs: ["OilHarvestComponentRich_C","OilHarvestComponentUnderwater_C","OilHarvestComponent_C"] },
+  { key: "rn_blackPearls",  label: "Black Pearls",   fill: "#1a0a2a", stroke: "#ffd700", weight: 1.5,
+    hcs: ["BlackPearlHarvestComponent_C","BlackSiliconHarvestComponent_C"] },
+  { key: "rn_silk",          label: "Silk",           fill: "#f0e0c0", stroke: "#b09060",
+    hcs: ["SeedWithSilkHarvestComponent_C","SeedWithSilkHarvestComponent_Ex_C"] },
+  { key: "rn_plantY",       label: "Plant Species Y", fill: "#ff6644", stroke: "#aa3322",
+    hcs: ["SeedHarvestComponentY_C"] },
+  { key: "rn_plantX",       label: "Plant Species X", fill: "#00cc66", stroke: "#008844",
+    hcs: ["SeedHarvestComponentX_C"] },
+  { key: "rn_salt",          label: "Salt",           fill: "#f5f5f5", stroke: "#999999",
+    hcs: ["RawSaltHarvestComponent_C","Salt_Sulfur_Stone_HarvestComponent_C"] },
+  { key: "rn_sulfur",        label: "Sulfur",         fill: "#cccc00", stroke: "#888800",
+    hcs: ["Salt_Sulfur_Stone_HarvestComponent_C","EX_SulfurHarvestComponent_C",
+          "SulfurHarvestComponent_C","SulfurHarvestComponent_LC_C"] },
+  { key: "rn_rareFlower",   label: "Rare Flower",    fill: "#a6ecff", stroke: "#f5fdff", weight: 1.3,
+    hcs: ["RareFlowers_HarvestComponent_SingleHarvest_C","RareFlowerHarvestComponent_C",
+          "RareFlowerHarvestComponent_Jackson_C","WoodHarvestComponent_RareFlower_C"] },
+  { key: "rn_cactusSap",    label: "Cactus Sap",     fill: "#44aa44", stroke: "#226622",
+    hcs: ["CactusHarvestComponent_C","CactusHarvestComponent_Ex_Base_C",
+          "CactusHarvestComponent_Ex_Large_C","CactusLargeHarvestComponent_C"] },
+  { key: "rn_organicPoly",  label: "Organic Polymer", fill: "#66ddaa", stroke: "#338866",
+    hcs: ["UseHarvestComponent_LCToxic_Single_Polymer_C","BushB_01_PolymerHarvestComponent_C"] },
+  { key: "rn_keratin",      label: "Keratin",        fill: "#d4c4a4", stroke: "#8a7a5a",
+    hcs: ["BoneHarvestComponent_C"] },
+  { key: "rn_cementPaste",  label: "Cementing Paste", fill: "#888888", stroke: "#555555",
+    hcs: ["CementCoralHitHarvestComponent_C"] },
+  { key: "rn_charcoal",     label: "Charcoal",       fill: "#292626", stroke: "#5c1905", weight: 1.4,
+    hcs: ["BurntWoodHarvestComponent_C","WoodCoalHarvestComponent_C"] },
+  { key: "rn_elementOre",   label: "Element Ore",    fill: "#ff00fb", stroke: "#38107d",
+    hcs: ["ElementOreHarvestComponent_C"] },
+  { key: "rn_greenGem",     label: "Green Gems",     fill: "#44ff44", stroke: "#008800",
+    hcs: ["GemFertileHarvestComponent_C","GemFertileHarvestComponent_Light_C",
+          "GargoyleHarvestComponent_C"] },
+  { key: "rn_blueGem",      label: "Blue Gems",      fill: "#4488ff", stroke: "#2244aa",
+    hcs: ["GemBioLumHarvestComponent_C","GargoyleHarvestComponent_C"] },
+  { key: "rn_redGem",       label: "Red Gems",       fill: "#ff4444", stroke: "#aa2222",
+    hcs: ["GemElementHarvestComponent_C","GargoyleHarvestComponent_C"] },
+  { key: "rn_fragGreenGem", label: "Fragmented Green Gem", fill: "#88ff88", stroke: "#44aa44",
+    hcs: ["EX_GemFertileHarvestComponent_Light_C"] },
+  { key: "rn_blueSap",      label: "Blue Crystalized Sap", fill: "#6688ff", stroke: "#3344aa",
+    hcs: ["WoodHarvestComponent_CorruptTree_BlueSap_C"] },
+  { key: "rn_redSap",       label: "Red Crystalized Sap",  fill: "#ff4422", stroke: "#aa2211",
+    hcs: ["WoodHarvestComponent_CorruptTree_C","WoodHarvestComponent_CorruptTree_Heartier_C",
+          "WoodHarvestComponent_CorruptTree_LessSap_C","WoodHarvestComponent_CorruptTree_VFX_Red_C"] },
+  { key: "rn_clay",         label: "Clay",            fill: "#cc8844", stroke: "#885522",
+    hcs: ["Claypile_HarvestComponent_C","ClayHarvest_Rock_Pickup_C","ClayPile_Pickup_Component_C"] },
+  { key: "rn_sap",          label: "Sap",             fill: "#dd9922", stroke: "#996611",
+    hcs: ["Sap_WoodHarvestComponent_C","WoodHarvestComponent_Ex_RareRedwoodSap_C",
+          "WoodHarvestComponent_RareRedwoodSap_C","WoodHarvestComponent_Sap_C"] },
+  { key: "rn_rockarrot",    label: "Rockarrot",       fill: "#ff8833", stroke: "#aa5522",
+    hcs: ["CarrotVeggie_HarvestComponent_C","Carrot_Pickup_C"] },
+  { key: "rn_savoroot",     label: "Savoroot",        fill: "#b3886d", stroke: "#543728",
+    hcs: ["PotatoVeggie_HarvestComponent_C","Potatoe_Pickup_C"] },
+  { key: "rn_citronal",     label: "Citronal",        fill: "#ffee44", stroke: "#aa9922",
+    hcs: ["CitronalVeggie_HarvestComponent_C","Citrone_Pickup_C"] },
+  { key: "rn_longrass",     label: "Longrass",        fill: "#88cc44", stroke: "#558822",
+    hcs: ["CornVeggie_HarvestComponent_C","Corn_Pickup_C"] },
+  { key: "rn_honey",        label: "Honey",           fill: "#ffcc00", stroke: "#aa8800",
+    hcs: ["BeeHoneyHarvestComponent_C"] },
+  { key: "rn_bloodSap",     label: "Blood Sap",       fill: "#aa0000", stroke: "#660000",
+    hcs: ["WoodHarvestComponent_LC_BloodSap_C"] },
+  { key: "rn_bioToxin",     label: "Bio Toxin",       fill: "#00ffaa", stroke: "#00aa66",
+    hcs: ["Harvest_Trap_Biolum01_C","Harvest_Trap_Element01_C","Harvest_Trap_Fertile01_C",
+          "WoodHarvestComponent_Fungal_LostColony_C"] },
+  { key: "rn_stonePickup",  label: "Stone (Pick-Up)", fill: "#bbaa88", stroke: "#887755",
+    hcs: ["RockHarvestComponent_C"] },
+];
+
+let _resourceCanvasRenderer = null;
+const _resourceLayers = new Map();
+const _rnCategoryData = new Map();
+
+function decodeRnBinary(b64){
+  const bin = atob(b64);
+  const buf = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+  let pos = 0;
+  function varint(){
+    let r = 0, s = 0;
+    while (pos < buf.length){
+      const b = buf[pos++];
+      r |= (b & 0x7F) << s;
+      if (!(b & 0x80)) return r;
+      s += 7;
+    }
+    return r;
+  }
+  function zagzig(n){ return (n >>> 1) ^ -(n & 1); }
+  const count = varint();
+  const pts = new Array(count);
+  let px = 0, py = 0;
+  for (let i = 0; i < count; i++){
+    px += zagzig(varint());
+    py += zagzig(varint());
+    pts[i] = [px, py];
+  }
+  return pts;
+}
+
+function drawResourceNodes(rn){
+  for (const lg of _resourceLayers.values()) mapObj?.map?.removeLayer(lg);
+  _resourceLayers.clear();
+  _rnCategoryData.clear();
+
+  if (!rn || typeof rn !== "object" || !Object.keys(rn).length) return;
+  if (!mapObj?.map) return;
+
+  const loot = Global.loot || {};
+  const hi = loot.hi || [];
+  const dh = loot.dh || {};
+  const items = (Global.items || Global.baseItems || {}).i || {};
+
+  if (!_resourceCanvasRenderer) _resourceCanvasRenderer = L.canvas({ padding: 0.5 });
+
+  // Reverse lookup: HC class name → hcId in rn
+  const hcIdByClass = new Map();
+  for (const hcIdStr of Object.keys(rn)){
+    const cls = hi[Number(hcIdStr)];
+    if (cls) hcIdByClass.set(cls, Number(hcIdStr));
+  }
+
+  // Tooltip cache
+  const tipCache = new Map();
+  function tipForHC(hcId){
+    if (tipCache.has(hcId)) return tipCache.get(hcId);
+    const cls = hi[hcId] || "";
+    const itemIds = dh[cls]?.i || [];
+    const names = itemIds.map(id => items[String(id)]?.n || "?");
+    const label = cls.replace(/_C$/, "").replace(/HarvestComponent/g, "").replace(/_/g, " ").trim() || cls;
+    const result = { names, label };
+    tipCache.set(hcId, result);
+    return result;
+  }
+
+  for (const cat of RESOURCE_NODE_CATEGORIES){
+    const matchedHcIds = [];
+    for (const cls of cat.hcs){
+      const hcId = hcIdByClass.get(cls);
+      if (hcId !== undefined) matchedHcIds.push(hcId);
+    }
+    if (!matchedHcIds.length) continue;
+
+    let totalCount = 0;
+    const lg = L.layerGroup();
+
+    for (const hcId of matchedHcIds){
+      const value = rn[String(hcId)];
+      if (!value) continue;
+      const coords = typeof value === "string" ? decodeRnBinary(value) : value;
+      totalCount += coords.length;
+      const tip = tipForHC(hcId);
+
+      for (const [x, y] of coords){
+        const html = `<div style="font-size:11px"><b style="color:${cat.fill}">${escapeHtml(cat.label)}</b><br><span style="opacity:.7">${escapeHtml(tip.label)}</span><br>${tip.names.map(n => escapeHtml(n)).join(", ")}</div>`;
+        L.circleMarker([y, x], {
+          radius: 3, color: cat.stroke, weight: cat.weight || 1, opacity: 0.9,
+          fillColor: cat.fill, fillOpacity: 0.6,
+          renderer: _resourceCanvasRenderer, pane: "poiPane"
+        }).bindTooltip(html, { direction: "top", opacity: 0.95, className: "dark-tooltip" })
+          .addTo(lg);
+      }
+    }
+
+    if (totalCount > 0){
+      _resourceLayers.set(cat.key, lg);
+      _rnCategoryData.set(cat.key, { count: totalCount, catDef: cat });
+      if (poiVisibility[cat.key]) lg.addTo(mapObj.map);
+    }
+  }
+}
+
+function toggleResourceCategory(key){
+  const lg = _resourceLayers.get(key);
+  if (!lg || !mapObj?.map) return;
+  if (poiVisibility[key]){
+    poiVisibility[key] = false;
+    mapObj.map.removeLayer(lg);
+  } else {
+    poiVisibility[key] = true;
+    lg.addTo(mapObj.map);
+  }
+}
+
+function getAvailableResourceCategories(){
+  const out = [];
+  for (const [key, data] of _rnCategoryData){
+    out.push({ key: data.catDef.key, label: data.catDef.label,
+               fill: data.catDef.fill, stroke: data.catDef.stroke,
+               count: data.count });
+  }
+  return out;
+}
+
 function drawPois(){
   clearPois();
 
@@ -4026,6 +4349,16 @@ function drawPois(){
   drawSimpleDotPois(pois.beachChests,      "beachChests",      "#f0c040", "Beach Crate");
   drawSimpleDotPois(pois.memorial,         "memorial",         "#f0f0f0", "Memorial");
   drawTeleporterPois(pois.teleporters);
+
+  // ── Resource nodes ──
+  drawResourceNodes(pois.rn || {});
+
+  // ── Refresh open panels so counts/items stay current after map switch ──
+  const poiPanel = document.getElementById("poiPanel");
+  if (poiPanel && poiPanel.style.display !== "none") renderPoiPanel();
+
+  const resPanel = document.getElementById("resourcePanel");
+  if (resPanel && resPanel.style.display !== "none") renderResourcePanel();
 }
 
 
