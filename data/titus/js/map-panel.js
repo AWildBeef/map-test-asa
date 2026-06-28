@@ -4185,83 +4185,70 @@ let _resourceCanvasRenderer = null;
 const _resourceLayers = new Map();
 const _rnCategoryData = new Map();
 
-// ── Performance threshold: above this, use raw canvas instead of markers ──
+// ── Performance threshold: above this, use image overlay instead of markers ──
 const RN_PERF_THRESHOLD = 15000;
 
-// ── Raw canvas layer for high-count resource nodes ──
-// Draws dots directly on a single canvas — no per-point Leaflet objects.
-const RawDotLayer = L.Layer.extend({
+// ── Image-based dot layer for high-count resource nodes ──
+// Renders all dots once onto a 2048×2048 canvas, then hands it to
+// L.ImageOverlay which Leaflet transforms natively via CSS — zero JS
+// per frame during pan/zoom.  Dots scale with map zoom (acceptable for
+// dense coverage categories like stone/coral).
+const ImageDotLayer = L.Layer.extend({
   initialize(points, opts){
     this._pts = points;
     this._opts = opts;
   },
   onAdd(map){
     this._map = map;
-    const c = this._canvas = document.createElement("canvas");
-    c.style.position = "absolute";
-    c.style.pointerEvents = "none";
-    map.getPanes().overlayPane.appendChild(c);
-    map.on("moveend viewreset resize", this._redraw, this);
-    map.on("zoomanim", this._onZoomAnim, this);
-    this._redraw();
-    return this;
-  },
-  onRemove(map){
-    this._canvas.remove();
-    map.off("moveend viewreset resize", this._redraw, this);
-    map.off("zoomanim", this._onZoomAnim, this);
-    return this;
-  },
-  _onZoomAnim(e){
-    // Scale the canvas with a CSS transform during pinch/zoom animation
-    const map = this._map;
-    const scale = map.getZoomScale(e.zoom, map.getZoom());
-    const offset = map._latLngBoundsToNewLayerBounds(
-      map.getBounds(), e.zoom, e.center
-    ).min;
-    L.DomUtil.setTransform(this._canvas, offset, scale);
-  },
-  _redraw(){
-    const map = this._map, size = map.getSize();
-    const c = this._canvas;
-    c.width = size.x; c.height = size.y;
-    L.DomUtil.setPosition(c, map.containerPointToLayerPoint([0, 0]));
 
+    // Render dots to an offscreen canvas at map-pixel resolution
+    const size = (currentGeom()?.size?.[0]) || 2048;
+    const c = document.createElement("canvas");
+    c.width = size; c.height = size;
     const ctx = c.getContext("2d");
-    const { fill = "#aaa", stroke = "#666", radius = 3,
-            weight = 1, fillOpacity = 0.6 } = this._opts;
 
+    const { fill = "#aaa", stroke = "#666", radius = 4,
+            weight = 1, fillOpacity = 0.7 } = this._opts;
     const r = radius;
-    const b = map.getBounds();
-    const south = b.getSouth(), north = b.getNorth();
-    const west = b.getWest(), east = b.getEast();
 
-    // Batch fills into one path
+    // Batch fill — flip Y since canvas Y=0 is top but map lat=0 is top
     ctx.globalAlpha = fillOpacity;
     ctx.fillStyle = fill;
     ctx.beginPath();
     for (const [x, y] of this._pts){
-      if (y < south || y > north || x < west || x > east) continue;
-      const pt = map.latLngToContainerPoint([y, x]);
-      ctx.moveTo(pt.x + r, pt.y);
-      ctx.arc(pt.x, pt.y, r, 0, 6.2832);
+      ctx.moveTo(x + r, size - y);
+      ctx.arc(x, size - y, r, 0, 6.2832);
     }
     ctx.fill();
 
-    // Batch strokes into one path
+    // Batch stroke
     if (weight > 0){
       ctx.globalAlpha = 0.9;
       ctx.strokeStyle = stroke;
       ctx.lineWidth = weight;
       ctx.beginPath();
       for (const [x, y] of this._pts){
-        if (y < south || y > north || x < west || x > east) continue;
-        const pt = map.latLngToContainerPoint([y, x]);
-        ctx.moveTo(pt.x + r, pt.y);
-        ctx.arc(pt.x, pt.y, r, 0, 6.2832);
+        ctx.moveTo(x + r, size - y);
+        ctx.arc(x, size - y, r, 0, 6.2832);
       }
       ctx.stroke();
     }
+
+    // Hand off to Leaflet as an image overlay
+    const url = c.toDataURL("image/png");
+    this._overlay = L.imageOverlay(url, [[0, 0], [size, size]], {
+      interactive: false,
+      pane: "overlayPane"
+    });
+    this._overlay.addTo(map);
+    return this;
+  },
+  onRemove(map){
+    if (this._overlay){
+      map.removeLayer(this._overlay);
+      this._overlay = null;
+    }
+    return this;
   }
 });
 
@@ -4354,9 +4341,9 @@ function drawResourceNodes(rn){
 
     if (totalCount > RN_PERF_THRESHOLD){
       // Heavy category → raw canvas (no per-point objects)
-      layer = new RawDotLayer(allCoords, {
+      layer = new ImageDotLayer(allCoords, {
         fill: cat.fill, stroke: cat.stroke,
-        radius: 3, weight: cat.weight || 1, fillOpacity: 0.6
+        radius: 3, weight: 0.5, fillOpacity: 0.7
       });
     } else {
       // Light category → individual markers with tooltips

@@ -130,9 +130,9 @@ function drawItemFoliageNodes(){
   for (const [, g] of groups){
     if (g.pts.length > RN_PERF_THRESHOLD){
       // Heavy → raw canvas
-      new RawDotLayer(g.pts, {
+      new ImageDotLayer(g.pts, {
         fill: g.fill, stroke: g.stroke,
-        radius: 3, weight: g.weight, fillOpacity: 0.6
+        radius: 3, weight: 0.5, fillOpacity: 0.7
       }).addTo(lg);
     } else {
       // Light → individual markers
