@@ -4177,7 +4177,7 @@ const RESOURCE_NODE_CATEGORIES = [
   { key: "rn_bioToxin",     label: "Bio Toxin",       fill: "#00ffaa", stroke: "#00aa66",
     hcs: ["Harvest_Trap_Biolum01_C","Harvest_Trap_Element01_C","Harvest_Trap_Fertile01_C",
           "WoodHarvestComponent_Fungal_LostColony_C"] },
-  { key: "rn_stonePickup",  label: "Stone (Pick-Up)", fill: "#bbaa88", stroke: "#887755",
+  { key: "rn_stonePickup",  label: "Stone (Pick-Up)", fill: "#ab976d", stroke: "#6e6045",
     hcs: ["RockHarvestComponent_C"] },
 ];
 
