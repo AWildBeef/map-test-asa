@@ -1,5 +1,6 @@
 // ── Item → Harvest Component reverse index ──
 let _itemToHcIndex = null;
+function invalidateItemToHcIndex(){ _itemToHcIndex = null; }
 function getItemToHcIndex(){
   if (_itemToHcIndex) return _itemToHcIndex;
   const loot = Global.loot || {};
@@ -64,6 +65,34 @@ function foliageHcsForItem(it){
         hcId, cls, count, label, hcItems,
         fill: catDef?.fill || "#aaaaaa",
         stroke: catDef?.stroke || "#666666",
+        catLabel: catDef?.label || label
+      });
+    }
+
+    // Harvest remaps: when a mod replaces fromCls with toCls and toCls
+    // drops the searched item, show foliage using fromCls's geom data.
+    for (const [fromCls, toCls] of (loot._harvestRemaps || [])){
+      if (result.has(toCls)) continue;
+      const toItems = dh[toCls]?.i || [];
+      if (!toItems.includes(itemId)) continue;
+
+      // Use the original (from) component's geom data
+      const fromHcId = hiClassToId.get(fromCls);
+      if (fromHcId === undefined) continue;
+      const rnEntry = rn[String(fromHcId)];
+      if (!rnEntry) continue;
+
+      const count = typeof rnEntry === "string" ? rnPointCount(rnEntry) : rnEntry.length;
+      const hcItems = toItems.map(id => items[String(id)]?.n || "?");
+      const label = toCls.replace(/_C$/, "").replace(/HarvestComponent/g, "").replace(/_/g, " ").trim();
+      const catDef = RESOURCE_NODE_CATEGORIES.find(c => c.hcs.includes(fromCls));
+
+      result.set(toCls, {
+        hcId: fromHcId,    // geom from the original component
+        cls: toCls,        // display as the remapped component
+        count, label, hcItems,
+        fill: catDef?.fill || "#88cc44",
+        stroke: catDef?.stroke || "#557722",
         catLabel: catDef?.label || label
       });
     }

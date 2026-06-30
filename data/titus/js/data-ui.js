@@ -14,9 +14,11 @@ function resetLootToBase(){
   // Deep-clone the base data so mods can mutate freely without corrupting it
   Global.loot = JSON.parse(JSON.stringify(Global.baseLoot));
   Global.items = JSON.parse(JSON.stringify(Global.baseItems));
+  Global.loot._harvestRemaps = [];
 
   // Rebuild indexes from the clean base
   buildLootIndexes();
+  if (typeof invalidateItemToHcIndex === "function") invalidateItemToHcIndex();
 }
 
 function mergeLootFromMod(mod){
@@ -207,6 +209,170 @@ function mergeLootFromMod(mod){
   }
 }
 
+/* ── Merge mod top-level items into Global.items ──────────────────────────
+   mod.items is the authoritative item list for dd/dh references.
+   Returns a Map: modLocalId → globalId.
+   ──────────────────────────────────────────────────────────────────────── */
+function mergeModTopItems(mod){
+  const modItems = mod.items;
+  if (!modItems?.i || !modItems?.p) return new Map();
+  const items = Global.items;
+  if (!items?.i) return new Map();
+
+  // class → existing globalId
+  const clsToGid = new Map();
+  for (const [gid, it] of Object.entries(items.i)){
+    if (it.c) clsToGid.set(it.c, Number(gid));
+  }
+
+  let nextId  = Math.max(0, ...Object.keys(items.i).map(Number).filter(Number.isFinite)) + 1;
+  let nextPid = Math.max(0, ...Object.keys(items.p || {}).map(Number).filter(Number.isFinite)) + 1;
+  const existPaths = new Map(
+    Object.entries(items.p || {}).map(([id, p]) => [p, Number(id)])
+  );
+
+  const pathMap = {};
+  for (const [pid, path] of Object.entries(modItems.p)){
+    if (existPaths.has(path)){ pathMap[pid] = existPaths.get(path); }
+    else {
+      pathMap[pid] = nextPid;
+      items.p[String(nextPid)] = path;
+      existPaths.set(path, nextPid);
+      nextPid++;
+    }
+  }
+
+  const localToGlobal = new Map();
+  for (const [localId, def] of Object.entries(modItems.i)){
+    const cls = def.c;
+    if (cls && clsToGid.has(cls)){
+      const gid = clsToGid.get(cls);
+      localToGlobal.set(Number(localId), gid);
+      const ex = items.i[String(gid)];
+      if (ex){
+        if (def.n && !ex.n) ex.n = def.n;
+        if (def.w != null) ex.w = def.w;
+        ex._mod = true;
+      }
+      continue;
+    }
+    const gid = nextId++;
+    localToGlobal.set(Number(localId), gid);
+    if (cls) clsToGid.set(cls, gid);
+    items.i[String(gid)] = {
+      ...def,
+      p: pathMap[String(def.p)] ?? def.p,
+      _mod: true
+    };
+  }
+  return localToGlobal;
+}
+
+/* ── Merge mod dd/dh/di/hi/rd/rh into Global.loot ────────────────────────
+   Item refs: negative = -(vanillaId+1), positive = mod local id.
+   Also resolves dd/dh on decoded mod dinos from numeric indices to class
+   names so the existing lookup* helpers find them.
+   ──────────────────────────────────────────────────────────────────────── */
+function mergeModDinoLoot(mod, modItemToGlobal){
+  const loot = Global.loot;
+  if (!loot) return;
+
+  function remap(ref){
+    const n = Number(ref);
+    if (n < 0) return Math.abs(n) - 1;           // vanilla item id
+    const g = modItemToGlobal.get(n);
+    return g != null ? g : n;
+  }
+
+  // Merge dd
+  for (const [cls, comp] of Object.entries(mod.dd || {})){
+    const c = JSON.parse(JSON.stringify(comp));
+    for (const s of (c.s || [])){
+      for (const e of (s.e || [])){
+        if (Array.isArray(e.i)) e.i = e.i.map(remap);
+      }
+    }
+    loot.dd = loot.dd || {};
+    loot.dd[cls] = c;
+  }
+
+  // Merge dh — normalise mod format {e:[{item}]} → vanilla {i:[flat]}
+  for (const [cls, comp] of Object.entries(mod.dh || {})){
+    const flat = [];
+    const seen = new Set();
+    for (const e of (comp.e || [])){
+      const raw = e.item ?? e.i;
+      if (raw == null) continue;
+      const g = remap(raw);
+      if (!seen.has(g)){ seen.add(g); flat.push(g); }
+    }
+    loot.dh = loot.dh || {};
+    loot.dh[cls] = { i: flat };
+  }
+
+  // Extend di/hi
+  if (!Array.isArray(loot.di)) loot.di = [];
+  if (!Array.isArray(loot.hi)) loot.hi = [];
+  for (const cls of (mod.di || [])){ if (!loot.di.includes(cls)) loot.di.push(cls); }
+  for (const cls of (mod.hi || [])){ if (!loot.hi.includes(cls)) loot.hi.push(cls); }
+
+  // Merge rd/rh
+  loot.rd = loot.rd || {};
+  loot.rh = loot.rh || {};
+  for (const [ik, idxArr] of Object.entries(mod.rd || {})){
+    const gk = String(remap(Number(ik)));
+    const gis = idxArr.map(mi => {
+      const cls = mod.di?.[mi];
+      return cls ? loot.di.indexOf(cls) : -1;
+    }).filter(i => i >= 0);
+    if (gis.length) loot.rd[gk] = [...(loot.rd[gk] || []), ...gis];
+  }
+  for (const [ik, idxArr] of Object.entries(mod.rh || {})){
+    const gk = String(remap(Number(ik)));
+    const gis = idxArr.map(mi => {
+      const cls = mod.hi?.[mi];
+      return cls ? loot.hi.indexOf(cls) : -1;
+    }).filter(i => i >= 0);
+    if (gis.length) loot.rh[gk] = [...(loot.rh[gk] || []), ...gis];
+  }
+
+  // Resolve dd/dh on this mod's dinos only: numeric → class name
+  const currentModId = String(mod.modId || "");
+  for (const dinoObj of Object.values(Global.dinos?.dinos || {})){
+    if (!dinoObj._modId || dinoObj._modId !== currentModId) continue;
+    if (dinoObj.dd != null){
+      const n = Number(dinoObj.dd);
+      if (Number.isFinite(n)){
+        dinoObj.dd = n >= 0
+          ? (mod.di?.[n] || dinoObj.dd)
+          : (loot.di?.[Math.abs(n) - 1] || dinoObj.dd);
+      }
+    }
+    if (dinoObj.dh != null){
+      const n = Number(dinoObj.dh);
+      if (Number.isFinite(n)){
+        dinoObj.dh = n >= 0
+          ? (mod.hi?.[n] || dinoObj.dh)
+          : (loot.hi?.[Math.abs(n) - 1] || dinoObj.dh);
+      }
+    }
+  }
+
+  // Resolve harvest component remaps (hrc) to class-name pairs
+  // hrc entries are [fromRef, toRef] using the same negative trick.
+  // Store as loot._harvestRemaps = [[fromClass, toClass], ...]
+  if (Array.isArray(mod.hrc) && mod.hrc.length){
+    const vanillaHi = Global.baseLoot?.hi || [];
+    const modHi = mod.hi || [];
+    if (!loot._harvestRemaps) loot._harvestRemaps = [];
+    for (const [from, to] of mod.hrc){
+      const fromCls = from < 0 ? vanillaHi[Math.abs(from) - 1] : modHi[from];
+      const toCls   = to < 0   ? vanillaHi[Math.abs(to) - 1]   : modHi[to];
+      if (fromCls && toCls) loot._harvestRemaps.push([fromCls, toCls]);
+    }
+  }
+}
+
 async function loadSelectedSource() {
   const srcId = UI.sourceSelect.value;
   const src = SOURCES.find(s => s.id === srcId);
@@ -243,6 +409,8 @@ async function loadSelectedSource() {
       if (!modSrc?.file) continue;
       const mod = await loadJSON(modSrc.file);
       mergeLootFromMod(mod);
+      const modItemMap = mergeModTopItems(mod);
+      mergeModDinoLoot(mod, modItemMap);
     }
 
   }
@@ -304,6 +472,10 @@ async function loadSelectedSource() {
     };
 
     mergeLootFromMod(mod);
+
+    // Merge mod's own items + dino drop/harvest data
+    const modItemMap = mergeModTopItems(mod);
+    mergeModDinoLoot(mod, modItemMap);
 
   }
 
@@ -2402,6 +2574,16 @@ function rebuildLootIndices(){
       for (const iid of (harvestComp.i || [])){
         dinoHarvestItemIds.add(iid);
       }
+    }
+  }
+
+  // Items from harvest-remapped components (mod replaces a vanilla HC
+  // so its items become harvestable from the same foliage nodes)
+  for (const [, toCls] of (loot._harvestRemaps || [])){
+    const comp = loot.dh?.[toCls];
+    if (!comp) continue;
+    for (const iid of (comp.i || [])){
+      dinoHarvestItemIds.add(iid);
     }
   }
 
