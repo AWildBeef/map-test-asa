@@ -2754,7 +2754,7 @@ function renderResourcePanel(){
           aria-pressed="${poiVisibility[c.key] ? "true" : "false"}"
         >
           <span class="poi-rn-dot" style="background:${c.fill};border-color:${c.stroke}"></span>
-          <span class="poi-menu-label">${escapeHtml(c.label)} <span class="poi-rn-count">${c.count.toLocaleString()}</span></span>
+          <span class="poi-menu-label">${escapeHtml(c.label)} <span class="poi-rn-count">${c.count.toLocaleString()}${c.count > RN_PERF_THRESHOLD ? " ⚡" : ""}</span></span>
           <span class="poi-menu-check">${poiVisibility[c.key] ? "✓" : ""}</span>
         </button>
       `).join("")}
@@ -4096,13 +4096,12 @@ function drawDossierPois(notes) {
 // RESOURCE NODE SYSTEM — category-based, integrated with POI panel
 // ═══════════════════════════════════════════════════════════════════════
 
-
 const RESOURCE_NODE_CATEGORIES = [
-  { key: "rn_metal",       label: "Metal",           fill: "#c0c0c0", stroke: "#2b2b2b",
+  { key: "rn_metal",       label: "Metal",           fill: "#c0c0c0", stroke: "#606060",
     hcs: ["MetalHarvestComponent_C"] },
-  { key: "rn_richMetal",   label: "Rich Metal",      fill: "#ffd700", stroke: "#5c4501",
+  { key: "rn_richMetal",   label: "Rich Metal",      fill: "#ffd700", stroke: "#806000",
     hcs: ["MetalHarvestComponent_Rich_C"] },
-  { key: "rn_crystal",     label: "Crystal",         fill: "#6ddfff", stroke: "#12262b",
+  { key: "rn_crystal",     label: "Crystal",         fill: "#c06dff", stroke: "#7030a0",
     hcs: ["CrystalHarvestComponent_C","CrystalHarvestComponent_LC_DarkCrystal_C",
           "CrystalHarvestComponent_LC_DarkCrystal_DarkFrst_C",
           "CrystalHarvestComponent_LC_DarkCrystal_Green_C",
@@ -4111,11 +4110,11 @@ const RESOURCE_NODE_CATEGORIES = [
   { key: "rn_obsidian",    label: "Obsidian",        fill: "#4a2a6a", stroke: "#2a0a4a",
     hcs: ["MountainObsidianHarvestComponent_C","ObsidianHarvestComponent_C",
           "StoneHarvestComponent_RequiresMetal_Ex_C"] },
-  { key: "rn_silicaPearls", label: "Silica Pearls",  fill: "#ffffff", stroke: "#000000",
+  { key: "rn_silicaPearls", label: "Silica Pearls",  fill: "#eeddaa", stroke: "#a09060",
     hcs: ["CoralHarvestComponentUnderwater_Deep_C","SiliconHarvestComponent_C"] },
-  { key: "rn_oil",          label: "Oil",            fill: "#1a1a1a", stroke: "#666666", weight: 1.2,
+  { key: "rn_oil",          label: "Oil",            fill: "#1a1a1a", stroke: "#666666",
     hcs: ["OilHarvestComponentRich_C","OilHarvestComponentUnderwater_C","OilHarvestComponent_C"] },
-  { key: "rn_blackPearls",  label: "Black Pearls",   fill: "#1a0a2a", stroke: "#ffd700", weight: 1.5,
+  { key: "rn_blackPearls",  label: "Black Pearls",   fill: "#1a0a2a", stroke: "#8844cc",
     hcs: ["BlackPearlHarvestComponent_C","BlackSiliconHarvestComponent_C"] },
   { key: "rn_silk",          label: "Silk",           fill: "#f0e0c0", stroke: "#b09060",
     hcs: ["SeedWithSilkHarvestComponent_C","SeedWithSilkHarvestComponent_Ex_C"] },
@@ -4128,7 +4127,7 @@ const RESOURCE_NODE_CATEGORIES = [
   { key: "rn_sulfur",        label: "Sulfur",         fill: "#cccc00", stroke: "#888800",
     hcs: ["Salt_Sulfur_Stone_HarvestComponent_C","EX_SulfurHarvestComponent_C",
           "SulfurHarvestComponent_C","SulfurHarvestComponent_LC_C"] },
-  { key: "rn_rareFlower",   label: "Rare Flower",    fill: "#a6ecff", stroke: "#f5fdff", weight: 1.3,
+  { key: "rn_rareFlower",   label: "Rare Flower",    fill: "#ff66aa", stroke: "#aa3366",
     hcs: ["RareFlowers_HarvestComponent_SingleHarvest_C","RareFlowerHarvestComponent_C",
           "RareFlowerHarvestComponent_Jackson_C","WoodHarvestComponent_RareFlower_C"] },
   { key: "rn_cactusSap",    label: "Cactus Sap",     fill: "#44aa44", stroke: "#226622",
@@ -4140,9 +4139,9 @@ const RESOURCE_NODE_CATEGORIES = [
     hcs: ["BoneHarvestComponent_C"] },
   { key: "rn_cementPaste",  label: "Cementing Paste", fill: "#888888", stroke: "#555555",
     hcs: ["CementCoralHitHarvestComponent_C"] },
-  { key: "rn_charcoal",     label: "Charcoal",       fill: "#292626", stroke: "#5c1905", weight: 1.4,
+  { key: "rn_charcoal",     label: "Charcoal",       fill: "#333333", stroke: "#888888",
     hcs: ["BurntWoodHarvestComponent_C","WoodCoalHarvestComponent_C"] },
-  { key: "rn_elementOre",   label: "Element Ore",    fill: "#ff00fb", stroke: "#38107d",
+  { key: "rn_elementOre",   label: "Element Ore",    fill: "#44aaff", stroke: "#2266cc",
     hcs: ["ElementOreHarvestComponent_C"] },
   { key: "rn_greenGem",     label: "Green Gems",     fill: "#44ff44", stroke: "#008800",
     hcs: ["GemFertileHarvestComponent_C","GemFertileHarvestComponent_Light_C",
@@ -4159,18 +4158,18 @@ const RESOURCE_NODE_CATEGORIES = [
     hcs: ["WoodHarvestComponent_CorruptTree_C","WoodHarvestComponent_CorruptTree_Heartier_C",
           "WoodHarvestComponent_CorruptTree_LessSap_C","WoodHarvestComponent_CorruptTree_VFX_Red_C"] },
   { key: "rn_clay",         label: "Clay",            fill: "#cc8844", stroke: "#885522",
-    hcs: ["Claypile_HarvestComponent_C","ClayHarvest_Rock_Pickup_C","ClayPile_Pickup_Component_C"] },
+    hcs: ["Claypile_HarvestComponent_C"] },
   { key: "rn_sap",          label: "Sap",             fill: "#dd9922", stroke: "#996611",
     hcs: ["Sap_WoodHarvestComponent_C","WoodHarvestComponent_Ex_RareRedwoodSap_C",
           "WoodHarvestComponent_RareRedwoodSap_C","WoodHarvestComponent_Sap_C"] },
   { key: "rn_rockarrot",    label: "Rockarrot",       fill: "#ff8833", stroke: "#aa5522",
-    hcs: ["CarrotVeggie_HarvestComponent_C","Carrot_Pickup_C"] },
-  { key: "rn_savoroot",     label: "Savoroot",        fill: "#b3886d", stroke: "#543728",
-    hcs: ["PotatoVeggie_HarvestComponent_C","Potatoe_Pickup_C"] },
+    hcs: ["CarrotVeggie_HarvestComponent_C"] },
+  { key: "rn_savoroot",     label: "Savoroot",        fill: "#cc7744", stroke: "#884422",
+    hcs: ["PotatoVeggie_HarvestComponent_C"] },
   { key: "rn_citronal",     label: "Citronal",        fill: "#ffee44", stroke: "#aa9922",
-    hcs: ["CitronalVeggie_HarvestComponent_C","Citrone_Pickup_C"] },
+    hcs: ["CitronalVeggie_HarvestComponent_C"] },
   { key: "rn_longrass",     label: "Longrass",        fill: "#88cc44", stroke: "#558822",
-    hcs: ["CornVeggie_HarvestComponent_C","Corn_Pickup_C"] },
+    hcs: ["CornVeggie_HarvestComponent_C"] },
   { key: "rn_honey",        label: "Honey",           fill: "#ffcc00", stroke: "#aa8800",
     hcs: ["BeeHoneyHarvestComponent_C"] },
   { key: "rn_bloodSap",     label: "Blood Sap",       fill: "#aa0000", stroke: "#660000",
@@ -4178,13 +4177,80 @@ const RESOURCE_NODE_CATEGORIES = [
   { key: "rn_bioToxin",     label: "Bio Toxin",       fill: "#00ffaa", stroke: "#00aa66",
     hcs: ["Harvest_Trap_Biolum01_C","Harvest_Trap_Element01_C","Harvest_Trap_Fertile01_C",
           "WoodHarvestComponent_Fungal_LostColony_C"] },
-  { key: "rn_stonePickup",  label: "Stone (Pick-Up)", fill: "#bbaa88", stroke: "#887755",
+  { key: "rn_stonePickup",  label: "Stone (Pick-Up)", fill: "#ab976d", stroke: "#6e6045",
     hcs: ["RockHarvestComponent_C"] },
 ];
 
 let _resourceCanvasRenderer = null;
 const _resourceLayers = new Map();
 const _rnCategoryData = new Map();
+
+// ── Performance threshold: above this, use image overlay instead of markers ──
+const RN_PERF_THRESHOLD = 15000;
+
+// ── Image-based dot layer for high-count resource nodes ──
+// Renders all dots once onto a 2048×2048 canvas, then hands it to
+// L.ImageOverlay which Leaflet transforms natively via CSS — zero JS
+// per frame during pan/zoom.  Dots scale with map zoom (acceptable for
+// dense coverage categories like stone/coral).
+const ImageDotLayer = L.Layer.extend({
+  initialize(points, opts){
+    this._pts = points;
+    this._opts = opts;
+  },
+  onAdd(map){
+    this._map = map;
+
+    // Render dots to an offscreen canvas at map-pixel resolution
+    const size = (currentGeom()?.size?.[0]) || 2048;
+    const c = document.createElement("canvas");
+    c.width = size; c.height = size;
+    const ctx = c.getContext("2d");
+
+    const { fill = "#aaa", stroke = "#666", radius = 4,
+            weight = 1, fillOpacity = 0.7 } = this._opts;
+    const r = radius;
+
+    // Batch fill — flip Y since canvas Y=0 is top but map lat=0 is top
+    ctx.globalAlpha = fillOpacity;
+    ctx.fillStyle = fill;
+    ctx.beginPath();
+    for (const [x, y] of this._pts){
+      ctx.moveTo(x + r, size - y);
+      ctx.arc(x, size - y, r, 0, 6.2832);
+    }
+    ctx.fill();
+
+    // Batch stroke
+    if (weight > 0){
+      ctx.globalAlpha = 0.9;
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = weight;
+      ctx.beginPath();
+      for (const [x, y] of this._pts){
+        ctx.moveTo(x + r, size - y);
+        ctx.arc(x, size - y, r, 0, 6.2832);
+      }
+      ctx.stroke();
+    }
+
+    // Hand off to Leaflet as an image overlay
+    const url = c.toDataURL("image/png");
+    this._overlay = L.imageOverlay(url, [[0, 0], [size, size]], {
+      interactive: false,
+      pane: "overlayPane"
+    });
+    this._overlay.addTo(map);
+    return this;
+  },
+  onRemove(map){
+    if (this._overlay){
+      map.removeLayer(this._overlay);
+      this._overlay = null;
+    }
+    return this;
+  }
+});
 
 function decodeRnBinary(b64){
   const bin = atob(b64);
@@ -4256,32 +4322,49 @@ function drawResourceNodes(rn){
     }
     if (!matchedHcIds.length) continue;
 
-    let totalCount = 0;
-    const lg = L.layerGroup();
+    // Decode all points for this category
+    let allCoords = [];
+    const hcCoordsMap = new Map(); // hcId → coords (for tooltips)
 
     for (const hcId of matchedHcIds){
       const value = rn[String(hcId)];
       if (!value) continue;
       const coords = typeof value === "string" ? decodeRnBinary(value) : value;
-      totalCount += coords.length;
-      const tip = tipForHC(hcId);
+      allCoords = allCoords.concat(coords);
+      hcCoordsMap.set(hcId, coords);
+    }
 
-      for (const [x, y] of coords){
-        const html = `<div style="font-size:11px"><b style="color:${cat.fill}">${escapeHtml(cat.label)}</b><br><span style="opacity:.7">${escapeHtml(tip.label)}</span><br>${tip.names.map(n => escapeHtml(n)).join(", ")}</div>`;
-        L.circleMarker([y, x], {
-          radius: 3, color: cat.stroke, weight: cat.weight || 1, opacity: 0.9,
-          fillColor: cat.fill, fillOpacity: 0.6,
-          renderer: _resourceCanvasRenderer, pane: "poiPane"
-        }).bindTooltip(html, { direction: "top", opacity: 0.95, className: "dark-tooltip" })
-          .addTo(lg);
+    const totalCount = allCoords.length;
+    if (!totalCount) continue;
+
+    let layer;
+
+    if (totalCount > RN_PERF_THRESHOLD){
+      // Heavy category → raw canvas (no per-point objects)
+      layer = new ImageDotLayer(allCoords, {
+        fill: cat.fill, stroke: cat.stroke,
+        radius: 3, weight: 0.5, fillOpacity: 0.7
+      });
+    } else {
+      // Light category → individual markers with tooltips
+      layer = L.layerGroup();
+      for (const [hcId, coords] of hcCoordsMap){
+        const tip = tipForHC(hcId);
+        for (const [x, y] of coords){
+          const html = `<div style="font-size:11px"><b style="color:${cat.fill}">${escapeHtml(cat.label)}</b><br><span style="opacity:.7">${escapeHtml(tip.label)}</span><br>${tip.names.map(n => escapeHtml(n)).join(", ")}</div>`;
+          L.circleMarker([y, x], {
+            radius: 3, color: cat.stroke, weight: cat.weight || 1, opacity: 0.9,
+            fillColor: cat.fill, fillOpacity: 0.6,
+            renderer: _resourceCanvasRenderer, pane: "poiPane"
+          }).bindTooltip(html, { direction: "top", opacity: 0.95, className: "dark-tooltip" })
+            .addTo(layer);
+        }
       }
     }
 
-    if (totalCount > 0){
-      _resourceLayers.set(cat.key, lg);
-      _rnCategoryData.set(cat.key, { count: totalCount, catDef: cat });
-      if (poiVisibility[cat.key]) lg.addTo(mapObj.map);
-    }
+    _resourceLayers.set(cat.key, layer);
+    _rnCategoryData.set(cat.key, { count: totalCount, catDef: cat });
+    if (poiVisibility[cat.key]) layer.addTo(mapObj.map);
   }
 }
 

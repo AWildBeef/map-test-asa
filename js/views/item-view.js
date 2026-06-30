@@ -1,5 +1,6 @@
 // ── Item → Harvest Component reverse index ──
 let _itemToHcIndex = null;
+function invalidateItemToHcIndex(){ _itemToHcIndex = null; }
 function getItemToHcIndex(){
   if (_itemToHcIndex) return _itemToHcIndex;
   const loot = Global.loot || {};
@@ -67,6 +68,34 @@ function foliageHcsForItem(it){
         catLabel: catDef?.label || label
       });
     }
+
+    // Harvest remaps: when a mod replaces fromCls with toCls and toCls
+    // drops the searched item, show foliage using fromCls's geom data.
+    for (const [fromCls, toCls] of (loot._harvestRemaps || [])){
+      if (result.has(toCls)) continue;
+      const toItems = dh[toCls]?.i || [];
+      if (!toItems.includes(itemId)) continue;
+
+      // Use the original (from) component's geom data
+      const fromHcId = hiClassToId.get(fromCls);
+      if (fromHcId === undefined) continue;
+      const rnEntry = rn[String(fromHcId)];
+      if (!rnEntry) continue;
+
+      const count = typeof rnEntry === "string" ? rnPointCount(rnEntry) : rnEntry.length;
+      const hcItems = toItems.map(id => items[String(id)]?.n || "?");
+      const label = toCls.replace(/_C$/, "").replace(/HarvestComponent/g, "").replace(/_/g, " ").trim();
+      const catDef = RESOURCE_NODE_CATEGORIES.find(c => c.hcs.includes(fromCls));
+
+      result.set(toCls, {
+        hcId: fromHcId,    // geom from the original component
+        cls: toCls,        // display as the remapped component
+        count, label, hcItems,
+        fill: catDef?.fill || "#88cc44",
+        stroke: catDef?.stroke || "#557722",
+        catLabel: catDef?.label || label
+      });
+    }
   }
 
   return [...result.values()].sort((a, b) => b.count - a.count);
@@ -91,7 +120,6 @@ function drawItemFoliageNodes(){
     _itemFoliageLayer = null;
   }
   if (!mapObj?.map) return;
-  // Only draw when foliage tab is active
   if (infoPanelState.itemTab !== "foliage") return;
 
   const rn = currentGeom()?.pois?.rn || {};
@@ -99,8 +127,8 @@ function drawItemFoliageNodes(){
   const hi = loot.hi || [];
   if (!_resourceCanvasRenderer) _resourceCanvasRenderer = L.canvas({ padding: 0.5 });
 
-  const lg = L.layerGroup();
-  let any = false;
+  // Collect all toggled-on points, grouped by style
+  const groups = new Map(); // "fill|stroke|weight" → { pts, fill, stroke, weight }
 
   for (const [key, visible] of Object.entries(_itemFoliageVis)){
     if (!visible) continue;
@@ -115,20 +143,40 @@ function drawItemFoliageNodes(){
     const weight = catDef?.weight || 1;
 
     const coords = typeof rnEntry === "string" ? decodeRnBinary(rnEntry) : rnEntry;
-    for (const [x, y] of coords){
-      L.circleMarker([y, x], {
-        radius: 3, color: stroke, weight, opacity: 0.9,
-        fillColor: fill, fillOpacity: 0.6,
-        renderer: _resourceCanvasRenderer, pane: "poiPane"
-      }).addTo(lg);
+    const styleKey = `${fill}|${stroke}|${weight}`;
+
+    if (!groups.has(styleKey)){
+      groups.set(styleKey, { pts: [], fill, stroke, weight });
     }
-    any = true;
+    const g = groups.get(styleKey);
+    for (const pt of coords) g.pts.push(pt);
   }
 
-  if (any){
-    lg.addTo(mapObj.map);
-    _itemFoliageLayer = lg;
+  if (!groups.size) return;
+
+  const lg = L.layerGroup();
+
+  for (const [, g] of groups){
+    if (g.pts.length > RN_PERF_THRESHOLD){
+      // Heavy → raw canvas
+      new ImageDotLayer(g.pts, {
+        fill: g.fill, stroke: g.stroke,
+        radius: 3, weight: 0.5, fillOpacity: 0.7
+      }).addTo(lg);
+    } else {
+      // Light → individual markers
+      for (const [x, y] of g.pts){
+        L.circleMarker([y, x], {
+          radius: 3, color: g.stroke, weight: g.weight, opacity: 0.9,
+          fillColor: g.fill, fillOpacity: 0.6,
+          renderer: _resourceCanvasRenderer, pane: "poiPane"
+        }).addTo(lg);
+      }
+    }
   }
+
+  lg.addTo(mapObj.map);
+  _itemFoliageLayer = lg;
 }
 
 function drawItem(itemName) {
@@ -1438,7 +1486,7 @@ function renderItemTabFoliage(it){
               <span class="poi-rn-dot" style="background:${hc.fill};border-color:${hc.stroke}"></span>
               <span class="iv-foliage-title">
                 <span class="iv-foliage-cat">${escapeHtml(hc.catLabel)}</span>
-                <span class="poi-rn-count">${hc.count.toLocaleString()}</span>
+                <span class="poi-rn-count">${hc.count.toLocaleString()}${hc.count > RN_PERF_THRESHOLD ? " ⚡" : ""}</span>
               </span>
               <span class="poi-menu-check">${isOn ? "✓" : ""}</span>
             </button>
