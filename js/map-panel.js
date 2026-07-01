@@ -571,7 +571,7 @@ function rebuildMapIndices(){
 
   const spawn = Global.spawn || {};
 
-  // Invalidate the world-rule index cache — it's map-specific and must be
+  // Invalidate the world-rule index cache -- it's map-specific and must be
   // rebuilt for the new map before worldOutputsForBp() is called.
   invalidateWorldRuleCache();
 
@@ -585,8 +585,8 @@ function rebuildMapIndices(){
 
   // 1) which entries are on this map?
   // entryMaps is keyed by entry id (bp-keyed schema) or class name (legacy /
-  // mod data). The UI keeps speaking class names — unique within a map even
-  // when globally ambiguous — and State.entryIdByClass remembers which key
+  // mod data). The UI keeps speaking class names -- unique within a map even
+  // when globally ambiguous -- and State.entryIdByClass remembers which key
   // holds this map's data for that class.
   State.entryIdByClass = new Map();
   for (const [key, maps] of Object.entries(spawn.entryMaps || {})){
@@ -721,6 +721,11 @@ function initMap(img,size=[2048,2048]){
 
   setTimeout(() => {
     document.querySelector(".leaflet-control-zoom")?.classList.add("zoom-horizontal");
+    // Apply zoom control visibility from settings
+    if (!isDockBtnVisible("zoomControls")){
+      const zc = document.querySelector(".leaflet-control-zoom");
+      if (zc) zc.style.display = "none";
+    }
   }, 0);
 
   // panes
@@ -745,7 +750,7 @@ function initMap(img,size=[2048,2048]){
   const coordDisplay = document.createElement("div");
   coordDisplay.id = "coordDisplay";
   coordDisplay.className = "coord-display";
-  coordDisplay.textContent = "—";
+  coordDisplay.textContent = "--";
   document.getElementById("mapWrap")?.appendChild(coordDisplay);
 
   function pixelToArkCoords(latlng) {
@@ -764,7 +769,7 @@ function initMap(img,size=[2048,2048]){
   map.on("mousemove", (e) => {
     const { lat, lon } = pixelToArkCoords(e.latlng);
     if (lat < -5 || lat > 105 || lon < -5 || lon > 105) {
-      coordDisplay.textContent = "—";
+      coordDisplay.textContent = "--";
     } else {
       const clampedLat = Math.max(0, Math.min(100, lat));
       const clampedLon = Math.max(0, Math.min(100, lon));
@@ -773,7 +778,7 @@ function initMap(img,size=[2048,2048]){
   });
 
   map.on("mouseout", () => {
-    coordDisplay.textContent = "—";
+    coordDisplay.textContent = "--";
   });
 
   return { map, overlay, layer, poiLayer, bounds };
@@ -1050,7 +1055,10 @@ function setDockPref(key, val){
 
 function isDockBtnVisible(key){
   const prefs = getDockPrefs();
-  return prefs[key] !== false; // default visible
+  if (key in prefs) return prefs[key];
+  // Off by default
+  if (key === "drawStylePanel" || key === "exportPanel") return false;
+  return true;
 }
 
 function getAstraeosBgPref(){
@@ -1074,10 +1082,12 @@ function renderSettingsPanel(){
   const DOCK_BTNS = [
     { key: "dinoInfoPanel",   label: "Info panel" },
     { key: "drawStylePanel",  label: "Draw style" },
-    { key: "poiPanel",        label: "Markers" },
+    { key: "poiPanel",        label: "POI markers" },
+    { key: "resourcePanel",   label: "Resources" },
     { key: "rarityLegend",    label: "Rarity legend" },
     { key: "mapEntriesPanel", label: "Entries browser" },
-    { key: "exportPanel",     label: "Export panel" }
+    { key: "exportPanel",     label: "Export panel" },
+    { key: "zoomControls",    label: "Zoom controls" }
   ];
 
   body.innerHTML = `
@@ -1127,6 +1137,11 @@ function renderSettingsPanel(){
     el.onchange = () => {
       setDockPref(el.dataset.dockPref, el.checked);
       renderDock();
+      // Toggle zoom controls visibility
+      if (el.dataset.dockPref === "zoomControls"){
+        const zc = document.querySelector(".leaflet-control-zoom");
+        if (zc) zc.style.display = el.checked ? "" : "none";
+      }
     };
   });
 
@@ -1563,7 +1578,7 @@ function isOceanCrate(crateClass) {
 // isDesertCrate is an alias for isOceanCrate - kept for potential future separation
 function isDesertCrate(crateClass) { return isOceanCrate(crateClass); }
 
-// Beaver dams — giant beaver lodges that act as lootable supply containers.
+// Beaver dams -- giant beaver lodges that act as lootable supply containers.
 // Two known classes: DenLogs_Child2 and DamLogs_Child. Matched on the
 // distinctive "...Logs_..." segment so either variant is caught.
 function isBeaverDam(crateClass) {
@@ -2166,8 +2181,8 @@ function mountPanelSwipe(container, tabs, getActive, setActive){
   let isHorizontal = false;
 
   const EDGE_GUARD_PX = 22;
-  const SWIPE_MIN_PX = 80;   // was 40 — higher threshold means deliberate swipes only
-  const SWIPE_MAX_Y = 40;    // was 60 — tighter vertical tolerance
+  const SWIPE_MIN_PX = 80;   // was 40 -- higher threshold means deliberate swipes only
+  const SWIPE_MAX_Y = 40;    // was 60 -- tighter vertical tolerance
 
   container.addEventListener("touchstart", (e) => {
     if (!e.touches || e.touches.length !== 1) return;
@@ -2404,7 +2419,7 @@ function ensurePoiPanel(){
 
   panel.innerHTML = `
     <div class="fp-header">
-      <div class="fp-title">Markers</div>
+      <div class="fp-title">POI Markers</div>
       <div class="fp-actions"></div>
     </div>
     <div class="fp-body"></div>
@@ -2689,7 +2704,7 @@ function togglePoiPanel(){
 
 
 // ═══════════════════════════════════════════════════════════════════════
-// RESOURCE PANEL — separate dock panel for resource node toggles
+// RESOURCE PANEL -- separate dock panel for resource node toggles
 // ═══════════════════════════════════════════════════════════════════════
 
 function ensureResourcePanel(){
