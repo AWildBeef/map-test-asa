@@ -41,7 +41,8 @@ const MAPS = [
       { id:"sat",  label:"Satellite", url:"maps/astraeos.webp" }
     ],
     defaultBg:"sat"
-  }
+  },
+  { id:"Svartalfheim", geomShort:"Svart", mapCode:"Svart", image:"svartalfheim.webp" }
 ];
 const jsonCache = {};
 
