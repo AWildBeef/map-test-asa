@@ -6533,3 +6533,44 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
   background: rgba(255,255,255,.06);
   color: var(--text-2, #d0dde6);
 }
+
+/* ============================================================
+   LAYER PICKER (multi-layer maps like Genesis)
+   ============================================================ */
+.layer-picker{
+  position: absolute;
+  bottom: 46px;
+  right: 8px;
+  z-index: 800;
+  display: flex;
+  gap: 2px;
+  border-radius: 8px;
+  background: rgba(10, 18, 26, .88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,.4);
+  padding: 3px;
+  pointer-events: auto;
+}
+.layer-picker-btn{
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-3, #8fa8b8);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.layer-picker-btn:hover{
+  background: rgba(255,255,255,.08);
+  color: var(--text-1, #f0fbff);
+}
+.layer-picker-btn.is-active{
+  background: rgba(var(--accent-rgb, 80,180,220), .25);
+  color: var(--text-1, #f0fbff);
+}

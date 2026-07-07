@@ -42,7 +42,7 @@ const MAPS = [
     ],
     defaultBg:"sat"
   },
-  { id:"Svartalfheim", geomShort:"Svart", mapCode:"Svart", image:"svartalfheim.webp" }
+  { id:"Genesis", geomShort:"Genesis", mapCode:"Genesis", image:"genesis.webp" }
 ];
 const jsonCache = {};
 
@@ -156,6 +156,8 @@ const State = {
   bossNames: [],
   bossNameToIndex: new Map(),
   bossItemIndex: new Map(),  // itemId -> [bossName1, ...]
+  
+  activeLayer: 0,  // for multi-layer maps (Genesis)
   
   mapCrateIds: new Set(),
   mapItemIds: new Set(),
