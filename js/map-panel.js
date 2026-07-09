@@ -484,7 +484,7 @@ function hordeLegendForCurrentMap(){
 }
 
 
-function drawPlayerStarts(groups){
+function drawPlayerStarts(groups, usesLayers){
   if (!mapObj?.poiLayer) return;
   if (!poiVisibility.playerStarts) return;
   if (!groups || typeof groups !== "object") return;
@@ -499,8 +499,15 @@ function drawPlayerStarts(groups){
     for (const pt of points) {
       if (!Array.isArray(pt) || pt.length < 2) continue;
 
-      const x = Number(pt[0]);
-      const y = Number(pt[1]);
+      let x, y;
+      if (usesLayers && pt.length >= 3){
+        if (pt[0] !== State.activeLayer) continue;
+        x = Number(pt[1]);
+        y = Number(pt[2]);
+      } else {
+        x = Number(pt[0]);
+        y = Number(pt[1]);
+      }
       if (![x, y].every(Number.isFinite)) continue;
 
       const tip = [
@@ -571,7 +578,7 @@ function rebuildMapIndices(){
 
   const spawn = Global.spawn || {};
 
-  // Invalidate the world-rule index cache -- it's map-specific and must be
+  // Invalidate the world-rule index cache — it's map-specific and must be
   // rebuilt for the new map before worldOutputsForBp() is called.
   invalidateWorldRuleCache();
 
@@ -585,8 +592,8 @@ function rebuildMapIndices(){
 
   // 1) which entries are on this map?
   // entryMaps is keyed by entry id (bp-keyed schema) or class name (legacy /
-  // mod data). The UI keeps speaking class names -- unique within a map even
-  // when globally ambiguous -- and State.entryIdByClass remembers which key
+  // mod data). The UI keeps speaking class names — unique within a map even
+  // when globally ambiguous — and State.entryIdByClass remembers which key
   // holds this map's data for that class.
   State.entryIdByClass = new Map();
   for (const [key, maps] of Object.entries(spawn.entryMaps || {})){
@@ -750,7 +757,7 @@ function initMap(img,size=[2048,2048]){
   const coordDisplay = document.createElement("div");
   coordDisplay.id = "coordDisplay";
   coordDisplay.className = "coord-display";
-  coordDisplay.textContent = "--";
+  coordDisplay.textContent = "—";
   document.getElementById("mapWrap")?.appendChild(coordDisplay);
 
   function pixelToArkCoords(latlng) {
@@ -769,7 +776,7 @@ function initMap(img,size=[2048,2048]){
   map.on("mousemove", (e) => {
     const { lat, lon } = pixelToArkCoords(e.latlng);
     if (lat < -5 || lat > 105 || lon < -5 || lon > 105) {
-      coordDisplay.textContent = "--";
+      coordDisplay.textContent = "—";
     } else {
       const clampedLat = Math.max(0, Math.min(100, lat));
       const clampedLon = Math.max(0, Math.min(100, lon));
@@ -778,7 +785,7 @@ function initMap(img,size=[2048,2048]){
   });
 
   map.on("mouseout", () => {
-    coordDisplay.textContent = "--";
+    coordDisplay.textContent = "—";
   });
 
   return { map, overlay, layer, poiLayer, bounds };
@@ -819,6 +826,10 @@ async function onMapChanged(){
   dockState.cfg = {
     image: img
   };
+
+  // ── Layer switcher for multi-layer maps ──
+  State.activeLayer = 0;
+  updateLayerPicker(geom);
 
   rebuildMapIndices();
   rebuildLootIndices();
@@ -906,6 +917,8 @@ function drawEntry(entryName, rarityScore){
   const entry = geom?.entries?.[entryName];
   if (!entry) return;
 
+  const usesLayers = !!geom?.usesLayers;
+
   for (const mgr of Object.values(entry.m || {})) {
 
     const meta = {
@@ -948,7 +961,13 @@ function drawEntry(entryName, rarityScore){
 
     // boxes
     for (const box of mgr.b || []) {
-      const [x, y, w, h] = box;
+      let x, y, w, h;
+      if (usesLayers){
+        if (box[0] !== State.activeLayer) continue;
+        [, x, y, w, h] = box;
+      } else {
+        [x, y, w, h] = box;
+      }
       if (![x, y, w, h].every(Number.isFinite)) continue;
 
       const rect = L.rectangle([[y, x], [y + h, x + w]], {
@@ -961,7 +980,13 @@ function drawEntry(entryName, rarityScore){
 
     // points
     for (const pt of mgr.p || []) {
-      const [x, y] = pt;
+      let x, y;
+      if (usesLayers){
+        if (pt[0] !== State.activeLayer) continue;
+        [, x, y] = pt;
+      } else {
+        [x, y] = pt;
+      }
       if (![x, y].every(Number.isFinite)) continue;
 
       const ptMarker = L.circleMarker([y, x], {
@@ -978,6 +1003,67 @@ function drawEntry(entryName, rarityScore){
       wireLinkedHighlight(ptMarker);
     }
   }
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// LAYER SWITCHER — for multi-layer maps like Genesis
+// ═══════════════════════════════════════════════════════════════════════
+
+let _layerPickerEl = null;
+
+function updateLayerPicker(geom){
+  if (_layerPickerEl){
+    _layerPickerEl.remove();
+    _layerPickerEl = null;
+  }
+
+  if (!geom?.usesLayers || !geom.layers?.length) return;
+  if (!mapObj?.map) return;
+
+  const container = mapObj.map.getContainer();
+  const bar = document.createElement("div");
+  bar.className = "layer-picker";
+  L.DomEvent.disableClickPropagation(bar);
+  L.DomEvent.disableScrollPropagation(bar);
+
+  for (let i = 0; i < geom.layers.length; i++){
+    const layer = geom.layers[i];
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `layer-picker-btn ${i === State.activeLayer ? "is-active" : ""}`;
+    btn.textContent = layer.n || `Layer ${i}`;
+    btn.onclick = () => switchLayer(i, geom);
+    bar.appendChild(btn);
+  }
+
+  container.appendChild(bar);
+  _layerPickerEl = bar;
+}
+
+function switchLayer(layerIdx, geomOverride){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = geomOverride || Global.mapGeom.get(mapMeta?.geomShort);
+  if (!geom?.layers?.[layerIdx]) return;
+  if (layerIdx === State.activeLayer) return;
+
+  State.activeLayer = layerIdx;
+  const layer = geom.layers[layerIdx];
+
+  // Swap map image
+  if (layer.img && mapObj?.overlay){
+    mapObj.overlay.setUrl(layer.img);
+  }
+
+  // Update picker UI
+  if (_layerPickerEl){
+    _layerPickerEl.querySelectorAll(".layer-picker-btn").forEach((btn, i) => {
+      btn.classList.toggle("is-active", i === layerIdx);
+    });
+  }
+
+  // Redraw current view
+  render();
 }
 
 
@@ -1539,6 +1625,22 @@ function ueToLeaflet(ue_x, ue_y) {
   ];
 }
 
+// Convert UE world coords using a specific layer's bounds (for multi-layer maps)
+function ueToLeafletForLayer(ue_x, ue_y, layerIdx) {
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const layer = geom?.layers?.[layerIdx];
+  if (!layer?.bounds) return ueToLeaflet(ue_x, ue_y); // fallback
+  const [minX, maxX, minY, maxY] = layer.bounds;
+  const [imgW, imgH] = geom?.size || [2048, 2048];
+  const lon = (ue_x - minX) / (maxX - minX) * 100;
+  const lat = (ue_y - minY) / (maxY - minY) * 100;
+  return [
+    (1 - lat / 100) * imgH,
+    (lon / 100) * imgW
+  ];
+}
+
 
 /* ============================================================
    CAVE / OCEAN / DESERT CRATE DETECTION
@@ -1578,7 +1680,7 @@ function isOceanCrate(crateClass) {
 // isDesertCrate is an alias for isOceanCrate - kept for potential future separation
 function isDesertCrate(crateClass) { return isOceanCrate(crateClass); }
 
-// Beaver dams -- giant beaver lodges that act as lootable supply containers.
+// Beaver dams — giant beaver lodges that act as lootable supply containers.
 // Two known classes: DenLogs_Child2 and DamLogs_Child. Matched on the
 // distinctive "...Logs_..." segment so either variant is caught.
 function isBeaverDam(crateClass) {
@@ -2181,8 +2283,8 @@ function mountPanelSwipe(container, tabs, getActive, setActive){
   let isHorizontal = false;
 
   const EDGE_GUARD_PX = 22;
-  const SWIPE_MIN_PX = 80;   // was 40 -- higher threshold means deliberate swipes only
-  const SWIPE_MAX_Y = 40;    // was 60 -- tighter vertical tolerance
+  const SWIPE_MIN_PX = 80;   // was 40 — higher threshold means deliberate swipes only
+  const SWIPE_MAX_Y = 40;    // was 60 — tighter vertical tolerance
 
   container.addEventListener("touchstart", (e) => {
     if (!e.touches || e.touches.length !== 1) return;
@@ -2644,6 +2746,7 @@ function renderPoiPanel(){
     { key: "iceWyvernNests",    label: "Ice Wyvern Nests",    count: (pois.iceWyvernNests || []).length },
     { key: "rockDrakeNests",    label: "Rock Drake Nests",    count: (pois.rockDrakeNests || []).length },
     { key: "deinonychusNests",  label: "Deinonychus Nests",   count: (pois.deinonychusNests || []).length },
+    { key: "magmaNests",        label: "Magmasaur Nests",     count: (pois.magmaNests || []).length },
     { key: "beachChests",       label: "Beach Crates",        count: (pois.beachChests || []).length },
     { key: "memorial",          label: "Memorial",            count: (pois.memorial || []).length },
     { key: "teleporters",       label: "Teleporters",         count: (pois.teleporters || []).length }
@@ -2704,7 +2807,7 @@ function togglePoiPanel(){
 
 
 // ═══════════════════════════════════════════════════════════════════════
-// RESOURCE PANEL -- separate dock panel for resource node toggles
+// RESOURCE PANEL — separate dock panel for resource node toggles
 // ═══════════════════════════════════════════════════════════════════════
 
 function ensureResourcePanel(){
@@ -3984,6 +4087,10 @@ function drawSimpleDotPois(points, visKey, color, label, outlineColor) {
 
 function drawNestPois(points, visKey, color, label) {
   if (!mapObj?.poiLayer || !poiVisibility[visKey]) return;
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const usesLayers = !!geom?.usesLayers;
+
   const size = 16;
   const icon = L.divIcon({
     className: `poi-nest-icon`,
@@ -3994,8 +4101,15 @@ function drawNestPois(points, visKey, color, label) {
     iconSize: [size, size], iconAnchor: [size/2, size/2]
   });
   for (const pt of (Array.isArray(points) ? points : [])) {
-    const x = Number(pt?.[0] ?? pt?.x);
-    const y = Number(pt?.[1] ?? pt?.y);
+    let x, y;
+    if (usesLayers && Array.isArray(pt) && pt.length >= 3){
+      if (pt[0] !== State.activeLayer) continue;
+      x = Number(pt[1]);
+      y = Number(pt[2]);
+    } else {
+      x = Number(pt?.[0] ?? pt?.x);
+      y = Number(pt?.[1] ?? pt?.y);
+    }
     if (![x, y].every(Number.isFinite)) continue;
     L.marker([y, x], { icon, pane: "poiPane" })
       .addTo(mapObj.poiLayer)
@@ -4055,6 +4169,10 @@ function noteTooltipHtml(note, { hideJump = false } = {}) {
 
 function drawExplorerNotePois(notes) {
   if (!mapObj?.poiLayer || !poiVisibility.explorerNotes) return;
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const usesLayers = !!geom?.usesLayers;
+
   const size = 16;
   const icon = L.divIcon({
     className: "poi-note-icon",
@@ -4067,12 +4185,29 @@ function drawExplorerNotePois(notes) {
     iconSize: [size, size], iconAnchor: [size/2, size/2]
   });
   for (const note of notes) {
-    if (!Array.isArray(note) || note.length < 4 || isDossierNote(note[1])) continue;
-    const latlng = ueToLeaflet(note[2], note[3]);
+    if (!Array.isArray(note)) continue;
+
+    let layerIdx, noteIdx, name, ueX, ueY;
+    if (usesLayers && note.length >= 6) {
+      [layerIdx, noteIdx, name, ueX, ueY] = note;
+      if (layerIdx !== State.activeLayer) continue;
+    } else if (note.length >= 5) {
+      [noteIdx, name, ueX, ueY] = note;
+      layerIdx = null;
+    } else continue;
+
+    if (isDossierNote(noteIdx)) continue;
+
+    const latlng = layerIdx != null
+      ? ueToLeafletForLayer(ueX, ueY, layerIdx)
+      : ueToLeaflet(ueX, ueY);
     if (!latlng) continue;
+
+    // Build note array in standard format for tooltip
+    const stdNote = layerIdx != null ? note.slice(1) : note;
     L.marker(latlng, { icon, pane: "poiPane" })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(noteTooltipHtml(note), {
+      .bindTooltip(noteTooltipHtml(stdNote), {
         direction: "auto", sticky: false, offset: [0,-10],
         opacity: 0.97, className: "note-tooltip note-tooltip--interactive", autoPan: true,
         interactive: true
@@ -4082,6 +4217,10 @@ function drawExplorerNotePois(notes) {
 
 function drawDossierPois(notes) {
   if (!mapObj?.poiLayer || !poiVisibility.dinoDossiers) return;
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const usesLayers = !!geom?.usesLayers;
+
   const size = 16;
   const icon = L.divIcon({
     className: "poi-dossier-icon",
@@ -4094,12 +4233,28 @@ function drawDossierPois(notes) {
     iconSize: [size, size], iconAnchor: [size/2, size/2]
   });
   for (const note of notes) {
-    if (!Array.isArray(note) || note.length < 4 || !isDossierNote(note[1])) continue;
-    const latlng = ueToLeaflet(note[2], note[3]);
+    if (!Array.isArray(note)) continue;
+
+    let layerIdx, noteIdx, name, ueX, ueY;
+    if (usesLayers && note.length >= 6) {
+      [layerIdx, noteIdx, name, ueX, ueY] = note;
+      if (layerIdx !== State.activeLayer) continue;
+    } else if (note.length >= 5) {
+      [noteIdx, name, ueX, ueY] = note;
+      layerIdx = null;
+    } else continue;
+
+    if (!isDossierNote(noteIdx)) continue;
+
+    const latlng = layerIdx != null
+      ? ueToLeafletForLayer(ueX, ueY, layerIdx)
+      : ueToLeaflet(ueX, ueY);
     if (!latlng) continue;
+
+    const stdNote = layerIdx != null ? note.slice(1) : note;
     L.marker(latlng, { icon, pane: "poiPane" })
       .addTo(mapObj.poiLayer)
-      .bindTooltip(noteTooltipHtml(note), {
+      .bindTooltip(noteTooltipHtml(stdNote), {
         direction: "auto", sticky: true, offset: [0,-10],
         opacity: 0.97, className: "note-tooltip", autoPan: true
       });
@@ -4112,11 +4267,11 @@ function drawDossierPois(notes) {
 // ═══════════════════════════════════════════════════════════════════════
 
 const RESOURCE_NODE_CATEGORIES = [
-  { key: "rn_metal",       label: "Metal",           fill: "#c0c0c0", stroke: "#2b2b2b",
+  { key: "rn_metal",       label: "Metal",           fill: "#c0c0c0", stroke: "#606060",
     hcs: ["MetalHarvestComponent_C"] },
-  { key: "rn_richMetal",   label: "Rich Metal",      fill: "#ffd700", stroke: "#5c4501",
+  { key: "rn_richMetal",   label: "Rich Metal",      fill: "#ffd700", stroke: "#806000",
     hcs: ["MetalHarvestComponent_Rich_C"] },
-  { key: "rn_crystal",     label: "Crystal",         fill: "#6ddfff", stroke: "#12262b",
+  { key: "rn_crystal",     label: "Crystal",         fill: "#c06dff", stroke: "#7030a0",
     hcs: ["CrystalHarvestComponent_C","CrystalHarvestComponent_LC_DarkCrystal_C",
           "CrystalHarvestComponent_LC_DarkCrystal_DarkFrst_C",
           "CrystalHarvestComponent_LC_DarkCrystal_Green_C",
@@ -4125,11 +4280,11 @@ const RESOURCE_NODE_CATEGORIES = [
   { key: "rn_obsidian",    label: "Obsidian",        fill: "#4a2a6a", stroke: "#2a0a4a",
     hcs: ["MountainObsidianHarvestComponent_C","ObsidianHarvestComponent_C",
           "StoneHarvestComponent_RequiresMetal_Ex_C"] },
-  { key: "rn_silicaPearls", label: "Silica Pearls",  fill: "#ffffff", stroke: "#000000",
+  { key: "rn_silicaPearls", label: "Silica Pearls",  fill: "#eeddaa", stroke: "#a09060",
     hcs: ["CoralHarvestComponentUnderwater_Deep_C","SiliconHarvestComponent_C"] },
-  { key: "rn_oil",          label: "Oil",            fill: "#1a1a1a", stroke: "#666666", weight: 1.2,
+  { key: "rn_oil",          label: "Oil",            fill: "#1a1a1a", stroke: "#666666",
     hcs: ["OilHarvestComponentRich_C","OilHarvestComponentUnderwater_C","OilHarvestComponent_C"] },
-  { key: "rn_blackPearls",  label: "Black Pearls",   fill: "#1a0a2a", stroke: "#ffd700", weight: 1.5,
+  { key: "rn_blackPearls",  label: "Black Pearls",   fill: "#1a0a2a", stroke: "#8844cc",
     hcs: ["BlackPearlHarvestComponent_C","BlackSiliconHarvestComponent_C"] },
   { key: "rn_silk",          label: "Silk",           fill: "#f0e0c0", stroke: "#b09060",
     hcs: ["SeedWithSilkHarvestComponent_C","SeedWithSilkHarvestComponent_Ex_C"] },
@@ -4142,7 +4297,7 @@ const RESOURCE_NODE_CATEGORIES = [
   { key: "rn_sulfur",        label: "Sulfur",         fill: "#cccc00", stroke: "#888800",
     hcs: ["Salt_Sulfur_Stone_HarvestComponent_C","EX_SulfurHarvestComponent_C",
           "SulfurHarvestComponent_C","SulfurHarvestComponent_LC_C"] },
-  { key: "rn_rareFlower",   label: "Rare Flower",    fill: "#a6ecff", stroke: "#f5fdff", weight: 1.3,
+  { key: "rn_rareFlower",   label: "Rare Flower",    fill: "#ff66aa", stroke: "#aa3366",
     hcs: ["RareFlowers_HarvestComponent_SingleHarvest_C","RareFlowerHarvestComponent_C",
           "RareFlowerHarvestComponent_Jackson_C","WoodHarvestComponent_RareFlower_C"] },
   { key: "rn_cactusSap",    label: "Cactus Sap",     fill: "#44aa44", stroke: "#226622",
@@ -4154,9 +4309,9 @@ const RESOURCE_NODE_CATEGORIES = [
     hcs: ["BoneHarvestComponent_C"] },
   { key: "rn_cementPaste",  label: "Cementing Paste", fill: "#888888", stroke: "#555555",
     hcs: ["CementCoralHitHarvestComponent_C"] },
-  { key: "rn_charcoal",     label: "Charcoal",       fill: "#292626", stroke: "#5c1905", weight: 1.4,
+  { key: "rn_charcoal",     label: "Charcoal",       fill: "#333333", stroke: "#888888",
     hcs: ["BurntWoodHarvestComponent_C","WoodCoalHarvestComponent_C"] },
-  { key: "rn_elementOre",   label: "Element Ore",    fill: "#ff00fb", stroke: "#38107d",
+  { key: "rn_elementOre",   label: "Element Ore",    fill: "#44aaff", stroke: "#2266cc",
     hcs: ["ElementOreHarvestComponent_C"] },
   { key: "rn_greenGem",     label: "Green Gems",     fill: "#44ff44", stroke: "#008800",
     hcs: ["GemFertileHarvestComponent_C","GemFertileHarvestComponent_Light_C",
@@ -4173,18 +4328,18 @@ const RESOURCE_NODE_CATEGORIES = [
     hcs: ["WoodHarvestComponent_CorruptTree_C","WoodHarvestComponent_CorruptTree_Heartier_C",
           "WoodHarvestComponent_CorruptTree_LessSap_C","WoodHarvestComponent_CorruptTree_VFX_Red_C"] },
   { key: "rn_clay",         label: "Clay",            fill: "#cc8844", stroke: "#885522",
-    hcs: ["Claypile_HarvestComponent_C","ClayHarvest_Rock_Pickup_C","ClayPile_Pickup_Component_C"] },
+    hcs: ["Claypile_HarvestComponent_C"] },
   { key: "rn_sap",          label: "Sap",             fill: "#dd9922", stroke: "#996611",
     hcs: ["Sap_WoodHarvestComponent_C","WoodHarvestComponent_Ex_RareRedwoodSap_C",
           "WoodHarvestComponent_RareRedwoodSap_C","WoodHarvestComponent_Sap_C"] },
   { key: "rn_rockarrot",    label: "Rockarrot",       fill: "#ff8833", stroke: "#aa5522",
-    hcs: ["CarrotVeggie_HarvestComponent_C","Carrot_Pickup_C"] },
-  { key: "rn_savoroot",     label: "Savoroot",        fill: "#b3886d", stroke: "#543728",
-    hcs: ["PotatoVeggie_HarvestComponent_C","Potatoe_Pickup_C"] },
+    hcs: ["CarrotVeggie_HarvestComponent_C"] },
+  { key: "rn_savoroot",     label: "Savoroot",        fill: "#cc7744", stroke: "#884422",
+    hcs: ["PotatoVeggie_HarvestComponent_C"] },
   { key: "rn_citronal",     label: "Citronal",        fill: "#ffee44", stroke: "#aa9922",
-    hcs: ["CitronalVeggie_HarvestComponent_C","Citrone_Pickup_C"] },
+    hcs: ["CitronalVeggie_HarvestComponent_C"] },
   { key: "rn_longrass",     label: "Longrass",        fill: "#88cc44", stroke: "#558822",
-    hcs: ["CornVeggie_HarvestComponent_C","Corn_Pickup_C"] },
+    hcs: ["CornVeggie_HarvestComponent_C"] },
   { key: "rn_honey",        label: "Honey",           fill: "#ffcc00", stroke: "#aa8800",
     hcs: ["BeeHoneyHarvestComponent_C"] },
   { key: "rn_bloodSap",     label: "Blood Sap",       fill: "#aa0000", stroke: "#660000",
@@ -4216,42 +4371,42 @@ const ImageDotLayer = L.Layer.extend({
   onAdd(map){
     this._map = map;
 
-    // Render dots to an offscreen canvas at map-pixel resolution
-    const size = (currentGeom()?.size?.[0]) || 2048;
+    // Render at 2x map resolution for sharper dots when zoomed in
+    const mapSize = (currentGeom()?.size?.[0]) || 2048;
+    const scale = 2;
+    const size = mapSize * scale;
     const c = document.createElement("canvas");
     c.width = size; c.height = size;
     const ctx = c.getContext("2d");
 
-    const { fill = "#aaa", stroke = "#666", radius = 4,
-            weight = 1, fillOpacity = 0.7 } = this._opts;
-    const r = radius;
+    const { fill = "#aaa", stroke = "#666", radius = 2,
+            weight = 1, fillOpacity = 0.5 } = this._opts;
+    const dotSize = radius * scale;
 
-    // Batch fill — flip Y since canvas Y=0 is top but map lat=0 is top
+    // Draw filled squares — no anti-aliasing, no bleed between neighbors
     ctx.globalAlpha = fillOpacity;
     ctx.fillStyle = fill;
-    ctx.beginPath();
     for (const [x, y] of this._pts){
-      ctx.moveTo(x + r, size - y);
-      ctx.arc(x, size - y, r, 0, 6.2832);
+      const cx = x * scale;
+      const cy = size - (y * scale);
+      ctx.fillRect(cx - dotSize, cy - dotSize, dotSize * 2, dotSize * 2);
     }
-    ctx.fill();
 
-    // Batch stroke
+    // Stroke outlines
     if (weight > 0){
-      ctx.globalAlpha = 0.9;
+      ctx.globalAlpha = 0.7;
       ctx.strokeStyle = stroke;
-      ctx.lineWidth = weight;
-      ctx.beginPath();
+      ctx.lineWidth = weight * scale;
       for (const [x, y] of this._pts){
-        ctx.moveTo(x + r, size - y);
-        ctx.arc(x, size - y, r, 0, 6.2832);
+        const cx = x * scale;
+        const cy = size - (y * scale);
+        ctx.strokeRect(cx - dotSize, cy - dotSize, dotSize * 2, dotSize * 2);
       }
-      ctx.stroke();
     }
 
     // Hand off to Leaflet as an image overlay
     const url = c.toDataURL("image/png");
-    this._overlay = L.imageOverlay(url, [[0, 0], [size, size]], {
+    this._overlay = L.imageOverlay(url, [[0, 0], [mapSize, mapSize]], {
       interactive: false,
       pane: "overlayPane"
     });
@@ -4358,7 +4513,7 @@ function drawResourceNodes(rn){
       // Heavy category → raw canvas (no per-point objects)
       layer = new ImageDotLayer(allCoords, {
         fill: cat.fill, stroke: cat.stroke,
-        radius: 3, weight: 0.5, fillOpacity: 0.7
+        radius: 2, weight: 1, fillOpacity: 0.4
       });
     } else {
       // Light category → individual markers with tooltips
@@ -4413,20 +4568,27 @@ function drawPois(){
   if (!geom?.pois) return;
 
   const pois = geom.pois;
+  const usesLayers = !!geom?.usesLayers;
+
+  // Filter supply crates by active layer (layered maps use 'l' key)
+  const allCrates = pois.supplyCrates || [];
+  const crates = usesLayers
+    ? allCrates.filter(p => p.l === undefined || p.l === State.activeLayer)
+    : allCrates;
 
   drawPoiGroup(pois.tributeTerminals, "tributeTerminals");
-  drawSupplyCratePois(pois.supplyCrates || []);
+  drawSupplyCratePois(crates);
   if (isAbMap()) {
-    drawAbNormalCratePois(pois.supplyCrates || []);
-    drawAbDungeonCratePois(pois.supplyCrates || []);
-    drawAbSurfaceCratePois(pois.supplyCrates || []);
+    drawAbNormalCratePois(crates);
+    drawAbDungeonCratePois(crates);
+    drawAbSurfaceCratePois(crates);
   } else {
-    drawCaveCratePois(pois.supplyCrates || []);
-    drawOceanCratePois(pois.supplyCrates || []);
-    drawBeaverDamPois(pois.supplyCrates || []);
+    drawCaveCratePois(crates);
+    drawOceanCratePois(crates);
+    drawBeaverDamPois(crates);
   }
-  drawArtifactCratePois(pois.supplyCrates || []);
-  drawPlayerStarts(pois.playerStarts);
+  drawArtifactCratePois(crates);
+  drawPlayerStarts(pois.playerStarts, usesLayers);
   drawExplorerNotePois(pois.explorerNotes || []);
   drawDossierPois(pois.explorerNotes || []);
   drawMissionPois(pois.missions || []);
@@ -4444,6 +4606,7 @@ function drawPois(){
   drawNestPois(pois.iceWyvernNests,        "iceWyvernNests",   "#88eeff", "Ice Wyvern Nest");
   drawNestPois(pois.rockDrakeNests,        "rockDrakeNests",   "#00ffcc", "Rock Drake Nest");
   drawNestPois(pois.deinonychusNests,      "deinonychusNests", "#ff5050", "Deinonychus Nest");
+  drawNestPois(pois.magmaNests,            "magmaNests",       "#ff6600", "Magmasaur Nest");
   drawSimpleDotPois(pois.beachChests,      "beachChests",      "#f0c040", "Beach Crate");
   drawSimpleDotPois(pois.memorial,         "memorial",         "#f0f0f0", "Memorial");
   drawTeleporterPois(pois.teleporters);
