@@ -1698,9 +1698,7 @@ function missionPointHasClass(point, missionClass){
   const legend = Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
 
   for (const row of (Array.isArray(point?.m) ? point.m : [])){
-    if (!Array.isArray(row) || !row.length) continue;
-
-    const idx = Number(row[0]);
+    const idx = Array.isArray(row) ? Number(row[0]) : Number(row);
     if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
 
     const meta = legend[idx];
@@ -3181,10 +3179,16 @@ function buildMissionGroups(point, legend){
   const grouped = new Map();
 
   for (const row of rows){
-    if (!Array.isArray(row) || !row.length) continue;
-
-    const idx = Number(row[0]);
-    const weight = row.length > 1 ? row[1] : null;
+    // Lost Colony rows are [legendIdx, weight]; Genesis rows are plain
+    // legend indexes. Accept both.
+    let idx, weight = null;
+    if (Array.isArray(row)){
+      if (!row.length) continue;
+      idx = Number(row[0]);
+      weight = row.length > 1 ? row[1] : null;
+    } else {
+      idx = Number(row);
+    }
 
     if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
 

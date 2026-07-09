@@ -3804,7 +3804,7 @@ function missionTooltipHtml(point, legend){
     return `<div class="poi-tip-title">Mission</div>`;
   }
 
-  return groups.map(g => `
+  const blocks = groups.map(g => `
     <div class="poi-tip-block">
       <div class="poi-tip-title">${escapeHtml(g.name)}</div>
       <div class="poi-tip-lines">
@@ -3814,6 +3814,13 @@ function missionTooltipHtml(point, legend){
       </div>
     </div>
   `).join("");
+
+  // Dispatcher id — debug aid, shown small under the missions
+  const disp = typeof point?.d === "string" && point.d
+    ? `<div class="poi-tip-line" style="opacity:.55;font-size:.85em;">${escapeHtml(point.d)}</div>`
+    : "";
+
+  return blocks + disp;
 }
 
 
@@ -3827,6 +3834,17 @@ function missionMarkerColor(point, legend){
   if (kind.includes("defense")) return "#4db6ff";
   if (kind.includes("resource")) return "#7dff7a";
 
+  // Genesis mission kinds
+  if (kind.includes("hunt")) return "#ff5d5d";
+  if (kind.includes("race")) return "#ffd94d";
+  if (kind.includes("gather")) return "#7dff7a";
+  if (kind.includes("gauntlet")) return "#c47dff";
+  if (kind.includes("fishing")) return "#4dd2ff";
+  if (kind.includes("escort")) return "#ffa64d";
+  if (kind.includes("retrieve")) return "#4dffc3";
+  if (kind.includes("sport")) return "#ff7ddb";
+  if (kind.includes("eel")) return "#8899ff";
+
   return "#ff66cc";
 }
 
@@ -3834,11 +3852,16 @@ function addMissionMarkers(points, { layer = mapObj?.poiLayer } = {}) {
   if (!layer || !Array.isArray(points)) return;
 
   const legend = missionLegendForCurrentMap();
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const usesLayers = !!Global.mapGeom.get(mapMeta?.geomShort)?.usesLayers;
 
   for (const p of points){
     const x = Number(p?.x);
     const y = Number(p?.y);
     if (![x, y].every(Number.isFinite)) continue;
+
+    // Layered maps (Genesis): each dispatcher belongs to one layer (`l`)
+    if (usesLayers && Number.isFinite(Number(p?.l)) && Number(p.l) !== State.activeLayer) continue;
 
     const fillColor = missionMarkerColor(p, legend);
 
