@@ -36,7 +36,7 @@ function foliageHcsForItem(it){
   const hi = loot.hi || [];
   const dh = loot.dh || {};
   const items = (Global.items || Global.baseItems || {}).i || {};
-  const rn = currentGeom()?.pois?.rn || {};
+  const rn = resourceNodesForCurrentMap();
 
   const hiClassToId = new Map();
   for (let i = 0; i < hi.length; i++){
@@ -122,7 +122,7 @@ function drawItemFoliageNodes(){
   if (!mapObj?.map) return;
   if (infoPanelState.itemTab !== "foliage") return;
 
-  const rn = currentGeom()?.pois?.rn || {};
+  const rn = resourceNodesForCurrentMap();
   const loot = Global.loot || {};
   const hi = loot.hi || [];
   if (!_resourceCanvasRenderer) _resourceCanvasRenderer = L.canvas({ padding: 0.5 });

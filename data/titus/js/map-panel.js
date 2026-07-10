@@ -4478,6 +4478,24 @@ function decodeRnBinary(b64){
   return pts;
 }
 
+function resourceNodesForCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const rn = geom?.pois?.rn;
+  if (!rn || typeof rn !== "object") return {};
+
+  // Layered maps nest per-layer blocks: values are objects instead of
+  // the flat map's base64 strings.
+  if (geom?.usesLayers){
+    const first = Object.values(rn)[0];
+    if (first && typeof first === "object" && !Array.isArray(first)){
+      return rn[String(State.activeLayer)] || {};
+    }
+  }
+
+  return rn;
+}
+
 function drawResourceNodes(rn){
   for (const lg of _resourceLayers.values()) mapObj?.map?.removeLayer(lg);
   _resourceLayers.clear();
@@ -4640,8 +4658,8 @@ function drawPois(){
   drawSimpleDotPois(pois.memorial,         "memorial",         "#f0f0f0", "Memorial");
   drawTeleporterPois(pois.teleporters);
 
-  // ── Resource nodes ──
-  drawResourceNodes(pois.rn || {});
+  // ── Resource nodes (layer-scoped on layered maps) ──
+  drawResourceNodes(resourceNodesForCurrentMap());
 
   // ── Refresh open panels so counts/items stay current after map switch ──
   const poiPanel = document.getElementById("poiPanel");
