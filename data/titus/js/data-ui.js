@@ -1664,19 +1664,20 @@ function missionDiffLabelFromClass(cls){
 
 
 function missionClassesUsedOnCurrentMap(){
-  if (State.mapId !== "Lost Colony") return new Set();
-
   const geom = currentGeom();
   const legend = Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
   const points = Array.isArray(geom?.pois?.missions) ? geom.pois.missions : [];
+  const usesLayers = !!geom?.usesLayers;
 
   const out = new Set();
 
   for (const p of points){
-    for (const row of (Array.isArray(p?.m) ? p.m : [])){
-      if (!Array.isArray(row) || !row.length) continue;
+    // Layered maps: only missions dispatched on the active layer
+    if (usesLayers && Number.isFinite(Number(p?.l)) && Number(p.l) !== State.activeLayer) continue;
 
-      const idx = Number(row[0]);
+    for (const row of (Array.isArray(p?.m) ? p.m : [])){
+      // LC rows are [idx, weight]; Genesis rows are plain indexes
+      const idx = Array.isArray(row) ? Number(row[0]) : Number(row);
       if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;
 
       const meta = legend[idx];
@@ -1712,12 +1713,31 @@ function missionPointHasClass(point, missionClass){
 }
 
 
+function missionLegendRowByClass(missionClass){
+  const geom = currentGeom();
+  const legend = Array.isArray(geom?.missionLegend) ? geom.missionLegend : [];
+
+  for (const row of legend){
+    const cls = bpClass(normalizeBp(row?.bp));
+    if (cls === missionClass) return row;
+  }
+  return null;
+}
+
 function missionLootDisplayName(missionClass){
   const m = lootData().m?.[missionClass];
-  if (!m) return missionClass;
 
-  const diff = missionDiffLabelFromClass(missionClass);
-  return `${m.n || missionClass} (${diff})`;
+  // The map's legend is the naming authority: clean base name plus
+  // size (s) and difficulty (d) exactly when the legend provides them.
+  const row = missionLegendRowByClass(missionClass);
+  if (row){
+    let label = String(row.n || m?.n || missionClass).trim();
+    if (row.s) label += ` (${row.s})`;
+    if (row.d) label += ` (${row.d})`;
+    return label;
+  }
+
+  return (m?.n) || missionClass;
 }
 
 
@@ -2484,6 +2504,21 @@ function rebuildLootIndices(){
           lootStructClass: structClass
         });
       }
+
+      // Genesis route: missions with their own item sets (m.s) — with or
+      // without loot structures
+      if (Array.isArray(m.s) && m.s.length){
+        const value = `mission:${missionClass}:own`;
+        const label = missionDisplayName(missionClass) + (structs.length ? " • Sets" : "");
+
+        State.crateOptions.push({ value, label });
+        State.crateNameToRef.set(value, {
+          kind: "mission",
+          missionClass,
+          missionName: m.n || missionClass,
+          lootStructClass: null
+        });
+      }
     }
   }
 
@@ -2746,10 +2781,14 @@ function crateClassFromLegendRow(row){
 function supplyCrateClassesUsedOnCurrentMap(){
   const legend = supplyLegendForCurrentMap();
   const points = supplyCratePointsForCurrentMap();
+  const usesLayers = !!currentGeom()?.usesLayers;
 
   const out = new Set();
 
   for (const p of points){
+    // Layered maps: crate list follows the active layer
+    if (usesLayers && Number.isFinite(Number(p?.l)) && Number(p.l) !== State.activeLayer) continue;
+
     for (const row of (Array.isArray(p?.c) ? p.c : [])){
       if (!Array.isArray(row) || row.length < 1) continue;
 
@@ -2772,7 +2811,10 @@ function hordeCrateClassesUsedOnCurrentMap(){
   const points = Array.isArray(geom?.pois?.hordeEvents) ? geom.pois.hordeEvents : [];
   const out = new Set();
 
+  const usesLayersH = !!geom?.usesLayers;
   for (const p of points){
+    if (usesLayersH && Number.isFinite(Number(p?.l)) && Number(p.l) !== State.activeLayer) continue;
+
     for (const rawIdx of (Array.isArray(p?.h) ? p.h : [])){
       const idx = Number(rawIdx);
       if (!Number.isInteger(idx) || idx < 0 || idx >= legend.length) continue;

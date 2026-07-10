@@ -1062,6 +1062,12 @@ function switchLayer(layerIdx, geomOverride){
     });
   }
 
+  // Crate/item lists are layer-scoped on layered maps — rebuild the
+  // indices AND repopulate the visible dropdown (same pair the crate
+  // type-filter pills use).
+  rebuildLootIndices();
+  if (typeof rebuildSelectionSelect === "function") rebuildSelectionSelect();
+
   // Redraw current view
   render();
 }

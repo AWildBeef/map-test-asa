@@ -92,9 +92,9 @@ function missionSizeLabelFromClass(missionClass){
 }
 
 function missionDisplayName(missionClass){
-  const base = missionLootDisplayName(missionClass);
-  const size = missionSizeLabelFromClass(missionClass);
-  return size ? `${base} (${size})` : base;
+  // Size and difficulty now come from the map legend inside
+  // missionLootDisplayName — no class-derived suffixes.
+  return missionLootDisplayName(missionClass);
 }
 
 function crateDisplayNameByClass(crateClass){
@@ -174,9 +174,33 @@ function getSelectedCrate(selectionValue){
   }
 
   if (ref.kind === "mission"){
-    const meta = lootData().ls?.[ref.lootStructClass];
     const mission = lootData().m?.[ref.missionClass];
-    if (!meta || !mission) return null;
+    if (!mission) return null;
+
+    // Genesis route: the mission's own item sets (no loot structure)
+    if (!ref.lootStructClass){
+      if (!Array.isArray(mission.s) || !mission.s.length) return null;
+
+      return {
+        kind: "mission",
+        missionClass: ref.missionClass,
+        lootStructClass: null,
+        class: ref.missionClass,
+        name: missionDisplayName(ref.missionClass),
+        rawName: ref.missionClass,
+        level: null,
+        minSets: mission.mn ?? null,
+        maxSets: mission.mx ?? null,
+        qmin: null,
+        qmax: null,
+        rwr: mission.rwr === true ? true : null,
+        sets: mission.s
+      };
+    }
+
+    // Lost Colony route: loot structure sets
+    const meta = lootData().ls?.[ref.lootStructClass];
+    if (!meta) return null;
 
     return {
       kind: "mission",
@@ -302,7 +326,58 @@ function renderCrateHero(c) {
                   `
                   : ``
               }
+              ${
+                mission?.hex != null
+                  ? `
+                    <div class="meta-cell">
+                      <div class="meta-stack">
+                        <div class="meta-label">Hexagons</div>
+                        <div class="meta-value">${escapeHtml(String(mission.hex))}</div>
+                      </div>
+                    </div>
+                  `
+                  : ``
+              }
+              ${
+                mission?.pc != null
+                  ? `
+                    <div class="meta-cell">
+                      <div class="meta-stack">
+                        <div class="meta-label">Max Players</div>
+                        <div class="meta-value">${escapeHtml(String(mission.pc))}</div>
+                      </div>
+                    </div>
+                  `
+                  : ``
+              }
+              ${
+                Array.isArray(mission?.lsq) && (mission.lsq[0] != null || mission.lsq[1] != null)
+                  ? `
+                    <div class="meta-cell">
+                      <div class="meta-stack">
+                        <div class="meta-label">Loot Structures</div>
+                        <div class="meta-value">${escapeHtml(fmtRangeCollapsed(mission.lsq[0], mission.lsq[1]))}</div>
+                      </div>
+                    </div>
+                  `
+                  : ``
+              }
             </div>
+            ${
+              c.kind === "mission" && c.lootStructClass == null && (c.minSets != null || c.maxSets != null)
+                ? `
+                  <div class="lc-chips" style="margin-top:6px;">
+                    <span class="lc-chip">Item sets <b>${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))}</b></span>
+                    ${
+                      c.rwr === true ? `<span class="lc-chip rwr">⊘ no repeats</span>` : ``
+                    }
+                  </div>
+                  <div class="lc-mech">This mission rewards <b>${escapeHtml(fmtRangeCollapsed(c.minSets, c.maxSets))}</b> of the item sets below.${
+                    c.rwr === true ? " Repeats are not allowed." : ""
+                  }</div>
+                `
+                : ``
+            }
           `
           : `
             <div class="lc-chips">
