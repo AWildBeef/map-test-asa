@@ -2620,7 +2620,25 @@ function rebuildLootIndices(){
     }
   }
 
-  for (const itemId of [...dinoDropItemIds, ...dinoHarvestItemIds]){
+  // --- foliage / resource-node items on this map ---
+  // Every harvest component present in the map's resource data (layer-
+  // scoped on layered maps) contributes its items — this is how
+  // foliage-only items like Sap or Element Shard reach the dropdown.
+  const foliageItemIds = new Set();
+  if (typeof resourceNodesForCurrentMap === "function"){
+    const rn = resourceNodesForCurrentMap();
+    const hi = loot.hi || [];
+    for (const hcIdStr of Object.keys(rn || {})){
+      const cls = hi[Number(hcIdStr)];
+      const comp = cls ? loot.dh?.[cls] : null;
+      if (!comp) continue;
+      for (const iid of (comp.i || [])){
+        foliageItemIds.add(iid);
+      }
+    }
+  }
+
+  for (const itemId of [...dinoDropItemIds, ...dinoHarvestItemIds, ...foliageItemIds]){
     State.mapItemIds.add(itemId);
     const itemRow = items.i?.[String(itemId)];
     if (!itemRow) continue;
@@ -2634,7 +2652,7 @@ function rebuildLootIndices(){
     }
   }
 
-  // Rebuild itemNames to include dino loot items
+  // Rebuild itemNames to include dino + foliage loot items
   State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 
   // --- boss reward items + engram unlocks on this map ---
