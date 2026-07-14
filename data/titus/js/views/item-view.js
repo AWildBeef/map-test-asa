@@ -238,6 +238,15 @@ function drawItem(itemName) {
 
         visibleMissionClasses.add(missionClass);
       }
+
+      // Genesis route: missions with their own item sets — same visibility
+      // key the crates tab uses for the own-sets entry.
+      if (Array.isArray(mission?.s) && mission.s.length){
+        const crateValue = `mission:${missionClass}:own`;
+        const key = itemCrateVisibilityKey(itemName, crateValue);
+        const visible = entryVisibility[key] ?? true;
+        if (visible) visibleMissionClasses.add(missionClass);
+      }
     }
   }
 
@@ -1128,6 +1137,23 @@ function renderItemTabCrates(it){
             missionClass,
             structClass,
             name: missionDisplayName(missionClass),
+            level: null,
+            details: []
+          });
+        }
+      }
+
+      // Genesis route: the mission's own item sets — this is how items
+      // reached the mission for most Genesis missions, so list the
+      // own-sets entry (matches the Crate View dropdown value).
+      if (Array.isArray(mission?.s) && mission.s.length){
+        const key = `mission:${missionClass}:own`;
+        if (!missionMap.has(key)){
+          missionMap.set(key, {
+            crateValue: key,
+            missionClass,
+            structClass: null,
+            name: missionDisplayName(missionClass) + (structs.length ? " • Sets" : ""),
             level: null,
             details: []
           });

@@ -193,6 +193,7 @@ const poiVisibility = {
   waterVeins: false,
   oilVeins: false,
   gasVeins: false,
+  oxygenVents: false,
   chargeNodes: false,
   hyperChargeNodes: false,
   plantZ: false,

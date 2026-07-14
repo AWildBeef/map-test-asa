@@ -2744,6 +2744,7 @@ function renderPoiPanel(){
     { key: "waterVeins",        label: "Water Veins",         count: (pois.waterVeins || []).length },
     { key: "oilVeins",          label: "Oil Veins",           count: (pois.oilVeins || []).length },
     { key: "gasVeins",          label: "Gas Veins",           count: (pois.gasVeins || []).length },
+    { key: "oxygenVents",       label: "Oxygen Vents",        count: (pois.oxygenVents || []).length },
     { key: "chargeNodes",       label: "Charge Nodes",        count: (pois.chargeNodes || []).length },
     { key: "hyperChargeNodes",  label: "Hyper Charge Nodes",  count: (pois.hyperChargeNodes || []).length },
     { key: "plantZ",            label: "Wild Plant Z",        count: (pois.plantZ || []).length },
@@ -4100,9 +4101,19 @@ function drawSimpleDotPois(points, visKey, color, label, outlineColor) {
   // different ring). A custom ring is drawn slightly thicker so it reads.
   const ring = outlineColor || "#111";
   const ringWeight = outlineColor ? 2.5 : 1.5;
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const usesLayers = !!Global.mapGeom.get(mapMeta?.geomShort)?.usesLayers;
   for (const pt of (Array.isArray(points) ? points : [])) {
-    const x = Number(pt?.[0] ?? pt?.x);
-    const y = Number(pt?.[1] ?? pt?.y);
+    let x, y;
+    if (usesLayers && Array.isArray(pt) && pt.length >= 3){
+      // Layered maps: points are [layer, x, y]
+      if (Number(pt[0]) !== State.activeLayer) continue;
+      x = Number(pt[1]);
+      y = Number(pt[2]);
+    } else {
+      x = Number(pt?.[0] ?? pt?.x);
+      y = Number(pt?.[1] ?? pt?.y);
+    }
     if (![x, y].every(Number.isFinite)) continue;
     L.circleMarker([y, x], {
       radius: 5, color: ring, weight: ringWeight,
@@ -4645,6 +4656,7 @@ function drawPois(){
   drawSimpleDotPois(pois.waterVeins,       "waterVeins",       "#5ab4ff", "Water Vein");
   drawSimpleDotPois(pois.oilVeins,         "oilVeins",         "#555",    "Oil Vein");
   drawSimpleDotPois(pois.gasVeins,         "gasVeins",         "#ff4dff", "Gas Vein");
+  drawSimpleDotPois(pois.oxygenVents,      "oxygenVents",      "#9fdcff", "Oxygen Vent");
   drawSimpleDotPois(pois.chargeNodes,      "chargeNodes",      "#00ff55", "Charge Node");
   drawSimpleDotPois(pois.hyperChargeNodes, "hyperChargeNodes", "#00ff55", "Hyper Charge Node", "#aa55ff");
   drawSimpleDotPois(pois.plantZ,           "plantZ",           "#00eeff", "Wild Plant Z");
