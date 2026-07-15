@@ -42,7 +42,7 @@ const MAPS = [
     ],
     defaultBg:"sat"
   },
-  { id:"Genesis", geomShort:"Genesis", mapCode:"Genesis", image:"genesis.webp" }
+  { id:"Genesis", geomShort:"Genesis", mapCode:"Genesis 1", image:"genesis.webp" }
 ];
 const jsonCache = {};
 
@@ -170,6 +170,19 @@ const entryVisibility = {};
 
 let dockControl = null;
 let dockState = { mapMeta: null, cfg: null };
+
+// Explorer note rows come in two shapes: classic [idx, name, x, y, z]
+// and layered [layer, idx, name, x, y, z] (Genesis). Shape-detected so
+// both coexist everywhere notes are read.
+function noteIsLayered(note){
+  return Array.isArray(note) && note.length >= 6 && typeof note[2] === "string";
+}
+function noteStd(note){
+  return noteIsLayered(note) ? note.slice(1) : note;
+}
+function noteLayerOf(note){
+  return noteIsLayered(note) ? Number(note[0]) : null;
+}
 
 const poiVisibility = {
   tributeTerminals: true,

@@ -5031,10 +5031,6 @@ body[data-mode="dino"] #dinoInfoPanel[data-tab="loot"] .dino-loot-section-head .
   filter: drop-shadow(0 1px 2px rgba(0,0,0,.55));
 }
 
-body[data-mode="note"] .mode-toggle {
-  background: rgba(var(--accent-rgb), .18);
-}
-
 /* ── Dark tooltip (tribute terminals, player starts, obelisks) ─ */
 .leaflet-tooltip.dark-tooltip {
   background: rgba(18, 22, 30, 0.92);
@@ -6539,7 +6535,7 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
    ============================================================ */
 .layer-picker{
   position: absolute;
-  bottom: 46px;
+  bottom: 80px;   /* clears the .coord-display GPS badge at bottom:44px */
   right: 8px;
   z-index: 800;
   display: flex;
@@ -6573,4 +6569,32 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 .layer-picker-btn.is-active{
   background: rgba(var(--accent-rgb, 80,180,220), .25);
   color: var(--text-1, #f0fbff);
+}
+
+/* ── Zoom-to-entry (Dino panel) ─────────────────────────── */
+.dv-entry-zoom{
+  background: transparent;
+  border: none;
+  color: var(--text-2, #9fb3c8);
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  flex: 0 0 auto;
+}
+.dv-entry-zoom:hover{
+  color: var(--accent-bright, #7cc4ff);
+  background: rgba(255,255,255,.06);
+}
+
+/* Pulse an entry's spawn shapes after zoom-to-entry */
+@keyframes spawnZoomPulse{
+  0%, 100% { stroke-opacity: 1; }
+  50%      { stroke-opacity: .12; }
+}
+.spawn-zoom-pulse{
+  stroke-width: 5 !important;
+  animation: spawnZoomPulse .6s ease-in-out 3;
+  filter: drop-shadow(0 0 6px currentColor);
 }

@@ -488,6 +488,9 @@ async function loadSelectedSource() {
   rebuildSelectionSelect();
   applyEmbedRestrictions();
   renderDock();
+  // renderDock rebuilds base (layer 0) imagery — put the active layer's
+  // image + picker state back so a source change doesn't desync them.
+  if (typeof reapplyActiveLayer === "function") reapplyActiveLayer();
   render();
   if (isPanelVisible("mapEntriesPanel")) {
     renderMapEntriesPanel();
@@ -4287,11 +4290,14 @@ function rebuildSelectionSelect() {
   } else if (State.mode === "note") {
     placeholder = "(Select a Note or Dossier)";
     const allNotes = getNoteOptionsForCurrentMap();
-    options = allNotes.map(n => ({
-      value: `note:${n[0]}`,
-      label: n[1],                // clean label, no #N suffix
-      searchExtra: String(n[0]),  // index kept for hidden search matching
-    }));
+    options = allNotes.map(raw => {
+      const n = noteStd(raw);
+      return {
+        value: `note:${n[0]}`,
+        label: n[1],                // clean label, no #N suffix
+        searchExtra: String(n[0]),  // index kept for hidden search matching
+      };
+    });
   }
 
   UI.dinoSelect.innerHTML = "";

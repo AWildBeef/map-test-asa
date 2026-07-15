@@ -1003,6 +1003,21 @@ function renderDinoPanel(name){
     };
   }
 
+  body.querySelectorAll("[data-dino-entry-zoom]").forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const cls = btn.dataset.dinoEntryZoom;
+      const key = btn.dataset.key;
+      // Zooming to a hidden entry would show nothing — turn it on first.
+      if (key && !(entryVisibility[key] ?? true)){
+        entryVisibility[key] = true;
+        render();
+        renderInfoPanel();
+      }
+      if (typeof zoomToSpawnEntry === "function") zoomToSpawnEntry(cls);
+    };
+  });
+
   body.querySelectorAll("[data-dino-entry-toggle]").forEach(btn => {
     btn.onclick = () => {
       const key = btn.dataset.key;
@@ -1484,6 +1499,14 @@ function renderDinoSpawnMenuRow(entry, selectedName, idx){
         >
           <span class="dv-entry-name">${escapeHtml(entry.entryClass)}</span>
         </button>
+
+        <button
+          type="button"
+          class="dv-entry-zoom"
+          data-dino-entry-zoom="${escapeAttr(entry.entryClass)}"
+          data-key="${escapeAttr(key)}"
+          title="Zoom to spawn zones"
+        >⌖</button>
 
         <button
           type="button"

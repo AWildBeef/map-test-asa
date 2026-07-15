@@ -54,6 +54,8 @@ function render() {
     if (!noteViewState.selected && State.selection) {
       noteViewState.selected = noteFromSelection(State.selection);
     }
+    clearDraw();
+    drawPois();
     drawNote(noteViewState.selected);
   }
   

@@ -21,7 +21,9 @@ function getNoteOptionsForCurrentMap() {
 
   return notes.filter(note => {
     if (!Array.isArray(note) || note.length < 2) return false;
-    const [idx, name] = note;
+    const l = noteLayerOf(note);
+    if (l != null && l !== State.activeLayer) return false;
+    const [idx, name] = noteStd(note);
     const dossier = isDossierNote(name);
     if (tab === "notes"    &&  dossier) return false;
     if (tab === "dossiers" && !dossier) return false;
@@ -35,18 +37,18 @@ function noteFromSelection(selection) {
   if (!selection || !selection.startsWith("note:")) return null;
   const idx = Number(selection.slice(5));
   if (!Number.isInteger(idx)) return null;
-  return getNotesForCurrentMap().find(n => n[0] === idx) || null;
+  return getNotesForCurrentMap().find(n => noteStd(n)[0] === idx) || null;
 }
 
 /* ── Commands ─────────────────────────────────────── */
 
 function noteTeleportCommand(note) {
-  const [idx, name, ue_x, ue_y, ue_z] = note;
+  const [idx, name, ue_x, ue_y, ue_z] = noteStd(note);
   return `cheat SPI ${Math.round(ue_x)} ${Math.round(ue_y)} ${Math.round((ue_z || 0) + 200)}`;
 }
 
 function noteUnlockCommand(note) {
-  const [idx] = note;
+  const [idx] = noteStd(note);
   return `cheat GiveExplorerNote ${idx}`;
 }
 
@@ -54,7 +56,7 @@ function noteUnlockCommand(note) {
 
 function renderNotePanel(note) {
   if (!note || !Array.isArray(note)) { renderInfoPanelBodyEmpty(); return; }
-  const [idx, name, ue_x, ue_y, ue_z] = note;
+  const [idx, name, ue_x, ue_y, ue_z] = noteStd(note);
   const dossier = isDossierNote(name);
   const gps     = ueToGps(ue_x, ue_y);
   const gpsStr  = gps ? `${gps.lat.toFixed(1)}, ${gps.lon.toFixed(1)}` : "N/A";
@@ -103,8 +105,8 @@ function buildNoteDropdownToolbar({ rebuild } = {}) {
   bar.style.cssText = "display:flex; flex-wrap:wrap; gap:4px;";
 
   const allNotes = getNotesForCurrentMap();
-  const nNotes   = allNotes.filter(n => !isDossierNote(n[1])).length;
-  const nDoss    = allNotes.filter(n =>  isDossierNote(n[1])).length;
+  const nNotes   = allNotes.filter(n => !isDossierNote(noteStd(n)[1])).length;
+  const nDoss    = allNotes.filter(n =>  isDossierNote(noteStd(n)[1])).length;
   const tab      = noteViewState.noteTab || "all";
 
   // Tab pills
@@ -160,14 +162,23 @@ function _makeNoteIcon(dossier) {
       });
 }
 
+let _selectedNoteMarker = null;
+
 function drawNote(note) {
   clearDraw();
-  clearPois();
+  // Keep the standard POI set (terminals etc.) — only manage our own pin.
+  if (_selectedNoteMarker){
+    _selectedNoteMarker.remove();
+    _selectedNoteMarker = null;
+  }
   if (!note || !mapObj?.poiLayer) return;
-  const [idx, name, ue_x, ue_y] = note;
-  const latlng = ueToLeaflet(ue_x, ue_y);
+  const [idx, name, ue_x, ue_y] = noteStd(note);
+  const l = noteLayerOf(note);
+  const latlng = (l != null && typeof ueToLeafletForLayer === "function")
+    ? ueToLeafletForLayer(ue_x, ue_y, l)
+    : ueToLeaflet(ue_x, ue_y);
   if (!latlng) return;
-  L.marker(latlng, { icon: _makeNoteIcon(isDossierNote(name)), pane: "poiPane" })
+  _selectedNoteMarker = L.marker(latlng, { icon: _makeNoteIcon(isDossierNote(name)), pane: "poiPane" })
     .addTo(mapObj.poiLayer)
     .bindTooltip(noteTooltipHtml(note, { hideJump: true }), {
       direction: "auto", sticky: true, offset: [0, -10],
@@ -178,9 +189,9 @@ function drawNote(note) {
 // Switch to Note View and select this note (called when clicking a POI note marker)
 function openNoteView(note) {
   if (!note || !Array.isArray(note)) return;
-  const [idx] = note;
+  const [idx, noteName] = noteStd(note);
   noteViewState.selected = note;
-  noteViewState.noteTab  = isDossierNote(note[1]) ? "dossiers" : "notes";
+  noteViewState.noteTab  = isDossierNote(noteName) ? "dossiers" : "notes";
   noteViewState.query    = "";
   State.mode = "note";
   State.selection = `note:${idx}`;

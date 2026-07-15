@@ -848,6 +848,73 @@ async function onMapChanged(){
 }
 
 
+// Shapes drawn per spawn entry — lets zoomToSpawnEntry pulse them.
+const _spawnShapesByEntry = new Map();
+function _registerSpawnShape(entryName, layer){
+  if (!_spawnShapesByEntry.has(entryName)) _spawnShapesByEntry.set(entryName, []);
+  _spawnShapesByEntry.get(entryName).push(layer);
+}
+
+// Zoom the map to an entry's spawn zones on the current map. On layered
+// maps, hops to the layer that actually has zones if the active one has
+// none. Pulses the entry's shapes so tiny/blended boxes pop.
+function zoomToSpawnEntry(entryName){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const entry = geom?.entries?.[entryName];
+  if (!entry || !mapObj?.map) return false;
+  const usesLayers = !!geom?.usesLayers;
+
+  const perLayer = new Map();
+  const addPt = (li, y, x) => {
+    const k = usesLayers ? li : 0;
+    if (!perLayer.has(k)) perLayer.set(k, []);
+    perLayer.get(k).push([y, x]);
+  };
+  for (const mgr of Object.values(entry.m || {})){
+    for (const box of mgr.b || []){
+      let li = 0, x, y, w, h;
+      if (usesLayers) [li, x, y, w, h] = box; else [x, y, w, h] = box;
+      if (![x, y, w, h].every(Number.isFinite)) continue;
+      addPt(li, y, x); addPt(li, y + h, x + w);
+    }
+    for (const pt of mgr.p || []){
+      let li = 0, x, y;
+      if (usesLayers) [li, x, y] = pt; else [x, y] = pt;
+      if (![x, y].every(Number.isFinite)) continue;
+      addPt(li, y, x);
+    }
+  }
+  if (!perLayer.size) return false;
+
+  let layerIdx = usesLayers ? State.activeLayer : 0;
+  if (!perLayer.has(layerIdx)) layerIdx = [...perLayer.keys()].sort((a, b) => a - b)[0];
+  if (usesLayers && layerIdx !== State.activeLayer) switchLayer(layerIdx);
+
+  let b = L.latLngBounds(perLayer.get(layerIdx));
+  // Don't dive to max zoom on point-sized zones — enforce a minimum span.
+  const MIN_SPAN = 120;
+  if ((b.getEast() - b.getWest()) < MIN_SPAN || (b.getNorth() - b.getSouth()) < MIN_SPAN){
+    const c = b.getCenter();
+    b = L.latLngBounds([[c.lat - MIN_SPAN / 2, c.lng - MIN_SPAN / 2],
+                        [c.lat + MIN_SPAN / 2, c.lng + MIN_SPAN / 2]]);
+  }
+  mapObj.map.fitBounds(b.pad(0.3), { animate: true });
+
+  setTimeout(() => {
+    for (const shape of _spawnShapesByEntry.get(entryName) || []){
+      const el = shape.getElement?.() || shape._path;
+      if (!el) continue;
+      el.classList.remove("spawn-zoom-pulse");
+      void el.getBoundingClientRect();
+      el.classList.add("spawn-zoom-pulse");
+      setTimeout(() => el.classList.remove("spawn-zoom-pulse"), 2400);
+    }
+  }, 80);
+  return true;
+}
+
+
 function drawDino(name){
   clearDraw();
 
@@ -976,6 +1043,19 @@ function drawEntry(entryName, rarityScore){
       }).addTo(mapObj.layer);
       rect.bindTooltip(tipHtml, tipOpts);
       wireLinkedHighlight(rect);
+      _registerSpawnShape(entryName, rect);
+
+      // Visibility floor: point-sized boxes get a constant-size dashed
+      // ring so they stay findable at any zoom.
+      if (w < 6 && h < 6){
+        const halo = L.circleMarker([y + h / 2, x + w / 2], {
+          radius: 8, color: style.color, weight: 2, fill: false,
+          opacity: 0.75, dashArray: "2 4", pane: "spawnPane"
+        }).addTo(mapObj.layer);
+        halo.bindTooltip(tipHtml, tipOpts);
+        wireLinkedHighlight(halo);
+        _registerSpawnShape(entryName, halo);
+      }
     }
 
     // points
@@ -1001,6 +1081,7 @@ function drawEntry(entryName, rarityScore){
       }).addTo(mapObj.layer);
       ptMarker.bindTooltip(tipHtml, tipOpts);
       wireLinkedHighlight(ptMarker);
+      _registerSpawnShape(entryName, ptMarker);
     }
   }
 }
@@ -1040,6 +1121,22 @@ function updateLayerPicker(geom){
   container.appendChild(bar);
   _layerPickerEl = bar;
 }
+
+function reapplyActiveLayer(){
+  // After a dock rebuild (source change), the overlay shows the base
+  // (layer 0) image. Re-apply the active layer's image and rebuild the
+  // picker so UI and imagery agree.
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  if (!geom?.usesLayers){
+    State.activeLayer = 0;
+    return;
+  }
+  const layer = geom.layers?.[State.activeLayer];
+  if (layer?.img && mapObj?.overlay) mapObj.overlay.setUrl(layer.img);
+  updateLayerPicker(geom);
+}
+
 
 function switchLayer(layerIdx, geomOverride){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
@@ -1574,6 +1671,7 @@ function toggleMapEntriesPanel(){
 
 
 function clearDraw(){
+  _spawnShapesByEntry.clear();
   mapObj?.layer.clearLayers();
   // Clean up item-view foliage layer (not the toggle state)
   if (typeof _itemFoliageLayer !== "undefined" && _itemFoliageLayer){
@@ -2949,7 +3047,7 @@ function installCopyDelegation(){
       if (Number.isInteger(idx)) {
         const mapMeta = MAPS.find(m => m.id === State.mapId);
         const geom = Global.mapGeom.get(mapMeta?.geomShort);
-        const note = (geom?.pois?.explorerNotes || []).find(n => n[0] === idx);
+        const note = (geom?.pois?.explorerNotes || []).find(n => noteStd(n)[0] === idx);
         if (note) openNoteView(note);
       }
       return;
@@ -4195,7 +4293,7 @@ function isDossierNote(name) {
 }
 
 function noteTooltipHtml(note, { hideJump = false } = {}) {
-  const [idx, name, ue_x, ue_y] = note;
+  const [idx, name, ue_x, ue_y] = noteStd(note);
   const gps = ueToGps(ue_x, ue_y);
   const gpsStr = gps ? `${gps.lat.toFixed(1)}, ${gps.lon.toFixed(1)}` : "N/A";
   const type = isDossierNote(name) ? "Dossier" : "Note";
