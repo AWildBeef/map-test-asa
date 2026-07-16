@@ -488,9 +488,6 @@ async function loadSelectedSource() {
   rebuildSelectionSelect();
   applyEmbedRestrictions();
   renderDock();
-  // renderDock rebuilds base (layer 0) imagery — put the active layer's
-  // image + picker state back so a source change doesn't desync them.
-  if (typeof reapplyActiveLayer === "function") reapplyActiveLayer();
   render();
   if (isPanelVisible("mapEntriesPanel")) {
     renderMapEntriesPanel();
@@ -1595,18 +1592,27 @@ function missionLootItemIds(missionClass){
 
   const out = [];
 
-  for (const structClass of (Array.isArray(m.ls) ? m.ls : [])){
-    const ls = lootData().ls?.[structClass];
-    if (!ls) continue;
-
-    for (const setRow of (Array.isArray(ls.s) ? ls.s : [])){
-      for (const entry of (Array.isArray(setRow?.e) ? setRow.e : [])){
+  // Resolve a list of set rows through the SAME machinery the Loot Sets tab
+  // uses: inline entries plus override (si-indexed lootset) entries.
+  const collect = (setRows) => {
+    for (const setRow of (Array.isArray(setRows) ? setRows : [])){
+      const { allEntries } = lootSetEntriesFromRow(setRow);
+      for (const entry of allEntries){
         for (const iid of (Array.isArray(entry?.i) ? entry.i : [])){
           if (Number.isInteger(iid)) out.push(iid);
         }
       }
     }
+  };
+
+  // Loot-structure route (outpost / Lost Colony missions)
+  for (const structClass of (Array.isArray(m.ls) ? m.ls : [])){
+    const ls = lootData().ls?.[structClass];
+    if (ls) collect(ls.s);
   }
+
+  // Own-sets route (hunt missions and other set-carrying missions)
+  collect(m.s);
 
   return [...new Set(out)];
 }
@@ -2623,25 +2629,7 @@ function rebuildLootIndices(){
     }
   }
 
-  // --- foliage / resource-node items on this map ---
-  // Every harvest component present in the map's resource data (layer-
-  // scoped on layered maps) contributes its items — this is how
-  // foliage-only items like Sap or Element Shard reach the dropdown.
-  const foliageItemIds = new Set();
-  if (typeof resourceNodesForCurrentMap === "function"){
-    const rn = resourceNodesForCurrentMap();
-    const hi = loot.hi || [];
-    for (const hcIdStr of Object.keys(rn || {})){
-      const cls = hi[Number(hcIdStr)];
-      const comp = cls ? loot.dh?.[cls] : null;
-      if (!comp) continue;
-      for (const iid of (comp.i || [])){
-        foliageItemIds.add(iid);
-      }
-    }
-  }
-
-  for (const itemId of [...dinoDropItemIds, ...dinoHarvestItemIds, ...foliageItemIds]){
+  for (const itemId of [...dinoDropItemIds, ...dinoHarvestItemIds]){
     State.mapItemIds.add(itemId);
     const itemRow = items.i?.[String(itemId)];
     if (!itemRow) continue;
@@ -2655,7 +2643,7 @@ function rebuildLootIndices(){
     }
   }
 
-  // Rebuild itemNames to include dino + foliage loot items
+  // Rebuild itemNames to include dino loot items
   State.itemNames = [...State.itemNameToIds.keys()].sort((a,b)=>a.localeCompare(b));
 
   // --- boss reward items + engram unlocks on this map ---
@@ -4290,14 +4278,11 @@ function rebuildSelectionSelect() {
   } else if (State.mode === "note") {
     placeholder = "(Select a Note or Dossier)";
     const allNotes = getNoteOptionsForCurrentMap();
-    options = allNotes.map(raw => {
-      const n = noteStd(raw);
-      return {
-        value: `note:${n[0]}`,
-        label: n[1],                // clean label, no #N suffix
-        searchExtra: String(n[0]),  // index kept for hidden search matching
-      };
-    });
+    options = allNotes.map(n => ({
+      value: `note:${n[0]}`,
+      label: n[1],                // clean label, no #N suffix
+      searchExtra: String(n[0]),  // index kept for hidden search matching
+    }));
   }
 
   UI.dinoSelect.innerHTML = "";
