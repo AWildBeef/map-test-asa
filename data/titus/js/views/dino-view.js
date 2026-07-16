@@ -341,24 +341,6 @@ function renderDinoInventorySection(d){
     `);
   }
 
-  // ── Passive Generation ──
-  const gi = invObj.gi || [];
-  if (gi.length){
-    const rows = gi.map(entry => {
-      const name = itemDisplayNameById(entry[0]);
-      const interval = fmtDuration(entry[1]);
-      const max = entry[2];
-      return `<div class="dv-inv-row">
-        <span class="loot-item-tag" data-item-id="${escapeAttr(String(entry[0]))}">${escapeHtml(name)}</span>
-        <span class="dv-inv-detail">every <b>${escapeHtml(interval)}</b> · max <b>${escapeHtml(String(max))}</b></span>
-      </div>`;
-    }).join("");
-    sections.push(`
-      <div class="iv-eyebrow">Generates</div>
-      ${rows}
-    `);
-  }
-
   // ── Spoil Multipliers ──
   const sm = invObj.sm || [];
   if (sm.length){
@@ -824,15 +806,39 @@ function renderDinoLootSetCard(setRow, idx, dinoBp, allRows, dropComp){
 }
 
 
+// Passively-generated items for a dino (from its tamed inventory component).
+function dinoPassiveGenHtml(d){
+  const dinoObj = getDinoObjByBp(d?.bpPath);
+  if (dinoObj?.iv == null) return "";
+  const invObj = itemData()?.inv?.[String(dinoObj.iv)];
+  const gi = invObj?.gi || [];
+  if (!gi.length) return "";
+  const rows = gi.map(entry => {
+    const name = itemDisplayNameById(entry[0]);
+    const interval = fmtDuration(entry[1]);
+    const max = entry[2];
+    return `<div class="dv-inv-row">
+      <span class="loot-item-tag" data-item-id="${escapeAttr(String(entry[0]))}">${escapeHtml(name)}</span>
+      <span class="dv-inv-detail">every <b>${escapeHtml(interval)}</b> · max <b>${escapeHtml(String(max))}</b></span>
+    </div>`;
+  }).join("");
+  return `
+    <div class="info-section">
+      <div class="iv-eyebrow">Passively Generates</div>
+      ${rows}
+    </div>`;
+}
+
 function renderDinoTabLoot(d){
   const bp = d?.bpPath;
   if (!bp) return `<div class="info-section"><div class="info-empty">No loot data</div></div>`;
 
   const dropComp = dropCompForDino(bp);
   const harvestComp = harvestCompForDino(bp);
+  const genHtml = dinoPassiveGenHtml(d);
 
   if (!dropComp && !harvestComp){
-    return `<div class="info-section"><div class="info-empty">No loot data for this dino</div></div>`;
+    return genHtml || `<div class="info-section"><div class="info-empty">No loot data for this dino</div></div>`;
   }
 
   let html = "";
@@ -881,6 +887,8 @@ function renderDinoTabLoot(d){
         </div>
       </div>`;
   }
+
+  html += genHtml;
 
   return html;
 }
