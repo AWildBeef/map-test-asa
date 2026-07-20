@@ -42,7 +42,7 @@ const MAPS = [
     ],
     defaultBg:"sat"
   },
-  { id:"Genesis", geomShort:"Genesis", mapCode:"Genesis 1", image:"genesis.webp" }
+  { id:"Genesis 1", geomShort:"Genesis", mapCode:"Gen", image:"genesis.webp" }
 ];
 const jsonCache = {};
 
