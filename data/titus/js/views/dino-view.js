@@ -879,6 +879,11 @@ function renderDinoTabLoot(d){
             >${allOpen ? "Collapse All" : "Expand All"}</button>
           ` : ""}
         </div>
+        ${Array.isArray(dropComp.gd) && dropComp.gd.length
+          ? `<div class="lc-mech">Always drops: ${dropComp.gd.map(id =>
+              `<span class="loot-item-tag" data-item-id="${escapeAttr(String(id))}">${escapeHtml(itemDisplayNameById(id))}</span>`
+            ).join(" ")}</div>`
+          : ""}
         ${mn != null && mx != null
           ? `<div class="lc-mech">Their drop bag will contain <b>${escapeHtml(fmtRangeCollapsed(mn, mx))}</b> of the item sets below.</div>`
           : ""}
