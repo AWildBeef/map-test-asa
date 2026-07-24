@@ -176,10 +176,17 @@ function renderExportPanel(){
         { id: "current_source",    label: "All Maps (Source)" }
       ]
     : isNote
-    ? [
-        { id: "current_map",       label: "Current Map" },
-        { id: "current_source",    label: "All Maps" }
-      ]
+    ? (() => {
+        const mapMeta = MAPS.find(m => m.id === State.mapId);
+        const geom = Global.mapGeom.get(mapMeta?.geomShort);
+        const hasLayers = geom?.usesLayers && geom?.layers?.length > 1;
+        const layerName = hasLayers ? (geom.layers[State.activeLayer]?.n || `Layer ${State.activeLayer}`) : "";
+        const opts = [];
+        if (hasLayers) opts.push({ id: "current_layer", label: `Current Layer (${layerName})` });
+        opts.push({ id: "current_map", label: "Current Map" });
+        opts.push({ id: "current_source", label: "All Maps" });
+        return opts;
+      })()
     : /* map */
     [
         { id: "current_map",       label: "Current Map" },

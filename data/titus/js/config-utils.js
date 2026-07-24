@@ -1140,11 +1140,14 @@ async function buildNoteReport(){
 
   // Collect maps to export
   const mapsToExport = [];
-  if (scope === "current_map"){
+  if (scope === "current_map" || scope === "current_layer"){
     mapsToExport.push(MAPS.find(m => m.id === State.mapId));
   } else {
     for (const m of MAPS) mapsToExport.push(m);
   }
+
+  // For current_layer scope, filter to only notes on the active layer.
+  const filterLayer = scope === "current_layer" ? State.activeLayer : null;
 
   // Ensure geom data is loaded for all maps we need
   for (const mapMeta of mapsToExport){
@@ -1167,6 +1170,11 @@ async function buildNoteReport(){
     const mapNotes = [];
     for (const note of notes){
       if (!Array.isArray(note) || note.length < 2) continue;
+      // Layer filtering for current_layer scope
+      if (filterLayer != null){
+        const nl = noteLayerOf(note);
+        if (nl != null && nl !== filterLayer) continue;
+      }
       const [idx, name, ue_x, ue_y, ue_z] = noteStd(note);
       const entry = { name };
       if (opts.includeIndex) entry.index = idx;
@@ -1185,7 +1193,7 @@ async function buildNoteReport(){
       mapNotes.push(entry);
     }
 
-    if (scope === "current_map"){
+    if (scope === "current_map" || scope === "current_layer"){
       return mapNotes;
     }
     result[mapMeta.id] = mapNotes;
