@@ -65,11 +65,19 @@ function renderNotePanel(note) {
 
   setInfoPanelTitle(name);
   setInfoPanelHTML(`
-    <div class="info-section">
+    <div class="info-section" style="padding-top:4px;">
       <div class="lc-chips">
         <span class="lc-chip">${dossier ? "Dino Dossier" : "Explorer Note"}</span>
         <span class="lc-chip">Index <b>${escapeHtml(String(idx))}</b></span>
-        <span class="lc-chip">GPS <b>${escapeHtml(gpsStr)}</b></span>
+      </div>
+    </div>
+    <div class="info-section">
+      <div class="iv-eyebrow">GPS</div>
+      <div class="iv-cmd-lines">
+        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(gpsStr)}">
+          <span class="iv-cmd-tag">GPS</span>
+          <span class="iv-cmd-text">${escapeHtml(gpsStr)}</span>
+        </div>
       </div>
     </div>
     <div class="info-section">
@@ -88,10 +96,11 @@ function renderNotePanel(note) {
     </div>
     <div class="info-section">
       <div class="iv-eyebrow">UE Coordinates</div>
-      <div class="lc-chips">
-        <span class="lc-chip">X <b>${escapeHtml(String(Math.round(ue_x)))}</b></span>
-        <span class="lc-chip">Y <b>${escapeHtml(String(Math.round(ue_y)))}</b></span>
-        <span class="lc-chip">Z <b>${escapeHtml(String(Math.round(ue_z || 0)))}</b></span>
+      <div class="iv-cmd-lines">
+        <div class="iv-cmd-line copy-on-click" data-copy="${escapeAttr(`${Math.round(ue_x)} ${Math.round(ue_y)} ${Math.round(ue_z || 0)}`)}">
+          <span class="iv-cmd-tag">XYZ</span>
+          <span class="iv-cmd-text">X ${escapeHtml(String(Math.round(ue_x)))}  Y ${escapeHtml(String(Math.round(ue_y)))}  Z ${escapeHtml(String(Math.round(ue_z || 0)))}</span>
+        </div>
       </div>
     </div>
   `);

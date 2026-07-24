@@ -147,12 +147,14 @@ function renderExportPanel(){
   const isMap   = type === "map";
   const isCrate = type === "crate";
   const isItem  = type === "item";
+  const isNote  = type === "note";
 
   const dinoOpts  = exportPanelState.dino;
   const entryOpts = exportPanelState.entry;
   const mapOpts   = exportPanelState.map;
   const crateOpts = exportPanelState.crate;
   const itemOpts  = exportPanelState.item;
+  const noteOpts  = exportPanelState.note;
 
   // Scope options vary by report type
   const scopeOptions = (isCrate || isItem)
@@ -172,6 +174,11 @@ function renderExportPanel(){
         { id: "current_selection", label: "Selected Entry" },
         { id: "current_map",       label: "Current Map" },
         { id: "current_source",    label: "All Maps (Source)" }
+      ]
+    : isNote
+    ? [
+        { id: "current_map",       label: "Current Map" },
+        { id: "current_source",    label: "All Maps" }
       ]
     : /* map */
     [
@@ -193,6 +200,7 @@ function renderExportPanel(){
         <button type="button" class="fp-tab ${isMap   ? "is-on" : ""}" data-export-type="map">Map</button>
         <button type="button" class="fp-tab ${isCrate ? "is-on" : ""}" data-export-type="crate">Crates</button>
         <button type="button" class="fp-tab ${isItem  ? "is-on" : ""}" data-export-type="item">Items</button>
+        <button type="button" class="fp-tab ${isNote  ? "is-on" : ""}" data-export-type="note">Notes</button>
       </div>
     </div>
 
@@ -396,6 +404,27 @@ function renderExportPanel(){
           <label class="fp-row">
             <input type="checkbox" data-export-opt="item.includeMissions" ${itemOpts.includeMissions ? "checked" : ""}>
             <span>Include missions as sources</span>
+          </label>
+        </div>
+      ` : ""}
+
+      ${isNote ? `
+        <div class="export-group">
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="note.includeIndex" ${noteOpts.includeIndex ? "checked" : ""}>
+            <span>Note index</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="note.includeGps" ${noteOpts.includeGps ? "checked" : ""}>
+            <span>In-game GPS coordinates</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="note.includeUeCoords" ${noteOpts.includeUeCoords ? "checked" : ""}>
+            <span>UE coordinates</span>
+          </label>
+          <label class="fp-row">
+            <input type="checkbox" data-export-opt="note.includeCommands" ${noteOpts.includeCommands ? "checked" : ""}>
+            <span>Teleport & unlock commands</span>
           </label>
         </div>
       ` : ""}
