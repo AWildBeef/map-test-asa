@@ -5190,6 +5190,11 @@ body[data-mode="item"] #dinoInfoPanel[data-tab="bosses"] .info-row{
 }
 
 /* ── Note tooltip dark background ─────────────────────────────── */
+/* ── Note View panel ───────────────────────────────────────── */
+body[data-mode="note"] #dinoInfoPanel .fp-body {
+  padding-top: 8px;
+}
+
 .leaflet-tooltip.note-tooltip {
   background: rgba(18, 22, 30, 0.92);
   border: 1px solid rgba(255,255,255,.12);

@@ -431,7 +431,10 @@ function renderExportPanel(){
     </div>
 
     <div class="fp-row fp-col" style="margin-top:10px;">
-      <button type="button" class="fp-tab is-on" data-export-run="json">Download JSON</button>
+      <div class="fp-row" style="gap:6px;">
+        <button type="button" class="fp-tab is-on" data-export-run="json" style="flex:1;">Download JSON</button>
+        <button type="button" class="fp-tab" data-export-run="txt" style="flex:1;">Download TXT</button>
+      </div>
     </div>
   `;
 
@@ -466,6 +469,10 @@ function renderExportPanel(){
   const runBtn = body.querySelector("[data-export-run='json']");
   if (runBtn){
     runBtn.onclick = () => exportCurrentReportJSON();
+  }
+  const txtBtn = body.querySelector("[data-export-run='txt']");
+  if (txtBtn){
+    txtBtn.onclick = () => exportCurrentReportTXT();
   }
 }
 
@@ -1511,6 +1518,18 @@ function downloadJSON(filename, data){
   a.click();
   a.remove();
 
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function downloadText(filename, text){
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 

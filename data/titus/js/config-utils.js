@@ -1134,7 +1134,7 @@ function buildExportReport(){
   return buildMapReport();
 }
 
-function buildNoteReport(){
+async function buildNoteReport(){
   const opts = exportPanelState.note;
   const scope = exportPanelState.scope;
 
@@ -1143,8 +1143,18 @@ function buildNoteReport(){
   if (scope === "current_map"){
     mapsToExport.push(MAPS.find(m => m.id === State.mapId));
   } else {
-    // All maps
     for (const m of MAPS) mapsToExport.push(m);
+  }
+
+  // Ensure geom data is loaded for all maps we need
+  for (const mapMeta of mapsToExport){
+    if (!mapMeta) continue;
+    if (!Global.mapGeom.has(mapMeta.geomShort)){
+      try {
+        const geom = await loadJSON(`${PATHS.geomDir}/${mapMeta.geomShort}_geom.json`);
+        Global.mapGeom.set(mapMeta.geomShort, geom);
+      } catch(e) { /* map geom not available, skip */ }
+    }
   }
 
   const result = {};
@@ -1183,20 +1193,58 @@ function buildNoteReport(){
   return result;
 }
 
-function exportCurrentReportJSON(){
-  const report = buildExportReport();
+async function exportCurrentReportJSON(){
+  const report = await Promise.resolve(buildExportReport());
   const src = currentSourceMeta();
-
   const type = exportPanelState.reportType;
 
   const fileBase = [
     "export",
     type,
     safeFilePart(src.label || src.id || "source"),
-    safeFilePart(State.mapId || "")
+    type === "note" && exportPanelState.scope !== "current_map" ? "all_maps" : safeFilePart(State.mapId || "")
   ].filter(Boolean).join("_");
 
   downloadJSON(`${fileBase}.json`, report);
+}
+
+async function exportCurrentReportTXT(){
+  const report = await Promise.resolve(buildExportReport());
+  const src = currentSourceMeta();
+  const type = exportPanelState.reportType;
+
+  const fileBase = [
+    "export",
+    type,
+    safeFilePart(src.label || src.id || "source"),
+    type === "note" && exportPanelState.scope !== "current_map" ? "all_maps" : safeFilePart(State.mapId || "")
+  ].filter(Boolean).join("_");
+
+  downloadText(`${fileBase}.txt`, reportToText(report, type));
+}
+
+function reportToText(report, type){
+  if (type === "note") return noteReportToText(report);
+  return JSON.stringify(report, null, 2);
+}
+
+function noteReportToText(report){
+  const lines = [];
+  const renderNotes = (notes, mapLabel) => {
+    if (mapLabel) lines.push(`\n=== ${mapLabel} ===`);
+    for (const n of notes){
+      const parts = [n.name];
+      if (n.index != null) parts[0] = `[${n.index}] ${n.name}`;
+      if (n.gps) parts.push(`GPS: ${n.gps.lat}, ${n.gps.lon}`);
+      if (n.ue) parts.push(`UE: ${n.ue.x} ${n.ue.y} ${n.ue.z}`);
+      if (n.teleportCommand) parts.push(`TP: ${n.teleportCommand}`);
+      if (n.unlockCommand) parts.push(`Unlock: ${n.unlockCommand}`);
+      lines.push(parts.join("  |  "));
+    }
+  };
+  if (Array.isArray(report)) renderNotes(report);
+  else for (const [mapName, notes] of Object.entries(report)) renderNotes(notes, mapName);
+  return lines.join("\n");
 }
 
 
