@@ -1168,6 +1168,8 @@ async function buildNoteReport(){
     if (!notes.length) continue;
 
     const mapNotes = [];
+    const usesLayers = geom.usesLayers && geom.layers?.length > 1;
+
     for (const note of notes){
       if (!Array.isArray(note) || note.length < 2) continue;
       // Layer filtering for current_layer scope
@@ -1179,7 +1181,21 @@ async function buildNoteReport(){
       const entry = { name };
       if (opts.includeIndex) entry.index = idx;
       if (opts.includeGps){
-        const gps = ueToGps(ue_x, ue_y);
+        // For layered maps, use the note's own layer bounds for GPS conversion.
+        let noteBounds = null;
+        if (usesLayers){
+          const nl = noteLayerOf(note);
+          const layerIdx = nl != null ? nl : 0;
+          const lb = geom.layers[layerIdx]?.bounds;
+          if (Array.isArray(lb) && lb.length >= 4)
+            noteBounds = { minX: lb[0], maxX: lb[1], minY: lb[2], maxY: lb[3] };
+        }
+        if (!noteBounds){
+          const b = geom.bounds;
+          if (Array.isArray(b) && b.length >= 4)
+            noteBounds = { minX: b[0], maxX: b[1], minY: b[2], maxY: b[3] };
+        }
+        const gps = ueToGpsWithBounds(ue_x, ue_y, noteBounds);
         if (gps) entry.gps = { lat: Number(gps.lat.toFixed(1)), lon: Number(gps.lon.toFixed(1)) };
       }
       if (opts.includeUeCoords){

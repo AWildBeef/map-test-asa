@@ -1752,10 +1752,23 @@ function clearDraw(){
 ============================================================ */
 
 // geom.bounds format: [minX, maxX, minY, maxY]  (UE world units, flat array)
+// On layered maps, use the active layer's bounds (each layer can have its own
+// UE world extent, e.g. Genesis Ocean is much larger than the main layer).
 function boundsForCurrentMap() {
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
-  const b = geom?.bounds;
+  if (!geom) return null;
+
+  // Check for layer-specific bounds first
+  if (geom.usesLayers && geom.layers?.length > State.activeLayer){
+    const layerBounds = geom.layers[State.activeLayer]?.bounds;
+    if (Array.isArray(layerBounds) && layerBounds.length >= 4){
+      return { minX: layerBounds[0], maxX: layerBounds[1], minY: layerBounds[2], maxY: layerBounds[3] };
+    }
+  }
+
+  // Fallback to top-level bounds
+  const b = geom.bounds;
   if (!Array.isArray(b) || b.length < 4) return null;
   return { minX: b[0], maxX: b[1], minY: b[2], maxY: b[3] };
 }
@@ -1764,6 +1777,11 @@ function boundsForCurrentMap() {
 // Returns null if bounds are unavailable.
 function ueToGps(ue_x, ue_y) {
   const b = boundsForCurrentMap();
+  return b ? ueToGpsWithBounds(ue_x, ue_y, b) : null;
+}
+
+// Convert UE coords to GPS using explicit bounds { minX, maxX, minY, maxY }.
+function ueToGpsWithBounds(ue_x, ue_y, b){
   if (!b) return null;
   const lon = (ue_x - b.minX) / (b.maxX - b.minX) * 100;
   const lat = (ue_y - b.minY) / (b.maxY - b.minY) * 100;
