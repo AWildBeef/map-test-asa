@@ -147,14 +147,12 @@ function renderExportPanel(){
   const isMap   = type === "map";
   const isCrate = type === "crate";
   const isItem  = type === "item";
-  const isNote  = type === "note";
 
   const dinoOpts  = exportPanelState.dino;
   const entryOpts = exportPanelState.entry;
   const mapOpts   = exportPanelState.map;
   const crateOpts = exportPanelState.crate;
   const itemOpts  = exportPanelState.item;
-  const noteOpts  = exportPanelState.note;
 
   // Scope options vary by report type
   const scopeOptions = (isCrate || isItem)
@@ -175,18 +173,6 @@ function renderExportPanel(){
         { id: "current_map",       label: "Current Map" },
         { id: "current_source",    label: "All Maps (Source)" }
       ]
-    : isNote
-    ? (() => {
-        const mapMeta = MAPS.find(m => m.id === State.mapId);
-        const geom = Global.mapGeom.get(mapMeta?.geomShort);
-        const hasLayers = geom?.usesLayers && geom?.layers?.length > 1;
-        const layerName = hasLayers ? (geom.layers[State.activeLayer]?.n || `Layer ${State.activeLayer}`) : "";
-        const opts = [];
-        if (hasLayers) opts.push({ id: "current_layer", label: `Current Layer (${layerName})` });
-        opts.push({ id: "current_map", label: "Current Map" });
-        opts.push({ id: "current_source", label: "All Maps" });
-        return opts;
-      })()
     : /* map */
     [
         { id: "current_map",       label: "Current Map" },
@@ -207,7 +193,6 @@ function renderExportPanel(){
         <button type="button" class="fp-tab ${isMap   ? "is-on" : ""}" data-export-type="map">Map</button>
         <button type="button" class="fp-tab ${isCrate ? "is-on" : ""}" data-export-type="crate">Crates</button>
         <button type="button" class="fp-tab ${isItem  ? "is-on" : ""}" data-export-type="item">Items</button>
-        <button type="button" class="fp-tab ${isNote  ? "is-on" : ""}" data-export-type="note">Notes</button>
       </div>
     </div>
 
@@ -414,34 +399,10 @@ function renderExportPanel(){
           </label>
         </div>
       ` : ""}
-
-      ${isNote ? `
-        <div class="export-group">
-          <label class="fp-row">
-            <input type="checkbox" data-export-opt="note.includeIndex" ${noteOpts.includeIndex ? "checked" : ""}>
-            <span>Note index</span>
-          </label>
-          <label class="fp-row">
-            <input type="checkbox" data-export-opt="note.includeGps" ${noteOpts.includeGps ? "checked" : ""}>
-            <span>In-game GPS coordinates</span>
-          </label>
-          <label class="fp-row">
-            <input type="checkbox" data-export-opt="note.includeUeCoords" ${noteOpts.includeUeCoords ? "checked" : ""}>
-            <span>UE coordinates</span>
-          </label>
-          <label class="fp-row">
-            <input type="checkbox" data-export-opt="note.includeCommands" ${noteOpts.includeCommands ? "checked" : ""}>
-            <span>Teleport & unlock commands</span>
-          </label>
-        </div>
-      ` : ""}
     </div>
 
     <div class="fp-row fp-col" style="margin-top:10px;">
-      <div class="fp-row" style="gap:6px;">
-        <button type="button" class="fp-tab is-on" data-export-run="json" style="flex:1;">Download JSON</button>
-        <button type="button" class="fp-tab" data-export-run="txt" style="flex:1;">Download TXT</button>
-      </div>
+      <button type="button" class="fp-tab is-on" data-export-run="json">Download JSON</button>
     </div>
   `;
 
@@ -476,10 +437,6 @@ function renderExportPanel(){
   const runBtn = body.querySelector("[data-export-run='json']");
   if (runBtn){
     runBtn.onclick = () => exportCurrentReportJSON();
-  }
-  const txtBtn = body.querySelector("[data-export-run='txt']");
-  if (txtBtn){
-    txtBtn.onclick = () => exportCurrentReportTXT();
   }
 }
 
@@ -1528,18 +1485,6 @@ function downloadJSON(filename, data){
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function downloadText(filename, text){
-  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
 
 function renderMapEntriesList(){
   const panel = ensureMapEntriesPanel();
@@ -1752,23 +1697,10 @@ function clearDraw(){
 ============================================================ */
 
 // geom.bounds format: [minX, maxX, minY, maxY]  (UE world units, flat array)
-// On layered maps, use the active layer's bounds (each layer can have its own
-// UE world extent, e.g. Genesis Ocean is much larger than the main layer).
 function boundsForCurrentMap() {
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
-  if (!geom) return null;
-
-  // Check for layer-specific bounds first
-  if (geom.usesLayers && geom.layers?.length > State.activeLayer){
-    const layerBounds = geom.layers[State.activeLayer]?.bounds;
-    if (Array.isArray(layerBounds) && layerBounds.length >= 4){
-      return { minX: layerBounds[0], maxX: layerBounds[1], minY: layerBounds[2], maxY: layerBounds[3] };
-    }
-  }
-
-  // Fallback to top-level bounds
-  const b = geom.bounds;
+  const b = geom?.bounds;
   if (!Array.isArray(b) || b.length < 4) return null;
   return { minX: b[0], maxX: b[1], minY: b[2], maxY: b[3] };
 }
@@ -1777,11 +1709,6 @@ function boundsForCurrentMap() {
 // Returns null if bounds are unavailable.
 function ueToGps(ue_x, ue_y) {
   const b = boundsForCurrentMap();
-  return b ? ueToGpsWithBounds(ue_x, ue_y, b) : null;
-}
-
-// Convert UE coords to GPS using explicit bounds { minX, maxX, minY, maxY }.
-function ueToGpsWithBounds(ue_x, ue_y, b){
   if (!b) return null;
   const lon = (ue_x - b.minX) / (b.maxX - b.minX) * 100;
   const lat = (ue_y - b.minY) / (b.maxY - b.minY) * 100;
@@ -4407,7 +4334,7 @@ function drawExplorerNotePois(notes) {
       layerIdx = null;
     } else continue;
 
-    if (isDossierNote(noteIdx)) continue;
+    if (isDossierNote(name)) continue;
 
     const latlng = layerIdx != null
       ? ueToLeafletForLayer(ueX, ueY, layerIdx)
@@ -4455,7 +4382,7 @@ function drawDossierPois(notes) {
       layerIdx = null;
     } else continue;
 
-    if (!isDossierNote(noteIdx)) continue;
+    if (!isDossierNote(name)) continue;
 
     const latlng = layerIdx != null
       ? ueToLeafletForLayer(ueX, ueY, layerIdx)
