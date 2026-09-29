@@ -3909,16 +3909,28 @@ function missionTooltipHtml(point, legend){
     return `<div class="poi-tip-title">Mission</div>`;
   }
 
-  const blocks = groups.map(g => `
+  const blocks = groups.map(g => {
+    // Collapse identical lines. A dispatcher can offer many variants that
+    // render the same; listing the line 20 times is noise, not information.
+    const counts = new Map();
+    for (const v of g.variants){
+      const line = missionVariantLine(v, v.w);
+      counts.set(line, (counts.get(line) || 0) + 1);
+    }
+
+    const lines = [...counts.entries()].map(([line, n]) => `
+      <div class="poi-tip-line">${escapeHtml(n > 1 ? `${line} ×${n}` : line)}</div>
+    `).join("");
+
+    return `
     <div class="poi-tip-block">
       <div class="poi-tip-title">${escapeHtml(g.name)}</div>
       <div class="poi-tip-lines">
-        ${g.variants.map(v => `
-          <div class="poi-tip-line">${escapeHtml(missionVariantLine(v, v.w))}</div>
-        `).join("")}
+        ${lines}
       </div>
     </div>
-  `).join("");
+  `;
+  }).join("");
 
   // Dispatcher id — debug aid, shown small under the missions
   const disp = typeof point?.d === "string" && point.d
@@ -4825,9 +4837,45 @@ function shortBpName(bp){
 
 
 function fmtWeightShort(v){
+  // Guard null/undefined explicitly: Number(null) is 0, which is finite, so
+  // legacy rows with no weight were rendering a bogus "(0)".
+  if (v == null || v === "") return "";
+
   const n = Number(v);
   if (!Number.isFinite(n)) return "";
   return fmt(n);
+}
+
+
+// Structural tokens that carry no information for the reader once the legend
+// group name is already shown above the line ("Pirate Camp", "Market", ...).
+const MISSION_LABEL_NOISE = new Set([
+  "missiontype", "mission", "missiontypes",
+  "gen", "lc", "genesis",
+  "outpost", "land", "ocean"
+]);
+
+
+// Fallback label for legend rows that carry no kind/size/difficulty. Turns
+// "MissionType_Gen_Outpost_Land_ArcheologySite_1_C" into "Archeology Site 1"
+// so sibling variants sharing one display name stay tellable apart.
+function missionVariantFallbackLabel(bp){
+  const cls = bpClass(normalizeBp(bp)).replace(/_C$/, "");
+  if (!cls) return "";
+
+  const tokens = cls.split("_").filter(Boolean);
+
+  // Drop leading structural tokens only — an inner "Land" or "Ocean" may be
+  // the actual subject and is left alone.
+  while (tokens.length > 1 && MISSION_LABEL_NOISE.has(tokens[0].toLowerCase())){
+    tokens.shift();
+  }
+
+  return tokens
+    .map(t => t.replace(/([a-z0-9])([A-Z])/g, "$1 $2"))
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 
@@ -4839,6 +4887,10 @@ function missionVariantLine(meta, weight){
   if (meta?.d) parts.push(meta.d);
 
   let line = parts.join(" • ");
+
+  // No kind/size/difficulty in the legend row — fall back to the blueprint so
+  // the line still identifies which variant it is.
+  if (!line) line = missionVariantFallbackLabel(meta?.bp);
   if (!line) line = "Mission Variant";
 
   const w = fmtWeightShort(weight);

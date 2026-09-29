@@ -2497,11 +2497,23 @@ function rebuildLootIndices(){
   const showMissions = typeFilter === "all" || typeFilter === "mission";
 
   if (showMissions) {
+    // Missions whose every loot-structure ref is missing from loot.ls produce
+    // no dropdown row at all and fail silently. Collect them and warn once so
+    // an export gap is visible instead of looking like a UI bug.
+    const danglingStructRefs = new Map();
+
     for (const missionClass of missionClasses){
       const m = loot.m?.[missionClass];
       if (!m) continue;
 
       const structs = Array.isArray(m.ls) ? m.ls : [];
+
+      const unresolved = structs.filter(s => s && !loot.ls?.[s]);
+      const hasOwnSets = Array.isArray(m.s) && m.s.length;
+      if (unresolved.length === structs.length && structs.length && !hasOwnSets){
+        danglingStructRefs.set(missionClass, unresolved);
+      }
+
       for (const structClass of structs){
         if (!structClass || !loot.ls?.[structClass]) continue;
 
@@ -2531,6 +2543,19 @@ function rebuildLootIndices(){
           lootStructClass: null
         });
       }
+    }
+
+    if (danglingStructRefs.size){
+      const missing = [...new Set([...danglingStructRefs.values()].flat())].sort();
+
+      console.warn(
+        `[loot] ${danglingStructRefs.size} mission(s) on ${State.mapId} have no ` +
+        `resolvable loot structure and were omitted from Crate View. ` +
+        `Missing from loot_global.ls:`,
+        missing,
+        "\nAffected missions:",
+        [...danglingStructRefs.keys()]
+      );
     }
   }
 
