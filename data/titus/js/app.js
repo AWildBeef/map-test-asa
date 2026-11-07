@@ -11,7 +11,7 @@ window.ASA_APP_MODULES = [
   "js/render-boot.js",
 ];
 
-const APP_VER = "5.12";
+const APP_VER = "5.13";
 
 (function loadSequentially(i = 0) {
   if (i >= window.ASA_APP_MODULES.length) return;

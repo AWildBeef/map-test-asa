@@ -39,9 +39,10 @@ function render() {
     drawDino(State.selection);
     drawPois();
   } else if (State.mode === "entry") {
+    if (spawnManagerFocus && !activeSpawnManagerForEntry(State.selection)) clearSpawnManagerFocus();
     clearDraw();
     const score = entryRarityForEntry(State.selection);
-    drawEntry(State.selection, score);
+    drawEntry(State.selection, score, activeSpawnManagerForEntry(State.selection));
     drawPois();
   } else if (State.mode === "crate") {
     drawCrate(State.selection);

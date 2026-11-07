@@ -25,6 +25,6 @@
   console.log("body classes:", document.body.className);
 
   const script = document.createElement("script");
-  script.src = "js/app.js?v=4";
+  script.src = "js/app.js?v=5.13";
   document.head.appendChild(script);
 })();

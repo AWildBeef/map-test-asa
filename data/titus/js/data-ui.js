@@ -4357,6 +4357,7 @@ function rebuildSelectionSelect() {
 
   UI.dinoSelect.onchange = () => {
     const newValue = UI.dinoSelect.value || "";
+    if (typeof clearSpawnManagerFocus === "function") clearSpawnManagerFocus();
     State.selection = newValue;
     State.selections[State.mode] = newValue;
     // For note mode, sync noteViewState.selected from the selection value

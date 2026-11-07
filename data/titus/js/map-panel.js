@@ -793,6 +793,8 @@ function initMap(img,size=[2048,2048]){
 
 
 async function onMapChanged(){
+  // A focus from one map must never reappear on another map.
+  clearSpawnManagerFocus();
 
   const mapMeta = MAPS.find(m => m.id === State.mapId);
 
@@ -848,6 +850,43 @@ async function onMapChanged(){
 }
 
 
+// An optional per-manager map filter: selecting a manager shows *only* its
+// boxes and points, without inventing a new global selection mode.
+let spawnManagerFocus = null;
+
+function clearSpawnManagerFocus(){
+  spawnManagerFocus = null;
+}
+
+function setSpawnManagerFocus(entryName, managerName){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  const valid = managerName && Object.prototype.hasOwnProperty.call(
+    geom?.entries?.[entryName]?.m || {}, managerName
+  );
+  spawnManagerFocus = valid ? { mapId: State.mapId, entryName, managerName } : null;
+}
+
+function activeSpawnManagerForEntry(entryName){
+  return (spawnManagerFocus?.mapId === State.mapId &&
+          spawnManagerFocus?.entryName === entryName) ? spawnManagerFocus.managerName : null;
+}
+
+function showSpawnManager(entryName, managerName){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const mgr = Global.mapGeom.get(mapMeta?.geomShort)?.entries?.[entryName]?.m?.[managerName];
+  if (!mgr) return false;
+
+  // In mod/group mode, an official manager may belong to a hidden entry.
+  // Allow the entry in the picker while inspecting its geometry.
+  if (typeof infoPanelState !== "undefined" && !activeSourceIsOfficial()) {
+    infoPanelState.showAllEntries = true;
+  }
+  if (typeof infoPanelState !== "undefined") infoPanelState.entryTab = "info";
+  openEntryView(entryName, { managerName });
+  return zoomToSpawnEntry(entryName, managerName);
+}
+
 // Shapes drawn per spawn entry — lets zoomToSpawnEntry pulse them.
 const _spawnShapesByEntry = new Map();
 function _registerSpawnShape(entryName, layer){
@@ -858,7 +897,7 @@ function _registerSpawnShape(entryName, layer){
 // Zoom the map to an entry's spawn zones on the current map. On layered
 // maps, hops to the layer that actually has zones if the active one has
 // none. Pulses the entry's shapes so tiny/blended boxes pop.
-function zoomToSpawnEntry(entryName){
+function zoomToSpawnEntry(entryName, managerName = null){
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
   const entry = geom?.entries?.[entryName];
@@ -871,7 +910,8 @@ function zoomToSpawnEntry(entryName){
     if (!perLayer.has(k)) perLayer.set(k, []);
     perLayer.get(k).push([y, x]);
   };
-  for (const mgr of Object.values(entry.m || {})){
+  for (const [name, mgr] of Object.entries(entry.m || {})){
+    if (managerName && name !== managerName) continue;
     for (const box of mgr.b || []){
       let li = 0, x, y, w, h;
       if (usesLayers) [li, x, y, w, h] = box; else [x, y, w, h] = box;
@@ -951,7 +991,7 @@ function fmtDuration(seconds){
 
 // Tooltip content for a spawn box / point: which entry, the manager's
 // minimum, linked-zone note, respawn timers, counted classes, and flags.
-function spawnBoxTooltipHtml(entryName, mgr, zoneCount){
+function spawnBoxTooltipHtml(entryName, managerName, mgr, zoneCount){
   const md = Number(mgr?.md) || 0;
 
   const rows = [];
@@ -969,6 +1009,8 @@ function spawnBoxTooltipHtml(entryName, mgr, zoneCount){
   return `
     <div class="sbt">
       <div class="sbt-entry">${escapeHtml(entryName)}</div>
+      <div class="sbt-manager-label">NPC Manager</div>
+      <div class="sbt-manager">${escapeHtml(managerName)}</div>
       <div class="sbt-min">Min Desired: <b>${escapeHtml(String(md))}</b></div>
       ${zoneCount > 1 ? `<div class="sbt-link">⛓ shared across ${zoneCount} linked zones</div>` : ""}
       ${rows.join("")}
@@ -976,7 +1018,7 @@ function spawnBoxTooltipHtml(entryName, mgr, zoneCount){
     </div>`;
 }
 
-function drawEntry(entryName, rarityScore){
+function drawEntry(entryName, rarityScore, managerName = null){
 
   const mapMeta = MAPS.find(m => m.id === State.mapId);
   const geom = Global.mapGeom.get(mapMeta?.geomShort);
@@ -986,7 +1028,8 @@ function drawEntry(entryName, rarityScore){
 
   const usesLayers = !!geom?.usesLayers;
 
-  for (const mgr of Object.values(entry.m || {})) {
+  for (const [name, mgr] of Object.entries(entry.m || {})) {
+    if (managerName && name !== managerName) continue;
 
     const meta = {
       isCave: !!mgr?.c,
@@ -999,7 +1042,7 @@ function drawEntry(entryName, rarityScore){
     const style = styleForEntry(meta, color);
 
     const zoneCount = (mgr?.b?.length || 0) + (mgr?.p?.length || 0);
-    const tipHtml = spawnBoxTooltipHtml(entryName, mgr, zoneCount);
+    const tipHtml = spawnBoxTooltipHtml(entryName, name, mgr, zoneCount);
     const tipOpts = {
       direction: "auto",
       sticky: true,
@@ -1419,7 +1462,38 @@ function ensureMapEntriesPanel(){
   return panel;
 }
 
+// A geom object is cached in Global.mapGeom. Cache its browser index too,
+// so typing in the manager search never scans thousands of zones repeatedly.
+const managerBrowserIndex = new WeakMap();
+function getManagerBrowserRowsCurrentMap(){
+  const mapMeta = MAPS.find(m => m.id === State.mapId);
+  const geom = Global.mapGeom.get(mapMeta?.geomShort);
+  if (!geom) return [];
+
+  let rows = managerBrowserIndex.get(geom);
+  if (!rows){
+    rows = [];
+    for (const [entryName, entry] of Object.entries(geom.entries || {})){
+      for (const [managerName, mgr] of Object.entries(entry.m || {})){
+        rows.push({
+          kind: "manager",
+          entryName, managerName,
+          boxes: mgr.b?.length || 0,
+          points: mgr.p?.length || 0,
+          minDesired: Number(mgr.md) || 0
+        });
+      }
+    }
+    rows.sort((a, b) => a.managerName.localeCompare(b.managerName) || a.entryName.localeCompare(b.entryName));
+    managerBrowserIndex.set(geom, rows);
+  }
+
+  const q = normSearch(spawnBrowserState.search || "");
+  return q ? rows.filter(r => normSearch(`${r.managerName} ${r.entryName}`).includes(q)) : rows;
+}
+
 function getSpawnBrowserRows() {
+  if (spawnBrowserState.tab === "managers") return getManagerBrowserRowsCurrentMap();
   if (spawnBrowserState.tab === "entries") {
     if (spawnBrowserState.scope === "current") return getEntryRowsCurrentMap();
     return getEntryRowsAllMaps();
@@ -1493,9 +1567,33 @@ function renderMapEntriesList(){
   if (!list) return;
 
   const rows = getSpawnBrowserRows();
+  const isManagerTab = spawnBrowserState.tab === "managers";
+  const limit = isManagerTab ? 100 : rows.length;
+  const shown = rows.slice(0, limit);
+  const summary = isManagerTab ? `<div class="manager-browser-count">${rows.length.toLocaleString()} matching manager${rows.length === 1 ? "" : "s"}${rows.length > limit ? ` · showing first ${limit.toLocaleString()} — refine your search` : ""}</div>` : "";
+  const focusName = isManagerTab && State.mode === "entry"
+    ? activeSpawnManagerForEntry(State.selection) : null;
+  const focusBar = focusName ? `
+    <div class="manager-browser-focus">
+      <span>Showing only <b>${escapeHtml(focusName)}</b></span>
+      <button type="button" data-manager-showall="1">Show all</button>
+    </div>` : "";
 
-  list.innerHTML = rows.length
-    ? rows.map(r => {
+  list.innerHTML = summary + focusBar + (shown.length
+    ? shown.map(r => {
+        if (r.kind === "manager") {
+          const focused = activeSpawnManagerForEntry(r.entryName) === r.managerName;
+          return `
+            <div class="dd-item ${focused ? "is-on" : ""}" data-manager-entry="${escapeAttr(r.entryName)}" data-manager-name="${escapeAttr(r.managerName)}" role="button" tabindex="0">
+              <div class="dd-item-left" style="display:block; min-width:0;">
+                <div class="dd-item-name manager-browser-name">${escapeHtml(r.managerName)}</div>
+                <div class="dd-item-meta">
+                  <div class="entry-meta-line">Entry: ${escapeHtml(r.entryName)}</div>
+                  <div class="entry-meta-line">${r.boxes} box${r.boxes === 1 ? "" : "es"} · ${r.points} point${r.points === 1 ? "" : "s"} · Min Desired: ${escapeHtml(fmt(r.minDesired))}</div>
+                </div>
+              </div>
+            </div>`;
+        }
         if (r.kind === "dino") {
           return `
             <div class="dd-item" data-dino-jump="${escapeAttr(r.name)}">
@@ -1535,7 +1633,25 @@ function renderMapEntriesList(){
           </div>
         `;
       }).join("")
-    : `<div style="color:var(--muted)">No matching results.</div>`;
+    : `<div style="color:var(--muted)">No matching results.</div>`);
+
+  list.querySelectorAll("[data-manager-showall]").forEach(btn => {
+    btn.onclick = () => {
+      openEntryView(State.selection);
+      renderMapEntriesList();
+    };
+  });
+
+  list.querySelectorAll("[data-manager-entry]").forEach(row => {
+    const navigate = () => {
+      showSpawnManager(row.dataset.managerEntry, row.dataset.managerName);
+      renderMapEntriesList();
+    };
+    row.onclick = navigate;
+    row.onkeydown = e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate(); }
+    };
+  });
 
   list.querySelectorAll("[data-entry-jump]").forEach(row => {
     row.onclick = () => {
@@ -1558,19 +1674,21 @@ function renderMapEntriesPanel(){
   const body = panel.querySelector(".fp-body");
   if (!body) return;
 
-  const showMapFilter = spawnBrowserState.scope === "current";
+  const isManagerTab = spawnBrowserState.tab === "managers";
+  const showMapFilter = !isManagerTab && spawnBrowserState.scope === "current";
 
   body.innerHTML = `
     ${renderTabs({
       tabs: [
         { id: "entries", label: "Entries" },
-        { id: "dinos", label: "Dinos" }
+        { id: "dinos", label: "Dinos" },
+        { id: "managers", label: "Managers" }
       ],
       activeId: spawnBrowserState.tab,
       dataAttr: "data-spawn-tab"
     })}
 
-    ${renderTabs({
+    ${isManagerTab ? `<div class="manager-browser-scope">Managers on ${escapeHtml(State.mapId)} · select one to isolate and zoom</div>` : renderTabs({
       tabs: [
         { id: "current", label: "Current Map" },
         { id: "all", label: "All Maps" }
@@ -1591,7 +1709,7 @@ function renderMapEntriesPanel(){
       id="mapEntriesSearch"
       class="dd-search"
       type="text"
-      placeholder="${spawnBrowserState.tab === "entries" ? "Search spawn entries..." : "Search dinos..."}"
+      placeholder="${isManagerTab ? "Search manager name or spawn entry..." : spawnBrowserState.tab === "entries" ? "Search spawn entries..." : "Search dinos..."}"
       value="${escapeAttr(spawnBrowserState.search)}"
       style="margin-bottom:8px;"
     >
@@ -1602,17 +1720,20 @@ function renderMapEntriesPanel(){
   wireTabs(body, {
     tabs: [
       { id: "entries", label: "Entries" },
-      { id: "dinos", label: "Dinos" }
+      { id: "dinos", label: "Dinos" },
+      { id: "managers", label: "Managers" }
     ],
     activeId: spawnBrowserState.tab,
     dataAttr: "data-spawn-tab",
     onChange: (id) => {
       spawnBrowserState.tab = id;
+      spawnBrowserState.search = "";
+      if (id === "managers") spawnBrowserState.scope = "current";
       renderMapEntriesPanel();
     }
   });
 
-  wireTabs(body, {
+  if (!isManagerTab) wireTabs(body, {
     tabs: [
       { id: "current", label: "Current Map" },
       { id: "all", label: "All Maps" }
@@ -1861,7 +1982,7 @@ function poiHasBeaverDam(point)      { return _poiMatchesCrateFn(point, isBeaver
 let mapObj = null;
 
 const spawnBrowserState = {
-  tab: "entries",     // "entries" | "dinos"
+  tab: "entries",     // "entries" | "dinos" | "managers"
   scope: "current",   // "current" | "all"
   filter: "all",      // "all" | "unique" | "shared"
   search: ""

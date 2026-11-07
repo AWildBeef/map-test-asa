@@ -287,6 +287,7 @@ function setMode(mode){
   }
 
   State.selections[State.mode] = State.selection || "";
+  if (typeof clearSpawnManagerFocus === "function") clearSpawnManagerFocus();
   State.mode = mode;
   syncSelectionForMode(State.mode);
 
@@ -334,8 +335,13 @@ const dinoSpawnCardOpenState = {}; // key: entryVisibilityKey -> bool
 
 const dinoLootSetOpenState = {};
 
-function openEntryView(entryName){
+function openEntryView(entryName, { managerName = null } = {}){
   if (!entryName) return;
+
+  // A regular entry selection always clears the manager-only map filter.
+  if (typeof setSpawnManagerFocus === "function") {
+    setSpawnManagerFocus(entryName, managerName);
+  }
 
   State.selections[State.mode] = State.selection || "";
   State.mode = "entry";

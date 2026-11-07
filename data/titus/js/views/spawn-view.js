@@ -209,7 +209,7 @@ function managersForEntryOnCurrentMap(entryName){
 
 function renderEntryManagersSection(entryName){
   const managers = managersForEntryOnCurrentMap(entryName);
-  const mgrList = managers ? Object.values(managers) : [];
+  const mgrList = managers ? Object.entries(managers) : [];
   if (!mgrList.length){
     return `
       <div class="info-section">
@@ -218,12 +218,12 @@ function renderEntryManagersSection(entryName){
       </div>`;
   }
 
-  const totalMin = mgrList.reduce((s, m) => s + (Number(m?.md) || 0), 0);
+  const totalMin = mgrList.reduce((s, [, m]) => s + (Number(m?.md) || 0), 0);
 
   // Group managers that share identical settings so a dozen clones read as
   // one line instead of a dozen.
   const groups = new Map();
-  for (const m of mgrList){
+  for (const [name, m] of mgrList){
     const zones = (m?.b?.length || 0) + (m?.p?.length || 0);
     const cdcKey = Array.isArray(m?.cdc) ? [...m.cdc].sort().join(",") : (m?.cdc ?? "");
     const sig = JSON.stringify([
@@ -231,11 +231,13 @@ function renderEntryManagersSection(entryName){
       m?.c ? 1 : 0, m?.u ? 1 : 0, m?.dw ? 1 : 0, m?.wiw ? 1 : 0,
       m?.lm ?? null, m?.cld ? 1 : 0, m?.cwd ? 1 : 0, cdcKey, zones
     ]);
-    if (!groups.has(sig)) groups.set(sig, { mgr: m, count: 0, zones });
+    if (!groups.has(sig)) groups.set(sig, { mgr: m, count: 0, zones, names: [] });
     groups.get(sig).count++;
+    groups.get(sig).names.push(name);
   }
 
-  const groupHtml = [...groups.values()].map(({ mgr, count, zones }) => {
+  const selectedManager = activeSpawnManagerForEntry(entryName);
+  const groupHtml = [...groups.values()].map(({ mgr, count, zones, names }) => {
     const md = Number(mgr?.md) || 0;
     const line = `
       <div class="sv-mgr-line">
@@ -260,16 +262,30 @@ function renderEntryManagersSection(entryName){
     if (mgr?.dw)  chips.push(`<span class="lc-chip">No wandering</span>`);
     if (mgr?.wiw) chips.push(`<span class="lc-chip">Ignores wild</span>`);
 
+    const namesHtml = names.map(name => `
+      <button type="button" class="sv-mgr-name ${selectedManager === name ? "is-on" : ""}"
+              data-focus-spawn-manager="${escapeAttr(name)}" title="Show this manager's spawn zones on the map">
+        <span>${escapeHtml(name)}</span><span class="sv-mgr-find">Locate ↗</span>
+      </button>`).join("");
     return `
       <div class="sv-mgr">
         ${line}
         ${chips.length ? `<div class="lc-chips">${chips.join("")}</div>` : ""}
+        ${names.length === 1 ? `<div class="sv-mgr-names">${namesHtml}</div>` : `
+          <details class="sv-mgr-details" ${selectedManager && names.includes(selectedManager) ? "open" : ""}>
+            <summary>View ${names.length} manager names</summary>
+            <div class="sv-mgr-names">${namesHtml}</div>
+          </details>`}
       </div>`;
   }).join("");
 
   return `
     <div class="info-section">
       <div class="iv-eyebrow">Spawn Managers</div>
+      ${selectedManager ? `<div class="sv-mgr-focused">
+        <div>Showing only <b>${escapeHtml(selectedManager)}</b> on the map</div>
+        <button type="button" class="sv-mgr-showall" data-show-all-spawn-managers="1">Show all managers</button>
+      </div>` : ""}
       <div class="lc-chips" style="margin-bottom:9px;">
         <span class="lc-chip">Managers <b>${mgrList.length}</b></span>
         <span class="lc-chip">Min Desired NPCs <b>${escapeHtml(fmt(totalMin))}</b></span>
@@ -362,6 +378,14 @@ function renderEntryPanel(entryName){
       viewOptions.includeOfficialInEntryPanels = !viewOptions.includeOfficialInEntryPanels;
       renderEntryPanel(entryName);
     };
+  }
+
+  body.querySelectorAll("[data-focus-spawn-manager]").forEach(btn => {
+    btn.onclick = () => showSpawnManager(entryName, btn.dataset.focusSpawnManager);
+  });
+  const showAllManagers = body.querySelector("[data-show-all-spawn-managers]");
+  if (showAllManagers){
+    showAllManagers.onclick = () => openEntryView(entryName);
   }
 
   body.querySelectorAll("[data-open-dino]").forEach(btn => {

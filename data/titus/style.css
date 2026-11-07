@@ -6603,3 +6603,64 @@ body[data-mode="note"] #dinoInfoPanel .fp-body {
   animation: spawnZoomPulse .6s ease-in-out 3;
   filter: drop-shadow(0 0 6px currentColor);
 }
+
+/* ── NPC manager identities & navigation ── */
+.spawn-box-tip { max-width: 310px; }
+.sbt-manager-label {
+  font-size: 10px; margin-top: 7px; color: var(--text-dim, #7f98a8);
+  letter-spacing: .07em; text-transform: uppercase;
+}
+.sbt-manager {
+  font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--text-1, #f0fbff); word-break: break-all;
+}
+.sv-mgr-details { margin-top: 7px; }
+.sv-mgr-details summary {
+  color: var(--accent-bright, #86e6ff); font-size: 12px;
+  cursor: pointer; padding: 5px 0;
+}
+.sv-mgr-names { display: grid; gap: 4px; margin-top: 6px; }
+.sv-mgr-name {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  text-align: left; gap: 10px; cursor: pointer; padding: 8px 9px;
+  border-radius: 7px; border: 1px solid var(--border-soft);
+  background: var(--fill-soft); color: var(--text-2, #d9edf7);
+  font: 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.sv-mgr-name span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.sv-mgr-name:hover, .sv-mgr-name.is-on {
+  border-color: var(--accent-bright, #86e6ff);
+  background: rgba(var(--accent-rgb, 57, 200, 255), .12);
+}
+.sv-mgr-find { flex: 0 0 auto; font: 600 11px system-ui, sans-serif; color: var(--accent-bright, #86e6ff); }
+.sv-mgr-focused {
+  margin: 8px 0 10px; padding: 10px; display: grid; gap: 8px;
+  border-radius: 10px; border: 1px solid var(--border-mid);
+  background: rgba(var(--accent-rgb, 57, 200, 255), .08);
+  color: var(--text-2, #d9edf7); font-size: 12px;
+}
+.sv-mgr-focused b { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+.sv-mgr-showall {
+  border: 1px solid var(--border-mid); background: var(--fill-strong);
+  color: var(--accent-bright); padding: 7px; border-radius: 7px;
+  font-size: 12px; font-weight: 600; font-family: inherit; cursor: pointer;
+}
+.manager-browser-count, .manager-browser-scope {
+  color: var(--text-3, #9fb8c8); font-size: 11px; line-height: 1.35;
+  padding: 5px 6px 9px;
+}
+.manager-browser-name { white-space: normal; overflow-wrap: anywhere; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+.manager-browser-focus {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  justify-content: space-between; padding: 9px; margin-bottom: 9px;
+  border: 1px solid var(--border-mid); border-radius: 9px;
+  background: rgba(var(--accent-rgb, 57, 200, 255), .08);
+  color: var(--text-2, #d9edf7); font-size: 11px;
+}
+.manager-browser-focus span { min-width: 0; flex: 1 1 150px; overflow-wrap: anywhere; }
+.manager-browser-focus button {
+  border: 1px solid var(--border-mid); border-radius: 6px;
+  padding: 5px 8px; background: var(--fill-strong);
+  color: var(--accent-bright); cursor: pointer;
+}
