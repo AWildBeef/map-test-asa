@@ -31,6 +31,7 @@ const MAPS = [
   { id:"Aberration", geomShort:"Aberration", mapCode:"AB", image:"aberration.webp" },
   { id:"Extinction", geomShort:"Extinction", mapCode:"EXT", image:"extinction.webp" },
   { id:"Lost Colony", geomShort:"LostColony", mapCode:"LC", image:"lostcolony.webp" },
+  { id:"Amissa", geomShort:"Amissa", mapCode:"Amissa", image:"amissa.webp" },
   {
     id:"Astraeos",
     geomShort:"Astraeos",
